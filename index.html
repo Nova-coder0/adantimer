@@ -9,33 +9,59 @@
 <body>
 
   <div class="container">
+
     <!-- Standortanzeige -->
     <div id="location">📍 Locating...</div>
 
-    <!-- Nächste Gebetszeit -->
+    <!-- Manueller Standort -->
+    <div class="manual-location">
+      <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)" />
+      <input type="text" id="manual-country" placeholder="Enter country (optional)" />
+      <button id="set-location-btn">Set Location</button>
+    </div>
+
+    <!-- Titel & nächste Gebetszeit -->
     <h1 id="title">Next Prayer</h1>
     <div id="next-prayer-name"></div>
-
-    <!-- Countdown -->
     <div id="countdown">Loading...</div>
 
-    <!-- Sprache wechseln -->
+    <!-- Sprachumschaltung -->
     <div class="language-switch">
       <button onclick="setLanguage('en')">EN</button>
       <button onclick="setLanguage('ar')">AR</button>
     </div>
 
-    <!-- Gebetszeiten-Liste -->
+    <!-- Gebetszeiten -->
     <div id="prayer-times"></div>
-
-    <!-- Manueller Standort -->
-    <div id="manual-location" style="margin-top:20px;">
-      <input id="manual-city" type="text" placeholder="City" />
-      <input id="manual-country" type="text" placeholder="Country" />
-      <button id="manual-submit">Show Prayer Times</button>
-    </div>
   </div>
 
   <script src="script.js"></script>
+
+  <script>
+    // Button Event Listener für manuelle Eingabe
+    document.getElementById("set-location-btn").addEventListener("click", async () => {
+      const city = document.getElementById("manual-city").value.trim();
+      const country = document.getElementById("manual-country").value.trim();
+
+      if (!city) return alert("Please enter a city.");
+
+      try {
+        // Koordinaten über OpenStreetMap Nominatim API abrufen
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&format=json&limit=1`);
+        const data = await res.json();
+
+        if (data && data.length > 0) {
+          const lat = parseFloat(data[0].lat);
+          const lng = parseFloat(data[0].lon);
+          setManualLocation(lat, lng, city, country); // Script.js Funktion
+        } else {
+          alert("City not found. Try again.");
+        }
+      } catch (err) {
+        alert("Error fetching location. Try again.");
+        console.error(err);
+      }
+    });
+  </script>
 </body>
 </html>
