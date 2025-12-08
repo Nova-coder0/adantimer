@@ -53,7 +53,9 @@
         if (data && data.length > 0) {
           const lat = parseFloat(data[0].lat);
           const lng = parseFloat(data[0].lon);
-          setManualLocation(lat, lng, city, country); // Script.js Funktion
+
+          // Neue Funktion im neuen Skript aufrufen
+          setManualLocation(lat, lng, city, country);
         } else {
           alert("City not found. Try again.");
         }
@@ -63,5 +65,6 @@
       }
     });
   </script>
+
 </body>
 </html>
