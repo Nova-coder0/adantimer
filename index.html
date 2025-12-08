@@ -4,28 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adantimer</title>
-
-  <!-- ✅ HIER WAR DER FEHLER: CSS WIRD JETZT GELADEN -->
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
 
   <div class="container">
+    <!-- Standortanzeige -->
     <div id="location">📍 Locating...</div>
 
+    <!-- Nächste Gebetszeit -->
     <h1 id="title">Next Prayer</h1>
     <div id="next-prayer-name"></div>
-    
+
+    <!-- Countdown -->
     <div id="countdown">Loading...</div>
 
-
+    <!-- Sprache wechseln -->
     <div class="language-switch">
       <button onclick="setLanguage('en')">EN</button>
       <button onclick="setLanguage('ar')">AR</button>
     </div>
 
+    <!-- Gebetszeiten-Liste -->
     <div id="prayer-times"></div>
+
+    <!-- Manueller Standort -->
+    <div id="manual-location" style="margin-top:20px;">
+      <input id="manual-city" type="text" placeholder="City" />
+      <input id="manual-country" type="text" placeholder="Country" />
+      <button id="manual-submit">Show Prayer Times</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
