@@ -1,11 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adantimer</title>
+  <style>
+    body {
+      background: #0e0e0e;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    #countdown {
+      font-size: 36px;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+    #prayer-times div {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+    .language-switch button {
+      margin: 10px 5px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <h1>Adantimer</h1>
-  <p>Website setup in progress.</p>
+
+  <h1 id="title">Next Prayer</h1>
+  <div id="countdown">Loading...</div>
+
+  <div class="language-switch">
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('ar')">AR</button>
+  </div>
+
+  <div id="prayer-times"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
