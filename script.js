@@ -1,21 +1,32 @@
+let cityName = "";
+let countryName = "";
 const countdownEl = document.getElementById("countdown");
 const prayerTimesEl = document.getElementById("prayer-times");
 const titleEl = document.getElementById("title");
+const locationEl = document.getElementById("location");
+const nextPrayerNameEl = document.getElementById("next-prayer-name");
 
 let language = "en";
 
 function setLanguage(lang) {
   language = lang;
+
+  // Arabic oder LTR Body-Richtung setzen
+  if (language === "ar") {
+    document.body.setAttribute("dir", "rtl");
+    titleEl.innerText = "الصلاة القادمة";
+  } else {
+    document.body.setAttribute("dir", "ltr");
+    titleEl.innerText = "Next Prayer";
+  }
+
   loadPrayerTimes();
 }
 
 function getLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
-      pos => resolve({
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude
-      }),
+      pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
       err => reject(err)
     );
   });
@@ -24,6 +35,8 @@ function getLocation() {
 async function loadPrayerTimes() {
   countdownEl.innerText = "Loading...";
   prayerTimesEl.innerHTML = "";
+  nextPrayerNameEl.innerText = "";
+  locationEl.innerText = "📍 Locating...";
 
   try {
     const { lat, lng } = await getLocation();
@@ -33,6 +46,12 @@ async function loadPrayerTimes() {
     const data = await res.json();
     const times = data.data.timings;
 
+    // 1️⃣ Standort setzen
+    cityName = data.data.meta.timezone.split("/")[1] || "City";
+    countryName = data.data.meta.timezone.split("/")[0] || "Country";
+    locationEl.innerText = "📍 " + cityName + ", " + countryName;
+
+    // 2️⃣ Gebetszeiten auflisten
     const prayers = [
       { key: "Fajr", label: { en: "Fajr", ar: "الفجر" } },
       { key: "Dhuhr", label: { en: "Dhuhr", ar: "الظهر" } },
@@ -49,6 +68,7 @@ async function loadPrayerTimes() {
       const t = new Date();
       t.setHours(h, m, 0);
 
+      // nächste Gebetszeit bestimmen
       if (!nextPrayer && t > now) {
         nextPrayer = { ...p, time: t };
       }
@@ -67,13 +87,14 @@ async function loadPrayerTimes() {
       nextPrayer = { ...fajrTomorrow, time: t };
     }
 
-    titleEl.innerText =
-      language === "ar" ? "الصلاة القادمة" : "Next Prayer";
+    // Name der nächsten Gebetszeit anzeigen
+    nextPrayerNameEl.innerText = nextPrayer.label[language];
 
     startCountdown(nextPrayer);
 
   } catch {
     countdownEl.innerText = "Location permission required.";
+    locationEl.innerText = "📍 Location not found";
   }
 }
 
@@ -88,19 +109,15 @@ function startCountdown(prayer) {
     }
 
     const hrs = String(Math.floor(diff / 3600000)).padStart(2, "0");
-    const mins = String(
-      Math.floor((diff % 3600000) / 60000)
-    ).padStart(2, "0");
-    const secs = String(
-      Math.floor((diff % 60000) / 1000)
-    ).padStart(2, "0");
+    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
 
-    countdownEl.innerText =
-      `${prayer.label[language]} in ${hrs}:${mins}:${secs}`;
+    countdownEl.innerText = `${prayer.label[language]} in ${hrs}:${mins}:${secs}`;
   }
 
   tick();
   setInterval(tick, 1000);
 }
 
+// Seite initial laden
 loadPrayerTimes();
