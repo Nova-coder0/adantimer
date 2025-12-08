@@ -32,6 +32,21 @@ function getLocation() {
   });
 }
 
+// Reverse-Geocoding: Koordinaten → Stadt/Land
+async function getCityCountry(lat, lng) {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+    );
+    const data = await res.json();
+    const city = data.address.city || data.address.town || data.address.village || "";
+    const country = data.address.country || "";
+    return { city, country };
+  } catch {
+    return { city: "", country: "" };
+  }
+}
+
 async function loadPrayerTimes() {
   countdownEl.innerText = "Loading...";
   prayerTimesEl.innerHTML = "";
@@ -40,20 +55,21 @@ async function loadPrayerTimes() {
 
   try {
     const { lat, lng } = await getLocation();
+
+    // Stadt/Land über Reverse-Geocoding
+    const location = await getCityCountry(lat, lng);
+    cityName = location.city;
+    countryName = location.country;
+    locationEl.innerText = "📍 " + cityName + (countryName ? ", " + countryName : "");
+
+    // Gebetszeiten abrufen
     const res = await fetch(
       `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=2`
     );
     const data = await res.json();
     const times = data.data.timings;
 
-    // Standort setzen
-    cityName = data.data.meta.timezone || ""; // Meta-Daten enthalten oft Ort/Zeit
-    countryName = ""; // Optional: wenn API keine Country liefert
-    document.getElementById("location").innerText =
-    "📍 " + cityName + (countryName ? ", " + countryName : "");
-
-
-    // 2️⃣ Gebetszeiten auflisten
+    // Gebetszeiten auflisten
     const prayers = [
       { key: "Fajr", label: { en: "Fajr", ar: "الفجر" } },
       { key: "Dhuhr", label: { en: "Dhuhr", ar: "الظهر" } },
@@ -80,6 +96,7 @@ async function loadPrayerTimes() {
       prayerTimesEl.appendChild(div);
     });
 
+    // Falls heute alle Gebetszeiten vorbei → nächster Fajr morgen
     if (!nextPrayer) {
       const fajrTomorrow = prayers[0];
       const [h, m] = times["Fajr"].split(":");
