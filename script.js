@@ -9,6 +9,7 @@ const nextPrayerNameEl = document.getElementById("next-prayer-name");
 let language = "en";
 let currentLocationType = null; // "gps", "ip", "manual"
 let manualCoords = null; // {lat, lng}
+let countdownInterval = null;
 
 // Sprachumschaltung
 function setLanguage(lang) {
@@ -38,14 +39,19 @@ async function getIPLocation() {
   try {
     const res = await fetch("https://ipapi.co/json/");
     const data = await res.json();
-    return { lat: data.latitude, lng: data.longitude, city: data.city, country: data.country_name };
+    return {
+      lat: data.latitude,
+      lng: data.longitude,
+      city: data.city,
+      country: data.country_name
+    };
   } catch {
     return null;
   }
 }
 
 // Manuelle Eingabe
-function setManualLocation(lat, lng, city="", country="") {
+function setManualLocation(lat, lng, city = "", country = "") {
   manualCoords = { lat, lng };
   cityName = city;
   countryName = country;
@@ -63,7 +69,7 @@ async function loadPrayerTimes() {
   let coords = null;
 
   try {
-    // 1️⃣ Prüfen: manuelle Eingabe hat Vorrang
+    // 1️⃣ Manuelle Eingabe hat Vorrang
     if (currentLocationType === "manual" && manualCoords) {
       coords = manualCoords;
     } else {
@@ -72,7 +78,7 @@ async function loadPrayerTimes() {
         coords = await getGPSLocation();
         currentLocationType = "gps";
       } catch {
-        // IP Fallback
+        // IP-Fallback
         const ipData = await getIPLocation();
         if (ipData) {
           coords = { lat: ipData.lat, lng: ipData.lng };
@@ -95,7 +101,7 @@ async function loadPrayerTimes() {
     // Standortanzeige oben
     if (currentLocationType !== "manual") {
       cityName = data.data.meta.timezone || cityName;
-      countryName = ""; // optional
+      countryName = "";
     }
     locationEl.innerText = "📍 " + cityName + (countryName ? ", " + countryName : "");
 
@@ -164,8 +170,9 @@ function startCountdown(prayer) {
     countdownEl.innerText = `${prayer.label[language]} in ${hrs}:${mins}:${secs}`;
   }
 
+  if (countdownInterval) clearInterval(countdownInterval);
   tick();
-  setInterval(tick, 1000);
+  countdownInterval = setInterval(tick, 1000);
 }
 
 // Seite initial laden
