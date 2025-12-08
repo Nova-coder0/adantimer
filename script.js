@@ -8,10 +8,11 @@ const nextPrayerNameEl = document.getElementById("next-prayer-name");
 
 let language = "en";
 
+// Sprache umschalten
 function setLanguage(lang) {
   language = lang;
 
-  // Arabic oder LTR Body-Richtung setzen
+  // RTL/LTR Body setzen
   if (language === "ar") {
     document.body.setAttribute("dir", "rtl");
     titleEl.innerText = "الصلاة القادمة";
@@ -23,6 +24,7 @@ function setLanguage(lang) {
   loadPrayerTimes();
 }
 
+// GPS-basierten Standort abrufen
 function getLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
@@ -47,6 +49,7 @@ async function getCityCountry(lat, lng) {
   }
 }
 
+// Gebetszeiten laden
 async function loadPrayerTimes() {
   countdownEl.innerText = "Loading...";
   prayerTimesEl.innerHTML = "";
@@ -56,20 +59,20 @@ async function loadPrayerTimes() {
   try {
     const { lat, lng } = await getLocation();
 
-    // Stadt/Land über Reverse-Geocoding
+    // Standort abrufen
     const location = await getCityCountry(lat, lng);
     cityName = location.city;
     countryName = location.country;
     locationEl.innerText = "📍 " + cityName + (countryName ? ", " + countryName : "");
 
-    // Gebetszeiten abrufen
+    // Gebetszeiten von API
     const res = await fetch(
       `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=2`
     );
     const data = await res.json();
     const times = data.data.timings;
 
-    // Gebetszeiten auflisten
+    // Gebetszeiten-Labels
     const prayers = [
       { key: "Fajr", label: { en: "Fajr", ar: "الفجر" } },
       { key: "Dhuhr", label: { en: "Dhuhr", ar: "الظهر" } },
@@ -86,7 +89,6 @@ async function loadPrayerTimes() {
       const t = new Date();
       t.setHours(h, m, 0);
 
-      // nächste Gebetszeit bestimmen
       if (!nextPrayer && t > now) {
         nextPrayer = { ...p, time: t };
       }
@@ -96,7 +98,7 @@ async function loadPrayerTimes() {
       prayerTimesEl.appendChild(div);
     });
 
-    // Falls heute alle Gebetszeiten vorbei → nächster Fajr morgen
+    // Falls kein nächstes Gebet mehr heute, Fajr morgen
     if (!nextPrayer) {
       const fajrTomorrow = prayers[0];
       const [h, m] = times["Fajr"].split(":");
@@ -106,7 +108,7 @@ async function loadPrayerTimes() {
       nextPrayer = { ...fajrTomorrow, time: t };
     }
 
-    // Name der nächsten Gebetszeit anzeigen
+    // Nächstes Gebet anzeigen
     nextPrayerNameEl.innerText = nextPrayer.label[language];
 
     startCountdown(nextPrayer);
@@ -117,6 +119,7 @@ async function loadPrayerTimes() {
   }
 }
 
+// Countdown starten
 function startCountdown(prayer) {
   function tick() {
     const now = new Date();
@@ -138,5 +141,5 @@ function startCountdown(prayer) {
   setInterval(tick, 1000);
 }
 
-// Seite initial laden
+// Initial laden
 loadPrayerTimes();
