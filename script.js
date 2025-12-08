@@ -46,10 +46,12 @@ async function loadPrayerTimes() {
     const data = await res.json();
     const times = data.data.timings;
 
-    // 1️⃣ Standort setzen
-    cityName = data.data.meta.timezone.split("/")[1] || "City";
-    countryName = data.data.meta.timezone.split("/")[0] || "Country";
-    locationEl.innerText = "📍 " + cityName + ", " + countryName;
+    // Standort setzen
+    cityName = data.data.meta.timezone || ""; // Meta-Daten enthalten oft Ort/Zeit
+    countryName = ""; // Optional: wenn API keine Country liefert
+    document.getElementById("location").innerText =
+    "📍 " + cityName + (countryName ? ", " + countryName : "");
+
 
     // 2️⃣ Gebetszeiten auflisten
     const prayers = [
