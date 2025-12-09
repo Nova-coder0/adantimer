@@ -145,21 +145,31 @@ body[dir="rtl"] {
   text-align: center;
 }
 
-/* =================== SITE HEADER =================== */
+/* EINHEITLICHER BODY-HINTERGRUND */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0b0b0b, #121212); /* sanfte Farbänderung von oben nach unten */
+  color: #ffffff;
+  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* SITE HEADER */
 .site-header {
   width: 100%;
   text-align: center;
   padding: 40px 20px 20px 20px;
-  background: linear-gradient(180deg, #0b0b0b, #121212);
 }
 
 .site-header h1 {
   font-size: 64px;
-  color: #ffffff;
   font-weight: 900;
   letter-spacing: 2px;
   text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
 }
 
 @media (max-width: 420px) {
@@ -168,8 +178,15 @@ body[dir="rtl"] {
   }
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* CONTAINER */
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 20px;
+  text-align: center;
+  background: #181818; /* abgerundeter, dunkler Container */
+  border-radius: 16px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
+
