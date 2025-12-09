@@ -8,32 +8,34 @@
 </head>
 <body>
 
-  <div class="container">
+ <div class="container">
 
-    <!-- Standortanzeige -->
-    <div id="location">📍 Locating...</div>
+  <!-- Standortanzeige -->
+  <div id="location" class="location">📍 Locating...</div>
 
-    <!-- Manueller Standort -->
-    <div class="manual-location">
-      <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)" />
-      <input type="text" id="manual-country" placeholder="Enter country (optional)" />
-      <button id="set-location-btn">Set Location</button>
-    </div>
-
-    <!-- Titel & nächste Gebetszeit -->
-    <h1 id="title">Next Prayer</h1>
-    <div id="next-prayer-name"></div>
-    <div id="countdown">Loading...</div>
-
-    <!-- Sprachumschaltung -->
-    <div class="language-switch">
-      <button onclick="setLanguage('en')">EN</button>
-      <button onclick="setLanguage('ar')">AR</button>
-    </div>
-
-    <!-- Gebetszeiten -->
-    <div id="prayer-times"></div>
+  <!-- Manueller Standort -->
+  <div class="manual-location card">
+    <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)" />
+    <input type="text" id="manual-country" placeholder="Enter country (optional)" />
+    <button id="set-location-btn">Set Location</button>
   </div>
+
+  <!-- Titel & nächste Gebetszeit -->
+  <div class="next-prayer card">
+    <h1 id="title">Next Prayer</h1>
+    <div id="next-prayer-name" class="highlight"></div>
+    <div id="countdown" class="countdown">Loading...</div>
+  </div>
+
+  <!-- Sprachumschaltung -->
+  <div class="language-switch card">
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('ar')">AR</button>
+  </div>
+
+  <!-- Gebetszeiten -->
+  <div id="prayer-times" class="card"></div>
+</div>
 
   <script src="script.js"></script>
 
