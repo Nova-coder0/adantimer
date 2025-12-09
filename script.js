@@ -40,10 +40,7 @@ async function getIPLocation() {
   try {
     const res = await fetch("https://ipapi.co/json/");
     const data = await res.json();
-    return {
-      lat: data.latitude,
-      lng: data.longitude
-    };
+    return { lat: data.latitude, lng: data.longitude };
   } catch {
     return null;
   }
@@ -89,7 +86,7 @@ async function loadPrayerTimes() {
   let coords = null;
 
   try {
-    // MANUAL FIRST
+    // =================== LOCATION PRIORITY ===================
     if (currentLocationType === "manual" && manualCoords) {
       coords = manualCoords;
     } else {
@@ -104,23 +101,25 @@ async function loadPrayerTimes() {
       }
     }
 
-    // PRAYER TIMES
+    // =================== PRAYER TIMES ===================
     const res = await fetch(
       `https://api.aladhan.com/v1/timings?latitude=${coords.lat}&longitude=${coords.lng}&method=2`
     );
     const data = await res.json();
     const times = data.data.timings;
 
-    // REAL LOCATION NAME (FIX ✅)
-    if (currentLocationType !== "manual") {
+    // =================== LOCATION DISPLAY ===================
+    if (currentLocationType === "manual") {
+      // cityName und countryName sind schon gesetzt
+    } else {
       const loc = await reverseGeocode(coords.lat, coords.lng);
       cityName = loc.city || "Your location";
       countryName = loc.country || "";
     }
-
     locationEl.innerText =
       "📍 " + cityName + (countryName ? ", " + countryName : "");
 
+    // =================== PRAYER ARRAY ===================
     const prayers = [
       { key: "Fajr", label: { en: "Fajr", ar: "الفجر" } },
       { key: "Dhuhr", label: { en: "Dhuhr", ar: "الظهر" } },
@@ -151,11 +150,7 @@ async function loadPrayerTimes() {
       const t = new Date();
       t.setDate(t.getDate() + 1);
       t.setHours(h, m, 0);
-      nextPrayer = {
-        key: "Fajr",
-        label: prayers[0].label,
-        time: t
-      };
+      nextPrayer = { key: "Fajr", label: prayers[0].label, time: t };
     }
 
     nextPrayerNameEl.innerText = nextPrayer.label[language];
@@ -174,7 +169,6 @@ function startCountdown(prayer) {
       loadPrayerTimes();
       return;
     }
-
     const h = String(Math.floor(diff / 3600000)).padStart(2, "0");
     const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
     const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
