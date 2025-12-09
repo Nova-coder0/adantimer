@@ -144,3 +144,25 @@ body[dir="rtl"] {
   direction: rtl;
   text-align: center;
 }
+
+/* =================== SITE HEADER =================== */
+.site-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.site-header h1 {
+  font-size: 48px;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+}
+
+@media (max-width: 360px) {
+  .site-header h1 {
+    font-size: 36px;
+  }
+}
+
