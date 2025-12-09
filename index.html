@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adantimer – Live Prayer Times & Adhan Timer</title>
-  <meta name="description" content="Adantimer shows live prayer times for your city. Includes Adhan timer, countdown, and automatic location detection." />
-  <meta name="keywords" content="Adantimer, prayer times, Adhan, Salah, Islam, Muslim timer, live prayer, countdown" />
+  <meta name="description" content="Adantimer shows live prayer times for your city. Adhan timer, countdown, and automatic location detection included." />
+  <meta name="keywords" content="Adantimer, prayer times, Adhan, Salah, Muslim timer, Islamic prayer" />
   <meta name="author" content="Adantimer Team" />
   <link rel="canonical" href="https://adantimer.valonwear.com/" />
 
-  <!-- OpenGraph -->
+  <!-- OpenGraph for Social Media -->
   <meta property="og:title" content="Adantimer – Live Prayer Times & Adhan Timer" />
-  <meta property="og:description" content="Adantimer shows live prayer times for your city. Includes Adhan timer, countdown, and automatic location detection." />
+  <meta property="og:description" content="Adantimer shows live prayer times for your city. Adhan timer, countdown, and automatic location detection included." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://adantimer.valonwear.com/" />
   <meta property="og:image" content="https://adantimer.valonwear.com/assets/og-image.png" />
@@ -19,12 +19,12 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Adantimer – Live Prayer Times & Adhan Timer" />
-  <meta name="twitter:description" content="Adantimer shows live prayer times for your city. Includes Adhan timer, countdown, and automatic location detection." />
+  <meta name="twitter:description" content="Adantimer shows live prayer times for your city. Adhan timer, countdown, and automatic location detection included." />
   <meta name="twitter:image" content="https://adantimer.valonwear.com/assets/og-image.png" />
 
   <link rel="stylesheet" href="style.css">
-
-  <!-- JSON-LD Structured Data -->
+  
+  <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,8 +40,8 @@
   }
   </script>
 </head>
-
 <body>
+
   <header class="site-header">
     <h1>Adantimer</h1>
   </header>
@@ -72,17 +72,22 @@
 
   <footer class="footer">
     <p>&copy; 2025 Adantimer. All rights reserved.</p>
+    <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
   </footer>
 
   <script src="script.js"></script>
   <script>
+    // Manual location input
     document.getElementById("set-location-btn").addEventListener("click", async () => {
       const city = document.getElementById("manual-city").value.trim();
       const country = document.getElementById("manual-country").value.trim();
+
       if (!city) return alert("Please enter a city.");
+
       try {
         const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&format=json&limit=1`);
         const data = await res.json();
+
         if (data && data.length > 0) {
           const lat = parseFloat(data[0].lat);
           const lng = parseFloat(data[0].lon);
@@ -96,5 +101,6 @@
       }
     });
   </script>
+
 </body>
 </html>
