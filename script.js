@@ -11,7 +11,7 @@ let currentLocationType = null; // "gps", "ip", "manual"
 let manualCoords = null; // {lat, lng}
 let countdownInterval = null;
 
-// Sprachumschaltung
+// =================== LANGUAGE ===================
 function setLanguage(lang) {
   language = lang;
   if (language === "ar") {
@@ -24,33 +24,53 @@ function setLanguage(lang) {
   loadPrayerTimes();
 }
 
-// GPS Standort abfragen
+// =================== GPS ===================
 function getGPSLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      err => reject(err)
+      err => reject(err),
+      { enableHighAccuracy: true, timeout: 10000 }
     );
   });
 }
 
-// IP Standort abfragen (Fallback)
+// =================== IP FALLBACK ===================
 async function getIPLocation() {
   try {
     const res = await fetch("https://ipapi.co/json/");
     const data = await res.json();
     return {
       lat: data.latitude,
-      lng: data.longitude,
-      city: data.city,
-      country: data.country_name
+      lng: data.longitude
     };
   } catch {
     return null;
   }
 }
 
-// Manuelle Eingabe
+// =================== REVERSE GEOCODE ===================
+async function reverseGeocode(lat, lng) {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+    );
+    const json = await res.json();
+    const addr = json.address || {};
+    const city =
+      addr.city ||
+      addr.town ||
+      addr.village ||
+      addr.hamlet ||
+      "";
+    const country = addr.country || "";
+    return { city, country };
+  } catch {
+    return { city: "", country: "" };
+  }
+}
+
+// =================== MANUAL ===================
 function setManualLocation(lat, lng, city = "", country = "") {
   manualCoords = { lat, lng };
   cityName = city;
@@ -59,7 +79,7 @@ function setManualLocation(lat, lng, city = "", country = "") {
   loadPrayerTimes();
 }
 
-// Hauptfunktion: Gebetszeiten laden
+// =================== CORE ===================
 async function loadPrayerTimes() {
   countdownEl.innerText = "Loading...";
   prayerTimesEl.innerHTML = "";
@@ -69,43 +89,38 @@ async function loadPrayerTimes() {
   let coords = null;
 
   try {
-    // 1️⃣ Manuelle Eingabe hat Vorrang
+    // MANUAL FIRST
     if (currentLocationType === "manual" && manualCoords) {
       coords = manualCoords;
     } else {
-      // GPS
       try {
         coords = await getGPSLocation();
         currentLocationType = "gps";
       } catch {
-        // IP-Fallback
-        const ipData = await getIPLocation();
-        if (ipData) {
-          coords = { lat: ipData.lat, lng: ipData.lng };
-          cityName = ipData.city || "";
-          countryName = ipData.country || "";
-          currentLocationType = "ip";
-        } else {
-          throw new Error("No location available");
-        }
+        const ip = await getIPLocation();
+        if (!ip) throw new Error();
+        coords = ip;
+        currentLocationType = "ip";
       }
     }
 
-    // 2️⃣ API Call zu Aladhan
+    // PRAYER TIMES
     const res = await fetch(
       `https://api.aladhan.com/v1/timings?latitude=${coords.lat}&longitude=${coords.lng}&method=2`
     );
     const data = await res.json();
     const times = data.data.timings;
 
-    // Standortanzeige oben
+    // REAL LOCATION NAME (FIX ✅)
     if (currentLocationType !== "manual") {
-      cityName = data.data.meta.timezone || cityName;
-      countryName = "";
+      const loc = await reverseGeocode(coords.lat, coords.lng);
+      cityName = loc.city || "Your location";
+      countryName = loc.country || "";
     }
-    locationEl.innerText = "📍 " + cityName + (countryName ? ", " + countryName : "");
 
-    // Gebetszeiten-Array
+    locationEl.innerText =
+      "📍 " + cityName + (countryName ? ", " + countryName : "");
+
     const prayers = [
       { key: "Fajr", label: { en: "Fajr", ar: "الفجر" } },
       { key: "Dhuhr", label: { en: "Dhuhr", ar: "الظهر" } },
@@ -132,48 +147,46 @@ async function loadPrayerTimes() {
     });
 
     if (!nextPrayer) {
-      const fajrTomorrow = prayers[0];
-      const [h, m] = times["Fajr"].split(":");
+      const [h, m] = times.Fajr.split(":");
       const t = new Date();
       t.setDate(t.getDate() + 1);
       t.setHours(h, m, 0);
-      nextPrayer = { ...fajrTomorrow, time: t };
+      nextPrayer = {
+        key: "Fajr",
+        label: prayers[0].label,
+        time: t
+      };
     }
 
-    // Name der nächsten Gebetszeit
     nextPrayerNameEl.innerText = nextPrayer.label[language];
-
-    // Countdown starten
     startCountdown(nextPrayer);
-
   } catch {
     countdownEl.innerText = "Location permission required.";
     locationEl.innerText = "📍 Location not found";
   }
 }
 
-// Countdown-Funktion
+// =================== COUNTDOWN ===================
 function startCountdown(prayer) {
   function tick() {
-    const now = new Date();
-    const diff = prayer.time - now;
-
+    const diff = prayer.time - new Date();
     if (diff <= 0) {
       loadPrayerTimes();
       return;
     }
 
-    const hrs = String(Math.floor(diff / 3600000)).padStart(2, "0");
-    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
-    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+    const h = String(Math.floor(diff / 3600000)).padStart(2, "0");
+    const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+    const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
 
-    countdownEl.innerText = `${prayer.label[language]} in ${hrs}:${mins}:${secs}`;
+    countdownEl.innerText = `${prayer.label[language]} in ${h}:${m}:${s}`;
   }
 
-  if (countdownInterval) clearInterval(countdownInterval);
+  clearInterval(countdownInterval);
   tick();
   countdownInterval = setInterval(tick, 1000);
 }
 
-// Seite initial laden
+// =================== INIT ===================
 loadPrayerTimes();
+
