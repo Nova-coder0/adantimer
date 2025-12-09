@@ -147,22 +147,29 @@ body[dir="rtl"] {
 
 /* =================== SITE HEADER =================== */
 .site-header {
+  width: 100%;
   text-align: center;
-  margin-bottom: 20px;
+  padding: 40px 20px 20px 20px;
+  background: linear-gradient(180deg, #0b0b0b, #121212);
 }
 
 .site-header h1 {
-  font-size: 48px;
+  font-size: 64px;
   color: #ffffff;
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: 2px;
   text-shadow: 0 4px 15px rgba(0,0,0,0.5);
   font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 420px) {
   .site-header h1 {
-    font-size: 36px;
+    font-size: 48px;
   }
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
