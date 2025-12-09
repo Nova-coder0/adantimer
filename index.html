@@ -5,48 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adantimer – Live Prayer Times & Adhan Timer</title>
   <meta name="description" content="Adantimer shows live prayer times for your city. Adhan timer, countdown, and automatic location detection included." />
-  <meta name="keywords" content="Adantimer, prayer times, Adhan, Salah, Muslim timer, Islamic prayer" />
+  <meta name="keywords" content="Adantimer, prayer times, Adhan, Salah, Islam, Muslim, countdown, timer, daily prayers, Fajr, Dhuhr, Asr, Maghrib, Isha, location, automatic prayer times" />
   <meta name="author" content="Adantimer Team" />
-  <link rel="canonical" href="https://adantimer.valonwear.com/" />
+  <link rel="canonical" href="https://www.adantimer.com/" />
 
-  <!-- OpenGraph for Social Media -->
+  <!-- OpenGraph -->
   <meta property="og:title" content="Adantimer – Live Prayer Times & Adhan Timer" />
   <meta property="og:description" content="Adantimer shows live prayer times for your city. Adhan timer, countdown, and automatic location detection included." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://adantimer.valonwear.com/" />
-  <meta property="og:image" content="https://adantimer.valonwear.com/assets/og-image.png" />
+  <meta property="og:url" content="https://www.adantimer.com/" />
+  <meta property="og:image" content="https://www.adantimer.com/assets/og-image.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Adantimer – Live Prayer Times & Adhan Timer" />
   <meta name="twitter:description" content="Adantimer shows live prayer times for your city. Adhan timer, countdown, and automatic location detection included." />
-  <meta name="twitter:image" content="https://adantimer.valonwear.com/assets/og-image.png" />
+  <meta name="twitter:image" content="https://www.adantimer.com/assets/og-image.png" />
 
-  <link rel="stylesheet" href="style.css">
-  
-  <!-- Structured Data (JSON-LD) -->
+  <!-- JSON-LD for structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Adantimer",
-    "url": "https://adantimer.valonwear.com/",
-    "description": "Adantimer shows live prayer times and Adhan timer",
+    "url": "https://www.adantimer.com/",
+    "description": "Adantimer shows live prayer times and Adhan timer for your city.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://adantimer.valonwear.com/?city={city}",
+      "target": "https://www.adantimer.com/?city={city}",
       "query-input": "required name=city"
     }
   }
   </script>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+  <!-- SITE HEADER -->
   <header class="site-header">
     <h1>Adantimer</h1>
   </header>
 
+  <!-- MAIN CONTAINER -->
   <main class="container">
+
+    <!-- LOCATION SECTION -->
     <section class="location-section card">
       <div id="location" class="location">📍 Locating...</div>
       <div class="manual-location">
@@ -56,38 +61,47 @@
       </div>
     </section>
 
+    <!-- NEXT PRAYER SECTION -->
     <section class="next-prayer card">
       <h2 id="title">Next Prayer</h2>
       <div id="next-prayer-name" class="highlight"></div>
       <div id="countdown" class="countdown">Loading...</div>
     </section>
 
+    <!-- LANGUAGE SWITCH -->
     <section class="language-switch card">
       <button onclick="setLanguage('en')">EN</button>
       <button onclick="setLanguage('ar')">AR</button>
     </section>
 
+    <!-- PRAYER TIMES -->
     <section id="prayer-times" class="card"></section>
+
+    <!-- SEO / Info Content -->
+    <section class="seo-content card">
+      <h2>About Adantimer</h2>
+      <p>
+        Adantimer is your ultimate online tool to get live prayer times anywhere in the world. With automatic location detection, countdown timers, and Adhan notifications, you will never miss a prayer. Adantimer supports Fajr, Dhuhr, Asr, Maghrib, and Isha prayers, showing accurate timings based on your city. Our Adhan timer ensures timely alerts, helping Muslims stay on track with their daily Salah. Users can also manually input their city and country if automatic location detection is not preferred. Adantimer is fully responsive, works on mobile, tablet, desktop, and TV screens. The interface is simple, clean, and user-friendly. Our goal is to provide fast-loading pages with accurate prayer times for any city worldwide. By integrating structured data (JSON-LD), OpenGraph, and Twitter cards, Adantimer ensures discoverability on search engines and social media. Users searching for Adantimer, live prayer times, or Adhan timer will find our platform quickly. The service is perfect for daily use, travel, or for those managing multiple locations. Adantimer is designed with modern web standards, fast performance, and SEO-friendly elements to ensure it ranks high on Google. Whether you are looking for prayer schedules in Cairo, Istanbul, London, or New York, Adantimer provides precise timings. Our platform is ideal for individuals, families, mosques, and community centers who want reliable Salah reminders and schedules. With multilingual support, Adantimer can switch between English and Arabic seamlessly. Countdown timers are accurate, updating in real-time to show the next prayer instantly. The design is optimized for all screen sizes, ensuring visibility on ultra-wide monitors and TV displays. Core Web Vitals are optimized to guarantee smooth performance, fast loading, and interactivity. Adantimer is more than a timer; it is a comprehensive prayer companion. Stay spiritually connected, never miss a prayer, and experience a modern, intuitive interface with Adantimer. This tool is essential for practicing Muslims who want reliable, on-time Salah notifications. We emphasize usability, accessibility, and search engine optimization. With our platform, you get Fajr, Dhuhr, Asr, Maghrib, and Isha timings in one place. Adantimer helps you manage your prayer schedule effortlessly. The SEO content embedded here ensures discoverability for keywords such as Adantimer, prayer times, Adhan timer, Salah schedule, Muslim prayers, and daily Salah reminders. The website is lightweight, mobile-friendly, and designed for fast rendering. Join thousands of users worldwide who trust Adantimer for accurate, real-time prayer times and Adhan notifications. Explore cities, check daily schedules, and rely on automated alerts. Adantimer combines modern web technology with traditional Salah needs, making it an indispensable tool for Muslims everywhere.
+      </p>
+    </section>
+
   </main>
 
-  <footer class="footer">
+  <!-- FOOTER -->
+  <footer class="footer card">
     <p>&copy; 2025 Adantimer. All rights reserved.</p>
-    <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
   </footer>
 
   <script src="script.js"></script>
   <script>
-    // Manual location input
+    // Button Event Listener for manual input
     document.getElementById("set-location-btn").addEventListener("click", async () => {
       const city = document.getElementById("manual-city").value.trim();
       const country = document.getElementById("manual-country").value.trim();
-
       if (!city) return alert("Please enter a city.");
-
       try {
         const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&format=json&limit=1`);
         const data = await res.json();
-
         if (data && data.length > 0) {
           const lat = parseFloat(data[0].lat);
           const lng = parseFloat(data[0].lon);
