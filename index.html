@@ -3,65 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adantimer</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <title>Adantimer – Live Prayer Times & Adhan Timer</title>
+  <meta name="description" content="Adantimer shows live prayer times for your city. Includes Adhan timer, countdown, and automatic location detection." />
+  <meta name="keywords" content="Adantimer, prayer times, Adhan, Salah, Islam, Muslim timer, live prayer, countdown" />
+  <meta name="author" content="Adantimer Team" />
+  <link rel="canonical" href="https://adantimer.valonwear.com/" />
 
-  <!-- SITE HEADER -->
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Adantimer – Live Prayer Times & Adhan Timer" />
+  <meta property="og:description" content="Adantimer shows live prayer times for your city. Includes Adhan timer, countdown, and automatic location detection." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://adantimer.valonwear.com/" />
+  <meta property="og:image" content="https://adantimer.valonwear.com/assets/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Adantimer – Live Prayer Times & Adhan Timer" />
+  <meta name="twitter:description" content="Adantimer shows live prayer times for your city. Includes Adhan timer, countdown, and automatic location detection." />
+  <meta name="twitter:image" content="https://adantimer.valonwear.com/assets/og-image.png" />
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Adantimer",
+    "url": "https://adantimer.valonwear.com/",
+    "description": "Adantimer shows live prayer times and Adhan timer",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://adantimer.valonwear.com/?city={city}",
+      "query-input": "required name=city"
+    }
+  }
+  </script>
+</head>
+
+<body>
   <header class="site-header">
     <h1>Adantimer</h1>
   </header>
 
-  <div class="container">
+  <main class="container">
+    <section class="location-section card">
+      <div id="location" class="location">📍 Locating...</div>
+      <div class="manual-location">
+        <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)" />
+        <input type="text" id="manual-country" placeholder="Enter country (optional)" />
+        <button id="set-location-btn">Set Location</button>
+      </div>
+    </section>
 
-    <!-- Standortanzeige -->
-    <div id="location" class="location">📍 Locating...</div>
-
-    <!-- Manueller Standort -->
-    <div class="manual-location card">
-      <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)" />
-      <input type="text" id="manual-country" placeholder="Enter country (optional)" />
-      <button id="set-location-btn">Set Location</button>
-    </div>
-
-    <!-- Titel & nächste Gebetszeit -->
-    <div class="next-prayer card">
+    <section class="next-prayer card">
       <h2 id="title">Next Prayer</h2>
       <div id="next-prayer-name" class="highlight"></div>
       <div id="countdown" class="countdown">Loading...</div>
-    </div>
+    </section>
 
-    <!-- Sprachumschaltung -->
-    <div class="language-switch card">
+    <section class="language-switch card">
       <button onclick="setLanguage('en')">EN</button>
       <button onclick="setLanguage('ar')">AR</button>
-    </div>
+    </section>
 
-    <!-- Gebetszeiten -->
-    <div id="prayer-times" class="card"></div>
-  </div>
+    <section id="prayer-times" class="card"></section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Adantimer. All rights reserved.</p>
+  </footer>
 
   <script src="script.js"></script>
-
   <script>
-    // Button Event Listener für manuelle Eingabe
     document.getElementById("set-location-btn").addEventListener("click", async () => {
       const city = document.getElementById("manual-city").value.trim();
       const country = document.getElementById("manual-country").value.trim();
-
       if (!city) return alert("Please enter a city.");
-
       try {
-        // Koordinaten über OpenStreetMap Nominatim API abrufen
         const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&format=json&limit=1`);
         const data = await res.json();
-
         if (data && data.length > 0) {
           const lat = parseFloat(data[0].lat);
           const lng = parseFloat(data[0].lon);
-
-          // Neue Funktion im neuen Skript aufrufen
           setManualLocation(lat, lng, city, country);
         } else {
           alert("City not found. Try again.");
@@ -72,6 +96,5 @@
       }
     });
   </script>
-
 </body>
 </html>
