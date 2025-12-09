@@ -190,3 +190,32 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
+/* EXTRA FÜR GROßE DISPLAYS */
+@media (min-width: 1440px) {
+  /* Header größer */
+  .site-header h1 {
+    font-size: 96px;
+  }
+
+  /* Container breiter & mehr Padding */
+  .container {
+    max-width: 1000px;
+    padding: 64px 48px;
+  }
+
+  /* Countdown größer */
+  .countdown {
+    font-size: 72px;
+  }
+
+  /* Nächste Gebetszeit */
+  .highlight {
+    font-size: 32px;
+  }
+
+  /* Gebetszeiten-Liste */
+  #prayer-times div {
+    font-size: 20px;
+    padding: 16px 12px;
+  }
+}
