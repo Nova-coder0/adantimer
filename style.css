@@ -17,13 +17,24 @@ body {
   justify-content: flex-start;
 }
 
-/* SITE HEADER */
+/* HEADER */
 .site-header {
   width: 100%;
-  position: relative;
+  padding: 20px 20px 40px;
   display: flex;
   justify-content: center;
-  padding: 20px 20px 40px;
+}
+
+/* INNER WRAPPER */
+.header-inner {
+  display: flex;
+  align-items: center;
+}
+
+/* LOGO */
+.site-logo {
+  height: 100px;
+  margin-right: 18px; /* 👈 HIER Nähe einstellen */
 }
 
 /* TITLE */
@@ -33,21 +44,12 @@ body {
   letter-spacing: 2px;
   margin: 0;
   text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  white-space: nowrap;
 }
 
-/* LOGO */
-.brand {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: calc(50% - 260px); /* 👈 Nähe zum Titel */
-  display: flex;
-  align-items: center;
-}
-
-.site-logo {
-  height: 100px;
-  width: auto;
+/* SPACER – hält Titel exakt mittig */
+.header-spacer {
+  width: calc(100px + 18px); /* logo height + gap */
 }
 
 /* TITEL */
