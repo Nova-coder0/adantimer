@@ -39,11 +39,11 @@ body {
 .brand {
   display: flex;
   align-items: center; /* Höhe exakt ausrichten */
-  gap: 16px;
+  gap: 15px;
 }
 
 .site-logo {
-  height: 64px;        /* ← Desktop Basis */
+  height: 72px;      /* war 64 → jetzt sichtbar größer */
   width: auto;
 }
 
