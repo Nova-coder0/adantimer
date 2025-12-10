@@ -208,17 +208,12 @@ body {
   .brand { gap: 20px; flex-direction: column; }
 }
 
-/* DESKTOP LARGE */
 @media (min-width: 1025px) and (max-width: 1920px) {
-  .site-logo { height: 120px; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
+  .site-logo { height: 120px; }
+  .brand { left: calc(50% - 300px); }
   .site-header h1 { font-size: 96px; }
-  #title { font-size: 36px; }
-  .highlight { font-size: 32px; }
-  .countdown { font-size: 72px; }
-  .container { max-width: 1000px; padding: 64px 48px; }
-  #prayer-times div { font-size: 20px; padding: 16px 12px; }
-  .brand { gap: 32px; }
 }
+
 
 /* ULTRA-WIDE & TV */
 @media (min-width: 1921px) {
