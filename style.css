@@ -29,7 +29,7 @@ body {
 .brand {
   display: flex;
   align-items: center; /* vertikal zentriert */
-  gap: 24px;           /* Abstand zwischen Logo und H1 */
+  gap: 15px;           /* Abstand zwischen Logo und H1 */
 }
 
 /* LOGO */
