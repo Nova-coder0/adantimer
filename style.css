@@ -1,11 +1,15 @@
-/* RESET */
+/* =========================
+   RESET
+========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY */
+/* =========================
+   BODY
+========================= */
 body {
   background: linear-gradient(180deg, #0b0b0b, #121212);
   color: #ffffff;
@@ -14,10 +18,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .site-header {
   width: 100%;
   padding: 20px 20px 40px;
@@ -25,59 +30,50 @@ body {
   justify-content: center;
 }
 
-/* INNER WRAPPER */
 .header-inner {
   display: flex;
   align-items: center;
 }
 
-/* LOGO */
 .site-logo {
   height: 100px;
-  margin-right: 18px; /* 👈 HIER Nähe einstellen */
+  margin-right: 18px; /* Abstand zum Titel */
 }
 
-/* TITLE */
 .site-header h1 {
-  font-size: 72px;
   font-weight: 900;
   letter-spacing: 2px;
   margin: 0;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
   white-space: nowrap;
-}
-
-/* SPACER – hält Titel exakt mittig */
-.header-spacer {
-  width: calc(100px + 18px); /* logo height + gap */
-}
-
-/* TITEL */
-.site-header h1 {
-  font-size: 72px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  margin: 0;
   text-align: center;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-/* CONTAINER */
+/* Spacer hält Titel exakt mittig */
+.header-spacer {
+  width: calc(100px + 18px);
+}
+
+/* =========================
+   CONTAINER
+========================= */
 .container {
   width: 100%;
-  max-width: 420px;
+  max-width: 420px; /* Mobile default */
   padding: 32px 20px;
-  text-align: center;
+  margin-bottom: 40px;
   background: #181818;
   border-radius: 16px;
-  margin-bottom: 40px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
   gap: 20px;
+  text-align: center;
 }
 
-/* CARDS */
+/* =========================
+   CARDS
+========================= */
 .card {
   background: #1f1f1f;
   border-radius: 16px;
@@ -85,13 +81,17 @@ body {
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-/* LOCATION */
+/* =========================
+   LOCATION
+========================= */
 .location {
   font-size: 14px;
   opacity: 0.8;
 }
 
-/* TITLE & NEXT PRAYER */
+/* =========================
+   TITLES & COUNTDOWN
+========================= */
 #title {
   font-size: 24px;
   letter-spacing: 0.5px;
@@ -109,10 +109,11 @@ body {
   font-size: 44px;
   font-weight: 700;
   margin-bottom: 10px;
-  color: #ffffff;
 }
 
-/* PRAYER TIMES */
+/* =========================
+   PRAYER TIMES
+========================= */
 #prayer-times {
   display: flex;
   flex-direction: column;
@@ -124,7 +125,6 @@ body {
   padding: 12px 10px;
   font-size: 16px;
   border-bottom: 1px solid #2a2a2a;
-  transition: background 0.2s;
 }
 
 #prayer-times div:last-child {
@@ -133,10 +133,11 @@ body {
 
 #prayer-times div:hover {
   background: #2a2a2a;
-  cursor: default;
 }
 
-/* LANGUAGE SWITCH */
+/* =========================
+   LANGUAGE SWITCH
+========================= */
 .language-switch {
   display: flex;
   justify-content: center;
@@ -144,23 +145,24 @@ body {
 }
 
 .language-switch button {
-  background: #333333;
+  background: #333;
   border: none;
-  color: #ffffff;
+  color: #fff;
   padding: 10px 18px;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .language-switch button:hover {
-  background: #444444;
+  background: #444;
 }
 
-/* MANUAL INPUT */
+/* =========================
+   MANUAL LOCATION
+========================= */
 .manual-location input {
   width: calc(50% - 10px);
-  margin: 0 5px 10px 5px;
+  margin: 0 5px 10px;
   padding: 8px 10px;
   border-radius: 8px;
   border: 1px solid #555;
@@ -176,48 +178,67 @@ body {
   color: #000;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .manual-location button:hover {
   background: #e6c200;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 420px) {
   .site-logo { height: 56px; margin-right: 10px; }
   .site-header h1 { font-size: 48px; }
   .header-spacer { width: calc(56px + 10px); }
 }
 
-/* TABLET */
+/* =========================
+   TABLET
+========================= */
 @media (min-width: 421px) and (max-width: 1024px) {
   .site-logo { height: 80px; margin-right: 14px; }
   .site-header h1 { font-size: 64px; }
   .header-spacer { width: calc(80px + 14px); }
+
+  .container {
+    max-width: 720px;
+    padding: 40px 36px;
+  }
 }
 
-/* DESKTOP */
-@media (min-width: 1025px) and (max-width: 1920px) {
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width: 1025px) {
   .site-logo { height: 120px; margin-right: 18px; }
   .site-header h1 { font-size: 96px; }
   .header-spacer { width: calc(120px + 18px); }
+
+  .container {
+    max-width: 1100px;
+    padding: 56px 56px;
+  }
 }
 
-/* ULTRA-WIDE / TV */
+/* =========================
+   ULTRA-WIDE / TV
+========================= */
 @media (min-width: 1921px) {
   .site-logo { height: 150px; margin-right: 22px; }
   .site-header h1 { font-size: 130px; }
   .header-spacer { width: calc(150px + 22px); }
+
+  .container {
+    max-width: 1400px;
+    padding: 72px 64px;
+  }
 }
 
-/* RTL SUPPORT */
+/* =========================
+   RTL SUPPORT
+========================= */
 body[dir="rtl"] {
   direction: rtl;
   text-align: center;
 }
-
-/* PERFORMANCE / SEO-OPTIMIZED NOTES */
-/* - Use background gradients instead of large images for speed */
-/* - Keep container width limited for readability */
-/* - Minimal shadows to prevent GPU overload on large screens */
