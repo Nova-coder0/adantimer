@@ -20,31 +20,28 @@ body {
 /* SITE HEADER */
 .site-header {
   width: 100%;
-  text-align: center;
-  padding: 20px 20px 40px 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.site-header h1 {
-  font-size: 64px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  margin: 0;
+  justify-content: center; /* Brand zentrieren */
+  padding: 20px 20px 40px 20px;
 }
 
 .brand {
   display: flex;
-  align-items: center; /* Höhe exakt ausrichten */
-  gap: 16px;
+  align-items: center; /* Logo und Titel vertikal zentrieren */
+  gap: 24px;           /* Abstand zwischen Logo und H1 */
 }
 
 .site-logo {
-  height: 82px;      /* war 64 → jetzt sichtbar größer */
+  height: 100px;  /* Default Desktop */
   width: auto;
+}
+
+.site-header h1 {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  margin: 0;
 }
 
 /* CONTAINER */
