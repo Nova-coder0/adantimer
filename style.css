@@ -183,50 +183,32 @@ body {
   background: #e6c200;
 }
 
-/* RESPONSIVE MOBILE */
+/* MOBILE */
 @media (max-width: 420px) {
-  .site-logo { height: 56px; }
+  .site-logo { height: 56px; margin-right: 10px; }
   .site-header h1 { font-size: 48px; }
-  #title { font-size: 20px; }
-  .highlight { font-size: 18px; }
-  .countdown { font-size: 36px; }
-  .manual-location input { width: 100%; margin-bottom: 8px; }
-  .brand { gap: 12px; }
+  .header-spacer { width: calc(56px + 10px); }
 }
 
 /* TABLET */
 @media (min-width: 421px) and (max-width: 1024px) {
-  .site-logo { 
-    position: relative; 
-    height: 80px; 
-    margin-bottom: 16px;
-  }
+  .site-logo { height: 80px; margin-right: 14px; }
   .site-header h1 { font-size: 64px; }
-  #title { font-size: 28px; }
-  .highlight { font-size: 24px; }
-  .countdown { font-size: 56px; }
-  .container { max-width: 720px; padding: 48px 36px; }
-  #prayer-times div { font-size: 18px; padding: 14px 12px; }
-  .brand { gap: 20px; flex-direction: column; }
+  .header-spacer { width: calc(80px + 14px); }
 }
 
+/* DESKTOP */
 @media (min-width: 1025px) and (max-width: 1920px) {
-  .site-logo { height: 120px; }
-  .brand { left: calc(50% - 300px); }
+  .site-logo { height: 120px; margin-right: 18px; }
   .site-header h1 { font-size: 96px; }
+  .header-spacer { width: calc(120px + 18px); }
 }
 
-
-/* ULTRA-WIDE & TV */
+/* ULTRA-WIDE / TV */
 @media (min-width: 1921px) {
-  .site-logo { height: 150px; position: absolute; left: 40px; top: 50%; transform: translateY(-50%); }
+  .site-logo { height: 150px; margin-right: 22px; }
   .site-header h1 { font-size: 130px; }
-  #title { font-size: 48px; }
-  .highlight { font-size: 36px; }
-  .countdown { font-size: 96px; }
-  .container { max-width: 1400px; padding: 80px 60px; }
-  #prayer-times div { font-size: 24px; padding: 20px 16px; }
-  .brand { gap: 40px; }
+  .header-spacer { width: calc(150px + 22px); }
 }
 
 /* RTL SUPPORT */
