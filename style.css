@@ -215,6 +215,9 @@ body {
     font-size: 18px;
     padding: 14px 12px;
   }
+  .site-header h1 {
+    font-size: 68px;
+  }
 }
 
 /* DESKTOP LARGE */
@@ -240,7 +243,7 @@ body {
     padding: 64px 48px;
   }
  .site-header h1 {
-    font-size: 96px;
+    font-size: 100px;
   }
 }
 
@@ -267,7 +270,7 @@ body {
     padding: 80px 60px;
   }
   .site-header h1 {
-    font-size: 120px;
+    font-size: 130px;
   }
 }
 
