@@ -242,3 +242,9 @@ body[dir="rtl"] {
   direction: rtl;
   text-align: center;
 }
+.site-logo {
+  pointer-events: none;     /* Kein Rechtsklick / kein Visual Search */
+  user-select: none;        /* Kein Markieren */
+  -webkit-user-drag: none;  /* Kein Drag */
+}
+
