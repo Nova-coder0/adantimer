@@ -175,17 +175,13 @@ body {
 
 /* RESPONSIVE MOBILE */
 @media (max-width: 420px) {
-  .site-logo { 
-    position: relative;  /* Logo wieder normal positioniert */
-    height: 56px; 
-    margin-bottom: 12px;
-  }
+  .site-logo { height: 56px; }
   .site-header h1 { font-size: 48px; }
   #title { font-size: 20px; }
   .highlight { font-size: 18px; }
   .countdown { font-size: 36px; }
   .manual-location input { width: 100%; margin-bottom: 8px; }
-  .brand { gap: 12px; flex-direction: column; }
+  .brand { gap: 12px; }
 }
 
 /* TABLET */
