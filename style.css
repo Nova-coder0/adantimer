@@ -35,15 +35,9 @@ body {
   align-items: center;
 }
 
-/* Logo – Standard (Mobile) */
 .site-logo {
   height: 100px;
-  margin-right: 18px;
-  position: relative;
-  top: 0;  /* Mobile / Standard – kein Verschieben */
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
+  margin-right: 18px; /* Abstand zum Titel */
 }
 
 .site-header h1 {
@@ -190,48 +184,55 @@ body {
   background: #e6c200;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 @media (max-width: 420px) {
-  .site-logo { 
-    height: 56px; 
-    margin-right: 10px; 
-    top: 0;  /* Mobile: kein Verschieben */
-  }
+  .site-logo { height: 56px; margin-right: 10px; }
   .site-header h1 { font-size: 48px; }
   .header-spacer { width: calc(56px + 10px); }
 }
 
-/* TABLET */
+/* =========================
+   TABLET
+========================= */
 @media (min-width: 421px) and (max-width: 1024px) {
-  .site-logo { 
-    height: 80px; 
-    margin-right: 14px; 
-    top: 6px;  /* leichtes Verschieben */
-  }
+  .site-logo { height: 80px; margin-right: 14px; }
   .site-header h1 { font-size: 64px; }
   .header-spacer { width: calc(80px + 14px); }
+
+  .container {
+    max-width: 720px;
+    padding: 40px 36px;
+  }
 }
 
-/* DESKTOP */
+/* =========================
+   DESKTOP
+========================= */
 @media (min-width: 1025px) {
-  .site-logo { 
-    height: 120px; 
-    margin-right: 18px; 
-    top: 16px;  /* Desktop: Logo leicht nach unten */
-  }
+  .site-logo { height: 120px; margin-right: 18px; }
   .site-header h1 { font-size: 96px; }
   .header-spacer { width: calc(120px + 18px); }
+
+  .container {
+    max-width: 1100px;
+    padding: 56px 56px;
+  }
 }
 
-/* ULTRA-WIDE / TV */
+/* =========================
+   ULTRA-WIDE / TV
+========================= */
 @media (min-width: 1921px) {
-  .site-logo { 
-    height: 150px; 
-    margin-right: 22px; 
-    top: 16px; 
-  }
+  .site-logo { height: 150px; margin-right: 22px; }
   .site-header h1 { font-size: 130px; }
   .header-spacer { width: calc(150px + 22px); }
+
+  .container {
+    max-width: 1400px;
+    padding: 72px 64px;
+  }
 }
 
 /* =========================
@@ -241,6 +242,7 @@ body[dir="rtl"] {
   direction: rtl;
   text-align: center;
 }
+
 .site-logo {
   pointer-events: none;     /* Kein Rechtsklick / kein Visual Search */
   user-select: none;        /* Kein Markieren */
