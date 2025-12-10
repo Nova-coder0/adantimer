@@ -38,6 +38,8 @@ body {
 .site-logo {
   height: 100px;
   margin-right: 18px; /* Abstand zum Titel */
+  position: relative;
+  top: 6px;                 /* Logo 6px nach unten verschoben */
 }
 
 .site-header h1 {
