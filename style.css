@@ -167,109 +167,51 @@ body {
 
 /* RESPONSIVE MOBILE */
 @media (max-width: 420px) {
-  .site-header h1 {
-    font-size: 48px;
-  }
-  #title {
-    font-size: 20px;
-  }
-  .highlight {
-    font-size: 18px;
-  }
-  .countdown {
-    font-size: 36px;
-  }
-  .manual-location input {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-
- .site-header h1 {
-    font-size: 56px;
-  }
+  .site-logo { height: 56px; }
+  .site-header h1 { font-size: 48px; }
+  #title { font-size: 20px; }
+  .highlight { font-size: 18px; }
+  .countdown { font-size: 36px; }
+  .manual-location input { width: 100%; margin-bottom: 8px; }
+  .brand { gap: 12px; }
 }
 
-
 /* TABLET */
-@media (min-width: 768px) and (max-width: 1439px) {
-  .site-header h1 {
-    font-size: 80px;
-  }
-  #title {
-    font-size: 28px;
-  }
-  .highlight {
-    font-size: 24px;
-  }
-  .countdown {
-    font-size: 56px;
-  }
-  .container {
-    max-width: 720px;
-    padding: 48px 36px;
-  }
-  #prayer-times div {
-    font-size: 18px;
-    padding: 14px 12px;
-  }
-  .site-header h1 {
-    font-size: 68px;
-  }
+@media (min-width: 421px) and (max-width: 1024px) {
+  .site-logo { height: 80px; }
+  .site-header h1 { font-size: 64px; }
+  #title { font-size: 28px; }
+  .highlight { font-size: 24px; }
+  .countdown { font-size: 56px; }
+  .container { max-width: 720px; padding: 48px 36px; }
+  #prayer-times div { font-size: 18px; padding: 14px 12px; }
+  .brand { gap: 20px; }
 }
 
 /* DESKTOP LARGE */
-@media (min-width: 1440px) and (max-width: 1920px) {
-  .site-header h1 {
-    font-size: 96px;
-  }
-  #title {
-    font-size: 36px;
-  }
-  .highlight {
-    font-size: 32px;
-  }
-  .countdown {
-    font-size: 72px;
-  }
-  #prayer-times div {
-    font-size: 20px;
-    padding: 16px 12px;
-  }
-  .container {
-    max-width: 1000px;
-    padding: 64px 48px;
-  }
- .site-header h1 {
-    font-size: 120px;
-  }
+@media (min-width: 1025px) and (max-width: 1920px) {
+  .site-logo { height: 120px; }
+  .site-header h1 { font-size: 96px; }
+  #title { font-size: 36px; }
+  .highlight { font-size: 32px; }
+  .countdown { font-size: 72px; }
+  .container { max-width: 1000px; padding: 64px 48px; }
+  #prayer-times div { font-size: 20px; padding: 16px 12px; }
+  .brand { gap: 32px; }
 }
 
 /* ULTRA-WIDE & TV */
 @media (min-width: 1921px) {
-  .site-header h1 {
-    font-size: 120px;
-  }
-  #title {
-    font-size: 48px;
-  }
-  .highlight {
-    font-size: 36px;
-  }
-  .countdown {
-    font-size: 96px;
-  }
-  #prayer-times div {
-    font-size: 24px;
-    padding: 20px 16px;
-  }
-  .container {
-    max-width: 1400px;
-    padding: 80px 60px;
-  }
-  .site-header h1 {
-    font-size: 130px;
-  }
+  .site-logo { height: 150px; }
+  .site-header h1 { font-size: 130px; }
+  #title { font-size: 48px; }
+  .highlight { font-size: 36px; }
+  .countdown { font-size: 96px; }
+  .container { max-width: 1400px; padding: 80px 60px; }
+  #prayer-times div { font-size: 24px; padding: 20px 16px; }
+  .brand { gap: 40px; }
 }
+
 
 /* RTL SUPPORT */
 body[dir="rtl"] {
