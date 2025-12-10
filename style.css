@@ -190,7 +190,7 @@ body {
    MOBILE
 ========================= */
 @media (max-width: 420px) {
-  .site-logo { height: 66px; margin-right: 10px; }
+  .site-logo { height: 166px; margin-right: 10px; }
   .site-header h1 { font-size: 48px; }
   .header-spacer { width: calc(56px + 10px); }
 }
