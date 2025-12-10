@@ -202,7 +202,7 @@ body {
 
 /* DESKTOP LARGE */
 @media (min-width: 1025px) and (max-width: 1920px) {
-  .site-logo { height: 120px; position: absolute; left: 15px; top: 50%; transform: translateY(-50%); }
+  .site-logo { height: 120px; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
   .site-header h1 { font-size: 96px; }
   #title { font-size: 36px; }
   .highlight { font-size: 32px; }
