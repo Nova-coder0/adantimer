@@ -20,26 +20,34 @@ body {
 /* SITE HEADER */
 .site-header {
   width: 100%;
-  position: relative; /* für absolut positioniertes Logo */
+  position: relative;
   display: flex;
-  justify-content: center; /* Titel mittig */
-  padding: 20px 20px 40px 20px;
+  justify-content: center;
+  padding: 20px 20px 40px;
 }
 
-.brand {
-  display: flex;
-  align-items: center; /* vertikal zentriert */
-  gap: 15px;           /* Abstand zwischen Logo und H1 */
+/* TITLE */
+.site-header h1 {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 /* LOGO */
-.site-logo {
-  height: 100px;       /* Default Desktop */
-  width: auto;
-  position: absolute;  /* Desktop: links positionieren */
-  left: 20px;
+.brand {
+  position: absolute;
   top: 50%;
-  transform: translateY(-50%); /* vertikal zentrieren */
+  transform: translateY(-50%);
+  left: calc(50% - 260px); /* 👈 Nähe zum Titel */
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  height: 100px;
+  width: auto;
 }
 
 /* TITEL */
