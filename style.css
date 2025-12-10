@@ -39,7 +39,7 @@ body {
   height: 100px;
   margin-right: 18px; /* Abstand zum Titel */
   position: relative;
-  top: 10px;
+  top: 8px;
 }
 
 .site-header h1 {
