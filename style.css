@@ -20,28 +20,36 @@ body {
 /* SITE HEADER */
 .site-header {
   width: 100%;
+  position: relative; /* für absolut positioniertes Logo */
   display: flex;
-  justify-content: center; /* Brand zentrieren */
+  justify-content: center; /* Titel mittig */
   padding: 20px 20px 40px 20px;
 }
 
 .brand {
   display: flex;
-  align-items: center; /* Logo und Titel vertikal zentrieren */
+  align-items: center; /* vertikal zentriert */
   gap: 24px;           /* Abstand zwischen Logo und H1 */
 }
 
+/* LOGO */
 .site-logo {
-  height: 100px;  /* Default Desktop */
+  height: 100px;       /* Default Desktop */
   width: auto;
+  position: absolute;  /* Desktop: links positionieren */
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%); /* vertikal zentrieren */
 }
 
+/* TITEL */
 .site-header h1 {
   font-size: 72px;
   font-weight: 900;
   letter-spacing: 2px;
   text-shadow: 0 4px 15px rgba(0,0,0,0.5);
   margin: 0;
+  text-align: center;
 }
 
 /* CONTAINER */
@@ -167,30 +175,38 @@ body {
 
 /* RESPONSIVE MOBILE */
 @media (max-width: 420px) {
-  .site-logo { height: 56px; }
+  .site-logo { 
+    position: relative;  /* Logo wieder normal positioniert */
+    height: 56px; 
+    margin-bottom: 12px;
+  }
   .site-header h1 { font-size: 48px; }
   #title { font-size: 20px; }
   .highlight { font-size: 18px; }
   .countdown { font-size: 36px; }
   .manual-location input { width: 100%; margin-bottom: 8px; }
-  .brand { gap: 12px; }
+  .brand { gap: 12px; flex-direction: column; }
 }
 
 /* TABLET */
 @media (min-width: 421px) and (max-width: 1024px) {
-  .site-logo { height: 80px; }
+  .site-logo { 
+    position: relative; 
+    height: 80px; 
+    margin-bottom: 16px;
+  }
   .site-header h1 { font-size: 64px; }
   #title { font-size: 28px; }
   .highlight { font-size: 24px; }
   .countdown { font-size: 56px; }
   .container { max-width: 720px; padding: 48px 36px; }
   #prayer-times div { font-size: 18px; padding: 14px 12px; }
-  .brand { gap: 20px; }
+  .brand { gap: 20px; flex-direction: column; }
 }
 
 /* DESKTOP LARGE */
 @media (min-width: 1025px) and (max-width: 1920px) {
-  .site-logo { height: 120px; }
+  .site-logo { height: 120px; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); }
   .site-header h1 { font-size: 96px; }
   #title { font-size: 36px; }
   .highlight { font-size: 32px; }
@@ -202,7 +218,7 @@ body {
 
 /* ULTRA-WIDE & TV */
 @media (min-width: 1921px) {
-  .site-logo { height: 150px; }
+  .site-logo { height: 150px; position: absolute; left: 40px; top: 50%; transform: translateY(-50%); }
   .site-header h1 { font-size: 130px; }
   #title { font-size: 48px; }
   .highlight { font-size: 36px; }
@@ -211,7 +227,6 @@ body {
   #prayer-times div { font-size: 24px; padding: 20px 16px; }
   .brand { gap: 40px; }
 }
-
 
 /* RTL SUPPORT */
 body[dir="rtl"] {
