@@ -63,34 +63,13 @@ async function reverseGeocode(lat, lng) {
   }
 }
 
-// =================== MANUAL ===================
+// =================== MANUAL LOCATION ===================
 function setManualLocation(lat, lng, city = "", country = "") {
   manualCoords = { lat, lng };
   cityName = city;
   countryName = country;
   currentLocationType = "manual";
   loadPrayerTimes();
-}
-
-// =================== PRETTY URL HANDLING ===================
-async function checkPrettyURL() {
-  const pathCity = window.location.pathname.slice(1); // entfernt führendes '/'
-  if (pathCity) {
-    try {
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(pathCity)}&format=json&limit=1`);
-      const data = await res.json();
-      if (data && data.length > 0) {
-        const lat = parseFloat(data[0].lat);
-        const lng = parseFloat(data[0].lon);
-        const country = data[0].display_name.split(',').pop().trim();
-        setManualLocation(lat, lng, pathCity, country);
-        return true; // Pretty URL erfolgreich
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }
-  return false; // Keine Pretty URL oder Fehler
 }
 
 // =================== CORE ===================
@@ -127,7 +106,7 @@ async function loadPrayerTimes() {
 
     // =================== LOCATION DISPLAY ===================
     if (currentLocationType === "manual") {
-      // cityName und countryName sind schon gesetzt
+      // cityName und countryName bereits gesetzt
     } else {
       const loc = await reverseGeocode(coords.lat, coords.lng);
       cityName = loc.city || "Your location";
@@ -200,8 +179,25 @@ function startCountdown(prayer) {
 
 // =================== INIT ===================
 (async function init() {
-  const hasPrettyURL = await checkPrettyURL();
-  if (!hasPrettyURL) {
-    loadPrayerTimes();
+  const pathCity = window.location.pathname.slice(1); // entferne führendes '/'
+
+  if (pathCity) {
+    // Pretty URL priorisieren
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(pathCity)}&format=json&limit=1`);
+      const data = await res.json();
+      if (data && data.length > 0) {
+        const lat = parseFloat(data[0].lat);
+        const lng = parseFloat(data[0].lon);
+        const country = data[0].display_name.split(',').pop().trim();
+        setManualLocation(lat, lng, pathCity, country); // startet loadPrayerTimes
+        return; // WICHTIG: keine GPS/IP-Abfrage danach
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
+
+  // Fallback auf GPS/IP, wenn keine Pretty URL
+  loadPrayerTimes();
 })();
