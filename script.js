@@ -11,33 +11,6 @@ let currentLocationType = null; // "gps", "ip", "manual"
 let manualCoords = null; // {lat, lng}
 let countdownInterval = null;
 
-// =================== PRETTY URL HANDLING ===================
-const pathCity = window.location.pathname.slice(1); // entfernt führendes '/'
-if(pathCity) {
-  setManualLocationByName(pathCity);
-}
-
-// Funktion, um Stadt per Name zu setzen
-async function setManualLocationByName(city) {
-  try {
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&format=json&limit=1`);
-    const data = await res.json();
-    if (data && data.length > 0) {
-      const lat = parseFloat(data[0].lat);
-      const lng = parseFloat(data[0].lon);
-      const country = data[0].display_name.split(',').pop().trim();
-      setManualLocation(lat, lng, city, country);
-    } else {
-      alert("City not found: " + city);
-    }
-  } catch (err) {
-    console.error(err);
-    alert("Error fetching city data.");
-  }
-}
-
-
-
 // =================== LANGUAGE ===================
 function setLanguage(lang) {
   language = lang;
@@ -82,11 +55,7 @@ async function reverseGeocode(lat, lng) {
     const json = await res.json();
     const addr = json.address || {};
     const city =
-      addr.city ||
-      addr.town ||
-      addr.village ||
-      addr.hamlet ||
-      "";
+      addr.city || addr.town || addr.village || addr.hamlet || "";
     const country = addr.country || "";
     return { city, country };
   } catch {
@@ -101,6 +70,27 @@ function setManualLocation(lat, lng, city = "", country = "") {
   countryName = country;
   currentLocationType = "manual";
   loadPrayerTimes();
+}
+
+// =================== PRETTY URL HANDLING ===================
+async function checkPrettyURL() {
+  const pathCity = window.location.pathname.slice(1); // entfernt führendes '/'
+  if (pathCity) {
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(pathCity)}&format=json&limit=1`);
+      const data = await res.json();
+      if (data && data.length > 0) {
+        const lat = parseFloat(data[0].lat);
+        const lng = parseFloat(data[0].lon);
+        const country = data[0].display_name.split(',').pop().trim();
+        setManualLocation(lat, lng, pathCity, country);
+        return true; // Pretty URL erfolgreich
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  return false; // Keine Pretty URL oder Fehler
 }
 
 // =================== CORE ===================
@@ -209,5 +199,9 @@ function startCountdown(prayer) {
 }
 
 // =================== INIT ===================
-loadPrayerTimes();
-
+(async function init() {
+  const hasPrettyURL = await checkPrettyURL();
+  if (!hasPrettyURL) {
+    loadPrayerTimes();
+  }
+})();
