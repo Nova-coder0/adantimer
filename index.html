@@ -3,65 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>Prayer Times & Adhan Timer – Accurate Salah Schedule | Adantimer</title>
   <meta name="description" content="Get live prayer times and Adhan alerts worldwide with Adantimer. Next prayer countdown, Salah schedule, and Muslim timer for global users." />
-  <meta name="keywords" content="prayer times, adhan timer, salah, next prayer countdown, islamic prayer schedule, prayer times without app, online adhan timer, automatic location prayer times" />
+  <meta name="keywords" content="prayer times, Adhan timer, Salah, next prayer countdown, Islamic prayer schedule, prayer times without app, online Adhan timer, automatic location prayer times, next prayer alert, prayer times in browser" />
   <meta name="author" content="Adantimer Team" />
   <link rel="canonical" href="https://www.adantimer.com/" />
 
-  <!-- =========================
-       FAVICONS (CLEAN – NO DUPLICATES)
-  ========================= -->
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/assets/favicon-2.png">
+<link rel="shortcut icon" href="/assets/favicon-2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-2.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="shortcut icon" href="/favicon.png">
 
-  <!-- =========================
-       OPEN GRAPH
-  ========================= -->
+  
+  <!-- OpenGraph -->
   <meta property="og:title" content="Prayer Times & Adhan Timer – Accurate Salah Schedule | Adantimer" />
-  <meta property="og:description" content="Live prayer times & Adhan timer with automatic location detection." />
+  <meta property="og:description" content="Get live prayer times and Adhan alerts worldwide with Adantimer. Next prayer countdown, Salah schedule, and Muslim timer for global users." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.adantimer.com/" />
   <meta property="og:image" content="https://www.adantimer.com/assets/og-image.png" />
 
-  <!-- =========================
-       TWITTER
-  ========================= -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Prayer Times & Adhan Timer | Adantimer" />
-  <meta name="twitter:description" content="Next prayer countdown & accurate salah times worldwide." />
+  <meta name="twitter:title" content="Prayer Times & Adhan Timer – Accurate Salah Schedule | Adantimer" />
+  <meta name="twitter:description" content="Get live prayer times and Adhan alerts worldwide with Adantimer. Next prayer countdown, Salah schedule, and Muslim timer for global users." />
   <meta name="twitter:image" content="https://www.adantimer.com/assets/og-image.png" />
 
-  <!-- =========================
-       STRUCTURED DATA – WEBSITE
-  ========================= -->
+  <!-- JSON-LD structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Adantimer",
     "url": "https://www.adantimer.com/",
+    "description": "Adantimer provides live prayer times and Adhan timer for Muslims worldwide.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://www.adantimer.com/{city}",
+      "target": "https://www.adantimer.com/?city={city}",
       "query-input": "required name=city"
     }
-  }
-  </script>
-
-  <!-- =========================
-       STRUCTURED DATA – ORGANIZATION (SERP LOGO)
-  ========================= -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Adantimer",
-    "url": "https://www.adantimer.com/",
-    "logo": "https://www.adantimer.com/assets/logo-512.png"
   }
   </script>
 
@@ -69,68 +50,63 @@
 </head>
 
 <body>
-
-<!-- =========================
-     HEADER
-========================= -->
-<header class="site-header">
+  <header class="site-header">
   <div class="header-inner">
-    <img src="/assets/logo.png" class="site-logo" alt="Adantimer logo">
+    <img src="/assets/logo.png" class="site-logo" alt="Adantimer logo" />
     <h1>Adantimer</h1>
     <div class="header-spacer"></div>
   </div>
 </header>
 
-<!-- =========================
-     MAIN
-========================= -->
-<main class="container">
 
-  <!-- LOCATION -->
-  <section class="location-section card">
-    <div id="location" class="location">📍 Locating...</div>
-    <div class="manual-location">
-      <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)">
-      <input type="text" id="manual-country" placeholder="Country (optional)">
-      <button id="set-location-btn">Set Location</button>
     </div>
-  </section>
+  </header>
 
-  <!-- NEXT PRAYER -->
-  <section class="next-prayer card">
-    <h2 id="title">Next Prayer</h2>
-    <div id="next-prayer-name" class="highlight"></div>
-    <div id="countdown" class="countdown">Loading...</div>
-  </section>
+  <!-- MAIN CONTAINER -->
+  <main class="container">
 
-  <!-- LANGUAGE -->
-  <section class="language-switch card">
-    <button onclick="setLanguage('en')">EN</button>
-    <button onclick="setLanguage('ar')">AR</button>
-  </section>
+    <!-- LOCATION SECTION -->
+    <section class="location-section card">
+      <div id="location" class="location">📍 Locating...</div>
+      <div class="manual-location">
+        <input type="text" id="manual-city" placeholder="Enter city (e.g. Cairo)" />
+        <input type="text" id="manual-country" placeholder="Enter country (optional)" />
+        <button id="set-location-btn">Set Location</button>
+      </div>
+    </section>
 
-  <!-- PRAYER TIMES -->
-  <section id="prayer-times" class="card"></section>
+    <!-- NEXT PRAYER SECTION -->
+    <section class="next-prayer card">
+      <h2 id="title">Next Prayer</h2>
+      <div id="next-prayer-name" class="highlight"></div>
+      <div id="countdown" class="countdown">Loading...</div>
+    </section>
 
-  <!-- =========================
-       SEO TEXT (KEPT – NOT REMOVED)
-  ========================= -->
-  <section class="seo-text card" style="max-width:1000px;margin:20px auto;padding:30px;line-height:1.7;">
-    <h2>About Adantimer – Live Prayer Times & Adhan Timer</h2>
-    <p>Adantimer provides instant <strong>prayer times</strong> and a precise <strong>Adhan timer</strong> for Muslims worldwide. With automatic location detection, it calculates accurate <strong>Salah</strong> times for Fajr, Dhuhr, Asr, Maghrib, and Isha.</p>
-    <p>The platform shows the <strong>next prayer countdown</strong> immediately and works on mobile, tablet, desktop, and ultra-wide screens. No app installation required.</p>
-    <p>Features include <strong>online Adhan timer</strong>, <strong>automatic location prayer times</strong>, bilingual support (EN / AR), and fast performance optimized for Core Web Vitals.</p>
-    <p>Adantimer is built for speed, clarity, and reliability, making it the perfect daily companion for Islamic prayer schedules.</p>
-  </section>
+    <!-- LANGUAGE SWITCH -->
+    <section class="language-switch card">
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('ar')">AR</button>
+    </section>
 
-</main>
+    <!-- PRAYER TIMES -->
+    <section id="prayer-times" class="card"></section>
 
-<!-- =========================
-     FOOTER
-========================= -->
-<footer class="footer card">
-  <p>&copy; 2025 Adantimer. All rights reserved.</p>
-</footer>
+    <!-- SEO TEXT BLOCK (Optimized 400 words) -->
+    <section class="seo-text card" style="max-width: 1000px; margin: 20px auto; padding: 30px; line-height: 1.7; font-size: 16px; background: #1f1f1f;">
+      <h2>About Adantimer – Live Prayer Times & Adhan Timer</h2>
+      <p>Adantimer provides instant <strong>prayer times</strong> and <strong>Adhan timer</strong> notifications globally. With automatic location detection, it calculates precise <strong>Salah</strong> timings for Fajr, Dhuhr, Asr, Maghrib, and Isha, ensuring you never miss a prayer. Users can also manually input their city to get accurate timings.</p>
+      <p>The platform displays the <strong>next prayer countdown</strong> immediately upon opening. Its responsive design works on mobile, tablet, desktop, and ultra-wide screens, prioritizing instant usability. Adantimer delivers a clear, minimal interface, focused on your daily <strong>Islamic prayer schedule</strong> without distractions.</p>
+      <p>Features include a live <strong>prayer times today</strong> display, <strong>online Adhan timer</strong>, and <strong>next prayer alerts</strong>. Users benefit from <strong>prayer times without app</strong> access directly in the browser, making it a fast and reliable tool for global Muslims.</p>
+      <p>Bilingual support in English and Arabic ensures accessibility for users worldwide. Adantimer combines technology and spirituality, providing guidance on Salah etiquette and the significance of punctual prayers while keeping notifications precise and seamless.</p>
+      <p>Optimized for search, the platform naturally integrates keywords like <strong>automatic location prayer times</strong> and <strong>prayer times in browser</strong>. Fast loading, secure servers, and Core Web Vitals optimization ensure high visibility and excellent user experience, making Adantimer the ultimate companion for daily Islamic prayers.</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer card">
+    <p>&copy; 2025 Adantimer. All rights reserved.</p>
+  </footer>
 
   <script src="script.js"></script>
   <script>
