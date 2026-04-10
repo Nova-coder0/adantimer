@@ -1,0 +1,44 @@
+name: Generate country sitemaps
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "tools/generate_sitemaps.py"
+      - ".github/workflows/generate-sitemaps.yml"
+      - "sitemap*.xml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-sitemaps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install city database
+        run: python -m pip install geonamescache==3.0.1
+
+      - name: Generate compressed country sitemaps
+        run: python tools/generate_sitemaps.py
+
+      - name: Commit generated sitemaps
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sitemap.xml sitemap-core.xml.gz sitemap-*.xml.gz
+          if git diff --cached --quiet; then
+            echo "No sitemap changes to commit."
+          else
+            git commit -m "Generate country sitemap index"
+            git push
+          fi
