@@ -2,127 +2,127 @@
   "rewrites": [
     {
       "source": "/ar",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=home"
     },
     {
       "source": "/ar/prayer-times/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=prayer-times&city=:city"
     },
     {
       "source": "/ar/prayer-times",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=prayer-times"
     },
     {
       "source": "/ar/next-prayer/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=next-prayer&city=:city"
     },
     {
       "source": "/ar/next-prayer",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=next-prayer"
     },
     {
       "source": "/ar/fajr-time/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=fajr&city=:city"
     },
     {
       "source": "/ar/fajr-time",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=fajr"
     },
     {
       "source": "/ar/dhuhr-time/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=dhuhr&city=:city"
     },
     {
       "source": "/ar/dhuhr-time",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=dhuhr"
     },
     {
       "source": "/ar/asr-time/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=asr&city=:city"
     },
     {
       "source": "/ar/asr-time",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=asr"
     },
     {
       "source": "/ar/maghrib-time/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=maghrib&city=:city"
     },
     {
       "source": "/ar/maghrib-time",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=maghrib"
     },
     {
       "source": "/ar/isha-time/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=isha&city=:city"
     },
     {
       "source": "/ar/isha-time",
-      "destination": "/index.html?lang=ar"
+      "destination": "/api/render?lang=ar&type=isha"
     },
     {
       "source": "/ar/:city",
-      "destination": "/index.html?lang=ar&city=:city"
+      "destination": "/api/render?lang=ar&type=home&city=:city"
     },
     {
       "source": "/prayer-times/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=prayer-times&city=:city"
     },
     {
       "source": "/prayer-times",
-      "destination": "/index.html"
+      "destination": "/api/render?type=prayer-times"
     },
     {
       "source": "/next-prayer/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=next-prayer&city=:city"
     },
     {
       "source": "/next-prayer",
-      "destination": "/index.html"
+      "destination": "/api/render?type=next-prayer"
     },
     {
       "source": "/dhuhr-time/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=dhuhr&city=:city"
     },
     {
       "source": "/dhuhr-time",
-      "destination": "/index.html"
+      "destination": "/api/render?type=dhuhr"
     },
     {
       "source": "/asr-time/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=asr&city=:city"
     },
     {
       "source": "/asr-time",
-      "destination": "/index.html"
+      "destination": "/api/render?type=asr"
     },
     {
       "source": "/fajr-time/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=fajr&city=:city"
     },
     {
       "source": "/fajr-time",
-      "destination": "/index.html"
+      "destination": "/api/render?type=fajr"
     },
     {
       "source": "/maghrib-time/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=maghrib&city=:city"
     },
     {
       "source": "/maghrib-time",
-      "destination": "/index.html"
+      "destination": "/api/render?type=maghrib"
     },
     {
       "source": "/isha-time/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=isha&city=:city"
     },
     {
       "source": "/isha-time",
-      "destination": "/index.html"
+      "destination": "/api/render?type=isha"
     },
     {
       "source": "/:city",
-      "destination": "/index.html?city=:city"
+      "destination": "/api/render?type=home&city=:city"
     }
   ]
 }
