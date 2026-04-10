@@ -1,6 +1,66 @@
 {
   "rewrites": [
     {
+      "source": "/ar/prayer-times/:city",
+      "destination": "/prayer-times/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/next-prayer/:city",
+      "destination": "/next-prayer/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/fajr-time/:city",
+      "destination": "/fajr-time/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/dhuhr-time/:city",
+      "destination": "/dhuhr-time/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/asr-time/:city",
+      "destination": "/asr-time/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/maghrib-time/:city",
+      "destination": "/maghrib-time/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/isha-time/:city",
+      "destination": "/isha-time/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/ar/:city",
+      "destination": "/index.html?lang=ar&city=:city"
+    },
+    {
+      "source": "/prayer-times/:city",
+      "destination": "/prayer-times/index.html?city=:city"
+    },
+    {
+      "source": "/next-prayer/:city",
+      "destination": "/next-prayer/index.html?city=:city"
+    },
+    {
+      "source": "/dhuhr-time/:city",
+      "destination": "/dhuhr-time/index.html?city=:city"
+    },
+    {
+      "source": "/asr-time/:city",
+      "destination": "/asr-time/index.html?city=:city"
+    },
+    {
+      "source": "/fajr-time/:city",
+      "destination": "/fajr-time/index.html?city=:city"
+    },
+    {
+      "source": "/maghrib-time/:city",
+      "destination": "/maghrib-time/index.html?city=:city"
+    },
+    {
+      "source": "/isha-time/:city",
+      "destination": "/isha-time/index.html?city=:city"
+    },
+    {
       "source": "/:city",
       "destination": "/index.html?city=:city"
     }
