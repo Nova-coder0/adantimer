@@ -229,6 +229,25 @@
     </div>
   </noscript>
 
+  <script>
+    (() => {
+      const languagePrefixes = new Set(["ar", "en", "de", "fr", "tr", "zh", "zh-cn", "zh-hans"]);
+      const pageByPath = {
+        "prayer-times": "prayer-times",
+        "next-prayer": "next-prayer",
+        "fajr-time": "fajr",
+        "dhuhr-time": "dhuhr",
+        "asr-time": "asr",
+        "maghrib-time": "maghrib",
+        "isha-time": "isha"
+      };
+      const parts = window.location.pathname.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+      const first = (parts[0] || "").toLowerCase();
+      const cleanParts = languagePrefixes.has(first) ? parts.slice(1) : parts;
+      const page = pageByPath[cleanParts[0]];
+      if (page) document.body.dataset.page = page;
+    })();
+  </script>
   <script src="/script.js"></script>
 </body>
 </html>
