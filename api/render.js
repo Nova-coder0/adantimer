@@ -54,10 +54,11 @@ export async function GET(request) {
       ? `/ar${route.path(city) === "/" ? "" : route.path(city)}`
       : route.path(city);
     const canonical = `${SITE_URL}${canonicalPath}`;
+    const alternates = getAlternates(route, city);
     const title = locale.title(topic, place, pageType);
     const description = locale.description(topic, place);
     const template = await readFile(INDEX_PATH, "utf8");
-    const html = applyHead(template, { canonical, description, locale, pageType, title });
+    const html = applyHead(template, { alternates, canonical, description, locale, pageType, title });
 
     return new Response(html, {
       headers: {
@@ -71,7 +72,7 @@ export async function GET(request) {
   }
 }
 
-function applyHead(template, { canonical, description, locale, pageType, title }) {
+function applyHead(template, { alternates, canonical, description, locale, pageType, title }) {
   const escapedTitle = escapeHtml(title);
   const escapedDescription = escapeHtml(description);
   const escapedCanonical = escapeHtml(canonical);
@@ -89,6 +90,9 @@ function applyHead(template, { canonical, description, locale, pageType, title }
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapedTitle}</title>`)
     .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapedDescription}">`)
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapedCanonical}">`)
+    .replace(/<link rel="alternate" hreflang="en" href="[^"]*">/, `<link rel="alternate" hreflang="en" href="${escapeHtml(alternates.en)}">`)
+    .replace(/<link rel="alternate" hreflang="ar" href="[^"]*">/, `<link rel="alternate" hreflang="ar" href="${escapeHtml(alternates.ar)}">`)
+    .replace(/<link rel="alternate" hreflang="x-default" href="[^"]*">/, `<link rel="alternate" hreflang="x-default" href="${escapeHtml(alternates.default)}">`)
     .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapedTitle}">`)
     .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapedDescription}">`)
     .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${escapedCanonical}">`)
@@ -100,6 +104,16 @@ function applyHead(template, { canonical, description, locale, pageType, title }
 
 function normalizeLanguage(value) {
   return String(value || "en").toLowerCase().startsWith("ar") ? "ar" : "en";
+}
+
+function getAlternates(route, city) {
+  const enPath = route.path(city);
+  const arPath = `/ar${enPath === "/" ? "" : enPath}`;
+  return {
+    en: `${SITE_URL}${enPath}`,
+    ar: `${SITE_URL}${arPath}`,
+    default: `${SITE_URL}${enPath}`
+  };
 }
 
 function normalizePageType(value) {
