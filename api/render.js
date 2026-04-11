@@ -155,4 +155,97 @@ export async function GET(request) {
     return new Response(html, {
       headers: {
         "content-type": "text/html; charset=utf-8",
-        "cache-control": "public, s-maxage=3600, stale-while
+        "cache-control": "public, s-maxage=3600, stale-while-revalidate=86400"
+      }
+    });
+  } catch (error) {
+    console.error("render failed", error);
+    return new Response("Adantimer render failed", { status: 500 });
+  }
+}
+
+function applyTemplate(template, { alternates, canonical, copy, description, locale, pageType, title }) {
+  const escapedTitle = escapeHtml(title);
+  const escapedDescription = escapeHtml(description);
+  const escapedCanonical = escapeHtml(canonical);
+  const alternateLinks = renderAlternateLinks(alternates);
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    url: canonical,
+    description,
+    inLanguage: locale.inLanguage
+  };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: copy.faq.map(item => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+
+  return template
+    .replace(/<html lang="[^"]*"(?: dir="[^"]*")?>/, `<html lang="${locale.htmlLang}" dir="${locale.dir}">`)
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapedTitle}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapedDescription}">`)
+    .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapedCanonical}">`)
+    .replace(/<link rel="alternate" hreflang="en" href="[^"]*">\s*<link rel="alternate" hreflang="ar" href="[^"]*">\s*<link rel="alternate" hreflang="x-default" href="[^"]*">/, alternateLinks)
+    .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapedTitle}">`)
+    .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapedDescription}">`)
+    .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${escapedCanonical}">`)
+    .replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${escapedTitle}">`)
+    .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapedDescription}">`)
+    .replace(/<script type="application\/ld\+json" id="website-schema">[\s\S]*?<\/script>/, `<script type="application/ld+json" id="website-schema">\n${JSON.stringify(pageSchema, null, 2)}\n  </script>`)
+    .replace(/<script type="application\/ld\+json">[\s\S]*?"@type": "FAQPage"[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(faqSchema, null, 2)}\n  </script>`)
+    .replace(/<body data-page="[^"]*">/, `<body data-page="${pageType}">`)
+    .replace(/<a class="brand" href="[^"]*">/, `<a class="brand" href="${escapeHtml(copy.brandHref)}">`)
+    .replace(/<button type="button" data-lang="en" class="[^"]*">EN<\/button>/, `<button type="button" data-lang="en" class="${copy.activeLanguage === "en" ? "lang-btn is-active" : "lang-btn"}">EN</button>`)
+    .replace(/<button type="button" data-lang="ar" class="[^"]*">AR<\/button>/, `<button type="button" data-lang="ar" class="${copy.activeLanguage === "ar" ? "lang-btn is-active" : "lang-btn"}">AR</button>`)
+    .replace(/<section class="hero-copy">[\s\S]*?<\/section>/, renderHeroCopy(copy))
+    .replace(/<aside class="next-prayer card featured-card" aria-live="polite">[\s\S]*?<\/aside>/, renderNextPrayerCard(copy))
+    .replace(/<section class="card schedule-card" aria-labelledby="schedule-heading">[\s\S]*?<\/section>/, renderScheduleSection(copy))
+    .replace(/<section class="card info-card" aria-labelledby="why-heading">[\s\S]*?<\/section>/, renderInfoSection(copy))
+    .replace(/<section class="card prose" aria-labelledby="cities-heading">[\s\S]*?<\/section>/, renderCitiesSection(copy))
+    .replace(/<article class="card prose" aria-labelledby="about-heading">[\s\S]*?<\/article>/, renderAboutArticle(copy))
+    .replace(/<section class="card prose" aria-labelledby="faq-heading">[\s\S]*?<\/section>/, renderFaqSection(copy))
+    .replace(/<footer class="shell footer">[\s\S]*?<\/footer>/, renderFooter(copy))
+    .replace(/<noscript>[\s\S]*?<\/noscript>/, renderNoscript(copy));
+}
+
+function getServerCopy({ canonical, city, language, pageType, place, topic }) {
+  if (language === "ar") {
+    return buildArabicCopy({ canonical, city, pageType, place, topic });
+  }
+  if (language === "en") {
+    return buildEnglishCopy({ canonical, city, pageType, place, topic });
+  }
+  return buildLocalizedCopy(language, { canonical, city, pageType, place, topic });
+}
+
+function buildEnglishCopy({ city, pageType, place, topic }) {
+  const brandHref = buildRoutePath("en", "home");
+  const cityLinks = getLocalizedCityLinks("en", pageType, place, topic);
+  const intentLinks = [
+    { label: "Prayer times today", href: buildRoutePath("en", "prayer-times") },
+    { label: "Next prayer time", href: buildRoutePath("en", "next-prayer") },
+    { label: "Fajr time", href: buildRoutePath("en", "fajr") },
+    { label: "Dhuhr time", href: buildRoutePath("en", "dhuhr") },
+    { label: "Asr time", href: buildRoutePath("en", "asr") },
+    { label: "Maghrib time", href: buildRoutePath("en", "maghrib") },
+    { label: "Isha time", href: buildRoutePath("en", "isha") }
+  ];
+  const cityIntentLinks = place
+    ? [
+        { label: `Prayer times in ${place}`, href: buildRoutePath("en", "prayer-times", place) },
+        { label: `Next prayer in ${place}`, href: buildRoutePath("en", "next-prayer", place) },
+        { label: `Fajr in ${place}`, href: buildRoutePath("en", "fajr", place) },
+        { label: `Dhuhr in ${place}`, href: buildRoutePath("en", "dhuhr", place) },
+        { label: `Asr in ${place}`, href: buildRoutePath("en", "asr", place) },
+        { label: `Maghrib in ${place}`, href: buildRoutePath("en", "maghrib", place) },
+        { label: `Isha in ${place}`, href: build
