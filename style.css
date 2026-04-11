@@ -125,6 +125,12 @@ a {
     box-shadow 160ms ease;
 }
 
+.lang-btn,
+.language-menu-toggle {
+  min-width: 124px;
+  justify-content: center;
+}
+
 .lang-btn:hover,
 .lang-btn:focus-visible,
 .lang-option:hover,
@@ -157,7 +163,7 @@ a {
   justify-content: space-between;
   gap: 10px;
   list-style: none;
-  min-width: 92px;
+  min-width: 168px;
   font-weight: 600;
 }
 
@@ -562,11 +568,17 @@ body[dir="rtl"] .language-menu-list {
 
   .language-switch {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .language-menu {
     margin-left: auto;
+    width: 100%;
+  }
+
+  .language-menu-toggle {
+    width: 100%;
   }
 
   .brand {
