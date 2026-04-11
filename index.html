@@ -81,8 +81,22 @@
           <span>Adantimer</span>
         </a>
         <div class="language-switch" aria-label="Language switcher">
-          <button type="button" data-lang="en" class="lang-btn is-active">EN</button>
-          <button type="button" data-lang="ar" class="lang-btn">AR</button>
+          <div class="language-pills" role="group" aria-label="Quick language switch">
+            <button type="button" data-lang="en" class="lang-btn is-active" aria-pressed="true">EN</button>
+            <button type="button" data-lang="ar" class="lang-btn" aria-pressed="false">AR</button>
+          </div>
+          <details class="language-menu">
+            <summary class="language-menu-toggle" aria-label="More languages">
+              <span id="language-menu-label">More</span>
+              <span class="language-menu-caret" aria-hidden="true">+</span>
+            </summary>
+            <div class="language-menu-list">
+              <button type="button" data-lang="de" class="lang-option">Deutsch</button>
+              <button type="button" data-lang="fr" class="lang-option">Francais</button>
+              <button type="button" data-lang="tr" class="lang-option">Turkce</button>
+              <button type="button" data-lang="zh-hans" class="lang-option">Chinese</button>
+            </div>
+          </details>
         </div>
       </nav>
 
@@ -191,7 +205,7 @@
           Adantimer is built for one clear job: helping you reach today's prayer times quickly. Instead of burying the schedule behind menus, the page shows your city, the next salah, and the full daily timetable right away.
         </p>
         <p>
-          If you travel often or want to check prayer times for family in another place, you can search a city manually and share the city page directly. That makes Adantimer more useful for long-tail searches such as prayer times in Berlin, prayer times in London, or fajr time in Dubai today.
+          if you travel often or want to check prayer times for family in another place, you can search a city manually and share the city page directly. That makes Adantimer more useful for long-tail searches such as prayer times in Berlin, prayer times in London, or fajr time in Dubai today.
         </p>
         <p>
           Search engines tend to reward pages that are helpful, clear, and focused. This page is now structured around real user intent: finding accurate salah times for a specific place and understanding when the next prayer begins.
@@ -249,5 +263,66 @@
     })();
   </script>
   <script src="/script.js"></script>
+  <script>
+    (() => {
+      const languageMenu = document.querySelector(".language-menu");
+      const languageMenuLabel = document.getElementById("language-menu-label");
+      const languageOptionButtons = Array.from(document.querySelectorAll(".lang-option"));
+      const quickLanguageButtons = Array.from(document.querySelectorAll(".lang-btn"));
+      const primaryLanguages = new Set(["en", "ar"]);
+      const languageLabels = {
+        en: "More",
+        ar: "More",
+        de: "DE",
+        fr: "FR",
+        tr: "TR",
+        "zh-hans": "ZH"
+      };
+
+      if (!languageMenu || !languageMenuLabel || typeof window.setLanguage !== "function") return;
+
+      const syncLanguageMenu = () => {
+        const activeLanguage =
+          window.language ||
+          document.documentElement.lang.toLowerCase() ||
+          localStorage.getItem("adantimer-language") ||
+          "en";
+
+        languageMenuLabel.textContent = languageLabels[activeLanguage] || "More";
+        languageMenu.classList.toggle("is-active", !primaryLanguages.has(activeLanguage));
+
+        quickLanguageButtons.forEach(button => {
+          const isActive = button.dataset.lang === activeLanguage;
+          button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+
+        languageOptionButtons.forEach(button => {
+          const isActive = button.dataset.lang === activeLanguage;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+      };
+
+      const originalSetLanguage = window.setLanguage;
+      window.setLanguage = (...args) => {
+        const result = originalSetLanguage(...args);
+        languageMenu.open = false;
+        syncLanguageMenu();
+        return result;
+      };
+
+      languageOptionButtons.forEach(button => {
+        button.addEventListener("click", () => window.setLanguage(button.dataset.lang, true));
+      });
+
+      document.addEventListener("click", event => {
+        if (!languageMenu.open) return;
+        if (languageMenu.contains(eyent.target)) return;
+        languageMenu.open = false;
+      });
+
+      syncLanguageMenu();
+    })();
+  </script>
 </body>
 </html>
