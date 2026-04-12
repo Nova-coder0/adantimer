@@ -13,8 +13,6 @@
   <link rel="alternate" hreflang="ar" href="https://www.adantimer.com/ar">
   <link rel="alternate" hreflang="de" href="https://www.adantimer.com/de">
   <link rel="alternate" hreflang="fr" href="https://www.adantimer.com/fr">
-  <link rel="alternate" hreflang="tr" href="https://www.adantimer.com/tr">
-  <link rel="alternate" hreflang="zh-hans" href="https://www.adantimer.com/zh-hans">
   <link rel="alternate" hreflang="x-default" href="https://www.adantimer.com/">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
   <link rel="apple-touch-icon" href="/assets/favicon.png">
@@ -37,7 +35,7 @@
     "name": "Adantimer",
     "url": "https://www.adantimer.com/",
     "description": "Adantimer helps Muslims check accurate prayer times and follow the next salah countdown by city.",
-    "inLanguage": ["en", "ar", "de", "fr", "tr", "zh-Hans"]
+    "inLanguage": ["en", "ar", "de", "fr"]
   }
   </script>
 
@@ -67,7 +65,7 @@
         "name": "Which languages does Adantimer support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Adantimer supports English, Arabic, German, French, Turkish, and Simplified Chinese, and it can adapt automatically to the visitor's browser language."
+          "text": "Adantimer supports English, Arabic, German, and French, and it can adapt automatically to the visitor's browser language."
         }
       }
     ]
@@ -274,6 +272,7 @@
       const languageOptionButtons = Array.from(document.querySelectorAll(".lang-option"));
       const quickLanguageButtons = Array.from(document.querySelectorAll(".lang-btn"));
       const primaryLanguages = new Set(["en", "ar"]);
+      const supportedLanguages = new Set(["en", "ar", "de", "fr", "tr", "zh-hans"]);
       const languageLabels = {
         en: "Other languages",
         ar: "Other languages",
@@ -282,15 +281,75 @@
         tr: "Turkish",
         "zh-hans": "Chinese"
       };
+      const mojibakeDecoder = typeof TextDecoder !== "undefined" ? new TextDecoder("utf-8") : null;
+      let wrappedSetLanguage = null;
 
-      if (!languageMenu || !languageMenuLabel || typeof window.setLanguage !== "function") return;
+      if (!languageMenu || !languageMenuLabel) return;
+
+      const repairMojibake = value => {
+        if (typeof value !== "string") return value;
+        if (!/[ÃƒÃ˜Ã™ÃÃ‘Ã…Ã†Ã‡Ã‹ÃÃ–ÃœÃÃžÃŸÃ -Ã¿]/.test(value)) return value;
+        try {
+          if (mojibakeDecoder) {
+            const bytes = Uint8Array.from(Array.from(value, char => char.charCodeAt(0) & 255));
+            return mojibakeDecoder.decode(bytes);
+          }
+          return decodeURIComponent(escape(value));
+        } catch {
+          return value;
+        }
+      };
+
+      const repairVisibleText = root => {
+        if (!root || typeof document.createTreeWalker !== "function") return;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_REJECT;
+            const tag = parent.tagName;
+            if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT") return NodeFilter.FILTER_REJECT;
+            return node.nodeValue && node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        });
+        let current = walker.nextNode();
+        while (current) {
+          const repaired = repairMojibake(current.nodeValue);
+          if (repaired !== current.nodeValue) current.nodeValue = repaired;
+          current = walker.nextNode();
+        }
+      };
+
+      const getPathLanguage = () => {
+        const firstSegment = window.location.pathname.replace(/^\/+/, "").split("/")[0].toLowerCase();
+        return supportedLanguages.has(firstSegment) ? firstSegment : "";
+      };
+
+      const getActiveLanguage = () => {
+        const stored = (localStorage.getItem("adantimer-language") || "").toLowerCase();
+        const windowLanguage = (window.language || "").toLowerCase();
+        const documentLanguage = (document.documentElement.lang || "").toLowerCase();
+        return (
+          (supportedLanguages.has(windowLanguage) && windowLanguage) ||
+          (supportedLanguages.has(stored) && stored) ||
+          getPathLanguage() ||
+          (documentLanguage.startsWith("ar") ? "ar" :
+            documentLanguage.startsWith("de") ? "de" :
+            documentLanguage.startsWith("fr") ? "fr" :
+            documentLanguage.startsWith("tr") ? "tr" :
+            documentLanguage.startsWith("zh") ? "zh-hans" : "en")
+        );
+      };
+
+      const buildRelativeUrl = lang => {
+        const parts = window.location.pathname.replace(/^\/+/, "").split("/").filter(Boolean);
+        const cleanParts = supportedLanguages.has((parts[0] || "").toLowerCase()) ? parts.slice(1) : parts;
+        const path = cleanParts.length ? `/${cleanParts.join("/")}` : "/";
+        return lang === "en" ? path : `/${lang}${path === "/" ? "" : path}`;
+      };
 
       const syncLanguageMenu = () => {
-        const activeLanguage =
-          window.language ||
-          document.documentElement.lang.toLowerCase() ||
-          localStorage.getItem("adantimer-language") ||
-          "en";
+        const activeLanguage = getActiveLanguage();
+        window.language = activeLanguage;
 
         languageMenuLabel.textContent = languageLabels[activeLanguage] || "Other languages";
         languageMenu.classList.toggle("is-active", !primaryLanguages.has(activeLanguage));
@@ -305,18 +364,35 @@
           button.classList.toggle("is-active", isActive);
           button.setAttribute("aria-pressed", isActive ? "true" : "false");
         });
+
+        repairVisibleText(document.body);
       };
 
-      const originalSetLanguage = window.setLanguage;
-      window.setLanguage = (...args) => {
-        const result = originalSetLanguage(...args);
-        languageMenu.open = false;
-        syncLanguageMenu();
-        return result;
+      const wrapSetLanguage = () => {
+        if (typeof window.setLanguage !== "function" || window.setLanguage === wrappedSetLanguage) return;
+        const originalSetLanguage = window.setLanguage;
+        wrappedSetLanguage = (...args) => {
+          const result = originalSetLanguage(...args);
+          languageMenu.open = false;
+          window.language = args[0] || getActiveLanguage();
+          syncLanguageMenu();
+          return result;
+        };
+        window.setLanguage = wrappedSetLanguage;
+      };
+
+      const handleLanguageChange = lang => {
+        localStorage.setItem("adantimer-language", lang);
+        window.language = lang;
+        if (typeof window.setLanguage === "function") {
+          window.setLanguage(lang, true);
+          return;
+        }
+        window.location.assign(buildRelativeUrl(lang) + window.location.search);
       };
 
       languageOptionButtons.forEach(button => {
-        button.addEventListener("click", () => window.setLanguage(button.dataset.lang, true));
+        button.addEventListener("click", () => handleLanguageChange(button.dataset.lang));
       });
 
       document.addEventListener("click", event => {
@@ -324,6 +400,13 @@
         if (languageMenu.contains(event.target)) return;
         languageMenu.open = false;
       });
+
+      wrapSetLanguage();
+      repairVisibleText(document.body);
+      new MutationObserver(() => {
+        wrapSetLanguage();
+        syncLanguageMenu();
+      }).observe(document.body, { childList: true, subtree: true, characterData: true });
 
       syncLanguageMenu();
     })();
