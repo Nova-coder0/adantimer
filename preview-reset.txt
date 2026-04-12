@@ -1,0 +1,1 @@
+Preview reset on 2026-04-12 to retrigger Vercel from the last known-good multilingual SSR commit.
