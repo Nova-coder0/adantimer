@@ -264,7 +264,8 @@
       if (page) document.body.dataset.page = page;
     })();
   </script>
-  <script src="/script.js"></script>
+  <script src="/client-startflow-fix.js?v=20260412d"></script>
+  <script src="/script.js?v=20260412c"></script>
   <script>
     (() => {
       const languageMenu = document.querySelector(".language-menu");
@@ -288,7 +289,7 @@
 
       const repairMojibake = value => {
         if (typeof value !== "string") return value;
-        if (!/[ÃƒÃ˜Ã™ÃÃ‘Ã…Ã†Ã‡Ã‹ÃÃ–ÃœÃÃžÃŸÃ -Ã¿]/.test(value)) return value;
+        if (!/[ÃƒÆ’ÃƒËœÃƒâ„¢ÃƒÂÃƒâ€˜Ãƒâ€¦Ãƒâ€ Ãƒâ€¡Ãƒâ€¹ÃƒÂÃƒâ€“ÃƒÅ“ÃƒÂÃƒÅ¾ÃƒÅ¸ÃƒÂ -ÃƒÂ¿]/.test(value)) return value;
         try {
           if (mojibakeDecoder) {
             const bytes = Uint8Array.from(Array.from(value, char => char.charCodeAt(0) & 255));
