@@ -19,17 +19,15 @@ const I18N = {
     faq: "FAQ", footer: "Accurate prayer times by city.", noscript: "JavaScript is required to load live prayer times and the next prayer countdown."
   },
   ar: {
-    html: "ar", dir: "rtl", in: "\u0641\u064a", home: "\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629", prayer: "\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629", next: "\u0648\u0642\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629", fajr: "\u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631", dhuhr: "\u0648\u0642\u062a \u0627\u0644\u0638\u0647\u0631", asr: "\u0648\u0642\u062a \u0627\u0644\u0639\u0635\u0631", maghrib: "\u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628", isha: "\u0648\u0642\u062a \u0627\u0644\u0639\u0634\u0627\u0621",
-    homeTitle: "Adantimer | \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0648\u0648\u0642\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629",
-    homeDesc: "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0648\u0627\u0639\u0631\u0641 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0648\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645 \u062d\u0633\u0628 \u0645\u0648\u0642\u0639\u0643.",
-    hero: "\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u062d\u0633\u0628 \u0627\u0644\u0645\u062f\u064a\u0646\u0629", sub: "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u062f\u0642\u064a\u0642\u0629 \u0648\u062a\u0627\u0628\u0639 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0648\u0627\u0646\u062a\u0642\u0644 \u0628\u0633\u0631\u0639\u0629 \u0625\u0644\u0649 \u0623\u064a \u0645\u062f\u064a\u0646\u0629.",
-    city: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", country: "\u0627\u0644\u062f\u0648\u0644\u0629", cityPh: "\u0623\u062f\u062e\u0644 \u0627\u0644\u0645\u062f\u064a\u0646\u0629", countryPh: "\u0627\u0644\u062f\u0648\u0644\u0629 (\u0627\u062e\u062a\u064a\u0627\u0631\u064a)", submit: "\u0627\u0639\u0631\u0636 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629",
-    nextPrayer: "\u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629", current: "\u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629", today: "\u0627\u0644\u064a\u0648\u0645", method: "\u0627\u0644\u0637\u0631\u064a\u0642\u0629", loading: "\u062c\u0627\u0631 \u0627\u0644\u062a\u062d\u0645\u064a\u0644...",
-    why: "\u0644\u0645\u0627\u0630\u0627 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0645\u0641\u064a\u062f\u0629", info: "\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0645\u0628\u0646\u064a\u0629 \u0644\u0646\u064a\u0629 \u0627\u0644\u0628\u062d\u062b \u0627\u0644\u0645\u0628\u0627\u0634\u0631\u0629 \u0639\u0646 \u0627\u0644\u0635\u0644\u0627\u0629 \u0645\u0639 \u0631\u0627\u0628\u0637 \u0648\u0627\u0636\u062d \u0648\u0645\u062d\u062a\u0648\u0649 \u0638\u0627\u0647\u0631 \u0648\u062c\u062f\u0648\u0644 \u064a\u0648\u0645\u064a \u0643\u0627\u0645\u0644.",
-    explore: "\u0627\u0643\u062a\u0634\u0641 \u0627\u0644\u0645\u0632\u064a\u062f", about: "\u062d\u0648\u0644 \u0627\u0644\u0635\u0641\u062d\u0629", aboutText: "\u062a\u062c\u0645\u0639 \u0627\u0644\u0635\u0641\u062d\u0629 \u0628\u064a\u0646 \u0646\u064a\u0629 \u0627\u0644\u0628\u062d\u062b \u0648\u0627\u0644\u0631\u0627\u0628\u0637 \u0648\u0627\u0644\u0639\u0646\u0648\u0627\u0646 \u0648\u0627\u0644\u0645\u062d\u062a\u0648\u0649 \u0627\u0644\u0638\u0627\u0647\u0631 \u062d\u062a\u0649 \u064a\u0635\u0644 \u0627\u0644\u0632\u0627\u0626\u0631 \u0625\u0644\u0649 \u0627\u0644\u0625\u062c\u0627\u0628\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0628\u0633\u0631\u0639\u0629.",
-    faq: "\u0627\u0644\u0623\u0633\u0626\u0644\u0629 \u0627\u0644\u0634\u0627\u0626\u0639\u0629", footer: "\u0645\u0648\u0627\u0642\u064a\u062a \u0635\u0644\u0627\u0629 \u062f\u0642\u064a\u0642\u0629 \u062d\u0633\u0628 \u0627\u0644\u0645\u062f\u064a\u0646\u0629.", noscript: "\u064a\u062a\u0637\u0644\u0628 \u0639\u0631\u0636 \u0627\u0644\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u062d\u064a\u0629 \u062a\u0634\u063a\u064a\u0644 JavaScript.",
-    shareQ: "\u0647\u0644 \u064a\u0645\u0643\u0646\u0646\u064a \u0645\u0634\u0627\u0631\u0643\u0629 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629\u061f", shareA: "\u0646\u0639\u0645. \u0643\u0644 \u0631\u0627\u0628\u0637 \u0645\u0628\u0646\u064a \u0643\u0635\u0641\u062d\u0629 \u0645\u0628\u0627\u0634\u0631\u0629 \u0644\u0646\u064a\u0629 \u0628\u062d\u062b \u0645\u062d\u062f\u062f\u0629 \u0639\u0646 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0648\u0627\u0644\u0645\u062f\u064a\u0646\u0629.",
-    autoQ: "\u0647\u0644 \u064a\u062d\u062f\u062f Adantimer \u0627\u0644\u0644\u063a\u0629 \u0648\u0627\u0644\u0645\u0648\u0642\u0639 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u061f", autoA: "\u0646\u0639\u0645. \u062a\u062a\u0628\u0639 \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u063a\u0629 \u0627\u0644\u0645\u062a\u0635\u0641\u062d \u0628\u0639\u062f \u0627\u0644\u062a\u062d\u0645\u064a\u0644\u060c \u0648\u062a\u062d\u0627\u0648\u0644 GPS \u0623\u0648\u0644\u0627\u064b \u062b\u0645 \u062a\u0646\u062a\u0642\u0644 \u0625\u0644\u0649 IP \u0643\u0628\u062f\u064a\u0644 \u0639\u0646\u062f \u0627\u0644\u062d\u0627\u062c\u0629."
+    html: "ar", dir: "rtl", in: "في", home: "مواقيت الصلاة", prayer: "مواقيت الصلاة", next: "وقت الصلاة القادمة", fajr: "وقت الفجر", dhuhr: "وقت الظهر", asr: "وقت العصر", maghrib: "وقت المغرب", isha: "وقت العشاء",
+    homeTitle: "Adantimer | مواقيت الصلاة ووقت الصلاة القادمة",
+    homeDesc: "تحقق من مواقيت الصلاة واعرف الصلاة القادمة وجدول اليوم حسب موقعك.",
+    hero: "مواقيت الصلاة حسب المدينة", sub: "تحقق من المواقيت الدقيقة وتابع الصلاة القادمة وانتقل بسرعة إلى أي مدينة.",
+    city: "المدينة", country: "الدولة", cityPh: "أدخل المدينة", countryPh: "الدولة (اختياري)", submit: "اعرض مواقيت الصلاة",
+    nextPrayer: "الصلاة القادمة", current: "الصلاة الحالية", today: "اليوم", method: "الطريقة", loading: "جار التحميل...",
+    why: "لماذا هذه الصفحة مفيدة", info: "هذه الصفحة مبنية لنية البحث المباشرة عن الصلاة مع رابط واضح ومحتوى ظاهر وجدول يومي كامل.",
+    explore: "اكتشف المزيد", about: "حول الصفحة", aboutText: "تجمع الصفحة بين نية البحث والرابط والعنوان والمحتوى الظاهر حتى يصل الزائر إلى الإجابة الصحيحة بسرعة.",
+    faq: "الأسئلة الشائعة", footer: "مواقيت صلاة دقيقة حسب المدينة.", noscript: "يتطلب عرض المواقيت الحية تشغيل JavaScript."
   },
   de: {
     html: "de", dir: "ltr", in: "in", home: "Gebetszeiten", prayer: "Gebetszeiten", next: "Naechstes Gebet", fajr: "Fajr Zeit", dhuhr: "Dhuhr Zeit", asr: "Asr Zeit", maghrib: "Maghrib Zeit", isha: "Isha Zeit",
@@ -47,12 +45,12 @@ const I18N = {
   fr: {
     html: "fr", dir: "ltr", in: "a", home: "Horaires de priere", prayer: "Horaires de priere", next: "Prochaine priere", fajr: "Heure du Fajr", dhuhr: "Heure du Dhuhr", asr: "Heure du Asr", maghrib: "Heure du Maghrib", isha: "Heure du Isha",
     homeTitle: "Adantimer | Horaires de priere et prochaine priere",
-    homeDesc: "Consultez les horaires de priere precis, le compte a rebours de la prochaine priere et le planning du jour selon la position.",
-    hero: "Horaires par ville", sub: "Consultez les horaires precis, suivez la prochaine priere et accedez vite a n'importe quelle ville.",
+    homeDesc: "Consultez les horaires de priere, le compte a rebours de la prochaine priere et le planning du jour selon la position.",
+    hero: "Horaires par ville", sub: "Consultez les horaires precis, la prochaine priere et passez vite a n'importe quelle ville.",
     city: "Ville", country: "Pays", cityPh: "Entrer une ville", countryPh: "Pays (optionnel)", submit: "Voir les horaires",
     nextPrayer: "Prochaine priere", current: "Priere actuelle", today: "Aujourd'hui", method: "Methode", loading: "Chargement...",
-    why: "Pourquoi cette page aide", info: "Cette route vise la recherche directe d'horaires de priere avec une URL de ville claire et un planning visible.",
-    explore: "Explorer plus", about: "A propos", aboutText: "La page aligne mieux l'intention de recherche, l'URL, le titre et le contenu visible pour renforcer la base SEO.",
+    why: "Pourquoi cette page aide", info: "Cette route cible la recherche directe d'horaires de priere avec une URL propre et un planning visible.",
+    explore: "Explorer plus", about: "A propos", aboutText: "La page aligne mieux la requete, l'URL, le titre et le contenu visible pour renforcer la base SEO.",
     faq: "FAQ", footer: "Horaires de priere precis par ville.", noscript: "JavaScript est requis pour charger les horaires en direct.",
     shareQ: "Puis-je partager cette page ?", shareA: "Oui. Chaque URL est construite comme une page directe pour une recherche precise sur les horaires de priere.",
     autoQ: "Adantimer detecte-t-il automatiquement la langue et la position ?", autoA: "Oui. La page suit la langue du navigateur apres le chargement et essaie d'abord le GPS, puis l'IP en secours."
@@ -60,28 +58,24 @@ const I18N = {
   tr: {
     html: "tr", dir: "ltr", in: "icin", home: "Namaz Vakitleri", prayer: "Namaz Vakitleri", next: "Sonraki Namaz", fajr: "Fajr Vakti", dhuhr: "Dhuhr Vakti", asr: "Asr Vakti", maghrib: "Maghrib Vakti", isha: "Isha Vakti",
     homeTitle: "Adantimer | Dogru namaz vakitleri ve sonraki namaz",
-    homeDesc: "Dogru namaz vakitlerini, bir sonraki namaz geri sayimini ve konuma gore gunluk vakit cizelgesini gorun.",
-    hero: "Sehre gore namaz vakitleri", sub: "Dogru vakitleri gorun, bir sonraki namaz geri sayimini takip edin ve istediginiz sehre hizla gecin.",
+    homeDesc: "Namaz vakitlerini, sonraki namaz geri sayimini ve gunluk takvimi konuma gore otomatik gorun.",
+    hero: "Sehre gore namaz vakitleri", sub: "Dogru vakitleri, sonraki namaz geri sayimini ve sehir sayfalarini hizli gorun.",
     city: "Sehir", country: "Ulke", cityPh: "Sehir girin", countryPh: "Ulke (istege bagli)", submit: "Vakitleri goster",
     nextPrayer: "Sonraki namaz", current: "Guncel namaz", today: "Bugun", method: "Yontem", loading: "Yukleniyor...",
-    why: "Bu sayfa neden yararli", info: "Bu rota, dogrudan namaz vakti aramalarina uygun temiz bir sehir URL'si ve gorunur gunluk takvim sunar.",
-    explore: "Daha fazlasi", about: "Hakkinda", aboutText: "Arama niyeti, URL, baslik ve gorunur icerik ayni hedefe hizalanarak bu sayfanin SEO temelini guclendirir.",
-    faq: "SSS", footer: "Sehre gore dogru namaz vakitleri.", noscript: "Canli vakitleri yuklemek icin JavaScript gerekir.",
-    shareQ: "Bu sayfayi paylasabilir miyim?", shareA: "Evet. Her URL, belirli bir namaz vakti arama niyeti ve sehir icin dogrudan acilan sayfa olarak kurulmustur.",
-    autoQ: "Adantimer dili ve konumu otomatik algilar mi?", autoA: "Evet. Sayfa yuklendikten sonra tarayici dilini izler, once GPS'i dener ve gerekirse IP yedegine gecer."
+    why: "Bu sayfa neden yararli", info: "Bu rota dogrudan namaz vakti aramasina uygun temiz URL ve gorunur takvim sunar.",
+    explore: "Daha fazlasi", about: "Hakkinda", aboutText: "Arama, URL, baslik ve gorunur metin arasindaki uyum bu sayfanin SEO temelini guclendirir.",
+    faq: "SSS", footer: "Sehre gore dogru namaz vakitleri.", noscript: "Canli vakitleri yuklemek icin JavaScript gerekir."
   },
   "zh-hans": {
-    html: "zh-CN", dir: "ltr", in: "", home: "\u793c\u62dc\u65f6\u95f4", prayer: "\u793c\u62dc\u65f6\u95f4", next: "\u4e0b\u4e00\u6b21\u793c\u62dc", fajr: "\u6668\u793c\u65f6\u95f4", dhuhr: "\u664c\u793c\u65f6\u95f4", asr: "\u665a\u793c\u65f6\u95f4", maghrib: "\u660f\u793c\u65f6\u95f4", isha: "\u5bb5\u793c\u65f6\u95f4",
-    homeTitle: "Adantimer | \u51c6\u786e\u793c\u62dc\u65f6\u95f4\u4e0e\u4e0b\u4e00\u6b21\u793c\u62dc",
-    homeDesc: "\u67e5\u770b\u51c6\u786e\u793c\u62dc\u65f6\u95f4\u3001\u4e0b\u4e00\u6b21\u793c\u62dc\u5012\u8ba1\u65f6\u4ee5\u53ca\u6839\u636e\u4f4d\u7f6e\u81ea\u52a8\u52a0\u8f7d\u7684\u6bcf\u65e5\u65f6\u95f4\u8868\u3002",
-    hero: "\u6309\u57ce\u5e02\u67e5\u770b\u793c\u62dc\u65f6\u95f4", sub: "\u67e5\u770b\u51c6\u786e\u793c\u62dc\u65f6\u95f4\u3001\u4e0b\u4e00\u6b21\u793c\u62dc\u5012\u8ba1\u65f6\uff0c\u5e76\u5feb\u901f\u5207\u6362\u5230\u4efb\u4f55\u57ce\u5e02\u3002",
-    city: "\u57ce\u5e02", country: "\u56fd\u5bb6", cityPh: "\u8f93\u5165\u57ce\u5e02", countryPh: "\u56fd\u5bb6\uff08\u53ef\u9009\uff09", submit: "\u67e5\u770b\u793c\u62dc\u65f6\u95f4",
-    nextPrayer: "\u4e0b\u4e00\u6b21\u793c\u62dc", current: "\u5f53\u524d\u793c\u62dc", today: "\u4eca\u5929", method: "\u8ba1\u7b97\u65b9\u5f0f", loading: "\u52a0\u8f7d\u4e2d...",
-    why: "\u4e3a\u4ec0\u4e48\u8fd9\u9875\u6709\u7528", info: "\u8fd9\u6761\u8def\u7531\u5bf9\u5e94\u76f4\u63a5\u793c\u62dc\u65f6\u95f4\u641c\u7d22\uff0c\u5e26\u6709\u6e05\u6670 URL \u548c\u53ef\u89c1\u7684\u6bcf\u65e5\u65f6\u95f4\u8868\u3002",
-    explore: "\u7ee7\u7eed\u63a2\u7d22", about: "\u5173\u4e8e", aboutText: "\u641c\u7d22\u8bcd\u3001URL\u3001\u6807\u9898\u4e0e\u53ef\u89c1\u5185\u5bb9\u7684\u4e00\u81f4\u6027\uff0c\u4f1a\u8ba9\u8fd9\u6761\u9875\u9762\u62e5\u6709\u66f4\u5f3a\u7684 SEO \u57fa\u7840\u3002",
-    faq: "\u5e38\u89c1\u95ee\u9898", footer: "\u6309\u57ce\u5e02\u63d0\u4f9b\u51c6\u786e\u793c\u62dc\u65f6\u95f4\u3002", noscript: "\u9700\u8981\u542f\u7528 JavaScript \u624d\u80fd\u52a0\u8f7d\u5b9e\u65f6\u793c\u62dc\u65f6\u95f4\u3002",
-    shareQ: "\u6211\u53ef\u4ee5\u5206\u4eab\u8fd9\u4e2a\u9875\u9762\u5417\uff1f", shareA: "\u53ef\u4ee5\u3002\u6bcf\u6761 URL \u90fd\u662f\u4e3a\u5177\u4f53\u7684\u793c\u62dc\u65f6\u95f4\u641c\u7d22\u610f\u56fe\u548c\u57ce\u5e02\u800c\u8bbe\u8ba1\u7684\u76f4\u8fbe\u9875\u9762\u3002",
-    autoQ: "Adantimer \u4f1a\u81ea\u52a8\u8bc6\u522b\u8bed\u8a00\u548c\u4f4d\u7f6e\u5417\uff1f", autoA: "\u4f1a\u3002\u9875\u9762\u52a0\u8f7d\u540e\u4f1a\u8ddf\u968f\u6d4f\u89c8\u5668\u8bed\u8a00\uff0c\u4f18\u5148\u5c1d\u8bd5 GPS\uff0c\u5fc5\u8981\u65f6\u518d\u4f7f\u7528 IP \u5907\u7528\u3002"
+    html: "zh-CN", dir: "ltr", in: "", home: "礼拜时间", prayer: "礼拜时间", next: "下一次礼拜", fajr: "晨礼时间", dhuhr: "晌礼时间", asr: "晡礼时间", maghrib: "昏礼时间", isha: "宵礼时间",
+    homeTitle: "Adantimer | 准确礼拜时间与下一次礼拜",
+    homeDesc: "查看准确礼拜时间、下一次礼拜倒计时以及根据位置自动加载的每日时间表。",
+    hero: "按城市查看礼拜时间", sub: "查看准确礼拜时间、下一次礼拜倒计时，并快速切换到任何城市。",
+    city: "城市", country: "国家", cityPh: "输入城市", countryPh: "国家（可选）", submit: "查看礼拜时间",
+    nextPrayer: "下一次礼拜", current: "当前礼拜", today: "今天", method: "计算方式", loading: "加载中...",
+    why: "为什么这页有用", info: "这条路由对应直接礼拜时间搜索，带有清晰 URL 和可见的每日时间表。",
+    explore: "继续探索", about: "关于", aboutText: "搜索词、URL、标题与可见内容的一致性，会让这条页面拥有更强的 SEO 基础。",
+    faq: "常见问题", footer: "按城市提供准确礼拜时间。", noscript: "需要启用 JavaScript 才能加载实时礼拜时间。"
   }
 };
 
@@ -158,11 +152,10 @@ function makeTitle(copy, topic, place) {
 }
 
 function makeDescription(copy, topic, place) {
-  if (copy.html === "ar") return `${topic}${place ? ` ${copy.in} ${place}` : ""}\u060c \u0627\u0637\u0644\u0639 \u0639\u0644\u0649 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0648\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645 \u0641\u064a \u0635\u0641\u062d\u0629 \u0648\u0627\u0636\u062d\u0629.`;
+  if (copy.html === "ar") return `${topic}${place ? ` ${copy.in} ${place}` : ""}، اطلع على الصلاة القادمة وجدول اليوم في صفحة واضحة.`;
   if (copy.html === "de") return `${topic}${place ? ` in ${place}` : ""}, Countdown zum naechsten Gebet und kompletter Tagesplan auf einer fokussierten Seite.`;
   if (copy.html === "fr") return `${topic}${place ? ` a ${place}` : ""}, compte a rebours de la prochaine priere et planning complet du jour sur une page claire.`;
-  if (copy.html === "tr") return `${topic}${place ? ` ${place} icin` : ""}, bir sonraki namaz geri sayimi ve gunun tam vakit cizelgesi tek bir odakli sayfada.`;
-  if (copy.html === "zh-CN") return `\u67e5\u770b${place ? `${place}\u7684` : ""}${topic}\u3001\u4e0b\u4e00\u6b21\u793c\u62dc\u5012\u8ba1\u65f6\u4ee5\u53ca\u4eca\u65e5\u5b8c\u6574\u65f6\u95f4\u8868\u3002`;
+  if (copy.html === "zh-CN") return `查看${place ? `${place}的` : ""}${topic}、下一次礼拜倒计时以及今日完整时间表。`;
   return `${topic}${place ? ` ${copy.in} ${place}` : ""}, next prayer countdown, and the full daily schedule on one focused page.`;
 }
 
@@ -258,9 +251,9 @@ function faq(copy, topic, place) {
 
 function faqItems(copy, topic, place) {
   return [
-    { q: copy.shareQ || (copy.html === "ar" ? "\u0647\u0644 \u064a\u0645\u0643\u0646\u0646\u064a \u0645\u0634\u0627\u0631\u0643\u0629 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629\u061f" : copy.html === "zh-CN" ? "\u6211\u53ef\u4ee5\u5206\u4eab\u8fd9\u4e2a\u9875\u9762\u5417\uff1f" : "Can I share this page?"), a: copy.shareA || (copy.html === "ar" ? "\u0646\u0639\u0645. \u0643\u0644 \u0631\u0627\u0628\u0637 \u0645\u062e\u0635\u0635 \u0645\u0628\u0627\u0634\u0631\u0629 \u0644\u0646\u064a\u0629 \u0628\u062d\u062b \u0648\u0627\u0636\u062d\u0629 \u0639\u0646 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629." : copy.html === "zh-CN" ? "\u53ef\u4ee5\u3002\u6bcf\u6761\u8def\u7531\u90fd\u662f\u4e3a\u660e\u786e\u7684\u793c\u62dc\u65f6\u95f4\u641c\u7d22\u610f\u56fe\u5efa\u7acb\u7684\u76f4\u63a5\u9875\u9762\u3002" : "Yes. Each route is built as a direct page for a specific prayer-time intent and city.") },
-    { q: copy.autoQ || (copy.html === "ar" ? "\u0647\u0644 \u064a\u062d\u062f\u062f Adantimer \u0627\u0644\u0644\u063a\u0629 \u0648\u0627\u0644\u0645\u0648\u0642\u0639 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u061f" : copy.html === "zh-CN" ? "Adantimer \u4f1a\u81ea\u52a8\u8bc6\u522b\u8bed\u8a00\u548c\u4f4d\u7f6e\u5417\uff1f" : "Does Adantimer detect language and location automatically?"), a: copy.autoA || (copy.html === "ar" ? "\u0646\u0639\u0645. \u062a\u062a\u0628\u0639 \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u063a\u0629 \u0627\u0644\u0645\u062a\u0635\u0641\u062d \u0628\u0639\u062f \u0627\u0644\u062a\u062d\u0645\u064a\u0644 \u0648\u062a\u062c\u0631\u0628 GPS \u0623\u0648\u0644\u0627 \u062b\u0645 IP \u0639\u0646\u062f \u0627\u0644\u062d\u0627\u062c\u0629." : copy.html === "zh-CN" ? "\u4f1a\u3002\u9875\u9762\u4f1a\u8ddf\u968f\u6d4f\u89c8\u5668\u8bed\u8a00\uff0c\u5148\u5c1d\u8bd5 GPS\uff0c\u518d\u4f7f\u7528 IP \u5907\u7528\u3002" : "Yes. The page follows browser language after load and tries GPS first, then IP fallback.") },
-    { q: place ? (copy.html === "zh-CN" ? `${place}${topic}\u662f\u4ec0\u4e48\u65f6\u5019\uff1f` : `${topic}${place ? ` ${copy.in} ${place}` : ""}?`) : topic, a: makeDescription(copy, topic, place) }
+    { q: copy.shareQ || (copy.html === "ar" ? "هل يمكنني مشاركة هذه الصفحة؟" : copy.html === "zh-CN" ? "我可以分享这个页面吗？" : "Can I share this page?"), a: copy.shareA || (copy.html === "ar" ? "نعم. كل رابط مخصص مباشرة لنية بحث واضحة عن مواقيت الصلاة." : copy.html === "zh-CN" ? "可以。每条路由都是为明确的礼拜时间搜索意图建立的直接页面。" : "Yes. Each route is built as a direct page for a specific prayer-time intent and city.") },
+    { q: copy.autoQ || (copy.html === "ar" ? "هل يحدد Adantimer اللغة والموقع تلقائيا؟" : copy.html === "zh-CN" ? "Adantimer 会自动识别语言和位置吗？" : "Does Adantimer detect language and location automatically?"), a: copy.autoA || (copy.html === "ar" ? "نعم. تتبع الصفحة لغة المتصفح بعد التحميل وتجرب GPS أولا ثم IP عند الحاجة." : copy.html === "zh-CN" ? "会。页面会跟随浏览器语言，先尝试 GPS，再使用 IP 备用。" : "Yes. The page follows browser language after load and tries GPS first, then IP fallback.") },
+    { q: place ? (copy.html === "zh-CN" ? `${place}${topic}是什么时候？` : `${topic}${place ? ` ${copy.in} ${place}` : ""}?`) : topic, a: makeDescription(copy, topic, place) }
   ];
 }
 
@@ -309,8 +302,8 @@ function schema(id, data) {
 }
 
 function topicLead(copy) {
-  if (copy.html === "ar") return "\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a";
-  if (copy.html === "zh-CN") return "\u793c\u62dc\u65f6\u95f4";
+  if (copy.html === "ar") return "مواقيت الصلاة في";
+  if (copy.html === "zh-CN") return "礼拜时间";
   return copy.hero;
 }
 
