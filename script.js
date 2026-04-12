@@ -18,9 +18,6 @@ const countryInput = document.getElementById("manual-country");
 const locationForm = document.getElementById("location-form");
 const setLocationButtonEl = document.getElementById("set-location-btn");
 const langButtons = Array.from(document.querySelectorAll(".lang-btn"));
-const langOptionButtons = Array.from(document.querySelectorAll(".lang-option"));
-const languageMenuEl = document.querySelector(".language-menu");
-const languageMenuLabelEl = document.getElementById("language-menu-label");
 const canonicalEl = document.querySelector("link[rel='canonical']");
 const websiteSchemaEl = document.getElementById("website-schema");
 const pageType = document.body.dataset.page || "home";
@@ -75,57 +72,57 @@ const LOCALES = {
   de: {
     code: "de", dir: "ltr",
     button: "Gebetszeiten laden", cityPlaceholder: "Stadt eingeben", countryPlaceholder: "Land (optional)",
-    nextPrayer: "NÃ¤chstes Gebet", currentPrayer: "Aktuelles Gebet", today: "Heute", method: "Methode",
+    nextPrayer: "Nächstes Gebet", currentPrayer: "Aktuelles Gebet", today: "Heute", method: "Methode",
     loading: "Wird geladen...", locating: "GPS wird versucht, danach IP als Fallback.", detect: "Standort wird erkannt",
     noCurrentPrayer: "Zwischen zwei Gebeten", searchPrompt: "Gib eine Stadt ein, um den Plan zu aktualisieren.",
     permissionError: "Dein Standort konnte nicht geladen werden. Suche nach einer Stadt, um fortzufahren.",
-    locationNotFound: "Stadt nicht gefunden. Versuche eine grÃ¶ÃŸere Stadt in der NÃ¤he.",
+    locationNotFound: "Stadt nicht gefunden. Versuche eine größere Stadt in der Nähe.",
     fetchError: "Die Gebetszeiten konnten gerade nicht geladen werden. Bitte versuche es erneut.",
-    timezone: tz => `Zeitzone: ${tz}`, locationPrefix: "Gebetszeiten fÃ¼r", countdown: "beginnt in",
+    timezone: tz => `Zeitzone: ${tz}`, locationPrefix: "Gebetszeiten für", countdown: "beginnt in",
     prayers: { Fajr: "Fajr", Dhuhr: "Dhuhr", Asr: "Asr", Maghrib: "Maghrib", Isha: "Isha" },
-    topics: { home: "Gebetszeiten", "prayer-times": "Gebetszeiten", "next-prayer": "Zeit des nÃ¤chsten Gebets", fajr: "Fajr-Zeit", dhuhr: "Dhuhr-Zeit", asr: "Asr-Zeit", maghrib: "Maghrib-Zeit", isha: "Isha-Zeit" },
-    eyebrow: "Gebetszeiten nach Stadt", infoEyebrow: "Automatisch", aboutEyebrow: "Ãœberblick", faqEyebrow: "FAQ", citiesEyebrow: "Beliebte StÃ¤dte",
+    topics: { home: "Gebetszeiten", "prayer-times": "Gebetszeiten", "next-prayer": "Zeit des nächsten Gebets", fajr: "Fajr-Zeit", dhuhr: "Dhuhr-Zeit", asr: "Asr-Zeit", maghrib: "Maghrib-Zeit", isha: "Isha-Zeit" },
+    eyebrow: "Gebetszeiten nach Stadt", infoEyebrow: "Automatisch", aboutEyebrow: "Überblick", faqEyebrow: "FAQ", citiesEyebrow: "Beliebte Städte",
     footer: "Genaue Gebetszeiten nach Stadt.",
-    citiesTitle: "Gebetszeiten in wichtigen StÃ¤dten",
+    citiesTitle: "Gebetszeiten in wichtigen Städten",
     citiesLine1: 'Direkt zu Stadtseiten: <a href="/new-york">New York</a>, <a href="/sydney">Sydney</a>, <a href="/london">London</a>, <a href="/berlin">Berlin</a>, <a href="/dubai">Dubai</a> und <a href="/cairo">Kairo</a>.',
-    citiesLine2: 'Direkt zu Suchintentionen wie <a href="/asr-time/new-york">Asr in New York</a>, <a href="/dhuhr-time/sydney">Dhuhr in Sydney</a> oder <a href="/next-prayer/london">nÃ¤chstes Gebet in London</a>.',
-    heroTitle: (type, place, topic) => type === "home" ? (place ? `Gebetszeiten in ${place} heute` : "Gebetszeiten heute und Countdown zum nÃ¤chsten Gebet") : (place ? `${topic} in ${place}` : `${topic} heute`),
-    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Sieh genaue Gebetszeiten in ${place}, den Countdown zum nÃ¤chsten Gebet und den kompletten Tagesplan.` : "Die Seite passt sich jetzt automatisch an die Browsersprache und den Standort an.") : (place ? `Sieh ${topic.toLowerCase()} in ${place} und darunter den vollstÃ¤ndigen Gebetsplan.` : `Lade ${topic.toLowerCase()} automatisch und prÃ¼fe darunter den vollstÃ¤ndigen Gebetsplan.`),
-    infoTitle: topic => `FÃ¼r schnelle ${topic.toLowerCase()}-Abfragen gebaut`,
-    features: topic => ["Erkennt Sprache und Standort automatisch.", `Zeigt ${topic.toLowerCase()} mit Live-Countdown und klarer Statusanzeige.`, "Funktioniert direkt im Browser ohne App.", "Manuelle Buttons fÃ¼r Englisch und Arabisch bleiben oben rechts verfÃ¼gbar."],
-    aboutTitle: topic => `${topic} ohne unnÃ¶tige Umwege`,
+    citiesLine2: 'Direkt zu Suchintentionen wie <a href="/asr-time/new-york">Asr in New York</a>, <a href="/dhuhr-time/sydney">Dhuhr in Sydney</a> oder <a href="/next-prayer/london">nächstes Gebet in London</a>.',
+    heroTitle: (type, place, topic) => type === "home" ? (place ? `Gebetszeiten in ${place} heute` : "Gebetszeiten heute und Countdown zum nächsten Gebet") : (place ? `${topic} in ${place}` : `${topic} heute`),
+    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Sieh genaue Gebetszeiten in ${place}, den Countdown zum nächsten Gebet und den kompletten Tagesplan.` : "Die Seite passt sich jetzt automatisch an die Browsersprache und den Standort an.") : (place ? `Sieh ${topic.toLowerCase()} in ${place} und darunter den vollständigen Gebetsplan.` : `Lade ${topic.toLowerCase()} automatisch und prüfe darunter den vollständigen Gebetsplan.`),
+    infoTitle: topic => `Für schnelle ${topic.toLowerCase()}-Abfragen gebaut`,
+    features: topic => ["Erkennt Sprache und Standort automatisch.", `Zeigt ${topic.toLowerCase()} mit Live-Countdown und klarer Statusanzeige.`, "Funktioniert direkt im Browser ohne App.", "Manuelle Buttons für Englisch und Arabisch bleiben oben rechts verfügbar."],
+    aboutTitle: topic => `${topic} ohne unnötige Umwege`,
     about: (topic, place) => [place ? `Diese Seite ist auf ${topic.toLowerCase()} in ${place} ausgerichtet, damit Besucher sofort die richtige Information sehen.` : `Diese Seite ist auf ${topic.toLowerCase()} ausgerichtet, damit Besucher sofort die richtige Information sehen.`, "Ziel ist ein professionelleres Erlebnis: automatische Sprachwahl, automatische Standorterkennung und ein klarer Gebetsplan.", "So verstehen sowohl Nutzer als auch Suchmaschinen die Seite deutlicher."],
-    faqTitle: "HÃ¤ufige Fragen",
-    faq: [["Erkennt die Seite meine Stadt automatisch?", "Ja. Zuerst wird GPS versucht, danach eine IP-basierte Erkennung."], ["Kann ich auf eine andere Stadt wechseln?", "Ja. Du kannst jede Stadt manuell suchen und die Seite aktualisiert sich sofort."], ["Folgt die Seite automatisch der Besuchersprache?", "Ja. Die Seite folgt jetzt automatisch der Browsersprache, wÃ¤hrend die manuellen Buttons fÃ¼r Englisch und Arabisch erhalten bleiben."]],
-    pageTitle: (type, place, topic) => type === "home" ? (place ? `Gebetszeiten in ${place} heute | Fajr, Dhuhr, Asr, Maghrib, Isha | Adantimer` : "Adantimer | Genaue Gebetszeiten und Countdown zum nÃ¤chsten Gebet") : (place ? `${topic} in ${place} heute | Adantimer` : `${topic} heute | Adantimer`),
-    pageDescription: (type, place, topic) => type === "home" ? (place ? `PrÃ¼fe genaue Gebetszeiten in ${place}, sieh den Countdown zum nÃ¤chsten Gebet und den heutigen Tagesplan.` : "PrÃ¼fe genaue Gebetszeiten fÃ¼r deine Stadt und lasse Adantimer automatisch die Browsersprache Ã¼bernehmen.") : (place ? `PrÃ¼fe ${topic.toLowerCase()} in ${place}, sieh den Countdown zum nÃ¤chsten Gebet und den vollstÃ¤ndigen Tagesplan.` : `PrÃ¼fe ${topic.toLowerCase()}, sieh den Countdown zum nÃ¤chsten Gebet und den vollstÃ¤ndigen Tagesplan.`)
+    faqTitle: "Häufige Fragen",
+    faq: [["Erkennt die Seite meine Stadt automatisch?", "Ja. Zuerst wird GPS versucht, danach eine IP-basierte Erkennung."], ["Kann ich auf eine andere Stadt wechseln?", "Ja. Du kannst jede Stadt manuell suchen und die Seite aktualisiert sich sofort."], ["Folgt die Seite automatisch der Besuchersprache?", "Ja. Die Seite folgt jetzt automatisch der Browsersprache, während die manuellen Buttons für Englisch und Arabisch erhalten bleiben."]],
+    pageTitle: (type, place, topic) => type === "home" ? (place ? `Gebetszeiten in ${place} heute | Fajr, Dhuhr, Asr, Maghrib, Isha | Adantimer` : "Adantimer | Genaue Gebetszeiten und Countdown zum nächsten Gebet") : (place ? `${topic} in ${place} heute | Adantimer` : `${topic} heute | Adantimer`),
+    pageDescription: (type, place, topic) => type === "home" ? (place ? `Prüfe genaue Gebetszeiten in ${place}, sieh den Countdown zum nächsten Gebet und den heutigen Tagesplan.` : "Prüfe genaue Gebetszeiten für deine Stadt und lasse Adantimer automatisch die Browsersprache übernehmen.") : (place ? `Prüfe ${topic.toLowerCase()} in ${place}, sieh den Countdown zum nächsten Gebet und den vollständigen Tagesplan.` : `Prüfe ${topic.toLowerCase()}, sieh den Countdown zum nächsten Gebet und den vollständigen Tagesplan.`)
   },
   fr: {
     code: "fr", dir: "ltr",
     button: "Voir les horaires", cityPlaceholder: "Entrer une ville", countryPlaceholder: "Pays (optionnel)",
-    nextPrayer: "Prochaine priÃ¨re", currentPrayer: "PriÃ¨re actuelle", today: "Aujourd'hui", method: "MÃ©thode",
-    loading: "Chargement...", locating: "GPS en cours, puis IP en secours.", detect: "DÃ©tection de votre position",
-    noCurrentPrayer: "Entre deux priÃ¨res", searchPrompt: "Entrez une ville pour mettre Ã  jour l'horaire.",
+    nextPrayer: "Prochaine prière", currentPrayer: "Prière actuelle", today: "Aujourd'hui", method: "Méthode",
+    loading: "Chargement...", locating: "GPS en cours, puis IP en secours.", detect: "Détection de votre position",
+    noCurrentPrayer: "Entre deux prières", searchPrompt: "Entrez une ville pour mettre à jour l'horaire.",
     permissionError: "Impossible de charger votre position. Recherchez une ville pour continuer.",
-    locationNotFound: "Ville introuvable. Essayez une grande ville proche.", fetchError: "Impossible de charger les horaires maintenant. RÃ©essayez.",
+    locationNotFound: "Ville introuvable. Essayez une grande ville proche.", fetchError: "Impossible de charger les horaires maintenant. Réessayez.",
     timezone: tz => `Fuseau horaire : ${tz}`, locationPrefix: "Horaires pour", countdown: "commence dans",
     prayers: { Fajr: "Fajr", Dhuhr: "Dhuhr", Asr: "Asr", Maghrib: "Maghrib", Isha: "Isha" },
-    topics: { home: "Horaires de priÃ¨re", "prayer-times": "Horaires de priÃ¨re", "next-prayer": "Heure de la prochaine priÃ¨re", fajr: "Heure du Fajr", dhuhr: "Heure du Dhuhr", asr: "Heure du Asr", maghrib: "Heure du Maghrib", isha: "Heure du Isha" },
-    eyebrow: "Horaires par ville", infoEyebrow: "Automatique", aboutEyebrow: "Ã€ propos", faqEyebrow: "FAQ", citiesEyebrow: "Villes populaires",
-    footer: "Horaires de priÃ¨re prÃ©cis par ville.",
-    citiesTitle: "Horaires de priÃ¨re dans les grandes villes",
-    citiesLine1: 'AccÃ©dez directement aux pages villes : <a href="/new-york">New York</a>, <a href="/sydney">Sydney</a>, <a href="/london">Londres</a>, <a href="/berlin">Berlin</a>, <a href="/dubai">DubaÃ¯</a> et <a href="/cairo">Le Caire</a>.',
-    citiesLine2: 'AccÃ©dez aussi Ã  des recherches prÃ©cises comme <a href="/asr-time/new-york">Asr Ã  New York</a>, <a href="/dhuhr-time/sydney">Dhuhr Ã  Sydney</a> ou <a href="/next-prayer/london">prochaine priÃ¨re Ã  Londres</a>.',
-    heroTitle: (type, place, topic) => type === "home" ? (place ? `Horaires de priÃ¨re Ã  ${place} aujourd'hui` : "Horaires de priÃ¨re aujourd'hui et compte Ã  rebours") : (place ? `${topic} Ã  ${place}` : `${topic} aujourd'hui`),
-    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Consultez les horaires prÃ©cis Ã  ${place}, la prochaine priÃ¨re et le planning complet du jour.` : "La page s'adapte dÃ©sormais automatiquement Ã  la langue du navigateur et Ã  la localisation.") : (place ? `Consultez ${topic.toLowerCase()} Ã  ${place}, puis le planning complet ci-dessous.` : `Chargez ${topic.toLowerCase()} automatiquement, puis consultez le planning complet ci-dessous.`),
-    infoTitle: topic => `ConÃ§u pour vÃ©rifier rapidement ${topic.toLowerCase()}`,
-    features: topic => ["DÃ©tecte automatiquement la langue et la position.", `Affiche ${topic.toLowerCase()} avec un compte Ã  rebours en direct.`, "Fonctionne directement dans le navigateur sans application.", "Les boutons manuels anglais et arabe restent disponibles en haut Ã  droite."],
+    topics: { home: "Horaires de prière", "prayer-times": "Horaires de prière", "next-prayer": "Heure de la prochaine prière", fajr: "Heure du Fajr", dhuhr: "Heure du Dhuhr", asr: "Heure du Asr", maghrib: "Heure du Maghrib", isha: "Heure du Isha" },
+    eyebrow: "Horaires par ville", infoEyebrow: "Automatique", aboutEyebrow: "À propos", faqEyebrow: "FAQ", citiesEyebrow: "Villes populaires",
+    footer: "Horaires de prière précis par ville.",
+    citiesTitle: "Horaires de prière dans les grandes villes",
+    citiesLine1: 'Accédez directement aux pages villes : <a href="/new-york">New York</a>, <a href="/sydney">Sydney</a>, <a href="/london">Londres</a>, <a href="/berlin">Berlin</a>, <a href="/dubai">Dubaï</a> et <a href="/cairo">Le Caire</a>.',
+    citiesLine2: 'Accédez aussi à des recherches précises comme <a href="/asr-time/new-york">Asr à New York</a>, <a href="/dhuhr-time/sydney">Dhuhr à Sydney</a> ou <a href="/next-prayer/london">prochaine prière à Londres</a>.',
+    heroTitle: (type, place, topic) => type === "home" ? (place ? `Horaires de prière à ${place} aujourd'hui` : "Horaires de prière aujourd'hui et compte à rebours") : (place ? `${topic} à ${place}` : `${topic} aujourd'hui`),
+    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Consultez les horaires précis à ${place}, la prochaine prière et le planning complet du jour.` : "La page s'adapte désormais automatiquement à la langue du navigateur et à la localisation.") : (place ? `Consultez ${topic.toLowerCase()} à ${place}, puis le planning complet ci-dessous.` : `Chargez ${topic.toLowerCase()} automatiquement, puis consultez le planning complet ci-dessous.`),
+    infoTitle: topic => `Conçu pour vérifier rapidement ${topic.toLowerCase()}`,
+    features: topic => ["Détecte automatiquement la langue et la position.", `Affiche ${topic.toLowerCase()} avec un compte à rebours en direct.`, "Fonctionne directement dans le navigateur sans application.", "Les boutons manuels anglais et arabe restent disponibles en haut à droite."],
     aboutTitle: topic => `${topic} sans friction inutile`,
-    about: (topic, place) => [place ? `Cette page vise directement ${topic.toLowerCase()} Ã  ${place}, afin que le visiteur obtienne immÃ©diatement la bonne information.` : `Cette page vise directement ${topic.toLowerCase()}, afin que le visiteur obtienne immÃ©diatement la bonne information.`, "L'objectif est une expÃ©rience plus professionnelle : langue automatique, localisation automatique et planning clair.", "Cela aide Ã  la fois l'utilisateur et les moteurs de recherche."],
-    faqTitle: "Questions frÃ©quentes",
-    faq: [["La page dÃ©tecte-t-elle ma ville automatiquement ?", "Oui. La page essaie d'abord le GPS puis un fallback par IP."], ["Puis-je changer de ville ?", "Oui. Vous pouvez rechercher n'importe quelle ville manuellement."], ["La page suit-elle automatiquement la langue du visiteur ?", "Oui. La page suit dÃ©sormais la langue du navigateur, avec les boutons anglais et arabe toujours disponibles."]],
-    pageTitle: (type, place, topic) => type === "home" ? (place ? `Horaires de priÃ¨re Ã  ${place} aujourd'hui | Fajr, Dhuhr, Asr, Maghrib, Isha | Adantimer` : "Adantimer | Horaires de priÃ¨re prÃ©cis et prochaine priÃ¨re") : (place ? `${topic} Ã  ${place} aujourd'hui | Adantimer` : `${topic} aujourd'hui | Adantimer`),
-    pageDescription: (type, place, topic) => type === "home" ? (place ? `Consultez les horaires prÃ©cis Ã  ${place}, la prochaine priÃ¨re et le planning complet du jour.` : "Consultez les horaires de priÃ¨re de votre ville et laissez Adantimer suivre automatiquement la langue du navigateur.") : (place ? `Consultez ${topic.toLowerCase()} Ã  ${place}, la prochaine priÃ¨re et le planning complet du jour.` : `Consultez ${topic.toLowerCase()}, la prochaine priÃ¨re et le planning complet du jour.`)
+    about: (topic, place) => [place ? `Cette page vise directement ${topic.toLowerCase()} à ${place}, afin que le visiteur obtienne immédiatement la bonne information.` : `Cette page vise directement ${topic.toLowerCase()}, afin que le visiteur obtienne immédiatement la bonne information.`, "L'objectif est une expérience plus professionnelle : langue automatique, localisation automatique et planning clair.", "Cela aide à la fois l'utilisateur et les moteurs de recherche."],
+    faqTitle: "Questions fréquentes",
+    faq: [["La page détecte-t-elle ma ville automatiquement ?", "Oui. La page essaie d'abord le GPS puis un fallback par IP."], ["Puis-je changer de ville ?", "Oui. Vous pouvez rechercher n'importe quelle ville manuellement."], ["La page suit-elle automatiquement la langue du visiteur ?", "Oui. La page suit désormais la langue du navigateur, avec les boutons anglais et arabe toujours disponibles."]],
+    pageTitle: (type, place, topic) => type === "home" ? (place ? `Horaires de prière à ${place} aujourd'hui | Fajr, Dhuhr, Asr, Maghrib, Isha | Adantimer` : "Adantimer | Horaires de prière précis et prochaine prière") : (place ? `${topic} à ${place} aujourd'hui | Adantimer` : `${topic} aujourd'hui | Adantimer`),
+    pageDescription: (type, place, topic) => type === "home" ? (place ? `Consultez les horaires précis à ${place}, la prochaine prière et le planning complet du jour.` : "Consultez les horaires de prière de votre ville et laissez Adantimer suivre automatiquement la langue du navigateur.") : (place ? `Consultez ${topic.toLowerCase()} à ${place}, la prochaine prière et le planning complet du jour.` : `Consultez ${topic.toLowerCase()}, la prochaine prière et le planning complet du jour.`)
   },
   tr: {
     code: "tr", dir: "ltr",
@@ -156,89 +153,59 @@ const LOCALES = {
   },
   "zh-hans": {
     code: "zh-CN", dir: "ltr",
-    button: "æŸ¥çœ‹ç¤¼æ‹œæ—¶é—´", cityPlaceholder: "è¾“å…¥åŸŽå¸‚", countryPlaceholder: "å›½å®¶ï¼ˆå¯é€‰ï¼‰",
-    nextPrayer: "ä¸‹ä¸€æ¬¡ç¤¼æ‹œ", currentPrayer: "å½“å‰ç¤¼æ‹œ", today: "ä»Šå¤©", method: "è®¡ç®—æ–¹å¼",
-    loading: "åŠ è½½ä¸­...", locating: "æ­£åœ¨å°è¯• GPSï¼Œç„¶åŽä½¿ç”¨ IP å¤‡ç”¨ã€‚", detect: "æ­£åœ¨è¯†åˆ«ä½ çš„ä½ç½®",
-    noCurrentPrayer: "ä¸¤æ¬¡ç¤¼æ‹œä¹‹é—´", searchPrompt: "è¾“å…¥åŸŽå¸‚ä»¥æ›´æ–°æ—¶é—´è¡¨ã€‚",
-    permissionError: "æ— æ³•èŽ·å–ä½ çš„ä½ç½®ã€‚è¯·è¾“å…¥åŸŽå¸‚ç»§ç»­ã€‚",
-    locationNotFound: "æœªæ‰¾åˆ°è¯¥åŸŽå¸‚ã€‚è¯·å°è¯•é™„è¿‘æ›´å¤§çš„åŸŽå¸‚ã€‚", fetchError: "æš‚æ—¶æ— æ³•åŠ è½½ç¤¼æ‹œæ—¶é—´ï¼Œè¯·ç¨åŽå†è¯•ã€‚",
-    timezone: tz => `æ—¶åŒºï¼š${tz}`, locationPrefix: "ç¤¼æ‹œæ—¶é—´", countdown: "å¼€å§‹äºŽ",
-    prayers: { Fajr: "æ™¨ç¤¼", Dhuhr: "æ™Œç¤¼", Asr: "æ™¡ç¤¼", Maghrib: "æ˜ç¤¼", Isha: "å®µç¤¼" },
-    topics: { home: "ç¤¼æ‹œæ—¶é—´", "prayer-times": "ç¤¼æ‹œæ—¶é—´", "next-prayer": "ä¸‹ä¸€æ¬¡ç¤¼æ‹œæ—¶é—´", fajr: "æ™¨ç¤¼æ—¶é—´", dhuhr: "æ™Œç¤¼æ—¶é—´", asr: "æ™¡ç¤¼æ—¶é—´", maghrib: "æ˜ç¤¼æ—¶é—´", isha: "å®µç¤¼æ—¶é—´" },
-    eyebrow: "æŒ‰åŸŽå¸‚æŸ¥çœ‹ç¤¼æ‹œæ—¶é—´", infoEyebrow: "è‡ªåŠ¨", aboutEyebrow: "å…³äºŽ", faqEyebrow: "å¸¸è§é—®é¢˜", citiesEyebrow: "çƒ­é—¨åŸŽå¸‚",
-    footer: "æŒ‰åŸŽå¸‚æä¾›å‡†ç¡®ç¤¼æ‹œæ—¶é—´ã€‚",
-    citiesTitle: "ä¸»è¦åŸŽå¸‚ç¤¼æ‹œæ—¶é—´",
-    citiesLine1: 'å¯ç›´æŽ¥æ‰“å¼€åŸŽå¸‚é¡µé¢ï¼š<a href="/new-york">çº½çº¦</a>ã€<a href="/sydney">æ‚‰å°¼</a>ã€<a href="/london">ä¼¦æ•¦</a>ã€<a href="/berlin">æŸæž—</a>ã€<a href="/dubai">è¿ªæ‹œ</a>ã€<a href="/cairo">å¼€ç½—</a>ã€‚',
-    citiesLine2: 'ä¹Ÿå¯ä»¥ç›´æŽ¥è¿›å…¥å…·ä½“æœç´¢ï¼Œä¾‹å¦‚ <a href="/asr-time/new-york">çº½çº¦æ™¡ç¤¼æ—¶é—´</a>ã€<a href="/dhuhr-time/sydney">æ‚‰å°¼æ™Œç¤¼æ—¶é—´</a>ã€<a href="/next-prayer/london">ä¼¦æ•¦ä¸‹ä¸€æ¬¡ç¤¼æ‹œ</a>ã€‚',
-    heroTitle: (type, place, topic) => type === "home" ? (place ? `${place} ä»Šæ—¥ç¤¼æ‹œæ—¶é—´` : "ä»Šæ—¥ç¤¼æ‹œæ—¶é—´ä¸Žä¸‹ä¸€æ¬¡ç¤¼æ‹œå€’è®¡æ—¶") : (place ? `${place}${topic}` : `${topic}`),
-    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `æŸ¥çœ‹ ${place} çš„å‡†ç¡®ç¤¼æ‹œæ—¶é—´ã€ä¸‹ä¸€æ¬¡ç¤¼æ‹œä»¥åŠå®Œæ•´æ—¥ç¨‹ã€‚` : "é¡µé¢çŽ°åœ¨ä¼šè‡ªåŠ¨æ ¹æ®æµè§ˆå™¨è¯­è¨€å’Œä½ç½®è¿›è¡Œé€‚é…ã€‚") : (place ? `æŸ¥çœ‹ ${place} çš„${topic}ï¼Œå¹¶åœ¨ä¸‹æ–¹æŸ¥çœ‹å®Œæ•´ç¤¼æ‹œæ—¶é—´è¡¨ã€‚` : `è‡ªåŠ¨åŠ è½½${topic}ï¼Œå¹¶åœ¨ä¸‹æ–¹æŸ¥çœ‹å®Œæ•´ç¤¼æ‹œæ—¶é—´è¡¨ã€‚`),
-    infoTitle: topic => `ä¸ºå¿«é€ŸæŸ¥çœ‹${topic}è€Œè®¾è®¡`,
-    features: topic => ["è‡ªåŠ¨è¯†åˆ«è¯­è¨€å’Œä½ç½®ã€‚", `æ˜¾ç¤º${topic}å¹¶æä¾›å®žæ—¶å€’è®¡æ—¶ã€‚`, "æ— éœ€å®‰è£…åº”ç”¨ï¼Œç›´æŽ¥åœ¨æµè§ˆå™¨ä¸­ä½¿ç”¨ã€‚", "å³ä¸Šè§’ä»ä¿ç•™è‹±è¯­å’Œé˜¿æ‹‰ä¼¯è¯­æ‰‹åŠ¨æŒ‰é’®ã€‚"],
-    aboutTitle: topic => `${topic}ï¼Œæ›´æ¸…æ™°æ›´ç›´æŽ¥`,
-    about: (topic, place) => [place ? `æ­¤é¡µé¢èšç„¦äºŽ ${place} çš„${topic}ï¼Œè®©è®¿é—®è€…èƒ½å¤Ÿç«‹å³çœ‹åˆ°æœ€ç›¸å…³çš„ä¿¡æ¯ã€‚` : `æ­¤é¡µé¢èšç„¦äºŽ${topic}ï¼Œè®©è®¿é—®è€…èƒ½å¤Ÿç«‹å³çœ‹åˆ°æœ€ç›¸å…³çš„ä¿¡æ¯ã€‚`, "ç›®æ ‡æ˜¯æä¾›æ›´ä¸“ä¸šçš„ä½“éªŒï¼šè‡ªåŠ¨è¯­è¨€ã€è‡ªåŠ¨å®šä½ï¼Œä»¥åŠæ¸…æ™°çš„ç¤¼æ‹œæ—¶é—´è¡¨ã€‚", "è¿™ä¹Ÿæ›´æœ‰åˆ©äºŽç”¨æˆ·å’Œæœç´¢å¼•æ“Žç†è§£é¡µé¢æ„å›¾ã€‚"],
-    faqTitle: "å¸¸è§é—®é¢˜",
-    faq: [["é¡µé¢ä¼šè‡ªåŠ¨è¯†åˆ«æˆ‘çš„åŸŽå¸‚å—ï¼Ÿ", "ä¼šã€‚é¡µé¢ä¼šå…ˆå°è¯• GPSï¼Œç„¶åŽä½¿ç”¨ IP ä½œä¸ºå¤‡ç”¨ã€‚"], ["æˆ‘å¯ä»¥åˆ‡æ¢åˆ°å…¶ä»–åŸŽå¸‚å—ï¼Ÿ", "å¯ä»¥ã€‚ä½ å¯ä»¥æ‰‹åŠ¨æœç´¢ä»»ä½•åŸŽå¸‚ã€‚"], ["é¡µé¢ä¼šè‡ªåŠ¨ä½¿ç”¨è®¿é—®è€…çš„è¯­è¨€å—ï¼Ÿ", "ä¼šã€‚é¡µé¢çŽ°åœ¨ä¼šè‡ªåŠ¨è·Ÿéšæµè§ˆå™¨è¯­è¨€ï¼ŒåŒæ—¶ä»ä¿ç•™è‹±è¯­å’Œé˜¿æ‹‰ä¼¯è¯­æ‰‹åŠ¨æŒ‰é’®ã€‚"]],
-    pageTitle: (type, place, topic) => type === "home" ? (place ? `${place} ä»Šæ—¥ç¤¼æ‹œæ—¶é—´ | æ™¨ç¤¼ æ™Œç¤¼ æ™¡ç¤¼ æ˜ç¤¼ å®µç¤¼ | Adantimer` : "Adantimer | å‡†ç¡®ç¤¼æ‹œæ—¶é—´ä¸Žä¸‹ä¸€æ¬¡ç¤¼æ‹œ") : (place ? `${place}${topic} | Adantimer` : `${topic} | Adantimer`),
-    pageDescription: (type, place, topic) => type === "home" ? (place ? `æŸ¥çœ‹ ${place} çš„å‡†ç¡®ç¤¼æ‹œæ—¶é—´ã€ä¸‹ä¸€æ¬¡ç¤¼æ‹œå€’è®¡æ—¶ä»¥åŠä»Šæ—¥å®Œæ•´ç¤¼æ‹œæ—¥ç¨‹ã€‚` : "æŸ¥çœ‹ä½ æ‰€åœ¨åŸŽå¸‚çš„ç¤¼æ‹œæ—¶é—´ï¼Œå¹¶è®© Adantimer è‡ªåŠ¨ä½¿ç”¨æµè§ˆå™¨è¯­è¨€ã€‚") : (place ? `æŸ¥çœ‹ ${place} çš„${topic}ã€ä¸‹ä¸€æ¬¡ç¤¼æ‹œå€’è®¡æ—¶ä»¥åŠä»Šæ—¥å®Œæ•´ç¤¼æ‹œæ—¥ç¨‹ã€‚` : `æŸ¥çœ‹${topic}ã€ä¸‹ä¸€æ¬¡ç¤¼æ‹œå€’è®¡æ—¶ä»¥åŠä»Šæ—¥å®Œæ•´ç¤¼æ‹œæ—¥ç¨‹ã€‚`)
+    button: "查看礼拜时间", cityPlaceholder: "输入城市", countryPlaceholder: "国家（可选）",
+    nextPrayer: "下一次礼拜", currentPrayer: "当前礼拜", today: "今天", method: "计算方式",
+    loading: "加载中...", locating: "正在尝试 GPS，然后使用 IP 备用。", detect: "正在识别你的位置",
+    noCurrentPrayer: "两次礼拜之间", searchPrompt: "输入城市以更新时间表。",
+    permissionError: "无法获取你的位置。请输入城市继续。",
+    locationNotFound: "未找到该城市。请尝试附近更大的城市。", fetchError: "暂时无法加载礼拜时间，请稍后再试。",
+    timezone: tz => `时区：${tz}`, locationPrefix: "礼拜时间", countdown: "开始于",
+    prayers: { Fajr: "晨礼", Dhuhr: "晌礼", Asr: "晡礼", Maghrib: "昏礼", Isha: "宵礼" },
+    topics: { home: "礼拜时间", "prayer-times": "礼拜时间", "next-prayer": "下一次礼拜时间", fajr: "晨礼时间", dhuhr: "晌礼时间", asr: "晡礼时间", maghrib: "昏礼时间", isha: "宵礼时间" },
+    eyebrow: "按城市查看礼拜时间", infoEyebrow: "自动", aboutEyebrow: "关于", faqEyebrow: "常见问题", citiesEyebrow: "热门城市",
+    footer: "按城市提供准确礼拜时间。",
+    citiesTitle: "主要城市礼拜时间",
+    citiesLine1: '可直接打开城市页面：<a href="/new-york">纽约</a>、<a href="/sydney">悉尼</a>、<a href="/london">伦敦</a>、<a href="/berlin">柏林</a>、<a href="/dubai">迪拜</a>、<a href="/cairo">开罗</a>。',
+    citiesLine2: '也可以直接进入具体搜索，例如 <a href="/asr-time/new-york">纽约晡礼时间</a>、<a href="/dhuhr-time/sydney">悉尼晌礼时间</a>、<a href="/next-prayer/london">伦敦下一次礼拜</a>。',
+    heroTitle: (type, place, topic) => type === "home" ? (place ? `${place} 今日礼拜时间` : "今日礼拜时间与下一次礼拜倒计时") : (place ? `${place}${topic}` : `${topic}`),
+    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `查看 ${place} 的准确礼拜时间、下一次礼拜以及完整日程。` : "页面现在会自动根据浏览器语言和位置进行适配。") : (place ? `查看 ${place} 的${topic}，并在下方查看完整礼拜时间表。` : `自动加载${topic}，并在下方查看完整礼拜时间表。`),
+    infoTitle: topic => `为快速查看${topic}而设计`,
+    features: topic => ["自动识别语言和位置。", `显示${topic}并提供实时倒计时。`, "无需安装应用，直接在浏览器中使用。", "右上角仍保留英语和阿拉伯语手动按钮。"],
+    aboutTitle: topic => `${topic}，更清晰更直接`,
+    about: (topic, place) => [place ? `此页面聚焦于 ${place} 的${topic}，让访问者能够立即看到最相关的信息。` : `此页面聚焦于${topic}，让访问者能够立即看到最相关的信息。`, "目标是提供更专业的体验：自动语言、自动定位，以及清晰的礼拜时间表。", "这也更有利于用户和搜索引擎理解页面意图。"],
+    faqTitle: "常见问题",
+    faq: [["页面会自动识别我的城市吗？", "会。页面会先尝试 GPS，然后使用 IP 作为备用。"], ["我可以切换到其他城市吗？", "可以。你可以手动搜索任何城市。"], ["页面会自动使用访问者的语言吗？", "会。页面现在会自动跟随浏览器语言，同时仍保留英语和阿拉伯语手动按钮。"]],
+    pageTitle: (type, place, topic) => type === "home" ? (place ? `${place} 今日礼拜时间 | 晨礼 晌礼 晡礼 昏礼 宵礼 | Adantimer` : "Adantimer | 准确礼拜时间与下一次礼拜") : (place ? `${place}${topic} | Adantimer` : `${topic} | Adantimer`),
+    pageDescription: (type, place, topic) => type === "home" ? (place ? `查看 ${place} 的准确礼拜时间、下一次礼拜倒计时以及今日完整礼拜日程。` : "查看你所在城市的礼拜时间，并让 Adantimer 自动使用浏览器语言。") : (place ? `查看 ${place} 的${topic}、下一次礼拜倒计时以及今日完整礼拜日程。` : `查看${topic}、下一次礼拜倒计时以及今日完整礼拜日程。`)
   },
   ar: {
     code: "ar", dir: "rtl",
-    button: "Ø§Ø¹Ø±Ø¶ Ø§Ù„Ù…ÙˆØ§Ù‚ÙŠØª", cityPlaceholder: "Ø£Ø¯Ø®Ù„ Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©", countryPlaceholder: "Ø§Ù„Ø¯ÙˆÙ„Ø© (Ø§Ø®ØªÙŠØ§Ø±ÙŠ)",
-    nextPrayer: "Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø©", currentPrayer: "Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ø­Ø§Ù„ÙŠØ©", today: "Ø§Ù„ÙŠÙˆÙ…", method: "Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„Ø­Ø³Ø§Ø¨",
-    loading: "Ø¬Ø§Ø± Ø§Ù„ØªØ­Ù…ÙŠÙ„...", locating: "Ø¬Ø§Ø±Ù Ù…Ø­Ø§ÙˆÙ„Ø© ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ù…ÙˆÙ‚Ø¹ Ø¹Ø¨Ø± GPS Ø«Ù… Ø¹Ø¨Ø± IP.", detect: "Ø¬Ø§Ø±Ù ØªØ­Ø¯ÙŠØ¯ Ù…ÙˆÙ‚Ø¹Ùƒ",
-    noCurrentPrayer: "Ø¨ÙŠÙ† Ø§Ù„ØµÙ„ÙˆØ§Øª", searchPrompt: "Ø£Ø¯Ø®Ù„ Ù…Ø¯ÙŠÙ†Ø© Ù„ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¬Ø¯ÙˆÙ„.",
-    permissionError: "ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ù…ÙˆÙ‚Ø¹Ùƒ. Ø§Ø¨Ø­Ø« Ø¹Ù† Ù…Ø¯ÙŠÙ†Ø© Ù„Ù„Ù…ØªØ§Ø¨Ø¹Ø©.",
-    locationNotFound: "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©. Ø¬Ø±Ù‘Ø¨ Ù…Ø¯ÙŠÙ†Ø© Ø£ÙƒØ¨Ø± Ù‚Ø±ÙŠØ¨Ø©.", fetchError: "ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ø¢Ù†. Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰.",
-    timezone: tz => `Ø§Ù„Ù…Ù†Ø·Ù‚Ø© Ø§Ù„Ø²Ù…Ù†ÙŠØ©: ${tz}`, locationPrefix: "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© ÙÙŠ", countdown: "ØªØ¨Ø¯Ø£ Ø®Ù„Ø§Ù„",
-    prayers: { Fajr: "Ø§Ù„ÙØ¬Ø±", Dhuhr: "Ø§Ù„Ø¸Ù‡Ø±", Asr: "Ø§Ù„Ø¹ØµØ±", Maghrib: "Ø§Ù„Ù…ØºØ±Ø¨", Isha: "Ø§Ù„Ø¹Ø´Ø§Ø¡" },
-    topics: { home: "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø©", "prayer-times": "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø©", "next-prayer": "ÙˆÙ‚Øª Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø©", fajr: "ÙˆÙ‚Øª Ø§Ù„ÙØ¬Ø±", dhuhr: "ÙˆÙ‚Øª Ø§Ù„Ø¸Ù‡Ø±", asr: "ÙˆÙ‚Øª Ø§Ù„Ø¹ØµØ±", maghrib: "ÙˆÙ‚Øª Ø§Ù„Ù…ØºØ±Ø¨", isha: "ÙˆÙ‚Øª Ø§Ù„Ø¹Ø´Ø§Ø¡" },
-    eyebrow: "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© Ø­Ø³Ø¨ Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©", infoEyebrow: "ØªÙ„Ù‚Ø§Ø¦ÙŠ", aboutEyebrow: "Ø¹Ù† Ø§Ù„ØµÙØ­Ø©", faqEyebrow: "Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©", citiesEyebrow: "Ù…Ø¯Ù† Ø´Ø§Ø¦Ø¹Ø©",
-    footer: "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ø¯Ù‚ÙŠÙ‚Ø© Ø­Ø³Ø¨ Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©.",
-    citiesTitle: "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© ÙÙŠ Ø§Ù„Ù…Ø¯Ù† Ø§Ù„ÙƒØ¨Ø±Ù‰",
-    citiesLine1: 'ØªØµÙØ­ ØµÙØ­Ø§Øª Ø§Ù„Ù…Ø¯Ù† Ù…Ø¨Ø§Ø´Ø±Ø©: <a href="/new-york">Ù†ÙŠÙˆÙŠÙˆØ±Ùƒ</a>ØŒ <a href="/sydney">Ø³ÙŠØ¯Ù†ÙŠ</a>ØŒ <a href="/london">Ù„Ù†Ø¯Ù†</a>ØŒ <a href="/berlin">Ø¨Ø±Ù„ÙŠÙ†</a>ØŒ <a href="/dubai">Ø¯Ø¨ÙŠ</a>ØŒ Ùˆ<a href="/cairo">Ø§Ù„Ù‚Ø§Ù‡Ø±Ø©</a>.',
-    citiesLine2: 'ÙŠÙ…ÙƒÙ†Ùƒ Ø£ÙŠØ¶Ø§Ù‹ Ø§Ù„Ø§Ù†ØªÙ‚Ø§Ù„ Ø¥Ù„Ù‰ ØµÙØ­Ø§Øª Ø¯Ù‚ÙŠÙ‚Ø© Ù…Ø«Ù„ <a href="/asr-time/new-york">ÙˆÙ‚Øª Ø§Ù„Ø¹ØµØ± ÙÙŠ Ù†ÙŠÙˆÙŠÙˆØ±Ùƒ</a>ØŒ <a href="/dhuhr-time/sydney">ÙˆÙ‚Øª Ø§Ù„Ø¸Ù‡Ø± ÙÙŠ Ø³ÙŠØ¯Ù†ÙŠ</a>ØŒ Ø£Ùˆ <a href="/next-prayer/london">Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø© ÙÙŠ Ù„Ù†Ø¯Ù†</a>.',
-    heroTitle: (type, place, topic) => type === "home" ? (place ? `Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© ÙÙŠ ${place} Ø§Ù„ÙŠÙˆÙ…` : "Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„ÙŠÙˆÙ… ÙˆØ§Ù„Ø¹Ø¯ Ø§Ù„ØªÙ†Ø§Ø²Ù„ÙŠ Ù„Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø©") : (place ? `${topic} ÙÙŠ ${place}` : `${topic} Ø§Ù„ÙŠÙˆÙ…`),
-    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Ø´Ø§Ù‡Ø¯ Ø§Ù„Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„Ø¯Ù‚ÙŠÙ‚Ø© ÙÙŠ ${place} ÙˆØªØ§Ø¨Ø¹ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø© ÙˆØ¬Ø¯ÙˆÙ„ Ø§Ù„ÙŠÙˆÙ… Ø§Ù„ÙƒØ§Ù…Ù„.` : "ØªØªÙƒÙŠÙ‘Ù Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø¢Ù† ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ù…Ø¹ Ù„ØºØ© Ø§Ù„Ù…ØªØµÙØ­ ÙˆÙ…ÙˆÙ‚Ø¹ Ø§Ù„Ø²Ø§Ø¦Ø±.") : (place ? `Ø´Ø§Ù‡Ø¯ ${topic} ÙÙŠ ${place} Ø«Ù… Ø±Ø§Ø¬Ø¹ Ø¬Ø¯ÙˆÙ„ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„ÙƒØ§Ù…Ù„ Ø¨Ø§Ù„Ø£Ø³ÙÙ„.` : `Ø­Ù…Ù‘Ù„ ${topic} ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø«Ù… Ø±Ø§Ø¬Ø¹ Ø¬Ø¯ÙˆÙ„ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„ÙƒØ§Ù…Ù„ Ø¨Ø§Ù„Ø£Ø³ÙÙ„.`),
-    infoTitle: topic => `Ù…ØµÙ…Ù…Ø© Ù„Ù„ÙˆØµÙˆÙ„ Ø§Ù„Ø³Ø±ÙŠØ¹ Ø¥Ù„Ù‰ ${topic}`,
-    features: topic => ["ØªØªØ¹Ø±Ù Ø¹Ù„Ù‰ Ø§Ù„Ù„ØºØ© ÙˆØ§Ù„Ù…ÙˆÙ‚Ø¹ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.", `ØªØ¹Ø±Ø¶ ${topic} Ù…Ø¹ Ø¹Ø¯ ØªÙ†Ø§Ø²Ù„ÙŠ Ù…Ø¨Ø§Ø´Ø± ÙˆØ­Ø§Ù„Ø© ÙˆØ§Ø¶Ø­Ø©.`, "ØªØ¹Ù…Ù„ Ù…Ø¨Ø§Ø´Ø±Ø© ÙÙŠ Ø§Ù„Ù…ØªØµÙØ­ Ù…Ù† Ø¯ÙˆÙ† ØªØ·Ø¨ÙŠÙ‚.", "ØªØ¨Ù‚Ù‰ Ø£Ø²Ø±Ø§Ø± Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ© ÙˆØ§Ù„Ø¹Ø±Ø¨ÙŠØ© Ù…ØªØ§Ø­Ø© ÙŠØ¯ÙˆÙŠØ§Ù‹ Ø£Ø¹Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†."],
-    aboutTitle: topic => `${topic} Ù…Ù† Ø¯ÙˆÙ† ØªØ¹Ù‚ÙŠØ¯`,
-    about: (topic, place) => [place ? `Ù‡Ø°Ù‡ Ø§Ù„ØµÙØ­Ø© Ù…ÙˆØ¬Ù‡Ø© Ø¥Ù„Ù‰ ${topic} ÙÙŠ ${place} Ø­ØªÙ‰ ÙŠØµÙ„ Ø§Ù„Ø²Ø§Ø¦Ø± Ø¥Ù„Ù‰ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø© Ø§Ù„ØµØ­ÙŠØ­Ø© Ù…Ø¨Ø§Ø´Ø±Ø©.` : `Ù‡Ø°Ù‡ Ø§Ù„ØµÙØ­Ø© Ù…ÙˆØ¬Ù‡Ø© Ø¥Ù„Ù‰ ${topic} Ø­ØªÙ‰ ÙŠØµÙ„ Ø§Ù„Ø²Ø§Ø¦Ø± Ø¥Ù„Ù‰ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø© Ø§Ù„ØµØ­ÙŠØ­Ø© Ù…Ø¨Ø§Ø´Ø±Ø©.`, "Ø§Ù„Ù‡Ø¯Ù Ù‡Ùˆ ØªØ¬Ø±Ø¨Ø© Ø£ÙƒØ«Ø± Ø§Ø­ØªØ±Ø§ÙÙŠØ©: Ù„ØºØ© ØªÙ„Ù‚Ø§Ø¦ÙŠØ©ØŒ Ù…ÙˆÙ‚Ø¹ ØªÙ„Ù‚Ø§Ø¦ÙŠØŒ ÙˆØ¬Ø¯ÙˆÙ„ ØµÙ„Ø§Ø© ÙˆØ§Ø¶Ø­.", "ÙˆÙ‡Ø°Ø§ ÙŠØ³Ø§Ø¹Ø¯ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… ÙˆÙ…Ø­Ø±ÙƒØ§Øª Ø§Ù„Ø¨Ø­Ø« Ø¹Ù„Ù‰ ÙÙ‡Ù… Ø§Ù„ØµÙØ­Ø© Ø¨Ø´ÙƒÙ„ Ø£ÙˆØ¶Ø­."],
-    faqTitle: "Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©",
-    faq: [["Ù‡Ù„ ØªØªØ¹Ø±Ù Ø§Ù„ØµÙØ­Ø© Ø¹Ù„Ù‰ Ù…Ø¯ÙŠÙ†ØªÙŠ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ØŸ", "Ù†Ø¹Ù…. ØªØ­Ø§ÙˆÙ„ Ø§Ù„ØµÙØ­Ø© Ø§Ø³ØªØ®Ø¯Ø§Ù… GPS Ø£ÙˆÙ„Ø§Ù‹ Ø«Ù… ØªØ¹ØªÙ…Ø¯ Ø¹Ù„Ù‰ IP ÙƒØ®ÙŠØ§Ø± Ø§Ø­ØªÙŠØ§Ø·ÙŠ."], ["Ù‡Ù„ ÙŠÙ…ÙƒÙ†Ù†ÙŠ Ø§Ù„ØªØ¨Ø¯ÙŠÙ„ Ø¥Ù„Ù‰ Ù…Ø¯ÙŠÙ†Ø© Ø£Ø®Ø±Ù‰ØŸ", "Ù†Ø¹Ù…. ÙŠÙ…ÙƒÙ†Ùƒ Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† Ø£ÙŠ Ù…Ø¯ÙŠÙ†Ø© ÙŠØ¯ÙˆÙŠØ§Ù‹ ÙˆØ³ÙŠØªÙ… ØªØ­Ø¯ÙŠØ« Ø§Ù„ØµÙØ­Ø© ÙÙˆØ±Ø§Ù‹."], ["Ù‡Ù„ ØªØªØ¨Ø¹ Ø§Ù„ØµÙØ­Ø© Ù„ØºØ© Ø§Ù„Ø²Ø§Ø¦Ø± ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ØŸ", "Ù†Ø¹Ù…. ØªØªØ¨Ø¹ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø¢Ù† Ù„ØºØ© Ø§Ù„Ù…ØªØµÙØ­ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ØŒ Ù…Ø¹ Ø¨Ù‚Ø§Ø¡ Ø£Ø²Ø±Ø§Ø± Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ© ÙˆØ§Ù„Ø¹Ø±Ø¨ÙŠØ© Ù…ØªØ§Ø­Ø© ÙŠØ¯ÙˆÙŠØ§Ù‹."]],
-    pageTitle: (type, place, topic) => type === "home" ? (place ? `Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© ÙÙŠ ${place} Ø§Ù„ÙŠÙˆÙ… | Ø§Ù„ÙØ¬Ø± ÙˆØ§Ù„Ø¸Ù‡Ø± ÙˆØ§Ù„Ø¹ØµØ± ÙˆØ§Ù„Ù…ØºØ±Ø¨ ÙˆØ§Ù„Ø¹Ø´Ø§Ø¡ | Adantimer` : "Adantimer | Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© ÙˆØ§Ù„Ø¹Ø¯ Ø§Ù„ØªÙ†Ø§Ø²Ù„ÙŠ Ù„Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø©") : (place ? `${topic} ÙÙŠ ${place} Ø§Ù„ÙŠÙˆÙ… | Adantimer` : `${topic} Ø§Ù„ÙŠÙˆÙ… | Adantimer`),
-    pageDescription: (type, place, topic) => type === "home" ? (place ? `ØªØ­Ù‚Ù‚ Ù…Ù† Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ø¯Ù‚ÙŠÙ‚Ø© ÙÙŠ ${place} ÙˆØªØ§Ø¨Ø¹ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø© ÙˆØ¬Ø¯ÙˆÙ„ Ø§Ù„ÙŠÙˆÙ… Ø§Ù„ÙƒØ§Ù…Ù„.` : "ØªØ­Ù‚Ù‚ Ù…Ù† Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© Ù„Ù…Ø¯ÙŠÙ†ØªÙƒ ÙˆØ¯Ø¹ Adantimer ÙŠØªØ¨Ø¹ Ù„ØºØ© Ø§Ù„Ù…ØªØµÙØ­ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.") : (place ? `ØªØ­Ù‚Ù‚ Ù…Ù† ${topic} ÙÙŠ ${place} ÙˆØªØ§Ø¨Ø¹ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø© ÙˆØ¬Ø¯ÙˆÙ„ Ø§Ù„ÙŠÙˆÙ… Ø§Ù„ÙƒØ§Ù…Ù„.` : `ØªØ­Ù‚Ù‚ Ù…Ù† ${topic} ÙˆØªØ§Ø¨Ø¹ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„Ù‚Ø§Ø¯Ù…Ø© ÙˆØ¬Ø¯ÙˆÙ„ Ø§Ù„ÙŠÙˆÙ… Ø§Ù„ÙƒØ§Ù…Ù„.`)
+    button: "اعرض المواقيت", cityPlaceholder: "أدخل المدينة", countryPlaceholder: "الدولة (اختياري)",
+    nextPrayer: "الصلاة القادمة", currentPrayer: "الصلاة الحالية", today: "اليوم", method: "طريقة الحساب",
+    loading: "جار التحميل...", locating: "جارٍ محاولة تحديد الموقع عبر GPS ثم عبر IP.", detect: "جارٍ تحديد موقعك",
+    noCurrentPrayer: "بين الصلوات", searchPrompt: "أدخل مدينة لتحديث الجدول.",
+    permissionError: "تعذر تحميل موقعك. ابحث عن مدينة للمتابعة.",
+    locationNotFound: "لم يتم العثور على المدينة. جرّب مدينة أكبر قريبة.", fetchError: "تعذر تحميل مواقيت الصلاة الآن. حاول مرة أخرى.",
+    timezone: tz => `المنطقة الزمنية: ${tz}`, locationPrefix: "مواقيت الصلاة في", countdown: "تبدأ خلال",
+    prayers: { Fajr: "الفجر", Dhuhr: "الظهر", Asr: "العصر", Maghrib: "المغرب", Isha: "العشاء" },
+    topics: { home: "مواقيت الصلاة", "prayer-times": "مواقيت الصلاة", "next-prayer": "وقت الصلاة القادمة", fajr: "وقت الفجر", dhuhr: "وقت الظهر", asr: "وقت العصر", maghrib: "وقت المغرب", isha: "وقت العشاء" },
+    eyebrow: "مواقيت الصلاة حسب المدينة", infoEyebrow: "تلقائي", aboutEyebrow: "عن الصفحة", faqEyebrow: "الأسئلة الشائعة", citiesEyebrow: "مدن شائعة",
+    footer: "مواقيت الصلاة الدقيقة حسب المدينة.",
+    citiesTitle: "مواقيت الصلاة في المدن الكبرى",
+    citiesLine1: 'تصفح صفحات المدن مباشرة: <a href="/new-york">نيويورك</a>، <a href="/sydney">سيدني</a>، <a href="/london">لندن</a>، <a href="/berlin">برلين</a>، <a href="/dubai">دبي</a>، و<a href="/cairo">القاهرة</a>.',
+    citiesLine2: 'يمكنك أيضاً الانتقال إلى صفحات دقيقة مثل <a href="/asr-time/new-york">وقت العصر في نيويورك</a>، <a href="/dhuhr-time/sydney">وقت الظهر في سيدني</a>، أو <a href="/next-prayer/london">الصلاة القادمة في لندن</a>.',
+    heroTitle: (type, place, topic) => type === "home" ? (place ? `مواقيت الصلاة في ${place} اليوم` : "مواقيت الصلاة اليوم والعد التنازلي للصلاة القادمة") : (place ? `${topic} في ${place}` : `${topic} اليوم`),
+    heroSubtitle: (type, place, topic) => type === "home" ? (place ? `شاهد المواقيت الدقيقة في ${place} وتابع الصلاة القادمة وجدول اليوم الكامل.` : "تتكيّف الصفحة الآن تلقائياً مع لغة المتصفح وموقع الزائر.") : (place ? `شاهد ${topic} في ${place} ثم راجع جدول الصلاة الكامل بالأسفل.` : `حمّل ${topic} تلقائياً ثم راجع جدول الصلاة الكامل بالأسفل.`),
+    infoTitle: topic => `مصممة للوصول السريع إلى ${topic}`,
+    features: topic => ["تتعرف على اللغة والموقع تلقائياً.", `تعرض ${topic} مع عد تنازلي مباشر وحالة واضحة.`, "تعمل مباشرة في المتصفح من دون تطبيق.", "تبقى أزرار الإنجليزية والعربية متاحة يدوياً أعلى اليمين."],
+    aboutTitle: topic => `${topic} من دون تعقيد`,
+    about: (topic, place) => [place ? `هذه الصفحة موجهة إلى ${topic} في ${place} حتى يصل الزائر إلى المعلومة الصحيحة مباشرة.` : `هذه الصفحة موجهة إلى ${topic} حتى يصل الزائر إلى المعلومة الصحيحة مباشرة.`, "الهدف هو تجربة أكثر احترافية: لغة تلقائية، موقع تلقائي، وجدول صلاة واضح.", "وهذا يساعد المستخدم ومحركات البحث على فهم الصفحة بشكل أوضح."],
+    faqTitle: "الأسئلة الشائعة",
+    faq: [["هل تتعرف الصفحة على مدينتي تلقائياً؟", "نعم. تحاول الصفحة استخدام GPS أولاً ثم تعتمد على IP كخيار احتياطي."], ["هل يمكنني التبديل إلى مدينة أخرى؟", "نعم. يمكنك البحث عن أي مدينة يدوياً وسيتم تحديث الصفحة فوراً."], ["هل تتبع الصفحة لغة الزائر تلقائياً؟", "نعم. تتبع الصفحة الآن لغة المتصفح تلقائياً، مع بقاء أزرار الإنجليزية والعربية متاحة يدوياً."]],
+    pageTitle: (type, place, topic) => type === "home" ? (place ? `مواقيت الصلاة في ${place} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer` : "Adantimer | مواقيت الصلاة والعد التنازلي للصلاة القادمة") : (place ? `${topic} في ${place} اليوم | Adantimer` : `${topic} اليوم | Adantimer`),
+    pageDescription: (type, place, topic) => type === "home" ? (place ? `تحقق من مواقيت الصلاة الدقيقة في ${place} وتابع الصلاة القادمة وجدول اليوم الكامل.` : "تحقق من مواقيت الصلاة لمدينتك ودع Adantimer يتبع لغة المتصفح تلقائياً.") : (place ? `تحقق من ${topic} في ${place} وتابع الصلاة القادمة وجدول اليوم الكامل.` : `تحقق من ${topic} وتابع الصلاة القادمة وجدول اليوم الكامل.`)
   }
 };
-
-const mojibakeDecoder = typeof TextDecoder !== "undefined" ? new TextDecoder("utf-8") : null;
-
-function repairMojibake(value) {
-  if (typeof value !== "string") return value;
-  if (!/[ÃƒÃ˜Ã™ÃÃ‘Ã…Ã†Ã‡Ã‹ÃÃ–ÃœÃÃžÃŸÃ -Ã¿]/.test(value)) return value;
-  try {
-    if (mojibakeDecoder) {
-      const bytes = Uint8Array.from(Array.from(value, char => char.charCodeAt(0) & 255));
-      return mojibakeDecoder.decode(bytes);
-    }
-    return decodeURIComponent(escape(value));
-  } catch {
-    return value;
-  }
-}
-
-function normalizeLocaleValue(value) {
-  if (typeof value === "string") return repairMojibake(value);
-  if (Array.isArray(value)) return value.map(normalizeLocaleValue);
-  if (typeof value === "function") {
-    return (...args) => normalizeLocaleValue(value(...args));
-  }
-  if (value && typeof value === "object") {
-    return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, normalizeLocaleValue(entry)]));
-  }
-  return value;
-}
-
-const NORMALIZED_LOCALES = normalizeLocaleValue(LOCALES);
 
 let language = "en";
 let currentLocationType = null;
@@ -262,40 +229,55 @@ function slugifyCity(value) {
 }
 
 function unslugifyCity(value) {
-  return String(value || "")
-    .replace(/-/g, " ")
-    .replace(/\b\p{L}/gu, letter => letter.toUpperCase());
+  return value.split("-").filter(Boolean).map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
 }
 
-function resolveLanguageTag(segment = "") {
-  return LANGUAGE_ALIASES[String(segment).toLowerCase()] || null;
+function resolveLanguageTag(input) {
+  if (!input) return "";
+  const normalized = String(input).toLowerCase();
+  return LANGUAGE_ALIASES[normalized] || LANGUAGE_ALIASES[normalized.split("-")[0]] || "";
+}
+
+function getRequestedLanguage() {
+  const params = new URLSearchParams(window.location.search);
+  const query = resolveLanguageTag(params.get("lang"));
+  if (query) return query;
+  const first = window.location.pathname.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean)[0] || "";
+  return resolveLanguageTag(first);
 }
 
 function getPreferredLanguage() {
-  const pathLanguage = resolveLanguageTag(window.location.pathname.split("/").filter(Boolean)[0]);
-  if (pathLanguage) return pathLanguage;
-  const saved = localStorage.getItem("adantimer-language");
-  if (saved && NORMALIZED_LOCALES[saved]) return saved;
+  const forced = getRequestedLanguage();
+  if (forced) return forced;
+  const stored = resolveLanguageTag(localStorage.getItem("adantimer-language"));
+  if (stored) return stored;
   const browserLanguages = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
-  for (const locale of browserLanguages) {
-    const normalized = resolveLanguageTag(locale);
-    if (normalized) return normalized;
+  for (const entry of browserLanguages) {
+    const match = resolveLanguageTag(entry);
+    if (match) return match;
   }
   return "en";
 }
 
 function getRequestedCity() {
-  const segments = window.location.pathname.split("/").filter(Boolean);
-  const clean = resolveLanguageTag(segments[0]) ? segments.slice(1) : segments;
-  if (!clean.length) return "";
-  if (["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"].includes(clean[0])) {
-    return clean[1] ? unslugifyCity(decodeURIComponent(clean[1])) : "";
+  const params = new URLSearchParams(window.location.search);
+  const queryCity = params.get("city");
+  if (queryCity) {
+    const decodedQueryCity = decodeURIComponent(queryCity).trim();
+    return decodedQueryCity.includes("-") ? unslugifyCity(decodedQueryCity) : decodedQueryCity;
   }
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
+  if (!path || path.toLowerCase() === "index.html") return "";
+  const parts = path.split("/").filter(Boolean);
+  const clean = resolveLanguageTag(parts[0]) ? parts.slice(1) : parts;
+  const keywordRoots = new Set(["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]);
+  if (!clean.length) return "";
+  if (keywordRoots.has(clean[0])) return clean[1] ? unslugifyCity(decodeURIComponent(clean[1])) : "";
   return unslugifyCity(decodeURIComponent(clean[0]));
 }
 
 function getLocale() {
-  return NORMALIZED_LOCALES[language] || NORMALIZED_LOCALES.en;
+  return LOCALES[language] || LOCALES.en;
 }
 
 function getTopic(locale) {
@@ -307,7 +289,7 @@ function getPlaceName(city = "", country = "") {
 }
 
 function getLanguagePrefix(lang) {
-  return lang === "en" ? "" : `/${lang}`;
+  return lang === "ar" ? "/ar" : "";
 }
 
 function buildRelativeUrl(lang, type, city = "") {
@@ -324,7 +306,10 @@ function buildRelativeUrl(lang, type, city = "") {
     isha: slug ? `/isha-time/${slug}` : "/isha-time"
   };
   const path = pathMap[type] || pathMap.home;
-  return `${prefix}${path === "/" && prefix ? "" : path}`;
+  const basePath = `${prefix}${path === "/" && prefix ? "" : path}`;
+  if (lang === "en" || lang === "ar") return basePath;
+  const params = new URLSearchParams({ lang });
+  return `${basePath}?${params.toString()}`;
 }
 
 function buildPageUrl(lang, type, city = "") {
@@ -367,28 +352,7 @@ function renderStaticContent() {
   const countryLabel = document.querySelector('label[for="manual-country"]');
   if (cityLabel) cityLabel.textContent = locale.cityPlaceholder;
   if (countryLabel) countryLabel.textContent = locale.countryPlaceholder;
-  langButtons.forEach(button => {
-    const isActive = button.dataset.lang === language;
-    button.classList.toggle("is-active", isActive);
-    button.setAttribute("aria-pressed", isActive ? "true" : "false");
-  });
-  langOptionButtons.forEach(button => {
-    const isActive = button.dataset.lang === language;
-    button.classList.toggle("is-active", isActive);
-    button.setAttribute("aria-pressed", isActive ? "true" : "false");
-  });
-  if (languageMenuLabelEl) {
-    const menuLabels = {
-      en: "Other languages",
-      ar: "Other languages",
-      de: "German",
-      fr: "French",
-      tr: "Turkish",
-      "zh-hans": "Chinese"
-    };
-    languageMenuLabelEl.textContent = menuLabels[language] || "Other languages";
-  }
-  if (languageMenuEl) languageMenuEl.classList.toggle("is-active", !["en", "ar"].includes(language));
+  langButtons.forEach(button => button.classList.toggle("is-active", button.dataset.lang === language));
   const brandLink = document.querySelector(".brand");
   if (brandLink) brandLink.setAttribute("href", buildRelativeUrl(language, "home"));
   const heroEyebrow = document.querySelector(".hero-copy .eyebrow");
@@ -402,10 +366,10 @@ function renderStaticContent() {
     const headingByLanguage = {
       en: "Today's Prayer Schedule",
       de: "Heutiger Gebetsplan",
-      fr: "Horaires de priÃ¨re du jour",
-      tr: "BugÃ¼nÃ¼n namaz takvimi",
-      "zh-hans": "ä»Šæ—¥ç¤¼æ‹œæ—¶é—´è¡¨",
-      ar: "Ø¬Ø¯ÙˆÙ„ Ø§Ù„ØµÙ„Ø§Ø© Ø§Ù„ÙŠÙˆÙ…"
+      fr: "Horaires de prière du jour",
+      tr: "Bugünün namaz takvimi",
+      "zh-hans": "今日礼拜时间表",
+      ar: "جدول الصلاة اليوم"
     };
     scheduleHeading.textContent = headingByLanguage[language] || headingByLanguage.en;
   }
@@ -498,8 +462,7 @@ function applySeoMeta(city = "") {
 }
 
 function setLanguage(lang, persist = true) {
-  language = NORMALIZED_LOCALES[lang] ? lang : "en";
-  window.language = language;
+  language = LOCALES[lang] ? lang : "en";
   const activeCity = cityName || getRequestedCity();
   if (persist) localStorage.setItem("adantimer-language", language);
   renderStaticContent();
@@ -510,17 +473,9 @@ function setLanguage(lang, persist = true) {
   updateHistory(activeCity);
 }
 
-window.setLanguage = setLanguage;
-
 async function getGPSLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }), reject, { enableHighAccuracy: true, timeout: 10000, maximumAge: 600000 });
-  });
-}
-
-function timeoutAfter(ms, message) {
-  return new Promise((_, reject) => {
-    window.setTimeout(() => reject(new Error(message)), ms);
   });
 }
 
@@ -678,15 +633,11 @@ async function resolveInitialLocation() {
     currentLocationType = "recent";
     return recent;
   }
-  const ipPromise = getIPLocation();
   try {
     currentLocationType = "gps";
-    return await Promise.race([
-      getGPSLocation(),
-      timeoutAfter(3500, "gps-timeout")
-    ]);
+    return await getGPSLocation();
   } catch {
-    const ipResult = await ipPromise;
+    const ipResult = await getIPLocation();
     if (ipResult) {
       currentLocationType = "ip";
       return ipResult;
@@ -785,13 +736,6 @@ if (locationForm) {
 
 langButtons.forEach(button => {
   button.addEventListener("click", () => setLanguage(button.dataset.lang, true));
-});
-
-langOptionButtons.forEach(button => {
-  button.addEventListener("click", () => {
-    if (languageMenuEl) languageMenuEl.open = false;
-    setLanguage(button.dataset.lang, true);
-  });
 });
 
 document.querySelectorAll("button.city-chip").forEach(button => {
