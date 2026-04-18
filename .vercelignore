@@ -1,0 +1,16 @@
+.codex_tmp
+.edge-profile
+wheelhouse
+sitemap_gz_preview
+
+*.log
+*.tmp
+*.temp
+*.har
+*.dmp
+*.mdmp
+*.trace
+*.zip
+*.7z
+*.rar
+*.pdf
