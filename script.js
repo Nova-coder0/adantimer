@@ -40,6 +40,14 @@ const LANGUAGE_ALIASES = {
   "zh-hans": "zh-hans"
 };
 
+const LANGUAGE_PREFIXES = {
+  ar: "/ar",
+  de: "/de",
+  fr: "/fr",
+  tr: "/tr",
+  "zh-hans": "/zh-hans"
+};
+
 const LOCALES = {
   en: {
     code: "en", dir: "ltr",
@@ -289,7 +297,7 @@ function getPlaceName(city = "", country = "") {
 }
 
 function getLanguagePrefix(lang) {
-  return lang === "ar" ? "/ar" : "";
+  return LANGUAGE_PREFIXES[lang] || "";
 }
 
 function buildRelativeUrl(lang, type, city = "") {
@@ -307,9 +315,7 @@ function buildRelativeUrl(lang, type, city = "") {
   };
   const path = pathMap[type] || pathMap.home;
   const basePath = `${prefix}${path === "/" && prefix ? "" : path}`;
-  if (lang === "en" || lang === "ar") return basePath;
-  const params = new URLSearchParams({ lang });
-  return `${basePath}?${params.toString()}`;
+  return basePath;
 }
 
 function buildPageUrl(lang, type, city = "") {
@@ -465,6 +471,7 @@ function setLanguage(lang, persist = true) {
   language = LOCALES[lang] ? lang : "en";
   const activeCity = cityName || getRequestedCity();
   if (persist) localStorage.setItem("adantimer-language", language);
+  window.language = language;
   renderStaticContent();
   renderScheduleSummary();
   renderPrayerRows();
@@ -472,6 +479,8 @@ function setLanguage(lang, persist = true) {
   applySeoMeta(activeCity);
   updateHistory(activeCity);
 }
+
+window.setLanguage = setLanguage;
 
 async function getGPSLocation() {
   return new Promise((resolve, reject) => {

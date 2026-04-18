@@ -52,6 +52,137 @@ const LOCALES = {
   }
 };
 
+const SUPPORTED_RENDER_LANGUAGES = ["en", "ar", "de", "fr", "tr", "zh-hans"];
+
+const LANGUAGE_ALIASES = {
+  en: "en",
+  "en-us": "en",
+  "en-gb": "en",
+  ar: "ar",
+  "ar-sa": "ar",
+  "ar-eg": "ar",
+  de: "de",
+  "de-de": "de",
+  fr: "fr",
+  "fr-fr": "fr",
+  tr: "tr",
+  "tr-tr": "tr",
+  zh: "zh-hans",
+  "zh-cn": "zh-hans",
+  "zh-hans": "zh-hans"
+};
+
+const LANGUAGE_PREFIXES = {
+  ar: "/ar",
+  de: "/de",
+  fr: "/fr",
+  tr: "/tr",
+  "zh-hans": "/zh-hans"
+};
+
+Object.assign(ROUTES.home, {
+  de: "Gebetszeiten",
+  fr: "Horaires de prière",
+  tr: "Namaz Vakitleri",
+  "zh-hans": "礼拜时间"
+});
+
+Object.assign(ROUTES["prayer-times"], {
+  de: "Gebetszeiten",
+  fr: "Horaires de prière",
+  tr: "Namaz Vakitleri",
+  "zh-hans": "礼拜时间"
+});
+
+Object.assign(ROUTES["next-prayer"], {
+  de: "Zeit des nächsten Gebets",
+  fr: "Heure de la prochaine prière",
+  tr: "Sonraki Namaz Vakti",
+  "zh-hans": "下一次礼拜时间"
+});
+
+Object.assign(ROUTES.fajr, {
+  de: "Fajr-Zeit",
+  fr: "Heure du Fajr",
+  tr: "Fajr Vakti",
+  "zh-hans": "晨礼时间"
+});
+
+Object.assign(ROUTES.dhuhr, {
+  de: "Dhuhr-Zeit",
+  fr: "Heure du Dhuhr",
+  tr: "Dhuhr Vakti",
+  "zh-hans": "晌礼时间"
+});
+
+Object.assign(ROUTES.asr, {
+  de: "Asr-Zeit",
+  fr: "Heure du Asr",
+  tr: "Asr Vakti",
+  "zh-hans": "晡礼时间"
+});
+
+Object.assign(ROUTES.maghrib, {
+  de: "Maghrib-Zeit",
+  fr: "Heure du Maghrib",
+  tr: "Maghrib Vakti",
+  "zh-hans": "昏礼时间"
+});
+
+Object.assign(ROUTES.isha, {
+  de: "Isha-Zeit",
+  fr: "Heure du Isha",
+  tr: "Isha Vakti",
+  "zh-hans": "宵礼时间"
+});
+
+Object.assign(LOCALES, {
+  de: {
+    htmlLang: "de",
+    dir: "ltr",
+    inLanguage: "de",
+    title: (topic, place, pageType) => pageType === "home" && !place
+      ? "Adantimer | Genaue Gebetszeiten und nächstes Gebet"
+      : `${topic}${place ? ` in ${place}` : ""} heute | Adantimer`,
+    description: (topic, place) => place
+      ? `Prüfe ${topic.toLowerCase()} in ${place}, sieh das nächste Gebet und den heutigen Gebetsplan.`
+      : `Prüfe ${topic.toLowerCase()} und den heutigen Gebetsplan automatisch nach Standort.`
+  },
+  fr: {
+    htmlLang: "fr",
+    dir: "ltr",
+    inLanguage: "fr",
+    title: (topic, place, pageType) => pageType === "home" && !place
+      ? "Adantimer | Horaires de prière précis et prochaine prière"
+      : `${topic}${place ? ` à ${place}` : ""} aujourd'hui | Adantimer`,
+    description: (topic, place) => place
+      ? `Consultez ${topic.toLowerCase()} à ${place}, la prochaine prière et le planning du jour.`
+      : `Consultez ${topic.toLowerCase()} et le planning du jour selon la localisation.`
+  },
+  tr: {
+    htmlLang: "tr",
+    dir: "ltr",
+    inLanguage: "tr",
+    title: (topic, place, pageType) => pageType === "home" && !place
+      ? "Adantimer | Doğru namaz vakitleri ve sonraki namaz"
+      : `${topic}${place ? ` ${place} için` : ""} bugün | Adantimer`,
+    description: (topic, place) => place
+      ? `${place} için ${topic.toLowerCase()} bilgisini, sonraki namazı ve günlük takvimi görüntüleyin.`
+      : `${topic.toLowerCase()} bilgisini ve günlük namaz takvimini konuma göre görüntüleyin.`
+  },
+  "zh-hans": {
+    htmlLang: "zh-CN",
+    dir: "ltr",
+    inLanguage: "zh-Hans",
+    title: (topic, place, pageType) => pageType === "home" && !place
+      ? "Adantimer | 准确礼拜时间与下一次礼拜"
+      : `${place ? `${place}` : ""}${topic} | Adantimer`,
+    description: (topic, place) => place
+      ? `查看 ${place} 的${topic}、下一次礼拜以及今日完整时间表。`
+      : `按位置查看${topic}与今日完整礼拜时间表。`
+  }
+});
+
 export async function GET(request) {
   try {
     const url = new URL(request.url);
@@ -62,16 +193,16 @@ export async function GET(request) {
     const city = normalizeCity(url.searchParams.get("city") || "");
     const place = city ? titleCase(city) : "";
     const topic = route[language] || route.en;
-    const canonicalPath = language === "ar"
-      ? `/ar${route.path(city) === "/" ? "" : route.path(city)}`
-      : route.path(city);
+    const canonicalPath = buildRoutePath(language, pageType, city);
     const canonical = `${SITE_URL}${canonicalPath}`;
-    const alternates = getAlternates(route, city);
+    const alternates = getAlternates(pageType, city);
     const title = locale.title(topic, place, pageType);
     const description = locale.description(topic, place);
     const copy = language === "ar"
       ? buildArabicCopy({ pageType, place, topic })
       : buildEnglishCopy({ pageType, place, topic });
+    copy.activeLanguage = language;
+    copy.brandHref = buildRoutePath(language, "home");
     const template = await readFile(INDEX_PATH, "utf8");
     const html = applyTemplate(template, {
       alternates,
@@ -127,6 +258,10 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapedCanonical}">`)
     .replace(/<link rel="alternate" hreflang="en" href="[^"]*">/, `<link rel="alternate" hreflang="en" href="${escapeHtml(alternates.en)}">`)
     .replace(/<link rel="alternate" hreflang="ar" href="[^"]*">/, `<link rel="alternate" hreflang="ar" href="${escapeHtml(alternates.ar)}">`)
+    .replace(/<link rel="alternate" hreflang="de" href="[^"]*">/, `<link rel="alternate" hreflang="de" href="${escapeHtml(alternates.de)}">`)
+    .replace(/<link rel="alternate" hreflang="fr" href="[^"]*">/, `<link rel="alternate" hreflang="fr" href="${escapeHtml(alternates.fr)}">`)
+    .replace(/<link rel="alternate" hreflang="tr" href="[^"]*">/, `<link rel="alternate" hreflang="tr" href="${escapeHtml(alternates.tr)}">`)
+    .replace(/<link rel="alternate" hreflang="zh-hans" href="[^"]*">/, `<link rel="alternate" hreflang="zh-hans" href="${escapeHtml(alternates["zh-hans"])}">`)
     .replace(/<link rel="alternate" hreflang="x-default" href="[^"]*">/, `<link rel="alternate" hreflang="x-default" href="${escapeHtml(alternates.default)}">`)
     .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapedTitle}">`)
     .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapedDescription}">`)
@@ -137,8 +272,8 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<script type="application\/ld\+json">[\s\S]*?"@type": "FAQPage"[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(faqSchema, null, 2)}\n  </script>`)
     .replace(/<body data-page="[^"]*">/, `<body data-page="${pageType}">`)
     .replace(/<a class="brand" href="[^"]*">/, `<a class="brand" href="${escapeHtml(copy.brandHref)}">`)
-    .replace(/<button type="button" data-lang="en" class="[^"]*">EN<\/button>/, `<button type="button" data-lang="en" class="${copy.activeLanguage === "en" ? "lang-btn is-active" : "lang-btn"}">EN</button>`)
-    .replace(/<button type="button" data-lang="ar" class="[^"]*">AR<\/button>/, `<button type="button" data-lang="ar" class="${copy.activeLanguage === "ar" ? "lang-btn is-active" : "lang-btn"}">AR</button>`)
+    .replace(/<button type="button" data-lang="en" class="[^"]*" aria-pressed="[^"]*">English<\/button>/, `<button type="button" data-lang="en" class="${copy.activeLanguage === "en" ? "lang-btn is-active" : "lang-btn"}" aria-pressed="${copy.activeLanguage === "en" ? "true" : "false"}">English</button>`)
+    .replace(/<button type="button" data-lang="ar" class="[^"]*" aria-pressed="[^"]*">Arabic<\/button>/, `<button type="button" data-lang="ar" class="${copy.activeLanguage === "ar" ? "lang-btn is-active" : "lang-btn"}" aria-pressed="${copy.activeLanguage === "ar" ? "true" : "false"}">Arabic</button>`)
     .replace(/<section class="hero-copy">[\s\S]*?<\/section>/, renderHeroCopy(copy))
     .replace(/<aside class="next-prayer card featured-card" aria-live="polite">[\s\S]*?<\/aside>/, renderNextPrayerCard(copy))
     .replace(/<section class="card schedule-card" aria-labelledby="schedule-heading">[\s\S]*?<\/section>/, renderScheduleSection(copy))
@@ -513,25 +648,24 @@ function renderInlineLinks(items, language) {
 }
 
 function normalizeLanguage(value) {
-  return String(value || "en").toLowerCase().startsWith("ar") ? "ar" : "en";
+  const normalized = String(value || "en").toLowerCase();
+  return LANGUAGE_ALIASES[normalized] || LANGUAGE_ALIASES[normalized.split("-")[0]] || "en";
 }
 
-function getAlternates(route, city) {
-  const enPath = route.path(city);
-  const arPath = `/ar${enPath === "/" ? "" : enPath}`;
-  return {
-    en: `${SITE_URL}${enPath}`,
-    ar: `${SITE_URL}${arPath}`,
-    default: `${SITE_URL}${enPath}`
-  };
+function getAlternates(pageType, city) {
+  const alternates = {};
+  for (const language of SUPPORTED_RENDER_LANGUAGES) {
+    alternates[language] = `${SITE_URL}${buildRoutePath(language, pageType, city)}`;
+  }
+  alternates.default = alternates.en;
+  return alternates;
 }
 
 function buildRoutePath(language, pageType, city = "") {
   const route = ROUTES[pageType] || ROUTES.home;
   const pathName = route.path(city);
-  return language === "ar"
-    ? `/ar${pathName === "/" ? "" : pathName}`
-    : pathName;
+  const prefix = LANGUAGE_PREFIXES[language] || "";
+  return `${prefix}${pathName === "/" && prefix ? "" : pathName}`;
 }
 
 function normalizePageType(value) {
