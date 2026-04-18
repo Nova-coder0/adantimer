@@ -183,6 +183,381 @@ Object.assign(LOCALES, {
   }
 });
 
+const INLINE_LINK_CONNECTORS = {
+  ar: "و",
+  de: "und",
+  fr: "et",
+  tr: "ve",
+  "zh-hans": "和"
+};
+
+const COPY_LOCALES = {
+  de: {
+    heroEyebrowHome: "Gebetszeiten nach Stadt",
+    heroEyebrowPlace: place => `Gebetsplan für ${place}`,
+    heroHeadingHome: "Gebetszeiten heute und Countdown bis zum nächsten Gebet",
+    heroHeadingPlace: place => `Gebetszeiten in ${place} heute`,
+    heroHeadingTopic: (topic, place) => `${topic}${place ? ` in ${place}` : " heute"}`,
+    heroSubtitlePlace: (topic, place) => `Nutze diese Seite, um ${topic.toLowerCase()} in ${place} zu prüfen, den Countdown bis zum nächsten Gebet zu verfolgen und den vollständigen Tagesplan ohne Umwege zu sehen.`,
+    heroSubtitleHome: "Prüfe genaue Gebetszeiten, verfolge das nächste Gebet und wechsle schnell zu Städten weltweit.",
+    cityLabel: "Stadt",
+    cityPlaceholder: "Stadt eingeben",
+    countryLabel: "Land",
+    countryPlaceholder: "Land (optional)",
+    submitLabel: "Gebetszeiten anzeigen",
+    topCitiesAria: "Beliebte Städte",
+    intentAria: "Schnellzugriffe für Gebetsseiten",
+    intentLinks: [
+      { type: "prayer-times", label: "Gebetszeiten heute" },
+      { type: "next-prayer", label: "Zeit des nächsten Gebets" },
+      { type: "fajr", label: "Fajr-Zeit" },
+      { type: "dhuhr", label: "Dhuhr-Zeit" },
+      { type: "asr", label: "Asr-Zeit" },
+      { type: "maghrib", label: "Maghrib-Zeit" },
+      { type: "isha", label: "Isha-Zeit" }
+    ],
+    locationStatus: place => place ? `Gebetszeiten für ${place}` : "Standort wird ermittelt",
+    nextPrayerTitle: "Nächstes Gebet",
+    currentPrayerLabel: "Aktuelles Gebet",
+    todayLabel: "Heute",
+    methodLabel: "Methode",
+    loadingLabel: "Wird geladen...",
+    locationText: place => place ? `Der Gebetsplan für ${place} wird nach dem Seitenstart automatisch geladen.` : "Zuerst GPS, danach IP-Fallback.",
+    scheduleEyebrow: "Heute",
+    scheduleHeading: (pageType, topic) => pageType === "home" ? "Heutiger Gebetsplan" : `${topic} und voller Tagesplan`,
+    scheduleSummary: place => place ? `Tagesplan und Countdown bis zum nächsten Gebet für ${place}.` : "Genaue Zeiten für deinen aktuellen Standort.",
+    infoEyebrow: "Warum diese Seite hilft",
+    infoTitle: topic => `Eine fokussierte ${topic.toLowerCase()}-Seite für den Alltag`,
+    features: (topic, place) => [
+      `Die Seite ist exakt auf die Suchintention nach ${topic.toLowerCase()}${place ? ` in ${place}` : ""} ausgerichtet.`,
+      "Sie zeigt den Countdown bis zum nächsten Gebet und den vollständigen Tagesplan auf einer Seite.",
+      "Sie passt sich nach dem Laden automatisch an Browsersprache und Standort an.",
+      "Sie nutzt klare Canonical-URLs, die sich leicht teilen und indexieren lassen."
+    ],
+    citiesEyebrow: "Mehr entdecken",
+    citiesTitle: topic => `Beliebte Seiten zu ${topic.toLowerCase()}`,
+    cityLinkLabel: (topic, city) => `${topic} in ${city}`,
+    cityIntentLinks: place => place
+      ? [
+          { type: "prayer-times", label: `Gebetszeiten in ${place}` },
+          { type: "next-prayer", label: `Nächstes Gebet in ${place}` },
+          { type: "fajr", label: `Fajr in ${place}` },
+          { type: "dhuhr", label: `Dhuhr in ${place}` },
+          { type: "asr", label: `Asr in ${place}` },
+          { type: "maghrib", label: `Maghrib in ${place}` },
+          { type: "isha", label: `Isha in ${place}` }
+        ]
+      : [
+          { type: "prayer-times", city: "Makkah", label: "Gebetszeiten in Makkah" },
+          { type: "asr", city: "Cairo", label: "Asr in Cairo" },
+          { type: "dhuhr", city: "Dubai", label: "Dhuhr in Dubai" },
+          { type: "next-prayer", city: "London", label: "Nächstes Gebet in London" }
+        ],
+    aboutEyebrow: "Über diese Seite",
+    aboutTitle: (topic, place) => `${topic}${place ? ` in ${place}` : ""} ohne Umwege`,
+    aboutParagraphs: (topic, place) => [
+      place
+        ? `Diese Seite ist gezielt für ${topic.toLowerCase()} in ${place} aufgebaut, damit Besucher schneller zur richtigen Antwort kommen als über eine generische Startseite.`
+        : `Diese Seite ist gezielt für ${topic.toLowerCase()} aufgebaut, damit Besucher schneller zur richtigen Antwort kommen als über eine generische Startseite.`,
+      "Das Ziel ist eine professionellere Erfahrung mit klarer Gebetsintention, automatischer Sprache, sauberer URL-Struktur und direktem Zugang zum Tagesplan.",
+      "Die engere Übereinstimmung zwischen Suche, URL, Titel und sichtbarem Inhalt stärkt die SEO-Basis dieser Route."
+    ],
+    faqEyebrow: "FAQ",
+    faqTitle: (topic, place) => `Häufige Fragen zu ${topic.toLowerCase()}${place ? ` in ${place}` : ""}`,
+    faq: (topic, place) => [
+      {
+        question: place ? `Kann ich diese Seite für ${topic.toLowerCase()} in ${place} teilen?` : "Kann ich diese Seite teilen?",
+        answer: place
+          ? `Ja. Diese Route ist direkt für ${topic.toLowerCase()} in ${place} aufgebaut und kann leicht wieder aufgerufen oder geteilt werden.`
+          : "Ja. Jede Route ist direkt auf eine Gebetsintention ausgerichtet und lässt sich leicht wieder aufrufen oder teilen."
+      },
+      {
+        question: "Erkennt Adantimer Sprache und Standort automatisch?",
+        answer: "Ja. Die Seite folgt nach dem Laden der Browsersprache, versucht zuerst GPS und greift bei Bedarf auf IP-basierten Standort zurück. Eine manuelle Stadtsuche bleibt trotzdem möglich."
+      },
+      {
+        question: "Welche Gebetszeiten zeigt diese Seite an?",
+        answer: `Die Seite hebt ${topic.toLowerCase()} hervor und lädt zusätzlich den vollständigen Tagesplan für Fajr, Dhuhr, Asr, Maghrib und Isha.`
+      }
+    ],
+    footerText: place => place ? `Genaue Gebetszeiten für ${place} und weitere Städte.` : "Genaue Gebetszeiten nach Stadt.",
+    noscriptText: "JavaScript wird benötigt, um Live-Gebetszeiten und den Countdown bis zum nächsten Gebet zu laden."
+  },
+  fr: {
+    heroEyebrowHome: "Horaires de prière par ville",
+    heroEyebrowPlace: place => `Planning des prières pour ${place}`,
+    heroHeadingHome: "Horaires de prière aujourd'hui et compte à rebours jusqu'à la prochaine prière",
+    heroHeadingPlace: place => `Horaires de prière à ${place} aujourd'hui`,
+    heroHeadingTopic: (topic, place) => `${topic}${place ? ` à ${place}` : " aujourd'hui"}`,
+    heroSubtitlePlace: (topic, place) => `Utilisez cette page pour consulter ${topic.toLowerCase()} à ${place}, suivre le compte à rebours de la prochaine prière et voir le planning complet du jour sans détour.`,
+    heroSubtitleHome: "Consultez des horaires de prière précis, suivez la prochaine prière et passez rapidement d'une ville à l'autre.",
+    cityLabel: "Ville",
+    cityPlaceholder: "Entrer une ville",
+    countryLabel: "Pays",
+    countryPlaceholder: "Pays (optionnel)",
+    submitLabel: "Voir les horaires",
+    topCitiesAria: "Villes populaires",
+    intentAria: "Raccourcis de recherche",
+    intentLinks: [
+      { type: "prayer-times", label: "Horaires de prière aujourd'hui" },
+      { type: "next-prayer", label: "Heure de la prochaine prière" },
+      { type: "fajr", label: "Heure du Fajr" },
+      { type: "dhuhr", label: "Heure du Dhuhr" },
+      { type: "asr", label: "Heure du Asr" },
+      { type: "maghrib", label: "Heure du Maghrib" },
+      { type: "isha", label: "Heure du Isha" }
+    ],
+    locationStatus: place => place ? `Horaires de prière pour ${place}` : "Localisation en cours",
+    nextPrayerTitle: "Prochaine prière",
+    currentPrayerLabel: "Prière actuelle",
+    todayLabel: "Aujourd'hui",
+    methodLabel: "Méthode",
+    loadingLabel: "Chargement...",
+    locationText: place => place ? `Le planning de prière pour ${place} se chargera automatiquement au démarrage de la page.` : "GPS d'abord, puis repli IP.",
+    scheduleEyebrow: "Aujourd'hui",
+    scheduleHeading: (pageType, topic) => pageType === "home" ? "Planning de prière du jour" : `${topic} et planning complet`,
+    scheduleSummary: place => place ? `Planning du jour et compte à rebours jusqu'à la prochaine prière pour ${place}.` : "Horaires précis pour votre ville actuelle.",
+    infoEyebrow: "Pourquoi cette page aide",
+    infoTitle: topic => `Une page ${topic.toLowerCase()} pensée pour l'usage quotidien`,
+    features: (topic, place) => [
+      `La page correspond exactement à l'intention de recherche pour ${topic.toLowerCase()}${place ? ` à ${place}` : ""}.`,
+      "Elle réunit le compte à rebours de la prochaine prière et le planning complet sur une seule page.",
+      "Elle s'adapte automatiquement à la langue du navigateur et à la localisation après chargement.",
+      "Elle utilise des URLs canoniques propres, faciles à partager et à indexer."
+    ],
+    citiesEyebrow: "Explorer plus",
+    citiesTitle: topic => `Pages populaires pour ${topic.toLowerCase()}`,
+    cityLinkLabel: (topic, city) => `${topic} à ${city}`,
+    cityIntentLinks: place => place
+      ? [
+          { type: "prayer-times", label: `Horaires de prière à ${place}` },
+          { type: "next-prayer", label: `Prochaine prière à ${place}` },
+          { type: "fajr", label: `Fajr à ${place}` },
+          { type: "dhuhr", label: `Dhuhr à ${place}` },
+          { type: "asr", label: `Asr à ${place}` },
+          { type: "maghrib", label: `Maghrib à ${place}` },
+          { type: "isha", label: `Isha à ${place}` }
+        ]
+      : [
+          { type: "prayer-times", city: "Makkah", label: "Horaires de prière à Makkah" },
+          { type: "asr", city: "Cairo", label: "Asr à Cairo" },
+          { type: "dhuhr", city: "Dubai", label: "Dhuhr à Dubai" },
+          { type: "next-prayer", city: "London", label: "Prochaine prière à London" }
+        ],
+    aboutEyebrow: "À propos",
+    aboutTitle: (topic, place) => `${topic}${place ? ` à ${place}` : ""} sans détour`,
+    aboutParagraphs: (topic, place) => [
+      place
+        ? `Cette page est conçue spécifiquement pour ${topic.toLowerCase()} à ${place}, afin d'amener plus vite le visiteur à la bonne réponse qu'une page d'accueil générique.`
+        : `Cette page est conçue spécifiquement pour ${topic.toLowerCase()}, afin d'amener plus vite le visiteur à la bonne réponse qu'une page d'accueil générique.`,
+      "L'objectif est une expérience plus professionnelle, avec une intention de prière claire, une langue automatique, une structure d'URL propre et un accès direct au planning du jour.",
+      "La cohérence plus forte entre recherche, URL, titre et contenu visible renforce la base SEO de cette route."
+    ],
+    faqEyebrow: "FAQ",
+    faqTitle: (topic, place) => `Questions fréquentes sur ${topic.toLowerCase()}${place ? ` à ${place}` : ""}`,
+    faq: (topic, place) => [
+      {
+        question: place ? `Puis-je partager cette page pour ${topic.toLowerCase()} à ${place} ?` : "Puis-je partager cette page ?",
+        answer: place
+          ? `Oui. Cette route est construite directement pour ${topic.toLowerCase()} à ${place} et peut être revisitée ou partagée facilement.`
+          : "Oui. Chaque route est construite pour une intention de prière précise et peut être revisitée ou partagée facilement."
+      },
+      {
+        question: "Adantimer détecte-t-il automatiquement la langue et la position ?",
+        answer: "Oui. Après le chargement, la page suit la langue du navigateur, essaie d'abord le GPS puis bascule sur une localisation IP si nécessaire, tout en gardant la recherche manuelle."
+      },
+      {
+        question: "Quels horaires de prière cette page affiche-t-elle ?",
+        answer: `La page met en avant ${topic.toLowerCase()} tout en chargeant l'ensemble du planning quotidien pour Fajr, Dhuhr, Asr, Maghrib et Isha.`
+      }
+    ],
+    footerText: place => place ? `Horaires de prière précis pour ${place} et d'autres villes.` : "Horaires de prière précis selon la ville.",
+    noscriptText: "JavaScript est nécessaire pour charger les horaires en direct et le compte à rebours de la prochaine prière."
+  },
+  tr: {
+    heroEyebrowHome: "Şehre göre namaz vakitleri",
+    heroEyebrowPlace: place => `${place} için namaz planı`,
+    heroHeadingHome: "Bugünün namaz vakitleri ve sonraki namaz için geri sayım",
+    heroHeadingPlace: place => `${place} için bugünün namaz vakitleri`,
+    heroHeadingTopic: (topic, place) => place ? `${place} için ${topic}` : `${topic} bugün`,
+    heroSubtitlePlace: (topic, place) => `${place} için ${topic.toLowerCase()} bilgisini görmek, sonraki namaz geri sayımını takip etmek ve günün tam planını tek sayfada incelemek için bu sayfayı kullanın.`,
+    heroSubtitleHome: "Doğru namaz vakitlerini görün, sonraki namazı takip edin ve dünya çapında şehirlere hızlıca geçin.",
+    cityLabel: "Şehir",
+    cityPlaceholder: "Şehir girin",
+    countryLabel: "Ülke",
+    countryPlaceholder: "Ülke (isteğe bağlı)",
+    submitLabel: "Namaz vakitlerini göster",
+    topCitiesAria: "Popüler şehirler",
+    intentAria: "Namaz arama kısayolları",
+    intentLinks: [
+      { type: "prayer-times", label: "Bugünün namaz vakitleri" },
+      { type: "next-prayer", label: "Sonraki namaz vakti" },
+      { type: "fajr", label: "Fajr vakti" },
+      { type: "dhuhr", label: "Dhuhr vakti" },
+      { type: "asr", label: "Asr vakti" },
+      { type: "maghrib", label: "Maghrib vakti" },
+      { type: "isha", label: "Isha vakti" }
+    ],
+    locationStatus: place => place ? `${place} için namaz vakitleri` : "Konum belirleniyor",
+    nextPrayerTitle: "Sonraki namaz",
+    currentPrayerLabel: "Geçerli namaz",
+    todayLabel: "Bugün",
+    methodLabel: "Yöntem",
+    loadingLabel: "Yükleniyor...",
+    locationText: place => place ? `${place} için namaz planı sayfa açıldıktan sonra otomatik olarak yüklenecek.` : "Önce GPS, sonra IP yedeği denenir.",
+    scheduleEyebrow: "Bugün",
+    scheduleHeading: (pageType, topic) => pageType === "home" ? "Bugünün namaz planı" : `${topic} ve tam günlük plan`,
+    scheduleSummary: place => place ? `${place} için günlük plan ve sonraki namaz geri sayımı.` : "Mevcut şehriniz için doğru vakitler.",
+    infoEyebrow: "Bu sayfa neden yararlı",
+    infoTitle: topic => `Günlük kullanım için odaklı bir ${topic.toLowerCase()} sayfası`,
+    features: (topic, place) => [
+      `${topic.toLowerCase()}${place ? ` ${place} için` : ""} arama niyetine doğrudan uyacak şekilde hazırlanmıştır.`,
+      "Sonraki namaz geri sayımını ve tam günlük çizelgeyi tek sayfada gösterir.",
+      "Yüklemeden sonra tarayıcı dili ve konuma otomatik uyum sağlar.",
+      "Paylaşılabilir ve indekslenebilir temiz canonical URL'ler kullanır."
+    ],
+    citiesEyebrow: "Daha fazlası",
+    citiesTitle: topic => `${topic.toLowerCase()} için popüler sayfalar`,
+    cityLinkLabel: (topic, city) => `${city} için ${topic}`,
+    cityIntentLinks: place => place
+      ? [
+          { type: "prayer-times", label: `${place} için namaz vakitleri` },
+          { type: "next-prayer", label: `${place} için sonraki namaz` },
+          { type: "fajr", label: `${place} için Fajr` },
+          { type: "dhuhr", label: `${place} için Dhuhr` },
+          { type: "asr", label: `${place} için Asr` },
+          { type: "maghrib", label: `${place} için Maghrib` },
+          { type: "isha", label: `${place} için Isha` }
+        ]
+      : [
+          { type: "prayer-times", city: "Makkah", label: "Makkah için namaz vakitleri" },
+          { type: "asr", city: "Cairo", label: "Cairo için Asr" },
+          { type: "dhuhr", city: "Dubai", label: "Dubai için Dhuhr" },
+          { type: "next-prayer", city: "London", label: "London için sonraki namaz" }
+        ],
+    aboutEyebrow: "Hakkında",
+    aboutTitle: (topic, place) => place ? `${place} için ${topic} sade ve net` : `${topic} sade ve net`,
+    aboutParagraphs: (topic, place) => [
+      place
+        ? `Bu sayfa ${place} için ${topic.toLowerCase()} aramasına özel olarak hazırlanmıştır; böylece ziyaretçi genel bir ana sayfaya göre daha hızlı doğru cevaba ulaşır.`
+        : `Bu sayfa ${topic.toLowerCase()} aramasına özel olarak hazırlanmıştır; böylece ziyaretçi genel bir ana sayfaya göre daha hızlı doğru cevaba ulaşır.`,
+      "Amaç daha profesyonel bir deneyim sunmaktır: net ibadet niyeti, otomatik dil, düzenli URL yapısı ve günün planına doğrudan erişim.",
+      "Arama, URL, başlık ve görünür içerik arasındaki daha güçlü uyum bu rotanın SEO temelini güçlendirir."
+    ],
+    faqEyebrow: "SSS",
+    faqTitle: (topic, place) => `${topic.toLowerCase()}${place ? ` ${place} için` : ""} hakkında sık sorulan sorular`,
+    faq: (topic, place) => [
+      {
+        question: place ? `${place} için ${topic.toLowerCase()} sayfasını paylaşabilir miyim?` : "Bu sayfayı paylaşabilir miyim?",
+        answer: place
+          ? `Evet. Bu rota ${place} için ${topic.toLowerCase()} amacıyla doğrudan hazırlanmıştır ve kolayca yeniden açılabilir veya paylaşılabilir.`
+          : "Evet. Her rota belirli bir namaz arama niyeti için hazırlanmıştır ve kolayca yeniden açılabilir veya paylaşılabilir."
+      },
+      {
+        question: "Adantimer dili ve konumu otomatik algılar mı?",
+        answer: "Evet. Sayfa yüklendikten sonra tarayıcı dilini izler, önce GPS dener, gerekirse IP konumuna düşer ve manuel şehir aramasını da açık tutar."
+      },
+      {
+        question: "Bu sayfada hangi namaz vakitleri gösterilir?",
+        answer: `Sayfa ${topic.toLowerCase()} bilgisini öne çıkarırken Fajr, Dhuhr, Asr, Maghrib ve Isha için tam günlük planı da yükler.`
+      }
+    ],
+    footerText: place => place ? `${place} ve diğer şehirler için doğru namaz vakitleri.` : "Şehre göre doğru namaz vakitleri.",
+    noscriptText: "Canlı namaz vakitlerini ve sonraki namaz geri sayımını yüklemek için JavaScript gerekir."
+  },
+  "zh-hans": {
+    heroEyebrowHome: "按城市查看礼拜时间",
+    heroEyebrowPlace: place => `${place}礼拜安排`,
+    heroHeadingHome: "今日礼拜时间与下一次礼拜倒计时",
+    heroHeadingPlace: place => `${place}今日礼拜时间`,
+    heroHeadingTopic: (topic, place) => place ? `${place}${topic}` : `${topic}`,
+    heroSubtitlePlace: (topic, place) => `使用此页面查看${place}的${topic}、跟踪下一次礼拜倒计时，并直接查看今日完整时间表。`,
+    heroSubtitleHome: "查看准确礼拜时间，跟踪下一次礼拜，并快速切换到世界各地的城市。",
+    cityLabel: "城市",
+    cityPlaceholder: "输入城市",
+    countryLabel: "国家",
+    countryPlaceholder: "国家（可选）",
+    submitLabel: "查看礼拜时间",
+    topCitiesAria: "热门城市",
+    intentAria: "礼拜搜索快捷入口",
+    intentLinks: [
+      { type: "prayer-times", label: "今日礼拜时间" },
+      { type: "next-prayer", label: "下一次礼拜时间" },
+      { type: "fajr", label: "晨礼时间" },
+      { type: "dhuhr", label: "晌礼时间" },
+      { type: "asr", label: "晡礼时间" },
+      { type: "maghrib", label: "昏礼时间" },
+      { type: "isha", label: "宵礼时间" }
+    ],
+    locationStatus: place => place ? `${place}礼拜时间` : "正在检测位置",
+    nextPrayerTitle: "下一次礼拜",
+    currentPrayerLabel: "当前礼拜",
+    todayLabel: "今天",
+    methodLabel: "方法",
+    loadingLabel: "加载中...",
+    locationText: place => place ? `${place}的礼拜时间表将在页面启动后自动加载。` : "先尝试 GPS，再回退到 IP 定位。",
+    scheduleEyebrow: "今天",
+    scheduleHeading: (pageType, topic) => pageType === "home" ? "今日礼拜时间表" : `${topic}与完整时间表`,
+    scheduleSummary: place => place ? `${place}的每日礼拜时间表和下一次礼拜倒计时。` : "为你当前城市提供准确时间。",
+    infoEyebrow: "为什么这页有用",
+    infoTitle: topic => `面向日常使用的${topic}页面`,
+    features: (topic, place) => [
+      `页面直接围绕${topic}${place ? `在${place}` : ""}这一搜索意图构建。`,
+      "在同一页面展示下一次礼拜倒计时和完整日程。",
+      "页面加载后会自动匹配浏览器语言和检测到的位置。",
+      "使用清晰的规范化 URL，便于分享和收录。"
+    ],
+    citiesEyebrow: "继续探索",
+    citiesTitle: topic => `${topic}热门页面`,
+    cityLinkLabel: (topic, city) => `${city}${topic}`,
+    cityIntentLinks: place => place
+      ? [
+          { type: "prayer-times", label: `${place}礼拜时间` },
+          { type: "next-prayer", label: `${place}下一次礼拜` },
+          { type: "fajr", label: `${place}晨礼` },
+          { type: "dhuhr", label: `${place}晌礼` },
+          { type: "asr", label: `${place}晡礼` },
+          { type: "maghrib", label: `${place}昏礼` },
+          { type: "isha", label: `${place}宵礼` }
+        ]
+      : [
+          { type: "prayer-times", city: "Makkah", label: "Makkah礼拜时间" },
+          { type: "asr", city: "Cairo", label: "Cairo晡礼" },
+          { type: "dhuhr", city: "Dubai", label: "Dubai晌礼" },
+          { type: "next-prayer", city: "London", label: "London下一次礼拜" }
+        ],
+    aboutEyebrow: "关于页面",
+    aboutTitle: (topic, place) => place ? `${place}${topic}页面，直接清晰` : `${topic}页面，直接清晰`,
+    aboutParagraphs: (topic, place) => [
+      place
+        ? `这个页面专门面向${place}的${topic}查询，比通用首页更快把访问者带到正确答案。`
+        : `这个页面专门面向${topic}查询，比通用首页更快把访问者带到正确答案。`,
+      "目标是提供更专业的体验：明确的礼拜意图、自动语言、整洁的链接结构，以及直达今日时间表的路径。",
+      "搜索词、URL、标题和可见内容之间更强的一致性，会让这条路由拥有更稳固的 SEO 基础。"
+    ],
+    faqEyebrow: "常见问题",
+    faqTitle: (topic, place) => `${topic}${place ? `${place}` : ""}常见问题`,
+    faq: (topic, place) => [
+      {
+        question: place ? `我可以分享这个关于${place}${topic}的页面吗？` : "我可以分享这个页面吗？",
+        answer: place
+          ? `可以。这个路由就是为${place}${topic}而建立，方便再次访问和分享。`
+          : "可以。每个路由都围绕特定礼拜搜索意图建立，便于再次访问和分享。"
+      },
+      {
+        question: "Adantimer 会自动识别语言和位置吗？",
+        answer: "会。页面加载后会跟随浏览器语言，先尝试 GPS，再在需要时回退到 IP 定位，同时仍保留手动城市搜索。"
+      },
+      {
+        question: "这个页面显示哪些礼拜时间？",
+        answer: `页面突出显示${topic}，同时加载 Fajr、Dhuhr、Asr、Maghrib 和 Isha 的完整每日时间表。`
+      }
+    ],
+    footerText: place => place ? `${place}及其他城市的准确礼拜时间。` : "按城市提供准确礼拜时间。",
+    noscriptText: "需要启用 JavaScript 才能加载实时礼拜时间和下一次礼拜倒计时。"
+  }
+};
+
 export async function GET(request) {
   try {
     const url = new URL(request.url);
@@ -198,9 +573,7 @@ export async function GET(request) {
     const alternates = getAlternates(pageType, city);
     const title = locale.title(topic, place, pageType);
     const description = locale.description(topic, place);
-    const copy = language === "ar"
-      ? buildArabicCopy({ pageType, place, topic })
-      : buildEnglishCopy({ pageType, place, topic });
+    const copy = buildCopy({ language, pageType, place, topic });
     copy.activeLanguage = language;
     copy.brandHref = buildRoutePath(language, "home");
     const template = await readFile(INDEX_PATH, "utf8");
@@ -505,6 +878,80 @@ function buildArabicCopy({ pageType, place, topic }) {
   };
 }
 
+function buildCopy({ language, pageType, place, topic }) {
+  if (language === "ar") return buildArabicCopy({ pageType, place, topic });
+  if (language === "en") return buildEnglishCopy({ pageType, place, topic });
+  return buildLocalizedCopy(language, { pageType, place, topic });
+}
+
+function buildLocalizedCopy(language, { pageType, place, topic }) {
+  const locale = COPY_LOCALES[language];
+  if (!locale) return buildEnglishCopy({ pageType, place, topic });
+
+  const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
+  const cityLinks = TOP_CITIES
+    .filter(item => item.city !== place)
+    .slice(0, 6)
+    .map(item => ({
+      label: locale.cityLinkLabel(topic, item.city),
+      href: buildRoutePath(language, resolvedPage, item.city)
+    }));
+  const intentLinks = locale.intentLinks.map(item => ({
+    label: item.label,
+    href: buildRoutePath(language, item.type)
+  }));
+  const cityIntentLinks = locale.cityIntentLinks(place).map(item => ({
+    label: item.label,
+    href: buildRoutePath(language, item.type, item.city || place)
+  }));
+
+  return {
+    activeLanguage: language,
+    brandHref: buildRoutePath(language, "home"),
+    heroEyebrow: pageType === "home"
+      ? (place ? locale.heroEyebrowPlace(place) : locale.heroEyebrowHome)
+      : locale.heroHeadingTopic(topic, place),
+    heroHeading: pageType === "home"
+      ? (place ? locale.heroHeadingPlace(place) : locale.heroHeadingHome)
+      : locale.heroHeadingTopic(topic, place),
+    heroSubtitle: place ? locale.heroSubtitlePlace(topic, place) : locale.heroSubtitleHome,
+    cityLabel: locale.cityLabel,
+    cityPlaceholder: locale.cityPlaceholder,
+    countryLabel: locale.countryLabel,
+    countryPlaceholder: locale.countryPlaceholder,
+    submitLabel: locale.submitLabel,
+    topCities: TOP_CITIES,
+    topCitiesAria: locale.topCitiesAria,
+    intentLinks,
+    intentAria: locale.intentAria,
+    locationStatus: locale.locationStatus(place),
+    nextPrayerTitle: locale.nextPrayerTitle,
+    currentPrayerLabel: locale.currentPrayerLabel,
+    todayLabel: locale.todayLabel,
+    methodLabel: locale.methodLabel,
+    loadingLabel: locale.loadingLabel,
+    locationText: locale.locationText(place),
+    scheduleEyebrow: locale.scheduleEyebrow,
+    scheduleHeading: locale.scheduleHeading(pageType, topic),
+    scheduleSummary: locale.scheduleSummary(place),
+    infoEyebrow: locale.infoEyebrow,
+    infoTitle: locale.infoTitle(topic, place),
+    features: locale.features(topic, place),
+    citiesEyebrow: locale.citiesEyebrow,
+    citiesTitle: locale.citiesTitle(topic),
+    cityLinks,
+    cityIntentLinks,
+    aboutEyebrow: locale.aboutEyebrow,
+    aboutTitle: locale.aboutTitle(topic, place),
+    aboutParagraphs: locale.aboutParagraphs(topic, place),
+    faqEyebrow: locale.faqEyebrow,
+    faqTitle: locale.faqTitle(topic, place),
+    faq: locale.faq(topic, place),
+    footerText: locale.footerText(place),
+    noscriptText: locale.noscriptText
+  };
+}
+
 function renderHeroCopy(copy) {
   return `        <section class="hero-copy">
           <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
@@ -639,7 +1086,7 @@ function renderInlineLinks(items, language) {
   if (items.length === 1) {
     return `<a href="${escapeHtml(items[0].href)}">${escapeHtml(items[0].label)}</a>.`;
   }
-  const connector = language === "ar" ? "و" : "and";
+  const connector = INLINE_LINK_CONNECTORS[language] || "and";
   const last = items[items.length - 1];
   const rest = items.slice(0, -1)
     .map(item => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`)
