@@ -225,6 +225,15 @@ let countryName = "";
 let countdownInterval = null;
 let nextPrayerData = null;
 let prayerSchedule = [];
+let loadingWatchdogId = null;
+
+const REQUEST_TIMEOUTS = {
+  ipLocation: 4000,
+  geocode: 5000,
+  citySearch: 6000,
+  prayerTimes: 8000,
+  loadingWatchdog: 12000
+};
 
 function slugifyCity(value) {
   return String(value)
@@ -482,6 +491,37 @@ function setLanguage(lang, persist = true) {
 
 window.setLanguage = setLanguage;
 
+async function fetchJsonWithTimeout(url, timeoutMs, options = {}) {
+  const controller = new AbortController();
+  const timerId = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+    return await response.json();
+  } finally {
+    window.clearTimeout(timerId);
+  }
+}
+
+function clearLoadingWatchdog() {
+  if (loadingWatchdogId) {
+    window.clearTimeout(loadingWatchdogId);
+    loadingWatchdogId = null;
+  }
+}
+
+function armLoadingWatchdog(locale) {
+  clearLoadingWatchdog();
+  loadingWatchdogId = window.setTimeout(() => {
+    if (nextPrayerData || countdownEl.textContent !== locale.loading) return;
+    countdownEl.textContent = locale.fetchError;
+    locationStatusEl.textContent = locale.fetchError;
+    locationEl.textContent = locale.searchPrompt;
+  }, REQUEST_TIMEOUTS.loadingWatchdog);
+}
+
 async function getGPSLocation() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }), reject, { enableHighAccuracy: true, timeout: 10000, maximumAge: 600000 });
@@ -490,8 +530,7 @@ async function getGPSLocation() {
 
 async function getIPLocation() {
   try {
-    const response = await fetch("https://ipapi.co/json/");
-    const data = await response.json();
+    const data = await fetchJsonWithTimeout("https://ipapi.co/json/", REQUEST_TIMEOUTS.ipLocation);
     if (!data || !data.latitude || !data.longitude) return null;
     return { lat: Number(data.latitude), lng: Number(data.longitude), city: data.city || "", country: data.country_name || "" };
   } catch {
@@ -501,8 +540,7 @@ async function getIPLocation() {
 
 async function reverseGeocode(lat, lng) {
   try {
-    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`);
-    const data = await response.json();
+    const data = await fetchJsonWithTimeout(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`, REQUEST_TIMEOUTS.geocode);
     const address = data.address || {};
     return { city: address.city || address.town || address.village || address.hamlet || "", country: address.country || "" };
   } catch {
@@ -513,8 +551,7 @@ async function reverseGeocode(lat, lng) {
 async function searchCity(city, country = "") {
   const params = new URLSearchParams({ format: "json", limit: "1", city });
   if (country) params.set("country", country);
-  const response = await fetch(`https://nominatim.openstreetmap.org/search?${params.toString()}`);
-  const data = await response.json();
+  const data = await fetchJsonWithTimeout(`https://nominatim.openstreetmap.org/search?${params.toString()}`, REQUEST_TIMEOUTS.citySearch);
   if (!Array.isArray(data) || !data.length) return null;
   const first = data[0];
   const displayParts = String(first.display_name || "").split(",").map(part => part.trim()).filter(Boolean);
@@ -657,12 +694,15 @@ async function resolveInitialLocation() {
 
 async function loadPrayerTimes(resolvedLocation) {
   const locale = getLocale();
+  clearInterval(countdownInterval);
   countdownEl.textContent = locale.loading;
   prayerTimesEl.innerHTML = "";
   nextPrayerData = null;
   renderNextPrayer();
+  armLoadingWatchdog(locale);
   const source = resolvedLocation || await resolveInitialLocation();
   if (!source) {
+    clearLoadingWatchdog();
     countdownEl.textContent = locale.permissionError;
     locationStatusEl.textContent = locale.permissionError;
     locationEl.textContent = locale.searchPrompt;
@@ -670,8 +710,7 @@ async function loadPrayerTimes(resolvedLocation) {
   }
   currentCoords = { lat: Number(source.lat), lng: Number(source.lng) };
   try {
-    const prayerResponse = await fetch(`https://api.aladhan.com/v1/timings?latitude=${currentCoords.lat}&longitude=${currentCoords.lng}&method=2`);
-    const prayerJson = await prayerResponse.json();
+    const prayerJson = await fetchJsonWithTimeout(`https://api.aladhan.com/v1/timings?latitude=${currentCoords.lat}&longitude=${currentCoords.lng}&method=2`, REQUEST_TIMEOUTS.prayerTimes);
     const data = prayerJson.data;
     const timings = data.timings;
     currentTimezone = data.meta.timezone || "";
@@ -699,6 +738,7 @@ async function loadPrayerTimes(resolvedLocation) {
       const fajr = prayerSchedule[0];
       nextPrayer = { ...fajr, time: new Date(fajr.time.getTime() + 86400000) };
     }
+    clearLoadingWatchdog();
     renderStaticContent();
     renderScheduleSummary();
     renderPrayerRows();
@@ -707,6 +747,7 @@ async function loadPrayerTimes(resolvedLocation) {
     saveRecentLocation();
     if (currentLocationType === "manual") updateHistory(cityName);
   } catch {
+    clearLoadingWatchdog();
     countdownEl.textContent = locale.fetchError;
     locationStatusEl.textContent = locale.fetchError;
     locationEl.textContent = locale.searchPrompt;
