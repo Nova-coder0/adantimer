@@ -713,15 +713,15 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
     { label: "Maghrib time", href: buildRoutePath("en", "maghrib") },
     { label: "Isha time", href: buildRoutePath("en", "isha") }
   ];
-  const cityIntentLinks = place
+  const cityIntentLinks = sourceCity
     ? [
-        { label: `Prayer times in ${place}`, href: buildRoutePath("en", "prayer-times", place) },
-        { label: `Next prayer in ${place}`, href: buildRoutePath("en", "next-prayer", place) },
-        { label: `Fajr in ${place}`, href: buildRoutePath("en", "fajr", place) },
-        { label: `Dhuhr in ${place}`, href: buildRoutePath("en", "dhuhr", place) },
-        { label: `Asr in ${place}`, href: buildRoutePath("en", "asr", place) },
-        { label: `Maghrib in ${place}`, href: buildRoutePath("en", "maghrib", place) },
-        { label: `Isha in ${place}`, href: buildRoutePath("en", "isha", place) }
+        { label: `Prayer times in ${place}`, href: buildRoutePath("en", "prayer-times", sourceCity) },
+        { label: `Next prayer in ${place}`, href: buildRoutePath("en", "next-prayer", sourceCity) },
+        { label: `Fajr in ${place}`, href: buildRoutePath("en", "fajr", sourceCity) },
+        { label: `Dhuhr in ${place}`, href: buildRoutePath("en", "dhuhr", sourceCity) },
+        { label: `Asr in ${place}`, href: buildRoutePath("en", "asr", sourceCity) },
+        { label: `Maghrib in ${place}`, href: buildRoutePath("en", "maghrib", sourceCity) },
+        { label: `Isha in ${place}`, href: buildRoutePath("en", "isha", sourceCity) }
       ]
     : [
         { label: "Prayer times in Makkah", href: buildRoutePath("en", "prayer-times", "Makkah") },
@@ -829,15 +829,15 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
     { label: "وقت المغرب", href: buildRoutePath("ar", "maghrib") },
     { label: "وقت العشاء", href: buildRoutePath("ar", "isha") }
   ];
-  const cityIntentLinks = place
+  const cityIntentLinks = sourceCity
     ? [
-        { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", place) },
-        { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", place) },
-        { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", place) },
-        { label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", place) },
-        { label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", place) },
-        { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", place) },
-        { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", place) }
+        { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
+        { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
+        { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
+        { label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", sourceCity) },
+        { label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", sourceCity) },
+        { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
+        { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) }
       ]
     : [
         { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "prayer-times", "Makkah") },
@@ -945,7 +945,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
   }));
   const cityIntentLinks = locale.cityIntentLinks(place).map(item => ({
     label: item.label,
-    href: buildRoutePath(language, item.type, item.city || place)
+    href: buildRoutePath(language, item.type, item.city || sourceCity)
   }));
 
   return {
