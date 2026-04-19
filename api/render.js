@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 const SITE_URL = "https://www.adantimer.com";
-const INDEX_PATH = path.join(process.cwd(), "index.html");
+const INDEX_PATH = path.join(process.cwd(), "templates", "index.html");
 
 const TOP_CITIES = [
   { city: "Makkah", country: "Saudi Arabia" },

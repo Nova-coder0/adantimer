@@ -135,7 +135,7 @@ function TestLiveUrl([string]$url, [string[]]$requiredSnippets) {
 }
 
 $requiredFiles = @(
-  "index.html",
+  "templates/index.html",
   "style.css",
   "script.js",
   "vercel.json",
@@ -159,7 +159,7 @@ try {
   AddFailure "vercel.json could not be parsed: $($_.Exception.Message)"
 }
 
-$indexHtml = ReadProjectFile "index.html"
+$indexHtml = ReadProjectFile "templates/index.html"
 $scriptJs = ReadProjectFile "script.js"
 $renderJs = ReadProjectFile "api/render.js"
 $vercelJsonText = ReadProjectFile "vercel.json"
@@ -251,7 +251,7 @@ AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-core.xml.gz' "Si
 AssertContains $robots 'Sitemap: https://www.adantimer.com/sitemap.xml' "robots.txt points to the sitemap index" "robots.txt is missing the sitemap index reference"
 AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired to the generator script" "Sitemap workflow no longer calls the generator script"
 
-TestMojibake "index.html"
+TestMojibake "templates/index.html"
 TestMojibake "script.js"
 TestMojibake "api/render.js"
 
