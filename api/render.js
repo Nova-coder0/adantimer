@@ -117,7 +117,7 @@ Object.assign(ROUTES.dhuhr, {
 
 Object.assign(ROUTES.asr, {
   de: "Asr-Zeit",
-  fr: "Heure du Asr",
+  fr: "Heure de l'Asr",
   tr: "Asr Vakti",
   "zh-hans": "晡礼时间"
 });
@@ -131,7 +131,7 @@ Object.assign(ROUTES.maghrib, {
 
 Object.assign(ROUTES.isha, {
   de: "Isha-Zeit",
-  fr: "Heure du Isha",
+  fr: "Heure de l'Isha",
   tr: "Isha Vakti",
   "zh-hans": "宵礼时间"
 });
@@ -145,8 +145,8 @@ Object.assign(LOCALES, {
       ? "Adantimer | Genaue Gebetszeiten und nächstes Gebet"
       : `${topic}${place ? ` in ${place}` : ""} heute | Adantimer`,
     description: (topic, place) => place
-      ? `Prüfe ${topic.toLowerCase()} in ${place}, sieh das nächste Gebet und den heutigen Gebetsplan.`
-      : `Prüfe ${topic.toLowerCase()} und den heutigen Gebetsplan automatisch nach Standort.`
+      ? `Prüfe ${topic} in ${place}, sieh das nächste Gebet und den heutigen Gebetsplan.`
+      : `Prüfe ${topic} und den heutigen Gebetsplan automatisch nach Standort.`
   },
   fr: {
     htmlLang: "fr",
@@ -156,8 +156,8 @@ Object.assign(LOCALES, {
       ? "Adantimer | Horaires de prière précis et prochaine prière"
       : `${topic}${place ? ` à ${place}` : ""} aujourd'hui | Adantimer`,
     description: (topic, place) => place
-      ? `Consultez ${topic.toLowerCase()} à ${place}, la prochaine prière et le planning du jour.`
-      : `Consultez ${topic.toLowerCase()} et le planning du jour selon la localisation.`
+      ? `Consultez ${topic} à ${place}, la prochaine prière et le planning du jour.`
+      : `Consultez ${topic} et le planning du jour selon la localisation.`
   },
   tr: {
     htmlLang: "tr",
@@ -165,10 +165,10 @@ Object.assign(LOCALES, {
     inLanguage: "tr",
     title: (topic, place, pageType) => pageType === "home" && !place
       ? "Adantimer | Doğru namaz vakitleri ve sonraki namaz"
-      : `${topic}${place ? ` ${place} için` : ""} bugün | Adantimer`,
+      : `${place ? `${place} için ${topic}` : topic} | Adantimer`,
     description: (topic, place) => place
-      ? `${place} için ${topic.toLowerCase()} bilgisini, sonraki namazı ve günlük takvimi görüntüleyin.`
-      : `${topic.toLowerCase()} bilgisini ve günlük namaz takvimini konuma göre görüntüleyin.`
+      ? `${place} için ${topic} bilgisini, sonraki namazı ve günlük takvimi görüntüleyin.`
+      : `${topic} bilgisini ve günlük namaz takvimini konuma göre görüntüleyin.`
   },
   "zh-hans": {
     htmlLang: "zh-CN",
@@ -227,9 +227,9 @@ const COPY_LOCALES = {
     scheduleHeading: (pageType, topic) => pageType === "home" ? "Heutiger Gebetsplan" : `${topic} und voller Tagesplan`,
     scheduleSummary: place => place ? `Tagesplan und Countdown bis zum nächsten Gebet für ${place}.` : "Genaue Zeiten für deinen aktuellen Standort.",
     infoEyebrow: "Warum diese Seite hilft",
-    infoTitle: topic => `Eine fokussierte ${topic.toLowerCase()}-Seite für den Alltag`,
+    infoTitle: topic => `Eine fokussierte Seite für ${topic}`,
     features: (topic, place) => [
-      `Die Seite ist exakt auf die Suchintention nach ${topic.toLowerCase()}${place ? ` in ${place}` : ""} ausgerichtet.`,
+      `Die Seite ist exakt auf die Suchintention nach ${topic}${place ? ` in ${place}` : ""} ausgerichtet.`,
       "Sie zeigt den Countdown bis zum nächsten Gebet und den vollständigen Tagesplan auf einer Seite.",
       "Sie passt sich nach dem Laden automatisch an Browsersprache und Standort an.",
       "Sie nutzt klare Canonical-URLs, die sich leicht teilen und indexieren lassen."
@@ -257,18 +257,18 @@ const COPY_LOCALES = {
     aboutTitle: (topic, place) => `${topic}${place ? ` in ${place}` : ""} ohne Umwege`,
     aboutParagraphs: (topic, place) => [
       place
-        ? `Diese Seite ist gezielt für ${topic.toLowerCase()} in ${place} aufgebaut, damit Besucher schneller zur richtigen Antwort kommen als über eine generische Startseite.`
-        : `Diese Seite ist gezielt für ${topic.toLowerCase()} aufgebaut, damit Besucher schneller zur richtigen Antwort kommen als über eine generische Startseite.`,
+        ? `Diese Seite ist gezielt für ${topic} in ${place} aufgebaut, damit Besucher schneller zur richtigen Antwort kommen als über eine generische Startseite.`
+        : `Diese Seite ist gezielt für ${topic} aufgebaut, damit Besucher schneller zur richtigen Antwort kommen als über eine generische Startseite.`,
       "Das Ziel ist eine professionellere Erfahrung mit klarer Gebetsintention, automatischer Sprache, sauberer URL-Struktur und direktem Zugang zum Tagesplan.",
       "Die engere Übereinstimmung zwischen Suche, URL, Titel und sichtbarem Inhalt stärkt die SEO-Basis dieser Route."
     ],
     faqEyebrow: "FAQ",
-    faqTitle: (topic, place) => `Häufige Fragen zu ${topic.toLowerCase()}${place ? ` in ${place}` : ""}`,
+    faqTitle: (topic, place) => `Häufige Fragen zu ${topic}${place ? ` in ${place}` : ""}`,
     faq: (topic, place) => [
       {
-        question: place ? `Kann ich diese Seite für ${topic.toLowerCase()} in ${place} teilen?` : "Kann ich diese Seite teilen?",
+        question: place ? `Kann ich diese Seite für ${topic} in ${place} teilen?` : "Kann ich diese Seite teilen?",
         answer: place
-          ? `Ja. Diese Route ist direkt für ${topic.toLowerCase()} in ${place} aufgebaut und kann leicht wieder aufgerufen oder geteilt werden.`
+          ? `Ja. Diese Route ist direkt für ${topic} in ${place} aufgebaut und kann leicht wieder aufgerufen oder geteilt werden.`
           : "Ja. Jede Route ist direkt auf eine Gebetsintention ausgerichtet und lässt sich leicht wieder aufrufen oder teilen."
       },
       {
@@ -277,7 +277,7 @@ const COPY_LOCALES = {
       },
       {
         question: "Welche Gebetszeiten zeigt diese Seite an?",
-        answer: `Die Seite hebt ${topic.toLowerCase()} hervor und lädt zusätzlich den vollständigen Tagesplan für Fajr, Dhuhr, Asr, Maghrib und Isha.`
+        answer: `Die Seite hebt ${topic} hervor und lädt zusätzlich den vollständigen Tagesplan für Fajr, Dhuhr, Asr, Maghrib und Isha.`
       }
     ],
     footerText: place => place ? `Genaue Gebetszeiten für ${place} und weitere Städte.` : "Genaue Gebetszeiten nach Stadt.",
@@ -318,9 +318,9 @@ const COPY_LOCALES = {
     scheduleHeading: (pageType, topic) => pageType === "home" ? "Planning de prière du jour" : `${topic} et planning complet`,
     scheduleSummary: place => place ? `Planning du jour et compte à rebours jusqu'à la prochaine prière pour ${place}.` : "Horaires précis pour votre ville actuelle.",
     infoEyebrow: "Pourquoi cette page aide",
-    infoTitle: topic => `Une page ${topic.toLowerCase()} pensée pour l'usage quotidien`,
+    infoTitle: topic => `Une page dédiée à ${topic}`,
     features: (topic, place) => [
-      `La page correspond exactement à l'intention de recherche pour ${topic.toLowerCase()}${place ? ` à ${place}` : ""}.`,
+      `La page correspond exactement à l'intention de recherche pour ${topic}${place ? ` à ${place}` : ""}.`,
       "Elle réunit le compte à rebours de la prochaine prière et le planning complet sur une seule page.",
       "Elle s'adapte automatiquement à la langue du navigateur et à la localisation après chargement.",
       "Elle utilise des URLs canoniques propres, faciles à partager et à indexer."
@@ -348,18 +348,18 @@ const COPY_LOCALES = {
     aboutTitle: (topic, place) => `${topic}${place ? ` à ${place}` : ""} sans détour`,
     aboutParagraphs: (topic, place) => [
       place
-        ? `Cette page est conçue spécifiquement pour ${topic.toLowerCase()} à ${place}, afin d'amener plus vite le visiteur à la bonne réponse qu'une page d'accueil générique.`
-        : `Cette page est conçue spécifiquement pour ${topic.toLowerCase()}, afin d'amener plus vite le visiteur à la bonne réponse qu'une page d'accueil générique.`,
+        ? `Cette page est conçue spécifiquement pour ${topic} à ${place}, afin d'amener plus vite le visiteur à la bonne réponse qu'une page d'accueil générique.`
+        : `Cette page est conçue spécifiquement pour ${topic}, afin d'amener plus vite le visiteur à la bonne réponse qu'une page d'accueil générique.`,
       "L'objectif est une expérience plus professionnelle, avec une intention de prière claire, une langue automatique, une structure d'URL propre et un accès direct au planning du jour.",
       "La cohérence plus forte entre recherche, URL, titre et contenu visible renforce la base SEO de cette route."
     ],
     faqEyebrow: "FAQ",
-    faqTitle: (topic, place) => `Questions fréquentes sur ${topic.toLowerCase()}${place ? ` à ${place}` : ""}`,
+    faqTitle: (topic, place) => `Questions fréquentes sur ${topic}${place ? ` à ${place}` : ""}`,
     faq: (topic, place) => [
       {
-        question: place ? `Puis-je partager cette page pour ${topic.toLowerCase()} à ${place} ?` : "Puis-je partager cette page ?",
+        question: place ? `Puis-je partager cette page pour ${topic} à ${place} ?` : "Puis-je partager cette page ?",
         answer: place
-          ? `Oui. Cette route est construite directement pour ${topic.toLowerCase()} à ${place} et peut être revisitée ou partagée facilement.`
+          ? `Oui. Cette route est construite directement pour ${topic} à ${place} et peut être revisitée ou partagée facilement.`
           : "Oui. Chaque route est construite pour une intention de prière précise et peut être revisitée ou partagée facilement."
       },
       {
@@ -368,7 +368,7 @@ const COPY_LOCALES = {
       },
       {
         question: "Quels horaires de prière cette page affiche-t-elle ?",
-        answer: `La page met en avant ${topic.toLowerCase()} tout en chargeant l'ensemble du planning quotidien pour Fajr, Dhuhr, Asr, Maghrib et Isha.`
+        answer: `La page met en avant ${topic} tout en chargeant l'ensemble du planning quotidien pour Fajr, Dhuhr, Asr, Maghrib et Isha.`
       }
     ],
     footerText: place => place ? `Horaires de prière précis pour ${place} et d'autres villes.` : "Horaires de prière précis selon la ville.",
@@ -409,9 +409,9 @@ const COPY_LOCALES = {
     scheduleHeading: (pageType, topic) => pageType === "home" ? "Bugünün namaz planı" : `${topic} ve tam günlük plan`,
     scheduleSummary: place => place ? `${place} için günlük plan ve sonraki namaz geri sayımı.` : "Mevcut şehriniz için doğru vakitler.",
     infoEyebrow: "Bu sayfa neden yararlı",
-    infoTitle: topic => `Günlük kullanım için odaklı bir ${topic.toLowerCase()} sayfası`,
+    infoTitle: topic => `Günlük kullanım için ${topic} sayfası`,
     features: (topic, place) => [
-      `${topic.toLowerCase()}${place ? ` ${place} için` : ""} arama niyetine doğrudan uyacak şekilde hazırlanmıştır.`,
+      `${place ? `${place} için ` : ""}${topic} arama niyetine doğrudan uyacak şekilde hazırlanmıştır.`,
       "Sonraki namaz geri sayımını ve tam günlük çizelgeyi tek sayfada gösterir.",
       "Yüklemeden sonra tarayıcı dili ve konuma otomatik uyum sağlar.",
       "Paylaşılabilir ve indekslenebilir temiz canonical URL'ler kullanır."
@@ -439,18 +439,18 @@ const COPY_LOCALES = {
     aboutTitle: (topic, place) => place ? `${place} için ${topic} sade ve net` : `${topic} sade ve net`,
     aboutParagraphs: (topic, place) => [
       place
-        ? `Bu sayfa ${place} için ${topic.toLowerCase()} aramasına özel olarak hazırlanmıştır; böylece ziyaretçi genel bir ana sayfaya göre daha hızlı doğru cevaba ulaşır.`
-        : `Bu sayfa ${topic.toLowerCase()} aramasına özel olarak hazırlanmıştır; böylece ziyaretçi genel bir ana sayfaya göre daha hızlı doğru cevaba ulaşır.`,
+        ? `Bu sayfa ${place} için ${topic} aramasına özel olarak hazırlanmıştır; böylece ziyaretçi genel bir ana sayfaya göre daha hızlı doğru cevaba ulaşır.`
+        : `Bu sayfa ${topic} aramasına özel olarak hazırlanmıştır; böylece ziyaretçi genel bir ana sayfaya göre daha hızlı doğru cevaba ulaşır.`,
       "Amaç daha profesyonel bir deneyim sunmaktır: net ibadet niyeti, otomatik dil, düzenli URL yapısı ve günün planına doğrudan erişim.",
       "Arama, URL, başlık ve görünür içerik arasındaki daha güçlü uyum bu rotanın SEO temelini güçlendirir."
     ],
     faqEyebrow: "SSS",
-    faqTitle: (topic, place) => `${topic.toLowerCase()}${place ? ` ${place} için` : ""} hakkında sık sorulan sorular`,
+    faqTitle: (topic, place) => `${place ? `${place} için ${topic}` : topic} hakkında sık sorulan sorular`,
     faq: (topic, place) => [
       {
-        question: place ? `${place} için ${topic.toLowerCase()} sayfasını paylaşabilir miyim?` : "Bu sayfayı paylaşabilir miyim?",
+        question: place ? `${place} için ${topic} sayfasını paylaşabilir miyim?` : "Bu sayfayı paylaşabilir miyim?",
         answer: place
-          ? `Evet. Bu rota ${place} için ${topic.toLowerCase()} amacıyla doğrudan hazırlanmıştır ve kolayca yeniden açılabilir veya paylaşılabilir.`
+          ? `Evet. Bu rota ${place} için ${topic} amacıyla doğrudan hazırlanmıştır ve kolayca yeniden açılabilir veya paylaşılabilir.`
           : "Evet. Her rota belirli bir namaz arama niyeti için hazırlanmıştır ve kolayca yeniden açılabilir veya paylaşılabilir."
       },
       {
@@ -459,7 +459,7 @@ const COPY_LOCALES = {
       },
       {
         question: "Bu sayfada hangi namaz vakitleri gösterilir?",
-        answer: `Sayfa ${topic.toLowerCase()} bilgisini öne çıkarırken Fajr, Dhuhr, Asr, Maghrib ve Isha için tam günlük planı da yükler.`
+        answer: `Sayfa ${topic} bilgisini öne çıkarırken Fajr, Dhuhr, Asr, Maghrib ve Isha için tam günlük planı da yükler.`
       }
     ],
     footerText: place => place ? `${place} ve diğer şehirler için doğru namaz vakitleri.` : "Şehre göre doğru namaz vakitleri.",
