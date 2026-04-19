@@ -198,6 +198,7 @@ AssertContains $scriptJs 'history.replaceState({}, "", buildRelativeUrl(language
 AssertContains $scriptJs 'window.language = language;' "Client exposes the active language globally for the menu sync" "Client no longer exposes the active language globally"
 AssertContains $scriptJs 'window.setLanguage = setLanguage;' "Client exposes setLanguage globally for the menu sync" "Client no longer exposes setLanguage globally"
 AssertContains $scriptJs 'function localizeCityName(city, lang = language)' "Client keeps the city-name localization helper" "Client city-name localization helper is missing"
+AssertContains $scriptJs 'function formatPlaceName(city = "", country = "", lang = language)' "Client keeps the shared place-format helper" "Client place-format helper is missing"
 AssertContains $scriptJs 'setLanguage(language, false);' "Client boot sequence still initializes language first" "Client boot sequence no longer initializes language before loading data"
 AssertContains $scriptJs 'loadPrayerTimes();' "Client boot sequence still loads prayer times on startup" "Client boot sequence no longer loads prayer times on startup"
 AssertNotContains $scriptJs 'const params = new URLSearchParams({ lang });' "Client no longer mixes query-param language URLs into route building" "Client still mixes query-param language URLs into route building"

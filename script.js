@@ -80,6 +80,7 @@ const LOCALES = {
   en: {
     code: "en", dir: "ltr",
     button: "Find Prayer Times", cityPlaceholder: "Enter city", countryPlaceholder: "Country (optional)",
+    currentLocationName: "Current location",
     nextPrayer: "Next Prayer", currentPrayer: "Current Prayer", today: "Today", method: "Method",
     loading: "Loading...", locating: "Trying GPS, then IP fallback.", detect: "Detecting your location",
     noCurrentPrayer: "Between prayers", searchPrompt: "Enter a city to update the schedule.",
@@ -108,6 +109,7 @@ const LOCALES = {
   de: {
     code: "de", dir: "ltr",
     button: "Gebetszeiten laden", cityPlaceholder: "Stadt eingeben", countryPlaceholder: "Land (optional)",
+    currentLocationName: "Aktueller Standort",
     nextPrayer: "Nächstes Gebet", currentPrayer: "Aktuelles Gebet", today: "Heute", method: "Methode",
     loading: "Wird geladen...", locating: "GPS wird versucht, danach IP als Fallback.", detect: "Standort wird erkannt",
     noCurrentPrayer: "Zwischen zwei Gebeten", searchPrompt: "Gib eine Stadt ein, um den Plan zu aktualisieren.",
@@ -136,6 +138,7 @@ const LOCALES = {
   fr: {
     code: "fr", dir: "ltr",
     button: "Voir les horaires", cityPlaceholder: "Entrer une ville", countryPlaceholder: "Pays (optionnel)",
+    currentLocationName: "Position actuelle",
     nextPrayer: "Prochaine prière", currentPrayer: "Prière actuelle", today: "Aujourd'hui", method: "Méthode",
     loading: "Chargement...", locating: "GPS en cours, puis IP en secours.", detect: "Détection de votre position",
     noCurrentPrayer: "Entre deux prières", searchPrompt: "Entrez une ville pour mettre à jour l'horaire.",
@@ -343,10 +346,18 @@ function localizeCountryName(country, lang = language) {
   return COUNTRY_NAME_LOCALIZATIONS[key]?.[localeKey] || country;
 }
 
+function formatPlaceName(city = "", country = "", lang = language) {
+  const localizedCity = localizeCityName(city, lang);
+  const localizedCountry = localizeCountryName(country, lang);
+  if (!localizedCity && !localizedCountry) return "";
+  if (!localizedCity) return localizedCountry;
+  if (!localizedCountry) return localizedCity;
+  const separator = (resolveLanguageTag(lang) || lang) === "ar" ? "، " : ", ";
+  return `${localizedCity}${separator}${localizedCountry}`;
+}
+
 function getPlaceName(city = "", country = "") {
-  const localizedCity = localizeCityName(city, language);
-  const localizedCountry = localizeCountryName(country, language);
-  return localizedCity && localizedCountry ? `${localizedCity}, ${localizedCountry}` : localizedCity || localizedCountry || "";
+  return formatPlaceName(city, country, language);
 }
 
 function getLanguagePrefix(lang) {
@@ -451,7 +462,11 @@ function renderStaticContent() {
     link.setAttribute("href", buildRelativeUrl(language, intent));
   });
   document.querySelectorAll(".popular-cities a.city-chip[data-city]").forEach(link => {
-    link.textContent = localizeCityName(link.dataset.city || "", language);
+    const localizedCity = localizeCityName(link.dataset.city || "", language);
+    const localizedPlace = formatPlaceName(link.dataset.city || "", link.dataset.country || "", language);
+    link.textContent = localizedCity;
+    link.setAttribute("aria-label", localizedPlace || localizedCity);
+    link.setAttribute("title", localizedPlace || localizedCity);
     link.setAttribute("href", buildRelativeUrl(language, "home", link.dataset.city || ""));
   });
   const infoEyebrow = document.querySelector(".info-card .eyebrow");
@@ -795,7 +810,7 @@ async function loadPrayerTimes(resolvedLocation) {
       countryName = source.country || "";
     } else {
       const resolved = await reverseGeocode(currentCoords.lat, currentCoords.lng);
-      cityName = resolved.city || "Your location";
+      cityName = resolved.city || "";
       countryName = resolved.country || "";
     }
     if (cityInput) cityInput.value = cityName || "";
