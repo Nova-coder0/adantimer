@@ -83,6 +83,12 @@ const LOCALES = {
     currentLocationName: "Current location",
     nextPrayer: "Next Prayer", currentPrayer: "Current Prayer", today: "Today", method: "Method",
     loading: "Loading...", locating: "Trying GPS, then IP fallback.", detect: "Detecting your location",
+    resolvingGpsStatus: "Checking browser location",
+    resolvingGpsDetail: "Trying your device location first.",
+    resolvingIpStatus: "Trying fallback location",
+    resolvingIpDetail: "Using network-based location as a backup.",
+    resolvingRecent: place => `Refreshing prayer times for ${place}`,
+    resolvingManual: place => `Loading prayer times for ${place}`,
     noCurrentPrayer: "Between prayers", searchPrompt: "Enter a city to update the schedule.",
     permissionError: "We couldn't load your location. Search for a city to continue.",
     locationNotFound: "City not found. Try a larger nearby city.",
@@ -112,6 +118,12 @@ const LOCALES = {
     currentLocationName: "Aktueller Standort",
     nextPrayer: "Nächstes Gebet", currentPrayer: "Aktuelles Gebet", today: "Heute", method: "Methode",
     loading: "Wird geladen...", locating: "GPS wird versucht, danach IP als Fallback.", detect: "Standort wird erkannt",
+    resolvingGpsStatus: "Browser-Standort wird gepr\u00fcft",
+    resolvingGpsDetail: "Zuerst wird dein Ger\u00e4testandort versucht.",
+    resolvingIpStatus: "Fallback-Standort wird versucht",
+    resolvingIpDetail: "Als Reserve wird die Netzwerkposition verwendet.",
+    resolvingRecent: place => `Gebetszeiten f\u00fcr ${place} werden aktualisiert`,
+    resolvingManual: place => `Gebetszeiten f\u00fcr ${place} werden geladen`,
     noCurrentPrayer: "Zwischen zwei Gebeten", searchPrompt: "Gib eine Stadt ein, um den Plan zu aktualisieren.",
     permissionError: "Dein Standort konnte nicht geladen werden. Suche nach einer Stadt, um fortzufahren.",
     locationNotFound: "Stadt nicht gefunden. Versuche eine größere Stadt in der Nähe.",
@@ -141,6 +153,12 @@ const LOCALES = {
     currentLocationName: "Position actuelle",
     nextPrayer: "Prochaine prière", currentPrayer: "Prière actuelle", today: "Aujourd'hui", method: "Méthode",
     loading: "Chargement...", locating: "GPS en cours, puis IP en secours.", detect: "Détection de votre position",
+    resolvingGpsStatus: "V\u00e9rification de la position du navigateur",
+    resolvingGpsDetail: "Essai de la position de l'appareil en premier.",
+    resolvingIpStatus: "Tentative de position de secours",
+    resolvingIpDetail: "Utilisation de la position r\u00e9seau en secours.",
+    resolvingRecent: place => `Actualisation des horaires pour ${place}`,
+    resolvingManual: place => `Chargement des horaires pour ${place}`,
     noCurrentPrayer: "Entre deux prières", searchPrompt: "Entrez une ville pour mettre à jour l'horaire.",
     permissionError: "Impossible de charger votre position. Recherchez une ville pour continuer.",
     locationNotFound: "Ville introuvable. Essayez une grande ville proche.", fetchError: "Impossible de charger les horaires maintenant. Réessayez.",
@@ -168,6 +186,12 @@ const LOCALES = {
     button: "Vakitleri göster", cityPlaceholder: "Şehir girin", countryPlaceholder: "Ülke (isteğe bağlı)",
     nextPrayer: "Sonraki namaz", currentPrayer: "Güncel namaz", today: "Bugün", method: "Yöntem",
     loading: "Yükleniyor...", locating: "Önce GPS, sonra IP yedeği deneniyor.", detect: "Konumunuz algılanıyor",
+    resolvingGpsStatus: "Taray\u0131c\u0131 konumu kontrol ediliyor",
+    resolvingGpsDetail: "\u00d6nce cihaz konumu deneniyor.",
+    resolvingIpStatus: "Yedek konum deneniyor",
+    resolvingIpDetail: "A\u011f tabanl\u0131 konum yedek olarak kullan\u0131l\u0131yor.",
+    resolvingRecent: place => `${place} i\u00e7in vakitler yenileniyor`,
+    resolvingManual: place => `${place} i\u00e7in vakitler y\u00fckleniyor`,
     noCurrentPrayer: "Namazlar arasında", searchPrompt: "Takvimi güncellemek için bir şehir girin.",
     permissionError: "Konum yüklenemedi. Devam etmek için bir şehir arayın.",
     locationNotFound: "Şehir bulunamadı. Daha büyük bir yakın şehir deneyin.", fetchError: "Namaz vakitleri şu anda yüklenemedi. Lütfen tekrar deneyin.",
@@ -192,6 +216,12 @@ const LOCALES = {
   },
   "zh-hans": {
     code: "zh-CN", dir: "ltr",
+    resolvingGpsStatus: "\u6b63\u5728\u68c0\u67e5\u6d4f\u89c8\u5668\u5b9a\u4f4d",
+    resolvingGpsDetail: "\u5148\u5c1d\u8bd5\u8bbe\u5907\u5b9a\u4f4d\u3002",
+    resolvingIpStatus: "\u6b63\u5728\u5c1d\u8bd5\u5907\u7528\u5b9a\u4f4d",
+    resolvingIpDetail: "\u6b63\u5728\u4f7f\u7528\u7f51\u7edc\u5b9a\u4f4d\u4f5c\u4e3a\u5907\u7528\u65b9\u6848\u3002",
+    resolvingRecent: place => `${place}\u7684\u793c\u62dc\u65f6\u95f4\u6b63\u5728\u5237\u65b0`,
+    resolvingManual: place => `\u6b63\u5728\u52a0\u8f7d${place}\u7684\u793c\u62dc\u65f6\u95f4`,
     button: "查看礼拜时间", cityPlaceholder: "输入城市", countryPlaceholder: "国家（可选）",
     nextPrayer: "下一次礼拜", currentPrayer: "当前礼拜", today: "今天", method: "计算方式",
     loading: "加载中...", locating: "正在尝试 GPS，然后使用 IP 备用。", detect: "正在识别你的位置",
@@ -219,6 +249,12 @@ const LOCALES = {
   },
   ar: {
     code: "ar", dir: "rtl",
+    resolvingGpsStatus: "\u062c\u0627\u0631\u064d \u0627\u0644\u062a\u062d\u0642\u0642 \u0645\u0646 \u0645\u0648\u0642\u0639 \u0627\u0644\u0645\u062a\u0635\u0641\u062d",
+    resolvingGpsDetail: "\u0646\u062d\u0627\u0648\u0644 \u0623\u0648\u0644\u0627\u064b \u062a\u062d\u062f\u064a\u062f \u0645\u0648\u0642\u0639 \u0627\u0644\u062c\u0647\u0627\u0632.",
+    resolvingIpStatus: "\u062c\u0627\u0631\u064d \u0645\u062d\u0627\u0648\u0644\u0629 \u062a\u062d\u062f\u064a\u062f \u0645\u0648\u0642\u0639 \u0628\u062f\u064a\u0644",
+    resolvingIpDetail: "\u064a\u062c\u0631\u064a \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0648\u0642\u0639 \u0627\u0644\u0634\u0628\u0643\u0629 \u0643\u062e\u064a\u0627\u0631 \u0627\u062d\u062a\u064a\u0627\u0637\u064a.",
+    resolvingRecent: place => `\u062c\u0627\u0631\u064d \u062a\u062d\u062f\u064a\u062b \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a ${place}`,
+    resolvingManual: place => `\u062c\u0627\u0631\u064d \u062a\u062d\u0645\u064a\u0644 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a ${place}`,
     button: "اعرض المواقيت", cityPlaceholder: "أدخل المدينة", countryPlaceholder: "الدولة (اختياري)",
     nextPrayer: "الصلاة القادمة", currentPrayer: "الصلاة الحالية", today: "اليوم", method: "طريقة الحساب",
     loading: "جار التحميل...", locating: "جارٍ محاولة تحديد الموقع عبر GPS ثم عبر IP.", detect: "جارٍ تحديد موقعك",
@@ -596,6 +632,10 @@ function renderAutoLoadFallback(locale) {
 function renderResolvingState(locale, mode = "detect", previewLocation = null) {
   const place = previewLocation ? formatPlaceName(previewLocation.city || "", previewLocation.country || "", locale.code) : "";
   const currentLocationLabel = locale.currentLocationName || locale.locationPrefix;
+  const gpsStatus = locale.resolvingGpsStatus || locale.detect;
+  const gpsDetail = locale.resolvingGpsDetail || locale.locating;
+  const ipStatus = locale.resolvingIpStatus || locale.loading;
+  const ipDetail = locale.resolvingIpDetail || locale.locating;
   titleEl.textContent = locale.nextPrayer;
   currentPrayerLabelEl.textContent = locale.currentPrayer;
   todayLabelEl.textContent = locale.today;
@@ -608,7 +648,7 @@ function renderResolvingState(locale, mode = "detect", previewLocation = null) {
 
   if (mode === "recent" && place) {
     countdownEl.textContent = locale.loading;
-    scheduleSummaryEl.textContent = `${currentLocationLabel}: ${place}`;
+    scheduleSummaryEl.textContent = locale.resolvingRecent ? locale.resolvingRecent(place) : `${currentLocationLabel}: ${place}`;
     locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
     locationEl.textContent = locale.loading;
     return;
@@ -616,16 +656,16 @@ function renderResolvingState(locale, mode = "detect", previewLocation = null) {
 
   if (mode === "manual" && place) {
     countdownEl.textContent = locale.loading;
-    scheduleSummaryEl.textContent = `${locale.locationPrefix} ${place}`;
+    scheduleSummaryEl.textContent = locale.resolvingManual ? locale.resolvingManual(place) : `${locale.locationPrefix} ${place}`;
     locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
     locationEl.textContent = locale.loading;
     return;
   }
 
-  countdownEl.textContent = mode === "ip" ? locale.loading : locale.detect;
-  scheduleSummaryEl.textContent = locale.locating;
-  locationStatusEl.textContent = locale.detect;
-  locationEl.textContent = locale.locating;
+  countdownEl.textContent = mode === "ip" ? locale.loading : gpsStatus;
+  scheduleSummaryEl.textContent = mode === "ip" ? ipDetail : gpsDetail;
+  locationStatusEl.textContent = mode === "ip" ? ipStatus : gpsStatus;
+  locationEl.textContent = mode === "ip" ? ipDetail : gpsDetail;
 }
 
 function armLoadingWatchdog(locale, softFail = false) {
