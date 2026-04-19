@@ -184,6 +184,8 @@ AssertContains $scriptJs 'const CITY_NAME_LOCALIZATIONS = {' "Client keeps local
 AssertContains $scriptJs 'const REQUEST_TIMEOUTS = {' "Client keeps explicit request timeouts" "Client request timeout config is missing"
 AssertContains $scriptJs 'async function fetchJsonWithTimeout(url, timeoutMs, options = {})' "Client keeps the shared timeout-aware fetch helper" "Client timeout-aware fetch helper is missing"
 AssertContains $scriptJs 'function renderResolvingState(locale, mode = "detect", previewLocation = null)' "Client keeps the staged resolving-state helper" "Client resolving-state helper is missing"
+AssertContains $scriptJs 'resolvingGpsStatus' "Client keeps explicit GPS resolving copy" "Client GPS resolving copy is missing"
+AssertContains $scriptJs 'resolvingIpDetail' "Client keeps explicit IP fallback resolving copy" "Client IP fallback resolving copy is missing"
 AssertContains $scriptJs 'async function resolveInitialLocation(onStage = null)' "Client keeps the staged initial location resolver" "Initial location resolver is missing"
 AssertContains $scriptJs 'async function loadPrayerTimes(resolvedLocation)' "Client keeps the main prayer loader" "Prayer loading entry point is missing"
 AssertContains $scriptJs 'function armLoadingWatchdog(locale, softFail = false)' "Client keeps the loading watchdog" "Client loading watchdog is missing"
