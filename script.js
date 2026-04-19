@@ -594,7 +594,7 @@ function renderAutoLoadFallback(locale) {
 }
 
 function renderResolvingState(locale, mode = "detect", previewLocation = null) {
-  const place = previewLocation ? getPlaceName(previewLocation.city || "", previewLocation.country || "") : "";
+  const place = previewLocation ? formatPlaceName(previewLocation.city || "", previewLocation.country || "", locale.code) : "";
   const currentLocationLabel = locale.currentLocationName || locale.locationPrefix;
   titleEl.textContent = locale.nextPrayer;
   currentPrayerLabelEl.textContent = locale.currentPrayer;
@@ -610,7 +610,7 @@ function renderResolvingState(locale, mode = "detect", previewLocation = null) {
     countdownEl.textContent = locale.loading;
     scheduleSummaryEl.textContent = `${currentLocationLabel}: ${place}`;
     locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
-    locationEl.textContent = locale.locating;
+    locationEl.textContent = locale.loading;
     return;
   }
 
