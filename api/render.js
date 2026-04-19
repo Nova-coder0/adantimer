@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 const SITE_URL = "https://www.adantimer.com";
-const INDEX_PATH = path.join(process.cwd(), "index.html");
+const INDEX_PATH = path.join(process.cwd(), "templates", "index.html");
 
 const TOP_CITIES = [
   { city: "Makkah", country: "Saudi Arabia" },
@@ -589,11 +589,17 @@ const COPY_LOCALES = {
 export async function GET(request) {
   try {
     const url = new URL(request.url);
-    const language = normalizeLanguage(url.searchParams.get("lang"));
-    const locale = LOCALES[language] || LOCALES.en;
     const pageType = normalizePageType(url.searchParams.get("type"));
-    const route = ROUTES[pageType] || ROUTES.home;
     const city = normalizeCity(url.searchParams.get("city") || "");
+    const explicitLanguage = url.searchParams.get("lang");
+    const language = resolveRequestLanguage({
+      explicitLanguage,
+      acceptLanguage: request.headers.get("accept-language"),
+      pageType,
+      city
+    });
+    const locale = LOCALES[language] || LOCALES.en;
+    const route = ROUTES[pageType] || ROUTES.home;
     const sourceCity = city ? titleCase(city) : "";
     const place = sourceCity ? formatPlaceName(sourceCity, "", language) : "";
     const topic = route[language] || route.en;
@@ -616,12 +622,15 @@ export async function GET(request) {
       title
     });
 
-    return new Response(html, {
-      headers: {
-        "content-type": "text/html; charset=utf-8",
-        "cache-control": "public, s-maxage=3600, stale-while-revalidate=86400"
-      }
-    });
+    const headers = {
+      "content-type": "text/html; charset=utf-8",
+      "cache-control": "public, s-maxage=3600, stale-while-revalidate=86400"
+    };
+    if (shouldVaryByAcceptLanguage({ explicitLanguage, pageType, city })) {
+      headers.vary = "accept-language";
+    }
+
+    return new Response(html, { headers });
   } catch (error) {
     console.error("render failed", error);
     return new Response("Adantimer render failed", { status: 500 });
@@ -1140,6 +1149,48 @@ function renderInlineLinks(items, language) {
 function normalizeLanguage(value) {
   const normalized = String(value || "en").toLowerCase();
   return LANGUAGE_ALIASES[normalized] || LANGUAGE_ALIASES[normalized.split("-")[0]] || "en";
+}
+
+function parseAcceptLanguage(value) {
+  return String(value || "")
+    .split(",")
+    .map(part => part.trim())
+    .filter(Boolean)
+    .map(part => {
+      const [tag, qualityPart] = part.split(";q=");
+      const quality = Number(qualityPart);
+      return {
+        tag: tag.trim().toLowerCase(),
+        quality: Number.isFinite(quality) ? quality : 1
+      };
+    })
+    .sort((left, right) => right.quality - left.quality);
+}
+
+function detectRequestLanguage(acceptLanguage) {
+  for (const candidate of parseAcceptLanguage(acceptLanguage)) {
+    const normalized = normalizeLanguage(candidate.tag);
+    if (SUPPORTED_RENDER_LANGUAGES.includes(normalized)) {
+      return normalized;
+    }
+  }
+  return "en";
+}
+
+function resolveRequestLanguage({ explicitLanguage, acceptLanguage, pageType, city }) {
+  if (explicitLanguage) {
+    return normalizeLanguage(explicitLanguage);
+  }
+
+  if (pageType === "home" && !city) {
+    return detectRequestLanguage(acceptLanguage);
+  }
+
+  return "en";
+}
+
+function shouldVaryByAcceptLanguage({ explicitLanguage, pageType, city }) {
+  return !explicitLanguage && pageType === "home" && !city;
 }
 
 function localizeCityName(city, language) {

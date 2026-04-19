@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/", "destination": "/api/render?type=home" },
     { "source": "/ar", "destination": "/api/render?lang=ar&type=home" },
     { "source": "/ar/prayer-times/:city", "destination": "/api/render?lang=ar&type=prayer-times&city=:city" },
     { "source": "/ar/prayer-times", "destination": "/api/render?lang=ar&type=prayer-times" },
