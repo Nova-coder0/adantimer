@@ -198,7 +198,7 @@ const COPY_LOCALES = {
     heroHeadingHome: "Gebetszeiten heute und Countdown bis zum nächsten Gebet",
     heroHeadingPlace: place => `Gebetszeiten in ${place} heute`,
     heroHeadingTopic: (topic, place) => `${topic}${place ? ` in ${place}` : " heute"}`,
-    heroSubtitlePlace: (topic, place) => `Nutze diese Seite, um ${topic.toLowerCase()} in ${place} zu prüfen, den Countdown bis zum nächsten Gebet zu verfolgen und den vollständigen Tagesplan ohne Umwege zu sehen.`,
+    heroSubtitlePlace: (topic, place) => `Nutze diese Seite, um ${topic} in ${place} zu prüfen, den Countdown bis zum nächsten Gebet zu verfolgen und den vollständigen Tagesplan ohne Umwege zu sehen.`,
     heroSubtitleHome: "Prüfe genaue Gebetszeiten, verfolge das nächste Gebet und wechsle schnell zu Städten weltweit.",
     cityLabel: "Stadt",
     cityPlaceholder: "Stadt eingeben",
@@ -235,7 +235,7 @@ const COPY_LOCALES = {
       "Sie nutzt klare Canonical-URLs, die sich leicht teilen und indexieren lassen."
     ],
     citiesEyebrow: "Mehr entdecken",
-    citiesTitle: topic => `Beliebte Seiten zu ${topic.toLowerCase()}`,
+    citiesTitle: topic => `Beliebte Seiten zu ${topic}`,
     cityLinkLabel: (topic, city) => `${topic} in ${city}`,
     cityIntentLinks: place => place
       ? [
@@ -289,7 +289,7 @@ const COPY_LOCALES = {
     heroHeadingHome: "Horaires de prière aujourd'hui et compte à rebours jusqu'à la prochaine prière",
     heroHeadingPlace: place => `Horaires de prière à ${place} aujourd'hui`,
     heroHeadingTopic: (topic, place) => `${topic}${place ? ` à ${place}` : " aujourd'hui"}`,
-    heroSubtitlePlace: (topic, place) => `Utilisez cette page pour consulter ${topic.toLowerCase()} à ${place}, suivre le compte à rebours de la prochaine prière et voir le planning complet du jour sans détour.`,
+    heroSubtitlePlace: (topic, place) => `Utilisez cette page pour consulter ${topic} à ${place}, suivre le compte à rebours de la prochaine prière et voir le planning complet du jour sans détour.`,
     heroSubtitleHome: "Consultez des horaires de prière précis, suivez la prochaine prière et passez rapidement d'une ville à l'autre.",
     cityLabel: "Ville",
     cityPlaceholder: "Entrer une ville",
@@ -303,9 +303,9 @@ const COPY_LOCALES = {
       { type: "next-prayer", label: "Heure de la prochaine prière" },
       { type: "fajr", label: "Heure du Fajr" },
       { type: "dhuhr", label: "Heure du Dhuhr" },
-      { type: "asr", label: "Heure du Asr" },
+      { type: "asr", label: "Heure de l'Asr" },
       { type: "maghrib", label: "Heure du Maghrib" },
-      { type: "isha", label: "Heure du Isha" }
+      { type: "isha", label: "Heure de l'Isha" }
     ],
     locationStatus: place => place ? `Horaires de prière pour ${place}` : "Localisation en cours",
     nextPrayerTitle: "Prochaine prière",
@@ -326,7 +326,7 @@ const COPY_LOCALES = {
       "Elle utilise des URLs canoniques propres, faciles à partager et à indexer."
     ],
     citiesEyebrow: "Explorer plus",
-    citiesTitle: topic => `Pages populaires pour ${topic.toLowerCase()}`,
+    citiesTitle: topic => `Pages populaires pour ${topic}`,
     cityLinkLabel: (topic, city) => `${topic} à ${city}`,
     cityIntentLinks: place => place
       ? [
@@ -380,13 +380,13 @@ const COPY_LOCALES = {
     heroHeadingHome: "Bugünün namaz vakitleri ve sonraki namaz için geri sayım",
     heroHeadingPlace: place => `${place} için bugünün namaz vakitleri`,
     heroHeadingTopic: (topic, place) => place ? `${place} için ${topic}` : `${topic} bugün`,
-    heroSubtitlePlace: (topic, place) => `${place} için ${topic.toLowerCase()} bilgisini görmek, sonraki namaz geri sayımını takip etmek ve günün tam planını tek sayfada incelemek için bu sayfayı kullanın.`,
+    heroSubtitlePlace: (topic, place) => `${place} için ${topic} bilgisini görmek, sonraki namaz geri sayımını takip etmek ve günün tam planını tek sayfada incelemek için bu sayfayı kullanın.`,
     heroSubtitleHome: "Doğru namaz vakitlerini görün, sonraki namazı takip edin ve dünya çapında şehirlere hızlıca geçin.",
     cityLabel: "Şehir",
     cityPlaceholder: "Şehir girin",
     countryLabel: "Ülke",
     countryPlaceholder: "Ülke (isteğe bağlı)",
-    submitLabel: "Namaz vakitlerini göster",
+    submitLabel: "Vakitleri göster",
     topCitiesAria: "Popüler şehirler",
     intentAria: "Namaz arama kısayolları",
     intentLinks: [
@@ -400,7 +400,7 @@ const COPY_LOCALES = {
     ],
     locationStatus: place => place ? `${place} için namaz vakitleri` : "Konum belirleniyor",
     nextPrayerTitle: "Sonraki namaz",
-    currentPrayerLabel: "Geçerli namaz",
+    currentPrayerLabel: "Güncel namaz",
     todayLabel: "Bugün",
     methodLabel: "Yöntem",
     loadingLabel: "Yükleniyor...",
@@ -417,7 +417,7 @@ const COPY_LOCALES = {
       "Paylaşılabilir ve indekslenebilir temiz canonical URL'ler kullanır."
     ],
     citiesEyebrow: "Daha fazlası",
-    citiesTitle: topic => `${topic.toLowerCase()} için popüler sayfalar`,
+    citiesTitle: topic => `${topic} için popüler sayfalar`,
     cityLinkLabel: (topic, city) => `${city} için ${topic}`,
     cityIntentLinks: place => place
       ? [
