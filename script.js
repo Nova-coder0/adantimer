@@ -512,10 +512,35 @@ function clearLoadingWatchdog() {
   }
 }
 
-function armLoadingWatchdog(locale) {
+function renderAutoLoadFallback(locale) {
+  currentCoords = null;
+  currentTimezone = "";
+  currentMethod = "";
+  cityName = "";
+  countryName = "";
+  prayerSchedule = [];
+  nextPrayerData = null;
+  nextPrayerNameEl.textContent = "";
+  countdownEl.textContent = locale.searchPrompt;
+  currentPrayerValueEl.textContent = "—";
+  todayDateValueEl.textContent = "—";
+  methodValueEl.textContent = "—";
+  locationStatusEl.textContent = locale.searchPrompt;
+  locationEl.textContent = locale.searchPrompt;
+  scheduleSummaryEl.textContent = locale.searchPrompt;
+  prayerTimesEl.innerHTML = "";
+  if (cityInput) cityInput.value = "";
+  if (countryInput) countryInput.value = "";
+}
+
+function armLoadingWatchdog(locale, softFail = false) {
   clearLoadingWatchdog();
   loadingWatchdogId = window.setTimeout(() => {
     if (nextPrayerData || countdownEl.textContent !== locale.loading) return;
+    if (softFail) {
+      renderAutoLoadFallback(locale);
+      return;
+    }
     countdownEl.textContent = locale.fetchError;
     locationStatusEl.textContent = locale.fetchError;
     locationEl.textContent = locale.searchPrompt;
@@ -694,15 +719,20 @@ async function resolveInitialLocation() {
 
 async function loadPrayerTimes(resolvedLocation) {
   const locale = getLocale();
+  const shouldSoftFail = !resolvedLocation && !getRequestedCity();
   clearInterval(countdownInterval);
   countdownEl.textContent = locale.loading;
   prayerTimesEl.innerHTML = "";
   nextPrayerData = null;
   renderNextPrayer();
-  armLoadingWatchdog(locale);
+  armLoadingWatchdog(locale, shouldSoftFail);
   const source = resolvedLocation || await resolveInitialLocation();
   if (!source) {
     clearLoadingWatchdog();
+    if (shouldSoftFail) {
+      renderAutoLoadFallback(locale);
+      return;
+    }
     countdownEl.textContent = locale.permissionError;
     locationStatusEl.textContent = locale.permissionError;
     locationEl.textContent = locale.searchPrompt;
@@ -748,6 +778,10 @@ async function loadPrayerTimes(resolvedLocation) {
     if (currentLocationType === "manual") updateHistory(cityName);
   } catch {
     clearLoadingWatchdog();
+    if (shouldSoftFail) {
+      renderAutoLoadFallback(locale);
+      return;
+    }
     countdownEl.textContent = locale.fetchError;
     locationStatusEl.textContent = locale.fetchError;
     locationEl.textContent = locale.searchPrompt;
