@@ -162,6 +162,7 @@ try {
 $indexHtml = ReadProjectFile "index.html"
 $scriptJs = ReadProjectFile "script.js"
 $renderJs = ReadProjectFile "api/render.js"
+$vercelJsonText = ReadProjectFile "vercel.json"
 $sitemapCore = ReadProjectFile "sitemap-core.xml"
 $sitemapIndex = ReadProjectFile "sitemap.xml"
 $robots = ReadProjectFile "robots.txt"
@@ -207,6 +208,11 @@ AssertContains $scriptJs 'loadPrayerTimes();' "Client boot sequence still loads 
 AssertNotContains $scriptJs 'const params = new URLSearchParams({ lang });' "Client no longer mixes query-param language URLs into route building" "Client still mixes query-param language URLs into route building"
 
 AssertContains $renderJs 'function normalizeLanguage(value)' "SSR renderer keeps language normalization" "SSR renderer is missing language normalization"
+AssertContains $renderJs 'function parseAcceptLanguage(value)' "SSR renderer parses Accept-Language for root requests" "SSR renderer is missing Accept-Language parsing"
+AssertContains $renderJs 'function detectRequestLanguage(acceptLanguage)' "SSR renderer detects request language from headers" "SSR renderer is missing request-language detection"
+AssertContains $renderJs 'function resolveRequestLanguage({ explicitLanguage, acceptLanguage, pageType, city })' "SSR renderer resolves root language per request" "SSR renderer is missing request-language resolution"
+AssertContains $renderJs 'if (pageType === "home" && !city)' "SSR renderer limits request-language detection to the root home route" "SSR renderer no longer limits request-language detection to the root route"
+AssertContains $renderJs 'headers.vary = "accept-language";' "SSR renderer varies root home responses by Accept-Language" "SSR renderer is missing Accept-Language cache variation"
 AssertContains $renderJs 'function getAlternates(pageType, city)' "SSR renderer keeps alternate-link generation" "SSR renderer is missing alternate-link generation"
 AssertContains $renderJs 'function buildEnglishCopy' "SSR renderer keeps English copy generation" "SSR renderer is missing English copy generation"
 AssertContains $renderJs 'function buildArabicCopy' "SSR renderer keeps Arabic copy generation" "SSR renderer is missing Arabic copy generation"
@@ -231,6 +237,7 @@ AssertContains $renderJs 'nextPrayerTitle: "Sonraki namaz"' "SSR renderer carrie
 AssertContains $renderJs 'cityLinkLabel: (topic, city) => `${city}${topic}`' "SSR renderer carries Chinese body copy" "SSR renderer is missing the Chinese SSR body copy markers"
 
 AssertContains $rewritesText '"/ar"' "vercel.json includes Arabic rewrites" "vercel.json is missing Arabic rewrites"
+AssertContains $vercelJsonText '{ "source": "/", "destination": "/api/render?type=home" }' "vercel.json rewrites the root path through SSR" "vercel.json is missing the root SSR rewrite"
 AssertContains $rewritesText '"/de"' "vercel.json includes German rewrites" "vercel.json is missing German rewrites"
 AssertContains $rewritesText '"/fr"' "vercel.json includes French rewrites" "vercel.json is missing French rewrites"
 AssertContains $rewritesText '"/tr"' "vercel.json includes Turkish rewrites" "vercel.json is missing Turkish rewrites"
