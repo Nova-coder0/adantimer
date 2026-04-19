@@ -593,6 +593,41 @@ function renderAutoLoadFallback(locale) {
   if (countryInput) countryInput.value = "";
 }
 
+function renderResolvingState(locale, mode = "detect", previewLocation = null) {
+  const place = previewLocation ? formatPlaceName(previewLocation.city || "", previewLocation.country || "", locale.code) : "";
+  const currentLocationLabel = locale.currentLocationName || locale.locationPrefix;
+  titleEl.textContent = locale.nextPrayer;
+  currentPrayerLabelEl.textContent = locale.currentPrayer;
+  todayLabelEl.textContent = locale.today;
+  methodLabelEl.textContent = locale.method;
+  prayerTimesEl.innerHTML = "";
+  nextPrayerNameEl.textContent = "";
+  currentPrayerValueEl.textContent = "—";
+  todayDateValueEl.textContent = "—";
+  methodValueEl.textContent = "—";
+
+  if (mode === "recent" && place) {
+    countdownEl.textContent = locale.loading;
+    scheduleSummaryEl.textContent = `${currentLocationLabel}: ${place}`;
+    locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
+    locationEl.textContent = locale.loading;
+    return;
+  }
+
+  if (mode === "manual" && place) {
+    countdownEl.textContent = locale.loading;
+    scheduleSummaryEl.textContent = `${locale.locationPrefix} ${place}`;
+    locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
+    locationEl.textContent = locale.loading;
+    return;
+  }
+
+  countdownEl.textContent = mode === "ip" ? locale.loading : locale.detect;
+  scheduleSummaryEl.textContent = locale.locating;
+  locationStatusEl.textContent = locale.detect;
+  locationEl.textContent = locale.locating;
+}
+
 function armLoadingWatchdog(locale, softFail = false) {
   clearLoadingWatchdog();
   loadingWatchdogId = window.setTimeout(() => {
@@ -748,11 +783,12 @@ function readRecentLocation() {
   }
 }
 
-async function resolveInitialLocation() {
+async function resolveInitialLocation(onStage = null) {
   const requestedCity = getRequestedCity();
   const params = new URLSearchParams(window.location.search);
   const requestedCountry = params.get("country") || "";
   if (requestedCity) {
+    if (onStage) onStage("manual", { city: requestedCity, country: requestedCountry });
     const result = await searchCity(requestedCity, requestedCountry);
     if (result) {
       currentLocationType = "manual";
@@ -761,13 +797,16 @@ async function resolveInitialLocation() {
   }
   const recent = readRecentLocation();
   if (recent && recent.lat && recent.lng) {
+    if (onStage) onStage("recent", recent);
     currentLocationType = "recent";
     return recent;
   }
   try {
+    if (onStage) onStage("gps");
     currentLocationType = "gps";
     return await getGPSLocation();
   } catch {
+    if (onStage) onStage("ip");
     const ipResult = await getIPLocation();
     if (ipResult) {
       currentLocationType = "ip";
@@ -780,13 +819,24 @@ async function resolveInitialLocation() {
 async function loadPrayerTimes(resolvedLocation) {
   const locale = getLocale();
   const shouldSoftFail = !resolvedLocation && !getRequestedCity();
+  const explicitRequestedCity = getRequestedCity();
   clearInterval(countdownInterval);
-  countdownEl.textContent = locale.loading;
-  prayerTimesEl.innerHTML = "";
   nextPrayerData = null;
-  renderNextPrayer();
+  if (resolvedLocation) {
+    renderResolvingState(locale, currentLocationType === "manual" ? "manual" : "recent", resolvedLocation);
+  } else if (shouldSoftFail) {
+    renderResolvingState(locale, "gps");
+  } else {
+    renderResolvingState(locale, explicitRequestedCity ? "manual" : "gps", explicitRequestedCity ? { city: explicitRequestedCity, country: new URLSearchParams(window.location.search).get("country") || "" } : null);
+  }
   armLoadingWatchdog(locale, shouldSoftFail);
-  const source = resolvedLocation || await resolveInitialLocation();
+  const source = resolvedLocation || await resolveInitialLocation((mode, previewLocation) => {
+    if (shouldSoftFail || mode === "manual" || mode === "recent") {
+      renderResolvingState(locale, mode, previewLocation);
+      return;
+    }
+    renderResolvingState(locale, mode);
+  });
   if (!source) {
     clearLoadingWatchdog();
     if (shouldSoftFail) {
