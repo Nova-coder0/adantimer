@@ -16,6 +16,34 @@ const TOP_CITIES = [
   { city: "Sydney", country: "Australia" }
 ];
 
+const CITY_NAME_LOCALIZATIONS = {
+  "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
+  "madinah": { ar: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", de: "Medina", fr: "Medine", tr: "Medine", "zh-hans": "\u9ea6\u5730\u90a3" },
+  "buraydah": { ar: "\u0628\u0631\u064a\u062f\u0629", de: "Buraida", fr: "Buraidah", tr: "Bureyde", "zh-hans": "\u5e03\u8d56\u8fbe" },
+  "cairo": { ar: "\u0627\u0644\u0642\u0627\u0647\u0631\u0629", de: "Kairo", fr: "Le Caire", tr: "Kahire", "zh-hans": "\u5f00\u7f57" },
+  "dubai": { ar: "\u062f\u0628\u064a", de: "Dubai", fr: "Duba\u00ef", tr: "Dubai", "zh-hans": "\u8fea\u62dc" },
+  "istanbul": { ar: "\u0625\u0633\u0637\u0646\u0628\u0648\u0644", de: "Istanbul", fr: "Istanbul", tr: "\u0130stanbul", "zh-hans": "\u4f0a\u65af\u5766\u5e03\u5c14" },
+  "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
+  "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
+  "sydney": { ar: "\u0633\u064a\u062f\u0646\u064a", de: "Sydney", fr: "Sydney", tr: "Sidney", "zh-hans": "\u6089\u5c3c" },
+  "berlin": { ar: "\u0628\u0631\u0644\u064a\u0646", de: "Berlin", fr: "Berlin", tr: "Berlin", "zh-hans": "\u67cf\u6797" },
+  "paris": { ar: "\u0628\u0627\u0631\u064a\u0633", de: "Paris", fr: "Paris", tr: "Paris", "zh-hans": "\u5df4\u9ece" },
+  "shanghai": { ar: "\u0634\u0646\u063a\u0647\u0627\u064a", de: "Shanghai", fr: "Shanghai", tr: "\u015eanhay", "zh-hans": "\u4e0a\u6d77" }
+};
+
+const COUNTRY_NAME_LOCALIZATIONS = {
+  "saudi arabia": { ar: "\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629", de: "Saudi-Arabien", fr: "Arabie saoudite", tr: "Suudi Arabistan", "zh-hans": "\u6c99\u7279\u963f\u62c9\u4f2f" },
+  "egypt": { ar: "\u0645\u0635\u0631", de: "\u00c4gypten", fr: "\u00c9gypte", tr: "M\u0131s\u0131r", "zh-hans": "\u57c3\u53ca" },
+  "united arab emirates": { ar: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a", de: "Vereinigte Arabische Emirate", fr: "\u00c9mirats arabes unis", tr: "Birle\u015fik Arap Emirlikleri", "zh-hans": "\u963f\u8054\u914b" },
+  "turkey": { ar: "\u062a\u0631\u0643\u064a\u0627", de: "T\u00fcrkei", fr: "Turquie", tr: "T\u00fcrkiye", "zh-hans": "\u571f\u8033\u5176" },
+  "united kingdom": { ar: "\u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigtes K\u00f6nigreich", fr: "Royaume-Uni", tr: "Birle\u015fik Krall\u0131k", "zh-hans": "\u82f1\u56fd" },
+  "united states": { ar: "\u0627\u0644\u0648\u0644\u0627\u064a\u0627\u062a \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigte Staaten", fr: "\u00c9tats-Unis", tr: "Amerika Birle\u015fik Devletleri", "zh-hans": "\u7f8e\u56fd" },
+  "australia": { ar: "\u0623\u0633\u062a\u0631\u0627\u0644\u064a\u0627", de: "Australien", fr: "Australie", tr: "Avustralya", "zh-hans": "\u6fb3\u5927\u5229\u4e9a" },
+  "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
+  "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
+  "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+};
+
 const ROUTES = {
   home: { en: "Prayer Times", ar: "مواقيت الصلاة", path: city => city ? `/${slugify(city)}` : "/" },
   "prayer-times": { en: "Prayer Times", ar: "مواقيت الصلاة", path: city => city ? `/prayer-times/${slugify(city)}` : "/prayer-times" },
@@ -566,14 +594,15 @@ export async function GET(request) {
     const pageType = normalizePageType(url.searchParams.get("type"));
     const route = ROUTES[pageType] || ROUTES.home;
     const city = normalizeCity(url.searchParams.get("city") || "");
-    const place = city ? titleCase(city) : "";
+    const sourceCity = city ? titleCase(city) : "";
+    const place = sourceCity ? formatPlaceName(sourceCity, "", language) : "";
     const topic = route[language] || route.en;
     const canonicalPath = buildRoutePath(language, pageType, city);
     const canonical = `${SITE_URL}${canonicalPath}`;
     const alternates = getAlternates(pageType, city);
     const title = locale.title(topic, place, pageType);
     const description = locale.description(topic, place);
-    const copy = buildCopy({ language, pageType, place, topic });
+    const copy = buildCopy({ language, pageType, place, sourceCity, topic });
     copy.activeLanguage = language;
     copy.brandHref = buildRoutePath(language, "home");
     const template = await readFile(INDEX_PATH, "utf8");
@@ -658,10 +687,18 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<noscript>[\s\S]*?<\/noscript>/, renderNoscript(copy));
 }
 
-function buildEnglishCopy({ pageType, place, topic }) {
+function getLocalizedTopCities(language) {
+  return TOP_CITIES.map(item => ({
+    ...item,
+    displayCity: localizeCityName(item.city, language),
+    displayCountry: localizeCountryName(item.country, language)
+  }));
+}
+
+function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
-    .filter(item => item.city !== place)
+    .filter(item => item.city !== sourceCity)
     .slice(0, 6)
     .map(item => ({
       label: `${topic} in ${item.city}`,
@@ -676,15 +713,15 @@ function buildEnglishCopy({ pageType, place, topic }) {
     { label: "Maghrib time", href: buildRoutePath("en", "maghrib") },
     { label: "Isha time", href: buildRoutePath("en", "isha") }
   ];
-  const cityIntentLinks = place
+  const cityIntentLinks = sourceCity
     ? [
-        { label: `Prayer times in ${place}`, href: buildRoutePath("en", "prayer-times", place) },
-        { label: `Next prayer in ${place}`, href: buildRoutePath("en", "next-prayer", place) },
-        { label: `Fajr in ${place}`, href: buildRoutePath("en", "fajr", place) },
-        { label: `Dhuhr in ${place}`, href: buildRoutePath("en", "dhuhr", place) },
-        { label: `Asr in ${place}`, href: buildRoutePath("en", "asr", place) },
-        { label: `Maghrib in ${place}`, href: buildRoutePath("en", "maghrib", place) },
-        { label: `Isha in ${place}`, href: buildRoutePath("en", "isha", place) }
+        { label: `Prayer times in ${place}`, href: buildRoutePath("en", "prayer-times", sourceCity) },
+        { label: `Next prayer in ${place}`, href: buildRoutePath("en", "next-prayer", sourceCity) },
+        { label: `Fajr in ${place}`, href: buildRoutePath("en", "fajr", sourceCity) },
+        { label: `Dhuhr in ${place}`, href: buildRoutePath("en", "dhuhr", sourceCity) },
+        { label: `Asr in ${place}`, href: buildRoutePath("en", "asr", sourceCity) },
+        { label: `Maghrib in ${place}`, href: buildRoutePath("en", "maghrib", sourceCity) },
+        { label: `Isha in ${place}`, href: buildRoutePath("en", "isha", sourceCity) }
       ]
     : [
         { label: "Prayer times in Makkah", href: buildRoutePath("en", "prayer-times", "Makkah") },
@@ -710,7 +747,7 @@ function buildEnglishCopy({ pageType, place, topic }) {
     countryLabel: "Country",
     countryPlaceholder: "Country (optional)",
     submitLabel: "Find Prayer Times",
-    topCities: TOP_CITIES,
+    topCities: getLocalizedTopCities("en"),
     topCitiesAria: "Popular city shortcuts",
     intentLinks,
     intentAria: "Prayer search shortcuts",
@@ -768,15 +805,21 @@ function buildEnglishCopy({ pageType, place, topic }) {
   };
 }
 
-function buildArabicCopy({ pageType, place, topic }) {
+function buildArabicCopy({ pageType, place, sourceCity, topic }) {
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
-    .filter(item => item.city !== place)
+    .filter(item => item.city !== sourceCity)
     .slice(0, 6)
     .map(item => ({
       label: `${topic} في ${item.city}`,
       href: buildRoutePath("ar", resolvedPage, item.city)
     }));
+  cityLinks.forEach((link, index) => {
+    const filteredCities = TOP_CITIES.filter(item => item.city !== sourceCity).slice(0, 6);
+    const sourceItem = filteredCities[index];
+    if (!sourceItem) return;
+    link.label = link.label.replace(sourceItem.city, localizeCityName(sourceItem.city, "ar"));
+  });
   const intentLinks = [
     { label: "مواقيت الصلاة اليوم", href: buildRoutePath("ar", "prayer-times") },
     { label: "وقت الصلاة القادمة", href: buildRoutePath("ar", "next-prayer") },
@@ -786,15 +829,15 @@ function buildArabicCopy({ pageType, place, topic }) {
     { label: "وقت المغرب", href: buildRoutePath("ar", "maghrib") },
     { label: "وقت العشاء", href: buildRoutePath("ar", "isha") }
   ];
-  const cityIntentLinks = place
+  const cityIntentLinks = sourceCity
     ? [
-        { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", place) },
-        { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", place) },
-        { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", place) },
-        { label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", place) },
-        { label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", place) },
-        { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", place) },
-        { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", place) }
+        { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
+        { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
+        { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
+        { label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", sourceCity) },
+        { label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", sourceCity) },
+        { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
+        { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) }
       ]
     : [
         { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "prayer-times", "Makkah") },
@@ -820,7 +863,7 @@ function buildArabicCopy({ pageType, place, topic }) {
     countryLabel: "الدولة",
     countryPlaceholder: "الدولة (اختياري)",
     submitLabel: "اعرض مواقيت الصلاة",
-    topCities: TOP_CITIES,
+    topCities: getLocalizedTopCities("ar"),
     topCitiesAria: "روابط سريعة للمدن",
     intentLinks,
     intentAria: "روابط سريعة لنوع البحث",
@@ -878,22 +921,22 @@ function buildArabicCopy({ pageType, place, topic }) {
   };
 }
 
-function buildCopy({ language, pageType, place, topic }) {
-  if (language === "ar") return buildArabicCopy({ pageType, place, topic });
-  if (language === "en") return buildEnglishCopy({ pageType, place, topic });
-  return buildLocalizedCopy(language, { pageType, place, topic });
+function buildCopy({ language, pageType, place, sourceCity, topic }) {
+  if (language === "ar") return buildArabicCopy({ pageType, place, sourceCity, topic });
+  if (language === "en") return buildEnglishCopy({ pageType, place, sourceCity, topic });
+  return buildLocalizedCopy(language, { pageType, place, sourceCity, topic });
 }
 
-function buildLocalizedCopy(language, { pageType, place, topic }) {
+function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
   const locale = COPY_LOCALES[language];
-  if (!locale) return buildEnglishCopy({ pageType, place, topic });
+  if (!locale) return buildEnglishCopy({ pageType, place, sourceCity, topic });
 
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
-    .filter(item => item.city !== place)
+    .filter(item => item.city !== sourceCity)
     .slice(0, 6)
     .map(item => ({
-      label: locale.cityLinkLabel(topic, item.city),
+      label: locale.cityLinkLabel(topic, localizeCityName(item.city, language)),
       href: buildRoutePath(language, resolvedPage, item.city)
     }));
   const intentLinks = locale.intentLinks.map(item => ({
@@ -902,7 +945,7 @@ function buildLocalizedCopy(language, { pageType, place, topic }) {
   }));
   const cityIntentLinks = locale.cityIntentLinks(place).map(item => ({
     label: item.label,
-    href: buildRoutePath(language, item.type, item.city || place)
+    href: buildRoutePath(language, item.type, item.city || sourceCity)
   }));
 
   return {
@@ -920,7 +963,7 @@ function buildLocalizedCopy(language, { pageType, place, topic }) {
     countryLabel: locale.countryLabel,
     countryPlaceholder: locale.countryPlaceholder,
     submitLabel: locale.submitLabel,
-    topCities: TOP_CITIES,
+    topCities: getLocalizedTopCities(language),
     topCitiesAria: locale.topCitiesAria,
     intentLinks,
     intentAria: locale.intentAria,
@@ -969,7 +1012,7 @@ function renderHeroCopy(copy) {
           </form>
 
           <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
-${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.city)}</a>`).join("\n")}
+${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
           </div>
 
           <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
@@ -1097,6 +1140,26 @@ function renderInlineLinks(items, language) {
 function normalizeLanguage(value) {
   const normalized = String(value || "en").toLowerCase();
   return LANGUAGE_ALIASES[normalized] || LANGUAGE_ALIASES[normalized.split("-")[0]] || "en";
+}
+
+function localizeCityName(city, language) {
+  if (!city) return "";
+  const localeKey = normalizeLanguage(language);
+  const key = slugify(city);
+  return CITY_NAME_LOCALIZATIONS[key]?.[localeKey] || city;
+}
+
+function localizeCountryName(country, language) {
+  if (!country) return "";
+  const localeKey = normalizeLanguage(language);
+  const key = String(country).trim().toLowerCase();
+  return COUNTRY_NAME_LOCALIZATIONS[key]?.[localeKey] || country;
+}
+
+function formatPlaceName(city, country, language) {
+  const localizedCity = localizeCityName(city, language);
+  const localizedCountry = localizeCountryName(country, language);
+  return localizedCity && localizedCountry ? `${localizedCity}, ${localizedCountry}` : localizedCity || localizedCountry || "";
 }
 
 function getAlternates(pageType, city) {
