@@ -62,36 +62,75 @@ function TestMojibake([string]$relativePath) {
 }
 
 function GetLiveResponse([string]$url) {
-  $headers = @{
-    "User-Agent" = "AdantimerQualityGate/1.0"
+  $nodeScript = @'
+const https = require("https");
+const { URL } = require("url");
+
+function fetchPage(target, redirects = 0) {
+  if (redirects > 5) {
+    throw new Error("Too many redirects");
   }
-  return Invoke-WebRequest -Uri $url -Headers $headers -UseBasicParsing -MaximumRedirection 5 -TimeoutSec 20
+
+  return new Promise((resolve, reject) => {
+    const request = https.get(target, {
+      headers: {
+        "User-Agent": "AdantimerQualityGate/1.0"
+      }
+    }, response => {
+      const statusCode = response.statusCode || 0;
+      if (statusCode >= 300 && statusCode < 400 && response.headers.location) {
+        const nextUrl = new URL(response.headers.location, target).toString();
+        response.resume();
+        resolve(fetchPage(nextUrl, redirects + 1));
+        return;
+      }
+
+      let content = "";
+      response.setEncoding("utf8");
+      response.on("data", chunk => content += chunk);
+      response.on("end", () => resolve({ statusCode, content }));
+    });
+
+    request.setTimeout(20000, () => request.destroy(new Error("Request timed out")));
+    request.on("error", reject);
+  });
+}
+
+fetchPage(process.argv[2])
+  .then(result => process.stdout.write(JSON.stringify(result)))
+  .catch(error => {
+    console.error(error.message);
+    process.exit(1);
+  });
+'@
+
+  $output = ($nodeScript | node - $url 2>&1) -join [Environment]::NewLine
+  if ($LASTEXITCODE -ne 0) {
+    throw "Node live fetch failed: $output"
+  }
+
+  return $output | ConvertFrom-Json
 }
 
 function TestLiveUrl([string]$url, [string[]]$requiredSnippets) {
   try {
     $response = GetLiveResponse $url
-    if ([int]$response.StatusCode -ne 200) {
-      AddFailure "Live check failed for $url with status $($response.StatusCode)"
+    if ([int]$response.statusCode -ne 200) {
+      AddFailure "Live check failed for $url with status $($response.statusCode)"
       return
     }
 
     AddCheck "Live check returned 200 for $url"
 
     foreach ($snippet in $requiredSnippets) {
-      if ($response.Content.Contains($snippet)) {
+      if ($response.content.Contains($snippet)) {
         AddCheck "Live content check passed for $url -> $snippet"
       } else {
         AddFailure "Live content check missing on $url -> $snippet"
       }
     }
   } catch {
-    $message = $_.Exception.Message
-    if ($message -match "SEC_E_NO_CREDENTIALS" -or $message -match "underlying connection was closed") {
-      AddCheck "Live check skipped for $url because the local TLS stack is unavailable in this environment"
-    } else {
-      AddFailure "Live check failed for $url -> $message"
-    }
+    AddFailure "Live check failed for $url -> $($_.Exception.Message)"
   }
 }
 
@@ -202,9 +241,12 @@ TestMojibake "script.js"
 TestMojibake "api/render.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Adantimer | Accurate Prayer Times and Next Salah Countdown')
+  TestLiveUrl "$BaseUrl/" @('<html lang="en">', "Other languages", 'hreflang="zh-hans"', '<title>Adantimer | Accurate Prayer Times and Next Salah Countdown</title>')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
-  TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('Prayer Times in Berlin Today | Adantimer', 'https://www.adantimer.com/prayer-times/berlin')
+  TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
+  TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')
+  TestLiveUrl "$BaseUrl/tr/prayer-times/istanbul" @('<html lang="tr" dir="ltr">', 'https://www.adantimer.com/tr/prayer-times/istanbul')
+  TestLiveUrl "$BaseUrl/zh-hans/prayer-times/shanghai" @('<html lang="zh-CN" dir="ltr">', 'https://www.adantimer.com/zh-hans/prayer-times/shanghai')
   TestLiveUrl "$BaseUrl/robots.txt" @('Sitemap: https://www.adantimer.com/sitemap.xml')
   TestLiveUrl "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-core.xml.gz', 'https://www.adantimer.com/sitemap-de.xml.gz')
 }
