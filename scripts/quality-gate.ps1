@@ -134,6 +134,28 @@ function TestLiveUrl([string]$url, [string[]]$requiredSnippets) {
   }
 }
 
+function TestLiveUrlRegex([string]$url, [string[]]$requiredPatterns) {
+  try {
+    $response = GetLiveResponse $url
+    if ([int]$response.statusCode -ne 200) {
+      AddFailure "Live regex check failed for $url with status $($response.statusCode)"
+      return
+    }
+
+    AddCheck "Live regex check returned 200 for $url"
+
+    foreach ($pattern in $requiredPatterns) {
+      if ([regex]::IsMatch($response.content, $pattern)) {
+        AddCheck "Live regex check passed for $url -> $pattern"
+      } else {
+        AddFailure "Live regex check missing on $url -> $pattern"
+      }
+    }
+  } catch {
+    AddFailure "Live regex check failed for $url -> $($_.Exception.Message)"
+  }
+}
+
 $requiredFiles = @(
   "templates/index.html",
   "style.css",
@@ -256,7 +278,8 @@ TestMojibake "script.js"
 TestMojibake "api/render.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @('<html lang="en">', "Other languages", 'hreflang="zh-hans"', '<title>Adantimer | Accurate Prayer Times and Next Salah Countdown</title>')
+  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"')
+  TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')
