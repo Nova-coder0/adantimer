@@ -48,6 +48,34 @@ const LANGUAGE_PREFIXES = {
   "zh-hans": "/zh-hans"
 };
 
+const CITY_NAME_LOCALIZATIONS = {
+  "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
+  "madinah": { ar: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", de: "Medina", fr: "Medine", tr: "Medine", "zh-hans": "\u9ea6\u5730\u90a3" },
+  "buraydah": { ar: "\u0628\u0631\u064a\u062f\u0629", de: "Buraida", fr: "Buraidah", tr: "Bureyde", "zh-hans": "\u5e03\u8d56\u8fbe" },
+  "cairo": { ar: "\u0627\u0644\u0642\u0627\u0647\u0631\u0629", de: "Kairo", fr: "Le Caire", tr: "Kahire", "zh-hans": "\u5f00\u7f57" },
+  "dubai": { ar: "\u062f\u0628\u064a", de: "Dubai", fr: "Duba\u00ef", tr: "Dubai", "zh-hans": "\u8fea\u62dc" },
+  "istanbul": { ar: "\u0625\u0633\u0637\u0646\u0628\u0648\u0644", de: "Istanbul", fr: "Istanbul", tr: "\u0130stanbul", "zh-hans": "\u4f0a\u65af\u5766\u5e03\u5c14" },
+  "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
+  "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
+  "sydney": { ar: "\u0633\u064a\u062f\u0646\u064a", de: "Sydney", fr: "Sydney", tr: "Sidney", "zh-hans": "\u6089\u5c3c" },
+  "berlin": { ar: "\u0628\u0631\u0644\u064a\u0646", de: "Berlin", fr: "Berlin", tr: "Berlin", "zh-hans": "\u67cf\u6797" },
+  "paris": { ar: "\u0628\u0627\u0631\u064a\u0633", de: "Paris", fr: "Paris", tr: "Paris", "zh-hans": "\u5df4\u9ece" },
+  "shanghai": { ar: "\u0634\u0646\u063a\u0647\u0627\u064a", de: "Shanghai", fr: "Shanghai", tr: "\u015eanhay", "zh-hans": "\u4e0a\u6d77" }
+};
+
+const COUNTRY_NAME_LOCALIZATIONS = {
+  "saudi arabia": { ar: "\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629", de: "Saudi-Arabien", fr: "Arabie saoudite", tr: "Suudi Arabistan", "zh-hans": "\u6c99\u7279\u963f\u62c9\u4f2f" },
+  "egypt": { ar: "\u0645\u0635\u0631", de: "\u00c4gypten", fr: "\u00c9gypte", tr: "M\u0131s\u0131r", "zh-hans": "\u57c3\u53ca" },
+  "united arab emirates": { ar: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a", de: "Vereinigte Arabische Emirate", fr: "\u00c9mirats arabes unis", tr: "Birle\u015fik Arap Emirlikleri", "zh-hans": "\u963f\u8054\u914b" },
+  "turkey": { ar: "\u062a\u0631\u0643\u064a\u0627", de: "T\u00fcrkei", fr: "Turquie", tr: "T\u00fcrkiye", "zh-hans": "\u571f\u8033\u5176" },
+  "united kingdom": { ar: "\u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigtes K\u00f6nigreich", fr: "Royaume-Uni", tr: "Birle\u015fik Krall\u0131k", "zh-hans": "\u82f1\u56fd" },
+  "united states": { ar: "\u0627\u0644\u0648\u0644\u0627\u064a\u0627\u062a \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigte Staaten", fr: "\u00c9tats-Unis", tr: "Amerika Birle\u015fik Devletleri", "zh-hans": "\u7f8e\u56fd" },
+  "australia": { ar: "\u0623\u0633\u062a\u0631\u0627\u0644\u064a\u0627", de: "Australien", fr: "Australie", tr: "Avustralya", "zh-hans": "\u6fb3\u5927\u5229\u4e9a" },
+  "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
+  "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
+  "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+};
+
 const LOCALES = {
   en: {
     code: "en", dir: "ltr",
@@ -301,8 +329,24 @@ function getTopic(locale) {
   return locale.topics[pageType] || locale.topics.home;
 }
 
+function localizeCityName(city, lang = language) {
+  if (!city) return "";
+  const localeKey = resolveLanguageTag(lang) || lang || "en";
+  const key = slugifyCity(city);
+  return CITY_NAME_LOCALIZATIONS[key]?.[localeKey] || city;
+}
+
+function localizeCountryName(country, lang = language) {
+  if (!country) return "";
+  const localeKey = resolveLanguageTag(lang) || lang || "en";
+  const key = String(country).trim().toLowerCase();
+  return COUNTRY_NAME_LOCALIZATIONS[key]?.[localeKey] || country;
+}
+
 function getPlaceName(city = "", country = "") {
-  return city && country ? `${city}, ${country}` : city || country || "";
+  const localizedCity = localizeCityName(city, language);
+  const localizedCountry = localizeCountryName(country, language);
+  return localizedCity && localizedCountry ? `${localizedCity}, ${localizedCountry}` : localizedCity || localizedCountry || "";
 }
 
 function getLanguagePrefix(lang) {
@@ -407,6 +451,7 @@ function renderStaticContent() {
     link.setAttribute("href", buildRelativeUrl(language, intent));
   });
   document.querySelectorAll(".popular-cities a.city-chip[data-city]").forEach(link => {
+    link.textContent = localizeCityName(link.dataset.city || "", language);
     link.setAttribute("href", buildRelativeUrl(language, "home", link.dataset.city || ""));
   });
   const infoEyebrow = document.querySelector(".info-card .eyebrow");
@@ -795,7 +840,7 @@ async function handleManualLocation(city, country = "") {
     return;
   }
   countdownEl.textContent = locale.loading;
-  locationStatusEl.textContent = `${locale.locationPrefix} ${city}`;
+  locationStatusEl.textContent = getPlaceName(city.trim(), country.trim()) || `${locale.locationPrefix} ${city}`;
   try {
     const result = await searchCity(city.trim(), country.trim());
     if (!result) {
