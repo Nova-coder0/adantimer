@@ -219,6 +219,195 @@ const INLINE_LINK_CONNECTORS = {
   "zh-hans": "和"
 };
 
+const ROOT_HOME_OVERRIDES = {
+  en: {
+    infoTitle: "A stronger starting point for global prayer time searches",
+    features: [
+      "Server-rendered copy matches the visitor's language before the page hydrates.",
+      "The homepage is structured to answer two fast paths: today's schedule near you or a direct city prayer page.",
+      "Major cities, next-prayer routes, and individual prayer routes are linked immediately from the first screen.",
+      "Clean language-aware URLs make the homepage a better entry point for search, sharing, and return visits."
+    ],
+    citiesTitle: "Start with major prayer time cities",
+    aboutTitle: "Built for automatic language, location, and city discovery",
+    aboutParagraphs: [
+      "Most visitors arriving on the homepage want either today's prayer schedule for their current city or a fast route into a known city page. The root page is structured around both goals.",
+      "Language, canonical signals, and visible copy now align earlier in the request so the first HTML already matches the visitor more closely.",
+      "That makes the homepage a stronger discovery page for global prayer-time searches while still handing off deeper intent to dedicated city routes."
+    ],
+    faqTitle: "Common questions about automatic prayer times",
+    faq: [
+      {
+        question: "Does the homepage adapt to my language automatically?",
+        answer: "Yes. The root page can now render in the visitor's browser language on the first server response, while manual language switching stays available in the header."
+      },
+      {
+        question: "Can I jump from the homepage to a direct city page?",
+        answer: "Yes. The homepage links directly to major city pages and to focused prayer-intent routes such as next prayer, Fajr, Dhuhr, Asr, Maghrib, and Isha."
+      },
+      {
+        question: "What happens if my location is not available?",
+        answer: "Adantimer tries GPS first, falls back to IP-based detection when needed, and still keeps manual city search available."
+      }
+    ]
+  },
+  ar: {
+    infoTitle: "نقطة بداية أقوى للبحث عن مواقيت الصلاة عالمياً",
+    features: [
+      "يتم عرض النص المناسب للغة الزائر من الخادم قبل أن تبدأ الصفحة في التفاعل.",
+      "الصفحة الرئيسية مبنية لمسارين واضحين: جدول اليوم في موقعك الحالي أو الانتقال مباشرة إلى صفحة مدينة معروفة.",
+      "روابط المدن المهمة وصفحات الصلاة القادمة وصفحات الفجر والظهر والعصر والمغرب والعشاء تظهر مباشرة من الشاشة الأولى.",
+      "الروابط النظيفة المرتبطة باللغة تجعل الصفحة الرئيسية أفضل للبحث والمشاركة والعودة لاحقاً."
+    ],
+    citiesTitle: "ابدأ بأهم مدن مواقيت الصلاة",
+    aboutTitle: "مصممة للغة التلقائية واكتشاف الموقع والمدينة",
+    aboutParagraphs: [
+      "معظم الزوار الذين يصلون إلى الصفحة الرئيسية يريدون إما جدول الصلاة لمدينتهم الحالية أو طريقاً سريعاً إلى صفحة مدينة يعرفونها. لذلك تم تنظيم الصفحة حول هذين الهدفين.",
+      "اللغة والإشارات القانونية والمحتوى المرئي أصبحت الآن متوافقة مبكراً في الطلب بحيث يطابق أول HTML الزائر بشكل أفضل.",
+      "هذا يجعل الصفحة الرئيسية أقوى كنقطة اكتشاف عالمية لمواقيت الصلاة مع إبقاء صفحات المدن المخصصة للمسارات الأعمق."
+    ],
+    faqTitle: "أسئلة شائعة عن مواقيت الصلاة التلقائية",
+    faq: [
+      {
+        question: "هل تتكيف الصفحة الرئيسية مع لغتي تلقائياً؟",
+        answer: "نعم. يمكن للصفحة الرئيسية الآن أن تُعرَض بلغة المتصفح من أول استجابة من الخادم، مع بقاء التبديل اليدوي للغة متاحاً في الأعلى."
+      },
+      {
+        question: "هل يمكنني الانتقال من الصفحة الرئيسية إلى صفحة مدينة مباشرة؟",
+        answer: "نعم. الصفحة الرئيسية تربط مباشرة بصفحات مدن مهمة وبصفحات نية الصلاة مثل الصلاة القادمة والفجر والظهر والعصر والمغرب والعشاء."
+      },
+      {
+        question: "ماذا يحدث إذا لم يتوفر موقعي؟",
+        answer: "يحاول Adantimer استخدام GPS أولاً، ثم يعتمد على IP عند الحاجة، مع بقاء البحث اليدوي عن المدينة متاحاً دائماً."
+      }
+    ]
+  },
+  de: {
+    infoTitle: "Ein stärkerer Einstieg für weltweite Gebetszeit-Suchen",
+    features: [
+      "Serverseitige Texte passen bereits vor dem Hydrieren zur Sprache des Besuchers.",
+      "Die Startseite beantwortet zwei schnelle Wege: den heutigen Plan am aktuellen Ort oder den direkten Einstieg in eine bekannte Stadtseite.",
+      "Wichtige Städte sowie Seiten für nächstes Gebet, Fajr, Dhuhr, Asr, Maghrib und Isha sind direkt von der ersten Ansicht aus verlinkt.",
+      "Saubere sprachabhängige URLs machen die Startseite stärker für Suche, Teilen und spätere Rückkehr."
+    ],
+    citiesTitle: "Starte mit wichtigen Städten für Gebetszeiten",
+    aboutTitle: "Gebaut für automatische Sprache, Standort und Stadtfindung",
+    aboutParagraphs: [
+      "Die meisten Besucher der Startseite wollen entweder den heutigen Gebetsplan für ihren aktuellen Ort oder einen schnellen Weg zu einer bekannten Stadtseite. Darauf ist diese Route jetzt ausgerichtet.",
+      "Sprache, Canonical-Signale und sichtbarer Inhalt greifen früher ineinander, sodass schon das erste HTML besser zum Besucher passt.",
+      "Dadurch wird die Startseite ein stärkerer Einstieg für weltweite Gebetszeit-Suchen, während die tieferen Stadtseiten ihre eigene Suchintention behalten."
+    ],
+    faqTitle: "Häufige Fragen zu automatischen Gebetszeiten",
+    faq: [
+      {
+        question: "Passt sich die Startseite automatisch an meine Sprache an?",
+        answer: "Ja. Die Root-Seite kann jetzt schon in der Browsersprache serverseitig ausgeliefert werden, während die manuelle Sprachwahl im Header erhalten bleibt."
+      },
+      {
+        question: "Kann ich von der Startseite direkt zu einer Stadtseite wechseln?",
+        answer: "Ja. Die Startseite verlinkt direkt auf wichtige Städte sowie auf fokussierte Seiten für nächstes Gebet, Fajr, Dhuhr, Asr, Maghrib und Isha."
+      },
+      {
+        question: "Was passiert, wenn mein Standort nicht verfügbar ist?",
+        answer: "Adantimer versucht zuerst GPS, wechselt bei Bedarf auf IP-Erkennung und lässt die manuelle Stadtsuche weiterhin offen."
+      }
+    ]
+  },
+  fr: {
+    infoTitle: "Un point d'entrée plus fort pour les recherches mondiales d'horaires de prière",
+    features: [
+      "Le contenu rendu côté serveur correspond à la langue du visiteur avant même l'hydratation.",
+      "La page d'accueil répond à deux besoins rapides : le planning du jour à proximité ou l'accès direct à une page de ville connue.",
+      "Les grandes villes ainsi que les routes prochaine prière, Fajr, Dhuhr, Asr, Maghrib et Isha sont liées dès le premier écran.",
+      "Des URL propres et adaptées à la langue renforcent la page d'accueil pour la recherche, le partage et les retours."
+    ],
+    citiesTitle: "Commencer par les grandes villes de prière",
+    aboutTitle: "Conçue pour la langue automatique, la localisation et la découverte des villes",
+    aboutParagraphs: [
+      "La plupart des visiteurs arrivant sur la page d'accueil veulent soit le planning du jour pour leur ville actuelle, soit un accès rapide à une page de ville connue. La route d'accueil est désormais structurée autour de ces deux objectifs.",
+      "La langue, les signaux canoniques et le contenu visible sont désormais alignés plus tôt dans la requête pour que le premier HTML corresponde mieux au visiteur.",
+      "La page d'accueil devient ainsi une meilleure porte d'entrée pour les recherches mondiales d'horaires de prière, tout en laissant les intentions plus précises aux pages de ville."
+    ],
+    faqTitle: "Questions fréquentes sur les horaires de prière automatiques",
+    faq: [
+      {
+        question: "La page d'accueil s'adapte-t-elle automatiquement à ma langue ?",
+        answer: "Oui. La page racine peut désormais être rendue côté serveur dans la langue du navigateur dès la première réponse, tout en gardant le changement manuel dans l'en-tête."
+      },
+      {
+        question: "Puis-je passer de l'accueil à une page de ville directe ?",
+        answer: "Oui. La page d'accueil relie directement les grandes villes ainsi que les routes centrées sur la prochaine prière, Fajr, Dhuhr, Asr, Maghrib et Isha."
+      },
+      {
+        question: "Que se passe-t-il si ma position n'est pas disponible ?",
+        answer: "Adantimer essaie d'abord le GPS, bascule sur la détection IP si nécessaire et laisse toujours la recherche manuelle de ville disponible."
+      }
+    ]
+  },
+  tr: {
+    infoTitle: "Küresel namaz vakti aramaları için daha güçlü bir başlangıç noktası",
+    features: [
+      "Sayfa daha yüklenmeden önce sunucu tarafı içerik ziyaretçinin diline uyum sağlar.",
+      "Ana sayfa iki hızlı yolu hedefler: bulunduğun yerde bugünün vakitleri veya bilinen bir şehir sayfasına doğrudan geçiş.",
+      "Önemli şehirler ile sonraki namaz, Fajr, Dhuhr, Asr, Maghrib ve Isha sayfaları ilk ekrandan hemen erişilebilir durumdadır.",
+      "Dile göre düzenlenmiş temiz URL yapısı ana sayfayı arama, paylaşım ve geri dönüş için daha güçlü hale getirir."
+    ],
+    citiesTitle: "Önemli namaz vakti şehirleriyle başla",
+    aboutTitle: "Otomatik dil, konum ve şehir keşfi için kuruldu",
+    aboutParagraphs: [
+      "Ana sayfaya gelen ziyaretçilerin çoğu ya mevcut şehirleri için bugünün vakitlerini ister ya da bildiği bir şehir sayfasına hızlı geçiş arar. Ana rota artık bu iki hedef etrafında kuruldu.",
+      "Dil, canonical sinyaller ve görünür içerik artık isteğin daha erken aşamasında hizalanıyor; böylece ilk HTML ziyaretçiyle daha iyi eşleşiyor.",
+      "Bu da ana sayfayı küresel namaz vakti aramaları için daha güçlü bir giriş noktası yaparken, daha derin niyetleri şehir sayfalarına bırakıyor."
+    ],
+    faqTitle: "Otomatik namaz vakitleri hakkında sık sorulan sorular",
+    faq: [
+      {
+        question: "Ana sayfa dilime otomatik uyum sağlıyor mu?",
+        answer: "Evet. Kök sayfa artık ilk sunucu yanıtında tarayıcı dilinde render edilebiliyor; üst kısımdaki manuel dil değişimi de açık kalıyor."
+      },
+      {
+        question: "Ana sayfadan doğrudan şehir sayfasına geçebilir miyim?",
+        answer: "Evet. Ana sayfa önemli şehirleri ve sonraki namaz, Fajr, Dhuhr, Asr, Maghrib ve Isha odaklı sayfaları doğrudan bağlar."
+      },
+      {
+        question: "Konumum alınamazsa ne olur?",
+        answer: "Adantimer önce GPS'i dener, gerekirse IP tabanlı konuma geçer ve manuel şehir aramasını her zaman açık tutar."
+      }
+    ]
+  },
+  "zh-hans": {
+    infoTitle: "面向全球礼拜时间搜索的更强首页入口",
+    features: [
+      "页面水合前，服务端内容就会先匹配访问者语言。",
+      "首页围绕两个高频目标构建：查看当前位置的今日礼拜时间，或直接进入已知城市页面。",
+      "重要城市以及下一次礼拜、晨礼、晌礼、晡礼、昏礼、宵礼页面都能在第一屏直接进入。",
+      "按语言组织的规范 URL 让首页更适合搜索、分享和再次访问。"
+    ],
+    citiesTitle: "从重点礼拜城市开始",
+    aboutTitle: "为自动语言、定位与城市发现而构建",
+    aboutParagraphs: [
+      "大多数进入首页的访问者，要么想看当前城市的今日礼拜时间，要么想快速进入一个已知城市页面。首页现在正是围绕这两个目标设计的。",
+      "语言、规范链接信号与可见内容现在会在更早阶段对齐，因此第一份 HTML 就更贴近访问者。",
+      "这让首页成为更强的全球礼拜时间搜索入口，同时把更深层的搜索意图继续交给专门的城市页面。"
+    ],
+    faqTitle: "关于自动礼拜时间的常见问题",
+    faq: [
+      {
+        question: "首页会自动适配我的语言吗？",
+        answer: "会。首页现在可以在第一次服务器响应时直接按浏览器语言渲染，同时页头仍保留手动切换语言。"
+      },
+      {
+        question: "我可以从首页直接进入城市页面吗？",
+        answer: "可以。首页直接链接到重点城市页面，以及下一次礼拜、晨礼、晌礼、晡礼、昏礼和宵礼等聚焦页面。"
+      },
+      {
+        question: "如果无法获取我的位置会怎样？",
+        answer: "Adantimer 会先尝试 GPS，需要时退回到 IP 定位，同时始终保留手动城市搜索。"
+      }
+    ]
+  }
+};
+
 const COPY_LOCALES = {
   de: {
     heroEyebrowHome: "Gebetszeiten nach Stadt",
@@ -705,6 +894,8 @@ function getLocalizedTopCities(language) {
 }
 
 function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
+  const isHomeRoot = pageType === "home" && !place;
+  const rootOverride = ROOT_HOME_OVERRIDES.en;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
     .filter(item => item.city !== sourceCity)
@@ -771,50 +962,58 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
     scheduleHeading: pageType === "home" ? "Today's Prayer Schedule" : `${topic} and Full Prayer Schedule`,
     scheduleSummary: place ? `Daily prayer schedule and next salah countdown for ${place}.` : "Accurate times for your current city.",
     infoEyebrow: "Why this page helps",
-    infoTitle: `A focused ${topic.toLowerCase()} page for daily use`,
-    features: [
-      `Built around the exact search intent for ${topic.toLowerCase()}${place ? ` in ${place}` : ""}.`,
-      "Shows the next-prayer countdown and the full daily timetable on one page.",
-      "Adapts automatically to browser language and detected location after page load.",
-      "Uses clean canonical URLs that can be shared, indexed, and revisited easily."
-    ],
+    infoTitle: isHomeRoot ? rootOverride.infoTitle : `A focused ${topic.toLowerCase()} page for daily use`,
+    features: isHomeRoot
+      ? rootOverride.features
+      : [
+          `Built around the exact search intent for ${topic.toLowerCase()}${place ? ` in ${place}` : ""}.`,
+          "Shows the next-prayer countdown and the full daily timetable on one page.",
+          "Adapts automatically to browser language and detected location after page load.",
+          "Uses clean canonical URLs that can be shared, indexed, and revisited easily."
+        ],
     citiesEyebrow: "Explore More",
-    citiesTitle: `Popular ${topic.toLowerCase()} pages`,
+    citiesTitle: isHomeRoot ? rootOverride.citiesTitle : `Popular ${topic.toLowerCase()} pages`,
     cityLinks,
     cityIntentLinks,
     aboutEyebrow: "About",
-    aboutTitle: `${topic}${place ? ` in ${place}` : ""} without the clutter`,
-    aboutParagraphs: [
-      place
-        ? `This landing page is focused on ${topic.toLowerCase()} in ${place}, so visitors reach the right answer faster than on a generic homepage.`
-        : `This landing page is focused on ${topic.toLowerCase()}, so visitors reach the right answer faster than on a generic homepage.`,
-      "The goal is a more professional experience: clear prayer intent, automatic language handling, clean route structure, and a direct path to today's schedule.",
-      "That stronger alignment between search query, URL, page title, and visible copy gives this route a better SEO foundation."
-    ],
+    aboutTitle: isHomeRoot ? rootOverride.aboutTitle : `${topic}${place ? ` in ${place}` : ""} without the clutter`,
+    aboutParagraphs: isHomeRoot
+      ? rootOverride.aboutParagraphs
+      : [
+          place
+            ? `This landing page is focused on ${topic.toLowerCase()} in ${place}, so visitors reach the right answer faster than on a generic homepage.`
+            : `This landing page is focused on ${topic.toLowerCase()}, so visitors reach the right answer faster than on a generic homepage.`,
+          "The goal is a more professional experience: clear prayer intent, automatic language handling, clean route structure, and a direct path to today's schedule.",
+          "That stronger alignment between search query, URL, page title, and visible copy gives this route a better SEO foundation."
+        ],
     faqEyebrow: "FAQ",
-    faqTitle: `Common questions about ${topic.toLowerCase()}${place ? ` in ${place}` : ""}`,
-    faq: [
-      {
-        question: place ? `Can I share this ${topic.toLowerCase()} page for ${place}?` : `Can I share this ${topic.toLowerCase()} page?`,
-        answer: place
-          ? `Yes. This route is built as a direct page for ${topic.toLowerCase()} in ${place}, so it can be revisited and shared easily.`
-          : "Yes. Each route is built as a direct page for a specific prayer intent, so it can be revisited and shared easily."
-      },
-      {
-        question: "Does Adantimer detect language and location automatically?",
-        answer: "Yes. The page follows the browser language after load, tries GPS first, then falls back to IP-based location, and still allows manual city search."
-      },
-      {
-        question: "Which prayer times are shown on this page?",
-        answer: `The page highlights ${topic.toLowerCase()} while still loading the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.`
-      }
-    ],
+    faqTitle: isHomeRoot ? rootOverride.faqTitle : `Common questions about ${topic.toLowerCase()}${place ? ` in ${place}` : ""}`,
+    faq: isHomeRoot
+      ? rootOverride.faq
+      : [
+          {
+            question: place ? `Can I share this ${topic.toLowerCase()} page for ${place}?` : `Can I share this ${topic.toLowerCase()} page?`,
+            answer: place
+              ? `Yes. This route is built as a direct page for ${topic.toLowerCase()} in ${place}, so it can be revisited and shared easily.`
+              : "Yes. Each route is built as a direct page for a specific prayer intent, so it can be revisited and shared easily."
+          },
+          {
+            question: "Does Adantimer detect language and location automatically?",
+            answer: "Yes. The page follows the browser language after load, tries GPS first, then falls back to IP-based location, and still allows manual city search."
+          },
+          {
+            question: "Which prayer times are shown on this page?",
+            answer: `The page highlights ${topic.toLowerCase()} while still loading the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.`
+          }
+        ],
     footerText: place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city.",
     noscriptText: "JavaScript is required to load live prayer times and the next prayer countdown."
   };
 }
 
 function buildArabicCopy({ pageType, place, sourceCity, topic }) {
+  const isHomeRoot = pageType === "home" && !place;
+  const rootOverride = ROOT_HOME_OVERRIDES.ar;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
     .filter(item => item.city !== sourceCity)
@@ -887,20 +1086,20 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
     scheduleHeading: pageType === "home" ? "جدول الصلاة اليوم" : `${topic} وجدول الصلاة الكامل`,
     scheduleSummary: place ? `جدول الصلاة اليومي والعد التنازلي للصلاة القادمة في ${place}.` : "مواقيت دقيقة لمدينتك الحالية.",
     infoEyebrow: "لماذا هذه الصفحة مفيدة",
-    infoTitle: `صفحة مركزة لعرض ${topic}${place ? ` في ${place}` : ""}`,
-    features: [
+    infoTitle: isHomeRoot ? rootOverride.infoTitle : `صفحة مركزة لعرض ${topic}${place ? ` في ${place}` : ""}`,
+    features: isHomeRoot ? rootOverride.features : [
       `الصفحة مبنية حول نية البحث المباشرة عن ${topic}${place ? ` في ${place}` : ""}.`,
       "تعرض الصلاة القادمة والجدول الكامل لليوم في مكان واحد.",
       "تتكيف تلقائيا مع لغة المتصفح والموقع بعد تحميل الصفحة.",
       "تستخدم رابطا أساسيا واضحا يمكن مشاركته وأرشفته بسهولة."
     ],
     citiesEyebrow: "اكتشف المزيد",
-    citiesTitle: `صفحات شائعة عن ${topic}`,
+    citiesTitle: isHomeRoot ? rootOverride.citiesTitle : `صفحات شائعة عن ${topic}`,
     cityLinks,
     cityIntentLinks,
     aboutEyebrow: "حول الصفحة",
-    aboutTitle: `${topic}${place ? ` في ${place}` : ""} بدون تعقيد`,
-    aboutParagraphs: [
+    aboutTitle: isHomeRoot ? rootOverride.aboutTitle : `${topic}${place ? ` في ${place}` : ""} بدون تعقيد`,
+    aboutParagraphs: isHomeRoot ? rootOverride.aboutParagraphs : [
       place
         ? `هذه الصفحة مخصصة لعرض ${topic} في ${place} حتى يصل الزائر إلى الإجابة الصحيحة بسرعة أكبر من الصفحة العامة.`
         : `هذه الصفحة مخصصة لعرض ${topic} حتى يصل الزائر إلى الإجابة الصحيحة بسرعة أكبر من الصفحة العامة.`,
@@ -908,8 +1107,8 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
       "هذا التطابق الأقوى بين البحث والرابط والعنوان والمحتوى المرئي يمنح الصفحة أساسا أفضل لتحسين الظهور في محركات البحث."
     ],
     faqEyebrow: "الأسئلة الشائعة",
-    faqTitle: `أسئلة شائعة عن ${topic}${place ? ` في ${place}` : ""}`,
-    faq: [
+    faqTitle: isHomeRoot ? rootOverride.faqTitle : `أسئلة شائعة عن ${topic}${place ? ` في ${place}` : ""}`,
+    faq: isHomeRoot ? rootOverride.faq : [
       {
         question: place ? `هل يمكنني مشاركة صفحة ${topic} في ${place}؟` : "هل يمكنني مشاركة هذه الصفحة؟",
         answer: place
@@ -939,6 +1138,8 @@ function buildCopy({ language, pageType, place, sourceCity, topic }) {
 function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
   const locale = COPY_LOCALES[language];
   if (!locale) return buildEnglishCopy({ pageType, place, sourceCity, topic });
+  const isHomeRoot = pageType === "home" && !place;
+  const rootOverride = ROOT_HOME_OVERRIDES[language];
 
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
@@ -952,10 +1153,18 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     label: item.label,
     href: buildRoutePath(language, item.type)
   }));
-  const cityIntentLinks = locale.cityIntentLinks(place).map(item => ({
-    label: item.label,
-    href: buildRoutePath(language, item.type, item.city || sourceCity)
-  }));
+  const cityIntentLinks = locale.cityIntentLinks(place).map(item => {
+    const resolvedCity = item.city || sourceCity;
+    let label = item.label;
+    if (!place && item.city) {
+      label = label.replace(item.city, localizeCityName(item.city, language));
+    }
+
+    return {
+      label,
+      href: buildRoutePath(language, item.type, resolvedCity)
+    };
+  });
 
   return {
     activeLanguage: language,
@@ -987,18 +1196,18 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     scheduleHeading: locale.scheduleHeading(pageType, topic),
     scheduleSummary: locale.scheduleSummary(place),
     infoEyebrow: locale.infoEyebrow,
-    infoTitle: locale.infoTitle(topic, place),
-    features: locale.features(topic, place),
+    infoTitle: isHomeRoot && rootOverride ? rootOverride.infoTitle : locale.infoTitle(topic, place),
+    features: isHomeRoot && rootOverride ? rootOverride.features : locale.features(topic, place),
     citiesEyebrow: locale.citiesEyebrow,
-    citiesTitle: locale.citiesTitle(topic),
+    citiesTitle: isHomeRoot && rootOverride ? rootOverride.citiesTitle : locale.citiesTitle(topic),
     cityLinks,
     cityIntentLinks,
     aboutEyebrow: locale.aboutEyebrow,
-    aboutTitle: locale.aboutTitle(topic, place),
-    aboutParagraphs: locale.aboutParagraphs(topic, place),
+    aboutTitle: isHomeRoot && rootOverride ? rootOverride.aboutTitle : locale.aboutTitle(topic, place),
+    aboutParagraphs: isHomeRoot && rootOverride ? rootOverride.aboutParagraphs : locale.aboutParagraphs(topic, place),
     faqEyebrow: locale.faqEyebrow,
-    faqTitle: locale.faqTitle(topic, place),
-    faq: locale.faq(topic, place),
+    faqTitle: isHomeRoot && rootOverride ? rootOverride.faqTitle : locale.faqTitle(topic, place),
+    faq: isHomeRoot && rootOverride ? rootOverride.faq : locale.faq(topic, place),
     footerText: locale.footerText(place),
     noscriptText: locale.noscriptText
   };
