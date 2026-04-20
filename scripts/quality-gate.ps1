@@ -243,6 +243,8 @@ AssertContains $renderJs 'function buildLocalizedCopy(language, { pageType, plac
 AssertContains $renderJs 'const SUPPORTED_RENDER_LANGUAGES = ["en", "ar", "de", "fr", "tr", "zh-hans"];' "SSR renderer tracks all supported languages" "SSR renderer supported-language list is missing or incomplete"
 AssertContains $renderJs 'const LANGUAGE_ALIASES = {' "SSR renderer keeps language aliases" "SSR renderer language aliases are missing"
 AssertContains $renderJs 'const LANGUAGE_PREFIXES = {' "SSR renderer keeps language prefixes" "SSR renderer language prefixes are missing"
+AssertContains $renderJs 'const ROOT_HOME_OVERRIDES = {' "SSR renderer keeps explicit root-home copy overrides" "SSR renderer is missing the root-home copy overrides"
+AssertContains $renderJs 'A stronger starting point for global prayer time searches' "SSR renderer carries stronger English root-home copy" "SSR renderer is missing the stronger English root-home copy"
 AssertContains $renderJs 'const CITY_NAME_LOCALIZATIONS = {' "SSR renderer keeps localized city-name mappings" "SSR renderer localized city-name mappings are missing"
 AssertContains $renderJs 'const INLINE_LINK_CONNECTORS = {' "SSR renderer keeps localized inline-link connectors" "SSR renderer is missing localized inline-link connectors"
 AssertContains $renderJs 'function localizeCityName(city, language)' "SSR renderer keeps the city-name localization helper" "SSR renderer city-name localization helper is missing"
@@ -278,7 +280,7 @@ TestMojibake "script.js"
 TestMojibake "api/render.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"')
+  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
