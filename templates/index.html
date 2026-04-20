@@ -190,13 +190,47 @@
       </section>
     </section>
 
+    <section id="qibla-panel" class="card qibla-panel" aria-labelledby="qibla-panel-heading" hidden>
+      <div class="qibla-panel-copy">
+        <p class="eyebrow">Qibla</p>
+        <h2 id="qibla-panel-heading">Qibla Compass</h2>
+        <p id="qibla-panel-summary">See the direction of the Kaaba from your current location or any city you search.</p>
+      </div>
+      <div class="qibla-panel-grid">
+        <div class="qibla-compass-card">
+          <div class="qibla-compass" id="qibla-compass" aria-hidden="true">
+            <span class="qibla-cardinal qibla-cardinal-n">N</span>
+            <span class="qibla-cardinal qibla-cardinal-e">E</span>
+            <span class="qibla-cardinal qibla-cardinal-s">S</span>
+            <span class="qibla-cardinal qibla-cardinal-w">W</span>
+            <span class="qibla-compass-ring"></span>
+            <span class="qibla-compass-core"></span>
+            <span class="qibla-needle" id="qibla-needle"></span>
+          </div>
+        </div>
+        <div class="qibla-readout">
+          <div class="qibla-readout-head">
+            <strong id="qibla-place">Current location</strong>
+            <span id="qibla-status">Allow location or search for a city to calculate qibla.</span>
+          </div>
+          <div class="qibla-stats">
+            <div class="qibla-stat">
+              <span id="qibla-bearing-label">Bearing from north</span>
+              <strong id="qibla-bearing-value">-</strong>
+            </div>
+            <div class="qibla-stat">
+              <span id="qibla-distance-label">Distance to Makkah</span>
+              <strong id="qibla-distance-value">-</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="card tools-hub" aria-labelledby="tools-heading">
       <div class="tools-copy">
         <p class="eyebrow">More Tools</p>
-        <h2 id="tools-heading">Open Qibla, Quran, Dhikr, and Hadith pages</h2>
-        <p>
-          Add more daily-use Islamic pages directly under the main prayer schedule so visitors can continue into qibla direction, Quran reading, dhikr, and hadith pages without leaving Adantimer.
-        </p>
+        <h2 id="tools-heading">Open Qibla, Quran, Dhikr, and Hadith</h2>
       </div>
       <div class="tools-grid">
         <a class="tool-link-card" href="/qibla" data-tool-type="qibla">
