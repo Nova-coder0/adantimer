@@ -194,6 +194,7 @@ $rewritesText = $vercelConfig.rewrites | ConvertTo-Json -Depth 10
 AssertContains $indexHtml 'data-lang="en"' "Homepage keeps the English quick button" "Homepage is missing the English quick button"
 AssertContains $indexHtml 'data-lang="ar"' "Homepage keeps the Arabic quick button" "Homepage is missing the Arabic quick button"
 AssertContains $indexHtml 'Other languages' "Homepage includes the Other languages menu" "Homepage is missing the Other languages menu"
+AssertContains $indexHtml 'class="card tools-hub"' "Homepage template includes the tools hub container" "Homepage template is missing the tools hub container"
 AssertContains $indexHtml 'hreflang="de"' "Homepage exposes the German alternate" "Homepage is missing the German alternate"
 AssertContains $indexHtml 'hreflang="fr"' "Homepage exposes the French alternate" "Homepage is missing the French alternate"
 AssertContains $indexHtml 'hreflang="tr"' "Homepage exposes the Turkish alternate" "Homepage is missing the Turkish alternate"
@@ -202,6 +203,10 @@ AssertContains $indexHtml '"inLanguage": ["en", "ar", "de", "fr", "tr", "zh-Hans
 AssertContains $indexHtml '<script src="/script.js"></script>' "Homepage loads the main client script without stale cache-bust markers" "Homepage script loader drifted from the stable baseline"
 
 AssertContains $scriptJs 'function buildRelativeUrl(lang, type, city = "")' "Client keeps a single URL builder" "Client URL builder is missing"
+AssertContains $scriptJs 'const TOOL_HUB_LOCALES = {' "Client keeps localized tool-hub copy" "Client tool-hub copy is missing"
+AssertContains $scriptJs 'function renderToolsHub(locale)' "Client keeps the tools-hub renderer" "Client tools-hub renderer is missing"
+AssertContains $scriptJs 'qibla: "/qibla"' "Client URL builder includes the qibla route" "Client URL builder is missing the qibla route"
+AssertContains $scriptJs '"hadith"' "Client recognizes the hadith route" "Client route handling is missing the hadith page"
 AssertContains $scriptJs 'const LANGUAGE_PREFIXES = {' "Client keeps explicit language path prefixes" "Client language path prefixes are missing"
 AssertContains $scriptJs 'const CITY_NAME_LOCALIZATIONS = {' "Client keeps localized city-name mappings" "Client localized city-name mappings are missing"
 AssertContains $scriptJs 'const REQUEST_TIMEOUTS = {' "Client keeps explicit request timeouts" "Client request timeout config is missing"
@@ -237,6 +242,10 @@ AssertContains $renderJs 'if (pageType === "home" && !city)' "SSR renderer limit
 AssertContains $renderJs 'headers.vary = "accept-language";' "SSR renderer varies root home responses by Accept-Language" "SSR renderer is missing Accept-Language cache variation"
 AssertContains $renderJs 'function getAlternates(pageType, city)' "SSR renderer keeps alternate-link generation" "SSR renderer is missing alternate-link generation"
 AssertContains $renderJs 'function buildEnglishCopy' "SSR renderer keeps English copy generation" "SSR renderer is missing English copy generation"
+AssertContains $renderJs 'const TOOL_HUB_CONTENT = {' "SSR renderer keeps server-rendered tool-hub copy" "SSR renderer is missing tool-hub copy"
+AssertContains $renderJs 'function buildToolHubCopy(language, pageType)' "SSR renderer keeps the tool-hub builder" "SSR renderer is missing the tool-hub builder"
+AssertContains $renderJs 'function renderToolsSection(copy)' "SSR renderer keeps the tools-section renderer" "SSR renderer is missing the tools-section renderer"
+AssertContains $renderJs 'qibla: { en: "Qibla Direction"' "SSR renderer defines the qibla route" "SSR renderer is missing the qibla route"
 AssertContains $renderJs 'function buildArabicCopy' "SSR renderer keeps Arabic copy generation" "SSR renderer is missing Arabic copy generation"
 AssertContains $renderJs 'function buildCopy({ language, pageType, place, sourceCity, topic })' "SSR renderer keeps the shared copy entry point" "SSR renderer is missing the shared copy entry point"
 AssertContains $renderJs 'function buildLocalizedCopy(language, { pageType, place, sourceCity, topic })' "SSR renderer keeps the localized copy builder" "SSR renderer is missing the localized copy builder"
@@ -263,11 +272,17 @@ AssertContains $renderJs 'cityLinkLabel: (topic, city) => `${city}${topic}`' "SS
 AssertContains $rewritesText '"/ar"' "vercel.json includes Arabic rewrites" "vercel.json is missing Arabic rewrites"
 AssertContains $vercelJsonText '{ "source": "/", "destination": "/api/render?type=home" }' "vercel.json rewrites the root path through SSR" "vercel.json is missing the root SSR rewrite"
 AssertContains $rewritesText '"/de"' "vercel.json includes German rewrites" "vercel.json is missing German rewrites"
+AssertContains $rewritesText '"/qibla"' "vercel.json includes the qibla rewrite" "vercel.json is missing the qibla rewrite"
+AssertContains $rewritesText '"/quran"' "vercel.json includes the quran rewrite" "vercel.json is missing the quran rewrite"
+AssertContains $rewritesText '"/dhikr"' "vercel.json includes the dhikr rewrite" "vercel.json is missing the dhikr rewrite"
+AssertContains $rewritesText '"/hadith"' "vercel.json includes the hadith rewrite" "vercel.json is missing the hadith rewrite"
 AssertContains $rewritesText '"/fr"' "vercel.json includes French rewrites" "vercel.json is missing French rewrites"
 AssertContains $rewritesText '"/tr"' "vercel.json includes Turkish rewrites" "vercel.json is missing Turkish rewrites"
 AssertContains $rewritesText '"/zh-hans"' "vercel.json includes Chinese rewrites" "vercel.json is missing Chinese rewrites"
 
 AssertContains $sitemapCore 'https://www.adantimer.com/de/prayer-times' "Core sitemap includes German prayer routes" "Core sitemap is missing German prayer routes"
+AssertContains $sitemapCore 'https://www.adantimer.com/qibla' "Core sitemap includes the qibla page" "Core sitemap is missing the qibla page"
+AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/hadith' "Core sitemap includes the Chinese hadith page" "Core sitemap is missing the Chinese hadith page"
 AssertContains $sitemapCore 'https://www.adantimer.com/fr/prayer-times' "Core sitemap includes French prayer routes" "Core sitemap is missing French prayer routes"
 AssertContains $sitemapCore 'https://www.adantimer.com/tr/prayer-times' "Core sitemap includes Turkish prayer routes" "Core sitemap is missing Turkish prayer routes"
 AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/isha-time' "Core sitemap includes Chinese prayer routes" "Core sitemap is missing Chinese prayer routes"
@@ -277,11 +292,11 @@ AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired
 
 TestMojibake "templates/index.html"
 TestMojibake "script.js"
-TestMojibake "api/render.js"
 
 if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
+  TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'tools-hub')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')

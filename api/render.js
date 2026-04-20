@@ -52,7 +52,11 @@ const ROUTES = {
   dhuhr: { en: "Dhuhr Time", ar: "وقت الظهر", path: city => city ? `/dhuhr-time/${slugify(city)}` : "/dhuhr-time" },
   asr: { en: "Asr Time", ar: "وقت العصر", path: city => city ? `/asr-time/${slugify(city)}` : "/asr-time" },
   maghrib: { en: "Maghrib Time", ar: "وقت المغرب", path: city => city ? `/maghrib-time/${slugify(city)}` : "/maghrib-time" },
-  isha: { en: "Isha Time", ar: "وقت العشاء", path: city => city ? `/isha-time/${slugify(city)}` : "/isha-time" }
+  isha: { en: "Isha Time", ar: "وقت العشاء", path: city => city ? `/isha-time/${slugify(city)}` : "/isha-time" },
+  qibla: { en: "Qibla Direction", ar: "اتجاه القبلة", path: () => "/qibla" },
+  quran: { en: "Quran", ar: "القرآن", path: () => "/quran" },
+  dhikr: { en: "Dhikr", ar: "الذكر", path: () => "/dhikr" },
+  hadith: { en: "Hadith", ar: "الحديث", path: () => "/hadith" }
 };
 
 const LOCALES = {
@@ -162,6 +166,34 @@ Object.assign(ROUTES.isha, {
   fr: "Heure de l'Isha",
   tr: "Isha Vakti",
   "zh-hans": "宵礼时间"
+});
+
+Object.assign(ROUTES.qibla, {
+  de: "Qibla-Richtung",
+  fr: "Direction de la Qibla",
+  tr: "Kible Yonu",
+  "zh-hans": "Qibla方向"
+});
+
+Object.assign(ROUTES.quran, {
+  de: "Koran",
+  fr: "Coran",
+  tr: "Kuran",
+  "zh-hans": "古兰经"
+});
+
+Object.assign(ROUTES.dhikr, {
+  de: "Dhikr",
+  fr: "Dhikr",
+  tr: "Zikir",
+  "zh-hans": "记念"
+});
+
+Object.assign(ROUTES.hadith, {
+  de: "Hadith",
+  fr: "Hadith",
+  tr: "Hadis",
+  "zh-hans": "圣训"
 });
 
 Object.assign(LOCALES, {
@@ -405,6 +437,75 @@ const ROOT_HOME_OVERRIDES = {
         answer: "Adantimer 会先尝试 GPS，需要时退回到 IP 定位，同时始终保留手动城市搜索。"
       }
     ]
+  }
+};
+
+const TOOL_HUB_CONTENT = {
+  en: {
+    eyebrow: "More Tools",
+    title: "Keep going with qibla, Quran, dhikr, and hadith",
+    intro: "Add more daily-use Islamic pages directly under the prayer schedule so visitors can move into qibla direction, Quran reading, dhikr, and hadith without leaving Adantimer.",
+    items: {
+      qibla: { label: "Qibla", description: "Open a qibla direction page alongside the live prayer schedule.", cta: "Open Qibla" },
+      quran: { label: "Quran", description: "Continue into a Quran page for quick daily reading and return visits.", cta: "Open Quran" },
+      dhikr: { label: "Dhikr", description: "Keep a dedicated dhikr page one tap away from the main prayer experience.", cta: "Open Dhikr" },
+      hadith: { label: "Hadith", description: "Jump into a hadith page for short reading and study sessions.", cta: "Open Hadith" }
+    }
+  },
+  ar: {
+    eyebrow: "أدوات إضافية",
+    title: "واصل إلى القبلة والقرآن والذكر والحديث",
+    intro: "أضف صفحات إسلامية يومية مباشرة أسفل جدول الصلاة حتى ينتقل الزائر إلى القبلة والقرآن والذكر والحديث من داخل Adantimer.",
+    items: {
+      qibla: { label: "القبلة", description: "افتح صفحة اتجاه القبلة بجانب جدول الصلاة المباشر.", cta: "افتح القبلة" },
+      quran: { label: "القرآن", description: "انتقل إلى صفحة قرآن للقراءة اليومية والعودة السريعة.", cta: "افتح القرآن" },
+      dhikr: { label: "الذكر", description: "اجعل صفحة الذكر متاحة مباشرة بجانب تجربة مواقيت الصلاة.", cta: "افتح الذكر" },
+      hadith: { label: "الحديث", description: "انتقل إلى صفحة حديث للقراءة السريعة والمراجعة.", cta: "افتح الحديث" }
+    }
+  },
+  de: {
+    eyebrow: "Weitere Funktionen",
+    title: "Weiter zu Qibla, Koran, Dhikr und Hadith",
+    intro: "Füge direkt unter dem Gebetsplan weitere islamische Seiten hinzu, damit Besucher innerhalb von Adantimer zu Qibla, Koran, Dhikr und Hadith wechseln können.",
+    items: {
+      qibla: { label: "Qibla", description: "Öffne eine Qibla-Seite zusammen mit dem aktuellen Gebetsplan.", cta: "Qibla öffnen" },
+      quran: { label: "Koran", description: "Wechsle auf eine Koran-Seite für tägliches Lesen und spätere Rückkehr.", cta: "Koran öffnen" },
+      dhikr: { label: "Dhikr", description: "Halte eine eigene Dhikr-Seite direkt neben den Gebetszeiten bereit.", cta: "Dhikr öffnen" },
+      hadith: { label: "Hadith", description: "Springe auf eine Hadith-Seite für kurze Lese- und Lernphasen.", cta: "Hadith öffnen" }
+    }
+  },
+  fr: {
+    eyebrow: "Autres fonctions",
+    title: "Continuer vers Qibla, Coran, Dhikr et Hadith",
+    intro: "Ajoute d'autres pages islamiques directement sous le planning afin que le visiteur puisse ouvrir la qibla, le Coran, le dhikr et le hadith sans quitter Adantimer.",
+    items: {
+      qibla: { label: "Qibla", description: "Ouvrez une page de direction de la qibla à côté du planning en direct.", cta: "Ouvrir Qibla" },
+      quran: { label: "Coran", description: "Accédez à une page Coran pour la lecture quotidienne et les retours rapides.", cta: "Ouvrir Coran" },
+      dhikr: { label: "Dhikr", description: "Gardez une page dhikr dédiée juste à côté des horaires de prière.", cta: "Ouvrir Dhikr" },
+      hadith: { label: "Hadith", description: "Passez à une page hadith pour des lectures courtes et régulières.", cta: "Ouvrir Hadith" }
+    }
+  },
+  tr: {
+    eyebrow: "Diger Araclar",
+    title: "Kible, Kuran, zikir ve hadis sayfalarina devam et",
+    intro: "Namaz takviminin hemen altina ek sayfalar ekleyerek ziyaretcinin Adantimer icinde kible, Kuran, zikir ve hadis sayfalarina gecmesini sagla.",
+    items: {
+      qibla: { label: "Kible", description: "Canli namaz takvimiyle birlikte bir kible sayfasi ac.", cta: "Kibleyi ac" },
+      quran: { label: "Kuran", description: "Gunluk okuma ve geri donusler icin bir Kuran sayfasina gec.", cta: "Kurani ac" },
+      dhikr: { label: "Zikir", description: "Ana namaz deneyiminin yaninda ozel bir zikir sayfasi tut.", cta: "Zikri ac" },
+      hadith: { label: "Hadis", description: "Kisa okuma ve inceleme icin bir hadis sayfasina git.", cta: "Hadisi ac" }
+    }
+  },
+  "zh-hans": {
+    eyebrow: "更多功能",
+    title: "继续进入 Qibla、Quran、Dhikr 和 Hadith 页面",
+    intro: "在主礼拜时间区块下方直接加入更多伊斯兰页面，让访问者可以在 Adantimer 内继续进入朝向、古兰经、记念与圣训页面。",
+    items: {
+      qibla: { label: "Qibla", description: "在实时礼拜时间旁打开朝向页面。", cta: "打开 Qibla" },
+      quran: { label: "Quran", description: "进入古兰经页面，方便每日阅读和再次访问。", cta: "打开 Quran" },
+      dhikr: { label: "Dhikr", description: "让记念页面紧贴主礼拜时间体验。", cta: "打开 Dhikr" },
+      hadith: { label: "Hadith", description: "进入圣训页面，适合短时间阅读和学习。", cta: "打开 Hadith" }
+    }
   }
 };
 
@@ -878,6 +979,7 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<aside class="next-prayer card featured-card" aria-live="polite">[\s\S]*?<\/aside>/, renderNextPrayerCard(copy))
     .replace(/<section class="card schedule-card" aria-labelledby="schedule-heading">[\s\S]*?<\/section>/, renderScheduleSection(copy))
     .replace(/<section class="card info-card" aria-labelledby="why-heading">[\s\S]*?<\/section>/, renderInfoSection(copy))
+    .replace(/<section class="card tools-hub" aria-labelledby="tools-heading">[\s\S]*?<\/section>/, renderToolsSection(copy))
     .replace(/<section class="card prose" aria-labelledby="cities-heading">[\s\S]*?<\/section>/, renderCitiesSection(copy))
     .replace(/<article class="card prose" aria-labelledby="about-heading">[\s\S]*?<\/article>/, renderAboutArticle(copy))
     .replace(/<section class="card prose" aria-labelledby="faq-heading">[\s\S]*?<\/section>/, renderFaqSection(copy))
@@ -1006,6 +1108,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
             answer: `The page highlights ${topic.toLowerCase()} while still loading the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.`
           }
         ],
+    ...buildToolHubCopy("en", pageType),
     footerText: place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city.",
     noscriptText: "JavaScript is required to load live prayer times and the next prayer countdown."
   };
@@ -1124,6 +1227,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
         answer: `تسلط الصفحة الضوء على ${topic} مع تحميل الجدول الكامل للفجر والظهر والعصر والمغرب والعشاء.`
       }
     ],
+    ...buildToolHubCopy("ar", pageType),
     footerText: place ? `مواقيت صلاة دقيقة في ${place} ومدن أخرى.` : "مواقيت صلاة دقيقة حسب المدينة.",
     noscriptText: "يتطلب عرض المواقيت الحية والعد التنازلي للصلاة القادمة تشغيل JavaScript."
   };
@@ -1208,6 +1312,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     faqEyebrow: locale.faqEyebrow,
     faqTitle: isHomeRoot && rootOverride ? rootOverride.faqTitle : locale.faqTitle(topic, place),
     faq: isHomeRoot && rootOverride ? rootOverride.faq : locale.faq(topic, place),
+    ...buildToolHubCopy(language, pageType),
     footerText: locale.footerText(place),
     noscriptText: locale.noscriptText
   };
@@ -1286,6 +1391,23 @@ ${copy.features.map(item => `          <li>${escapeHtml(item)}</li>`).join("\n")
       </section>`;
 }
 
+function renderToolsSection(copy) {
+  return `    <section class="card tools-hub" aria-labelledby="tools-heading">
+      <div class="tools-copy">
+        <p class="eyebrow">${escapeHtml(copy.toolsEyebrow)}</p>
+        <h2 id="tools-heading">${escapeHtml(copy.toolsTitle)}</h2>
+        <p>${escapeHtml(copy.toolsIntro)}</p>
+      </div>
+      <div class="tools-grid">
+${copy.toolCards.map(item => `        <a class="tool-link-card${item.active ? " is-active" : ""}" href="${escapeHtml(item.href)}" data-tool-type="${escapeHtml(item.type)}">
+          <strong class="tool-label">${escapeHtml(item.label)}</strong>
+          <span class="tool-description">${escapeHtml(item.description)}</span>
+          <span class="tool-cta">${escapeHtml(item.cta)}</span>
+        </a>`).join("\n")}
+      </div>
+    </section>`;
+}
+
 function renderCitiesSection(copy) {
   return `    <section class="card prose" aria-labelledby="cities-heading">
       <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
@@ -1353,6 +1475,24 @@ function renderInlineLinks(items, language) {
     .map(item => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`)
     .join(", ");
   return `${rest}, ${connector} <a href="${escapeHtml(last.href)}">${escapeHtml(last.label)}</a>.`;
+}
+
+function buildToolHubCopy(language, pageType) {
+  const locale = TOOL_HUB_CONTENT[language] || TOOL_HUB_CONTENT.en;
+  const toolTypes = ["qibla", "quran", "dhikr", "hadith"];
+  return {
+    toolsEyebrow: locale.eyebrow,
+    toolsTitle: locale.title,
+    toolsIntro: locale.intro,
+    toolCards: toolTypes.map(type => ({
+      type,
+      label: locale.items[type].label,
+      description: locale.items[type].description,
+      cta: locale.items[type].cta,
+      href: buildRoutePath(language, type),
+      active: pageType === type
+    }))
+  };
 }
 
 function normalizeLanguage(value) {
