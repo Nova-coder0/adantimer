@@ -443,8 +443,8 @@ const ROOT_HOME_OVERRIDES = {
 const TOOL_HUB_CONTENT = {
   en: {
     eyebrow: "More Tools",
-    title: "Keep going with qibla, Quran, dhikr, and hadith",
-    intro: "Add more daily-use Islamic pages directly under the prayer schedule so visitors can move into qibla direction, Quran reading, dhikr, and hadith without leaving Adantimer.",
+    title: "Open Qibla, Quran, Dhikr, and Hadith",
+    intro: "",
     items: {
       qibla: { label: "Qibla", description: "Open a qibla direction page alongside the live prayer schedule.", cta: "Open Qibla" },
       quran: { label: "Quran", description: "Continue into a Quran page for quick daily reading and return visits.", cta: "Open Quran" },
@@ -506,6 +506,63 @@ const TOOL_HUB_CONTENT = {
       dhikr: { label: "Dhikr", description: "让记念页面紧贴主礼拜时间体验。", cta: "打开 Dhikr" },
       hadith: { label: "Hadith", description: "进入圣训页面，适合短时间阅读和学习。", cta: "打开 Hadith" }
     }
+  }
+};
+
+const QIBLA_PANEL_CONTENT = {
+  en: {
+    eyebrow: "Qibla",
+    title: "Qibla Compass",
+    summary: "See the direction of the Kaaba from your current location or any city you search.",
+    placeFallback: "Current location",
+    statusIdle: "Allow location or search for a city to calculate qibla.",
+    bearingLabel: "Bearing from north",
+    distanceLabel: "Distance to Makkah"
+  },
+  ar: {
+    eyebrow: "\u0627\u0644\u0642\u0628\u0644\u0629",
+    title: "\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u0642\u0628\u0644\u0629",
+    summary: "\u0627\u0639\u0631\u0641 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0643\u0639\u0628\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629 \u062a\u0628\u062d\u062b \u0639\u0646\u0647\u0627.",
+    placeFallback: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u062d\u0627\u0644\u064a",
+    statusIdle: "\u0627\u0633\u0645\u062d \u0628\u0627\u0644\u0645\u0648\u0642\u0639 \u0623\u0648 \u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u062f\u064a\u0646\u0629 \u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0642\u0628\u0644\u0629.",
+    bearingLabel: "\u0627\u0644\u062f\u0631\u062c\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644",
+    distanceLabel: "\u0627\u0644\u0645\u0633\u0627\u0641\u0629 \u0625\u0644\u0649 \u0645\u0643\u0629"
+  },
+  de: {
+    eyebrow: "Qibla",
+    title: "Qibla-Kompass",
+    summary: "Sieh die Richtung der Kaaba von deinem aktuellen Standort oder jeder gesuchten Stadt.",
+    placeFallback: "Aktueller Standort",
+    statusIdle: "Erlaube den Standortzugriff oder suche eine Stadt, um die Qibla zu berechnen.",
+    bearingLabel: "Grad von Norden",
+    distanceLabel: "Entfernung nach Mekka"
+  },
+  fr: {
+    eyebrow: "Qibla",
+    title: "Boussole qibla",
+    summary: "Affiche la direction de la Kaaba depuis votre position actuelle ou n'importe quelle ville recherchee.",
+    placeFallback: "Position actuelle",
+    statusIdle: "Autorisez la position ou recherchez une ville pour calculer la qibla.",
+    bearingLabel: "Cap depuis le nord",
+    distanceLabel: "Distance jusqu'a La Mecque"
+  },
+  tr: {
+    eyebrow: "Kible",
+    title: "Kible pusulasi",
+    summary: "Bulundugun konumdan veya aradigin herhangi bir sehirden Kabe yonunu gosterir.",
+    placeFallback: "Guncel konum",
+    statusIdle: "Kibleyi hesaplamak icin konuma izin ver veya bir sehir ara.",
+    bearingLabel: "Kuzeyden derece",
+    distanceLabel: "Mekke uzakligi"
+  },
+  "zh-hans": {
+    eyebrow: "\u671d\u5411",
+    title: "\u671d\u5411\u7f57\u76d8",
+    summary: "\u6839\u636e\u5f53\u524d\u4f4d\u7f6e\u6216\u641c\u7d22\u7684\u57ce\u5e02\u663e\u793a\u5361\u5c14\u767d\u7684\u65b9\u5411\u3002",
+    placeFallback: "\u5f53\u524d\u4f4d\u7f6e",
+    statusIdle: "\u5141\u8bb8\u5b9a\u4f4d\u6216\u641c\u7d22\u57ce\u5e02\u4ee5\u8ba1\u7b97\u671d\u5411\u3002",
+    bearingLabel: "\u4ece\u6b63\u5317\u5f00\u59cb\u7684\u65b9\u5411",
+    distanceLabel: "\u8ddd\u9ea6\u52a0\u7684\u8ddd\u79bb"
   }
 };
 
@@ -979,6 +1036,7 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<aside class="next-prayer card featured-card" aria-live="polite">[\s\S]*?<\/aside>/, renderNextPrayerCard(copy))
     .replace(/<section class="card schedule-card" aria-labelledby="schedule-heading">[\s\S]*?<\/section>/, renderScheduleSection(copy))
     .replace(/<section class="card info-card" aria-labelledby="why-heading">[\s\S]*?<\/section>/, renderInfoSection(copy))
+    .replace(/<section id="qibla-panel" class="card qibla-panel" aria-labelledby="qibla-panel-heading" hidden>[\s\S]*?<\/section>/, renderQiblaPanelSection(copy))
     .replace(/<section class="card tools-hub" aria-labelledby="tools-heading">[\s\S]*?<\/section>/, renderToolsSection(copy))
     .replace(/<section class="card prose" aria-labelledby="cities-heading">[\s\S]*?<\/section>/, renderCitiesSection(copy))
     .replace(/<article class="card prose" aria-labelledby="about-heading">[\s\S]*?<\/article>/, renderAboutArticle(copy))
@@ -1108,6 +1166,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
             answer: `The page highlights ${topic.toLowerCase()} while still loading the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.`
           }
         ],
+    ...buildQiblaPanelCopy("en", pageType),
     ...buildToolHubCopy("en", pageType),
     footerText: place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city.",
     noscriptText: "JavaScript is required to load live prayer times and the next prayer countdown."
@@ -1227,6 +1286,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
         answer: `تسلط الصفحة الضوء على ${topic} مع تحميل الجدول الكامل للفجر والظهر والعصر والمغرب والعشاء.`
       }
     ],
+    ...buildQiblaPanelCopy("ar", pageType),
     ...buildToolHubCopy("ar", pageType),
     footerText: place ? `مواقيت صلاة دقيقة في ${place} ومدن أخرى.` : "مواقيت صلاة دقيقة حسب المدينة.",
     noscriptText: "يتطلب عرض المواقيت الحية والعد التنازلي للصلاة القادمة تشغيل JavaScript."
@@ -1312,6 +1372,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     faqEyebrow: locale.faqEyebrow,
     faqTitle: isHomeRoot && rootOverride ? rootOverride.faqTitle : locale.faqTitle(topic, place),
     faq: isHomeRoot && rootOverride ? rootOverride.faq : locale.faq(topic, place),
+    ...buildQiblaPanelCopy(language, pageType),
     ...buildToolHubCopy(language, pageType),
     footerText: locale.footerText(place),
     noscriptText: locale.noscriptText
@@ -1392,11 +1453,14 @@ ${copy.features.map(item => `          <li>${escapeHtml(item)}</li>`).join("\n")
 }
 
 function renderToolsSection(copy) {
+  const introMarkup = copy.toolsIntro
+    ? `\n        <p class="tools-intro">${escapeHtml(copy.toolsIntro)}</p>`
+    : "";
   return `    <section class="card tools-hub" aria-labelledby="tools-heading">
       <div class="tools-copy">
         <p class="eyebrow">${escapeHtml(copy.toolsEyebrow)}</p>
         <h2 id="tools-heading">${escapeHtml(copy.toolsTitle)}</h2>
-        <p>${escapeHtml(copy.toolsIntro)}</p>
+${introMarkup}
       </div>
       <div class="tools-grid">
 ${copy.toolCards.map(item => `        <a class="tool-link-card${item.active ? " is-active" : ""}" href="${escapeHtml(item.href)}" data-tool-type="${escapeHtml(item.type)}">
@@ -1404,6 +1468,46 @@ ${copy.toolCards.map(item => `        <a class="tool-link-card${item.active ? " 
           <span class="tool-description">${escapeHtml(item.description)}</span>
           <span class="tool-cta">${escapeHtml(item.cta)}</span>
         </a>`).join("\n")}
+      </div>
+    </section>`;
+}
+
+function renderQiblaPanelSection(copy) {
+  const hiddenAttribute = copy.showQiblaPanel ? "" : " hidden";
+  return `    <section id="qibla-panel" class="card qibla-panel" aria-labelledby="qibla-panel-heading"${hiddenAttribute}>
+      <div class="qibla-panel-copy">
+        <p class="eyebrow">${escapeHtml(copy.qiblaEyebrow)}</p>
+        <h2 id="qibla-panel-heading">${escapeHtml(copy.qiblaTitle)}</h2>
+        <p id="qibla-panel-summary">${escapeHtml(copy.qiblaSummary)}</p>
+      </div>
+      <div class="qibla-panel-grid">
+        <div class="qibla-compass-card">
+          <div class="qibla-compass" id="qibla-compass" aria-hidden="true">
+            <span class="qibla-cardinal qibla-cardinal-n">N</span>
+            <span class="qibla-cardinal qibla-cardinal-e">E</span>
+            <span class="qibla-cardinal qibla-cardinal-s">S</span>
+            <span class="qibla-cardinal qibla-cardinal-w">W</span>
+            <span class="qibla-compass-ring"></span>
+            <span class="qibla-compass-core"></span>
+            <span class="qibla-needle" id="qibla-needle"></span>
+          </div>
+        </div>
+        <div class="qibla-readout">
+          <div class="qibla-readout-head">
+            <strong id="qibla-place">${escapeHtml(copy.qiblaPlaceFallback)}</strong>
+            <span id="qibla-status">${escapeHtml(copy.qiblaStatusIdle)}</span>
+          </div>
+          <div class="qibla-stats">
+            <div class="qibla-stat">
+              <span id="qibla-bearing-label">${escapeHtml(copy.qiblaBearingLabel)}</span>
+              <strong id="qibla-bearing-value">-</strong>
+            </div>
+            <div class="qibla-stat">
+              <span id="qibla-distance-label">${escapeHtml(copy.qiblaDistanceLabel)}</span>
+              <strong id="qibla-distance-value">-</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </section>`;
 }
@@ -1483,7 +1587,7 @@ function buildToolHubCopy(language, pageType) {
   return {
     toolsEyebrow: locale.eyebrow,
     toolsTitle: locale.title,
-    toolsIntro: locale.intro,
+    toolsIntro: "",
     toolCards: toolTypes.map(type => ({
       type,
       label: locale.items[type].label,
@@ -1492,6 +1596,20 @@ function buildToolHubCopy(language, pageType) {
       href: buildRoutePath(language, type),
       active: pageType === type
     }))
+  };
+}
+
+function buildQiblaPanelCopy(language, pageType) {
+  const locale = QIBLA_PANEL_CONTENT[language] || QIBLA_PANEL_CONTENT.en;
+  return {
+    showQiblaPanel: pageType === "qibla",
+    qiblaEyebrow: locale.eyebrow,
+    qiblaTitle: locale.title,
+    qiblaSummary: locale.summary,
+    qiblaPlaceFallback: locale.placeFallback,
+    qiblaStatusIdle: locale.statusIdle,
+    qiblaBearingLabel: locale.bearingLabel,
+    qiblaDistanceLabel: locale.distanceLabel
   };
 }
 

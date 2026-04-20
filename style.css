@@ -403,8 +403,13 @@ a {
   gap: 22px;
 }
 
+.content-grid + .qibla-panel,
 .content-grid + .tools-hub {
   margin-top: 16px;
+}
+
+.qibla-panel + .tools-hub {
+  margin-top: 18px;
 }
 
 .content-grid + .prose,
@@ -424,6 +429,154 @@ a {
 .info-card,
 .prose {
   padding: 26px;
+}
+
+.qibla-panel {
+  padding: 26px;
+  display: grid;
+  gap: 20px;
+}
+
+.qibla-panel-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.qibla-compass-card {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(13, 107, 93, 0.14);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255, 252, 244, 0.96), rgba(244, 235, 213, 0.92));
+}
+
+.qibla-compass {
+  position: relative;
+  inline-size: min(100%, 280px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(13, 107, 93, 0.18);
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.92) 0 18%, rgba(247, 240, 223, 0.94) 18% 64%, rgba(232, 220, 192, 0.92) 64% 100%);
+  box-shadow:
+    inset 0 0 0 10px rgba(255, 255, 255, 0.32),
+    0 18px 36px rgba(57, 43, 24, 0.12);
+}
+
+.qibla-compass-ring,
+.qibla-compass-core,
+.qibla-needle {
+  position: absolute;
+  inset: 50%;
+}
+
+.qibla-compass-ring {
+  inline-size: 76%;
+  block-size: 76%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(13, 107, 93, 0.2);
+}
+
+.qibla-compass-core {
+  inline-size: 16px;
+  block-size: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #0d6b5d;
+  box-shadow: 0 0 0 6px rgba(13, 107, 93, 0.14);
+}
+
+.qibla-needle {
+  inline-size: 10px;
+  block-size: 40%;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: 50% calc(100% - 12px);
+}
+
+.qibla-needle::before,
+.qibla-needle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.qibla-needle::before {
+  top: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 92px solid #0d6b5d;
+  filter: drop-shadow(0 8px 12px rgba(13, 107, 93, 0.18));
+}
+
+.qibla-needle::after {
+  bottom: 0;
+  inline-size: 4px;
+  block-size: 56px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(185, 137, 40, 0.15), rgba(185, 137, 40, 0.72));
+}
+
+.qibla-cardinal {
+  position: absolute;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.qibla-cardinal-n { top: 14px; left: 50%; transform: translateX(-50%); }
+.qibla-cardinal-e { right: 16px; top: 50%; transform: translateY(-50%); }
+.qibla-cardinal-s { bottom: 14px; left: 50%; transform: translateX(-50%); }
+.qibla-cardinal-w { left: 16px; top: 50%; transform: translateY(-50%); }
+
+.qibla-readout {
+  display: grid;
+  gap: 18px;
+}
+
+.qibla-readout-head {
+  display: grid;
+  gap: 8px;
+}
+
+.qibla-readout-head strong {
+  font-size: 1.08rem;
+}
+
+.qibla-readout-head span {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.qibla-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.qibla-stat {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(13, 107, 93, 0.14);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.qibla-stat span {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.qibla-stat strong {
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .tools-hub {
@@ -617,6 +770,7 @@ body[dir="rtl"] .language-menu-list {
   .hero-grid,
   .content-grid,
   .seo-grid,
+  .qibla-panel-grid,
   .tools-hub {
     grid-template-columns: 1fr;
   }
@@ -633,10 +787,15 @@ body[dir="rtl"] .language-menu-list {
   .content-grid + .prose,
   .content-grid + .seo-grid,
   .content-grid + section.prose,
+  .qibla-panel + .tools-hub,
   .tools-hub + .prose,
   .tools-hub + .seo-grid,
   .tools-hub + section.prose {
     margin-top: 28px;
+  }
+
+  .qibla-compass {
+    inline-size: min(100%, 240px);
   }
 
   .tools-grid {
@@ -687,10 +846,12 @@ body[dir="rtl"] .language-menu-list {
   .schedule-card,
   .info-card,
   .prose,
+  .qibla-panel,
   .tools-hub {
     padding: 20px;
   }
 
+  .qibla-stats,
   .tools-grid {
     grid-template-columns: 1fr;
   }

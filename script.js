@@ -20,6 +20,17 @@ const setLocationButtonEl = document.getElementById("set-location-btn");
 const langButtons = Array.from(document.querySelectorAll(".lang-btn"));
 const canonicalEl = document.querySelector("link[rel='canonical']");
 const websiteSchemaEl = document.getElementById("website-schema");
+const qiblaPanelEl = document.getElementById("qibla-panel");
+const qiblaPanelEyebrowEl = qiblaPanelEl ? qiblaPanelEl.querySelector(".eyebrow") : null;
+const qiblaPanelHeadingEl = document.getElementById("qibla-panel-heading");
+const qiblaPanelSummaryEl = document.getElementById("qibla-panel-summary");
+const qiblaPlaceEl = document.getElementById("qibla-place");
+const qiblaStatusEl = document.getElementById("qibla-status");
+const qiblaBearingLabelEl = document.getElementById("qibla-bearing-label");
+const qiblaBearingValueEl = document.getElementById("qibla-bearing-value");
+const qiblaDistanceLabelEl = document.getElementById("qibla-distance-label");
+const qiblaDistanceValueEl = document.getElementById("qibla-distance-value");
+const qiblaNeedleEl = document.getElementById("qibla-needle");
 const pageType = document.body.dataset.page || "home";
 
 const LANGUAGE_ALIASES = {
@@ -294,8 +305,8 @@ const TOPIC_EXTENSIONS = {
 const TOOL_HUB_LOCALES = {
   en: {
     eyebrow: "More Tools",
-    title: "Keep going with qibla, Quran, dhikr, and hadith",
-    intro: "Add more daily-use Islamic pages directly under the prayer schedule so visitors can continue into qibla direction, Quran reading, dhikr, and hadith pages without leaving Adantimer.",
+    title: "Open Qibla, Quran, Dhikr, and Hadith",
+    intro: "",
     items: {
       qibla: { label: "Qibla", description: "Open a qibla direction page alongside the live prayer schedule.", cta: "Open Qibla" },
       quran: { label: "Quran", description: "Continue into a Quran page for quick daily reading and return visits.", cta: "Open Quran" },
@@ -360,6 +371,81 @@ const TOOL_HUB_LOCALES = {
   }
 };
 
+const QIBLA_PANEL_LOCALES = {
+  en: {
+    eyebrow: "Qibla",
+    title: "Qibla Compass",
+    summary: "See the direction of the Kaaba from your current location or any city you search.",
+    placeFallback: "Current location",
+    statusIdle: "Allow location or search for a city to calculate qibla.",
+    statusResolving: "Calculating qibla direction...",
+    statusError: "We couldn't calculate qibla right now. Search for a city and try again.",
+    statusReady: (place, bearing) => `${place} faces the qibla at ${bearing}\u00b0 from north.`,
+    bearingLabel: "Bearing from north",
+    distanceLabel: "Distance to Makkah"
+  },
+  ar: {
+    eyebrow: "\u0627\u0644\u0642\u0628\u0644\u0629",
+    title: "\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u0642\u0628\u0644\u0629",
+    summary: "\u0627\u0639\u0631\u0641 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0643\u0639\u0628\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629 \u062a\u0628\u062d\u062b \u0639\u0646\u0647\u0627.",
+    placeFallback: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u062d\u0627\u0644\u064a",
+    statusIdle: "\u0627\u0633\u0645\u062d \u0628\u0627\u0644\u0645\u0648\u0642\u0639 \u0623\u0648 \u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u062f\u064a\u0646\u0629 \u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0642\u0628\u0644\u0629.",
+    statusResolving: "\u062c\u0627\u0631\u064d \u062d\u0633\u0627\u0628 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629...",
+    statusError: "\u062a\u0639\u0630\u0631 \u062d\u0633\u0627\u0628 \u0627\u0644\u0642\u0628\u0644\u0629 \u0627\u0644\u0622\u0646. \u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u062f\u064a\u0646\u0629 \u0648\u062d\u0627\u0648\u0644 \u0645\u0631\u0629 \u0623\u062e\u0631\u0649.",
+    statusReady: (place, bearing) => `\u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 ${place} \u0647\u0648 ${bearing}\u00b0 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644.`,
+    bearingLabel: "\u0627\u0644\u062f\u0631\u062c\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644",
+    distanceLabel: "\u0627\u0644\u0645\u0633\u0627\u0641\u0629 \u0625\u0644\u0649 \u0645\u0643\u0629"
+  },
+  de: {
+    eyebrow: "Qibla",
+    title: "Qibla-Kompass",
+    summary: "Sieh die Richtung der Kaaba von deinem aktuellen Standort oder jeder gesuchten Stadt.",
+    placeFallback: "Aktueller Standort",
+    statusIdle: "Erlaube den Standortzugriff oder suche eine Stadt, um die Qibla zu berechnen.",
+    statusResolving: "Qibla-Richtung wird berechnet...",
+    statusError: "Die Qibla konnte gerade nicht berechnet werden. Suche nach einer Stadt und versuche es erneut.",
+    statusReady: (place, bearing) => `Die Qibla liegt von ${place} bei ${bearing}\u00b0 von Norden.`,
+    bearingLabel: "Grad von Norden",
+    distanceLabel: "Entfernung nach Mekka"
+  },
+  fr: {
+    eyebrow: "Qibla",
+    title: "Boussole qibla",
+    summary: "Affiche la direction de la Kaaba depuis votre position actuelle ou n'importe quelle ville recherchee.",
+    placeFallback: "Position actuelle",
+    statusIdle: "Autorisez la position ou recherchez une ville pour calculer la qibla.",
+    statusResolving: "Calcul de la direction de la qibla...",
+    statusError: "Impossible de calculer la qibla pour le moment. Recherchez une ville et reessayez.",
+    statusReady: (place, bearing) => `Depuis ${place}, la qibla est a ${bearing}\u00b0 depuis le nord.`,
+    bearingLabel: "Cap depuis le nord",
+    distanceLabel: "Distance jusqu'a La Mecque"
+  },
+  tr: {
+    eyebrow: "Kible",
+    title: "Kible pusulasi",
+    summary: "Bulundugun konumdan veya aradigin herhangi bir sehirden Kabe yonunu gosterir.",
+    placeFallback: "Guncel konum",
+    statusIdle: "Kibleyi hesaplamak icin konuma izin ver veya bir sehir ara.",
+    statusResolving: "Kible yonu hesaplaniyor...",
+    statusError: "Kible su anda hesaplanamadi. Bir sehir ara ve tekrar dene.",
+    statusReady: (place, bearing) => `${place} icin kible, kuzeyden ${bearing}\u00b0 yonundedir.`,
+    bearingLabel: "Kuzeyden derece",
+    distanceLabel: "Mekke uzakligi"
+  },
+  "zh-hans": {
+    eyebrow: "\u671d\u5411",
+    title: "\u671d\u5411\u7f57\u76d8",
+    summary: "\u6839\u636e\u5f53\u524d\u4f4d\u7f6e\u6216\u641c\u7d22\u7684\u57ce\u5e02\u663e\u793a\u5361\u5c14\u767d\u65b9\u5411\u3002",
+    placeFallback: "\u5f53\u524d\u4f4d\u7f6e",
+    statusIdle: "\u5141\u8bb8\u5b9a\u4f4d\u6216\u641c\u7d22\u57ce\u5e02\u4ee5\u8ba1\u7b97\u671d\u5411\u3002",
+    statusResolving: "\u6b63\u5728\u8ba1\u7b97\u671d\u5411...",
+    statusError: "\u76ee\u524d\u65e0\u6cd5\u8ba1\u7b97\u671d\u5411\u3002\u8bf7\u641c\u7d22\u57ce\u5e02\u540e\u91cd\u8bd5\u3002",
+    statusReady: (place, bearing) => `${place}\u7684\u671d\u5411\u4e3a\u76f8\u5bf9\u6b63\u5317 ${bearing}\u00b0\u3002`,
+    bearingLabel: "\u76f8\u5bf9\u6b63\u5317\u7684\u65b9\u5411",
+    distanceLabel: "\u8ddd\u79bb\u9ea6\u52a0"
+  }
+};
+
 Object.entries(TOPIC_EXTENSIONS).forEach(([lang, topics]) => {
   LOCALES[lang].topics = { ...LOCALES[lang].topics, ...topics };
 });
@@ -379,6 +465,9 @@ let countdownInterval = null;
 let nextPrayerData = null;
 let prayerSchedule = [];
 let loadingWatchdogId = null;
+let qiblaPanelState = "idle";
+
+const KAABA_COORDS = { lat: 21.4225, lng: 39.8262 };
 
 const REQUEST_TIMEOUTS = {
   ipLocation: 4000,
@@ -539,13 +628,21 @@ function renderToolsHub(locale) {
   if (!toolsSection || !locale.tools) return;
   const eyebrow = toolsSection.querySelector(".eyebrow");
   const heading = toolsSection.querySelector("h2");
-  const intro = toolsSection.querySelector(".tools-copy p:last-child");
+  const intro = toolsSection.querySelector(".tools-copy .tools-intro");
   const grid = toolsSection.querySelector(".tools-grid");
   const order = ["qibla", "quran", "dhikr", "hadith"];
 
   if (eyebrow) eyebrow.textContent = locale.tools.eyebrow;
   if (heading) heading.textContent = locale.tools.title;
-  if (intro) intro.textContent = locale.tools.intro;
+  if (intro) {
+    if (locale.tools.intro) {
+      intro.textContent = locale.tools.intro;
+      intro.hidden = false;
+    } else {
+      intro.hidden = true;
+      intro.textContent = "";
+    }
+  }
   if (!grid) return;
 
   grid.innerHTML = order.map(type => {
@@ -558,6 +655,89 @@ function renderToolsHub(locale) {
       <span class="tool-cta">${item.cta}</span>
     </a>`;
   }).join("");
+}
+
+function toRadians(value) {
+  return value * (Math.PI / 180);
+}
+
+function toDegrees(value) {
+  return value * (180 / Math.PI);
+}
+
+function normalizeDegrees(value) {
+  return (value % 360 + 360) % 360;
+}
+
+function calculateQiblaBearing(lat, lng) {
+  const latitude = toRadians(lat);
+  const longitude = toRadians(lng);
+  const kaabaLatitude = toRadians(KAABA_COORDS.lat);
+  const deltaLongitude = toRadians(KAABA_COORDS.lng - lng);
+  const y = Math.sin(deltaLongitude);
+  const x = Math.cos(latitude) * Math.tan(kaabaLatitude) - Math.sin(latitude) * Math.cos(deltaLongitude);
+  return normalizeDegrees(toDegrees(Math.atan2(y, x)));
+}
+
+function calculateDistanceKm(lat, lng) {
+  const earthRadiusKm = 6371;
+  const deltaLat = toRadians(KAABA_COORDS.lat - lat);
+  const deltaLng = toRadians(KAABA_COORDS.lng - lng);
+  const latitude = toRadians(lat);
+  const kaabaLatitude = toRadians(KAABA_COORDS.lat);
+  const a = Math.sin(deltaLat / 2) ** 2
+    + Math.cos(latitude) * Math.cos(kaabaLatitude) * Math.sin(deltaLng / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return earthRadiusKm * c;
+}
+
+function renderQiblaPanel(state = qiblaPanelState) {
+  if (!qiblaPanelEl) return;
+
+  if (pageType !== "qibla") {
+    qiblaPanelEl.hidden = true;
+    return;
+  }
+
+  qiblaPanelEl.hidden = false;
+  qiblaPanelState = state;
+  const locale = QIBLA_PANEL_LOCALES[language] || QIBLA_PANEL_LOCALES.en;
+  const numberLocale = (LOCALES[language] || LOCALES.en).code;
+  const place = getPlaceName(cityName, countryName);
+
+  if (qiblaPanelEyebrowEl) qiblaPanelEyebrowEl.textContent = locale.eyebrow;
+  if (qiblaPanelHeadingEl) qiblaPanelHeadingEl.textContent = locale.title;
+  if (qiblaPanelSummaryEl) qiblaPanelSummaryEl.textContent = locale.summary;
+  if (qiblaBearingLabelEl) qiblaBearingLabelEl.textContent = locale.bearingLabel;
+  if (qiblaDistanceLabelEl) qiblaDistanceLabelEl.textContent = locale.distanceLabel;
+  if (qiblaPlaceEl) qiblaPlaceEl.textContent = place || locale.placeFallback;
+
+  if (currentCoords && Number.isFinite(currentCoords.lat) && Number.isFinite(currentCoords.lng)) {
+    const bearing = calculateQiblaBearing(currentCoords.lat, currentCoords.lng);
+    const distanceKm = calculateDistanceKm(currentCoords.lat, currentCoords.lng);
+    const formattedBearing = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(bearing);
+    const formattedDistance = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(distanceKm);
+
+    if (qiblaNeedleEl) qiblaNeedleEl.style.transform = `translateX(-50%) rotate(${bearing}deg)`;
+    if (qiblaBearingValueEl) qiblaBearingValueEl.textContent = `${formattedBearing}\u00b0`;
+    if (qiblaDistanceValueEl) qiblaDistanceValueEl.textContent = `${formattedDistance} km`;
+    if (qiblaStatusEl) qiblaStatusEl.textContent = locale.statusReady(place || locale.placeFallback, formattedBearing);
+    qiblaPanelEl.dataset.state = "ready";
+    return;
+  }
+
+  if (qiblaNeedleEl) qiblaNeedleEl.style.transform = "translateX(-50%) rotate(0deg)";
+  if (qiblaBearingValueEl) qiblaBearingValueEl.textContent = "\u2014";
+  if (qiblaDistanceValueEl) qiblaDistanceValueEl.textContent = "\u2014";
+
+  const fallbackStatus = state === "error"
+    ? locale.statusError
+    : (state === "gps" || state === "ip" || state === "manual" || state === "recent"
+      ? locale.statusResolving
+      : locale.statusIdle);
+
+  if (qiblaStatusEl) qiblaStatusEl.textContent = fallbackStatus;
+  qiblaPanelEl.dataset.state = state;
 }
 
 function renderStaticContent() {
@@ -627,6 +807,7 @@ function renderStaticContent() {
   if (infoTitle) infoTitle.textContent = locale.infoTitle(topic);
   renderFeatureList(locale.features(topic));
   renderToolsHub(locale);
+  renderQiblaPanel(currentCoords ? "ready" : qiblaPanelState);
   const aboutArticle = document.querySelector(".seo-grid article.prose");
   if (aboutArticle) {
     const eyebrow = aboutArticle.querySelector(".eyebrow");
@@ -744,6 +925,7 @@ function renderAutoLoadFallback(locale) {
   prayerTimesEl.innerHTML = "";
   if (cityInput) cityInput.value = "";
   if (countryInput) countryInput.value = "";
+  renderQiblaPanel("idle");
 }
 
 function renderResolvingState(locale, mode = "detect", previewLocation = null) {
@@ -768,6 +950,7 @@ function renderResolvingState(locale, mode = "detect", previewLocation = null) {
     scheduleSummaryEl.textContent = locale.resolvingRecent ? locale.resolvingRecent(place) : `${currentLocationLabel}: ${place}`;
     locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
     locationEl.textContent = locale.loading;
+    renderQiblaPanel("recent");
     return;
   }
 
@@ -776,6 +959,7 @@ function renderResolvingState(locale, mode = "detect", previewLocation = null) {
     scheduleSummaryEl.textContent = locale.resolvingManual ? locale.resolvingManual(place) : `${locale.locationPrefix} ${place}`;
     locationStatusEl.textContent = `${locale.locationPrefix} ${place}`;
     locationEl.textContent = locale.loading;
+    renderQiblaPanel("manual");
     return;
   }
 
@@ -783,6 +967,7 @@ function renderResolvingState(locale, mode = "detect", previewLocation = null) {
   scheduleSummaryEl.textContent = mode === "ip" ? ipDetail : gpsDetail;
   locationStatusEl.textContent = mode === "ip" ? ipStatus : gpsStatus;
   locationEl.textContent = mode === "ip" ? ipDetail : gpsDetail;
+  renderQiblaPanel(mode === "ip" ? "ip" : "gps");
 }
 
 function armLoadingWatchdog(locale, softFail = false) {
@@ -849,6 +1034,7 @@ function renderScheduleSummary() {
   scheduleSummaryEl.textContent = place ? (locale.scheduleSummary ? locale.scheduleSummary(place) : `${locale.locationPrefix} ${place}`) : locale.searchPrompt;
   locationStatusEl.textContent = place ? `${locale.locationPrefix} ${place}` : locale.detect;
   locationEl.textContent = currentTimezone ? `${place || locale.detect} - ${locale.timezone(currentTimezone)}` : (place || locale.locating);
+  renderQiblaPanel(currentCoords ? "ready" : qiblaPanelState);
 }
 
 function getCurrentPrayer() {
@@ -1003,6 +1189,7 @@ async function loadPrayerTimes(resolvedLocation) {
     countdownEl.textContent = locale.permissionError;
     locationStatusEl.textContent = locale.permissionError;
     locationEl.textContent = locale.searchPrompt;
+    renderQiblaPanel("error");
     return;
   }
   currentCoords = { lat: Number(source.lat), lng: Number(source.lng) };
@@ -1052,6 +1239,7 @@ async function loadPrayerTimes(resolvedLocation) {
     countdownEl.textContent = locale.fetchError;
     locationStatusEl.textContent = locale.fetchError;
     locationEl.textContent = locale.searchPrompt;
+    renderQiblaPanel("error");
   }
 }
 
