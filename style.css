@@ -393,7 +393,7 @@ a {
 }
 
 .main-content {
-  padding: 26px 0 56px;
+  padding: 12px 0 56px;
 }
 
 .content-grid,
@@ -401,6 +401,12 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.7fr);
   gap: 22px;
+}
+
+.content-grid + .prose,
+.content-grid + .seo-grid,
+.content-grid + section.prose {
+  margin-top: 40px;
 }
 
 .seo-grid {
@@ -548,6 +554,12 @@ body[dir="rtl"] .language-menu-list {
   .section-head {
     align-items: start;
     flex-direction: column;
+  }
+
+  .content-grid + .prose,
+  .content-grid + .seo-grid,
+  .content-grid + section.prose {
+    margin-top: 28px;
   }
 }
 
