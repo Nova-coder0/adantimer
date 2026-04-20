@@ -1153,10 +1153,18 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     label: item.label,
     href: buildRoutePath(language, item.type)
   }));
-  const cityIntentLinks = locale.cityIntentLinks(place).map(item => ({
-    label: item.label,
-    href: buildRoutePath(language, item.type, item.city || sourceCity)
-  }));
+  const cityIntentLinks = locale.cityIntentLinks(place).map(item => {
+    const resolvedCity = item.city || sourceCity;
+    let label = item.label;
+    if (!place && item.city) {
+      label = label.replace(item.city, localizeCityName(item.city, language));
+    }
+
+    return {
+      label,
+      href: buildRoutePath(language, item.type, resolvedCity)
+    };
+  });
 
   return {
     activeLanguage: language,
