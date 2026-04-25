@@ -89,6 +89,63 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
 };
 
+const QIBLA_PAGE_COPY = {
+  en: {
+    button: "Show Qibla Direction",
+    heroSubtitle: place => place
+      ? `Use the compass below to align toward Makkah from ${place}.`
+      : "Use the compass below to calculate qibla direction from your current location or any city you search.",
+    pageDescription: place => place
+      ? `Check qibla direction from ${place}, see the bearing to Makkah, and use the live compass on supported phones.`
+      : "Check qibla direction from your current location or any city, see the bearing to Makkah, and use the live compass on supported phones."
+  },
+  ar: {
+    button: "\u0627\u0639\u0631\u0636 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629",
+    heroSubtitle: place => place
+      ? `\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0623\u062f\u0646\u0627\u0647 \u0644\u0645\u0639\u0631\u0641\u0629 \u0627\u062a\u062c\u0627\u0647 \u0645\u0643\u0629 \u0645\u0646 ${place}.`
+      : "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0623\u062f\u0646\u0627\u0647 \u0644\u062d\u0633\u0627\u0628 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629 \u062a\u0628\u062d\u062b \u0639\u0646\u0647\u0627.",
+    pageDescription: place => place
+      ? `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 ${place}\u060c \u0648\u0627\u0639\u0631\u0641 \u0632\u0627\u0648\u064a\u0629 \u0645\u0643\u0629\u060c \u0648\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629.`
+      : "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629\u060c \u0648\u0627\u0639\u0631\u0641 \u0632\u0627\u0648\u064a\u0629 \u0645\u0643\u0629\u060c \u0648\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629."
+  },
+  de: {
+    button: "Qibla-Richtung anzeigen",
+    heroSubtitle: place => place
+      ? `Nutze den Kompass unten, um die Richtung nach Mekka von ${place} aus auszurichten.`
+      : "Nutze den Kompass unten, um die Qibla von deinem aktuellen Standort oder jeder gesuchten Stadt aus zu berechnen.",
+    pageDescription: place => place
+      ? `Pr\u00fcfe die Qibla-Richtung von ${place}, sieh den Winkel nach Mekka und nutze den Live-Kompass auf unterst\u00fctzten Handys.`
+      : "Pr\u00fcfe die Qibla-Richtung von deinem aktuellen Standort oder jeder gesuchten Stadt, sieh den Winkel nach Mekka und nutze den Live-Kompass auf unterst\u00fctzten Handys."
+  },
+  fr: {
+    button: "Afficher la qibla",
+    heroSubtitle: place => place
+      ? `Utilisez la boussole ci-dessous pour vous orienter vers La Mecque depuis ${place}.`
+      : "Utilisez la boussole ci-dessous pour calculer la direction de la qibla depuis votre position actuelle ou n'importe quelle ville recherch\u00e9e.",
+    pageDescription: place => place
+      ? `Consultez la direction de la qibla depuis ${place}, voyez l'angle vers La Mecque et utilisez la boussole en direct sur les t\u00e9l\u00e9phones compatibles.`
+      : "Consultez la direction de la qibla depuis votre position actuelle ou n'importe quelle ville, voyez l'angle vers La Mecque et utilisez la boussole en direct sur les t\u00e9l\u00e9phones compatibles."
+  },
+  tr: {
+    button: "Kible Y\u00f6n\u00fcn\u00fc G\u00f6ster",
+    heroSubtitle: place => place
+      ? `A\u015fa\u011f\u0131daki pusulay\u0131 kullanarak ${place} konumundan Mekke y\u00f6n\u00fcn\u00fc hizala.`
+      : "A\u015fa\u011f\u0131daki pusulay\u0131 kullanarak mevcut konumundan veya arad\u0131\u011f\u0131n herhangi bir \u015fehirden kible y\u00f6n\u00fcn\u00fc hesapla.",
+    pageDescription: place => place
+      ? `${place} konumundan kible y\u00f6n\u00fcn\u00fc g\u00f6r, Mekke a\u00e7\u0131s\u0131n\u0131 incele ve desteklenen telefonlarda canl\u0131 pusulay\u0131 kullan.`
+      : "Mevcut konumundan veya herhangi bir \u015fehirden kible y\u00f6n\u00fcn\u00fc g\u00f6r, Mekke a\u00e7\u0131s\u0131n\u0131 incele ve desteklenen telefonlarda canl\u0131 pusulay\u0131 kullan."
+  },
+  "zh-hans": {
+    button: "\u663e\u793a Qibla \u65b9\u5411",
+    heroSubtitle: place => place
+      ? `\u4f7f\u7528\u4e0b\u65b9\u6307\u5357\u9488\uff0c\u4ece ${place} \u5bf9\u51c6\u9ea6\u52a0\u65b9\u5411\u3002`
+      : "\u4f7f\u7528\u4e0b\u65b9\u6307\u5357\u9488\uff0c\u4ece\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u641c\u7d22\u7684\u57ce\u5e02\u8ba1\u7b97 Qibla \u65b9\u5411\u3002",
+    pageDescription: place => place
+      ? `\u67e5\u770b ${place} \u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002`
+      : "\u67e5\u770b\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u57ce\u5e02\u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002"
+  }
+};
+
 const LOCALES = {
   en: {
     code: "en", dir: "ltr",
@@ -934,10 +991,13 @@ function renderStaticContent() {
   const locale = getLocale();
   const topic = getTopic(locale);
   const place = getPlaceName(cityName, countryName);
+  const qiblaPageCopy = QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en;
   document.documentElement.lang = locale.code;
   document.documentElement.dir = locale.dir;
   document.body.setAttribute("dir", locale.dir);
-  if (setLocationButtonEl) setLocationButtonEl.textContent = locale.button;
+  if (setLocationButtonEl) {
+    setLocationButtonEl.textContent = pageType === "qibla" ? qiblaPageCopy.button : locale.button;
+  }
   if (cityInput) cityInput.placeholder = locale.cityPlaceholder;
   if (countryInput) countryInput.placeholder = locale.countryPlaceholder;
   const cityLabel = document.querySelector('label[for="manual-city"]');
@@ -950,7 +1010,11 @@ function renderStaticContent() {
   const heroEyebrow = document.querySelector(".hero-copy .eyebrow");
   if (heroEyebrow) heroEyebrow.textContent = pageType === "home" ? locale.eyebrow : topic;
   if (heroHeadingEl) heroHeadingEl.textContent = locale.heroTitle(pageType, place, topic);
-  if (heroSubtitleEl) heroSubtitleEl.textContent = locale.heroSubtitle(pageType, place, topic);
+  if (heroSubtitleEl) {
+    heroSubtitleEl.textContent = pageType === "qibla"
+      ? qiblaPageCopy.heroSubtitle(place)
+      : locale.heroSubtitle(pageType, place, topic);
+  }
   const scheduleEyebrow = document.querySelector(".schedule-card .eyebrow");
   if (scheduleEyebrow) scheduleEyebrow.textContent = locale.today;
   const scheduleHeading = document.querySelector("#schedule-heading");
@@ -1044,8 +1108,11 @@ function applySeoMeta(city = "") {
   const locale = getLocale();
   const topic = getTopic(locale);
   const place = getPlaceName(city.trim(), countryName);
+  const qiblaPageCopy = QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en;
   const title = locale.pageTitle(pageType, place, topic);
-  const description = locale.pageDescription(pageType, place, topic);
+  const description = pageType === "qibla"
+    ? qiblaPageCopy.pageDescription(place)
+    : locale.pageDescription(pageType, place, topic);
   const url = buildPageUrl(language, pageType, city);
   document.title = title;
   setMetaContent("meta[name='description']", description);

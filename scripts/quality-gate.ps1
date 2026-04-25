@@ -61,6 +61,22 @@ function TestMojibake([string]$relativePath) {
   }
 }
 
+function TestNodeSyntax([string]$relativePath) {
+  $absolutePath = Join-Path $projectRoot $relativePath
+  if (-not (Test-Path $absolutePath)) {
+    AddFailure "Missing required file for syntax check: $relativePath"
+    return
+  }
+
+  $output = & node --check $absolutePath 2>&1
+  if ($LASTEXITCODE -eq 0) {
+    AddCheck "Node syntax check passed for $relativePath"
+  } else {
+    $details = ($output | Out-String).Trim()
+    AddFailure "Node syntax check failed for $relativePath`n$details"
+  }
+}
+
 function GetLiveResponse([string]$url) {
   $nodeScript = @'
 const https = require("https");
@@ -172,6 +188,9 @@ $requiredFiles = @(
 foreach ($file in $requiredFiles) {
   AssertTrue (Test-Path (Join-Path $projectRoot $file)) "Found $file" "Missing required file: $file"
 }
+
+TestNodeSyntax "script.js"
+TestNodeSyntax "api/render.js"
 
 try {
   $vercelConfig = Get-Content (Join-Path $projectRoot "vercel.json") -Raw | ConvertFrom-Json
