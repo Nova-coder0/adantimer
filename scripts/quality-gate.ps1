@@ -181,6 +181,7 @@ $requiredFiles = @(
   "sitemap.xml",
   "sitemap-core.xml",
   "api/render.js",
+  "data/quran-surahs.js",
   ".github/workflows/generate-sitemaps.yml",
   "tools/generate_sitemaps.py"
 )
@@ -201,8 +202,10 @@ try {
 }
 
 $indexHtml = ReadProjectFile "templates/index.html"
+$styleCss = ReadProjectFile "style.css"
 $scriptJs = ReadProjectFile "script.js"
 $renderJs = ReadProjectFile "api/render.js"
+$quranSurahs = ReadProjectFile "data/quran-surahs.js"
 $vercelJsonText = ReadProjectFile "vercel.json"
 $sitemapCore = ReadProjectFile "sitemap-core.xml"
 $sitemapIndex = ReadProjectFile "sitemap.xml"
@@ -224,6 +227,10 @@ AssertContains $indexHtml '"inLanguage": ["en", "ar", "de", "fr", "tr", "zh-Hans
 AssertContains $indexHtml '<script src="/script.js"></script>' "Homepage loads the main client script without stale cache-bust markers" "Homepage script loader drifted from the stable baseline"
 
 AssertContains $scriptJs 'function buildRelativeUrl(lang, type, city = "")' "Client keeps a single URL builder" "Client URL builder is missing"
+AssertContains $scriptJs 'function initQuranIndex()' "Client keeps the Quran index initializer" "Client Quran index initializer is missing"
+AssertContains $scriptJs 'function updateQuranIndexFilter(query = "")' "Client keeps the Quran index filter helper" "Client Quran index filter helper is missing"
+AssertContains $scriptJs 'pageType === "quran"' "Client handles the standalone Quran page separately" "Client does not separate the Quran page flow"
+AssertContains $scriptJs 'buildRelativeUrl(language, "quran")' "Client can navigate to localized Quran routes" "Client Quran route navigation is missing"
 AssertContains $scriptJs 'const TOOL_HUB_LOCALES = {' "Client keeps localized tool-hub copy" "Client tool-hub copy is missing"
 AssertContains $scriptJs 'const QIBLA_PANEL_LOCALES = {' "Client keeps localized qibla-panel copy" "Client qibla-panel copy is missing"
 AssertContains $scriptJs 'function renderToolsHub(locale)' "Client keeps the tools-hub renderer" "Client tools-hub renderer is missing"
@@ -270,6 +277,11 @@ AssertContains $renderJs 'if (pageType === "home" && !city)' "SSR renderer limit
 AssertContains $renderJs 'headers.vary = "accept-language";' "SSR renderer varies root home responses by Accept-Language" "SSR renderer is missing Accept-Language cache variation"
 AssertContains $renderJs 'function getAlternates(pageType, city)' "SSR renderer keeps alternate-link generation" "SSR renderer is missing alternate-link generation"
 AssertContains $renderJs 'function buildEnglishCopy' "SSR renderer keeps English copy generation" "SSR renderer is missing English copy generation"
+AssertContains $renderJs 'import { QURAN_SURAHS } from "../data/quran-surahs.js";' "SSR renderer imports the local Quran metadata" "SSR renderer is missing the local Quran metadata import"
+AssertContains $renderJs 'const QURAN_INDEX_CONTENT = {' "SSR renderer keeps the Quran index copy map" "SSR renderer is missing the Quran index copy map"
+AssertContains $renderJs 'function buildQuranIndexCopy(language, pageType)' "SSR renderer keeps the Quran index copy builder" "SSR renderer is missing the Quran index copy builder"
+AssertContains $renderJs 'function renderQuranIndexSection(copy)' "SSR renderer keeps the Quran index renderer" "SSR renderer is missing the Quran index renderer"
+AssertContains $renderJs 'copy.standalonePageType === "quran"' "SSR renderer treats Quran as a standalone page type" "SSR renderer is missing the standalone Quran page branch"
 AssertContains $renderJs 'const TOOL_HUB_CONTENT = {' "SSR renderer keeps server-rendered tool-hub copy" "SSR renderer is missing tool-hub copy"
 AssertContains $renderJs 'const QIBLA_PANEL_CONTENT = {' "SSR renderer keeps server-rendered qibla-panel copy" "SSR renderer is missing qibla-panel copy"
 AssertContains $renderJs 'qiblaSensorButton' "SSR renderer keeps qibla sensor copy" "SSR renderer is missing qibla sensor copy"
@@ -316,12 +328,17 @@ AssertContains $rewritesText '"/zh-hans"' "vercel.json includes Chinese rewrites
 AssertContains $sitemapCore 'https://www.adantimer.com/de/prayer-times' "Core sitemap includes German prayer routes" "Core sitemap is missing German prayer routes"
 AssertContains $sitemapCore 'https://www.adantimer.com/qibla' "Core sitemap includes the qibla page" "Core sitemap is missing the qibla page"
 AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/hadith' "Core sitemap includes the Chinese hadith page" "Core sitemap is missing the Chinese hadith page"
+AssertContains $sitemapCore 'https://www.adantimer.com/quran' "Core sitemap includes the Quran page" "Core sitemap is missing the Quran page"
 AssertContains $sitemapCore 'https://www.adantimer.com/fr/prayer-times' "Core sitemap includes French prayer routes" "Core sitemap is missing French prayer routes"
 AssertContains $sitemapCore 'https://www.adantimer.com/tr/prayer-times' "Core sitemap includes Turkish prayer routes" "Core sitemap is missing Turkish prayer routes"
 AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/isha-time' "Core sitemap includes Chinese prayer routes" "Core sitemap is missing Chinese prayer routes"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-core.xml.gz' "Sitemap index points to the core sitemap" "Sitemap index is missing the core sitemap"
 AssertContains $robots 'Sitemap: https://www.adantimer.com/sitemap.xml' "robots.txt points to the sitemap index" "robots.txt is missing the sitemap index reference"
 AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired to the generator script" "Sitemap workflow no longer calls the generator script"
+AssertContains $styleCss '.quran-surah-grid {' "Stylesheet includes the Quran surah grid" "Stylesheet is missing the Quran surah grid styles"
+AssertContains $styleCss 'body[data-page="quran"] .hero-grid {' "Stylesheet includes the standalone Quran hero layout" "Stylesheet is missing the standalone Quran hero layout"
+AssertContains $quranSurahs 'export const QURAN_SURAHS = [' "Local Quran metadata exports the surah list" "Local Quran metadata export is missing"
+AssertContains $quranSurahs 'slug: "al-fatihah"' "Local Quran metadata includes Surah Al-Fatihah" "Local Quran metadata is missing Surah Al-Fatihah"
 
 TestMojibake "templates/index.html"
 TestMojibake "script.js"
@@ -330,6 +347,7 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
+  TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')
