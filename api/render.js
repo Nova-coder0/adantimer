@@ -1836,6 +1836,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         ? DHIKR_INDEX_CONTENT.en.noscriptText
         : "JavaScript is required to load live prayer times and the next prayer countdown."
   };
+  return copy;
 }
 
 function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReaderData }) {
@@ -3176,6 +3177,7 @@ function buildDhikrIndexCopy(language, pageType) {
     footerText: locale.footerText,
     noscriptText: locale.noscriptText
   };
+  return copy;
 }
 
 function buildQiblaPanelCopy(language, pageType) {
