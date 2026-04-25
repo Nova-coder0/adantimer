@@ -23,6 +23,7 @@ const languageButtons = [...langButtons, ...langOptionButtons];
 const canonicalEl = document.querySelector("link[rel='canonical']");
 const websiteSchemaEl = document.getElementById("website-schema");
 const quranSearchInputEl = document.getElementById("quran-search");
+const quranSearchClearEl = document.getElementById("quran-search-clear");
 const quranSearchCountEl = document.getElementById("quran-search-count");
 const quranSearchEmptyEl = document.getElementById("quran-search-empty");
 const quranSurahGridEl = document.getElementById("quran-surah-grid");
@@ -156,24 +157,48 @@ const QIBLA_PAGE_COPY = {
 
 const QURAN_INDEX_LOCALES = {
   en: {
-    searchCount: count => `${count} surahs available`
+    searchCount: (visible, total, hasQuery) => hasQuery ? `${visible} of ${total} surahs shown` : `${total} surahs available`,
+    emptyState: query => `No surah matched "${query}".`,
+    clearLabel: "Clear search"
   },
   ar: {
-    searchCount: count => `${count} سورة متاحة`
+    searchCount: (visible, total, hasQuery) => hasQuery ? `${visible} من ${total} سورة ظاهرة` : `${total} سورة متاحة`,
+    emptyState: query => `لا توجد سورة تطابق "${query}".`,
+    clearLabel: "مسح البحث"
   },
   de: {
-    searchCount: count => `${count} Suren verfügbar`
+    searchCount: (visible, total, hasQuery) => hasQuery ? `${visible} von ${total} Suren angezeigt` : `${total} Suren verfügbar`,
+    emptyState: query => `Keine Sure passt zu "${query}".`,
+    clearLabel: "Suche löschen"
   },
   fr: {
-    searchCount: count => `${count} sourates disponibles`
+    searchCount: (visible, total, hasQuery) => hasQuery ? `${visible} sur ${total} sourates affichées` : `${total} sourates disponibles`,
+    emptyState: query => `Aucune sourate ne correspond à "${query}".`,
+    clearLabel: "Effacer la recherche"
   },
   tr: {
-    searchCount: count => `${count} sure hazır`
+    searchCount: (visible, total, hasQuery) => hasQuery ? `${visible} / ${total} sure gösteriliyor` : `${total} sure hazır`,
+    emptyState: query => `"${query}" ile eşleşen sure bulunamadı.`,
+    clearLabel: "Aramayı temizle"
   },
   "zh-hans": {
-    searchCount: count => `共 ${count} 章`
+    searchCount: (visible, total, hasQuery) => hasQuery ? `显示 ${visible} / ${total} 章` : `共 ${total} 章`,
+    emptyState: query => `没有匹配“${query}”的章节。`,
+    clearLabel: "清除搜索"
   }
 };
+
+function normalizeForSearch(value = "") {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "")
+    .replace(/[٠-٩]/g, digit => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit)))
+    .replace(/[^a-z0-9\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\u4e00-\u9fff\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 const LOCALES = {
   en: {
@@ -1225,21 +1250,31 @@ function getCurrentDocumentLanguage() {
 function updateQuranIndexFilter(query = "") {
   if (!quranSurahGridEl) return;
   const locale = QURAN_INDEX_LOCALES[language] || QURAN_INDEX_LOCALES.en;
-  const normalizedQuery = String(query || "").trim().toLowerCase();
+  const rawQuery = String(query || "").trim();
+  const normalizedQuery = normalizeForSearch(rawQuery);
   let visibleCount = 0;
+  const totalCount = quranSurahGridEl.querySelectorAll(".quran-surah-card").length;
 
   quranSurahGridEl.querySelectorAll(".quran-surah-card").forEach(card => {
-    const searchable = (card.dataset.search || "").toLowerCase();
+    const searchable = normalizeForSearch(card.dataset.search || "");
     const matches = !normalizedQuery || searchable.includes(normalizedQuery);
     card.hidden = !matches;
     if (matches) visibleCount += 1;
   });
 
   if (quranSearchCountEl) {
-    quranSearchCountEl.textContent = locale.searchCount(visibleCount);
+    quranSearchCountEl.textContent = locale.searchCount(visibleCount, totalCount, Boolean(normalizedQuery));
   }
   if (quranSearchEmptyEl) {
     quranSearchEmptyEl.hidden = visibleCount !== 0;
+    if (!quranSearchEmptyEl.hidden) {
+      quranSearchEmptyEl.textContent = locale.emptyState(rawQuery || normalizedQuery);
+    }
+  }
+  if (quranSearchClearEl) {
+    quranSearchClearEl.hidden = !normalizedQuery;
+    quranSearchClearEl.setAttribute("aria-label", locale.clearLabel);
+    quranSearchClearEl.setAttribute("title", locale.clearLabel);
   }
 }
 
@@ -1249,6 +1284,20 @@ function initQuranIndex() {
     quranSearchInputEl.dataset.bound = "true";
     quranSearchInputEl.addEventListener("input", event => {
       updateQuranIndexFilter(event.target.value);
+    });
+    quranSearchInputEl.addEventListener("keydown", event => {
+      if (event.key === "Escape" && quranSearchInputEl.value) {
+        quranSearchInputEl.value = "";
+        updateQuranIndexFilter("");
+      }
+    });
+  }
+  if (quranSearchClearEl && quranSearchClearEl.dataset.bound !== "true") {
+    quranSearchClearEl.dataset.bound = "true";
+    quranSearchClearEl.addEventListener("click", () => {
+      quranSearchInputEl.value = "";
+      updateQuranIndexFilter("");
+      quranSearchInputEl.focus();
     });
   }
   updateQuranIndexFilter(quranSearchInputEl.value);

@@ -2068,7 +2068,10 @@ function renderHeroCopy(copy) {
 
           <div class="quran-search-bar">
             <label class="sr-only" for="quran-search">${escapeHtml(copy.quranSearchLabel)}</label>
-            <input type="search" id="quran-search" class="quran-search-input" placeholder="${escapeHtml(copy.quranSearchPlaceholder)}" autocomplete="off">
+            <div class="quran-search-row">
+              <input type="search" id="quran-search" class="quran-search-input" placeholder="${escapeHtml(copy.quranSearchPlaceholder)}" autocomplete="off">
+              <button type="button" id="quran-search-clear" class="quran-search-clear" hidden aria-label="${escapeHtml(copy.quranClearLabel)}" title="${escapeHtml(copy.quranClearLabel)}">&times;</button>
+            </div>
             <p class="muted quran-search-hint">${escapeHtml(copy.quranSearchHint)}</p>
           </div>
 
@@ -2099,6 +2102,10 @@ ${copy.quranStats.map(item => `            <div class="quran-hero-stat">
             <div class="quran-hero-stat">
               <strong>${escapeHtml(copy.quranRevelationValue || "")}</strong>
               <span>${escapeHtml(copy.quranRevelationStatLabel || "")}</span>
+            </div>
+            <div class="quran-hero-stat">
+              <strong>${escapeHtml(copy.quranPositionValue || "")}</strong>
+              <span>${escapeHtml(copy.quranPositionStatLabel || "")}</span>
             </div>
           </div>
         </section>`;
@@ -2314,6 +2321,10 @@ function renderQuranSurahSection(copy) {
           <strong>${escapeHtml(copy.quranNext.name)}</strong>
         </a>`
     : "";
+  const indexMarkup = `<a class="quran-nav-card quran-nav-card-index" href="${escapeHtml(copy.quranIndexHref)}">
+          <span class="quran-nav-label">${escapeHtml(copy.quranIndexNavLabel)}</span>
+          <strong>${escapeHtml(copy.quranBackLabel)}</strong>
+        </a>`;
 
   return `    <section class="quran-reader" aria-labelledby="quran-reader-heading">
       <section class="card quran-reader-card">
@@ -2335,6 +2346,7 @@ ${ayahMarkup}
       </section>
       <section class="quran-nav-grid" aria-label="${escapeHtml(copy.quranNavigationAria)}">
 ${previousMarkup}
+${indexMarkup}
 ${nextMarkup}
       </section>
 ${renderFaqSection(copy)}
@@ -2532,6 +2544,7 @@ function buildQuranIndexCopy(language, pageType) {
       quranSearchLabel: "",
       quranSearchPlaceholder: "",
       quranSearchHint: "",
+      quranClearLabel: "",
       quranSearchCountText: "",
       quranEmptyState: "",
       quranSectionEyebrow: "",
@@ -2542,6 +2555,14 @@ function buildQuranIndexCopy(language, pageType) {
 
   const locale = QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en;
   const revelationLocale = REVELATION_LABELS[language] || REVELATION_LABELS.en;
+  const quranClearLabels = {
+    en: "Clear search",
+    ar: "مسح البحث",
+    de: "Suche löschen",
+    fr: "Effacer la recherche",
+    tr: "Aramayi temizle",
+    "zh-hans": "清除搜索"
+  };
   const surahs = QURAN_SURAHS.map(item => {
     const revelationKey = item.revelation === "madinah" || item.revelation === "medinan"
       ? "medinan"
@@ -2572,7 +2593,9 @@ function buildQuranIndexCopy(language, pageType) {
         item.slug,
         item.nameSimple,
         item.nameArabic,
-        item.translatedName
+        item.translatedName,
+        revelationLabel,
+        revelationKey
       ].join(" ").toLowerCase()
     };
   });
@@ -2586,6 +2609,7 @@ function buildQuranIndexCopy(language, pageType) {
     quranSearchLabel: locale.searchLabel,
     quranSearchPlaceholder: locale.searchPlaceholder,
     quranSearchHint: locale.searchHint,
+    quranClearLabel: quranClearLabels[language] || quranClearLabels.en,
     quranSearchCountText: locale.searchCount(surahs.length),
     quranEmptyState: locale.emptyState,
     quranStats: locale.stats,
@@ -2620,6 +2644,15 @@ function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
 
   const locale = QURAN_SURAH_CONTENT[language] || QURAN_SURAH_CONTENT.en;
   const revelationLocale = REVELATION_LABELS[language] || REVELATION_LABELS.en;
+  const quranSurahUi = {
+    en: { indexLabel: "All surahs", positionLabel: "Position" },
+    ar: { indexLabel: "جميع السور", positionLabel: "الموضع" },
+    de: { indexLabel: "Alle Suren", positionLabel: "Position" },
+    fr: { indexLabel: "Toutes les sourates", positionLabel: "Position" },
+    tr: { indexLabel: "Tum sureler", positionLabel: "Konum" },
+    "zh-hans": { indexLabel: "全部章节", positionLabel: "位置" }
+  };
+  const surahUi = quranSurahUi[language] || quranSurahUi.en;
   const revelationKey = surah.revelation === "madinah" || surah.revelation === "medinan" ? "medinan" : "meccan";
   const revelationLabel = revelationLocale[revelationKey];
   const neighbors = getAdjacentQuranSurahs(surah.slug);
@@ -2645,9 +2678,12 @@ function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
     quranSectionIntro: locale.sectionIntro(surah),
     quranIndexHref: buildRoutePath(language, "quran"),
     quranBackLabel: locale.backLabel,
+    quranIndexNavLabel: surahUi.indexLabel,
     quranNavigationAria: surah.nameSimple,
     quranRevelationLabel: `${locale.revelationPrefix}: ${revelationLabel}`,
     quranAyahCountLabel: ayahCountText,
+    quranPositionValue: `${surah.id} / ${QURAN_SURAHS.length}`,
+    quranPositionStatLabel: surahUi.positionLabel,
     quranAyahs: surahReaderData.ayahs,
     quranEmptyText: surahReaderData.hasFetchError ? locale.emptyText : locale.emptyText,
     quranPrevious: neighbors.previous
