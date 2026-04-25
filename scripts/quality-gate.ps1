@@ -229,6 +229,7 @@ AssertContains $scriptJs 'const QIBLA_PANEL_LOCALES = {' "Client keeps localized
 AssertContains $scriptJs 'function renderToolsHub(locale)' "Client keeps the tools-hub renderer" "Client tools-hub renderer is missing"
 AssertContains $scriptJs 'function calculateQiblaBearing(lat, lng)' "Client keeps the qibla-bearing calculator" "Client qibla-bearing calculator is missing"
 AssertContains $scriptJs 'function renderQiblaPanel(state = qiblaPanelState)' "Client keeps the qibla-panel renderer" "Client qibla-panel renderer is missing"
+AssertContains $scriptJs 'function setQiblaCompassVisualState(bearing = null)' "Client keeps the qibla compass visual-state helper" "Client qibla compass visual-state helper is missing"
 AssertContains $scriptJs 'async function enableLiveCompass()' "Client keeps the live compass permission flow" "Client live compass permission flow is missing"
 AssertContains $scriptJs 'function readDeviceHeading(event)' "Client keeps the device-heading reader" "Client device-heading reader is missing"
 AssertContains $scriptJs 'async function loadQiblaCompass(resolvedLocation)' "Client keeps the standalone qibla loader" "Client standalone qibla loader is missing"
@@ -276,6 +277,7 @@ AssertContains $renderJs 'function buildToolHubCopy(language, pageType)' "SSR re
 AssertContains $renderJs 'function renderToolsSection(copy)' "SSR renderer keeps the tools-section renderer" "SSR renderer is missing the tools-section renderer"
 AssertContains $renderJs 'function buildQiblaPanelCopy(language, pageType)' "SSR renderer keeps the qibla-panel builder" "SSR renderer is missing the qibla-panel builder"
 AssertContains $renderJs 'function renderQiblaPanelSection(copy)' "SSR renderer keeps the qibla-panel renderer" "SSR renderer is missing the qibla-panel renderer"
+AssertContains $renderJs 'qiblaKaabaLabel' "SSR renderer keeps the qibla Kaaba marker label" "SSR renderer is missing the qibla Kaaba marker label"
 AssertContains $renderJs 'qibla: { en: "Qibla Direction"' "SSR renderer defines the qibla route" "SSR renderer is missing the qibla route"
 AssertContains $renderJs 'function buildArabicCopy' "SSR renderer keeps Arabic copy generation" "SSR renderer is missing Arabic copy generation"
 AssertContains $renderJs 'function buildCopy({ language, pageType, place, sourceCity, topic })' "SSR renderer keeps the shared copy entry point" "SSR renderer is missing the shared copy entry point"
@@ -327,7 +329,7 @@ TestMojibake "script.js"
 if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
-  TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button')
+  TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')

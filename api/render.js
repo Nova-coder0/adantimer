@@ -514,6 +514,7 @@ const QIBLA_PANEL_CONTENT = {
     eyebrow: "Qibla",
     title: "Qibla Compass",
     summary: "See the direction of the Kaaba from your current location or any city you search.",
+    kaabaLabel: "Kaaba",
     placeFallback: "Current location",
     statusIdle: "Allow location or search for a city to calculate qibla.",
     bearingLabel: "Bearing from north",
@@ -523,6 +524,7 @@ const QIBLA_PANEL_CONTENT = {
     eyebrow: "\u0627\u0644\u0642\u0628\u0644\u0629",
     title: "\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u0642\u0628\u0644\u0629",
     summary: "\u0627\u0639\u0631\u0641 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0643\u0639\u0628\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629 \u062a\u0628\u062d\u062b \u0639\u0646\u0647\u0627.",
+    kaabaLabel: "\u0627\u0644\u0643\u0639\u0628\u0629",
     placeFallback: "\u0627\u0644\u0645\u0648\u0642\u0639 \u0627\u0644\u062d\u0627\u0644\u064a",
     statusIdle: "\u0627\u0633\u0645\u062d \u0628\u0627\u0644\u0645\u0648\u0642\u0639 \u0623\u0648 \u0627\u0628\u062d\u062b \u0639\u0646 \u0645\u062f\u064a\u0646\u0629 \u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0642\u0628\u0644\u0629.",
     bearingLabel: "\u0627\u0644\u062f\u0631\u062c\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644",
@@ -532,6 +534,7 @@ const QIBLA_PANEL_CONTENT = {
     eyebrow: "Qibla",
     title: "Qibla-Kompass",
     summary: "Sieh die Richtung der Kaaba von deinem aktuellen Standort oder jeder gesuchten Stadt.",
+    kaabaLabel: "Kaaba",
     placeFallback: "Aktueller Standort",
     statusIdle: "Erlaube den Standortzugriff oder suche eine Stadt, um die Qibla zu berechnen.",
     bearingLabel: "Grad von Norden",
@@ -541,6 +544,7 @@ const QIBLA_PANEL_CONTENT = {
     eyebrow: "Qibla",
     title: "Boussole qibla",
     summary: "Affiche la direction de la Kaaba depuis votre position actuelle ou n'importe quelle ville recherchee.",
+    kaabaLabel: "Kaaba",
     placeFallback: "Position actuelle",
     statusIdle: "Autorisez la position ou recherchez une ville pour calculer la qibla.",
     bearingLabel: "Cap depuis le nord",
@@ -550,6 +554,7 @@ const QIBLA_PANEL_CONTENT = {
     eyebrow: "Kible",
     title: "Kible pusulasi",
     summary: "Bulundugun konumdan veya aradigin herhangi bir sehirden Kabe yonunu gosterir.",
+    kaabaLabel: "Kabe",
     placeFallback: "Guncel konum",
     statusIdle: "Kibleyi hesaplamak icin konuma izin ver veya bir sehir ara.",
     bearingLabel: "Kuzeyden derece",
@@ -559,6 +564,7 @@ const QIBLA_PANEL_CONTENT = {
     eyebrow: "\u671d\u5411",
     title: "\u671d\u5411\u7f57\u76d8",
     summary: "\u6839\u636e\u5f53\u524d\u4f4d\u7f6e\u6216\u641c\u7d22\u7684\u57ce\u5e02\u663e\u793a\u5361\u5c14\u767d\u7684\u65b9\u5411\u3002",
+    kaabaLabel: "Kaaba",
     placeFallback: "\u5f53\u524d\u4f4d\u7f6e",
     statusIdle: "\u5141\u8bb8\u5b9a\u4f4d\u6216\u641c\u7d22\u57ce\u5e02\u4ee5\u8ba1\u7b97\u671d\u5411\u3002",
     bearingLabel: "\u4ece\u6b63\u5317\u5f00\u59cb\u7684\u65b9\u5411",
@@ -1704,13 +1710,21 @@ function renderQiblaPanelSection(copy) {
       <div class="qibla-panel-grid">
         <div class="qibla-compass-card">
           <div class="qibla-compass" id="qibla-compass" aria-hidden="true">
-            <span class="qibla-cardinal qibla-cardinal-n">N</span>
-            <span class="qibla-cardinal qibla-cardinal-e">E</span>
-            <span class="qibla-cardinal qibla-cardinal-s">S</span>
-            <span class="qibla-cardinal qibla-cardinal-w">W</span>
-            <span class="qibla-compass-ring"></span>
-            <span class="qibla-compass-core"></span>
-            <span class="qibla-needle" id="qibla-needle"></span>
+            <span class="qibla-forward-pointer"></span>
+            <div class="qibla-dial" id="qibla-dial">
+              <span class="qibla-cardinal qibla-cardinal-n">N</span>
+              <span class="qibla-cardinal qibla-cardinal-e">E</span>
+              <span class="qibla-cardinal qibla-cardinal-s">S</span>
+              <span class="qibla-cardinal qibla-cardinal-w">W</span>
+              <span class="qibla-compass-ring"></span>
+              <span class="qibla-needle" id="qibla-needle">
+                <span class="qibla-bearing-line"></span>
+              </span>
+              <span class="qibla-kaaba-marker" id="qibla-kaaba-marker">
+                <span class="qibla-kaaba-badge">${escapeHtml(copy.qiblaKaabaLabel)}</span>
+              </span>
+              <span class="qibla-compass-core"></span>
+            </div>
           </div>
         </div>
         <div class="qibla-readout">
@@ -1857,6 +1871,7 @@ function buildQiblaPanelCopy(language, pageType) {
     qiblaEyebrow: locale.eyebrow,
     qiblaTitle: locale.title,
     qiblaSummary: locale.summary,
+    qiblaKaabaLabel: locale.kaabaLabel || QIBLA_PANEL_CONTENT.en.kaabaLabel,
     qiblaPlaceFallback: locale.placeFallback,
     qiblaStatusIdle: locale.statusIdle,
     qiblaSensorButton: locale.sensorButton || QIBLA_PANEL_CONTENT.en.sensorButton,
