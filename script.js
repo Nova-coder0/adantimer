@@ -521,7 +521,7 @@ Object.assign(TOOL_HUB_LOCALES["zh-hans"], { title: "\u4f0a\u65af\u5170\u5de5\u5
 Object.assign(QIBLA_PANEL_LOCALES.en, {
   sensorButton: "Enable live compass",
   sensorHintIdle: "On phones with a compass sensor, enable the live compass so the qibla arrow turns as you rotate your device.",
-  sensorHintActive: "Live compass is active. Turn your device until the qibla arrow points at the Kaaba symbol.",
+  sensorHintActive: "Live compass is active. Turn your device until the moving qibla arrow aligns with the Kaaba symbol.",
   sensorHintPrompt: "Tap the button to allow compass access on this device.",
   sensorHintUnavailable: "Live compass is unavailable here. The page is showing the qibla bearing from north.",
   sensorHintDenied: "Compass access was denied. The page is showing the qibla bearing from north."
@@ -530,7 +530,7 @@ Object.assign(QIBLA_PANEL_LOCALES.en, {
 Object.assign(QIBLA_PANEL_LOCALES.ar, {
   sensorButton: "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629",
   sensorHintIdle: "\u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u062a\u064a \u062a\u062f\u0639\u0645 \u062d\u0633\u0627\u0633 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u064a\u0645\u0643\u0646\u0643 \u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0644\u064a\u062f\u0648\u0631 \u0633\u0647\u0645 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0639 \u062d\u0631\u0643\u0629 \u0627\u0644\u062c\u0647\u0627\u0632.",
-  sensorHintActive: "\u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u062a\u0639\u0645\u0644 \u0627\u0644\u0622\u0646. \u062d\u0631\u0651\u0643 \u062c\u0647\u0627\u0632\u0643 \u062d\u062a\u0649 \u064a\u0634\u064a\u0631 \u0633\u0647\u0645 \u0627\u0644\u0642\u0628\u0644\u0629 \u0625\u0644\u0649 \u0631\u0645\u0632 \u0627\u0644\u0643\u0639\u0628\u0629.",
+  sensorHintActive: "\u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u062a\u0639\u0645\u0644 \u0627\u0644\u0622\u0646. \u062d\u0631\u0651\u0643 \u062c\u0647\u0627\u0632\u0643 \u062d\u062a\u0649 \u064a\u062a\u0637\u0627\u0628\u0642 \u0633\u0647\u0645 \u0627\u0644\u0642\u0628\u0644\u0629 \u0627\u0644\u0645\u062a\u062d\u0631\u0643 \u0645\u0639 \u0631\u0645\u0632 \u0627\u0644\u0643\u0639\u0628\u0629.",
   sensorHintPrompt: "\u0627\u0636\u063a\u0637 \u0627\u0644\u0632\u0631 \u0644\u0644\u0633\u0645\u0627\u062d \u0628\u0627\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u062c\u0647\u0627\u0632.",
   sensorHintUnavailable: "\u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629 \u0647\u0646\u0627. \u064a\u062a\u0645 \u0627\u0644\u0622\u0646 \u0639\u0631\u0636 \u0632\u0627\u0648\u064a\u0629 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644.",
   sensorHintDenied: "\u062a\u0645 \u0631\u0641\u0636 \u0627\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0627\u0644\u0628\u0648\u0635\u0644\u0629. \u064a\u062a\u0645 \u0627\u0644\u0622\u0646 \u0639\u0631\u0636 \u0632\u0627\u0648\u064a\u0629 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644."
@@ -539,7 +539,7 @@ Object.assign(QIBLA_PANEL_LOCALES.ar, {
 Object.assign(QIBLA_PANEL_LOCALES.de, {
   sensorButton: "Live-Kompass aktivieren",
   sensorHintIdle: "Auf Handys mit Kompasssensor kannst du den Live-Kompass aktivieren, damit sich der Qibla-Zeiger mit der Geraeteausrichtung dreht.",
-  sensorHintActive: "Der Live-Kompass ist aktiv. Drehe dein Geraet, bis der Qibla-Zeiger auf das Kaaba-Symbol zeigt.",
+  sensorHintActive: "Der Live-Kompass ist aktiv. Drehe dein Geraet, bis sich der bewegte Qibla-Zeiger mit dem Kaaba-Symbol deckt.",
   sensorHintPrompt: "Tippe auf den Button, um den Kompasszugriff auf diesem Geraet zu erlauben.",
   sensorHintUnavailable: "Hier ist kein Live-Kompass verfuegbar. Es wird nur die Qibla-Richtung von Norden angezeigt.",
   sensorHintDenied: "Der Kompasszugriff wurde abgelehnt. Es wird nur die Qibla-Richtung von Norden angezeigt."
@@ -548,7 +548,7 @@ Object.assign(QIBLA_PANEL_LOCALES.de, {
 Object.assign(QIBLA_PANEL_LOCALES.fr, {
   sensorButton: "Activer la boussole en direct",
   sensorHintIdle: "Sur les telephones avec capteur, activez la boussole en direct pour que la fleche qibla tourne avec l'appareil.",
-  sensorHintActive: "La boussole en direct est active. Tournez l'appareil jusqu'a ce que la fleche qibla pointe vers le symbole de la Kaaba.",
+  sensorHintActive: "La boussole en direct est active. Tournez l'appareil jusqu'a ce que la fleche qibla mobile s'aligne avec le symbole de la Kaaba.",
   sensorHintPrompt: "Touchez le bouton pour autoriser l'acces a la boussole sur cet appareil.",
   sensorHintUnavailable: "La boussole en direct n'est pas disponible ici. La page affiche seulement l'angle depuis le nord.",
   sensorHintDenied: "L'acces a la boussole a ete refuse. La page affiche seulement l'angle depuis le nord."
@@ -557,7 +557,7 @@ Object.assign(QIBLA_PANEL_LOCALES.fr, {
 Object.assign(QIBLA_PANEL_LOCALES.tr, {
   sensorButton: "Canli pusulayi etkinlestir",
   sensorHintIdle: "Pusula sensoru olan telefonlarda canli pusulayi etkinlestir; boylece kible oku cihazla birlikte doner.",
-  sensorHintActive: "Canli pusula aktif. Kible oku Kabe simgesini gosterecek sekilde cihazi dondur.",
+  sensorHintActive: "Canli pusula aktif. Hareketli kible oku Kabe simgesiyle ayni hizaya gelene kadar cihazi dondur.",
   sensorHintPrompt: "Bu cihazda pusula erisimine izin vermek icin dugmeye dokun.",
   sensorHintUnavailable: "Canli pusula burada kullanilamiyor. Sayfa yalnizca kuzeye gore kible acisini gosteriyor.",
   sensorHintDenied: "Pusula erisimi reddedildi. Sayfa yalnizca kuzeye gore kible acisini gosteriyor."
@@ -566,7 +566,7 @@ Object.assign(QIBLA_PANEL_LOCALES.tr, {
 Object.assign(QIBLA_PANEL_LOCALES["zh-hans"], {
   sensorButton: "\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488",
   sensorHintIdle: "\u5728\u5e26\u6709\u6307\u5357\u9488\u4f20\u611f\u5668\u7684\u624b\u673a\u4e0a\uff0c\u53ef\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488\uff0c\u8ba9 Qibla \u7bad\u5934\u968f\u8bbe\u5907\u65b9\u5411\u4e00\u8d77\u65cb\u8f6c\u3002",
-  sensorHintActive: "\u5b9e\u65f6\u6307\u5357\u9488\u5df2\u542f\u7528\u3002\u8bf7\u8f6c\u52a8\u8bbe\u5907\uff0c\u76f4\u5230 Qibla \u7bad\u5934\u6307\u5411 Kaaba \u7b26\u53f7\u3002",
+  sensorHintActive: "\u5b9e\u65f6\u6307\u5357\u9488\u5df2\u542f\u7528\u3002\u8bf7\u8f6c\u52a8\u8bbe\u5907\uff0c\u76f4\u5230\u79fb\u52a8\u7684 Qibla \u7bad\u5934\u4e0e Kaaba \u7b26\u53f7\u91cd\u5408\u3002",
   sensorHintPrompt: "\u70b9\u51fb\u6309\u94ae\uff0c\u5141\u8bb8\u6b64\u8bbe\u5907\u8bbf\u95ee\u6307\u5357\u9488\u3002",
   sensorHintUnavailable: "\u6b64\u5904\u65e0\u6cd5\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002\u5f53\u524d\u663e\u793a\u7684\u662f\u76f8\u5bf9\u6b63\u5317\u7684 Qibla \u65b9\u4f4d\u3002",
   sensorHintDenied: "\u6307\u5357\u9488\u6743\u9650\u88ab\u62d2\u7edd\u3002\u5f53\u524d\u663e\u793a\u7684\u662f\u76f8\u5bf9\u6b63\u5317\u7684 Qibla \u65b9\u4f4d\u3002"
@@ -923,17 +923,17 @@ function setQiblaCompassVisualState(bearing = null) {
     return;
   }
 
-  const relativeBearing = Number.isFinite(deviceHeading)
-    ? normalizeDegrees(bearing - deviceHeading)
+  const needleBearing = Number.isFinite(deviceHeading)
+    ? deviceHeading
     : bearing;
 
   if (qiblaNeedleEl) {
-    qiblaNeedleEl.style.transform = `translate(-50%, -50%) rotate(${relativeBearing}deg)`;
+    qiblaNeedleEl.style.transform = `translate(-50%, -50%) rotate(${needleBearing}deg)`;
     qiblaNeedleEl.hidden = false;
   }
 
   if (qiblaKaabaMarkerEl) {
-    qiblaKaabaMarkerEl.style.transform = `translate(-50%, -50%) rotate(${relativeBearing}deg)`;
+    qiblaKaabaMarkerEl.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
     qiblaKaabaMarkerEl.hidden = false;
   }
 }
