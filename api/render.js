@@ -1710,7 +1710,6 @@ function renderQiblaPanelSection(copy) {
       <div class="qibla-panel-grid">
         <div class="qibla-compass-card">
           <div class="qibla-compass" id="qibla-compass" aria-hidden="true">
-            <span class="qibla-forward-pointer"></span>
             <div class="qibla-dial" id="qibla-dial">
               <span class="qibla-cardinal qibla-cardinal-n">N</span>
               <span class="qibla-cardinal qibla-cardinal-e">E</span>

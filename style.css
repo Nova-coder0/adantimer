@@ -468,19 +468,6 @@ a {
   overflow: visible;
 }
 
-.qibla-forward-pointer {
-  position: absolute;
-  left: 50%;
-  top: 12px;
-  inline-size: 0;
-  block-size: 0;
-  transform: translateX(-50%);
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 18px solid rgba(191, 48, 48, 0.92);
-  filter: drop-shadow(0 4px 10px rgba(99, 24, 24, 0.18));
-}
-
 .qibla-dial,
 .qibla-compass-ring,
 .qibla-compass-core,
@@ -517,7 +504,7 @@ a {
 .qibla-needle {
   inline-size: 100%;
   block-size: 100%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(0deg);
   transform-origin: 50% 50%;
 }
 
@@ -530,7 +517,7 @@ a {
   transform: translate(-50%, -100%);
   transform-origin: 50% 100%;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(13, 107, 93, 0.16), rgba(13, 107, 93, 0.82));
+  background: linear-gradient(180deg, rgba(13, 107, 93, 0.14), rgba(13, 107, 93, 0.9));
   box-shadow: 0 8px 16px rgba(13, 107, 93, 0.12);
 }
 
@@ -566,6 +553,7 @@ a {
   box-shadow:
     0 10px 22px rgba(20, 14, 10, 0.18),
     inset 0 0 0 1px rgba(255, 231, 166, 0.16);
+  outline: 3px solid rgba(255, 249, 239, 0.95);
 }
 
 .qibla-kaaba-icon::before,
