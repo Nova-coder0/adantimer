@@ -493,7 +493,7 @@ a {
 .qibla-dial {
   inline-size: 100%;
   block-size: 100%;
-  transform: translate(-50%, -50%) rotate(0deg);
+  transform: translate(-50%, -50%);
   transform-origin: 50% 50%;
 }
 
@@ -515,9 +515,9 @@ a {
 }
 
 .qibla-needle {
-  inline-size: 0;
-  block-size: 0;
-  transform: translate(-50%, -50%) rotate(0deg);
+  inline-size: 100%;
+  block-size: 100%;
+  transform: translate(-50%, -50%);
   transform-origin: 50% 50%;
 }
 
@@ -525,13 +525,13 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  inline-size: 6px;
-  block-size: 36%;
+  inline-size: 5px;
+  block-size: 32%;
   transform: translate(-50%, -100%);
   transform-origin: 50% 100%;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(185, 137, 40, 0.2), rgba(185, 137, 40, 0.88));
-  box-shadow: 0 8px 16px rgba(13, 107, 93, 0.1);
+  background: linear-gradient(180deg, rgba(13, 107, 93, 0.16), rgba(13, 107, 93, 0.82));
+  box-shadow: 0 8px 16px rgba(13, 107, 93, 0.12);
 }
 
 .qibla-bearing-line::before {
@@ -540,45 +540,56 @@ a {
   left: 50%;
   top: -2px;
   transform: translate(-50%, -100%);
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 24px solid #0d6b5d;
-  filter: drop-shadow(0 8px 12px rgba(13, 107, 93, 0.18));
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 16px solid #0d6b5d;
+  filter: drop-shadow(0 8px 12px rgba(13, 107, 93, 0.14));
 }
 
 .qibla-kaaba-marker {
-  inline-size: 0;
-  block-size: 0;
+  inline-size: 100%;
+  block-size: 100%;
   transform: translate(-50%, -50%) rotate(0deg);
   transform-origin: 50% 50%;
 }
 
-.qibla-kaaba-badge {
+.qibla-kaaba-icon {
   position: absolute;
   left: 50%;
   top: 50%;
+  inline-size: 26px;
+  block-size: 26px;
   transform: translate(-50%, -128px);
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, #1b1b1b, #3a2a1b);
-  color: #f6e3a2;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 10px 22px rgba(20, 14, 10, 0.18);
+  border-radius: 6px;
+  background:
+    linear-gradient(180deg, #c9a545 0 18%, #111111 18% 100%);
+  box-shadow:
+    0 10px 22px rgba(20, 14, 10, 0.18),
+    inset 0 0 0 1px rgba(255, 231, 166, 0.16);
 }
 
-.qibla-kaaba-badge::after {
+.qibla-kaaba-icon::before,
+.qibla-kaaba-icon::after {
   content: "";
   position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.qibla-kaaba-icon::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.0) 40%);
+}
+
+.qibla-kaaba-icon::after {
+  inset: auto;
   left: 50%;
   bottom: -8px;
+  inline-size: 2px;
+  block-size: 10px;
   transform: translateX(-50%);
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 9px solid #2d2117;
+  border-radius: 999px;
+  background: rgba(39, 28, 17, 0.48);
 }
 
 .qibla-cardinal {
@@ -912,9 +923,8 @@ body[dir="rtl"] .language-menu-list {
     inline-size: min(100%, 240px);
   }
 
-  .qibla-kaaba-badge {
+  .qibla-kaaba-icon {
     transform: translate(-50%, -114px);
-    font-size: 0.68rem;
   }
 
   body[data-page="qibla"] .qibla-panel-grid {
