@@ -321,6 +321,7 @@ AssertContains $renderJs 'function renderQuranSurahSection(copy)' "SSR renderer 
 AssertContains $renderJs 'function renderDhikrSection(copy)' "SSR renderer keeps the Dhikr section renderer" "SSR renderer is missing the Dhikr section renderer"
 AssertContains $renderJs 'id="quran-search-clear"' "SSR renderer includes the Quran search clear control" "SSR renderer is missing the Quran search clear control"
 AssertContains $renderJs 'data-dhikr-card ' "SSR renderer includes the Dhikr cards" "SSR renderer is missing the Dhikr cards"
+AssertContains $renderJs 'dhikr-card-badges' "SSR renderer includes the Dhikr evidence badges" "SSR renderer is missing the Dhikr evidence badges"
 AssertContains $renderJs 'quranArabicName: surah.nameArabic || ""' "SSR renderer exposes the Arabic surah name for the standalone hero" "SSR renderer is missing the Arabic surah-name field for the standalone hero"
 AssertContains $renderJs 'copy.standalonePageType === "dhikr"' "SSR renderer treats Dhikr as a standalone page type" "SSR renderer is missing the standalone Dhikr page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran"' "SSR renderer treats Quran as a standalone page type" "SSR renderer is missing the standalone Quran page branch"
@@ -389,6 +390,7 @@ AssertContains $styleCss '.quran-search-row {' "Stylesheet includes the Quran se
 AssertContains $styleCss '.quran-search-clear {' "Stylesheet includes the Quran search clear button" "Stylesheet is missing the Quran search clear button"
 AssertContains $styleCss '.dhikr-card-grid {' "Stylesheet includes the Dhikr card grid" "Stylesheet is missing the Dhikr card grid styles"
 AssertContains $styleCss '.dhikr-summary-grid {' "Stylesheet includes the Dhikr summary grid" "Stylesheet is missing the Dhikr summary grid styles"
+AssertContains $styleCss '.dhikr-meta-badge {' "Stylesheet includes the Dhikr evidence badge styles" "Stylesheet is missing the Dhikr evidence badge styles"
 AssertContains $styleCss 'body[data-page="dhikr"] .hero-grid {' "Stylesheet includes the standalone Dhikr hero layout" "Stylesheet is missing the standalone Dhikr hero layout"
 AssertContains $styleCss 'body[data-page="quran"] .hero-grid {' "Stylesheet includes the standalone Quran hero layout" "Stylesheet is missing the standalone Quran hero layout"
 AssertContains $styleCss 'body[data-page="quran-surah"] .hero-grid {' "Stylesheet includes the standalone Quran surah hero layout" "Stylesheet is missing the standalone Quran surah hero layout"
@@ -398,6 +400,8 @@ AssertContains $quranSurahs 'export function getQuranSurahBySlug(slug)' "Local Q
 AssertContains $quranSurahs 'export function getAdjacentQuranSurahs(slug)' "Local Quran metadata exports adjacent surah lookup" "Local Quran adjacent surah helper is missing"
 AssertContains $dhikrEntries 'export const DHIKR_CATEGORIES = [' "Local Dhikr metadata exports the category list" "Local Dhikr metadata export is missing"
 AssertContains $dhikrEntries 'id: "morning-subhanallah"' "Local Dhikr metadata includes the morning SubhanAllah entry" "Local Dhikr metadata is missing the morning SubhanAllah entry"
+AssertContains $dhikrEntries 'id: "forgiveness-sayyid-al-istighfar"' "Local Dhikr metadata includes the Sayyid al-Istighfar entry" "Local Dhikr metadata is missing the Sayyid al-Istighfar entry"
+AssertContains $dhikrEntries 'id: "provision"' "Local Dhikr metadata includes the provision category" "Local Dhikr metadata is missing the provision category"
 AssertContains $dhikrEntries 'export function getDhikrItems()' "Local Dhikr metadata exports the item helper" "Local Dhikr metadata item helper is missing"
 
 TestMojibake "templates/index.html"
@@ -407,8 +411,8 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
-  TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr">', 'dhikr-card-grid', 'data-dhikr-category="morning"', 'data-dhikr-item="morning-subhanallah"')
-  TestLiveUrl "$BaseUrl/de/dhikr" @('<html lang="de" dir="ltr">', '<body data-page="dhikr">', 'data-dhikr-item="morning-subhanallah"')
+  TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr">', 'dhikr-card-grid', 'data-dhikr-category="provision"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"', 'dhikr-card-badges')
+  TestLiveUrl "$BaseUrl/de/dhikr" @('<html lang="de" dir="ltr">', '<body data-page="dhikr">', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran" @('id="quran-search-clear"', 'quran-search-count')
   TestLiveUrl "$BaseUrl/quran/al-fatihah" @('<body data-page="quran-surah"', 'quran-ayah-list', 'Surah Al-Fatihah', 'ayah-1')

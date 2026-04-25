@@ -2402,12 +2402,18 @@ function renderDhikrSection(copy) {
               <span class="dhikr-card-category">${escapeHtml(item.categoryLabel)}</span>
               <span class="dhikr-card-target">${escapeHtml(item.targetLabel)}</span>
             </div>
+            <div class="dhikr-card-badges" aria-label="${escapeHtml(copy.dhikrEvidenceAria)}">
+              <span class="dhikr-meta-badge is-grade">${escapeHtml(item.authenticityLabel)}</span>
+              <span class="dhikr-meta-badge">${escapeHtml(item.reference)}</span>
+              ${item.countModeLabel ? `<span class="dhikr-meta-badge is-guided">${escapeHtml(item.countModeLabel)}</span>` : ""}
+            </div>
             <p class="dhikr-card-arabic">${escapeHtml(item.arabic)}</p>
             <p class="dhikr-card-transliteration">${escapeHtml(item.transliteration)}</p>
             <p class="dhikr-card-translation">${escapeHtml(item.translation)}</p>
+            <p class="dhikr-card-focus">${escapeHtml(item.focus)}</p>
             <div class="dhikr-card-meta">
-              <span>${escapeHtml(item.source)}</span>
-              <span>${escapeHtml(item.benefit)}</span>
+              <span>${escapeHtml(item.sourceLabel)}</span>
+              <span>${escapeHtml(item.guidance)}</span>
             </div>
             <div class="dhikr-counter" aria-label="${escapeHtml(copy.dhikrCounterAria)}">
               <button type="button" class="dhikr-counter-btn" data-dhikr-action="decrement" aria-label="${escapeHtml(copy.dhikrDecrementLabel)}">-</button>
@@ -3114,6 +3120,32 @@ function buildDhikrIndexCopy(language, pageType) {
   const locale = DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en;
   const categories = getDhikrCategories();
   const items = getDhikrItems();
+  const authenticityLabels = {
+    en: { sahih: "Sahih source", hasan: "Hasan source", authenticated: "Authenticated source", quran: "Quran source" },
+    ar: { sahih: "مصدر صحيح", hasan: "مصدر حسن", authenticated: "مصدر موثق", quran: "مصدر قرآني" },
+    de: { sahih: "Sahih-Quelle", hasan: "Hasan-Quelle", authenticated: "Verifizierte Quelle", quran: "Quran-Quelle" },
+    fr: { sahih: "Source sahih", hasan: "Source hasan", authenticated: "Source authentifiee", quran: "Source coranique" },
+    tr: { sahih: "Sahih kaynak", hasan: "Hasan kaynak", authenticated: "Dogrulanmis kaynak", quran: "Kur'an kaynagi" },
+    "zh-hans": { sahih: "可靠圣训来源", hasan: "良好圣训来源", authenticated: "已核实来源", quran: "古兰经来源" }
+  };
+  const countModeLabels = {
+    en: { fixed: "Fixed count", guided: "Guided starting target" },
+    ar: { fixed: "عدد ثابت", guided: "هدف إرشادي" },
+    de: { fixed: "Feste Anzahl", guided: "Gefuehrtes Startziel" },
+    fr: { fixed: "Compte fixe", guided: "Objectif guide" },
+    tr: { fixed: "Sabit sayi", guided: "Yonlendirilmis hedef" },
+    "zh-hans": { fixed: "固定次数", guided: "引导目标" }
+  };
+  const sourceLabels = {
+    en: "Use and source note",
+    ar: "ملاحظة الاستخدام والمصدر",
+    de: "Nutzungs- und Quellenhinweis",
+    fr: "Note d'usage et de source",
+    tr: "Kullanim ve kaynak notu",
+    "zh-hans": "用途与来源说明"
+  };
+  const localizedAuthenticity = authenticityLabels[language] || authenticityLabels.en;
+  const localizedCountModes = countModeLabels[language] || countModeLabels.en;
 
   const copy = {
     heroEyebrow: locale.heroEyebrow,
@@ -3146,6 +3178,7 @@ function buildDhikrIndexCopy(language, pageType) {
     dhikrSectionTitle: locale.sectionTitle,
     dhikrSectionIntro: locale.sectionIntro,
     dhikrCategoriesAria: locale.categoriesAria,
+    dhikrEvidenceAria: sourceLabels[language] || sourceLabels.en,
     dhikrCategories: [
       {
         id: "all",
@@ -3169,8 +3202,12 @@ function buildDhikrIndexCopy(language, pageType) {
       arabic: item.arabic,
       transliteration: item.transliteration,
       translation: item.translations[language] || item.translations.en,
-      benefit: item.benefit[language] || item.benefit.en,
-      source: item.source[language] || item.source.en,
+      focus: (item.focus?.[language] || item.focus?.en || ""),
+      guidance: (item.guidance?.[language] || item.guidance?.en || ""),
+      sourceLabel: sourceLabels[language] || sourceLabels.en,
+      reference: item.reference,
+      authenticityLabel: localizedAuthenticity[item.authenticity] || localizedAuthenticity.authenticated,
+      countModeLabel: item.countMode === "guided" ? localizedCountModes.guided : localizedCountModes.fixed,
       progressText: locale.progressText(0, item.countTarget)
     })),
     faq: locale.faq,
