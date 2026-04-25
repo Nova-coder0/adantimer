@@ -42,6 +42,14 @@ const qiblaNeedleEl = document.getElementById("qibla-needle");
 const qiblaKaabaMarkerEl = document.getElementById("qibla-kaaba-marker");
 const qiblaSensorButtonEl = document.getElementById("qibla-sensor-button");
 const qiblaSensorHintEl = document.getElementById("qibla-sensor-hint");
+const dhikrCardGridEl = document.getElementById("dhikr-card-grid");
+const dhikrCategoryButtons = Array.from(document.querySelectorAll("[data-dhikr-category]"));
+const dhikrSummaryCompletedEl = document.getElementById("dhikr-summary-completed");
+const dhikrSummaryRepetitionsEl = document.getElementById("dhikr-summary-repetitions");
+const dhikrSummaryTargetEl = document.getElementById("dhikr-summary-target");
+const dhikrActiveCategoryEl = document.getElementById("dhikr-active-category");
+const dhikrResetVisibleEl = document.getElementById("dhikr-reset-visible");
+const dhikrResetAllEl = document.getElementById("dhikr-reset-all");
 const pageType = document.body.dataset.page || "home";
 
 const LANGUAGE_ALIASES = {
@@ -185,6 +193,34 @@ const QURAN_INDEX_LOCALES = {
     searchCount: (visible, total, hasQuery) => hasQuery ? `显示 ${visible} / ${total} 章` : `共 ${total} 章`,
     emptyState: query => `没有匹配“${query}”的章节。`,
     clearLabel: "清除搜索"
+  }
+};
+
+const DHIKR_STATE_STORAGE_KEY = "adantimer-dhikr-state-v1";
+const DHIKR_UI_LOCALES = {
+  en: {
+    progressText: (value, target) => `${value} of ${target} completed`,
+    currentCategory: label => `Current collection: ${label}`
+  },
+  ar: {
+    progressText: (value, target) => `${value} من ${target} مكتمل`,
+    currentCategory: label => `المجموعة الحالية: ${label}`
+  },
+  de: {
+    progressText: (value, target) => `${value} von ${target} erledigt`,
+    currentCategory: label => `Aktive Sammlung: ${label}`
+  },
+  fr: {
+    progressText: (value, target) => `${value} sur ${target} termines`,
+    currentCategory: label => `Collection active : ${label}`
+  },
+  tr: {
+    progressText: (value, target) => `${value} / ${target} tamamlandi`,
+    currentCategory: label => `Aktif koleksiyon: ${label}`
+  },
+  "zh-hans": {
+    progressText: (value, target) => `已完成 ${value} / ${target}`,
+    currentCategory: label => `当前分类：${label}`
   }
 };
 
@@ -1303,6 +1339,160 @@ function initQuranIndex() {
   updateQuranIndexFilter(quranSearchInputEl.value);
 }
 
+function getDhikrLocale() {
+  return DHIKR_UI_LOCALES[language] || DHIKR_UI_LOCALES.en;
+}
+
+function readDhikrState() {
+  try {
+    const raw = localStorage.getItem(DHIKR_STATE_STORAGE_KEY);
+    if (!raw) return { activeCategory: "all", counts: {} };
+    const parsed = JSON.parse(raw);
+    return {
+      activeCategory: parsed.activeCategory || "all",
+      counts: parsed.counts && typeof parsed.counts === "object" ? parsed.counts : {}
+    };
+  } catch {
+    return { activeCategory: "all", counts: {} };
+  }
+}
+
+function writeDhikrState(state) {
+  localStorage.setItem(DHIKR_STATE_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getDhikrCards() {
+  return dhikrCardGridEl ? Array.from(dhikrCardGridEl.querySelectorAll("[data-dhikr-card]")) : [];
+}
+
+function getVisibleDhikrCards() {
+  return getDhikrCards().filter(card => !card.hidden);
+}
+
+function updateDhikrCard(card, count) {
+  const locale = getDhikrLocale();
+  const target = Number(card.dataset.dhikrTarget || "0");
+  const safeCount = Math.max(0, Math.min(count, target));
+  const countEl = card.querySelector("[data-dhikr-count]");
+  const progressTextEl = card.querySelector("[data-dhikr-progress-text]");
+  const progressFillEl = card.querySelector("[data-dhikr-progress-fill]");
+  const decrementButton = card.querySelector('[data-dhikr-action="decrement"]');
+  const resetButton = card.querySelector('[data-dhikr-action="reset"]');
+  const progressRatio = target > 0 ? Math.min(safeCount / target, 1) : 0;
+
+  if (countEl) countEl.textContent = String(safeCount);
+  if (progressTextEl) progressTextEl.textContent = locale.progressText(safeCount, target);
+  if (progressFillEl) progressFillEl.style.width = `${Math.round(progressRatio * 100)}%`;
+  if (decrementButton) decrementButton.disabled = safeCount === 0;
+  if (resetButton) resetButton.disabled = safeCount === 0;
+
+  card.classList.toggle("is-complete", target > 0 && safeCount >= target);
+}
+
+function renderDhikrSummary(state) {
+  const locale = getDhikrLocale();
+  const visibleCards = getVisibleDhikrCards();
+  const totals = visibleCards.reduce((acc, card) => {
+    const itemId = card.dataset.dhikrItem || "";
+    const target = Number(card.dataset.dhikrTarget || "0");
+    const count = Math.max(0, Math.min(Number(state.counts[itemId] || 0), target));
+    acc.target += target;
+    acc.count += count;
+    if (target > 0 && count >= target) acc.completed += 1;
+    return acc;
+  }, { completed: 0, count: 0, target: 0 });
+
+  if (dhikrSummaryCompletedEl) dhikrSummaryCompletedEl.textContent = String(totals.completed);
+  if (dhikrSummaryRepetitionsEl) dhikrSummaryRepetitionsEl.textContent = String(totals.count);
+  if (dhikrSummaryTargetEl) dhikrSummaryTargetEl.textContent = String(totals.target);
+
+  const activeButton = dhikrCategoryButtons.find(button => button.dataset.dhikrCategory === state.activeCategory)
+    || dhikrCategoryButtons.find(button => button.dataset.dhikrCategory === "all");
+  if (dhikrActiveCategoryEl && activeButton) {
+    const label = activeButton.querySelector("span")?.textContent || activeButton.textContent.trim();
+    dhikrActiveCategoryEl.textContent = locale.currentCategory(label);
+  }
+}
+
+function renderDhikrPage(state) {
+  getDhikrCards().forEach(card => {
+    const itemId = card.dataset.dhikrItem || "";
+    const category = card.dataset.dhikrCategory || "all";
+    const target = Number(card.dataset.dhikrTarget || "0");
+    const count = Math.max(0, Math.min(Number(state.counts[itemId] || 0), target));
+    const matchesCategory = state.activeCategory === "all" || category === state.activeCategory;
+    card.hidden = !matchesCategory;
+    updateDhikrCard(card, count);
+  });
+
+  dhikrCategoryButtons.forEach(button => {
+    const isActive = button.dataset.dhikrCategory === state.activeCategory;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+
+  renderDhikrSummary(state);
+}
+
+function initDhikrPage() {
+  if (!dhikrCardGridEl) return;
+  const state = readDhikrState();
+
+  if (dhikrCategoryButtons.length) {
+    dhikrCategoryButtons.forEach(button => {
+      if (button.dataset.bound === "true") return;
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        state.activeCategory = button.dataset.dhikrCategory || "all";
+        writeDhikrState(state);
+        renderDhikrPage(state);
+      });
+    });
+  }
+
+  getDhikrCards().forEach(card => {
+    if (card.dataset.bound === "true") return;
+    card.dataset.bound = "true";
+    card.addEventListener("click", event => {
+      const actionButton = event.target.closest("[data-dhikr-action]");
+      if (!actionButton) return;
+      const itemId = card.dataset.dhikrItem || "";
+      const target = Number(card.dataset.dhikrTarget || "0");
+      const current = Math.max(0, Math.min(Number(state.counts[itemId] || 0), target));
+      const action = actionButton.dataset.dhikrAction;
+
+      if (action === "increment") state.counts[itemId] = Math.min(current + 1, target);
+      if (action === "decrement") state.counts[itemId] = Math.max(current - 1, 0);
+      if (action === "reset") state.counts[itemId] = 0;
+
+      writeDhikrState(state);
+      renderDhikrPage(state);
+    });
+  });
+
+  if (dhikrResetVisibleEl && dhikrResetVisibleEl.dataset.bound !== "true") {
+    dhikrResetVisibleEl.dataset.bound = "true";
+    dhikrResetVisibleEl.addEventListener("click", () => {
+      getVisibleDhikrCards().forEach(card => {
+        state.counts[card.dataset.dhikrItem || ""] = 0;
+      });
+      writeDhikrState(state);
+      renderDhikrPage(state);
+    });
+  }
+
+  if (dhikrResetAllEl && dhikrResetAllEl.dataset.bound !== "true") {
+    dhikrResetAllEl.dataset.bound = "true";
+    dhikrResetAllEl.addEventListener("click", () => {
+      state.counts = {};
+      writeDhikrState(state);
+      renderDhikrPage(state);
+    });
+  }
+
+  renderDhikrPage(state);
+}
+
 function setLanguage(lang, persist = true) {
   language = LOCALES[lang] ? lang : "en";
   if (persist) localStorage.setItem("adantimer-language", language);
@@ -1331,6 +1521,18 @@ function setLanguage(lang, persist = true) {
         return;
       }
     }
+    return;
+  }
+
+  if (pageType === "dhikr") {
+    if (persist) {
+      const targetUrl = buildRelativeUrl(language, "dhikr");
+      if (window.location.pathname !== targetUrl) {
+        window.location.href = targetUrl;
+        return;
+      }
+    }
+    initDhikrPage();
     return;
   }
 
@@ -1817,6 +2019,8 @@ if (pageType === "quran") {
   initQuranIndex();
 } else if (pageType === "quran-surah") {
   // Surah pages are fully server-rendered; no client bootstrap is needed here.
+} else if (pageType === "dhikr") {
+  initDhikrPage();
 } else if (pageType === "qibla") {
   loadQiblaCompass();
 } else {

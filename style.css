@@ -445,12 +445,49 @@ body[data-page="quran-surah"] .hero-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
+body[data-page="dhikr"] .hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 body[data-page="quran"] .hero-copy {
   max-inline-size: none;
 }
 
 body[data-page="quran-surah"] .hero-copy {
   max-inline-size: none;
+}
+
+body[data-page="dhikr"] .hero-copy {
+  max-inline-size: none;
+}
+
+.dhikr-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.dhikr-hero-stat {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.dhikr-hero-stat strong,
+.dhikr-hero-stat span {
+  display: block;
+}
+
+.dhikr-hero-stat strong {
+  font-size: 1.2rem;
+}
+
+.dhikr-hero-stat span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .quran-search-bar {
@@ -719,6 +756,238 @@ body[data-page="quran-surah"] .hero-copy {
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.dhikr-dashboard {
+  display: grid;
+  gap: 28px;
+}
+
+.dhikr-summary-card,
+.dhikr-collections-card {
+  padding: 28px;
+}
+
+.dhikr-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.dhikr-summary-stat {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.dhikr-summary-stat span,
+.dhikr-summary-stat strong {
+  display: block;
+}
+
+.dhikr-summary-stat span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.dhikr-summary-stat strong {
+  margin-top: 8px;
+  font-size: 1.3rem;
+}
+
+.dhikr-summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.dhikr-summary-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: var(--accent-strong);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dhikr-summary-btn.is-secondary {
+  background: rgba(13, 107, 93, 0.1);
+  color: var(--accent-strong);
+}
+
+.dhikr-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.dhikr-category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.74);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dhikr-category-chip strong {
+  color: var(--accent-strong);
+}
+
+.dhikr-category-chip.is-active {
+  background: rgba(13, 107, 93, 0.12);
+  border-color: rgba(13, 107, 93, 0.24);
+}
+
+.dhikr-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.dhikr-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.dhikr-card.is-complete {
+  border-color: rgba(13, 107, 93, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(13, 107, 93, 0.16);
+}
+
+.dhikr-card-head,
+.dhikr-card-meta,
+.dhikr-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dhikr-card-category,
+.dhikr-card-target {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.dhikr-card-category {
+  background: rgba(13, 107, 93, 0.1);
+  color: var(--accent-strong);
+}
+
+.dhikr-card-target {
+  background: rgba(56, 42, 21, 0.06);
+  color: var(--muted);
+}
+
+.dhikr-card-arabic,
+.dhikr-card-transliteration,
+.dhikr-card-translation {
+  margin: 0;
+}
+
+.dhikr-card-arabic {
+  direction: rtl;
+  text-align: right;
+  font-size: 1.55rem;
+  line-height: 2;
+  color: var(--accent-strong);
+}
+
+.dhikr-card-transliteration {
+  font-weight: 600;
+}
+
+.dhikr-card-translation {
+  color: var(--muted);
+}
+
+.dhikr-card-meta {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.dhikr-counter {
+  justify-content: flex-start;
+}
+
+.dhikr-counter-btn {
+  inline-size: 42px;
+  block-size: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(13, 107, 93, 0.1);
+  color: var(--accent-strong);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.dhikr-counter-btn:disabled,
+.dhikr-reset-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.dhikr-counter-value {
+  min-inline-size: 54px;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.dhikr-progress-block {
+  display: grid;
+  gap: 10px;
+}
+
+.dhikr-progress-bar {
+  overflow: hidden;
+  block-size: 10px;
+  border-radius: 999px;
+  background: rgba(13, 107, 93, 0.08);
+}
+
+.dhikr-progress-fill {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(13, 107, 93, 0.7), rgba(13, 107, 93, 0.96));
+}
+
+.dhikr-progress-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.dhikr-reset-btn {
+  justify-self: start;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(56, 42, 21, 0.08);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 .qibla-panel-grid {
@@ -1207,12 +1476,21 @@ body[dir="rtl"] .language-menu-list {
     grid-template-columns: 1fr 1fr;
   }
 
+  .dhikr-hero-stats,
+  .dhikr-summary-grid,
+  .dhikr-card-grid,
   .quran-surah-grid {
     grid-template-columns: 1fr;
   }
 
   .quran-nav-grid {
     grid-template-columns: 1fr;
+  }
+
+  .dhikr-card-head,
+  .dhikr-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -1265,9 +1543,21 @@ body[dir="rtl"] .language-menu-list {
   }
 
   .qibla-stats,
+  .dhikr-hero-stats,
+  .dhikr-summary-grid,
   .quran-hero-stats,
   .tools-grid {
     grid-template-columns: 1fr;
+  }
+
+  .dhikr-summary-actions,
+  .dhikr-category-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dhikr-card {
+    padding: 20px;
   }
 
   .quran-surah-top {

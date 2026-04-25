@@ -204,6 +204,7 @@ $requiredFiles = @(
   "sitemap-core.xml",
   "api/render.js",
   "data/quran-surahs.js",
+  "data/dhikr-entries.js",
   ".github/workflows/generate-sitemaps.yml",
   "tools/generate_sitemaps.py"
 )
@@ -228,6 +229,7 @@ $styleCss = ReadProjectFile "style.css"
 $scriptJs = ReadProjectFile "script.js"
 $renderJs = ReadProjectFile "api/render.js"
 $quranSurahs = ReadProjectFile "data/quran-surahs.js"
+$dhikrEntries = ReadProjectFile "data/dhikr-entries.js"
 $vercelJsonText = ReadProjectFile "vercel.json"
 $sitemapCore = ReadProjectFile "sitemap-core.xml"
 $sitemapIndex = ReadProjectFile "sitemap.xml"
@@ -253,6 +255,11 @@ AssertContains $scriptJs 'function getRequestedSurahSlug()' "Client keeps the su
 AssertContains $scriptJs 'function initQuranIndex()' "Client keeps the Quran index initializer" "Client Quran index initializer is missing"
 AssertContains $scriptJs 'function updateQuranIndexFilter(query = "")' "Client keeps the Quran index filter helper" "Client Quran index filter helper is missing"
 AssertContains $scriptJs 'function normalizeForSearch(value = "")' "Client keeps the Quran search normalizer" "Client Quran search normalizer is missing"
+AssertContains $scriptJs 'const DHIKR_STATE_STORAGE_KEY = "adantimer-dhikr-state-v1";' "Client keeps the Dhikr storage key" "Client Dhikr storage key is missing"
+AssertContains $scriptJs 'function renderDhikrPage(state)' "Client keeps the Dhikr page renderer" "Client Dhikr page renderer is missing"
+AssertContains $scriptJs 'function initDhikrPage()' "Client keeps the Dhikr page initializer" "Client Dhikr page initializer is missing"
+AssertContains $scriptJs 'buildRelativeUrl(language, "dhikr")' "Client can navigate to localized Dhikr routes" "Client Dhikr route navigation is missing"
+AssertContains $scriptJs 'pageType === "dhikr"' "Client handles the standalone Dhikr page separately" "Client does not separate the Dhikr page flow"
 AssertContains $scriptJs 'pageType === "quran"' "Client handles the standalone Quran page separately" "Client does not separate the Quran page flow"
 AssertContains $scriptJs 'buildRelativeUrl(language, "quran")' "Client can navigate to localized Quran routes" "Client Quran route navigation is missing"
 AssertContains $scriptJs 'buildRelativeUrl(language, "quran-surah", "", getRequestedSurahSlug())' "Client can navigate to localized Quran surah routes" "Client Quran surah route navigation is missing"
@@ -305,12 +312,17 @@ AssertContains $renderJs 'function buildEnglishCopy' "SSR renderer keeps English
 AssertContains $renderJs 'getAdjacentQuranSurahs' "SSR renderer imports the local Quran helpers" "SSR renderer is missing the local Quran helper imports"
 AssertContains $renderJs 'const QURAN_INDEX_CONTENT = {' "SSR renderer keeps the Quran index copy map" "SSR renderer is missing the Quran index copy map"
 AssertContains $renderJs 'const QURAN_SURAH_CONTENT = {' "SSR renderer keeps the Quran surah copy map" "SSR renderer is missing the Quran surah copy map"
+AssertContains $renderJs 'const DHIKR_INDEX_CONTENT = {' "SSR renderer keeps the Dhikr index copy map" "SSR renderer is missing the Dhikr index copy map"
 AssertContains $renderJs 'function buildQuranIndexCopy(language, pageType)' "SSR renderer keeps the Quran index copy builder" "SSR renderer is missing the Quran index copy builder"
 AssertContains $renderJs 'function buildQuranSurahCopy(language, pageType, surah, surahReaderData)' "SSR renderer keeps the Quran surah copy builder" "SSR renderer is missing the Quran surah copy builder"
+AssertContains $renderJs 'function buildDhikrIndexCopy(language, pageType)' "SSR renderer keeps the Dhikr index copy builder" "SSR renderer is missing the Dhikr index copy builder"
 AssertContains $renderJs 'function renderQuranIndexSection(copy)' "SSR renderer keeps the Quran index renderer" "SSR renderer is missing the Quran index renderer"
 AssertContains $renderJs 'function renderQuranSurahSection(copy)' "SSR renderer keeps the Quran surah renderer" "SSR renderer is missing the Quran surah renderer"
+AssertContains $renderJs 'function renderDhikrSection(copy)' "SSR renderer keeps the Dhikr section renderer" "SSR renderer is missing the Dhikr section renderer"
 AssertContains $renderJs 'id="quran-search-clear"' "SSR renderer includes the Quran search clear control" "SSR renderer is missing the Quran search clear control"
+AssertContains $renderJs 'data-dhikr-card ' "SSR renderer includes the Dhikr cards" "SSR renderer is missing the Dhikr cards"
 AssertContains $renderJs 'quranArabicName: surah.nameArabic || ""' "SSR renderer exposes the Arabic surah name for the standalone hero" "SSR renderer is missing the Arabic surah-name field for the standalone hero"
+AssertContains $renderJs 'copy.standalonePageType === "dhikr"' "SSR renderer treats Dhikr as a standalone page type" "SSR renderer is missing the standalone Dhikr page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran"' "SSR renderer treats Quran as a standalone page type" "SSR renderer is missing the standalone Quran page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran-surah"' "SSR renderer treats Quran surahs as standalone pages" "SSR renderer is missing the standalone Quran surah branch"
 AssertContains $renderJs 'const QURAN_API_BASE = "https://api.alquran.cloud/v1";' "SSR renderer keeps the Quran API base" "SSR renderer is missing the Quran API base"
@@ -362,6 +374,8 @@ AssertContains $rewritesText '"/zh-hans"' "vercel.json includes Chinese rewrites
 AssertContains $sitemapCore 'https://www.adantimer.com/de/prayer-times' "Core sitemap includes German prayer routes" "Core sitemap is missing German prayer routes"
 AssertContains $sitemapCore 'https://www.adantimer.com/qibla' "Core sitemap includes the qibla page" "Core sitemap is missing the qibla page"
 AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/hadith' "Core sitemap includes the Chinese hadith page" "Core sitemap is missing the Chinese hadith page"
+AssertContains $sitemapCore 'https://www.adantimer.com/dhikr' "Core sitemap includes the Dhikr page" "Core sitemap is missing the Dhikr page"
+AssertContains $sitemapCore 'https://www.adantimer.com/ar/dhikr' "Core sitemap includes the Arabic Dhikr page" "Core sitemap is missing the Arabic Dhikr page"
 AssertContains $sitemapCore 'https://www.adantimer.com/quran' "Core sitemap includes the Quran page" "Core sitemap is missing the Quran page"
 AssertContains $sitemapCore 'https://www.adantimer.com/quran/al-fatihah' "Core sitemap includes the first Quran surah page" "Core sitemap is missing the first Quran surah page"
 AssertContains $sitemapCore 'https://www.adantimer.com/fr/prayer-times' "Core sitemap includes French prayer routes" "Core sitemap is missing French prayer routes"
@@ -373,12 +387,18 @@ AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired
 AssertContains $styleCss '.quran-surah-grid {' "Stylesheet includes the Quran surah grid" "Stylesheet is missing the Quran surah grid styles"
 AssertContains $styleCss '.quran-search-row {' "Stylesheet includes the Quran search row layout" "Stylesheet is missing the Quran search row layout"
 AssertContains $styleCss '.quran-search-clear {' "Stylesheet includes the Quran search clear button" "Stylesheet is missing the Quran search clear button"
+AssertContains $styleCss '.dhikr-card-grid {' "Stylesheet includes the Dhikr card grid" "Stylesheet is missing the Dhikr card grid styles"
+AssertContains $styleCss '.dhikr-summary-grid {' "Stylesheet includes the Dhikr summary grid" "Stylesheet is missing the Dhikr summary grid styles"
+AssertContains $styleCss 'body[data-page="dhikr"] .hero-grid {' "Stylesheet includes the standalone Dhikr hero layout" "Stylesheet is missing the standalone Dhikr hero layout"
 AssertContains $styleCss 'body[data-page="quran"] .hero-grid {' "Stylesheet includes the standalone Quran hero layout" "Stylesheet is missing the standalone Quran hero layout"
 AssertContains $styleCss 'body[data-page="quran-surah"] .hero-grid {' "Stylesheet includes the standalone Quran surah hero layout" "Stylesheet is missing the standalone Quran surah hero layout"
 AssertContains $quranSurahs 'export const QURAN_SURAHS = [' "Local Quran metadata exports the surah list" "Local Quran metadata export is missing"
 AssertContains $quranSurahs 'slug: "al-fatihah"' "Local Quran metadata includes Surah Al-Fatihah" "Local Quran metadata is missing Surah Al-Fatihah"
 AssertContains $quranSurahs 'export function getQuranSurahBySlug(slug)' "Local Quran metadata exports slug lookup" "Local Quran slug lookup helper is missing"
 AssertContains $quranSurahs 'export function getAdjacentQuranSurahs(slug)' "Local Quran metadata exports adjacent surah lookup" "Local Quran adjacent surah helper is missing"
+AssertContains $dhikrEntries 'export const DHIKR_CATEGORIES = [' "Local Dhikr metadata exports the category list" "Local Dhikr metadata export is missing"
+AssertContains $dhikrEntries 'id: "morning-subhanallah"' "Local Dhikr metadata includes the morning SubhanAllah entry" "Local Dhikr metadata is missing the morning SubhanAllah entry"
+AssertContains $dhikrEntries 'export function getDhikrItems()' "Local Dhikr metadata exports the item helper" "Local Dhikr metadata item helper is missing"
 
 TestMojibake "templates/index.html"
 TestMojibake "script.js"
@@ -387,6 +407,8 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
+  TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr">', 'dhikr-card-grid', 'data-dhikr-category="morning"', 'data-dhikr-item="morning-subhanallah"')
+  TestLiveUrl "$BaseUrl/de/dhikr" @('<html lang="de" dir="ltr">', '<body data-page="dhikr">', 'data-dhikr-item="morning-subhanallah"')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran" @('id="quran-search-clear"', 'quran-search-count')
   TestLiveUrl "$BaseUrl/quran/al-fatihah" @('<body data-page="quran-surah"', 'quran-ayah-list', 'Surah Al-Fatihah', 'ayah-1')
