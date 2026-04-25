@@ -2635,7 +2635,7 @@ function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
     hideNextPrayerCard: true,
     showPopularCities: false,
     showIntentLinks: false,
-    quranArabicName: surah.arabicName || "",
+    quranArabicName: surah.nameArabic || "",
     quranAyahCountValue: String(surah.ayahs),
     quranAyahCountStatLabel: ayahStatLabel,
     quranRevelationValue: revelationLabel,
