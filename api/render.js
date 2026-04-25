@@ -2757,7 +2757,7 @@ const DHIKR_INDEX_CONTENT = {
   en: {
     heroEyebrow: "Dhikr",
     heroTitle: "Track daily dhikr without leaving the browser",
-    heroSubtitle: "Use focused counters for common daily remembrance, switch between key collections, and keep your progress saved locally on this device.",
+    heroSubtitle: "Use curated daily adhkar with source notes, move between focused collections for forgiveness, provision, ease, distress, healing, sleep, and more, and keep your progress saved locally on this device.",
     summaryEyebrow: "Today",
     summaryTitle: "Dhikr session progress",
     summaryCompletedLabel: "Completed entries",
@@ -2765,7 +2765,7 @@ const DHIKR_INDEX_CONTENT = {
     summaryTargetLabel: "Target repetitions",
     sectionEyebrow: "Collections",
     sectionTitle: "Daily dhikr collections",
-    sectionIntro: "Start with a focused collection, continue at your own pace, and reset only the part you want to repeat again.",
+    sectionIntro: "Move between curated collections with source notes, keep one category in focus, and reset only the entries you want to revisit.",
     currentCategory: label => `Current collection: ${label}`,
     resetVisibleLabel: "Reset current collection",
     resetAllLabel: "Reset all counters",
@@ -2781,7 +2781,7 @@ const DHIKR_INDEX_CONTENT = {
     statsStorageValue: "Local",
     categoriesAria: "Dhikr collections",
     metaTitle: "Dhikr Counter and Daily Remembrance Page | Adantimer",
-    metaDescription: "Track daily dhikr with focused counters, category filters, and browser-saved progress across common morning, evening, after-prayer, and general remembrance.",
+    metaDescription: "Track curated daily dhikr with counters, source notes, and browser-saved progress across morning, evening, after-prayer, forgiveness, provision, ease, distress, healing, sleep, and general remembrance.",
     faq: [
       {
         question: "Does this dhikr page save my progress?",
@@ -2789,7 +2789,7 @@ const DHIKR_INDEX_CONTENT = {
       },
       {
         question: "Can I focus on one collection at a time?",
-        answer: "Yes. The page lets you switch between collections such as morning, evening, after-prayer, forgiveness, and general dhikr."
+        answer: "Yes. The page lets you move between collections such as morning, evening, after-prayer, forgiveness, provision, ease, distress, healing, sleep, and general dhikr."
       },
       {
         question: "Do I need an app or login to use the counters?",
