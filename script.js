@@ -18,8 +18,14 @@ const countryInput = document.getElementById("manual-country");
 const locationForm = document.getElementById("location-form");
 const setLocationButtonEl = document.getElementById("set-location-btn");
 const langButtons = Array.from(document.querySelectorAll(".lang-btn"));
+const langOptionButtons = Array.from(document.querySelectorAll(".lang-option"));
+const languageButtons = [...langButtons, ...langOptionButtons];
 const canonicalEl = document.querySelector("link[rel='canonical']");
 const websiteSchemaEl = document.getElementById("website-schema");
+const quranSearchInputEl = document.getElementById("quran-search");
+const quranSearchCountEl = document.getElementById("quran-search-count");
+const quranSearchEmptyEl = document.getElementById("quran-search-empty");
+const quranSurahGridEl = document.getElementById("quran-surah-grid");
 const qiblaPanelEl = document.getElementById("qibla-panel");
 const qiblaPanelEyebrowEl = qiblaPanelEl ? qiblaPanelEl.querySelector(".eyebrow") : null;
 const qiblaPanelHeadingEl = document.getElementById("qibla-panel-heading");
@@ -145,6 +151,27 @@ const QIBLA_PAGE_COPY = {
     pageDescription: place => place
       ? `\u67e5\u770b ${place} \u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002`
       : "\u67e5\u770b\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u57ce\u5e02\u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002"
+  }
+};
+
+const QURAN_INDEX_LOCALES = {
+  en: {
+    searchCount: count => `${count} surahs available`
+  },
+  ar: {
+    searchCount: count => `${count} سورة متاحة`
+  },
+  de: {
+    searchCount: count => `${count} Suren verfügbar`
+  },
+  fr: {
+    searchCount: count => `${count} sourates disponibles`
+  },
+  tr: {
+    searchCount: count => `${count} sure hazır`
+  },
+  "zh-hans": {
+    searchCount: count => `共 ${count} 章`
   }
 };
 
@@ -1050,7 +1077,7 @@ function renderStaticContent() {
   const countryLabel = document.querySelector('label[for="manual-country"]');
   if (cityLabel) cityLabel.textContent = locale.cityPlaceholder;
   if (countryLabel) countryLabel.textContent = locale.countryPlaceholder;
-  langButtons.forEach(button => button.classList.toggle("is-active", button.dataset.lang === language));
+  syncLanguageControls();
   const brandLink = document.querySelector(".brand");
   if (brandLink) brandLink.setAttribute("href", buildRelativeUrl(language, "home"));
   const heroEyebrow = document.querySelector(".hero-copy .eyebrow");
@@ -1173,11 +1200,75 @@ function applySeoMeta(city = "") {
   }
 }
 
+function syncLanguageControls() {
+  langButtons.forEach(button => {
+    const isActive = button.dataset.lang === language;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+  langOptionButtons.forEach(button => {
+    button.classList.toggle("is-active", button.dataset.lang === language);
+  });
+}
+
+function getCurrentDocumentLanguage() {
+  const htmlLanguage = (document.documentElement.lang || "en").toLowerCase();
+  return LANGUAGE_ALIASES[htmlLanguage] || LANGUAGE_ALIASES[htmlLanguage.split("-")[0]] || "en";
+}
+
+function updateQuranIndexFilter(query = "") {
+  if (!quranSurahGridEl) return;
+  const locale = QURAN_INDEX_LOCALES[language] || QURAN_INDEX_LOCALES.en;
+  const normalizedQuery = String(query || "").trim().toLowerCase();
+  let visibleCount = 0;
+
+  quranSurahGridEl.querySelectorAll(".quran-surah-card").forEach(card => {
+    const searchable = (card.dataset.search || "").toLowerCase();
+    const matches = !normalizedQuery || searchable.includes(normalizedQuery);
+    card.hidden = !matches;
+    if (matches) visibleCount += 1;
+  });
+
+  if (quranSearchCountEl) {
+    quranSearchCountEl.textContent = locale.searchCount(visibleCount);
+  }
+  if (quranSearchEmptyEl) {
+    quranSearchEmptyEl.hidden = visibleCount !== 0;
+  }
+}
+
+function initQuranIndex() {
+  if (!quranSearchInputEl) return;
+  if (quranSearchInputEl.dataset.bound !== "true") {
+    quranSearchInputEl.dataset.bound = "true";
+    quranSearchInputEl.addEventListener("input", event => {
+      updateQuranIndexFilter(event.target.value);
+    });
+  }
+  updateQuranIndexFilter(quranSearchInputEl.value);
+}
+
 function setLanguage(lang, persist = true) {
   language = LOCALES[lang] ? lang : "en";
-  const activeCity = cityName || getRequestedCity();
   if (persist) localStorage.setItem("adantimer-language", language);
   window.language = language;
+  syncLanguageControls();
+  const brandLink = document.querySelector(".brand");
+  if (brandLink) brandLink.setAttribute("href", buildRelativeUrl(language, "home"));
+
+  if (pageType === "quran") {
+    if (persist) {
+      const targetUrl = buildRelativeUrl(language, "quran");
+      if (window.location.pathname !== targetUrl) {
+        window.location.href = targetUrl;
+        return;
+      }
+    }
+    initQuranIndex();
+    return;
+  }
+
+  const activeCity = cityName || getRequestedCity();
   renderStaticContent();
   if (pageType === "qibla") {
     renderQiblaPanel(currentCoords ? "ready" : qiblaPanelState);
@@ -1642,7 +1733,7 @@ if (qiblaSensorButtonEl) {
   });
 }
 
-langButtons.forEach(button => {
+languageButtons.forEach(button => {
   button.addEventListener("click", () => setLanguage(button.dataset.lang, true));
 });
 
@@ -1654,9 +1745,11 @@ document.querySelectorAll("button.city-chip").forEach(button => {
   });
 });
 
-language = getPreferredLanguage();
+language = pageType === "quran" ? getCurrentDocumentLanguage() : getPreferredLanguage();
 setLanguage(language, false);
-if (pageType === "qibla") {
+if (pageType === "quran") {
+  initQuranIndex();
+} else if (pageType === "qibla") {
   loadQiblaCompass();
 } else {
   loadPrayerTimes();

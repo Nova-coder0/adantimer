@@ -437,6 +437,131 @@ a {
   gap: 20px;
 }
 
+body[data-page="quran"] .hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body[data-page="quran"] .hero-copy {
+  max-inline-size: none;
+}
+
+.quran-search-bar {
+  margin-top: 22px;
+}
+
+.quran-search-input {
+  inline-size: 100%;
+  min-block-size: 54px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--text);
+  font: inherit;
+}
+
+.quran-search-hint {
+  margin-top: 10px;
+}
+
+.quran-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.quran-hero-stat {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.quran-hero-stat strong,
+.quran-hero-stat span {
+  display: block;
+}
+
+.quran-hero-stat strong {
+  font-size: 1.2rem;
+}
+
+.quran-hero-stat span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.quran-index-card {
+  padding: 26px;
+}
+
+.quran-index-intro {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.quran-search-empty {
+  margin: 18px 0 0;
+}
+
+.quran-surah-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.quran-surah-card {
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.quran-surah-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+}
+
+.quran-surah-number {
+  inline-size: 42px;
+  block-size: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: var(--accent-strong);
+  background: rgba(13, 107, 93, 0.08);
+}
+
+.quran-surah-meta h3,
+.quran-surah-meta p {
+  margin: 0;
+}
+
+.quran-surah-meta p {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.quran-surah-arabic {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.quran-surah-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .qibla-panel-grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
@@ -922,6 +1047,10 @@ body[dir="rtl"] .language-menu-list {
   .tools-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .quran-surah-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
@@ -973,8 +1102,17 @@ body[dir="rtl"] .language-menu-list {
   }
 
   .qibla-stats,
+  .quran-hero-stats,
   .tools-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quran-surah-top {
+    grid-template-columns: auto 1fr;
+  }
+
+  .quran-surah-arabic {
+    grid-column: 1 / -1;
   }
 
   .countdown {
