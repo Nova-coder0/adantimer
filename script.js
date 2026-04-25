@@ -30,7 +30,9 @@ const qiblaBearingLabelEl = document.getElementById("qibla-bearing-label");
 const qiblaBearingValueEl = document.getElementById("qibla-bearing-value");
 const qiblaDistanceLabelEl = document.getElementById("qibla-distance-label");
 const qiblaDistanceValueEl = document.getElementById("qibla-distance-value");
+const qiblaDialEl = document.getElementById("qibla-dial");
 const qiblaNeedleEl = document.getElementById("qibla-needle");
+const qiblaKaabaMarkerEl = document.getElementById("qibla-kaaba-marker");
 const qiblaSensorButtonEl = document.getElementById("qibla-sensor-button");
 const qiblaSensorHintEl = document.getElementById("qibla-sensor-hint");
 const pageType = document.body.dataset.page || "home";
@@ -903,6 +905,36 @@ async function enableLiveCompass() {
   renderQiblaPanel(qiblaPanelState);
 }
 
+function setQiblaCompassVisualState(bearing = null) {
+  const dialRotation = Number.isFinite(deviceHeading) ? -deviceHeading : 0;
+
+  if (qiblaDialEl) {
+    qiblaDialEl.style.transform = `translate(-50%, -50%) rotate(${dialRotation}deg)`;
+  }
+
+  if (!Number.isFinite(bearing)) {
+    if (qiblaNeedleEl) {
+      qiblaNeedleEl.style.transform = "translate(-50%, -50%) rotate(0deg)";
+      qiblaNeedleEl.hidden = true;
+    }
+    if (qiblaKaabaMarkerEl) {
+      qiblaKaabaMarkerEl.style.transform = "translate(-50%, -50%) rotate(0deg)";
+      qiblaKaabaMarkerEl.hidden = true;
+    }
+    return;
+  }
+
+  if (qiblaNeedleEl) {
+    qiblaNeedleEl.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
+    qiblaNeedleEl.hidden = false;
+  }
+
+  if (qiblaKaabaMarkerEl) {
+    qiblaKaabaMarkerEl.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
+    qiblaKaabaMarkerEl.hidden = false;
+  }
+}
+
 function renderQiblaPanel(state = qiblaPanelState) {
   if (!qiblaPanelEl) return;
 
@@ -936,13 +968,9 @@ function renderQiblaPanel(state = qiblaPanelState) {
     const distanceKm = calculateDistanceKm(currentCoords.lat, currentCoords.lng);
     const formattedBearing = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(bearing);
     const formattedDistance = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(distanceKm);
-    const liveRotation = Number.isFinite(deviceHeading)
-      ? normalizeDegrees(bearing - deviceHeading)
-      : bearing;
-
     qiblaBearing = bearing;
 
-    if (qiblaNeedleEl) qiblaNeedleEl.style.transform = `translateX(-50%) rotate(${liveRotation}deg)`;
+    setQiblaCompassVisualState(bearing);
     if (qiblaBearingValueEl) qiblaBearingValueEl.textContent = `${formattedBearing}\u00b0`;
     if (qiblaDistanceValueEl) qiblaDistanceValueEl.textContent = `${formattedDistance} km`;
     if (qiblaStatusEl) qiblaStatusEl.textContent = locale.statusReady(place || locale.placeFallback, formattedBearing);
@@ -963,7 +991,7 @@ function renderQiblaPanel(state = qiblaPanelState) {
   }
 
   qiblaBearing = null;
-  if (qiblaNeedleEl) qiblaNeedleEl.style.transform = "translateX(-50%) rotate(0deg)";
+  setQiblaCompassVisualState(null);
   if (qiblaBearingValueEl) qiblaBearingValueEl.textContent = "\u2014";
   if (qiblaDistanceValueEl) qiblaDistanceValueEl.textContent = "\u2014";
 
