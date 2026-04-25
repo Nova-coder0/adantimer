@@ -1793,8 +1793,6 @@ ${renderScheduleSection(copy)}
 ${renderInfoSection(copy)}
     </section>
 
-${renderQiblaPanelSection(copy)}
-
 ${renderToolsSection(copy)}
 
 ${renderCitiesSection(copy)}
