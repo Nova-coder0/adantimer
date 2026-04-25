@@ -457,6 +457,13 @@ body[data-page="quran-surah"] .hero-copy {
   margin-top: 22px;
 }
 
+.quran-search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
 .quran-search-input {
   inline-size: 100%;
   min-block-size: 54px;
@@ -466,6 +473,18 @@ body[data-page="quran-surah"] .hero-copy {
   background: rgba(255, 255, 255, 0.82);
   color: var(--text);
   font: inherit;
+}
+
+.quran-search-clear {
+  inline-size: 54px;
+  block-size: 54px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--accent-strong);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .quran-search-hint {
@@ -612,7 +631,7 @@ body[data-page="quran-surah"] .hero-copy {
 }
 
 .quran-surah-hero .quran-hero-stats {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .secondary-link {
@@ -675,7 +694,7 @@ body[data-page="quran-surah"] .hero-copy {
 
 .quran-nav-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -687,6 +706,10 @@ body[data-page="quran-surah"] .hero-copy {
   background: rgba(255, 255, 255, 0.74);
   color: inherit;
   text-decoration: none;
+}
+
+.quran-nav-card-index {
+  border-style: dashed;
 }
 
 .quran-nav-label {
