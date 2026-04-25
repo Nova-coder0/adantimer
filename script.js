@@ -831,9 +831,24 @@ function getScreenHeadingOffset() {
   return 0;
 }
 
+function getCompassAccuracy(event) {
+  return Number.isFinite(event.webkitCompassAccuracy) ? Number(event.webkitCompassAccuracy) : null;
+}
+
+function hasAbsoluteCompassFrame(event) {
+  return event.type === "deviceorientationabsolute" || event.absolute === true;
+}
+
 function readDeviceHeading(event) {
   if (Number.isFinite(event.webkitCompassHeading)) {
+    const accuracy = getCompassAccuracy(event);
+    if (Number.isFinite(accuracy) && accuracy > 25) {
+      return null;
+    }
     return normalizeDegrees(event.webkitCompassHeading);
+  }
+  if (!hasAbsoluteCompassFrame(event)) {
+    return null;
   }
   if (!Number.isFinite(event.alpha)) {
     return null;
