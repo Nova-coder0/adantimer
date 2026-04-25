@@ -1,6 +1,10 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import {
+  getDhikrCategories,
+  getDhikrItems
+} from "../data/dhikr-entries.js";
+import {
   QURAN_SURAHS,
   getAdjacentQuranSurahs,
   getQuranSurahBySlug
@@ -1735,13 +1739,13 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         { label: "Next prayer in London", href: buildRoutePath("en", "next-prayer", "London") }
       ];
 
-  return {
+  const copy = {
     activeLanguage: "en",
-    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah",
-    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" ? pageType : "",
-    hideNextPrayerCard: pageType === "qibla" || pageType === "quran",
-    showPopularCities: pageType !== "qibla" && pageType !== "quran",
-    showIntentLinks: pageType !== "qibla" && pageType !== "quran",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" ? pageType : "",
+    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr",
+    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr",
+    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr",
     brandHref: buildRoutePath("en", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `Prayer schedule for ${place}` : "Prayer times by city")
@@ -1818,15 +1822,21 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         ],
     ...buildQuranIndexCopy("en", pageType),
     ...buildQuranSurahCopy("en", pageType, surah, surahReaderData),
+    ...buildDhikrIndexCopy("en", pageType),
     ...buildQiblaPanelCopy("en", pageType),
     ...buildToolHubCopy("en", pageType),
     footerText: pageType === "quran"
       ? QURAN_INDEX_CONTENT.en.footerText
-      : (place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city."),
+      : pageType === "dhikr"
+        ? DHIKR_INDEX_CONTENT.en.footerText
+        : (place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city."),
     noscriptText: pageType === "quran"
       ? QURAN_INDEX_CONTENT.en.noscriptText
-      : "JavaScript is required to load live prayer times and the next prayer countdown."
+      : pageType === "dhikr"
+        ? DHIKR_INDEX_CONTENT.en.noscriptText
+        : "JavaScript is required to load live prayer times and the next prayer countdown."
   };
+  return copy;
 }
 
 function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReaderData }) {
@@ -1872,13 +1882,13 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
         { label: "الصلاة القادمة في لندن", href: buildRoutePath("ar", "next-prayer", "London") }
       ];
 
-  return {
+  const copy = {
     activeLanguage: "ar",
-    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah",
-    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" ? pageType : "",
-    hideNextPrayerCard: pageType === "qibla" || pageType === "quran",
-    showPopularCities: pageType !== "qibla" && pageType !== "quran",
-    showIntentLinks: pageType !== "qibla" && pageType !== "quran",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" ? pageType : "",
+    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr",
+    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr",
+    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr",
     brandHref: buildRoutePath("ar", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `جدول الصلاة في ${place}` : "مواقيت الصلاة حسب المدينة")
@@ -1949,6 +1959,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     ],
     ...buildQuranIndexCopy("ar", pageType),
     ...buildQuranSurahCopy("ar", pageType, surah, surahReaderData),
+    ...buildDhikrIndexCopy("ar", pageType),
     ...buildQiblaPanelCopy("ar", pageType),
     ...buildToolHubCopy("ar", pageType),
     footerText: pageType === "quran"
@@ -1958,6 +1969,11 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
       ? QURAN_INDEX_CONTENT.ar.noscriptText
       : "يتطلب عرض المواقيت الحية والعد التنازلي للصلاة القادمة تشغيل JavaScript."
   };
+  if (pageType === "dhikr") {
+    copy.footerText = DHIKR_INDEX_CONTENT.ar.footerText;
+    copy.noscriptText = DHIKR_INDEX_CONTENT.ar.noscriptText;
+  }
+  return copy;
 }
 
 function buildCopy({ language, pageType, place, sourceCity, topic, surah, surahReaderData }) {
@@ -1999,11 +2015,11 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
 
   return {
     activeLanguage: language,
-    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah",
-    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" ? pageType : "",
-    hideNextPrayerCard: pageType === "qibla" || pageType === "quran",
-    showPopularCities: pageType !== "qibla" && pageType !== "quran",
-    showIntentLinks: pageType !== "qibla" && pageType !== "quran",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" ? pageType : "",
+    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr",
+    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr",
+    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr",
     brandHref: buildRoutePath(language, "home"),
     heroEyebrow: pageType === "home"
       ? (place ? locale.heroEyebrowPlace(place) : locale.heroEyebrowHome)
@@ -2046,18 +2062,40 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     faq: isHomeRoot && rootOverride ? rootOverride.faq : locale.faq(topic, place),
     ...buildQuranIndexCopy(language, pageType),
     ...buildQuranSurahCopy(language, pageType, surah, surahReaderData),
+    ...buildDhikrIndexCopy(language, pageType),
     ...buildQiblaPanelCopy(language, pageType),
     ...buildToolHubCopy(language, pageType),
     footerText: pageType === "quran"
       ? (QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en).footerText
-      : locale.footerText(place),
+      : pageType === "dhikr"
+        ? (DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en).footerText
+        : locale.footerText(place),
     noscriptText: pageType === "quran"
       ? (QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en).noscriptText
-      : locale.noscriptText
+      : pageType === "dhikr"
+        ? (DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en).noscriptText
+        : locale.noscriptText
   };
 }
 
 function renderHeroCopy(copy) {
+  if (copy.standalonePageType === "dhikr") {
+    return `        <section class="hero-copy dhikr-hero-copy">
+          <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
+          <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
+          <p id="hero-subtitle" class="hero-subtitle">
+            ${escapeHtml(copy.heroSubtitle)}
+          </p>
+
+          <div class="dhikr-hero-stats" aria-label="${escapeHtml(copy.dhikrStatsAria)}">
+${copy.dhikrStats.map(item => `            <div class="dhikr-hero-stat">
+              <strong>${escapeHtml(item.value)}</strong>
+              <span>${escapeHtml(item.label)}</span>
+            </div>`).join("\n")}
+          </div>
+        </section>`;
+  }
+
   if (copy.standalonePageType === "quran") {
     return `        <section class="hero-copy quran-hero-copy">
           <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
@@ -2353,6 +2391,85 @@ ${renderFaqSection(copy)}
     </section>`;
 }
 
+function renderDhikrSection(copy) {
+  const categoryMarkup = copy.dhikrCategories.map(item => `          <button type="button" class="dhikr-category-chip${item.active ? " is-active" : ""}" data-dhikr-category="${escapeHtml(item.id)}" aria-pressed="${item.active ? "true" : "false"}">
+            <span>${escapeHtml(item.label)}</span>
+            <strong>${item.itemCount}</strong>
+          </button>`).join("\n");
+
+  const cardMarkup = copy.dhikrItems.map(item => `          <article class="dhikr-card" data-dhikr-card data-dhikr-item="${escapeHtml(item.id)}" data-dhikr-category="${escapeHtml(item.category)}" data-dhikr-target="${item.countTarget}">
+            <div class="dhikr-card-head">
+              <span class="dhikr-card-category">${escapeHtml(item.categoryLabel)}</span>
+              <span class="dhikr-card-target">${escapeHtml(item.targetLabel)}</span>
+            </div>
+            <p class="dhikr-card-arabic">${escapeHtml(item.arabic)}</p>
+            <p class="dhikr-card-transliteration">${escapeHtml(item.transliteration)}</p>
+            <p class="dhikr-card-translation">${escapeHtml(item.translation)}</p>
+            <div class="dhikr-card-meta">
+              <span>${escapeHtml(item.source)}</span>
+              <span>${escapeHtml(item.benefit)}</span>
+            </div>
+            <div class="dhikr-counter" aria-label="${escapeHtml(copy.dhikrCounterAria)}">
+              <button type="button" class="dhikr-counter-btn" data-dhikr-action="decrement" aria-label="${escapeHtml(copy.dhikrDecrementLabel)}">-</button>
+              <strong class="dhikr-counter-value" data-dhikr-count>0</strong>
+              <button type="button" class="dhikr-counter-btn" data-dhikr-action="increment" aria-label="${escapeHtml(copy.dhikrIncrementLabel)}">+</button>
+            </div>
+            <div class="dhikr-progress-block">
+              <div class="dhikr-progress-bar" aria-hidden="true">
+                <span class="dhikr-progress-fill" data-dhikr-progress-fill style="width:0%"></span>
+              </div>
+              <p class="dhikr-progress-text" data-dhikr-progress-text>${escapeHtml(item.progressText)}</p>
+            </div>
+            <button type="button" class="dhikr-reset-btn" data-dhikr-action="reset">${escapeHtml(copy.dhikrResetItemLabel)}</button>
+          </article>`).join("\n");
+
+  return `    <section class="dhikr-dashboard" aria-labelledby="dhikr-dashboard-heading">
+      <section class="card dhikr-summary-card" aria-labelledby="dhikr-summary-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">${escapeHtml(copy.dhikrSummaryEyebrow)}</p>
+            <h2 id="dhikr-summary-heading">${escapeHtml(copy.dhikrSummaryTitle)}</h2>
+          </div>
+          <p id="dhikr-active-category" class="muted">${escapeHtml(copy.dhikrCurrentCategoryText)}</p>
+        </div>
+        <div class="dhikr-summary-grid">
+          <div class="dhikr-summary-stat">
+            <span>${escapeHtml(copy.dhikrSummaryCompletedLabel)}</span>
+            <strong id="dhikr-summary-completed">${escapeHtml(copy.dhikrSummaryCompletedValue)}</strong>
+          </div>
+          <div class="dhikr-summary-stat">
+            <span>${escapeHtml(copy.dhikrSummaryRepetitionsLabel)}</span>
+            <strong id="dhikr-summary-repetitions">${escapeHtml(copy.dhikrSummaryRepetitionsValue)}</strong>
+          </div>
+          <div class="dhikr-summary-stat">
+            <span>${escapeHtml(copy.dhikrSummaryTargetLabel)}</span>
+            <strong id="dhikr-summary-target">${escapeHtml(copy.dhikrSummaryTargetValue)}</strong>
+          </div>
+        </div>
+        <div class="dhikr-summary-actions">
+          <button type="button" id="dhikr-reset-visible" class="dhikr-summary-btn">${escapeHtml(copy.dhikrResetVisibleLabel)}</button>
+          <button type="button" id="dhikr-reset-all" class="dhikr-summary-btn is-secondary">${escapeHtml(copy.dhikrResetAllLabel)}</button>
+        </div>
+      </section>
+      <section class="card dhikr-collections-card" aria-labelledby="dhikr-dashboard-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">${escapeHtml(copy.dhikrSectionEyebrow)}</p>
+            <h2 id="dhikr-dashboard-heading">${escapeHtml(copy.dhikrSectionTitle)}</h2>
+          </div>
+          <p class="muted">${escapeHtml(copy.dhikrSectionIntro)}</p>
+        </div>
+        <div class="dhikr-category-row" role="group" aria-label="${escapeHtml(copy.dhikrCategoriesAria)}">
+${categoryMarkup}
+        </div>
+        <div class="dhikr-card-grid" id="dhikr-card-grid">
+${cardMarkup}
+        </div>
+      </section>
+${renderFaqSection(copy)}
+    </section>`;
+}
+
 function renderCitiesSection(copy) {
   return `    <section class="card prose" aria-labelledby="cities-heading">
       <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
@@ -2397,6 +2514,12 @@ ${copy.faq.map(item => `          <div>
 
 function renderMainContent(copy) {
   if (copy.standalonePage) {
+    if (copy.standalonePageType === "dhikr") {
+      return `  <main class="shell main-content">
+${renderDhikrSection(copy)}
+  </main>`;
+    }
+
     if (copy.standalonePageType === "quran") {
       return `  <main class="shell main-content">
 ${renderQuranIndexSection(copy)}
@@ -2624,6 +2747,279 @@ function buildQuranIndexCopy(language, pageType) {
   };
 }
 
+const DHIKR_INDEX_CONTENT = {
+  en: {
+    heroEyebrow: "Dhikr",
+    heroTitle: "Track daily dhikr without leaving the browser",
+    heroSubtitle: "Use focused counters for common daily remembrance, switch between key collections, and keep your progress saved locally on this device.",
+    summaryEyebrow: "Today",
+    summaryTitle: "Dhikr session progress",
+    summaryCompletedLabel: "Completed entries",
+    summaryRepetitionsLabel: "Repetitions done",
+    summaryTargetLabel: "Target repetitions",
+    sectionEyebrow: "Collections",
+    sectionTitle: "Daily dhikr collections",
+    sectionIntro: "Start with a focused collection, continue at your own pace, and reset only the part you want to repeat again.",
+    currentCategory: label => `Current collection: ${label}`,
+    resetVisibleLabel: "Reset current collection",
+    resetAllLabel: "Reset all counters",
+    counterAria: "Dhikr counter controls",
+    decrementLabel: "Decrease counter",
+    incrementLabel: "Increase counter",
+    resetItemLabel: "Reset entry",
+    progressText: (value, target) => `${value} of ${target} completed`,
+    targetLabel: target => `${target}x target`,
+    statsLabelCollections: "Collections",
+    statsLabelEntries: "Entries",
+    statsLabelStorage: "Saved in browser",
+    statsStorageValue: "Local",
+    categoriesAria: "Dhikr collections",
+    metaTitle: "Dhikr Counter and Daily Remembrance Page | Adantimer",
+    metaDescription: "Track daily dhikr with focused counters, category filters, and browser-saved progress across common morning, evening, after-prayer, and general remembrance.",
+    faq: [
+      {
+        question: "Does this dhikr page save my progress?",
+        answer: "Yes. The counters are stored in your browser on this device, so your current progress can remain available when you return."
+      },
+      {
+        question: "Can I focus on one collection at a time?",
+        answer: "Yes. The page lets you switch between collections such as morning, evening, after-prayer, forgiveness, and general dhikr."
+      },
+      {
+        question: "Do I need an app or login to use the counters?",
+        answer: "No. The first dhikr version works directly in the browser and does not require an account."
+      }
+    ],
+    footerText: "Daily dhikr counters and focused remembrance tools inside Adantimer.",
+    noscriptText: "JavaScript is needed for the live dhikr counters. The dhikr text itself is already visible."
+  },
+  ar: {
+    heroEyebrow: "الذكر",
+    heroTitle: "تابع ذكرك اليومي مباشرة من المتصفح",
+    heroSubtitle: "استخدم عدادات مركزة لأذكار يومية مشهورة، وانتقل بين المجموعات الأساسية، واحتفظ بتقدمك محلياً على هذا الجهاز.",
+    summaryEyebrow: "اليوم",
+    summaryTitle: "تقدم جلسة الذكر",
+    summaryCompletedLabel: "الأذكار المكتملة",
+    summaryRepetitionsLabel: "مرات التكرار",
+    summaryTargetLabel: "العدد المستهدف",
+    sectionEyebrow: "المجموعات",
+    sectionTitle: "مجموعات الذكر اليومية",
+    sectionIntro: "ابدأ بمجموعة مركزة، وتابع بالسرعة التي تناسبك، ثم أعد فقط الجزء الذي تريد تكراره من جديد.",
+    currentCategory: label => `المجموعة الحالية: ${label}`,
+    resetVisibleLabel: "إعادة مجموعة الحالية",
+    resetAllLabel: "إعادة جميع العدادات",
+    counterAria: "عناصر عداد الذكر",
+    decrementLabel: "تقليل العداد",
+    incrementLabel: "زيادة العداد",
+    resetItemLabel: "إعادة الذكر",
+    progressText: (value, target) => `${value} من ${target} مكتمل`,
+    targetLabel: target => `الهدف ${target} مرة`,
+    statsLabelCollections: "المجموعات",
+    statsLabelEntries: "الأذكار",
+    statsLabelStorage: "حفظ المتصفح",
+    statsStorageValue: "محلي",
+    categoriesAria: "مجموعات الذكر",
+    metaTitle: "صفحة الذكر والعداد اليومي | Adantimer",
+    metaDescription: "تابع الذكر اليومي بعدادات مركزة وفلاتر للمجموعات وحفظ محلي في المتصفح لأذكار الصباح والمساء وما بعد الصلاة والاستغفار والذكر العام.",
+    faq: [
+      {
+        question: "هل تحفظ صفحة الذكر تقدمي؟",
+        answer: "نعم. يتم حفظ العدادات داخل متصفحك على هذا الجهاز حتى يبقى تقدمك الحالي متاحاً عند العودة."
+      },
+      {
+        question: "هل أستطيع التركيز على مجموعة واحدة فقط؟",
+        answer: "نعم. يمكنك التنقل بين مجموعات مثل أذكار الصباح والمساء وما بعد الصلاة والاستغفار والذكر العام."
+      },
+      {
+        question: "هل أحتاج إلى تطبيق أو تسجيل دخول؟",
+        answer: "لا. النسخة الأولى من صفحة الذكر تعمل مباشرة في المتصفح ولا تحتاج إلى حساب."
+      }
+    ],
+    footerText: "عدادات ذكر يومية وأدوات تذكير مركزة داخل Adantimer.",
+    noscriptText: "يحتاج عداد الذكر التفاعلي إلى JavaScript، أما نصوص الذكر نفسها فهي ظاهرة بالفعل."
+  },
+  de: {
+    heroEyebrow: "Dhikr",
+    heroTitle: "Täglichen Dhikr direkt im Browser verfolgen",
+    heroSubtitle: "Nutze fokussierte Zähler für bekannte tägliche Adhkar, wechsle zwischen den wichtigsten Sammlungen und behalte deinen Fortschritt lokal auf diesem Gerät.",
+    summaryEyebrow: "Heute",
+    summaryTitle: "Fortschritt deiner Dhikr-Session",
+    summaryCompletedLabel: "Erledigte Einträge",
+    summaryRepetitionsLabel: "Wiederholungen",
+    summaryTargetLabel: "Zielwiederholungen",
+    sectionEyebrow: "Sammlungen",
+    sectionTitle: "Tägliche Dhikr-Sammlungen",
+    sectionIntro: "Starte mit einer klaren Sammlung, bleibe in deinem eigenen Rhythmus und setze nur den Teil zurück, den du noch einmal beginnen willst.",
+    currentCategory: label => `Aktive Sammlung: ${label}`,
+    resetVisibleLabel: "Aktive Sammlung zurücksetzen",
+    resetAllLabel: "Alle Zähler zurücksetzen",
+    counterAria: "Dhikr-Zähler",
+    decrementLabel: "Zähler verringern",
+    incrementLabel: "Zähler erhöhen",
+    resetItemLabel: "Eintrag zurücksetzen",
+    progressText: (value, target) => `${value} von ${target} erledigt`,
+    targetLabel: target => `${target}x Ziel`,
+    statsLabelCollections: "Sammlungen",
+    statsLabelEntries: "Einträge",
+    statsLabelStorage: "Im Browser gespeichert",
+    statsStorageValue: "Lokal",
+    categoriesAria: "Dhikr-Sammlungen",
+    metaTitle: "Dhikr-Zähler und tägliche Adhkar | Adantimer",
+    metaDescription: "Verfolge tägliche Adhkar mit fokussierten Zählern, Kategorien und lokal gespeicherten Fortschritten für Morgen-, Abend-, Nach-dem-Gebet- und allgemeine Dhikr-Sammlungen.",
+    faq: [
+      {
+        question: "Speichert diese Dhikr-Seite meinen Fortschritt?",
+        answer: "Ja. Die Zähler werden lokal in deinem Browser auf diesem Gerät gespeichert, damit dein aktueller Stand beim nächsten Besuch erhalten bleiben kann."
+      },
+      {
+        question: "Kann ich nur eine Sammlung gleichzeitig nutzen?",
+        answer: "Ja. Du kannst zwischen Sammlungen wie Morgen, Abend, nach dem Gebet, Istighfar und allgemeinem Dhikr wechseln."
+      },
+      {
+        question: "Brauche ich eine App oder ein Konto?",
+        answer: "Nein. Die erste Dhikr-Version läuft direkt im Browser und benötigt keinen Login."
+      }
+    ],
+    footerText: "Tägliche Dhikr-Zähler und fokussierte Erinnerungsseiten in Adantimer.",
+    noscriptText: "Für die interaktiven Dhikr-Zähler wird JavaScript benötigt. Der Dhikr-Inhalt selbst ist bereits sichtbar."
+  },
+  fr: {
+    heroEyebrow: "Dhikr",
+    heroTitle: "Suivre le dhikr quotidien directement dans le navigateur",
+    heroSubtitle: "Utilisez des compteurs concentres pour des adhkar quotidiens connus, passez d'une collection a l'autre et gardez votre progression enregistre localement sur cet appareil.",
+    summaryEyebrow: "Aujourd'hui",
+    summaryTitle: "Progression de la session de dhikr",
+    summaryCompletedLabel: "Entrees terminees",
+    summaryRepetitionsLabel: "Repetitions",
+    summaryTargetLabel: "Objectif total",
+    sectionEyebrow: "Collections",
+    sectionTitle: "Collections quotidiennes de dhikr",
+    sectionIntro: "Commencez avec une collection claire, avancez a votre rythme et reinitialisez seulement la partie que vous voulez recommencer.",
+    currentCategory: label => `Collection active : ${label}`,
+    resetVisibleLabel: "Reinitialiser la collection active",
+    resetAllLabel: "Reinitialiser tous les compteurs",
+    counterAria: "Compteur de dhikr",
+    decrementLabel: "Diminuer le compteur",
+    incrementLabel: "Augmenter le compteur",
+    resetItemLabel: "Reinitialiser l'entree",
+    progressText: (value, target) => `${value} sur ${target} termines`,
+    targetLabel: target => `objectif ${target}x`,
+    statsLabelCollections: "Collections",
+    statsLabelEntries: "Entrees",
+    statsLabelStorage: "Enregistre dans le navigateur",
+    statsStorageValue: "Local",
+    categoriesAria: "Collections de dhikr",
+    metaTitle: "Compteur de dhikr et rappels quotidiens | Adantimer",
+    metaDescription: "Suivez votre dhikr quotidien avec des compteurs concentres, des filtres de collection et une progression enregistree localement pour les rappels du matin, du soir, d'apres-priere et generaux.",
+    faq: [
+      {
+        question: "Cette page de dhikr garde-t-elle ma progression ?",
+        answer: "Oui. Les compteurs sont enregistres dans votre navigateur sur cet appareil afin que votre progression puisse rester disponible quand vous revenez."
+      },
+      {
+        question: "Puis-je me concentrer sur une seule collection ?",
+        answer: "Oui. Vous pouvez passer entre des collections comme matin, soir, apres la priere, pardon et dhikr general."
+      },
+      {
+        question: "Faut-il une application ou un compte ?",
+        answer: "Non. La premiere version de la page dhikr fonctionne directement dans le navigateur et ne demande aucun compte."
+      }
+    ],
+    footerText: "Compteurs de dhikr quotidiens et pages de rappel concentrees dans Adantimer.",
+    noscriptText: "JavaScript est necessaire pour les compteurs de dhikr. Le texte du dhikr reste deja visible."
+  },
+  tr: {
+    heroEyebrow: "Zikir",
+    heroTitle: "Gunluk zikri dogrudan tarayicida takip et",
+    heroSubtitle: "Bilinen gunluk zikirler icin odakli sayaçlar kullan, temel koleksiyonlar arasinda gecis yap ve ilerlemeni bu cihazda yerel olarak sakla.",
+    summaryEyebrow: "Bugun",
+    summaryTitle: "Zikir oturumu ilerlemesi",
+    summaryCompletedLabel: "Tamamlanan girisler",
+    summaryRepetitionsLabel: "Tekrar sayisi",
+    summaryTargetLabel: "Toplam hedef",
+    sectionEyebrow: "Koleksiyonlar",
+    sectionTitle: "Gunluk zikir koleksiyonlari",
+    sectionIntro: "Net bir koleksiyonla basla, kendi hizinda devam et ve sadece yeniden yapmak istedigin bolumu sifirla.",
+    currentCategory: label => `Aktif koleksiyon: ${label}`,
+    resetVisibleLabel: "Aktif koleksiyonu sifirla",
+    resetAllLabel: "Tum sayaçlari sifirla",
+    counterAria: "Zikir sayaci",
+    decrementLabel: "Sayaci azalt",
+    incrementLabel: "Sayaci artir",
+    resetItemLabel: "Girisi sifirla",
+    progressText: (value, target) => `${value} / ${target} tamamlandi`,
+    targetLabel: target => `${target}x hedef`,
+    statsLabelCollections: "Koleksiyon",
+    statsLabelEntries: "Giris",
+    statsLabelStorage: "Tarayicida saklanir",
+    statsStorageValue: "Yerel",
+    categoriesAria: "Zikir koleksiyonlari",
+    metaTitle: "Zikir sayaci ve gunluk zikir sayfasi | Adantimer",
+    metaDescription: "Sabah, aksam, namaz sonrasi ve genel zikirler icin odakli sayaçlar, kategori filtreleri ve tarayicida saklanan ilerleme ile gunluk zikri takip et.",
+    faq: [
+      {
+        question: "Bu zikir sayfasi ilerlememi saklar mi?",
+        answer: "Evet. Sayaçlar bu cihazdaki tarayicinda yerel olarak saklanir; boylece geri geldiginde mevcut ilerlemen korunabilir."
+      },
+      {
+        question: "Tek bir koleksiyona odaklanabilir miyim?",
+        answer: "Evet. Sabah, aksam, namaz sonrasi, istigfar ve genel zikir gibi koleksiyonlar arasinda gecis yapabilirsin."
+      },
+      {
+        question: "Uygulama veya hesap gerekiyor mu?",
+        answer: "Hayir. Ilk zikir surumu dogrudan tarayicida calisir ve hesap istemez."
+      }
+    ],
+    footerText: "Adantimer icinde gunluk zikir sayaçlari ve odakli hatirlatici sayfalari.",
+    noscriptText: "Canli zikir sayaclari icin JavaScript gerekir. Zikir metinleri ise zaten gorunur durumdadir."
+  },
+  "zh-hans": {
+    heroEyebrow: "Dhikr",
+    heroTitle: "直接在浏览器中追踪每日记念",
+    heroSubtitle: "使用专注计数器完成常见每日 dhikr，在核心分类之间切换，并将进度保存在当前设备浏览器中。",
+    summaryEyebrow: "今天",
+    summaryTitle: "Dhikr 进度",
+    summaryCompletedLabel: "完成条目",
+    summaryRepetitionsLabel: "已完成次数",
+    summaryTargetLabel: "总目标次数",
+    sectionEyebrow: "分类",
+    sectionTitle: "每日 dhikr 分类",
+    sectionIntro: "先专注一组内容，按自己的节奏完成，并且只重置你想重新开始的那一部分。",
+    currentCategory: label => `当前分类：${label}`,
+    resetVisibleLabel: "重置当前分类",
+    resetAllLabel: "重置全部计数",
+    counterAria: "Dhikr 计数器",
+    decrementLabel: "减少计数",
+    incrementLabel: "增加计数",
+    resetItemLabel: "重置条目",
+    progressText: (value, target) => `已完成 ${value} / ${target}`,
+    targetLabel: target => `${target} 次目标`,
+    statsLabelCollections: "分类",
+    statsLabelEntries: "条目",
+    statsLabelStorage: "浏览器保存",
+    statsStorageValue: "本地",
+    categoriesAria: "Dhikr 分类",
+    metaTitle: "Dhikr 计数器与每日记念页 | Adantimer",
+    metaDescription: "通过专注计数器、分类切换和浏览器本地保存进度来追踪每日 dhikr，适用于晨间、晚间、礼拜后、求饶恕和通用记念。",
+    faq: [
+      {
+        question: "这个 dhikr 页面会保存我的进度吗？",
+        answer: "会。计数会保存在当前设备的浏览器中，因此你下次回来时可以继续当前进度。"
+      },
+      {
+        question: "我可以一次只专注一个分类吗？",
+        answer: "可以。你可以在晨间、晚间、礼拜后、求饶恕和通用 dhikr 分类之间切换。"
+      },
+      {
+        question: "需要安装应用或登录吗？",
+        answer: "不需要。第一版 dhikr 页面直接在浏览器中工作，不要求账户。"
+      }
+    ],
+    footerText: "Adantimer 内的每日 dhikr 计数器与专注记念页面。",
+    noscriptText: "互动式 dhikr 计数器需要 JavaScript，但 dhikr 内容本身已经显示。"
+  }
+};
+
 function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
   if (pageType !== "quran-surah" || !surah) {
     return {
@@ -2704,6 +3100,84 @@ function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
     footerText: locale.footerText(surah),
     noscriptText: locale.noscriptText
   };
+}
+
+function buildDhikrIndexCopy(language, pageType) {
+  if (pageType !== "dhikr") {
+    return {
+      dhikrStats: [],
+      dhikrCategories: [],
+      dhikrItems: []
+    };
+  }
+
+  const locale = DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en;
+  const categories = getDhikrCategories();
+  const items = getDhikrItems();
+
+  const copy = {
+    heroEyebrow: locale.heroEyebrow,
+    heroHeading: locale.heroTitle,
+    heroSubtitle: locale.heroSubtitle,
+    metaTitle: locale.metaTitle,
+    metaDescription: locale.metaDescription,
+    dhikrStatsAria: locale.heroTitle,
+    dhikrStats: [
+      { value: String(categories.length), label: locale.statsLabelCollections },
+      { value: String(items.length), label: locale.statsLabelEntries },
+      { value: locale.statsStorageValue, label: locale.statsLabelStorage }
+    ],
+    dhikrSummaryEyebrow: locale.summaryEyebrow,
+    dhikrSummaryTitle: locale.summaryTitle,
+    dhikrSummaryCompletedLabel: locale.summaryCompletedLabel,
+    dhikrSummaryRepetitionsLabel: locale.summaryRepetitionsLabel,
+    dhikrSummaryTargetLabel: locale.summaryTargetLabel,
+    dhikrSummaryCompletedValue: "0",
+    dhikrSummaryRepetitionsValue: "0",
+    dhikrSummaryTargetValue: String(items.reduce((sum, item) => sum + item.countTarget, 0)),
+    dhikrCurrentCategoryText: locale.currentCategory(DHIKR_CATEGORIES_LABEL(language, "all")),
+    dhikrResetVisibleLabel: locale.resetVisibleLabel,
+    dhikrResetAllLabel: locale.resetAllLabel,
+    dhikrCounterAria: locale.counterAria,
+    dhikrDecrementLabel: locale.decrementLabel,
+    dhikrIncrementLabel: locale.incrementLabel,
+    dhikrResetItemLabel: locale.resetItemLabel,
+    dhikrSectionEyebrow: locale.sectionEyebrow,
+    dhikrSectionTitle: locale.sectionTitle,
+    dhikrSectionIntro: locale.sectionIntro,
+    dhikrCategoriesAria: locale.categoriesAria,
+    dhikrCategories: [
+      {
+        id: "all",
+        label: DHIKR_CATEGORIES_LABEL(language, "all"),
+        itemCount: items.length,
+        active: true
+      },
+      ...categories.map(category => ({
+        id: category.id,
+        label: category.labels[language] || category.labels.en,
+        itemCount: items.filter(item => item.category === category.id).length,
+        active: false
+      }))
+    ],
+    dhikrItems: items.map(item => ({
+      id: item.id,
+      category: item.category,
+      categoryLabel: DHIKR_CATEGORIES_LABEL(language, item.category),
+      countTarget: item.countTarget,
+      targetLabel: locale.targetLabel(item.countTarget),
+      arabic: item.arabic,
+      transliteration: item.transliteration,
+      translation: item.translations[language] || item.translations.en,
+      benefit: item.benefit[language] || item.benefit.en,
+      source: item.source[language] || item.source.en,
+      progressText: locale.progressText(0, item.countTarget)
+    })),
+    faq: locale.faq,
+    footerText: locale.footerText,
+    noscriptText: locale.noscriptText
+  };
+  return copy;
 }
 
 function buildQiblaPanelCopy(language, pageType) {
@@ -2838,4 +3312,10 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
+
+function DHIKR_CATEGORIES_LABEL(language, id) {
+  const category = [{ id: "all", labels: { en: "All", ar: "الكل", de: "Alle", fr: "Toutes", tr: "Tümü", "zh-hans": "全部" } }, ...getDhikrCategories()]
+    .find(entry => entry.id === id);
+  return category?.labels?.[language] || category?.labels?.en || id;
 }
