@@ -66,9 +66,19 @@
     <priority>0.82</priority>
   </url>
   <url>
+    <loc>https://www.adantimer.com/quran/al-fatihah</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.adantimer.com/ar/quran</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/ar/quran/al-fatihah</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.adantimer.com/de/quran</loc>
@@ -76,9 +86,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.adantimer.com/de/quran/al-fatihah</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.adantimer.com/fr/quran</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/fr/quran/al-fatihah</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.adantimer.com/tr/quran</loc>
@@ -86,9 +106,19 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.adantimer.com/tr/quran/al-fatihah</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.adantimer.com/zh-hans/quran</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/zh-hans/quran/al-fatihah</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.adantimer.com/dhikr</loc>

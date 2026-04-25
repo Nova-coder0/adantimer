@@ -114,3 +114,26 @@ export const QURAN_SURAHS = [
   { id: 113, slug: "al-falaq", nameSimple: "Al-Falaq", nameArabic: "الفلق", translatedName: "The Daybreak", ayahs: 5, revelation: "makkah" },
   { id: 114, slug: "an-nas", nameSimple: "An-Nas", nameArabic: "الناس", translatedName: "Mankind", ayahs: 6, revelation: "makkah" }
 ];
+
+export function getQuranSurahBySlug(slug) {
+  const normalizedSlug = String(slug || "").trim().toLowerCase();
+  return QURAN_SURAHS.find(item => item.slug === normalizedSlug) || null;
+}
+
+export function getQuranSurahById(id) {
+  const numericId = Number(id);
+  return QURAN_SURAHS.find(item => item.id === numericId) || null;
+}
+
+export function getAdjacentQuranSurahs(slug) {
+  const current = getQuranSurahBySlug(slug);
+  if (!current) {
+    return { previous: null, current: null, next: null };
+  }
+
+  return {
+    previous: getQuranSurahById(current.id - 1),
+    current,
+    next: getQuranSurahById(current.id + 1)
+  };
+}

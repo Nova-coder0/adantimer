@@ -732,9 +732,14 @@ function getLanguagePrefix(lang) {
   return LANGUAGE_PREFIXES[lang] || "";
 }
 
-function buildRelativeUrl(lang, type, city = "") {
+function getRequestedSurahSlug() {
+  return document.body.dataset.surahSlug || "";
+}
+
+function buildRelativeUrl(lang, type, city = "", detail = "") {
   const prefix = getLanguagePrefix(lang);
   const slug = city ? encodeURIComponent(slugifyCity(city)) : "";
+  const detailSlug = detail ? encodeURIComponent(slugifyCity(detail)) : "";
   const pathMap = {
     home: slug ? `/${slug}` : "/",
     "prayer-times": slug ? `/prayer-times/${slug}` : "/prayer-times",
@@ -746,6 +751,7 @@ function buildRelativeUrl(lang, type, city = "") {
     isha: slug ? `/isha-time/${slug}` : "/isha-time",
     qibla: "/qibla",
     quran: "/quran",
+    "quran-surah": detailSlug ? `/quran/${detailSlug}` : "/quran",
     dhikr: "/dhikr",
     hadith: "/hadith"
   };
@@ -1268,6 +1274,17 @@ function setLanguage(lang, persist = true) {
     return;
   }
 
+  if (pageType === "quran-surah") {
+    if (persist) {
+      const targetUrl = buildRelativeUrl(language, "quran-surah", "", getRequestedSurahSlug());
+      if (window.location.pathname !== targetUrl) {
+        window.location.href = targetUrl;
+        return;
+      }
+    }
+    return;
+  }
+
   const activeCity = cityName || getRequestedCity();
   renderStaticContent();
   if (pageType === "qibla") {
@@ -1745,10 +1762,12 @@ document.querySelectorAll("button.city-chip").forEach(button => {
   });
 });
 
-language = pageType === "quran" ? getCurrentDocumentLanguage() : getPreferredLanguage();
+language = pageType === "quran" || pageType === "quran-surah" ? getCurrentDocumentLanguage() : getPreferredLanguage();
 setLanguage(language, false);
 if (pageType === "quran") {
   initQuranIndex();
+} else if (pageType === "quran-surah") {
+  // Surah pages are fully server-rendered; no client bootstrap is needed here.
 } else if (pageType === "qibla") {
   loadQiblaCompass();
 } else {
