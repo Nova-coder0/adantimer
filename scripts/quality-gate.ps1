@@ -196,6 +196,7 @@ AssertContains $indexHtml 'data-lang="ar"' "Homepage keeps the Arabic quick butt
 AssertContains $indexHtml 'Other languages' "Homepage includes the Other languages menu" "Homepage is missing the Other languages menu"
 AssertContains $indexHtml 'class="card tools-hub"' "Homepage template includes the tools hub container" "Homepage template is missing the tools hub container"
 AssertContains $indexHtml 'class="card qibla-panel"' "Homepage template includes the qibla panel container" "Homepage template is missing the qibla panel container"
+AssertContains $indexHtml 'id="qibla-sensor-button"' "Homepage template includes the qibla sensor button" "Homepage template is missing the qibla sensor button"
 AssertContains $indexHtml 'hreflang="de"' "Homepage exposes the German alternate" "Homepage is missing the German alternate"
 AssertContains $indexHtml 'hreflang="fr"' "Homepage exposes the French alternate" "Homepage is missing the French alternate"
 AssertContains $indexHtml 'hreflang="tr"' "Homepage exposes the Turkish alternate" "Homepage is missing the Turkish alternate"
@@ -209,6 +210,9 @@ AssertContains $scriptJs 'const QIBLA_PANEL_LOCALES = {' "Client keeps localized
 AssertContains $scriptJs 'function renderToolsHub(locale)' "Client keeps the tools-hub renderer" "Client tools-hub renderer is missing"
 AssertContains $scriptJs 'function calculateQiblaBearing(lat, lng)' "Client keeps the qibla-bearing calculator" "Client qibla-bearing calculator is missing"
 AssertContains $scriptJs 'function renderQiblaPanel(state = qiblaPanelState)' "Client keeps the qibla-panel renderer" "Client qibla-panel renderer is missing"
+AssertContains $scriptJs 'async function enableLiveCompass()' "Client keeps the live compass permission flow" "Client live compass permission flow is missing"
+AssertContains $scriptJs 'function readDeviceHeading(event)' "Client keeps the device-heading reader" "Client device-heading reader is missing"
+AssertContains $scriptJs 'async function loadQiblaCompass(resolvedLocation)' "Client keeps the standalone qibla loader" "Client standalone qibla loader is missing"
 AssertContains $scriptJs 'qibla: "/qibla"' "Client URL builder includes the qibla route" "Client URL builder is missing the qibla route"
 AssertContains $scriptJs '"hadith"' "Client recognizes the hadith route" "Client route handling is missing the hadith page"
 AssertContains $scriptJs 'const LANGUAGE_PREFIXES = {' "Client keeps explicit language path prefixes" "Client language path prefixes are missing"
@@ -248,6 +252,7 @@ AssertContains $renderJs 'function getAlternates(pageType, city)' "SSR renderer 
 AssertContains $renderJs 'function buildEnglishCopy' "SSR renderer keeps English copy generation" "SSR renderer is missing English copy generation"
 AssertContains $renderJs 'const TOOL_HUB_CONTENT = {' "SSR renderer keeps server-rendered tool-hub copy" "SSR renderer is missing tool-hub copy"
 AssertContains $renderJs 'const QIBLA_PANEL_CONTENT = {' "SSR renderer keeps server-rendered qibla-panel copy" "SSR renderer is missing qibla-panel copy"
+AssertContains $renderJs 'qiblaSensorButton' "SSR renderer keeps qibla sensor copy" "SSR renderer is missing qibla sensor copy"
 AssertContains $renderJs 'function buildToolHubCopy(language, pageType)' "SSR renderer keeps the tool-hub builder" "SSR renderer is missing the tool-hub builder"
 AssertContains $renderJs 'function renderToolsSection(copy)' "SSR renderer keeps the tools-section renderer" "SSR renderer is missing the tools-section renderer"
 AssertContains $renderJs 'function buildQiblaPanelCopy(language, pageType)' "SSR renderer keeps the qibla-panel builder" "SSR renderer is missing the qibla-panel builder"
@@ -303,7 +308,7 @@ TestMojibake "script.js"
 if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
-  TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'tools-hub', 'qibla-panel', 'Qibla Compass')
+  TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')

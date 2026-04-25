@@ -566,6 +566,42 @@ const QIBLA_PANEL_CONTENT = {
   }
 };
 
+for (const tools of Object.values(TOOL_HUB_CONTENT)) {
+  tools.intro = "";
+}
+
+Object.assign(TOOL_HUB_CONTENT.en, { title: "Islamic Tools" });
+Object.assign(TOOL_HUB_CONTENT.ar, { title: "\u0623\u062f\u0648\u0627\u062a \u0625\u0633\u0644\u0627\u0645\u064a\u0629" });
+Object.assign(TOOL_HUB_CONTENT.de, { title: "Islamische Tools" });
+Object.assign(TOOL_HUB_CONTENT.fr, { title: "Outils islamiques" });
+Object.assign(TOOL_HUB_CONTENT.tr, { title: "Islami Araclar" });
+Object.assign(TOOL_HUB_CONTENT["zh-hans"], { title: "\u4f0a\u65af\u5170\u5de5\u5177" });
+
+Object.assign(QIBLA_PANEL_CONTENT.en, {
+  sensorButton: "Enable live compass",
+  sensorHintIdle: "On phones with a compass sensor, enable the live compass so the arrow turns with your device."
+});
+Object.assign(QIBLA_PANEL_CONTENT.ar, {
+  sensorButton: "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629",
+  sensorHintIdle: "\u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u062a\u064a \u062a\u062f\u0639\u0645 \u062d\u0633\u0627\u0633 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u064a\u0645\u0643\u0646\u0643 \u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0644\u064a\u062a\u062d\u0631\u0643 \u0627\u0644\u0633\u0647\u0645 \u0645\u0639 \u0627\u0644\u062c\u0647\u0627\u0632."
+});
+Object.assign(QIBLA_PANEL_CONTENT.de, {
+  sensorButton: "Live-Kompass aktivieren",
+  sensorHintIdle: "Auf Handys mit Kompasssensor kannst du den Live-Kompass aktivieren, damit sich der Pfeil mit dem Geraet dreht."
+});
+Object.assign(QIBLA_PANEL_CONTENT.fr, {
+  sensorButton: "Activer la boussole en direct",
+  sensorHintIdle: "Sur les telephones avec capteur, activez la boussole en direct pour faire tourner la fleche avec l'appareil."
+});
+Object.assign(QIBLA_PANEL_CONTENT.tr, {
+  sensorButton: "Canli pusulayi etkinlestir",
+  sensorHintIdle: "Pusula sensoru olan telefonlarda oku cihazla birlikte dondurmek icin canli pusulayi etkinlestir."
+});
+Object.assign(QIBLA_PANEL_CONTENT["zh-hans"], {
+  sensorButton: "\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488",
+  sensorHintIdle: "\u5728\u5e26\u6709\u6307\u5357\u9488\u4f20\u611f\u5668\u7684\u624b\u673a\u4e0a\uff0c\u53ef\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488\uff0c\u8ba9\u7bad\u5934\u968f\u8bbe\u5907\u8f6c\u52a8\u3002"
+});
+
 const COPY_LOCALES = {
   de: {
     heroEyebrowHome: "Gebetszeiten nach Stadt",
@@ -1041,6 +1077,7 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<section class="card prose" aria-labelledby="cities-heading">[\s\S]*?<\/section>/, renderCitiesSection(copy))
     .replace(/<article class="card prose" aria-labelledby="about-heading">[\s\S]*?<\/article>/, renderAboutArticle(copy))
     .replace(/<section class="card prose" aria-labelledby="faq-heading">[\s\S]*?<\/section>/, renderFaqSection(copy))
+    .replace(/<main class="shell main-content">[\s\S]*?<\/main>/, renderMainContent(copy))
     .replace(/<footer class="shell footer">[\s\S]*?<\/footer>/, renderFooter(copy))
     .replace(/<noscript>[\s\S]*?<\/noscript>/, renderNoscript(copy));
 }
@@ -1092,6 +1129,10 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: "en",
+    standalonePage: pageType === "qibla",
+    hideNextPrayerCard: pageType === "qibla",
+    showPopularCities: pageType !== "qibla",
+    showIntentLinks: pageType !== "qibla",
     brandHref: buildRoutePath("en", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `Prayer schedule for ${place}` : "Prayer times by city")
@@ -1218,6 +1259,10 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: "ar",
+    standalonePage: pageType === "qibla",
+    hideNextPrayerCard: pageType === "qibla",
+    showPopularCities: pageType !== "qibla",
+    showIntentLinks: pageType !== "qibla",
     brandHref: buildRoutePath("ar", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `جدول الصلاة في ${place}` : "مواقيت الصلاة حسب المدينة")
@@ -1332,6 +1377,10 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: language,
+    standalonePage: pageType === "qibla",
+    hideNextPrayerCard: pageType === "qibla",
+    showPopularCities: pageType !== "qibla",
+    showIntentLinks: pageType !== "qibla",
     brandHref: buildRoutePath(language, "home"),
     heroEyebrow: pageType === "home"
       ? (place ? locale.heroEyebrowPlace(place) : locale.heroEyebrowHome)
@@ -1380,6 +1429,22 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
 }
 
 function renderHeroCopy(copy) {
+  const popularCitiesMarkup = copy.showPopularCities
+    ? `
+
+          <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
+${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
+          </div>`
+    : "";
+
+  const intentLinksMarkup = copy.showIntentLinks
+    ? `
+
+          <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
+${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("\n")}
+          </div>`
+    : "";
+
   return `        <section class="hero-copy">
           <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
           <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
@@ -1394,18 +1459,13 @@ function renderHeroCopy(copy) {
             <input type="text" id="manual-country" name="country" placeholder="${escapeHtml(copy.countryPlaceholder)}" autocomplete="country-name">
             <button id="set-location-btn" type="submit">${escapeHtml(copy.submitLabel)}</button>
           </form>
-
-          <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
-${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
-          </div>
-
-          <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
-${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("\n")}
-          </div>
+${popularCitiesMarkup}
+${intentLinksMarkup}
         </section>`;
 }
 
 function renderNextPrayerCard(copy) {
+  if (copy.hideNextPrayerCard) return "";
   return `        <aside class="next-prayer card featured-card" aria-live="polite">
           <p class="card-label" id="location-status">${escapeHtml(copy.locationStatus)}</p>
           <h2 id="title">${escapeHtml(copy.nextPrayerTitle)}</h2>
@@ -1497,6 +1557,10 @@ function renderQiblaPanelSection(copy) {
             <strong id="qibla-place">${escapeHtml(copy.qiblaPlaceFallback)}</strong>
             <span id="qibla-status">${escapeHtml(copy.qiblaStatusIdle)}</span>
           </div>
+          <div class="qibla-sensor-controls">
+            <button id="qibla-sensor-button" class="qibla-sensor-button" type="button" hidden>${escapeHtml(copy.qiblaSensorButton)}</button>
+            <p id="qibla-sensor-hint" class="qibla-sensor-hint">${escapeHtml(copy.qiblaSensorHintIdle)}</p>
+          </div>
           <div class="qibla-stats">
             <div class="qibla-stat">
               <span id="qibla-bearing-label">${escapeHtml(copy.qiblaBearingLabel)}</span>
@@ -1554,6 +1618,34 @@ ${copy.faq.map(item => `          <div>
       </section>`;
 }
 
+function renderMainContent(copy) {
+  if (copy.standalonePage) {
+    return `  <main class="shell main-content">
+${renderQiblaPanelSection(copy)}
+  </main>`;
+  }
+
+  return `  <main class="shell main-content">
+    <section class="content-grid">
+${renderScheduleSection(copy)}
+
+${renderInfoSection(copy)}
+    </section>
+
+${renderQiblaPanelSection(copy)}
+
+${renderToolsSection(copy)}
+
+${renderCitiesSection(copy)}
+
+    <section class="seo-grid">
+${renderAboutArticle(copy)}
+
+${renderFaqSection(copy)}
+    </section>
+  </main>`;
+}
+
 function renderFooter(copy) {
   return `  <footer class="shell footer">
     <p>&copy; 2026 Adantimer. ${escapeHtml(copy.footerText)}</p>
@@ -1608,6 +1700,8 @@ function buildQiblaPanelCopy(language, pageType) {
     qiblaSummary: locale.summary,
     qiblaPlaceFallback: locale.placeFallback,
     qiblaStatusIdle: locale.statusIdle,
+    qiblaSensorButton: locale.sensorButton || QIBLA_PANEL_CONTENT.en.sensorButton,
+    qiblaSensorHintIdle: locale.sensorHintIdle || QIBLA_PANEL_CONTENT.en.sensorHintIdle,
     qiblaBearingLabel: locale.bearingLabel,
     qiblaDistanceLabel: locale.distanceLabel
   };
