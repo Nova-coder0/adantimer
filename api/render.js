@@ -2847,7 +2847,7 @@ const DHIKR_INDEX_CONTENT = {
   de: {
     heroEyebrow: "Dhikr",
     heroTitle: "Täglichen Dhikr direkt im Browser verfolgen",
-    heroSubtitle: "Nutze fokussierte Zähler für bekannte tägliche Adhkar, wechsle zwischen den wichtigsten Sammlungen und behalte deinen Fortschritt lokal auf diesem Gerät.",
+    heroSubtitle: "Nutze kuratierte tägliche Adhkar mit Quellenhinweisen, wechsle zwischen Sammlungen für Vergebung, Rizq, Erleichterung, Bedrängnis, Heilung, Schlaf und mehr, und behalte deinen Fortschritt lokal auf diesem Gerät.",
     summaryEyebrow: "Heute",
     summaryTitle: "Fortschritt deiner Dhikr-Session",
     summaryCompletedLabel: "Erledigte Einträge",
@@ -2855,7 +2855,7 @@ const DHIKR_INDEX_CONTENT = {
     summaryTargetLabel: "Zielwiederholungen",
     sectionEyebrow: "Sammlungen",
     sectionTitle: "Tägliche Dhikr-Sammlungen",
-    sectionIntro: "Starte mit einer klaren Sammlung, bleibe in deinem eigenen Rhythmus und setze nur den Teil zurück, den du noch einmal beginnen willst.",
+    sectionIntro: "Wechsle zwischen kuratierten Sammlungen mit Quellenhinweisen, halte eine Kategorie im Fokus und setze nur die Einträge zurück, die du erneut beginnen willst.",
     currentCategory: label => `Aktive Sammlung: ${label}`,
     resetVisibleLabel: "Aktive Sammlung zurücksetzen",
     resetAllLabel: "Alle Zähler zurücksetzen",
@@ -2871,7 +2871,7 @@ const DHIKR_INDEX_CONTENT = {
     statsStorageValue: "Lokal",
     categoriesAria: "Dhikr-Sammlungen",
     metaTitle: "Dhikr-Zähler und tägliche Adhkar | Adantimer",
-    metaDescription: "Verfolge tägliche Adhkar mit fokussierten Zählern, Kategorien und lokal gespeicherten Fortschritten für Morgen-, Abend-, Nach-dem-Gebet- und allgemeine Dhikr-Sammlungen.",
+    metaDescription: "Verfolge kuratierte tägliche Adhkar mit Zählern, Quellenhinweisen und lokal gespeicherten Fortschritten für Morgen, Abend, nach dem Gebet, Vergebung, Rizq, Erleichterung, Bedrängnis, Heilung, Schlaf und allgemeinen Dhikr.",
     faq: [
       {
         question: "Speichert diese Dhikr-Seite meinen Fortschritt?",
@@ -2879,7 +2879,7 @@ const DHIKR_INDEX_CONTENT = {
       },
       {
         question: "Kann ich nur eine Sammlung gleichzeitig nutzen?",
-        answer: "Ja. Du kannst zwischen Sammlungen wie Morgen, Abend, nach dem Gebet, Istighfar und allgemeinem Dhikr wechseln."
+        answer: "Ja. Du kannst zwischen Sammlungen wie Morgen, Abend, nach dem Gebet, Vergebung, Rizq, Erleichterung, Bedrängnis, Heilung, Schlaf und allgemeinem Dhikr wechseln."
       },
       {
         question: "Brauche ich eine App oder ein Konto?",
