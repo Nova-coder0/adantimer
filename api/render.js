@@ -2402,12 +2402,18 @@ function renderDhikrSection(copy) {
               <span class="dhikr-card-category">${escapeHtml(item.categoryLabel)}</span>
               <span class="dhikr-card-target">${escapeHtml(item.targetLabel)}</span>
             </div>
+            <div class="dhikr-card-badges" aria-label="${escapeHtml(copy.dhikrEvidenceAria)}">
+              <span class="dhikr-meta-badge is-grade">${escapeHtml(item.authenticityLabel)}</span>
+              <span class="dhikr-meta-badge">${escapeHtml(item.reference)}</span>
+              ${item.countModeLabel ? `<span class="dhikr-meta-badge is-guided">${escapeHtml(item.countModeLabel)}</span>` : ""}
+            </div>
             <p class="dhikr-card-arabic">${escapeHtml(item.arabic)}</p>
             <p class="dhikr-card-transliteration">${escapeHtml(item.transliteration)}</p>
             <p class="dhikr-card-translation">${escapeHtml(item.translation)}</p>
+            <p class="dhikr-card-focus">${escapeHtml(item.focus)}</p>
             <div class="dhikr-card-meta">
-              <span>${escapeHtml(item.source)}</span>
-              <span>${escapeHtml(item.benefit)}</span>
+              <span>${escapeHtml(item.sourceLabel)}</span>
+              <span>${escapeHtml(item.guidance)}</span>
             </div>
             <div class="dhikr-counter" aria-label="${escapeHtml(copy.dhikrCounterAria)}">
               <button type="button" class="dhikr-counter-btn" data-dhikr-action="decrement" aria-label="${escapeHtml(copy.dhikrDecrementLabel)}">-</button>
@@ -2751,7 +2757,7 @@ const DHIKR_INDEX_CONTENT = {
   en: {
     heroEyebrow: "Dhikr",
     heroTitle: "Track daily dhikr without leaving the browser",
-    heroSubtitle: "Use focused counters for common daily remembrance, switch between key collections, and keep your progress saved locally on this device.",
+    heroSubtitle: "Use curated daily adhkar with source notes, move between focused collections for forgiveness, provision, ease, distress, healing, sleep, and more, and keep your progress saved locally on this device.",
     summaryEyebrow: "Today",
     summaryTitle: "Dhikr session progress",
     summaryCompletedLabel: "Completed entries",
@@ -2759,7 +2765,7 @@ const DHIKR_INDEX_CONTENT = {
     summaryTargetLabel: "Target repetitions",
     sectionEyebrow: "Collections",
     sectionTitle: "Daily dhikr collections",
-    sectionIntro: "Start with a focused collection, continue at your own pace, and reset only the part you want to repeat again.",
+    sectionIntro: "Move between curated collections with source notes, keep one category in focus, and reset only the entries you want to revisit.",
     currentCategory: label => `Current collection: ${label}`,
     resetVisibleLabel: "Reset current collection",
     resetAllLabel: "Reset all counters",
@@ -2775,7 +2781,7 @@ const DHIKR_INDEX_CONTENT = {
     statsStorageValue: "Local",
     categoriesAria: "Dhikr collections",
     metaTitle: "Dhikr Counter and Daily Remembrance Page | Adantimer",
-    metaDescription: "Track daily dhikr with focused counters, category filters, and browser-saved progress across common morning, evening, after-prayer, and general remembrance.",
+    metaDescription: "Track curated daily dhikr with counters, source notes, and browser-saved progress across morning, evening, after-prayer, forgiveness, provision, ease, distress, healing, sleep, and general remembrance.",
     faq: [
       {
         question: "Does this dhikr page save my progress?",
@@ -2783,7 +2789,7 @@ const DHIKR_INDEX_CONTENT = {
       },
       {
         question: "Can I focus on one collection at a time?",
-        answer: "Yes. The page lets you switch between collections such as morning, evening, after-prayer, forgiveness, and general dhikr."
+        answer: "Yes. The page lets you move between collections such as morning, evening, after-prayer, forgiveness, provision, ease, distress, healing, sleep, and general dhikr."
       },
       {
         question: "Do I need an app or login to use the counters?",
@@ -2841,7 +2847,7 @@ const DHIKR_INDEX_CONTENT = {
   de: {
     heroEyebrow: "Dhikr",
     heroTitle: "Täglichen Dhikr direkt im Browser verfolgen",
-    heroSubtitle: "Nutze fokussierte Zähler für bekannte tägliche Adhkar, wechsle zwischen den wichtigsten Sammlungen und behalte deinen Fortschritt lokal auf diesem Gerät.",
+    heroSubtitle: "Nutze kuratierte tägliche Adhkar mit Quellenhinweisen, wechsle zwischen Sammlungen für Vergebung, Rizq, Erleichterung, Bedrängnis, Heilung, Schlaf und mehr, und behalte deinen Fortschritt lokal auf diesem Gerät.",
     summaryEyebrow: "Heute",
     summaryTitle: "Fortschritt deiner Dhikr-Session",
     summaryCompletedLabel: "Erledigte Einträge",
@@ -2849,7 +2855,7 @@ const DHIKR_INDEX_CONTENT = {
     summaryTargetLabel: "Zielwiederholungen",
     sectionEyebrow: "Sammlungen",
     sectionTitle: "Tägliche Dhikr-Sammlungen",
-    sectionIntro: "Starte mit einer klaren Sammlung, bleibe in deinem eigenen Rhythmus und setze nur den Teil zurück, den du noch einmal beginnen willst.",
+    sectionIntro: "Wechsle zwischen kuratierten Sammlungen mit Quellenhinweisen, halte eine Kategorie im Fokus und setze nur die Einträge zurück, die du erneut beginnen willst.",
     currentCategory: label => `Aktive Sammlung: ${label}`,
     resetVisibleLabel: "Aktive Sammlung zurücksetzen",
     resetAllLabel: "Alle Zähler zurücksetzen",
@@ -2865,7 +2871,7 @@ const DHIKR_INDEX_CONTENT = {
     statsStorageValue: "Lokal",
     categoriesAria: "Dhikr-Sammlungen",
     metaTitle: "Dhikr-Zähler und tägliche Adhkar | Adantimer",
-    metaDescription: "Verfolge tägliche Adhkar mit fokussierten Zählern, Kategorien und lokal gespeicherten Fortschritten für Morgen-, Abend-, Nach-dem-Gebet- und allgemeine Dhikr-Sammlungen.",
+    metaDescription: "Verfolge kuratierte tägliche Adhkar mit Zählern, Quellenhinweisen und lokal gespeicherten Fortschritten für Morgen, Abend, nach dem Gebet, Vergebung, Rizq, Erleichterung, Bedrängnis, Heilung, Schlaf und allgemeinen Dhikr.",
     faq: [
       {
         question: "Speichert diese Dhikr-Seite meinen Fortschritt?",
@@ -2873,7 +2879,7 @@ const DHIKR_INDEX_CONTENT = {
       },
       {
         question: "Kann ich nur eine Sammlung gleichzeitig nutzen?",
-        answer: "Ja. Du kannst zwischen Sammlungen wie Morgen, Abend, nach dem Gebet, Istighfar und allgemeinem Dhikr wechseln."
+        answer: "Ja. Du kannst zwischen Sammlungen wie Morgen, Abend, nach dem Gebet, Vergebung, Rizq, Erleichterung, Bedrängnis, Heilung, Schlaf und allgemeinem Dhikr wechseln."
       },
       {
         question: "Brauche ich eine App oder ein Konto?",
@@ -3114,6 +3120,32 @@ function buildDhikrIndexCopy(language, pageType) {
   const locale = DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en;
   const categories = getDhikrCategories();
   const items = getDhikrItems();
+  const authenticityLabels = {
+    en: { sahih: "Sahih source", hasan: "Hasan source", authenticated: "Authenticated source", quran: "Quran source" },
+    ar: { sahih: "مصدر صحيح", hasan: "مصدر حسن", authenticated: "مصدر موثق", quran: "مصدر قرآني" },
+    de: { sahih: "Sahih-Quelle", hasan: "Hasan-Quelle", authenticated: "Verifizierte Quelle", quran: "Quran-Quelle" },
+    fr: { sahih: "Source sahih", hasan: "Source hasan", authenticated: "Source authentifiee", quran: "Source coranique" },
+    tr: { sahih: "Sahih kaynak", hasan: "Hasan kaynak", authenticated: "Dogrulanmis kaynak", quran: "Kur'an kaynagi" },
+    "zh-hans": { sahih: "可靠圣训来源", hasan: "良好圣训来源", authenticated: "已核实来源", quran: "古兰经来源" }
+  };
+  const countModeLabels = {
+    en: { fixed: "Fixed count", guided: "Guided starting target" },
+    ar: { fixed: "عدد ثابت", guided: "هدف إرشادي" },
+    de: { fixed: "Feste Anzahl", guided: "Gefuehrtes Startziel" },
+    fr: { fixed: "Compte fixe", guided: "Objectif guide" },
+    tr: { fixed: "Sabit sayi", guided: "Yonlendirilmis hedef" },
+    "zh-hans": { fixed: "固定次数", guided: "引导目标" }
+  };
+  const sourceLabels = {
+    en: "Use and source note",
+    ar: "ملاحظة الاستخدام والمصدر",
+    de: "Nutzungs- und Quellenhinweis",
+    fr: "Note d'usage et de source",
+    tr: "Kullanim ve kaynak notu",
+    "zh-hans": "用途与来源说明"
+  };
+  const localizedAuthenticity = authenticityLabels[language] || authenticityLabels.en;
+  const localizedCountModes = countModeLabels[language] || countModeLabels.en;
 
   const copy = {
     heroEyebrow: locale.heroEyebrow,
@@ -3146,6 +3178,7 @@ function buildDhikrIndexCopy(language, pageType) {
     dhikrSectionTitle: locale.sectionTitle,
     dhikrSectionIntro: locale.sectionIntro,
     dhikrCategoriesAria: locale.categoriesAria,
+    dhikrEvidenceAria: sourceLabels[language] || sourceLabels.en,
     dhikrCategories: [
       {
         id: "all",
@@ -3169,8 +3202,12 @@ function buildDhikrIndexCopy(language, pageType) {
       arabic: item.arabic,
       transliteration: item.transliteration,
       translation: item.translations[language] || item.translations.en,
-      benefit: item.benefit[language] || item.benefit.en,
-      source: item.source[language] || item.source.en,
+      focus: (item.focus?.[language] || item.focus?.en || ""),
+      guidance: (item.guidance?.[language] || item.guidance?.en || ""),
+      sourceLabel: sourceLabels[language] || sourceLabels.en,
+      reference: item.reference,
+      authenticityLabel: localizedAuthenticity[item.authenticity] || localizedAuthenticity.authenticated,
+      countModeLabel: item.countMode === "guided" ? localizedCountModes.guided : localizedCountModes.fixed,
       progressText: locale.progressText(0, item.countTarget)
     })),
     faq: locale.faq,
