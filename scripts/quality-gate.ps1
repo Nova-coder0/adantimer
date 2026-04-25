@@ -172,6 +172,28 @@ function TestLiveUrlRegex([string]$url, [string[]]$requiredPatterns) {
   }
 }
 
+function TestLiveUrlNotContains([string]$url, [string[]]$forbiddenSnippets) {
+  try {
+    $response = GetLiveResponse $url
+    if ([int]$response.statusCode -ne 200) {
+      AddFailure "Live negative check failed for $url with status $($response.statusCode)"
+      return
+    }
+
+    AddCheck "Live negative check returned 200 for $url"
+
+    foreach ($snippet in $forbiddenSnippets) {
+      if ($response.content.Contains($snippet)) {
+        AddFailure "Live negative check found forbidden content on $url -> $snippet"
+      } else {
+        AddCheck "Live negative check passed for $url -> $snippet"
+      }
+    }
+  } catch {
+    AddFailure "Live negative check failed for $url -> $($_.Exception.Message)"
+  }
+}
+
 $requiredFiles = @(
   "templates/index.html",
   "style.css",
@@ -286,6 +308,7 @@ AssertContains $renderJs 'function buildQuranIndexCopy(language, pageType)' "SSR
 AssertContains $renderJs 'function buildQuranSurahCopy(language, pageType, surah, surahReaderData)' "SSR renderer keeps the Quran surah copy builder" "SSR renderer is missing the Quran surah copy builder"
 AssertContains $renderJs 'function renderQuranIndexSection(copy)' "SSR renderer keeps the Quran index renderer" "SSR renderer is missing the Quran index renderer"
 AssertContains $renderJs 'function renderQuranSurahSection(copy)' "SSR renderer keeps the Quran surah renderer" "SSR renderer is missing the Quran surah renderer"
+AssertContains $renderJs 'quranArabicName: surah.arabicName || ""' "SSR renderer exposes the Arabic surah name for the standalone hero" "SSR renderer is missing the Arabic surah-name field for the standalone hero"
 AssertContains $renderJs 'copy.standalonePageType === "quran"' "SSR renderer treats Quran as a standalone page type" "SSR renderer is missing the standalone Quran page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran-surah"' "SSR renderer treats Quran surahs as standalone pages" "SSR renderer is missing the standalone Quran surah branch"
 AssertContains $renderJs 'const QURAN_API_BASE = "https://api.alquran.cloud/v1";' "SSR renderer keeps the Quran API base" "SSR renderer is missing the Quran API base"
@@ -347,6 +370,7 @@ AssertContains $robots 'Sitemap: https://www.adantimer.com/sitemap.xml' "robots.
 AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired to the generator script" "Sitemap workflow no longer calls the generator script"
 AssertContains $styleCss '.quran-surah-grid {' "Stylesheet includes the Quran surah grid" "Stylesheet is missing the Quran surah grid styles"
 AssertContains $styleCss 'body[data-page="quran"] .hero-grid {' "Stylesheet includes the standalone Quran hero layout" "Stylesheet is missing the standalone Quran hero layout"
+AssertContains $styleCss 'body[data-page="quran-surah"] .hero-grid {' "Stylesheet includes the standalone Quran surah hero layout" "Stylesheet is missing the standalone Quran surah hero layout"
 AssertContains $quranSurahs 'export const QURAN_SURAHS = [' "Local Quran metadata exports the surah list" "Local Quran metadata export is missing"
 AssertContains $quranSurahs 'slug: "al-fatihah"' "Local Quran metadata includes Surah Al-Fatihah" "Local Quran metadata is missing Surah Al-Fatihah"
 AssertContains $quranSurahs 'export function getQuranSurahBySlug(slug)' "Local Quran metadata exports slug lookup" "Local Quran slug lookup helper is missing"
@@ -361,7 +385,9 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran/al-fatihah" @('<body data-page="quran-surah"', 'quran-ayah-list', 'Surah Al-Fatihah', 'ayah-1')
+  TestLiveUrlNotContains "$BaseUrl/quran/al-fatihah" @('id="location-form"', 'class="next-prayer card featured-card"')
   TestLiveUrl "$BaseUrl/de/quran/al-fatihah" @('<html lang="de" dir="ltr">', '<body data-page="quran-surah"', 'Sure Al-Fatihah lesen')
+  TestLiveUrlNotContains "$BaseUrl/de/quran/al-fatihah" @('id="location-form"', 'class="next-prayer card featured-card"')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')

@@ -2081,6 +2081,29 @@ ${copy.quranStats.map(item => `            <div class="quran-hero-stat">
         </section>`;
   }
 
+  if (copy.standalonePageType === "quran-surah") {
+    return `        <section class="hero-copy quran-hero-copy quran-surah-hero">
+          <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
+          <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
+          <p id="hero-subtitle" class="hero-subtitle">
+            ${escapeHtml(copy.heroSubtitle)}
+          </p>
+          <p class="quran-surah-arabic-hero">${escapeHtml(copy.quranArabicName || "")}</p>
+          <a class="secondary-link" href="${escapeHtml(copy.quranIndexHref)}">${escapeHtml(copy.quranBackLabel)}</a>
+
+          <div class="quran-hero-stats" aria-label="${escapeHtml(copy.quranNavigationAria || copy.heroHeading)}">
+            <div class="quran-hero-stat">
+              <strong>${escapeHtml(copy.quranAyahCountValue || "")}</strong>
+              <span>${escapeHtml(copy.quranAyahCountStatLabel || "")}</span>
+            </div>
+            <div class="quran-hero-stat">
+              <strong>${escapeHtml(copy.quranRevelationValue || "")}</strong>
+              <span>${escapeHtml(copy.quranRevelationStatLabel || "")}</span>
+            </div>
+          </div>
+        </section>`;
+  }
+
   const popularCitiesMarkup = copy.showPopularCities
     ? `
 
@@ -2601,6 +2624,7 @@ function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
   const revelationLabel = revelationLocale[revelationKey];
   const neighbors = getAdjacentQuranSurahs(surah.slug);
   const ayahCountText = locale.versesLabel(surah.ayahs);
+  const ayahStatLabel = (locale.versesLabel(1) || "").replace(/[0-9٠-٩]+/g, "").trim() || ayahCountText;
 
   return {
     heroEyebrow: locale.heroEyebrow,
@@ -2608,6 +2632,14 @@ function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
     heroSubtitle: surah.translatedName,
     metaTitle: locale.metaTitle(surah),
     metaDescription: locale.metaDescription(surah),
+    hideNextPrayerCard: true,
+    showPopularCities: false,
+    showIntentLinks: false,
+    quranArabicName: surah.arabicName || "",
+    quranAyahCountValue: String(surah.ayahs),
+    quranAyahCountStatLabel: ayahStatLabel,
+    quranRevelationValue: revelationLabel,
+    quranRevelationStatLabel: locale.revelationPrefix,
     quranSectionEyebrow: locale.sectionEyebrow,
     quranSectionTitle: locale.sectionTitle(surah),
     quranSectionIntro: locale.sectionIntro(surah),

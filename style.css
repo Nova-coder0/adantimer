@@ -441,7 +441,15 @@ body[data-page="quran"] .hero-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
+body[data-page="quran-surah"] .hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 body[data-page="quran"] .hero-copy {
+  max-inline-size: none;
+}
+
+body[data-page="quran-surah"] .hero-copy {
   max-inline-size: none;
 }
 
@@ -587,6 +595,24 @@ body[data-page="quran"] .hero-copy {
 .quran-reader-intro {
   margin: 12px 0 0;
   color: var(--muted);
+}
+
+.quran-surah-arabic-hero {
+  margin: 14px 0 0;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  line-height: 1.9;
+  direction: rtl;
+  text-align: right;
+  color: var(--accent-strong);
+}
+
+.quran-surah-hero .secondary-link {
+  display: inline-flex;
+  margin-top: 18px;
+}
+
+.quran-surah-hero .quran-hero-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .secondary-link {
