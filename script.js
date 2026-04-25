@@ -31,6 +31,8 @@ const qiblaBearingValueEl = document.getElementById("qibla-bearing-value");
 const qiblaDistanceLabelEl = document.getElementById("qibla-distance-label");
 const qiblaDistanceValueEl = document.getElementById("qibla-distance-value");
 const qiblaNeedleEl = document.getElementById("qibla-needle");
+const qiblaSensorButtonEl = document.getElementById("qibla-sensor-button");
+const qiblaSensorHintEl = document.getElementById("qibla-sensor-hint");
 const pageType = document.body.dataset.page || "home";
 
 const LANGUAGE_ALIASES = {
@@ -85,6 +87,63 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
   "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
   "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+};
+
+const QIBLA_PAGE_COPY = {
+  en: {
+    button: "Show Qibla Direction",
+    heroSubtitle: place => place
+      ? `Use the compass below to align toward Makkah from ${place}.`
+      : "Use the compass below to calculate qibla direction from your current location or any city you search.",
+    pageDescription: place => place
+      ? `Check qibla direction from ${place}, see the bearing to Makkah, and use the live compass on supported phones.`
+      : "Check qibla direction from your current location or any city, see the bearing to Makkah, and use the live compass on supported phones."
+  },
+  ar: {
+    button: "\u0627\u0639\u0631\u0636 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629",
+    heroSubtitle: place => place
+      ? `\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0623\u062f\u0646\u0627\u0647 \u0644\u0645\u0639\u0631\u0641\u0629 \u0627\u062a\u062c\u0627\u0647 \u0645\u0643\u0629 \u0645\u0646 ${place}.`
+      : "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0623\u062f\u0646\u0627\u0647 \u0644\u062d\u0633\u0627\u0628 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629 \u062a\u0628\u062d\u062b \u0639\u0646\u0647\u0627.",
+    pageDescription: place => place
+      ? `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 ${place}\u060c \u0648\u0627\u0639\u0631\u0641 \u0632\u0627\u0648\u064a\u0629 \u0645\u0643\u0629\u060c \u0648\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629.`
+      : "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629\u060c \u0648\u0627\u0639\u0631\u0641 \u0632\u0627\u0648\u064a\u0629 \u0645\u0643\u0629\u060c \u0648\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629."
+  },
+  de: {
+    button: "Qibla-Richtung anzeigen",
+    heroSubtitle: place => place
+      ? `Nutze den Kompass unten, um die Richtung nach Mekka von ${place} aus auszurichten.`
+      : "Nutze den Kompass unten, um die Qibla von deinem aktuellen Standort oder jeder gesuchten Stadt aus zu berechnen.",
+    pageDescription: place => place
+      ? `Pr\u00fcfe die Qibla-Richtung von ${place}, sieh den Winkel nach Mekka und nutze den Live-Kompass auf unterst\u00fctzten Handys.`
+      : "Pr\u00fcfe die Qibla-Richtung von deinem aktuellen Standort oder jeder gesuchten Stadt, sieh den Winkel nach Mekka und nutze den Live-Kompass auf unterst\u00fctzten Handys."
+  },
+  fr: {
+    button: "Afficher la qibla",
+    heroSubtitle: place => place
+      ? `Utilisez la boussole ci-dessous pour vous orienter vers La Mecque depuis ${place}.`
+      : "Utilisez la boussole ci-dessous pour calculer la direction de la qibla depuis votre position actuelle ou n'importe quelle ville recherch\u00e9e.",
+    pageDescription: place => place
+      ? `Consultez la direction de la qibla depuis ${place}, voyez l'angle vers La Mecque et utilisez la boussole en direct sur les t\u00e9l\u00e9phones compatibles.`
+      : "Consultez la direction de la qibla depuis votre position actuelle ou n'importe quelle ville, voyez l'angle vers La Mecque et utilisez la boussole en direct sur les t\u00e9l\u00e9phones compatibles."
+  },
+  tr: {
+    button: "Kible Y\u00f6n\u00fcn\u00fc G\u00f6ster",
+    heroSubtitle: place => place
+      ? `A\u015fa\u011f\u0131daki pusulay\u0131 kullanarak ${place} konumundan Mekke y\u00f6n\u00fcn\u00fc hizala.`
+      : "A\u015fa\u011f\u0131daki pusulay\u0131 kullanarak mevcut konumundan veya arad\u0131\u011f\u0131n herhangi bir \u015fehirden kible y\u00f6n\u00fcn\u00fc hesapla.",
+    pageDescription: place => place
+      ? `${place} konumundan kible y\u00f6n\u00fcn\u00fc g\u00f6r, Mekke a\u00e7\u0131s\u0131n\u0131 incele ve desteklenen telefonlarda canl\u0131 pusulay\u0131 kullan.`
+      : "Mevcut konumundan veya herhangi bir \u015fehirden kible y\u00f6n\u00fcn\u00fc g\u00f6r, Mekke a\u00e7\u0131s\u0131n\u0131 incele ve desteklenen telefonlarda canl\u0131 pusulay\u0131 kullan."
+  },
+  "zh-hans": {
+    button: "\u663e\u793a Qibla \u65b9\u5411",
+    heroSubtitle: place => place
+      ? `\u4f7f\u7528\u4e0b\u65b9\u6307\u5357\u9488\uff0c\u4ece ${place} \u5bf9\u51c6\u9ea6\u52a0\u65b9\u5411\u3002`
+      : "\u4f7f\u7528\u4e0b\u65b9\u6307\u5357\u9488\uff0c\u4ece\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u641c\u7d22\u7684\u57ce\u5e02\u8ba1\u7b97 Qibla \u65b9\u5411\u3002",
+    pageDescription: place => place
+      ? `\u67e5\u770b ${place} \u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002`
+      : "\u67e5\u770b\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u57ce\u5e02\u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002"
+  }
 };
 
 const LOCALES = {
@@ -446,6 +505,71 @@ const QIBLA_PANEL_LOCALES = {
   }
 };
 
+for (const tools of Object.values(TOOL_HUB_LOCALES)) {
+  tools.intro = "";
+}
+
+Object.assign(TOOL_HUB_LOCALES.en, { title: "Islamic Tools" });
+Object.assign(TOOL_HUB_LOCALES.ar, { title: "\u0623\u062f\u0648\u0627\u062a \u0625\u0633\u0644\u0627\u0645\u064a\u0629" });
+Object.assign(TOOL_HUB_LOCALES.de, { title: "Islamische Tools" });
+Object.assign(TOOL_HUB_LOCALES.fr, { title: "Outils islamiques" });
+Object.assign(TOOL_HUB_LOCALES.tr, { title: "Islami Araclar" });
+Object.assign(TOOL_HUB_LOCALES["zh-hans"], { title: "\u4f0a\u65af\u5170\u5de5\u5177" });
+
+Object.assign(QIBLA_PANEL_LOCALES.en, {
+  sensorButton: "Enable live compass",
+  sensorHintIdle: "On phones with a compass sensor, enable the live compass so the arrow turns with your device.",
+  sensorHintActive: "Live compass is active. Turn your device until the arrow points straight ahead.",
+  sensorHintPrompt: "Tap the button to allow compass access on this device.",
+  sensorHintUnavailable: "Live compass is unavailable here. The page is showing the qibla bearing from north.",
+  sensorHintDenied: "Compass access was denied. The page is showing the qibla bearing from north."
+});
+
+Object.assign(QIBLA_PANEL_LOCALES.ar, {
+  sensorButton: "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629",
+  sensorHintIdle: "\u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u062a\u064a \u062a\u062f\u0639\u0645 \u062d\u0633\u0627\u0633 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u064a\u0645\u0643\u0646\u0643 \u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0644\u064a\u062a\u062d\u0631\u0643 \u0627\u0644\u0633\u0647\u0645 \u0645\u0639 \u0627\u0644\u062c\u0647\u0627\u0632.",
+  sensorHintActive: "\u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u062a\u0639\u0645\u0644 \u0627\u0644\u0622\u0646. \u062d\u0631\u0651\u0643 \u062c\u0647\u0627\u0632\u0643 \u062d\u062a\u0649 \u064a\u0634\u064a\u0631 \u0627\u0644\u0633\u0647\u0645 \u0645\u0628\u0627\u0634\u0631\u0629 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645.",
+  sensorHintPrompt: "\u0627\u0636\u063a\u0637 \u0627\u0644\u0632\u0631 \u0644\u0644\u0633\u0645\u0627\u062d \u0628\u0627\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0639\u0644\u0649 \u0647\u0630\u0627 \u0627\u0644\u062c\u0647\u0627\u0632.",
+  sensorHintUnavailable: "\u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u063a\u064a\u0631 \u0645\u062a\u0627\u062d\u0629 \u0647\u0646\u0627. \u064a\u062a\u0645 \u0627\u0644\u0622\u0646 \u0639\u0631\u0636 \u0632\u0627\u0648\u064a\u0629 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644.",
+  sensorHintDenied: "\u062a\u0645 \u0631\u0641\u0636 \u0627\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u0627\u0644\u0628\u0648\u0635\u0644\u0629. \u064a\u062a\u0645 \u0627\u0644\u0622\u0646 \u0639\u0631\u0636 \u0632\u0627\u0648\u064a\u0629 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0627\u0644\u0634\u0645\u0627\u0644."
+});
+
+Object.assign(QIBLA_PANEL_LOCALES.de, {
+  sensorButton: "Live-Kompass aktivieren",
+  sensorHintIdle: "Auf Handys mit Kompasssensor kannst du den Live-Kompass aktivieren, damit sich der Pfeil mit dem Geraet dreht.",
+  sensorHintActive: "Der Live-Kompass ist aktiv. Drehe dein Geraet, bis der Pfeil gerade nach vorne zeigt.",
+  sensorHintPrompt: "Tippe auf den Button, um den Kompasszugriff auf diesem Geraet zu erlauben.",
+  sensorHintUnavailable: "Hier ist kein Live-Kompass verfuegbar. Es wird nur die Qibla-Richtung von Norden angezeigt.",
+  sensorHintDenied: "Der Kompasszugriff wurde abgelehnt. Es wird nur die Qibla-Richtung von Norden angezeigt."
+});
+
+Object.assign(QIBLA_PANEL_LOCALES.fr, {
+  sensorButton: "Activer la boussole en direct",
+  sensorHintIdle: "Sur les telephones avec capteur, activez la boussole en direct pour faire tourner la fleche avec l'appareil.",
+  sensorHintActive: "La boussole en direct est active. Tournez l'appareil jusqu'a ce que la fleche pointe droit devant.",
+  sensorHintPrompt: "Touchez le bouton pour autoriser l'acces a la boussole sur cet appareil.",
+  sensorHintUnavailable: "La boussole en direct n'est pas disponible ici. La page affiche seulement l'angle depuis le nord.",
+  sensorHintDenied: "L'acces a la boussole a ete refuse. La page affiche seulement l'angle depuis le nord."
+});
+
+Object.assign(QIBLA_PANEL_LOCALES.tr, {
+  sensorButton: "Canli pusulayi etkinlestir",
+  sensorHintIdle: "Pusula sensoru olan telefonlarda oku cihazla birlikte dondurmek icin canli pusulayi etkinlestir.",
+  sensorHintActive: "Canli pusula aktif. Oku tam ileri bakacak sekilde cihazi dondur.",
+  sensorHintPrompt: "Bu cihazda pusula erisimine izin vermek icin dugmeye dokun.",
+  sensorHintUnavailable: "Canli pusula burada kullanilamiyor. Sayfa yalnizca kuzeye gore kible acisini gosteriyor.",
+  sensorHintDenied: "Pusula erisimi reddedildi. Sayfa yalnizca kuzeye gore kible acisini gosteriyor."
+});
+
+Object.assign(QIBLA_PANEL_LOCALES["zh-hans"], {
+  sensorButton: "\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488",
+  sensorHintIdle: "\u5728\u5e26\u6709\u6307\u5357\u9488\u4f20\u611f\u5668\u7684\u624b\u673a\u4e0a\uff0c\u53ef\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488\uff0c\u8ba9\u7bad\u5934\u968f\u8bbe\u5907\u8f6c\u52a8\u3002",
+  sensorHintActive: "\u5b9e\u65f6\u6307\u5357\u9488\u5df2\u542f\u7528\u3002\u8bf7\u8f6c\u52a8\u8bbe\u5907\uff0c\u76f4\u5230\u7bad\u5934\u6b63\u5bf9\u524d\u65b9\u3002",
+  sensorHintPrompt: "\u70b9\u51fb\u6309\u94ae\uff0c\u5141\u8bb8\u6b64\u8bbe\u5907\u8bbf\u95ee\u6307\u5357\u9488\u3002",
+  sensorHintUnavailable: "\u6b64\u5904\u65e0\u6cd5\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002\u5f53\u524d\u663e\u793a\u7684\u662f\u76f8\u5bf9\u6b63\u5317\u7684 Qibla \u65b9\u4f4d\u3002",
+  sensorHintDenied: "\u6307\u5357\u9488\u6743\u9650\u88ab\u62d2\u7edd\u3002\u5f53\u524d\u663e\u793a\u7684\u662f\u76f8\u5bf9\u6b63\u5317\u7684 Qibla \u65b9\u4f4d\u3002"
+});
+
 Object.entries(TOPIC_EXTENSIONS).forEach(([lang, topics]) => {
   LOCALES[lang].topics = { ...LOCALES[lang].topics, ...topics };
 });
@@ -466,6 +590,10 @@ let nextPrayerData = null;
 let prayerSchedule = [];
 let loadingWatchdogId = null;
 let qiblaPanelState = "idle";
+let qiblaBearing = null;
+let deviceHeading = null;
+let compassState = "unknown";
+let compassListenerAttached = false;
 
 const KAABA_COORDS = { lat: 21.4225, lng: 39.8262 };
 
@@ -691,6 +819,90 @@ function calculateDistanceKm(lat, lng) {
   return earthRadiusKm * c;
 }
 
+function getScreenHeadingOffset() {
+  if (window.screen && window.screen.orientation && Number.isFinite(window.screen.orientation.angle)) {
+    return window.screen.orientation.angle;
+  }
+  if (Number.isFinite(window.orientation)) {
+    return Number(window.orientation);
+  }
+  return 0;
+}
+
+function readDeviceHeading(event) {
+  if (Number.isFinite(event.webkitCompassHeading)) {
+    return normalizeDegrees(event.webkitCompassHeading);
+  }
+  if (!Number.isFinite(event.alpha)) {
+    return null;
+  }
+  return normalizeDegrees(360 - event.alpha + getScreenHeadingOffset());
+}
+
+function supportsLiveCompass() {
+  return typeof window.DeviceOrientationEvent !== "undefined";
+}
+
+function requiresLiveCompassPermission() {
+  return supportsLiveCompass() && typeof window.DeviceOrientationEvent.requestPermission === "function";
+}
+
+function attachCompassListener() {
+  if (compassListenerAttached || !supportsLiveCompass()) return;
+  const handleOrientation = event => {
+    const heading = readDeviceHeading(event);
+    if (!Number.isFinite(heading)) return;
+    deviceHeading = heading;
+    compassState = "active";
+    renderQiblaPanel(qiblaPanelState);
+  };
+
+  window.addEventListener("deviceorientationabsolute", handleOrientation, true);
+  window.addEventListener("deviceorientation", handleOrientation, true);
+  compassListenerAttached = true;
+}
+
+function syncCompassState() {
+  if (pageType !== "qibla") return;
+  if (!supportsLiveCompass()) {
+    if (compassState === "unknown") compassState = "unsupported";
+    return;
+  }
+  if (requiresLiveCompassPermission()) {
+    if (compassState === "unknown") compassState = "prompt";
+    return;
+  }
+  if (compassState === "unknown") compassState = "available";
+  attachCompassListener();
+}
+
+async function enableLiveCompass() {
+  if (!supportsLiveCompass()) {
+    compassState = "unsupported";
+    renderQiblaPanel(qiblaPanelState);
+    return;
+  }
+
+  if (requiresLiveCompassPermission()) {
+    try {
+      const permission = await window.DeviceOrientationEvent.requestPermission();
+      if (permission !== "granted") {
+        compassState = "denied";
+        renderQiblaPanel(qiblaPanelState);
+        return;
+      }
+    } catch {
+      compassState = "denied";
+      renderQiblaPanel(qiblaPanelState);
+      return;
+    }
+  }
+
+  compassState = "available";
+  attachCompassListener();
+  renderQiblaPanel(qiblaPanelState);
+}
+
 function renderQiblaPanel(state = qiblaPanelState) {
   if (!qiblaPanelEl) return;
 
@@ -702,8 +914,11 @@ function renderQiblaPanel(state = qiblaPanelState) {
   qiblaPanelEl.hidden = false;
   qiblaPanelState = state;
   const locale = QIBLA_PANEL_LOCALES[language] || QIBLA_PANEL_LOCALES.en;
+  const fallbackLocale = QIBLA_PANEL_LOCALES.en;
   const numberLocale = (LOCALES[language] || LOCALES.en).code;
   const place = getPlaceName(cityName, countryName);
+
+  syncCompassState();
 
   if (qiblaPanelEyebrowEl) qiblaPanelEyebrowEl.textContent = locale.eyebrow;
   if (qiblaPanelHeadingEl) qiblaPanelHeadingEl.textContent = locale.title;
@@ -711,21 +926,43 @@ function renderQiblaPanel(state = qiblaPanelState) {
   if (qiblaBearingLabelEl) qiblaBearingLabelEl.textContent = locale.bearingLabel;
   if (qiblaDistanceLabelEl) qiblaDistanceLabelEl.textContent = locale.distanceLabel;
   if (qiblaPlaceEl) qiblaPlaceEl.textContent = place || locale.placeFallback;
+  if (qiblaSensorButtonEl) {
+    qiblaSensorButtonEl.textContent = locale.sensorButton || fallbackLocale.sensorButton;
+    qiblaSensorButtonEl.hidden = !(compassState === "prompt" || compassState === "available");
+  }
 
   if (currentCoords && Number.isFinite(currentCoords.lat) && Number.isFinite(currentCoords.lng)) {
     const bearing = calculateQiblaBearing(currentCoords.lat, currentCoords.lng);
     const distanceKm = calculateDistanceKm(currentCoords.lat, currentCoords.lng);
     const formattedBearing = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(bearing);
     const formattedDistance = new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(distanceKm);
+    const liveRotation = Number.isFinite(deviceHeading)
+      ? normalizeDegrees(bearing - deviceHeading)
+      : bearing;
 
-    if (qiblaNeedleEl) qiblaNeedleEl.style.transform = `translateX(-50%) rotate(${bearing}deg)`;
+    qiblaBearing = bearing;
+
+    if (qiblaNeedleEl) qiblaNeedleEl.style.transform = `translateX(-50%) rotate(${liveRotation}deg)`;
     if (qiblaBearingValueEl) qiblaBearingValueEl.textContent = `${formattedBearing}\u00b0`;
     if (qiblaDistanceValueEl) qiblaDistanceValueEl.textContent = `${formattedDistance} km`;
     if (qiblaStatusEl) qiblaStatusEl.textContent = locale.statusReady(place || locale.placeFallback, formattedBearing);
+    if (qiblaSensorHintEl) {
+      const sensorHint = compassState === "active"
+        ? (locale.sensorHintActive || fallbackLocale.sensorHintActive)
+        : (compassState === "prompt"
+          ? (locale.sensorHintPrompt || fallbackLocale.sensorHintPrompt)
+          : (compassState === "denied"
+            ? (locale.sensorHintDenied || fallbackLocale.sensorHintDenied)
+            : ((compassState === "unsupported")
+              ? (locale.sensorHintUnavailable || fallbackLocale.sensorHintUnavailable)
+              : (locale.sensorHintIdle || fallbackLocale.sensorHintIdle))));
+      qiblaSensorHintEl.textContent = sensorHint;
+    }
     qiblaPanelEl.dataset.state = "ready";
     return;
   }
 
+  qiblaBearing = null;
   if (qiblaNeedleEl) qiblaNeedleEl.style.transform = "translateX(-50%) rotate(0deg)";
   if (qiblaBearingValueEl) qiblaBearingValueEl.textContent = "\u2014";
   if (qiblaDistanceValueEl) qiblaDistanceValueEl.textContent = "\u2014";
@@ -737,6 +974,16 @@ function renderQiblaPanel(state = qiblaPanelState) {
       : locale.statusIdle);
 
   if (qiblaStatusEl) qiblaStatusEl.textContent = fallbackStatus;
+  if (qiblaSensorHintEl) {
+    const sensorHint = compassState === "prompt"
+      ? (locale.sensorHintPrompt || fallbackLocale.sensorHintPrompt)
+      : (compassState === "denied"
+        ? (locale.sensorHintDenied || fallbackLocale.sensorHintDenied)
+        : ((compassState === "unsupported")
+          ? (locale.sensorHintUnavailable || fallbackLocale.sensorHintUnavailable)
+          : (locale.sensorHintIdle || fallbackLocale.sensorHintIdle)));
+    qiblaSensorHintEl.textContent = sensorHint;
+  }
   qiblaPanelEl.dataset.state = state;
 }
 
@@ -744,10 +991,13 @@ function renderStaticContent() {
   const locale = getLocale();
   const topic = getTopic(locale);
   const place = getPlaceName(cityName, countryName);
+  const qiblaPageCopy = QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en;
   document.documentElement.lang = locale.code;
   document.documentElement.dir = locale.dir;
   document.body.setAttribute("dir", locale.dir);
-  if (setLocationButtonEl) setLocationButtonEl.textContent = locale.button;
+  if (setLocationButtonEl) {
+    setLocationButtonEl.textContent = pageType === "qibla" ? qiblaPageCopy.button : locale.button;
+  }
   if (cityInput) cityInput.placeholder = locale.cityPlaceholder;
   if (countryInput) countryInput.placeholder = locale.countryPlaceholder;
   const cityLabel = document.querySelector('label[for="manual-city"]');
@@ -760,7 +1010,11 @@ function renderStaticContent() {
   const heroEyebrow = document.querySelector(".hero-copy .eyebrow");
   if (heroEyebrow) heroEyebrow.textContent = pageType === "home" ? locale.eyebrow : topic;
   if (heroHeadingEl) heroHeadingEl.textContent = locale.heroTitle(pageType, place, topic);
-  if (heroSubtitleEl) heroSubtitleEl.textContent = locale.heroSubtitle(pageType, place, topic);
+  if (heroSubtitleEl) {
+    heroSubtitleEl.textContent = pageType === "qibla"
+      ? qiblaPageCopy.heroSubtitle(place)
+      : locale.heroSubtitle(pageType, place, topic);
+  }
   const scheduleEyebrow = document.querySelector(".schedule-card .eyebrow");
   if (scheduleEyebrow) scheduleEyebrow.textContent = locale.today;
   const scheduleHeading = document.querySelector("#schedule-heading");
@@ -854,8 +1108,11 @@ function applySeoMeta(city = "") {
   const locale = getLocale();
   const topic = getTopic(locale);
   const place = getPlaceName(city.trim(), countryName);
+  const qiblaPageCopy = QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en;
   const title = locale.pageTitle(pageType, place, topic);
-  const description = locale.pageDescription(pageType, place, topic);
+  const description = pageType === "qibla"
+    ? qiblaPageCopy.pageDescription(place)
+    : locale.pageDescription(pageType, place, topic);
   const url = buildPageUrl(language, pageType, city);
   document.title = title;
   setMetaContent("meta[name='description']", description);
@@ -876,9 +1133,13 @@ function setLanguage(lang, persist = true) {
   if (persist) localStorage.setItem("adantimer-language", language);
   window.language = language;
   renderStaticContent();
-  renderScheduleSummary();
-  renderPrayerRows();
-  renderNextPrayer();
+  if (pageType === "qibla") {
+    renderQiblaPanel(currentCoords ? "ready" : qiblaPanelState);
+  } else {
+    renderScheduleSummary();
+    renderPrayerRows();
+    renderNextPrayer();
+  }
   applySeoMeta(activeCity);
   updateHistory(activeCity);
 }
@@ -1243,6 +1504,54 @@ async function loadPrayerTimes(resolvedLocation) {
   }
 }
 
+async function loadQiblaCompass(resolvedLocation) {
+  const locale = getLocale();
+  const explicitRequestedCity = getRequestedCity();
+
+  if (resolvedLocation) {
+    renderQiblaPanel(currentLocationType === "manual" ? "manual" : "recent");
+  } else {
+    renderQiblaPanel(explicitRequestedCity ? "manual" : "gps");
+  }
+
+  const source = resolvedLocation || await resolveInitialLocation((mode) => {
+    renderQiblaPanel(mode === "ip" ? "ip" : mode);
+  });
+
+  if (!source) {
+    currentCoords = null;
+    cityName = "";
+    countryName = "";
+    renderQiblaPanel("error");
+    return;
+  }
+
+  currentCoords = { lat: Number(source.lat), lng: Number(source.lng) };
+
+  if (source.city) {
+    cityName = source.city;
+    countryName = source.country || "";
+  } else {
+    const resolved = await reverseGeocode(currentCoords.lat, currentCoords.lng);
+    cityName = resolved.city || "";
+    countryName = resolved.country || "";
+  }
+
+  if (cityInput) cityInput.value = cityName || "";
+  if (countryInput) countryInput.value = countryName || "";
+
+  currentTimezone = "";
+  currentMethod = "";
+  prayerSchedule = [];
+  nextPrayerData = null;
+  clearInterval(countdownInterval);
+
+  renderStaticContent();
+  renderQiblaPanel("ready");
+  applySeoMeta(cityName);
+  saveRecentLocation();
+}
+
 async function handleManualLocation(city, country = "") {
   const locale = getLocale();
   if (!city.trim()) {
@@ -1259,10 +1568,18 @@ async function handleManualLocation(city, country = "") {
       return;
     }
     currentLocationType = "manual";
-    await loadPrayerTimes(result);
+    if (pageType === "qibla") {
+      await loadQiblaCompass(result);
+    } else {
+      await loadPrayerTimes(result);
+    }
   } catch {
-    locationStatusEl.textContent = locale.fetchError;
-    countdownEl.textContent = locale.fetchError;
+    if (pageType === "qibla") {
+      renderQiblaPanel("error");
+    } else {
+      locationStatusEl.textContent = locale.fetchError;
+      countdownEl.textContent = locale.fetchError;
+    }
   }
 }
 
@@ -1270,6 +1587,12 @@ if (locationForm) {
   locationForm.addEventListener("submit", event => {
     event.preventDefault();
     handleManualLocation(cityInput.value, countryInput.value);
+  });
+}
+
+if (qiblaSensorButtonEl) {
+  qiblaSensorButtonEl.addEventListener("click", () => {
+    enableLiveCompass();
   });
 }
 
@@ -1287,4 +1610,8 @@ document.querySelectorAll("button.city-chip").forEach(button => {
 
 language = getPreferredLanguage();
 setLanguage(language, false);
-loadPrayerTimes();
+if (pageType === "qibla") {
+  loadQiblaCompass();
+} else {
+  loadPrayerTimes();
+}

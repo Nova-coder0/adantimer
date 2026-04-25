@@ -566,6 +566,195 @@ const QIBLA_PANEL_CONTENT = {
   }
 };
 
+for (const tools of Object.values(TOOL_HUB_CONTENT)) {
+  tools.intro = "";
+}
+
+Object.assign(TOOL_HUB_CONTENT.en, { title: "Islamic Tools" });
+Object.assign(TOOL_HUB_CONTENT.ar, { title: "\u0623\u062f\u0648\u0627\u062a \u0625\u0633\u0644\u0627\u0645\u064a\u0629" });
+Object.assign(TOOL_HUB_CONTENT.de, { title: "Islamische Tools" });
+Object.assign(TOOL_HUB_CONTENT.fr, { title: "Outils islamiques" });
+Object.assign(TOOL_HUB_CONTENT.tr, { title: "Islami Araclar" });
+Object.assign(TOOL_HUB_CONTENT["zh-hans"], { title: "\u4f0a\u65af\u5170\u5de5\u5177" });
+
+Object.assign(QIBLA_PANEL_CONTENT.en, {
+  sensorButton: "Enable live compass",
+  sensorHintIdle: "On phones with a compass sensor, enable the live compass so the arrow turns with your device."
+});
+Object.assign(QIBLA_PANEL_CONTENT.ar, {
+  sensorButton: "\u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629",
+  sensorHintIdle: "\u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u062a\u064a \u062a\u062f\u0639\u0645 \u062d\u0633\u0627\u0633 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u064a\u0645\u0643\u0646\u0643 \u062a\u0641\u0639\u064a\u0644 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0644\u064a\u062a\u062d\u0631\u0643 \u0627\u0644\u0633\u0647\u0645 \u0645\u0639 \u0627\u0644\u062c\u0647\u0627\u0632."
+});
+Object.assign(QIBLA_PANEL_CONTENT.de, {
+  sensorButton: "Live-Kompass aktivieren",
+  sensorHintIdle: "Auf Handys mit Kompasssensor kannst du den Live-Kompass aktivieren, damit sich der Pfeil mit dem Geraet dreht."
+});
+Object.assign(QIBLA_PANEL_CONTENT.fr, {
+  sensorButton: "Activer la boussole en direct",
+  sensorHintIdle: "Sur les telephones avec capteur, activez la boussole en direct pour faire tourner la fleche avec l'appareil."
+});
+Object.assign(QIBLA_PANEL_CONTENT.tr, {
+  sensorButton: "Canli pusulayi etkinlestir",
+  sensorHintIdle: "Pusula sensoru olan telefonlarda oku cihazla birlikte dondurmek icin canli pusulayi etkinlestir."
+});
+Object.assign(QIBLA_PANEL_CONTENT["zh-hans"], {
+  sensorButton: "\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488",
+  sensorHintIdle: "\u5728\u5e26\u6709\u6307\u5357\u9488\u4f20\u611f\u5668\u7684\u624b\u673a\u4e0a\uff0c\u53ef\u542f\u7528\u5b9e\u65f6\u6307\u5357\u9488\uff0c\u8ba9\u7bad\u5934\u968f\u8bbe\u5907\u8f6c\u52a8\u3002"
+});
+
+const QIBLA_PAGE_COPY = {
+  en: {
+    submitLabel: "Show Qibla Direction",
+    heroSubtitle: place => place
+      ? `Use the compass below to align toward Makkah from ${place}.`
+      : "Use the compass below to calculate qibla direction from your current location or any city you search.",
+    description: place => place
+      ? `Check qibla direction from ${place}, see the bearing to Makkah, and use the live compass on supported phones.`
+      : "Check qibla direction from your current location or any city, see the bearing to Makkah, and use the live compass on supported phones.",
+    faq: place => [
+      {
+        question: place ? `Can I share this qibla page for ${place}?` : "Can I share this qibla page?",
+        answer: place
+          ? `Yes. This route is a direct qibla page for ${place}, so it can be reopened and shared easily.`
+          : "Yes. The qibla route is built as a direct page, so it can be reopened and shared easily."
+      },
+      {
+        question: "Does Adantimer detect language and location automatically?",
+        answer: "Yes. The page follows the browser language after load, tries GPS first, then falls back to IP-based location, and still allows manual city search."
+      },
+      {
+        question: "What does the qibla compass show?",
+        answer: "The page shows the qibla bearing from your location, the distance to Makkah, and a live compass mode on supported phones."
+      }
+    ]
+  },
+  ar: {
+    submitLabel: "\u0627\u0639\u0631\u0636 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629",
+    heroSubtitle: place => place
+      ? `\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0623\u062f\u0646\u0627\u0647 \u0644\u0645\u0639\u0631\u0641\u0629 \u0627\u062a\u062c\u0627\u0647 \u0645\u0643\u0629 \u0645\u0646 ${place}.`
+      : "\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0623\u062f\u0646\u0627\u0647 \u0644\u062d\u0633\u0627\u0628 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629 \u062a\u0628\u062d\u062b \u0639\u0646\u0647\u0627.",
+    description: place => place
+      ? `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 ${place}\u060c \u0648\u0627\u0639\u0631\u0641 \u0632\u0627\u0648\u064a\u0629 \u0645\u0643\u0629\u060c \u0648\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629.`
+      : "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643 \u0627\u0644\u062d\u0627\u0644\u064a \u0623\u0648 \u0623\u064a \u0645\u062f\u064a\u0646\u0629\u060c \u0648\u0627\u0639\u0631\u0641 \u0632\u0627\u0648\u064a\u0629 \u0645\u0643\u0629\u060c \u0648\u0627\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629.",
+    faq: place => [
+      {
+        question: place ? `\u0647\u0644 \u064a\u0645\u0643\u0646\u0646\u064a \u0645\u0634\u0627\u0631\u0643\u0629 \u0635\u0641\u062d\u0629 \u0627\u0644\u0642\u0628\u0644\u0629 \u0644\u0640 ${place}\u061f` : "\u0647\u0644 \u064a\u0645\u0643\u0646\u0646\u064a \u0645\u0634\u0627\u0631\u0643\u0629 \u0635\u0641\u062d\u0629 \u0627\u0644\u0642\u0628\u0644\u0629\u061f",
+        answer: place
+          ? `\u0646\u0639\u0645. \u0647\u0630\u0647 \u0635\u0641\u062d\u0629 \u0645\u0628\u0627\u0634\u0631\u0629 \u0644\u0639\u0631\u0636 \u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0642\u0628\u0644\u0629 \u0641\u064a ${place}\u060c \u0648\u064a\u0645\u0643\u0646 \u0641\u062a\u062d\u0647\u0627 \u0623\u0648 \u0645\u0634\u0627\u0631\u0643\u062a\u0647\u0627 \u0628\u0633\u0647\u0648\u0644\u0629.`
+          : "\u0646\u0639\u0645. \u0645\u0633\u0627\u0631 \u0627\u0644\u0642\u0628\u0644\u0629 \u0635\u0641\u062d\u0629 \u0645\u0628\u0627\u0634\u0631\u0629 \u0648\u064a\u0645\u0643\u0646 \u0627\u0644\u0631\u062c\u0648\u0639 \u0625\u0644\u064a\u0647\u0627 \u0623\u0648 \u0645\u0634\u0627\u0631\u0643\u062a\u0647\u0627 \u0628\u0633\u0647\u0648\u0644\u0629."
+      },
+      {
+        question: "\u0647\u0644 \u064a\u062d\u062f\u062f Adantimer \u0627\u0644\u0644\u063a\u0629 \u0648\u0627\u0644\u0645\u0648\u0642\u0639 \u062a\u0644\u0642\u0627\u0626\u064a\u0627\u061f",
+        answer: "\u0646\u0639\u0645. \u0627\u0644\u0635\u0641\u062d\u0629 \u062a\u062a\u0628\u0639 \u0644\u063a\u0629 \u0627\u0644\u0645\u062a\u0635\u0641\u062d \u0628\u0639\u062f \u0627\u0644\u062a\u062d\u0645\u064a\u0644\u060c \u0648\u062a\u062c\u0631\u0628 GPS \u0623\u0648\u0644\u0627 \u062b\u0645 \u062a\u0639\u062a\u0645\u062f \u0639\u0644\u0649 IP \u0639\u0646\u062f \u0627\u0644\u062d\u0627\u062c\u0629\u060c \u0645\u0639 \u0628\u0642\u0627\u0621 \u0627\u0644\u0628\u062d\u062b \u0627\u0644\u064a\u062f\u0648\u064a \u0645\u062a\u0627\u062d\u0627."
+      },
+      {
+        question: "\u0645\u0627\u0630\u0627 \u064a\u0639\u0631\u0636 \u0645\u0642\u064a\u0627\u0633 \u0627\u0644\u0642\u0628\u0644\u0629\u061f",
+        answer: "\u062a\u0639\u0631\u0636 \u0627\u0644\u0635\u0641\u062d\u0629 \u0632\u0627\u0648\u064a\u0629 \u0627\u0644\u0642\u0628\u0644\u0629 \u0645\u0646 \u0645\u0648\u0642\u0639\u0643\u060c \u0648\u0645\u0633\u0627\u0641\u0629 \u0645\u0643\u0629\u060c \u0648\u0648\u0636\u0639 \u0627\u0644\u0628\u0648\u0635\u0644\u0629 \u0627\u0644\u062d\u064a\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0648\u0627\u062a\u0641 \u0627\u0644\u0645\u062f\u0639\u0648\u0645\u0629."
+      }
+    ]
+  },
+  de: {
+    submitLabel: "Qibla-Richtung anzeigen",
+    heroSubtitle: place => place
+      ? `Nutze den Kompass unten, um die Richtung nach Mekka von ${place} aus auszurichten.`
+      : "Nutze den Kompass unten, um die Qibla von deinem aktuellen Standort oder jeder gesuchten Stadt aus zu berechnen.",
+    description: place => place
+      ? `Pr\u00fcfe die Qibla-Richtung von ${place}, sieh den Winkel nach Mekka und nutze den Live-Kompass auf unterst\u00fctzten Handys.`
+      : "Pr\u00fcfe die Qibla-Richtung von deinem aktuellen Standort oder jeder gesuchten Stadt, sieh den Winkel nach Mekka und nutze den Live-Kompass auf unterst\u00fctzten Handys.",
+    faq: place => [
+      {
+        question: place ? `Kann ich diese Qibla-Seite f\u00fcr ${place} teilen?` : "Kann ich diese Qibla-Seite teilen?",
+        answer: place
+          ? `Ja. Diese Route ist eine direkte Qibla-Seite f\u00fcr ${place} und l\u00e4sst sich leicht erneut aufrufen oder teilen.`
+          : "Ja. Die Qibla-Route ist eine direkte Seite und l\u00e4sst sich leicht erneut aufrufen oder teilen."
+      },
+      {
+        question: "Erkennt Adantimer Sprache und Standort automatisch?",
+        answer: "Ja. Die Seite folgt nach dem Laden der Browsersprache, versucht zuerst GPS und greift bei Bedarf auf IP-basierten Standort zur\u00fcck. Eine manuelle Stadtsuche bleibt m\u00f6glich."
+      },
+      {
+        question: "Was zeigt der Qibla-Kompass an?",
+        answer: "Die Seite zeigt den Qibla-Winkel von deinem Standort, die Entfernung nach Mekka und auf unterst\u00fctzten Handys einen Live-Kompass."
+      }
+    ]
+  },
+  fr: {
+    submitLabel: "Afficher la qibla",
+    heroSubtitle: place => place
+      ? `Utilisez la boussole ci-dessous pour vous orienter vers La Mecque depuis ${place}.`
+      : "Utilisez la boussole ci-dessous pour calculer la direction de la qibla depuis votre position actuelle ou n'importe quelle ville recherch\u00e9e.",
+    description: place => place
+      ? `Consultez la direction de la qibla depuis ${place}, voyez l'angle vers La Mecque et utilisez la boussole en direct sur les t\u00e9l\u00e9phones compatibles.`
+      : "Consultez la direction de la qibla depuis votre position actuelle ou n'importe quelle ville, voyez l'angle vers La Mecque et utilisez la boussole en direct sur les t\u00e9l\u00e9phones compatibles.",
+    faq: place => [
+      {
+        question: place ? `Puis-je partager cette page qibla pour ${place} ?` : "Puis-je partager cette page qibla ?",
+        answer: place
+          ? `Oui. Cette route est une page qibla directe pour ${place}, facile \u00e0 rouvrir et \u00e0 partager.`
+          : "Oui. La route qibla est une page directe, facile \u00e0 rouvrir et \u00e0 partager."
+      },
+      {
+        question: "Adantimer d\u00e9tecte-t-il automatiquement la langue et la position ?",
+        answer: "Oui. La page suit la langue du navigateur apr\u00e8s chargement, essaie d'abord le GPS puis utilise la position IP si n\u00e9cessaire. La recherche manuelle reste disponible."
+      },
+      {
+        question: "Que montre la boussole qibla ?",
+        answer: "La page affiche l'angle de la qibla depuis votre position, la distance jusqu'\u00e0 La Mecque et un mode boussole en direct sur les t\u00e9l\u00e9phones compatibles."
+      }
+    ]
+  },
+  tr: {
+    submitLabel: "Kible Y\u00f6n\u00fcn\u00fc G\u00f6ster",
+    heroSubtitle: place => place
+      ? `A\u015fa\u011f\u0131daki pusulay\u0131 kullanarak ${place} konumundan Mekke y\u00f6n\u00fcn\u00fc hizala.`
+      : "A\u015fa\u011f\u0131daki pusulay\u0131 kullanarak mevcut konumundan veya arad\u0131\u011f\u0131n herhangi bir \u015fehirden kible y\u00f6n\u00fcn\u00fc hesapla.",
+    description: place => place
+      ? `${place} konumundan kible y\u00f6n\u00fcn\u00fc g\u00f6r, Mekke a\u00e7\u0131s\u0131n\u0131 incele ve desteklenen telefonlarda canl\u0131 pusulay\u0131 kullan.`
+      : "Mevcut konumundan veya herhangi bir \u015fehirden kible y\u00f6n\u00fcn\u00fc g\u00f6r, Mekke a\u00e7\u0131s\u0131n\u0131 incele ve desteklenen telefonlarda canl\u0131 pusulay\u0131 kullan.",
+    faq: place => [
+      {
+        question: place ? `${place} i\u00e7in bu kible sayfas\u0131n\u0131 payla\u015fabilir miyim?` : "Bu kible sayfas\u0131n\u0131 payla\u015fabilir miyim?",
+        answer: place
+          ? `Evet. Bu rota ${place} i\u00e7in do\u011frudan bir kible sayfas\u0131d\u0131r; yeniden a\u00e7\u0131labilir ve kolayca payla\u015f\u0131labilir.`
+          : "Evet. Kible rotas\u0131 do\u011frudan bir sayfad\u0131r; yeniden a\u00e7\u0131labilir ve kolayca payla\u015f\u0131labilir."
+      },
+      {
+        question: "Adantimer dili ve konumu otomatik alg\u0131lar m\u0131?",
+        answer: "Evet. Sayfa y\u00fcklendikten sonra taray\u0131c\u0131 dilini izler, \u00f6nce GPS dener, gerekirse IP tabanl\u0131 konuma ge\u00e7er. Manuel \u015fehir aramas\u0131 da kullan\u0131labilir."
+      },
+      {
+        question: "Kible pusulas\u0131 ne g\u00f6sterir?",
+        answer: "Sayfa bulundu\u011fun konumdan kible a\u00e7\u0131s\u0131n\u0131, Mekke'ye olan mesafeyi ve desteklenen telefonlarda canl\u0131 pusula modunu g\u00f6sterir."
+      }
+    ]
+  },
+  "zh-hans": {
+    submitLabel: "\u663e\u793a Qibla \u65b9\u5411",
+    heroSubtitle: place => place
+      ? `\u4f7f\u7528\u4e0b\u65b9\u6307\u5357\u9488\uff0c\u4ece ${place} \u5bf9\u51c6\u9ea6\u52a0\u65b9\u5411\u3002`
+      : "\u4f7f\u7528\u4e0b\u65b9\u6307\u5357\u9488\uff0c\u4ece\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u641c\u7d22\u7684\u57ce\u5e02\u8ba1\u7b97 Qibla \u65b9\u5411\u3002",
+    description: place => place
+      ? `\u67e5\u770b ${place} \u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002`
+      : "\u67e5\u770b\u5f53\u524d\u4f4d\u7f6e\u6216\u4efb\u610f\u57ce\u5e02\u7684 Qibla \u65b9\u5411\uff0c\u67e5\u770b\u6307\u5411\u9ea6\u52a0\u7684\u89d2\u5ea6\uff0c\u5e76\u5728\u652f\u6301\u7684\u624b\u673a\u4e0a\u4f7f\u7528\u5b9e\u65f6\u6307\u5357\u9488\u3002",
+    faq: place => [
+      {
+        question: place ? `\u6211\u53ef\u4ee5\u5206\u4eab ${place} \u7684 Qibla \u9875\u9762\u5417\uff1f` : "\u6211\u53ef\u4ee5\u5206\u4eab\u8fd9\u4e2a Qibla \u9875\u9762\u5417\uff1f",
+        answer: place
+          ? `\u53ef\u4ee5\u3002\u8fd9\u662f ${place} \u7684\u76f4\u63a5 Qibla \u9875\u9762\uff0c\u53ef\u4ee5\u8f7b\u677e\u91cd\u65b0\u6253\u5f00\u6216\u5206\u4eab\u3002`
+          : "\u53ef\u4ee5\u3002Qibla \u8def\u7531\u662f\u4e00\u4e2a\u76f4\u63a5\u9875\u9762\uff0c\u53ef\u4ee5\u8f7b\u677e\u91cd\u65b0\u6253\u5f00\u6216\u5206\u4eab\u3002"
+      },
+      {
+        question: "Adantimer \u4f1a\u81ea\u52a8\u68c0\u6d4b\u8bed\u8a00\u548c\u4f4d\u7f6e\u5417\uff1f",
+        answer: "\u4f1a\u3002\u9875\u9762\u52a0\u8f7d\u540e\u4f1a\u8ddf\u968f\u6d4f\u89c8\u5668\u8bed\u8a00\uff0c\u4f18\u5148\u5c1d\u8bd5 GPS\uff0c\u5fc5\u8981\u65f6\u4f7f\u7528 IP \u5b9a\u4f4d\uff0c\u540c\u65f6\u4fdd\u7559\u624b\u52a8\u641c\u7d22\u57ce\u5e02\u3002"
+      },
+      {
+        question: "Qibla \u6307\u5357\u9488\u4f1a\u663e\u793a\u4ec0\u4e48\uff1f",
+        answer: "\u9875\u9762\u4f1a\u663e\u793a\u4ece\u4f60\u5f53\u524d\u4f4d\u7f6e\u8ba1\u7b97\u7684 Qibla \u89d2\u5ea6\uff0c\u5230\u9ea6\u52a0\u7684\u8ddd\u79bb\uff0c\u4ee5\u53ca\u5728\u53d7\u652f\u6301\u7684\u624b\u673a\u4e0a\u7684\u5b9e\u65f6\u6307\u5357\u9488\u6a21\u5f0f\u3002"
+      }
+    ]
+  }
+};
+
 const COPY_LOCALES = {
   de: {
     heroEyebrowHome: "Gebetszeiten nach Stadt",
@@ -954,8 +1143,16 @@ export async function GET(request) {
     const canonical = `${SITE_URL}${canonicalPath}`;
     const alternates = getAlternates(pageType, city);
     const title = locale.title(topic, place, pageType);
-    const description = locale.description(topic, place);
+    const description = pageType === "qibla"
+      ? (QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en).description(place)
+      : locale.description(topic, place);
     const copy = buildCopy({ language, pageType, place, sourceCity, topic });
+    if (pageType === "qibla") {
+      const qiblaPageCopy = QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en;
+      copy.heroSubtitle = qiblaPageCopy.heroSubtitle(place);
+      copy.submitLabel = qiblaPageCopy.submitLabel;
+      copy.faq = qiblaPageCopy.faq(place);
+    }
     copy.activeLanguage = language;
     copy.brandHref = buildRoutePath(language, "home");
     const template = await readFile(INDEX_PATH, "utf8");
@@ -1041,6 +1238,7 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<section class="card prose" aria-labelledby="cities-heading">[\s\S]*?<\/section>/, renderCitiesSection(copy))
     .replace(/<article class="card prose" aria-labelledby="about-heading">[\s\S]*?<\/article>/, renderAboutArticle(copy))
     .replace(/<section class="card prose" aria-labelledby="faq-heading">[\s\S]*?<\/section>/, renderFaqSection(copy))
+    .replace(/<main class="shell main-content">[\s\S]*?<\/main>/, renderMainContent(copy))
     .replace(/<footer class="shell footer">[\s\S]*?<\/footer>/, renderFooter(copy))
     .replace(/<noscript>[\s\S]*?<\/noscript>/, renderNoscript(copy));
 }
@@ -1092,6 +1290,10 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: "en",
+    standalonePage: pageType === "qibla",
+    hideNextPrayerCard: pageType === "qibla",
+    showPopularCities: pageType !== "qibla",
+    showIntentLinks: pageType !== "qibla",
     brandHref: buildRoutePath("en", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `Prayer schedule for ${place}` : "Prayer times by city")
@@ -1218,6 +1420,10 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: "ar",
+    standalonePage: pageType === "qibla",
+    hideNextPrayerCard: pageType === "qibla",
+    showPopularCities: pageType !== "qibla",
+    showIntentLinks: pageType !== "qibla",
     brandHref: buildRoutePath("ar", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `جدول الصلاة في ${place}` : "مواقيت الصلاة حسب المدينة")
@@ -1332,6 +1538,10 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: language,
+    standalonePage: pageType === "qibla",
+    hideNextPrayerCard: pageType === "qibla",
+    showPopularCities: pageType !== "qibla",
+    showIntentLinks: pageType !== "qibla",
     brandHref: buildRoutePath(language, "home"),
     heroEyebrow: pageType === "home"
       ? (place ? locale.heroEyebrowPlace(place) : locale.heroEyebrowHome)
@@ -1380,6 +1590,22 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
 }
 
 function renderHeroCopy(copy) {
+  const popularCitiesMarkup = copy.showPopularCities
+    ? `
+
+          <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
+${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
+          </div>`
+    : "";
+
+  const intentLinksMarkup = copy.showIntentLinks
+    ? `
+
+          <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
+${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("\n")}
+          </div>`
+    : "";
+
   return `        <section class="hero-copy">
           <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
           <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
@@ -1394,18 +1620,13 @@ function renderHeroCopy(copy) {
             <input type="text" id="manual-country" name="country" placeholder="${escapeHtml(copy.countryPlaceholder)}" autocomplete="country-name">
             <button id="set-location-btn" type="submit">${escapeHtml(copy.submitLabel)}</button>
           </form>
-
-          <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
-${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
-          </div>
-
-          <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
-${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("\n")}
-          </div>
+${popularCitiesMarkup}
+${intentLinksMarkup}
         </section>`;
 }
 
 function renderNextPrayerCard(copy) {
+  if (copy.hideNextPrayerCard) return "";
   return `        <aside class="next-prayer card featured-card" aria-live="polite">
           <p class="card-label" id="location-status">${escapeHtml(copy.locationStatus)}</p>
           <h2 id="title">${escapeHtml(copy.nextPrayerTitle)}</h2>
@@ -1497,6 +1718,10 @@ function renderQiblaPanelSection(copy) {
             <strong id="qibla-place">${escapeHtml(copy.qiblaPlaceFallback)}</strong>
             <span id="qibla-status">${escapeHtml(copy.qiblaStatusIdle)}</span>
           </div>
+          <div class="qibla-sensor-controls">
+            <button id="qibla-sensor-button" class="qibla-sensor-button" type="button" hidden>${escapeHtml(copy.qiblaSensorButton)}</button>
+            <p id="qibla-sensor-hint" class="qibla-sensor-hint">${escapeHtml(copy.qiblaSensorHintIdle)}</p>
+          </div>
           <div class="qibla-stats">
             <div class="qibla-stat">
               <span id="qibla-bearing-label">${escapeHtml(copy.qiblaBearingLabel)}</span>
@@ -1554,6 +1779,34 @@ ${copy.faq.map(item => `          <div>
       </section>`;
 }
 
+function renderMainContent(copy) {
+  if (copy.standalonePage) {
+    return `  <main class="shell main-content">
+${renderQiblaPanelSection(copy)}
+  </main>`;
+  }
+
+  return `  <main class="shell main-content">
+    <section class="content-grid">
+${renderScheduleSection(copy)}
+
+${renderInfoSection(copy)}
+    </section>
+
+${renderQiblaPanelSection(copy)}
+
+${renderToolsSection(copy)}
+
+${renderCitiesSection(copy)}
+
+    <section class="seo-grid">
+${renderAboutArticle(copy)}
+
+${renderFaqSection(copy)}
+    </section>
+  </main>`;
+}
+
 function renderFooter(copy) {
   return `  <footer class="shell footer">
     <p>&copy; 2026 Adantimer. ${escapeHtml(copy.footerText)}</p>
@@ -1608,6 +1861,8 @@ function buildQiblaPanelCopy(language, pageType) {
     qiblaSummary: locale.summary,
     qiblaPlaceFallback: locale.placeFallback,
     qiblaStatusIdle: locale.statusIdle,
+    qiblaSensorButton: locale.sensorButton || QIBLA_PANEL_CONTENT.en.sensorButton,
+    qiblaSensorHintIdle: locale.sensorHintIdle || QIBLA_PANEL_CONTENT.en.sensorHintIdle,
     qiblaBearingLabel: locale.bearingLabel,
     qiblaDistanceLabel: locale.distanceLabel
   };

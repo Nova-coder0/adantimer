@@ -540,6 +540,26 @@ a {
   gap: 18px;
 }
 
+.qibla-sensor-controls {
+  display: grid;
+  gap: 10px;
+}
+
+.qibla-sensor-button {
+  width: auto;
+  min-width: 0;
+  justify-self: start;
+  padding-inline: 16px;
+  background: #0d6b5d;
+  color: #fff;
+}
+
+.qibla-sensor-hint {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .qibla-readout-head {
   display: grid;
   gap: 8px;
@@ -585,6 +605,41 @@ a {
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr);
   gap: 22px;
   align-items: start;
+}
+
+body[data-page="qibla"] .hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body[data-page="qibla"] .featured-card,
+body[data-page="qibla"] .main-content > .content-grid,
+body[data-page="qibla"] .main-content > .tools-hub,
+body[data-page="qibla"] .main-content > .prose,
+body[data-page="qibla"] .main-content > .seo-grid {
+  display: none;
+}
+
+body[data-page="qibla"] .hero-copy {
+  max-width: 820px;
+}
+
+body[data-page="qibla"] .hero-copy .popular-cities,
+body[data-page="qibla"] .hero-copy .intent-links {
+  display: none;
+}
+
+body[data-page="qibla"] .main-content {
+  padding-top: 0;
+}
+
+body[data-page="qibla"] .qibla-panel {
+  margin-top: 0;
+  padding: 32px;
+  gap: 24px;
+}
+
+body[data-page="qibla"] .qibla-panel-grid {
+  grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1.05fr);
 }
 
 .tools-copy p:last-child {
@@ -796,6 +851,10 @@ body[dir="rtl"] .language-menu-list {
 
   .qibla-compass {
     inline-size: min(100%, 240px);
+  }
+
+  body[data-page="qibla"] .qibla-panel-grid {
+    grid-template-columns: 1fr;
   }
 
   .tools-grid {
