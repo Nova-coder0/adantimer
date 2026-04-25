@@ -1721,7 +1721,7 @@ function renderQiblaPanelSection(copy) {
                 <span class="qibla-bearing-line"></span>
               </span>
               <span class="qibla-kaaba-marker" id="qibla-kaaba-marker">
-                <span class="qibla-kaaba-badge">${escapeHtml(copy.qiblaKaabaLabel)}</span>
+                <span class="qibla-kaaba-icon" title="${escapeHtml(copy.qiblaKaabaLabel)}"></span>
               </span>
               <span class="qibla-compass-core"></span>
             </div>
