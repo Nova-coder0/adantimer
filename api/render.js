@@ -1,9 +1,17 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { QURAN_SURAHS } from "../data/quran-surahs.js";
+import {
+  QURAN_SURAHS,
+  getAdjacentQuranSurahs,
+  getQuranSurahBySlug
+} from "../data/quran-surahs.js";
 
 const SITE_URL = "https://www.adantimer.com";
 const INDEX_PATH = path.join(process.cwd(), "templates", "index.html");
+const QURAN_API_BASE = "https://api.alquran.cloud/v1";
+const QURAN_API_TIMEOUT_MS = 12000;
+const QURAN_SURAH_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
+const quranSurahCache = new Map();
 
 const TOP_CITIES = [
   { city: "Makkah", country: "Saudi Arabia" },
@@ -56,6 +64,7 @@ const ROUTES = {
   isha: { en: "Isha Time", ar: "وقت العشاء", path: city => city ? `/isha-time/${slugify(city)}` : "/isha-time" },
   qibla: { en: "Qibla Direction", ar: "اتجاه القبلة", path: () => "/qibla" },
   quran: { en: "Quran", ar: "القرآن", path: () => "/quran" },
+  "quran-surah": { en: "Quran", ar: "القرآن", path: (city, surahSlug) => surahSlug ? `/quran/${slugify(surahSlug)}` : "/quran" },
   dhikr: { en: "Dhikr", ar: "الذكر", path: () => "/dhikr" },
   hadith: { en: "Hadith", ar: "الحديث", path: () => "/hadith" }
 };
@@ -177,6 +186,13 @@ Object.assign(ROUTES.qibla, {
 });
 
 Object.assign(ROUTES.quran, {
+  de: "Koran",
+  fr: "Coran",
+  tr: "Kuran",
+  "zh-hans": "古兰经"
+});
+
+Object.assign(ROUTES["quran-surah"], {
   de: "Koran",
   fr: "Coran",
   tr: "Kuran",
@@ -477,6 +493,189 @@ const QURAN_INDEX_CONTENT = {
     noscriptText: "JavaScript 仅用于搜索筛选，章节索引本身已经直接显示。",
     metaTitle: "古兰经章节索引与阅读页面 | Adantimer",
     metaDescription: "浏览全部 114 个古兰经章节，按名称或编号搜索，并在 Adantimer 中打开独立的古兰经阅读页面。"
+  }
+};
+
+const QURAN_SURAH_CONTENT = {
+  en: {
+    heroEyebrow: "Quran Reader",
+    sectionEyebrow: "Full surah text",
+    sectionTitle: surah => `Read Surah ${surah.nameSimple}`,
+    sectionIntro: surah => `Read the full Arabic text of Surah ${surah.nameSimple}, keep the page shareable, and move directly to the previous or next surah.`,
+    backLabel: "Back to all surahs",
+    previousLabel: "Previous surah",
+    nextLabel: "Next surah",
+    versesLabel: ayahs => `${ayahs} ayahs`,
+    revelationPrefix: "Revelation",
+    emptyText: "We could not load the surah text right now. Please try again in a moment.",
+    faq: surah => [
+      {
+        question: `Can I share the Surah ${surah.nameSimple} page directly?`,
+        answer: `Yes. Each surah has its own direct route, so you can reopen or share Surah ${surah.nameSimple} without returning to the index.`
+      },
+      {
+        question: "Is the surah text rendered directly on the page?",
+        answer: "Yes. The surah reader is server-rendered so the ayahs are already present in the initial HTML response."
+      },
+      {
+        question: "Can I continue to the next or previous surah?",
+        answer: "Yes. Each surah page includes direct navigation to the previous and next surah where available."
+      }
+    ],
+    footerText: surah => `Standalone Quran reading page for Surah ${surah.nameSimple} inside Adantimer.`,
+    noscriptText: "JavaScript is not required to read this surah page.",
+    metaTitle: surah => `Surah ${surah.nameSimple} Reader | Adantimer`,
+    metaDescription: surah => `Read Surah ${surah.nameSimple} in Arabic, review its ayah count and revelation type, and move through the Quran from a focused reading page inside Adantimer.`
+  },
+  ar: {
+    heroEyebrow: "قارئ القرآن",
+    sectionEyebrow: "نص السورة كاملًا",
+    sectionTitle: surah => `اقرأ سورة ${surah.nameSimple}`,
+    sectionIntro: surah => `اقرأ النص العربي الكامل لسورة ${surah.nameSimple}، واحتفظ بصفحة مباشرة قابلة للمشاركة، وانتقل مباشرة إلى السورة السابقة أو التالية.`,
+    backLabel: "العودة إلى جميع السور",
+    previousLabel: "السورة السابقة",
+    nextLabel: "السورة التالية",
+    versesLabel: ayahs => `${ayahs} آية`,
+    revelationPrefix: "النزول",
+    emptyText: "تعذر تحميل نص السورة الآن. حاول مرة أخرى بعد قليل.",
+    faq: surah => [
+      {
+        question: `هل يمكنني مشاركة صفحة سورة ${surah.nameSimple} مباشرة؟`,
+        answer: `نعم. لكل سورة مسار مباشر خاص بها، لذلك يمكنك إعادة فتح سورة ${surah.nameSimple} أو مشاركتها بسهولة دون الرجوع إلى الفهرس.`
+      },
+      {
+        question: "هل يتم عرض نص السورة مباشرة داخل الصفحة؟",
+        answer: "نعم. يتم إنشاء صفحة السورة من الخادم بحيث تكون الآيات موجودة بالفعل في أول استجابة HTML."
+      },
+      {
+        question: "هل يمكنني الانتقال إلى السورة السابقة أو التالية؟",
+        answer: "نعم. تتضمن كل صفحة سورة روابط مباشرة إلى السورة السابقة والتالية عند توفرها."
+      }
+    ],
+    footerText: surah => `صفحة قراءة مستقلة لسورة ${surah.nameSimple} داخل Adantimer.`,
+    noscriptText: "لا يلزم JavaScript لقراءة صفحة السورة هذه.",
+    metaTitle: surah => `قراءة سورة ${surah.nameSimple} | Adantimer`,
+    metaDescription: surah => `اقرأ سورة ${surah.nameSimple} بالنص العربي، وراجع عدد الآيات ونوع النزول، وانتقل في القرآن من صفحة قراءة مركزة داخل Adantimer.`
+  },
+  de: {
+    heroEyebrow: "Koran-Leser",
+    sectionEyebrow: "Vollständiger Surentext",
+    sectionTitle: surah => `Sure ${surah.nameSimple} lesen`,
+    sectionIntro: surah => `Lies den vollständigen arabischen Text der Sure ${surah.nameSimple}, nutze eine direkt teilbare Seite und wechsle sofort zur vorherigen oder nächsten Sure.`,
+    backLabel: "Zurück zu allen Suren",
+    previousLabel: "Vorherige Sure",
+    nextLabel: "Nächste Sure",
+    versesLabel: ayahs => `${ayahs} Verse`,
+    revelationPrefix: "Offenbarung",
+    emptyText: "Der Surentext konnte gerade nicht geladen werden. Bitte versuche es gleich noch einmal.",
+    faq: surah => [
+      {
+        question: `Kann ich die Seite für Sure ${surah.nameSimple} direkt teilen?`,
+        answer: `Ja. Jede Sure hat ihre eigene direkte Route. Du kannst die Seite für Sure ${surah.nameSimple} daher leicht erneut öffnen oder teilen.`
+      },
+      {
+        question: "Wird der Surentext direkt in der Seite gerendert?",
+        answer: "Ja. Die Surenseite wird serverseitig gerendert, sodass die Ayat bereits im ersten HTML enthalten sind."
+      },
+      {
+        question: "Kann ich zur vorherigen oder nächsten Sure wechseln?",
+        answer: "Ja. Jede Surenseite enthält direkte Navigation zur vorherigen und nächsten Sure, sofern vorhanden."
+      }
+    ],
+    footerText: surah => `Eigenständige Koran-Leseseite für Sure ${surah.nameSimple} in Adantimer.`,
+    noscriptText: "JavaScript wird zum Lesen dieser Surenseite nicht benötigt.",
+    metaTitle: surah => `Sure ${surah.nameSimple} lesen | Adantimer`,
+    metaDescription: surah => `Lies Sure ${surah.nameSimple} auf Arabisch, sieh Anzahl der Verse und Offenbarungsart und bewege dich über eine fokussierte Leseseite durch den Koran.`
+  },
+  fr: {
+    heroEyebrow: "Lecteur du Coran",
+    sectionEyebrow: "Texte complet de la sourate",
+    sectionTitle: surah => `Lire la sourate ${surah.nameSimple}`,
+    sectionIntro: surah => `Lisez le texte arabe complet de la sourate ${surah.nameSimple}, gardez une page partageable et passez directement à la sourate précédente ou suivante.`,
+    backLabel: "Retour à toutes les sourates",
+    previousLabel: "Sourate précédente",
+    nextLabel: "Sourate suivante",
+    versesLabel: ayahs => `${ayahs} versets`,
+    revelationPrefix: "Révélation",
+    emptyText: "Impossible de charger le texte de la sourate pour le moment. Réessayez dans un instant.",
+    faq: surah => [
+      {
+        question: `Puis-je partager directement la page de la sourate ${surah.nameSimple} ?`,
+        answer: `Oui. Chaque sourate possède sa propre route directe, vous pouvez donc rouvrir ou partager la page de ${surah.nameSimple} facilement.`
+      },
+      {
+        question: "Le texte de la sourate est-il rendu directement dans la page ?",
+        answer: "Oui. La page de sourate est rendue côté serveur, de sorte que les ayahs sont déjà présentes dans le premier HTML."
+      },
+      {
+        question: "Puis-je passer à la sourate précédente ou suivante ?",
+        answer: "Oui. Chaque page de sourate inclut une navigation directe vers la sourate précédente et suivante si elles existent."
+      }
+    ],
+    footerText: surah => `Page de lecture autonome pour la sourate ${surah.nameSimple} dans Adantimer.`,
+    noscriptText: "JavaScript n'est pas nécessaire pour lire cette page de sourate.",
+    metaTitle: surah => `Lire la sourate ${surah.nameSimple} | Adantimer`,
+    metaDescription: surah => `Lisez la sourate ${surah.nameSimple} en arabe, consultez son nombre de versets et son type de révélation, puis avancez dans le Coran depuis une page dédiée.`
+  },
+  tr: {
+    heroEyebrow: "Kuran Okuyucu",
+    sectionEyebrow: "Sure metninin tam hali",
+    sectionTitle: surah => `${surah.nameSimple} suresini oku`,
+    sectionIntro: surah => `${surah.nameSimple} suresinin tam Arapça metnini oku, doğrudan paylaşılabilir bir sayfada kal ve önceki ya da sonraki sureye geç.`,
+    backLabel: "Tüm surelere dön",
+    previousLabel: "Önceki sure",
+    nextLabel: "Sonraki sure",
+    versesLabel: ayahs => `${ayahs} ayet`,
+    revelationPrefix: "Nüzul",
+    emptyText: "Sure metni şu anda yüklenemedi. Lütfen biraz sonra tekrar dene.",
+    faq: surah => [
+      {
+        question: `${surah.nameSimple} suresi sayfasını doğrudan paylaşabilir miyim?`,
+        answer: `Evet. Her surenin kendi doğrudan rotası vardır; ${surah.nameSimple} suresi sayfasını kolayca tekrar açabilir veya paylaşabilirsin.`
+      },
+      {
+        question: "Sure metni sayfada doğrudan sunucu tarafından mı işleniyor?",
+        answer: "Evet. Sure sayfası sunucu tarafında render edilir ve ayetler ilk HTML içinde hazır gelir."
+      },
+      {
+        question: "Önceki ya da sonraki sureye geçebilir miyim?",
+        answer: "Evet. Her sure sayfasında varsa önceki ve sonraki sure için doğrudan bağlantılar bulunur."
+      }
+    ],
+    footerText: surah => `${surah.nameSimple} suresi için Adantimer içinde ayrı okuma sayfası.`,
+    noscriptText: "Bu sure sayfasını okumak için JavaScript gerekmez.",
+    metaTitle: surah => `${surah.nameSimple} suresini oku | Adantimer`,
+    metaDescription: surah => `${surah.nameSimple} suresini Arapça oku, ayet sayısını ve nüzul türünü gör ve Kuran içinde odaklı bir okuma sayfasından ilerle.`
+  },
+  "zh-hans": {
+    heroEyebrow: "古兰经阅读页",
+    sectionEyebrow: "完整章节文本",
+    sectionTitle: surah => `阅读 ${surah.nameSimple}`,
+    sectionIntro: surah => `阅读 ${surah.nameSimple} 的完整阿拉伯文内容，保持可直接分享的页面，并直接前往上一章或下一章。`,
+    backLabel: "返回全部章节",
+    previousLabel: "上一章",
+    nextLabel: "下一章",
+    versesLabel: ayahs => `${ayahs} 节`,
+    revelationPrefix: "启示时期",
+    emptyText: "当前无法加载章节文本，请稍后重试。",
+    faq: surah => [
+      {
+        question: `我可以直接分享 ${surah.nameSimple} 这一章的页面吗？`,
+        answer: `可以。每一章都有自己的直接路由，因此你可以轻松重新打开或分享 ${surah.nameSimple} 页面。`
+      },
+      {
+        question: "章节文本是否直接由服务器渲染在页面中？",
+        answer: "是的。章节页面是服务端渲染的，因此经文内容已经出现在首个 HTML 响应中。"
+      },
+      {
+        question: "我可以切换到上一章或下一章吗？",
+        answer: "可以。每个章节页面都包含上一章和下一章的直接导航（如果存在）。"
+      }
+    ],
+    footerText: surah => `Adantimer 内 ${surah.nameSimple} 的独立阅读页面。`,
+    noscriptText: "阅读这一章页面不需要 JavaScript。",
+    metaTitle: surah => `阅读 ${surah.nameSimple} | Adantimer`,
+    metaDescription: surah => `阅读 ${surah.nameSimple} 的阿拉伯文内容，查看经文数量与启示时期，并在独立阅读页中继续浏览古兰经。`
   }
 };
 
@@ -1362,6 +1561,7 @@ export async function GET(request) {
     const url = new URL(request.url);
     const pageType = normalizePageType(url.searchParams.get("type"));
     const city = normalizeCity(url.searchParams.get("city") || "");
+    const surahSlug = normalizeSurahSlug(url.searchParams.get("surah") || "");
     const explicitLanguage = url.searchParams.get("lang");
     const language = resolveRequestLanguage({
       explicitLanguage,
@@ -1374,10 +1574,21 @@ export async function GET(request) {
     const sourceCity = city ? titleCase(city) : "";
     const place = sourceCity ? formatPlaceName(sourceCity, "", language) : "";
     const topic = route[language] || route.en;
-    const canonicalPath = buildRoutePath(language, pageType, city);
+    let surah = null;
+    let surahReaderData = { ayahs: [], hasFetchError: false };
+
+    if (pageType === "quran-surah") {
+      surah = getQuranSurahBySlug(surahSlug);
+      if (!surah) {
+        return new Response("Not found", { status: 404 });
+      }
+      surahReaderData = await getQuranSurahReaderData(surah);
+    }
+
+    const canonicalPath = buildRoutePath(language, pageType, city, surahSlug);
     const canonical = `${SITE_URL}${canonicalPath}`;
-    const alternates = getAlternates(pageType, city);
-    const copy = buildCopy({ language, pageType, place, sourceCity, topic });
+    const alternates = getAlternates(pageType, city, surahSlug);
+    const copy = buildCopy({ language, pageType, place, sourceCity, topic, surah, surahReaderData });
     const title = copy.metaTitle || locale.title(topic, place, pageType);
     const description = copy.metaDescription || (pageType === "qibla"
       ? (QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en).description(place)
@@ -1390,6 +1601,7 @@ export async function GET(request) {
     }
     copy.activeLanguage = language;
     copy.brandHref = buildRoutePath(language, "home");
+    copy.surahSlug = surahSlug;
     const template = await readFile(INDEX_PATH, "utf8");
     const html = applyTemplate(template, {
       alternates,
@@ -1460,7 +1672,7 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${escapedDescription}">`)
     .replace(/<script type="application\/ld\+json" id="website-schema">[\s\S]*?<\/script>/, `<script type="application/ld+json" id="website-schema">\n${JSON.stringify(pageSchema, null, 2)}\n  </script>`)
     .replace(/<script type="application\/ld\+json">[\s\S]*?"@type": "FAQPage"[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${JSON.stringify(faqSchema, null, 2)}\n  </script>`)
-    .replace(/<body data-page="[^"]*">/, `<body data-page="${pageType}">`)
+    .replace(/<body data-page="[^"]*">/, `<body data-page="${pageType}"${copy.surahSlug ? ` data-surah-slug="${escapeHtml(copy.surahSlug)}"` : ""}>`)
     .replace(/<a class="brand" href="[^"]*">/, `<a class="brand" href="${escapeHtml(copy.brandHref)}">`)
     .replace(/<button type="button" data-lang="en" class="[^"]*" aria-pressed="[^"]*">English<\/button>/, `<button type="button" data-lang="en" class="${copy.activeLanguage === "en" ? "lang-btn is-active" : "lang-btn"}" aria-pressed="${copy.activeLanguage === "en" ? "true" : "false"}">English</button>`)
     .replace(/<button type="button" data-lang="ar" class="[^"]*" aria-pressed="[^"]*">Arabic<\/button>/, `<button type="button" data-lang="ar" class="${copy.activeLanguage === "ar" ? "lang-btn is-active" : "lang-btn"}" aria-pressed="${copy.activeLanguage === "ar" ? "true" : "false"}">Arabic</button>`)
@@ -1486,7 +1698,7 @@ function getLocalizedTopCities(language) {
   }));
 }
 
-function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
+function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahReaderData }) {
   const isHomeRoot = pageType === "home" && !place;
   const rootOverride = ROOT_HOME_OVERRIDES.en;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
@@ -1525,8 +1737,8 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: "en",
-    standalonePage: pageType === "qibla" || pageType === "quran",
-    standalonePageType: pageType === "qibla" || pageType === "quran" ? pageType : "",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" ? pageType : "",
     hideNextPrayerCard: pageType === "qibla" || pageType === "quran",
     showPopularCities: pageType !== "qibla" && pageType !== "quran",
     showIntentLinks: pageType !== "qibla" && pageType !== "quran",
@@ -1605,6 +1817,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
           }
         ],
     ...buildQuranIndexCopy("en", pageType),
+    ...buildQuranSurahCopy("en", pageType, surah, surahReaderData),
     ...buildQiblaPanelCopy("en", pageType),
     ...buildToolHubCopy("en", pageType),
     footerText: pageType === "quran"
@@ -1616,7 +1829,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
   };
 }
 
-function buildArabicCopy({ pageType, place, sourceCity, topic }) {
+function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReaderData }) {
   const isHomeRoot = pageType === "home" && !place;
   const rootOverride = ROOT_HOME_OVERRIDES.ar;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
@@ -1661,8 +1874,8 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: "ar",
-    standalonePage: pageType === "qibla" || pageType === "quran",
-    standalonePageType: pageType === "qibla" || pageType === "quran" ? pageType : "",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" ? pageType : "",
     hideNextPrayerCard: pageType === "qibla" || pageType === "quran",
     showPopularCities: pageType !== "qibla" && pageType !== "quran",
     showIntentLinks: pageType !== "qibla" && pageType !== "quran",
@@ -1735,6 +1948,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
       }
     ],
     ...buildQuranIndexCopy("ar", pageType),
+    ...buildQuranSurahCopy("ar", pageType, surah, surahReaderData),
     ...buildQiblaPanelCopy("ar", pageType),
     ...buildToolHubCopy("ar", pageType),
     footerText: pageType === "quran"
@@ -1746,15 +1960,15 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
   };
 }
 
-function buildCopy({ language, pageType, place, sourceCity, topic }) {
-  if (language === "ar") return buildArabicCopy({ pageType, place, sourceCity, topic });
-  if (language === "en") return buildEnglishCopy({ pageType, place, sourceCity, topic });
-  return buildLocalizedCopy(language, { pageType, place, sourceCity, topic });
+function buildCopy({ language, pageType, place, sourceCity, topic, surah, surahReaderData }) {
+  if (language === "ar") return buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReaderData });
+  if (language === "en") return buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahReaderData });
+  return buildLocalizedCopy(language, { pageType, place, sourceCity, topic, surah, surahReaderData });
 }
 
-function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
+function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, surah, surahReaderData }) {
   const locale = COPY_LOCALES[language];
-  if (!locale) return buildEnglishCopy({ pageType, place, sourceCity, topic });
+  if (!locale) return buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahReaderData });
   const isHomeRoot = pageType === "home" && !place;
   const rootOverride = ROOT_HOME_OVERRIDES[language];
 
@@ -1785,8 +1999,8 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
 
   return {
     activeLanguage: language,
-    standalonePage: pageType === "qibla" || pageType === "quran",
-    standalonePageType: pageType === "qibla" || pageType === "quran" ? pageType : "",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" ? pageType : "",
     hideNextPrayerCard: pageType === "qibla" || pageType === "quran",
     showPopularCities: pageType !== "qibla" && pageType !== "quran",
     showIntentLinks: pageType !== "qibla" && pageType !== "quran",
@@ -1831,6 +2045,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     faqTitle: isHomeRoot && rootOverride ? rootOverride.faqTitle : locale.faqTitle(topic, place),
     faq: isHomeRoot && rootOverride ? rootOverride.faq : locale.faq(topic, place),
     ...buildQuranIndexCopy(language, pageType),
+    ...buildQuranSurahCopy(language, pageType, surah, surahReaderData),
     ...buildQiblaPanelCopy(language, pageType),
     ...buildToolHubCopy(language, pageType),
     footerText: pageType === "quran"
@@ -1862,6 +2077,29 @@ ${copy.quranStats.map(item => `            <div class="quran-hero-stat">
               <strong>${escapeHtml(item.value)}</strong>
               <span>${escapeHtml(item.label)}</span>
             </div>`).join("\n")}
+          </div>
+        </section>`;
+  }
+
+  if (copy.standalonePageType === "quran-surah") {
+    return `        <section class="hero-copy quran-hero-copy quran-surah-hero">
+          <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
+          <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
+          <p id="hero-subtitle" class="hero-subtitle">
+            ${escapeHtml(copy.heroSubtitle)}
+          </p>
+          <p class="quran-surah-arabic-hero">${escapeHtml(copy.quranArabicName || "")}</p>
+          <a class="secondary-link" href="${escapeHtml(copy.quranIndexHref)}">${escapeHtml(copy.quranBackLabel)}</a>
+
+          <div class="quran-hero-stats" aria-label="${escapeHtml(copy.quranNavigationAria || copy.heroHeading)}">
+            <div class="quran-hero-stat">
+              <strong>${escapeHtml(copy.quranAyahCountValue || "")}</strong>
+              <span>${escapeHtml(copy.quranAyahCountStatLabel || "")}</span>
+            </div>
+            <div class="quran-hero-stat">
+              <strong>${escapeHtml(copy.quranRevelationValue || "")}</strong>
+              <span>${escapeHtml(copy.quranRevelationStatLabel || "")}</span>
+            </div>
           </div>
         </section>`;
   }
@@ -2022,18 +2260,20 @@ function renderQiblaPanelSection(copy) {
 
 function renderQuranIndexSection(copy) {
   const cardsMarkup = copy.quranSurahs.map(item => `        <article class="quran-surah-card" id="surah-${item.id}" data-search="${escapeHtml(item.search)}">
-          <div class="quran-surah-top">
-            <span class="quran-surah-number">${item.id}</span>
-            <div class="quran-surah-meta">
-              <h3>${escapeHtml(item.name)}</h3>
-              <p>${escapeHtml(item.translatedName)}</p>
+          <a class="quran-surah-link" href="${escapeHtml(item.href)}">
+            <div class="quran-surah-top">
+              <span class="quran-surah-number">${item.id}</span>
+              <div class="quran-surah-meta">
+                <h3>${escapeHtml(item.name)}</h3>
+                <p>${escapeHtml(item.translatedName)}</p>
+              </div>
+              <strong class="quran-surah-arabic">${escapeHtml(item.arabicName)}</strong>
             </div>
-            <strong class="quran-surah-arabic">${escapeHtml(item.arabicName)}</strong>
-          </div>
-          <div class="quran-surah-details">
-            <span>${escapeHtml(item.revelationLabel)}</span>
-            <span>${escapeHtml(item.ayahCountLabel)}</span>
-          </div>
+            <div class="quran-surah-details">
+              <span>${escapeHtml(item.revelationLabel)}</span>
+              <span>${escapeHtml(item.ayahCountLabel)}</span>
+            </div>
+          </a>
         </article>`).join("\n");
 
   return `    <section class="quran-index" aria-labelledby="quran-index-heading">
@@ -2051,6 +2291,53 @@ function renderQuranIndexSection(copy) {
 ${cardsMarkup}
         </div>
       </section>
+    </section>`;
+}
+
+function renderQuranSurahSection(copy) {
+  const ayahMarkup = copy.quranAyahs.length
+    ? copy.quranAyahs.map(item => `          <article class="quran-ayah-row" id="ayah-${item.number}">
+            <div class="quran-ayah-number">${item.number}</div>
+            <p class="quran-ayah-text">${escapeHtml(item.text)}</p>
+          </article>`).join("\n")
+    : `          <div class="quran-surah-empty">${escapeHtml(copy.quranEmptyText)}</div>`;
+
+  const previousMarkup = copy.quranPrevious
+    ? `<a class="quran-nav-card" href="${escapeHtml(copy.quranPrevious.href)}">
+          <span class="quran-nav-label">${escapeHtml(copy.quranPrevious.label)}</span>
+          <strong>${escapeHtml(copy.quranPrevious.name)}</strong>
+        </a>`
+    : "";
+  const nextMarkup = copy.quranNext
+    ? `<a class="quran-nav-card" href="${escapeHtml(copy.quranNext.href)}">
+          <span class="quran-nav-label">${escapeHtml(copy.quranNext.label)}</span>
+          <strong>${escapeHtml(copy.quranNext.name)}</strong>
+        </a>`
+    : "";
+
+  return `    <section class="quran-reader" aria-labelledby="quran-reader-heading">
+      <section class="card quran-reader-card">
+        <div class="quran-reader-head">
+          <div>
+            <p class="eyebrow">${escapeHtml(copy.quranSectionEyebrow)}</p>
+            <h2 id="quran-reader-heading">${escapeHtml(copy.quranSectionTitle)}</h2>
+            <p class="quran-reader-intro">${escapeHtml(copy.quranSectionIntro)}</p>
+          </div>
+          <a class="secondary-link" href="${escapeHtml(copy.quranIndexHref)}">${escapeHtml(copy.quranBackLabel)}</a>
+        </div>
+        <div class="quran-reader-meta">
+          <span>${escapeHtml(copy.quranRevelationLabel)}</span>
+          <span>${escapeHtml(copy.quranAyahCountLabel)}</span>
+        </div>
+        <div class="quran-ayah-list">
+${ayahMarkup}
+        </div>
+      </section>
+      <section class="quran-nav-grid" aria-label="${escapeHtml(copy.quranNavigationAria)}">
+${previousMarkup}
+${nextMarkup}
+      </section>
+${renderFaqSection(copy)}
     </section>`;
 }
 
@@ -2101,6 +2388,12 @@ function renderMainContent(copy) {
     if (copy.standalonePageType === "quran") {
       return `  <main class="shell main-content">
 ${renderQuranIndexSection(copy)}
+  </main>`;
+    }
+
+    if (copy.standalonePageType === "quran-surah") {
+      return `  <main class="shell main-content">
+${renderQuranSurahSection(copy)}
   </main>`;
     }
 
@@ -2173,6 +2466,63 @@ function buildToolHubCopy(language, pageType) {
   };
 }
 
+async function fetchJsonWithTimeout(url, timeoutMs) {
+  const controller = new AbortController();
+  const timerId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "accept": "application/json",
+        "user-agent": "AdantimerQuranRenderer/1.0"
+      },
+      signal: controller.signal
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    return await response.json();
+  } finally {
+    clearTimeout(timerId);
+  }
+}
+
+function mapQuranApiAyahs(payload) {
+  const ayahs = Array.isArray(payload?.data?.ayahs) ? payload.data.ayahs : [];
+  return ayahs
+    .map(item => ({
+      number: Number(item.numberInSurah || item.number || 0),
+      text: String(item.text || "").trim()
+    }))
+    .filter(item => item.number > 0 && item.text);
+}
+
+async function getQuranSurahReaderData(surahMeta) {
+  const cached = quranSurahCache.get(surahMeta.slug);
+  if (cached && (Date.now() - cached.createdAt) < QURAN_SURAH_CACHE_TTL_MS) {
+    return cached.value;
+  }
+
+  const endpoint = `${QURAN_API_BASE}/surah/${surahMeta.id}/quran-uthmani`;
+
+  try {
+    const payload = await fetchJsonWithTimeout(endpoint, QURAN_API_TIMEOUT_MS);
+    const value = {
+      ayahs: mapQuranApiAyahs(payload),
+      hasFetchError: false
+    };
+    quranSurahCache.set(surahMeta.slug, { createdAt: Date.now(), value });
+    return value;
+  } catch (error) {
+    return {
+      ayahs: [],
+      hasFetchError: true
+    };
+  }
+}
+
 function buildQuranIndexCopy(language, pageType) {
   if (pageType !== "quran") {
     return {
@@ -2200,6 +2550,7 @@ function buildQuranIndexCopy(language, pageType) {
     const localizedName = item.translatedName || item.nameSimple;
     return {
       id: item.id,
+      slug: item.slug,
       name: item.nameSimple,
       translatedName: localizedName,
       arabicName: item.nameArabic,
@@ -2215,6 +2566,7 @@ function buildQuranIndexCopy(language, pageType) {
               : language === "zh-hans"
                 ? `${item.ayahs} 节`
                 : `${item.ayahs} ayahs`,
+      href: buildRoutePath(language, "quran-surah", "", item.slug),
       search: [
         item.id,
         item.slug,
@@ -2244,6 +2596,76 @@ function buildQuranIndexCopy(language, pageType) {
     quranSurahs: surahs,
     faq: locale.faq,
     footerText: locale.footerText,
+    noscriptText: locale.noscriptText
+  };
+}
+
+function buildQuranSurahCopy(language, pageType, surah, surahReaderData) {
+  if (pageType !== "quran-surah" || !surah) {
+    return {
+      quranAyahs: [],
+      quranIndexHref: "",
+      quranBackLabel: "",
+      quranNavigationAria: "",
+      quranSectionEyebrow: "",
+      quranSectionTitle: "",
+      quranSectionIntro: "",
+      quranRevelationLabel: "",
+      quranAyahCountLabel: "",
+      quranPrevious: null,
+      quranNext: null,
+      quranEmptyText: ""
+    };
+  }
+
+  const locale = QURAN_SURAH_CONTENT[language] || QURAN_SURAH_CONTENT.en;
+  const revelationLocale = REVELATION_LABELS[language] || REVELATION_LABELS.en;
+  const revelationKey = surah.revelation === "madinah" || surah.revelation === "medinan" ? "medinan" : "meccan";
+  const revelationLabel = revelationLocale[revelationKey];
+  const neighbors = getAdjacentQuranSurahs(surah.slug);
+  const ayahCountText = locale.versesLabel(surah.ayahs);
+  const ayahStatLabel = (locale.versesLabel(1) || "").replace(/[0-9٠-٩]+/g, "").trim() || ayahCountText;
+
+  return {
+    heroEyebrow: locale.heroEyebrow,
+    heroHeading: surah.nameSimple,
+    heroSubtitle: surah.translatedName,
+    metaTitle: locale.metaTitle(surah),
+    metaDescription: locale.metaDescription(surah),
+    hideNextPrayerCard: true,
+    showPopularCities: false,
+    showIntentLinks: false,
+    quranArabicName: surah.nameArabic || "",
+    quranAyahCountValue: String(surah.ayahs),
+    quranAyahCountStatLabel: ayahStatLabel,
+    quranRevelationValue: revelationLabel,
+    quranRevelationStatLabel: locale.revelationPrefix,
+    quranSectionEyebrow: locale.sectionEyebrow,
+    quranSectionTitle: locale.sectionTitle(surah),
+    quranSectionIntro: locale.sectionIntro(surah),
+    quranIndexHref: buildRoutePath(language, "quran"),
+    quranBackLabel: locale.backLabel,
+    quranNavigationAria: surah.nameSimple,
+    quranRevelationLabel: `${locale.revelationPrefix}: ${revelationLabel}`,
+    quranAyahCountLabel: ayahCountText,
+    quranAyahs: surahReaderData.ayahs,
+    quranEmptyText: surahReaderData.hasFetchError ? locale.emptyText : locale.emptyText,
+    quranPrevious: neighbors.previous
+      ? {
+          label: locale.previousLabel,
+          name: neighbors.previous.nameSimple,
+          href: buildRoutePath(language, "quran-surah", "", neighbors.previous.slug)
+        }
+      : null,
+    quranNext: neighbors.next
+      ? {
+          label: locale.nextLabel,
+          name: neighbors.next.nameSimple,
+          href: buildRoutePath(language, "quran-surah", "", neighbors.next.slug)
+        }
+      : null,
+    faq: locale.faq(surah),
+    footerText: locale.footerText(surah),
     noscriptText: locale.noscriptText
   };
 }
@@ -2332,18 +2754,18 @@ function formatPlaceName(city, country, language) {
   return localizedCity && localizedCountry ? `${localizedCity}, ${localizedCountry}` : localizedCity || localizedCountry || "";
 }
 
-function getAlternates(pageType, city) {
+function getAlternates(pageType, city, surahSlug = "") {
   const alternates = {};
   for (const language of SUPPORTED_RENDER_LANGUAGES) {
-    alternates[language] = `${SITE_URL}${buildRoutePath(language, pageType, city)}`;
+    alternates[language] = `${SITE_URL}${buildRoutePath(language, pageType, city, surahSlug)}`;
   }
   alternates.default = alternates.en;
   return alternates;
 }
 
-function buildRoutePath(language, pageType, city = "") {
+function buildRoutePath(language, pageType, city = "", surahSlug = "") {
   const route = ROUTES[pageType] || ROUTES.home;
-  const pathName = route.path(city);
+  const pathName = route.path(city, surahSlug);
   const prefix = LANGUAGE_PREFIXES[language] || "";
   return `${prefix}${pathName === "/" && prefix ? "" : pathName}`;
 }
@@ -2354,6 +2776,10 @@ function normalizePageType(value) {
 
 function normalizeCity(value) {
   return decodeURIComponent(String(value || "")).replace(/\+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function normalizeSurahSlug(value) {
+  return slugify(decodeURIComponent(String(value || "")).replace(/\+/g, " ").trim());
 }
 
 function titleCase(value) {
