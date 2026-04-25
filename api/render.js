@@ -279,6 +279,22 @@ const QURAN_INDEX_CONTENT = {
     sectionEyebrow: "Surah index",
     sectionTitle: "Start with a surah",
     sectionIntro: "Open a surah directly and keep the Quran on its own focused page instead of mixing it into the prayer schedule.",
+    faq: [
+      {
+        question: "Can I search Quran surahs on this page?",
+        answer: "Yes. The Quran index page includes a client-side search field so visitors can filter surahs by name, Arabic title, translated title, or number."
+      },
+      {
+        question: "Does this page already include all 114 surahs?",
+        answer: "Yes. The page ships with a full local surah index so the main Quran directory is available immediately in the first HTML response."
+      },
+      {
+        question: "Is this a standalone Quran page or part of the prayer schedule?",
+        answer: "It is a standalone Quran page. The Quran index is separated from the prayer-time schedule so visitors can stay focused on reading."
+      }
+    ],
+    footerText: "Dedicated Quran index and reading pages inside Adantimer.",
+    noscriptText: "JavaScript is only needed for the Quran search filter. The surah index itself is already visible.",
     metaTitle: "Quran Surah Index and Reading Page | Adantimer",
     metaDescription: "Browse all 114 Quran surahs, search by name or number, and open a focused Quran reading page inside Adantimer."
   },
@@ -299,6 +315,22 @@ const QURAN_INDEX_CONTENT = {
     sectionEyebrow: "فهرس السور",
     sectionTitle: "ابدأ بسورة",
     sectionIntro: "افتح أي سورة مباشرة واحتفظ بالقرآن في صفحة مستقلة مركزة بدلاً من دمجه داخل جدول الصلاة.",
+    faq: [
+      {
+        question: "هل يمكنني البحث في السور من هذه الصفحة؟",
+        answer: "نعم. تحتوي صفحة فهرس القرآن على حقل بحث لتصفية السور بالاسم أو العنوان العربي أو الترجمة أو رقم السورة."
+      },
+      {
+        question: "هل تضم الصفحة جميع السور الـ 114 بالفعل؟",
+        answer: "نعم. يتم تحميل فهرس كامل للسور محلياً بحيث تكون صفحة القرآن الأساسية متاحة مباشرة في أول استجابة HTML."
+      },
+      {
+        question: "هل هذه صفحة قرآن مستقلة أم جزء من صفحة مواقيت الصلاة؟",
+        answer: "هذه صفحة قرآن مستقلة. تم فصل فهرس القرآن عن صفحة مواقيت الصلاة حتى يبقى التركيز على القراءة."
+      }
+    ],
+    footerText: "فهرس وصفحات قراءة القرآن داخل Adantimer.",
+    noscriptText: "يحتاج فلتر البحث فقط إلى JavaScript، أما فهرس السور نفسه فهو ظاهر بالفعل.",
     metaTitle: "فهرس سور القرآن وصفحة القراءة | Adantimer",
     metaDescription: "تصفح جميع سور القرآن الـ 114، وابحث بالاسم أو الرقم، وافتح صفحة قراءة قرآنية مستقلة داخل Adantimer."
   },
@@ -319,6 +351,22 @@ const QURAN_INDEX_CONTENT = {
     sectionEyebrow: "Surenverzeichnis",
     sectionTitle: "Mit einer Sure beginnen",
     sectionIntro: "Öffne eine Sure direkt und halte den Koran auf einer eigenen fokussierten Seite statt ihn in den Gebetsplan zu mischen.",
+    faq: [
+      {
+        question: "Kann ich auf dieser Seite nach Suren suchen?",
+        answer: "Ja. Die Koran-Indexseite enthält ein Suchfeld, das nach Name, arabischem Titel, Übersetzung oder Surennummer filtern kann."
+      },
+      {
+        question: "Enthält diese Seite bereits alle 114 Suren?",
+        answer: "Ja. Die Seite liefert ein vollständiges lokales Surenverzeichnis aus, sodass die Hauptübersicht schon im ersten HTML vorhanden ist."
+      },
+      {
+        question: "Ist das eine eigenständige Koranseite oder Teil des Gebetsplans?",
+        answer: "Es ist eine eigenständige Koranseite. Der Koranindex ist vom Gebetsplan getrennt, damit der Fokus auf dem Lesen bleibt."
+      }
+    ],
+    footerText: "Eigenständige Koran-Index- und Leseseiten in Adantimer.",
+    noscriptText: "JavaScript wird nur für den Suchfilter benötigt. Das Surenverzeichnis selbst ist bereits sichtbar.",
     metaTitle: "Koran-Surenverzeichnis und Leseseite | Adantimer",
     metaDescription: "Durchsuche alle 114 Koran-Suren, suche nach Name oder Nummer und öffne eine eigenständige Koran-Leseseite in Adantimer."
   },
@@ -339,6 +387,22 @@ const QURAN_INDEX_CONTENT = {
     sectionEyebrow: "Index des sourates",
     sectionTitle: "Commencer par une sourate",
     sectionIntro: "Ouvrez une sourate directement et gardez le Coran sur une page dédiée au lieu de le mélanger au planning de prière.",
+    faq: [
+      {
+        question: "Puis-je rechercher des sourates sur cette page ?",
+        answer: "Oui. La page d'index du Coran comprend un champ de recherche pour filtrer par nom, titre arabe, titre traduit ou numéro de sourate."
+      },
+      {
+        question: "Cette page contient-elle déjà les 114 sourates ?",
+        answer: "Oui. La page embarque un index local complet des sourates afin que le répertoire principal soit déjà présent dans le premier HTML."
+      },
+      {
+        question: "S'agit-il d'une page Coran autonome ou d'une partie du planning de prière ?",
+        answer: "C'est une page Coran autonome. L'index du Coran est séparé du planning de prière pour garder le focus sur la lecture."
+      }
+    ],
+    footerText: "Pages dédiées à l'index et à la lecture du Coran dans Adantimer.",
+    noscriptText: "JavaScript n'est nécessaire que pour le filtre de recherche. L'index des sourates reste déjà visible.",
     metaTitle: "Index des sourates du Coran et page de lecture | Adantimer",
     metaDescription: "Parcourez les 114 sourates du Coran, recherchez par nom ou numéro et ouvrez une page de lecture dédiée dans Adantimer."
   },
@@ -359,6 +423,22 @@ const QURAN_INDEX_CONTENT = {
     sectionEyebrow: "Sure dizini",
     sectionTitle: "Bir sure ile başla",
     sectionIntro: "Bir sureyi doğrudan aç ve Kuran'ı namaz çizelgesine karıştırmak yerine ayrı bir odak sayfasında tut.",
+    faq: [
+      {
+        question: "Bu sayfada sure arayabilir miyim?",
+        answer: "Evet. Kuran dizin sayfasında sure adı, Arapça başlık, çevrilmiş ad veya sure numarasına göre çalışan bir arama alanı bulunur."
+      },
+      {
+        question: "Bu sayfa gerçekten 114 surenin tamamını içeriyor mu?",
+        answer: "Evet. Sayfa tam yerel sure dizinini taşır, böylece ana Kuran rehberi ilk HTML içinde hazır gelir."
+      },
+      {
+        question: "Bu bağımsız bir Kuran sayfası mı yoksa namaz çizelgesinin parçası mı?",
+        answer: "Bu bağımsız bir Kuran sayfasıdır. Kuran dizini, okuma odağını korumak için namaz çizelgesinden ayrılmıştır."
+      }
+    ],
+    footerText: "Adantimer içinde özel Kuran dizin ve okuma sayfaları.",
+    noscriptText: "JavaScript sadece arama filtresi için gerekir. Sure dizini zaten görünür durumdadır.",
     metaTitle: "Kuran sure dizini ve okuma sayfası | Adantimer",
     metaDescription: "Tüm 114 Kuran suresini incele, ad veya numaraya göre ara ve Adantimer içinde özel bir Kuran okuma sayfası aç."
   },
@@ -379,6 +459,22 @@ const QURAN_INDEX_CONTENT = {
     sectionEyebrow: "章节索引",
     sectionTitle: "从一章开始",
     sectionIntro: "直接打开任意章节，让古兰经保持为独立专注页面，而不是混在礼拜时间页面里。",
+    faq: [
+      {
+        question: "我可以在这个页面里搜索章节吗？",
+        answer: "可以。古兰经索引页带有搜索框，可按章节名称、阿拉伯文标题、翻译标题或章节编号筛选。"
+      },
+      {
+        question: "这个页面已经包含全部 114 章了吗？",
+        answer: "是的。页面内置完整的本地章节索引，因此主目录在首个 HTML 响应里就已经可用。"
+      },
+      {
+        question: "这是独立的古兰经页面，还是礼拜时间页面的一部分？",
+        answer: "这是独立的古兰经页面。古兰经索引与礼拜时间页面分离，以保持阅读场景专注。"
+      }
+    ],
+    footerText: "Adantimer 内的独立古兰经索引与阅读页面。",
+    noscriptText: "JavaScript 仅用于搜索筛选，章节索引本身已经直接显示。",
     metaTitle: "古兰经章节索引与阅读页面 | Adantimer",
     metaDescription: "浏览全部 114 个古兰经章节，按名称或编号搜索，并在 Adantimer 中打开独立的古兰经阅读页面。"
   }
@@ -1511,8 +1607,12 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic }) {
     ...buildQuranIndexCopy("en", pageType),
     ...buildQiblaPanelCopy("en", pageType),
     ...buildToolHubCopy("en", pageType),
-    footerText: place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city.",
-    noscriptText: "JavaScript is required to load live prayer times and the next prayer countdown."
+    footerText: pageType === "quran"
+      ? QURAN_INDEX_CONTENT.en.footerText
+      : (place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city."),
+    noscriptText: pageType === "quran"
+      ? QURAN_INDEX_CONTENT.en.noscriptText
+      : "JavaScript is required to load live prayer times and the next prayer countdown."
   };
 }
 
@@ -1637,8 +1737,12 @@ function buildArabicCopy({ pageType, place, sourceCity, topic }) {
     ...buildQuranIndexCopy("ar", pageType),
     ...buildQiblaPanelCopy("ar", pageType),
     ...buildToolHubCopy("ar", pageType),
-    footerText: place ? `مواقيت صلاة دقيقة في ${place} ومدن أخرى.` : "مواقيت صلاة دقيقة حسب المدينة.",
-    noscriptText: "يتطلب عرض المواقيت الحية والعد التنازلي للصلاة القادمة تشغيل JavaScript."
+    footerText: pageType === "quran"
+      ? QURAN_INDEX_CONTENT.ar.footerText
+      : (place ? `مواقيت صلاة دقيقة في ${place} ومدن أخرى.` : "مواقيت صلاة دقيقة حسب المدينة."),
+    noscriptText: pageType === "quran"
+      ? QURAN_INDEX_CONTENT.ar.noscriptText
+      : "يتطلب عرض المواقيت الحية والعد التنازلي للصلاة القادمة تشغيل JavaScript."
   };
 }
 
@@ -1729,8 +1833,12 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic }) {
     ...buildQuranIndexCopy(language, pageType),
     ...buildQiblaPanelCopy(language, pageType),
     ...buildToolHubCopy(language, pageType),
-    footerText: locale.footerText(place),
-    noscriptText: locale.noscriptText
+    footerText: pageType === "quran"
+      ? (QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en).footerText
+      : locale.footerText(place),
+    noscriptText: pageType === "quran"
+      ? (QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en).noscriptText
+      : locale.noscriptText
   };
 }
 
@@ -2085,7 +2193,9 @@ function buildQuranIndexCopy(language, pageType) {
   const locale = QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en;
   const revelationLocale = REVELATION_LABELS[language] || REVELATION_LABELS.en;
   const surahs = QURAN_SURAHS.map(item => {
-    const revelationKey = item.revelation === "medinan" ? "medinan" : "meccan";
+    const revelationKey = item.revelation === "madinah" || item.revelation === "medinan"
+      ? "medinan"
+      : "meccan";
     const revelationLabel = revelationLocale[revelationKey];
     const localizedName = item.translatedName || item.nameSimple;
     return {
@@ -2131,7 +2241,10 @@ function buildQuranIndexCopy(language, pageType) {
     quranSectionEyebrow: locale.sectionEyebrow,
     quranSectionTitle: locale.sectionTitle,
     quranSectionIntro: locale.sectionIntro,
-    quranSurahs: surahs
+    quranSurahs: surahs,
+    faq: locale.faq,
+    footerText: locale.footerText,
+    noscriptText: locale.noscriptText
   };
 }
 
