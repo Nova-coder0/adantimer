@@ -2884,7 +2884,7 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Use a curated hadith page for short daily reading, topic-based study, and direct return visits across a growing set of themes.",
     searchLabel: "Search hadith",
     searchPlaceholder: "Search by theme, narrator, source, or keyword",
-    searchHint: "Filter by theme, narrator, source, or study topic such as repentance, patience, family, truthfulness, or trust in Allah.",
+    searchHint: "Filter by theme, narrator, source, or study topic such as repentance, parents, speech, neighbors, humility, generosity, and more.",
     searchCount: count => `${count} hadith entries`,
     emptyState: "No hadith matched this search or category yet.",
     sectionEyebrow: "Collections",
@@ -2900,15 +2900,15 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Narrator",
     takeawayLabel: "Why it matters",
     metaTitle: "Daily Hadith Reading Page | Adantimer",
-    metaDescription: "Read curated hadith with visible sources, short lessons, and study themes covering intentions, prayer, character, knowledge, gratitude, mercy, repentance, patience, family, truthfulness, and trust in Allah.",
+    metaDescription: "Read curated hadith with visible sources, short lessons, and study themes covering worship, repentance, family, speech, neighbors, generosity, humility, and more.",
     faq: [
       {
         question: "Does this hadith page focus on short daily reading?",
-        answer: "Yes. The first hadith page is built for quick reading and return visits, not for a large searchable hadith database."
+        answer: "Yes. The hadith page is built for quick reading, return visits, and steady topic study instead of trying to be a massive hadith database."
       },
       {
         question: "Can I filter hadith by topic?",
-          answer: "Yes. You can move between intentions, prayer, character, knowledge, gratitude, mercy, repentance, patience, family, truthfulness, and trust in Allah."
+          answer: "Yes. You can move between a growing set of study themes covering worship, character, family, repentance, speech, neighbors, generosity, humility, and more."
       },
       {
         question: "Does each card keep its source visible?",
@@ -2964,7 +2964,7 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Nutze eine kuratierte Hadith-Seite fuer kurze taegliche Lesepausen, schnelle Themenfilter und spaetere direkte Rueckkehr.",
     searchLabel: "Hadith durchsuchen",
     searchPlaceholder: "Nach Thema, Ueberlieferer, Quelle oder Stichwort suchen",
-    searchHint: "Filtere nach Thema, Ueberlieferer, Quelle oder Lernfeld wie Reue, Geduld, Familie, Wahrhaftigkeit oder Tawakkul.",
+    searchHint: "Filtere nach Thema, Ueberlieferer, Quelle oder Lernfeld wie Reue, Eltern, Sprache, Nachbarn, Demut, Grosszuegigkeit und mehr.",
     searchCount: count => `${count} Hadith-Eintraege`,
     emptyState: "Kein Hadith passt gerade zu dieser Suche oder Kategorie.",
     sectionEyebrow: "Themen",
@@ -2980,15 +2980,15 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Ueberlieferer",
     takeawayLabel: "Warum es wichtig ist",
     metaTitle: "Hadith-Seite fuer taegliches Lesen | Adantimer",
-    metaDescription: "Lies kuratierte Hadithe mit sichtbaren Quellen, kurzen Lektionen und Lernthemen zu Absichten, Gebet, Charakter, Wissen, Dankbarkeit, Barmherzigkeit, Reue, Geduld, Familie, Wahrhaftigkeit und Tawakkul.",
+    metaDescription: "Lies kuratierte Hadithe mit sichtbaren Quellen, kurzen Lektionen und Lernthemen zu Gottesdienst, Reue, Familie, Sprache, Nachbarn, Grosszuegigkeit, Demut und mehr.",
     faq: [
       {
         question: "Ist diese Hadith-Seite fuer kurze taegliche Lesemomente gebaut?",
-        answer: "Ja. Die erste Hadith-Seite ist fuer schnelles Lesen und spaetere Rueckkehr gedacht, nicht als grosse Hadith-Datenbank."
+        answer: "Ja. Die Hadith-Seite ist fuer schnelles Lesen, spaetere Rueckkehr und stetiges Themenlernen gebaut und nicht als riesige Hadith-Datenbank."
       },
       {
         question: "Kann ich Hadithe nach Thema filtern?",
-         answer: "Ja. Du kannst zwischen Absichten, Gebet, Charakter, Wissen, Dankbarkeit, Barmherzigkeit, Reue, Geduld, Familie, Wahrhaftigkeit und Tawakkul wechseln."
+         answer: "Ja. Du kannst zwischen einer wachsenden Menge an Lernthemen zu Gottesdienst, Charakter, Familie, Reue, Sprache, Nachbarn, Grosszuegigkeit, Demut und mehr wechseln."
       },
       {
         question: "Bleibt die Quelle in jeder Karte sichtbar?",
@@ -3004,7 +3004,7 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Utilisez une page hadith selectionnee pour des lectures courtes, un filtrage rapide par theme et des retours simples.",
     searchLabel: "Rechercher un hadith",
     searchPlaceholder: "Rechercher par theme, rapporteur, source ou mot-cle",
-    searchHint: "Filtrez par theme, rapporteur, source ou parcours d'etude comme le repentir, la patience, la famille, la veracite ou la confiance en Allah.",
+    searchHint: "Filtrez par theme, rapporteur, source ou parcours d'etude comme le repentir, les parents, la parole, les voisins, l'humilite, la generosite et plus encore.",
     searchCount: count => `${count} hadiths`,
     emptyState: "Aucun hadith ne correspond a cette recherche ou a cette categorie.",
     sectionEyebrow: "Themes",
@@ -3020,15 +3020,15 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Rapporteur",
     takeawayLabel: "Pourquoi c'est important",
     metaTitle: "Page hadith pour la lecture quotidienne | Adantimer",
-    metaDescription: "Lisez des hadiths selectionnes avec sources visibles, courtes lecons et themes d'etude sur les intentions, la priere, le comportement, le savoir, la gratitude, la misericorde, le repentir, la patience, la famille, la veracite et la confiance en Allah.",
+    metaDescription: "Lisez des hadiths selectionnes avec sources visibles, courtes lecons et themes d'etude sur l'adoration, le repentir, la famille, la parole, les voisins, la generosite, l'humilite et plus encore.",
     faq: [
       {
         question: "Cette page hadith est-elle faite pour une lecture quotidienne courte ?",
-        answer: "Oui. La premiere version est construite pour la lecture rapide et les retours reguliers, pas comme une grande base de donnees."
+        answer: "Oui. Cette page hadith est concue pour la lecture rapide, les retours reguliers et une etude thematique continue, pas comme une enorme base de donnees."
       },
       {
         question: "Puis-je filtrer les hadiths par theme ?",
-        answer: "Oui. Vous pouvez passer entre intentions, priere, comportement, savoir, gratitude, misericorde, repentir, patience, famille, veracite et confiance en Allah."
+        answer: "Oui. Vous pouvez passer entre un ensemble croissant de themes d'etude sur l'adoration, le comportement, la famille, le repentir, la parole, les voisins, la generosite, l'humilite et plus encore."
       },
       {
         question: "La source reste-t-elle visible sur chaque carte ?",
@@ -3044,7 +3044,7 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Kisa gunluk okumalar, hizli konu filtreleri ve kolay geri donusler icin secilmis bir hadis sayfasi kullan.",
     searchLabel: "Hadis ara",
     searchPlaceholder: "Konu, ravi, kaynak veya anahtar kelime ara",
-    searchHint: "Konu, ravi, kaynak veya tevbe, sabir, aile, dogruluk ve tevekkul gibi calisma basliklarina gore filtrele.",
+    searchHint: "Konu, ravi, kaynak veya tevbe, anne-baba, konusma, komsular, tevazu, comertlik ve benzeri calisma basliklarina gore filtrele.",
     searchCount: count => `${count} hadis`,
     emptyState: "Bu arama veya kategori icin eslesen hadis bulunmadi.",
     sectionEyebrow: "Temalar",
@@ -3060,15 +3060,15 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Ravi",
     takeawayLabel: "Neden onemli",
     metaTitle: "Gunluk hadis okuma sayfasi | Adantimer",
-    metaDescription: "Niyet, namaz, ahlak, ilim, sukretmek, merhamet, tevbe, sabir, aile, dogruluk ve tevekkul konularinda secilmis hadisleri kaynak notlari ve kisa derslerle oku.",
+    metaDescription: "Ibadet, tevbe, aile, konusma, komsular, comertlik, tevazu ve daha fazlasi hakkinda secilmis hadisleri kaynak notlari ve kisa derslerle oku.",
     faq: [
       {
         question: "Bu hadis sayfasi kisa gunluk okumalar icin mi hazirlandi?",
-        answer: "Evet. Ilk hadis sayfasi hizli okuma ve tekrar donusler icin yapildi; buyuk bir hadis veritabani olmak icin degil."
+        answer: "Evet. Hadis sayfasi hizli okuma, tekrar donus ve surekli konu calismasi icin kuruldu; devasa bir hadis veritabani olmak icin degil."
       },
       {
         question: "Hadisleri konuya gore filtreleyebilir miyim?",
-        answer: "Evet. Niyet, namaz, ahlak, ilim, sukretmek, merhamet, tevbe, sabir, aile, dogruluk ve tevekkul arasinda gecis yapabilirsin."
+        answer: "Evet. Ibadet, ahlak, aile, tevbe, konusma, komsular, comertlik, tevazu ve daha fazlasini kapsayan buyuyen konu basliklari arasinda gecis yapabilirsin."
       },
       {
         question: "Kaynak her kartta gorunur mu?",
