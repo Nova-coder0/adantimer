@@ -446,6 +446,11 @@ body[data-page="quran-surah"] .hero-grid {
 }
 
 body[data-page="dhikr"] .hero-grid,
+body[data-page="dhikr-collection"] .hero-grid,
+body[data-page="hadith"] .hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 body[data-page="dhikr-collection"] .hero-grid {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -459,7 +464,8 @@ body[data-page="quran-surah"] .hero-copy {
 }
 
 body[data-page="dhikr"] .hero-copy,
-body[data-page="dhikr-collection"] .hero-copy {
+body[data-page="dhikr-collection"] .hero-copy,
+body[data-page="hadith"] .hero-copy {
   max-inline-size: none;
 }
 
@@ -487,6 +493,39 @@ body[data-page="dhikr-collection"] .hero-copy {
 }
 
 .dhikr-hero-stat span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.hadith-search-bar {
+  margin-top: 22px;
+}
+
+.hadith-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.hadith-hero-stat {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.hadith-hero-stat strong,
+.hadith-hero-stat span {
+  display: block;
+}
+
+.hadith-hero-stat strong {
+  font-size: 1.2rem;
+}
+
+.hadith-hero-stat span {
   margin-top: 6px;
   color: var(--muted);
   font-size: 0.9rem;
@@ -765,8 +804,17 @@ body[data-page="dhikr-collection"] .hero-copy {
   gap: 28px;
 }
 
+.hadith-dashboard {
+  display: grid;
+  gap: 28px;
+}
+
 .dhikr-summary-card,
 .dhikr-collections-card {
+  padding: 28px;
+}
+
+.hadith-collections-card {
   padding: 28px;
 }
 
@@ -828,6 +876,13 @@ body[data-page="dhikr-collection"] .hero-copy {
   margin-top: 18px;
 }
 
+.hadith-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
 .dhikr-category-chip {
   display: inline-flex;
   align-items: center;
@@ -842,7 +897,24 @@ body[data-page="dhikr-collection"] .hero-copy {
   text-decoration: none;
 }
 
+.hadith-category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.74);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 .dhikr-category-chip strong {
+  color: var(--accent-strong);
+}
+
+.hadith-category-chip strong {
   color: var(--accent-strong);
 }
 
@@ -851,7 +923,19 @@ body[data-page="dhikr-collection"] .hero-copy {
   border-color: rgba(13, 107, 93, 0.24);
 }
 
+.hadith-category-chip.is-active {
+  background: rgba(13, 107, 93, 0.12);
+  border-color: rgba(13, 107, 93, 0.24);
+}
+
 .dhikr-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.hadith-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
@@ -867,8 +951,22 @@ body[data-page="dhikr-collection"] .hero-copy {
   background: rgba(255, 255, 255, 0.74);
 }
 
+.hadith-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+}
+
 .dhikr-card[hidden],
 .dhikr-card.is-hidden {
+  display: none !important;
+}
+
+.hadith-card[hidden],
+.hadith-card.is-hidden {
   display: none !important;
 }
 
@@ -886,8 +984,25 @@ body[data-page="dhikr-collection"] .hero-copy {
   gap: 12px;
 }
 
+.hadith-card-head,
+.hadith-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .dhikr-card-category,
 .dhikr-card-target {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.hadith-card-category,
+.hadith-card-grade {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
@@ -900,12 +1015,28 @@ body[data-page="dhikr-collection"] .hero-copy {
   color: var(--accent-strong);
 }
 
+.hadith-card-category {
+  background: rgba(13, 107, 93, 0.1);
+  color: var(--accent-strong);
+}
+
 .dhikr-card-target {
   background: rgba(56, 42, 21, 0.06);
   color: var(--muted);
 }
 
+.hadith-card-grade {
+  background: rgba(56, 42, 21, 0.06);
+  color: var(--muted);
+}
+
 .dhikr-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hadith-card-badges {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -938,6 +1069,11 @@ body[data-page="dhikr-collection"] .hero-copy {
   margin: 0;
 }
 
+.hadith-card-arabic,
+.hadith-card-translation {
+  margin: 0;
+}
+
 .dhikr-card-arabic {
   direction: rtl;
   text-align: right;
@@ -946,8 +1082,41 @@ body[data-page="dhikr-collection"] .hero-copy {
   color: var(--accent-strong);
 }
 
+.hadith-card-arabic {
+  direction: rtl;
+  text-align: right;
+  font-size: 1.45rem;
+  line-height: 2;
+  color: var(--accent-strong);
+}
+
 .dhikr-card-transliteration {
   font-weight: 600;
+}
+
+.hadith-card-translation {
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.hadith-card-meta {
+  align-items: flex-start;
+  color: var(--muted);
+}
+
+.hadith-card-meta span:first-child {
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hadith-card-meta span:last-child {
+  text-align: right;
+}
+
+.hadith-empty-state {
+  margin: 18px 0 0;
 }
 
 .dhikr-card-translation {
@@ -1523,8 +1692,10 @@ body[dir="rtl"] .language-menu-list {
   }
 
   .dhikr-hero-stats,
+  .hadith-hero-stats,
   .dhikr-summary-grid,
   .dhikr-card-grid,
+  .hadith-card-grid,
   .quran-surah-grid {
     grid-template-columns: 1fr;
   }
@@ -1534,7 +1705,9 @@ body[dir="rtl"] .language-menu-list {
   }
 
   .dhikr-card-head,
-  .dhikr-card-meta {
+  .dhikr-card-meta,
+  .hadith-card-head,
+  .hadith-card-meta {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -1590,6 +1763,7 @@ body[dir="rtl"] .language-menu-list {
 
   .qibla-stats,
   .dhikr-hero-stats,
+  .hadith-hero-stats,
   .dhikr-summary-grid,
   .quran-hero-stats,
   .tools-grid {
@@ -1597,12 +1771,14 @@ body[dir="rtl"] .language-menu-list {
   }
 
   .dhikr-summary-actions,
-  .dhikr-category-row {
+  .dhikr-category-row,
+  .hadith-category-row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .dhikr-card {
+  .dhikr-card,
+  .hadith-card {
     padding: 20px;
   }
 

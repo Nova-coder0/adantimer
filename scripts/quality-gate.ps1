@@ -205,6 +205,7 @@ $requiredFiles = @(
   "api/render.js",
   "data/quran-surahs.js",
   "data/dhikr-entries.js",
+  "data/hadith-entries.js",
   ".github/workflows/generate-sitemaps.yml",
   "tools/generate_sitemaps.py"
 )
@@ -230,6 +231,7 @@ $scriptJs = ReadProjectFile "script.js"
 $renderJs = ReadProjectFile "api/render.js"
 $quranSurahs = ReadProjectFile "data/quran-surahs.js"
 $dhikrEntries = ReadProjectFile "data/dhikr-entries.js"
+$hadithEntries = ReadProjectFile "data/hadith-entries.js"
 $vercelJsonText = ReadProjectFile "vercel.json"
 $sitemapCore = ReadProjectFile "sitemap-core.xml"
 $sitemapIndex = ReadProjectFile "sitemap.xml"
@@ -269,6 +271,11 @@ AssertContains $scriptJs 'pageType === "dhikr" || pageType === "dhikr-collection
 AssertContains $scriptJs 'pageType === "quran"' "Client handles the standalone Quran page separately" "Client does not separate the Quran page flow"
 AssertContains $scriptJs 'buildRelativeUrl(language, "quran")' "Client can navigate to localized Quran routes" "Client Quran route navigation is missing"
 AssertContains $scriptJs 'buildRelativeUrl(language, "quran-surah", "", getRequestedSurahSlug())' "Client can navigate to localized Quran surah routes" "Client Quran surah route navigation is missing"
+AssertContains $scriptJs 'const hadithCategoryRowEl = document.querySelector(".hadith-category-row");' "Client keeps the Hadith category row hook" "Client Hadith category row hook is missing"
+AssertContains $scriptJs 'function updateHadithFilter(query = "", category = "all")' "Client keeps the Hadith filter helper" "Client Hadith filter helper is missing"
+AssertContains $scriptJs 'function initHadithPage()' "Client keeps the Hadith page initializer" "Client Hadith page initializer is missing"
+AssertContains $scriptJs 'buildRelativeUrl(language, "hadith")' "Client can navigate to localized Hadith routes" "Client Hadith route navigation is missing"
+AssertContains $scriptJs 'pageType === "hadith"' "Client handles the standalone Hadith page separately" "Client does not separate the Hadith page flow"
 AssertContains $scriptJs 'const TOOL_HUB_LOCALES = {' "Client keeps localized tool-hub copy" "Client tool-hub copy is missing"
 AssertContains $scriptJs 'const QIBLA_PANEL_LOCALES = {' "Client keeps localized qibla-panel copy" "Client qibla-panel copy is missing"
 AssertContains $scriptJs 'function renderToolsHub(locale)' "Client keeps the tools-hub renderer" "Client tools-hub renderer is missing"
@@ -319,9 +326,12 @@ AssertContains $renderJs 'getAdjacentQuranSurahs' "SSR renderer imports the loca
 AssertContains $renderJs 'const QURAN_INDEX_CONTENT = {' "SSR renderer keeps the Quran index copy map" "SSR renderer is missing the Quran index copy map"
 AssertContains $renderJs 'const QURAN_SURAH_CONTENT = {' "SSR renderer keeps the Quran surah copy map" "SSR renderer is missing the Quran surah copy map"
 AssertContains $renderJs 'const DHIKR_INDEX_CONTENT = {' "SSR renderer keeps the Dhikr index copy map" "SSR renderer is missing the Dhikr index copy map"
+AssertContains $renderJs 'const HADITH_INDEX_CONTENT = {' "SSR renderer keeps the Hadith index copy map" "SSR renderer is missing the Hadith index copy map"
 AssertContains $renderJs 'function buildQuranIndexCopy(language, pageType)' "SSR renderer keeps the Quran index copy builder" "SSR renderer is missing the Quran index copy builder"
 AssertContains $renderJs 'function buildQuranSurahCopy(language, pageType, surah, surahReaderData)' "SSR renderer keeps the Quran surah copy builder" "SSR renderer is missing the Quran surah copy builder"
 AssertContains $renderJs 'function buildDhikrIndexCopy(language, pageType, collectionId = "")' "SSR renderer keeps the Dhikr index copy builder" "SSR renderer is missing the Dhikr index copy builder"
+AssertContains $renderJs 'function buildHadithIndexCopy(language, pageType)' "SSR renderer keeps the Hadith index copy builder" "SSR renderer is missing the Hadith index copy builder"
+AssertContains $renderJs 'function HADITH_CATEGORIES_LABEL(language, id)' "SSR renderer keeps the Hadith category label helper" "SSR renderer is missing the Hadith category label helper"
 AssertContains $renderJs 'function normalizeDhikrCollectionId(value)' "SSR renderer keeps the Dhikr collection normalizer" "SSR renderer is missing the Dhikr collection normalizer"
 AssertContains $renderJs 'function getDhikrCollectionRouteSlug(value)' "SSR renderer keeps the Dhikr collection route-slug helper" "SSR renderer is missing the Dhikr collection route-slug helper"
 AssertContains $renderJs 'function getDhikrCollectionCopy(language, collectionId, label)' "SSR renderer keeps the Dhikr collection copy helper" "SSR renderer is missing the Dhikr collection copy helper"
@@ -332,13 +342,17 @@ AssertContains $renderJs 'href: buildRoutePath(language, "dhikr-collection", "",
 AssertContains $renderJs 'function renderQuranIndexSection(copy)' "SSR renderer keeps the Quran index renderer" "SSR renderer is missing the Quran index renderer"
 AssertContains $renderJs 'function renderQuranSurahSection(copy)' "SSR renderer keeps the Quran surah renderer" "SSR renderer is missing the Quran surah renderer"
 AssertContains $renderJs 'function renderDhikrSection(copy)' "SSR renderer keeps the Dhikr section renderer" "SSR renderer is missing the Dhikr section renderer"
+AssertContains $renderJs 'function renderHadithSection(copy)' "SSR renderer keeps the Hadith section renderer" "SSR renderer is missing the Hadith section renderer"
 AssertContains $renderJs 'id="quran-search-clear"' "SSR renderer includes the Quran search clear control" "SSR renderer is missing the Quran search clear control"
 AssertContains $renderJs 'data-dhikr-card ' "SSR renderer includes the Dhikr cards" "SSR renderer is missing the Dhikr cards"
 AssertContains $renderJs 'dhikr-card-badges' "SSR renderer includes the Dhikr evidence badges" "SSR renderer is missing the Dhikr evidence badges"
+AssertContains $renderJs 'id="hadith-search-clear"' "SSR renderer includes the Hadith search clear control" "SSR renderer is missing the Hadith search clear control"
+AssertContains $renderJs 'data-hadith-card' "SSR renderer includes the Hadith cards" "SSR renderer is missing the Hadith cards"
 AssertContains $renderJs 'quranArabicName: surah.nameArabic || ""' "SSR renderer exposes the Arabic surah name for the standalone hero" "SSR renderer is missing the Arabic surah-name field for the standalone hero"
 AssertContains $renderJs 'copy.standalonePageType === "dhikr"' "SSR renderer treats Dhikr as a standalone page type" "SSR renderer is missing the standalone Dhikr page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran"' "SSR renderer treats Quran as a standalone page type" "SSR renderer is missing the standalone Quran page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran-surah"' "SSR renderer treats Quran surahs as standalone pages" "SSR renderer is missing the standalone Quran surah branch"
+AssertContains $renderJs 'copy.standalonePageType === "hadith"' "SSR renderer treats Hadith as a standalone page type" "SSR renderer is missing the standalone Hadith page branch"
 AssertContains $renderJs 'const QURAN_API_BASE = "https://api.alquran.cloud/v1";' "SSR renderer keeps the Quran API base" "SSR renderer is missing the Quran API base"
 AssertContains $renderJs 'async function getQuranSurahReaderData(surahMeta)' "SSR renderer keeps the Quran reader fetch helper" "SSR renderer is missing the Quran reader fetch helper"
 AssertContains $renderJs 'const TOOL_HUB_CONTENT = {' "SSR renderer keeps server-rendered tool-hub copy" "SSR renderer is missing tool-hub copy"
@@ -415,6 +429,10 @@ AssertContains $styleCss '.dhikr-card-grid {' "Stylesheet includes the Dhikr car
 AssertContains $styleCss '.dhikr-card[hidden],' "Stylesheet explicitly hides filtered Dhikr cards" "Stylesheet does not explicitly hide filtered Dhikr cards"
 AssertContains $styleCss '.dhikr-summary-grid {' "Stylesheet includes the Dhikr summary grid" "Stylesheet is missing the Dhikr summary grid styles"
 AssertContains $styleCss '.dhikr-meta-badge {' "Stylesheet includes the Dhikr evidence badge styles" "Stylesheet is missing the Dhikr evidence badge styles"
+AssertContains $styleCss '.hadith-card-grid {' "Stylesheet includes the Hadith card grid" "Stylesheet is missing the Hadith card grid styles"
+AssertContains $styleCss '.hadith-card[hidden],' "Stylesheet explicitly hides filtered Hadith cards" "Stylesheet does not explicitly hide filtered Hadith cards"
+AssertContains $styleCss '.hadith-category-row {' "Stylesheet includes the Hadith category row" "Stylesheet is missing the Hadith category row styles"
+AssertContains $styleCss 'body[data-page="hadith"] .hero-grid {' "Stylesheet includes the standalone Hadith hero layout" "Stylesheet is missing the standalone Hadith hero layout"
 AssertContains $styleCss 'text-decoration: none;' "Stylesheet keeps Dhikr collection chips link-safe" "Stylesheet does not neutralize Dhikr chip link decoration"
 AssertContains $styleCss 'body[data-page="dhikr-collection"] .hero-grid {' "Stylesheet includes the standalone Dhikr hero layout" "Stylesheet is missing the standalone Dhikr hero layout"
 AssertContains $styleCss 'body[data-page="quran"] .hero-grid {' "Stylesheet includes the standalone Quran hero layout" "Stylesheet is missing the standalone Quran hero layout"
@@ -428,6 +446,10 @@ AssertContains $dhikrEntries 'id: "morning-subhanallah"' "Local Dhikr metadata i
 AssertContains $dhikrEntries 'id: "forgiveness-sayyid-al-istighfar"' "Local Dhikr metadata includes the Sayyid al-Istighfar entry" "Local Dhikr metadata is missing the Sayyid al-Istighfar entry"
 AssertContains $dhikrEntries 'id: "provision"' "Local Dhikr metadata includes the provision category" "Local Dhikr metadata is missing the provision category"
 AssertContains $dhikrEntries 'export function getDhikrItems()' "Local Dhikr metadata exports the item helper" "Local Dhikr metadata item helper is missing"
+AssertContains $hadithEntries 'export const HADITH_CATEGORIES = [' "Local Hadith metadata exports the category list" "Local Hadith metadata export is missing"
+AssertContains $hadithEntries 'id: "intentions-actions"' "Local Hadith metadata includes the intentions entry" "Local Hadith metadata is missing the intentions entry"
+AssertContains $hadithEntries 'id: "mercy-shown-mercy"' "Local Hadith metadata includes the mercy entry" "Local Hadith metadata is missing the mercy entry"
+AssertContains $hadithEntries 'export function getHadithItems()' "Local Hadith metadata exports the item helper" "Local Hadith metadata item helper is missing"
 
 TestMojibake "templates/index.html"
 TestMojibake "script.js"
@@ -444,6 +466,8 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/dhikr/distress" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="distress"', 'distress-dhun-nun')
   TestLiveUrl "$BaseUrl/dhikr/healing" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="healing"', 'healing-rabb-an-nas')
   TestLiveUrl "$BaseUrl/dhikr/before-sleep" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="sleep"', 'sleep-ayat-al-kursi')
+  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'hadith-category-chip')
+  TestLiveUrl "$BaseUrl/de/hadith" @('<html lang="de" dir="ltr">', '<body data-page="hadith">', 'hadith-card-grid')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran" @('id="quran-search-clear"', 'quran-search-count')
   TestLiveUrl "$BaseUrl/quran/al-fatihah" @('<body data-page="quran-surah"', 'quran-ayah-list', 'Surah Al-Fatihah', 'ayah-1')
