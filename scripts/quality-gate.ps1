@@ -392,6 +392,7 @@ AssertContains $styleCss '.quran-surah-grid {' "Stylesheet includes the Quran su
 AssertContains $styleCss '.quran-search-row {' "Stylesheet includes the Quran search row layout" "Stylesheet is missing the Quran search row layout"
 AssertContains $styleCss '.quran-search-clear {' "Stylesheet includes the Quran search clear button" "Stylesheet is missing the Quran search clear button"
 AssertContains $styleCss '.dhikr-card-grid {' "Stylesheet includes the Dhikr card grid" "Stylesheet is missing the Dhikr card grid styles"
+AssertContains $styleCss '.dhikr-card[hidden],' "Stylesheet explicitly hides filtered Dhikr cards" "Stylesheet does not explicitly hide filtered Dhikr cards"
 AssertContains $styleCss '.dhikr-summary-grid {' "Stylesheet includes the Dhikr summary grid" "Stylesheet is missing the Dhikr summary grid styles"
 AssertContains $styleCss '.dhikr-meta-badge {' "Stylesheet includes the Dhikr evidence badge styles" "Stylesheet is missing the Dhikr evidence badge styles"
 AssertContains $styleCss 'body[data-page="dhikr"] .hero-grid {' "Stylesheet includes the standalone Dhikr hero layout" "Stylesheet is missing the standalone Dhikr hero layout"
