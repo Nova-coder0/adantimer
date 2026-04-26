@@ -440,7 +440,7 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/de/dhikr" @('<html lang="de" dir="ltr">', '<body data-page="dhikr"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"')
   TestLiveUrl "$BaseUrl/dhikr/morning" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="morning"', 'morning-subhanallah')
   TestLiveUrl "$BaseUrl/de/dhikr/forgiveness" @('<html lang="de" dir="ltr">', '<body data-page="dhikr-collection"', 'data-dhikr-collection="forgiveness"')
-  TestLiveUrl "$BaseUrl/dhikr/provision" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="provision"', 'provision-rizq-dua')
+  TestLiveUrl "$BaseUrl/dhikr/provision" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="provision"', 'provision-beneficial-rizq')
   TestLiveUrl "$BaseUrl/dhikr/distress" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="distress"', 'distress-dhun-nun')
   TestLiveUrl "$BaseUrl/dhikr/healing" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="healing"', 'healing-rabb-an-nas')
   TestLiveUrl "$BaseUrl/dhikr/before-sleep" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="sleep"', 'sleep-ayat-al-kursi')
