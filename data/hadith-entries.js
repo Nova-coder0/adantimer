@@ -644,7 +644,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih al-Bukhari 5641, Sahih Muslim 2573",
     narrator: "Abu Saeed al-Khudri and Abu Hurayrah",
-    arabic: "مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ وَلَا هَمٍّ وَلَا حُزْنٍ ... إِلَّا كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ",
+    arabic: "مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلاَ وَصَبٍ وَلاَ هَمٍّ وَلاَ حُزْنٍ وَلاَ أَذًى وَلاَ غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا، إِلاَّ كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ",
     translation: localized({
       en: "No fatigue, illness, anxiety, grief, harm, or distress afflicts a Muslim except that Allah expiates sins through it.",
       de: "Keine Muedigkeit, Krankheit, Sorge, Trauer, Schaeden oder Bedraengnis trifft einen Muslim, ohne dass Allah dadurch Suenden tilgt."
@@ -831,7 +831,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Sahih Muslim 85a",
     narrator: "Abdullah ibn Masud",
-    arabic: "الصَّلاَةُ لِوَقْتِهَا ... ثُمَّ بِرُّ الْوَالِدَيْنِ",
+    arabic: "سَأَلْتُ رَسُولَ اللَّهِ صلى الله عليه وسلم أَىُّ الْعَمَلِ أَفْضَلُ قَالَ الصَّلاَةُ لِوَقْتِهَا . قَالَ قُلْتُ ثُمَّ أَىٌّ قَالَ بِرُّ الْوَالِدَيْنِ . قَالَ قُلْتُ ثُمَّ أَىٌّ قَالَ الْجِهَادُ فِي سَبِيلِ اللَّهِ",
     translation: localized({
       en: "The best deed is prayer at its proper time, then kindness to the parents, then striving in the path of Allah.",
       de: "Die beste Tat ist das Gebet zu seiner Zeit, dann Guete zu den Eltern, dann der Einsatz auf Allahs Weg."
@@ -848,7 +848,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Sahih Muslim 2551",
     narrator: "Abu Hurayrah",
-    arabic: "رَغِمَ أَنْفُهُ ... مَنْ أَدْرَكَ أَبَوَيْهِ عِنْدَ الْكِبَرِ أَحَدَهُمَا أَوْ كِلَيْهِمَا ثُمَّ لَمْ يَدْخُلِ الْجَنَّةَ",
+    arabic: "رَغِمَ أَنْفُهُ ثُمَّ رَغِمَ أَنْفُهُ ثُمَّ رَغِمَ أَنْفُهُ . قِيلَ مَنْ يَا رَسُولَ اللَّهِ قَالَ مَنْ أَدْرَكَ وَالِدَيْهِ عِنْدَ الْكِبَرِ أَحَدَهُمَا أَوْ كِلَيْهِمَا ثُمَّ لَمْ يَدْخُلِ الْجَنَّةَ",
     translation: localized({
       en: "Disgrace be upon the one who reaches the old age of one or both of his parents and still does not enter Paradise through serving them.",
       de: "Erniedrigt sei, wer das Alter eines oder beider Eltern erlebt und trotzdem nicht durch ihren Dienst ins Paradies eintritt."
@@ -899,7 +899,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih al-Bukhari 6478, Sahih Muslim 2988",
     narrator: "Abu Hurayrah",
-    arabic: "إِنَّ الْعَبْدَ لَيَتَكَلَّمُ بِالْكَلِمَةِ ... يَرْفَعُهُ اللَّهُ بِهَا دَرَجَاتٍ ... وَإِنَّ الْعَبْدَ لَيَتَكَلَّمُ بِالْكَلِمَةِ ... يَهْوِي بِهَا فِي جَهَنَّمَ",
+    arabic: "إِنَّ الْعَبْدَ لَيَتَكَلَّمُ بِالْكَلِمَةِ مِنْ رِضْوَانِ اللَّهِ لاَ يُلْقِي لَهَا بَالاً، يَرْفَعُ اللَّهُ بِهَا دَرَجَاتٍ، وَإِنَّ الْعَبْدَ لَيَتَكَلَّمُ بِالْكَلِمَةِ مِنْ سَخَطِ اللَّهِ لاَ يُلْقِي لَهَا بَالاً يَهْوِي بِهَا فِي جَهَنَّمَ",
     translation: localized({
       en: "A servant may speak a word pleasing to Allah and be raised by it, and may speak a word of His anger and fall because of it.",
       de: "Ein Diener kann ein Wort sprechen, das Allah gefaellt, und dadurch erhoben werden; und ein Wort sprechen, das Allahs Zorn bringt, und dadurch fallen."
@@ -950,7 +950,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih Muslim 2563a",
     narrator: "Abu Hurayrah",
-    arabic: "لاَ تَحَاسَدُوا وَلاَ تَبَاغَضُوا ... وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا",
+    arabic: "إِيَّاكُمْ وَالظَّنَّ فَإِنَّ الظَّنَّ أَكْذَبُ الْحَدِيثِ وَلاَ تَحَسَّسُوا وَلاَ تَجَسَّسُوا وَلاَ تَنَافَسُوا وَلاَ تَحَاسَدُوا وَلاَ تَبَاغَضُوا وَلاَ تَدَابَرُوا وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا",
     translation: localized({
       en: "Do not envy one another, do not hate one another, and be servants of Allah as brothers.",
       de: "Beneidet einander nicht, hasst einander nicht und seid als Diener Allahs Brueder."
