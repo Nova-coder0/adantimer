@@ -483,6 +483,7 @@ AssertContains $hadithEntries 'export function getHadithItems()' "Local Hadith m
 
 TestMojibake "templates/index.html"
 TestMojibake "script.js"
+TestMojibake "data/hadith-entries.js"
 
 if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
