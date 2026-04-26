@@ -75,6 +75,61 @@ export const HADITH_CATEGORIES = [
       tr: "Merhamet",
       "zh-hans": "怜悯"
     }
+  },
+  {
+    id: "repentance",
+    labels: {
+      en: "Repentance",
+      ar: "Ø§Ù„ØªÙˆØ¨Ø©",
+      de: "Reue",
+      fr: "Repentir",
+      tr: "Tevbe",
+      "zh-hans": "å¿æ‚”"
+    }
+  },
+  {
+    id: "patience",
+    labels: {
+      en: "Patience",
+      ar: "Ø§Ù„ØµØ¨Ø±",
+      de: "Geduld",
+      fr: "Patience",
+      tr: "Sabir",
+      "zh-hans": "å¿è€�"
+    }
+  },
+  {
+    id: "family",
+    labels: {
+      en: "Family",
+      ar: "Ø§Ù„Ø£Ø³Ø±Ø©",
+      de: "Familie",
+      fr: "Famille",
+      tr: "Aile",
+      "zh-hans": "å®¶åº­"
+    }
+  },
+  {
+    id: "truthfulness",
+    labels: {
+      en: "Truthfulness",
+      ar: "Ø§Ù„ØµØ¯Ù‚",
+      de: "Wahrhaftigkeit",
+      fr: "Veracite",
+      tr: "Dogruluk",
+      "zh-hans": "è¯šå®ž"
+    }
+  },
+  {
+    id: "trust",
+    labels: {
+      en: "Trust in Allah",
+      ar: "Ø§Ù„ØªÙˆÙƒÙ„",
+      de: "Tawakkul",
+      fr: "Confiance en Allah",
+      tr: "Tevekkul",
+      "zh-hans": "æ‰˜é çœŸä¸»"
+    }
   }
 ];
 
@@ -431,6 +486,261 @@ export const HADITH_ITEMS = [
       en: "It ties mercy to community structure: tenderness to the young and respect toward elders."
     }),
     search: ["mercy", "young", "elders", "respect", "community"]
+  }),
+  item({
+    id: "repentance-allah-loves-return",
+    category: "repentance",
+    grade: "sahih",
+    source: "Sahih Muslim 2744c",
+    narrator: "Abdullah ibn Masud",
+    arabic: "Ù„Ù„Ù‘ÙŽÙ‡Ù Ø£ÙŽØ´ÙŽØ¯Ù‘Ù ÙÙŽØ±ÙŽØ­Ù‹Ø§ Ø¨ÙØªÙŽÙˆÙ’Ø¨ÙŽØ©Ù Ø¹ÙŽØ¨Ù’Ø¯ÙÙ‡Ù Ø§Ù„Ù’Ù…ÙØ¤Ù’Ù…ÙÙ†Ù",
+    translation: localized({
+      en: "Allah is more pleased with the repentance of His believing servant than a man who finds his lost mount in the desert.",
+      de: "Allah freut sich ueber die Reue Seines glaeubigen Dieners mehr als ein Mensch, der in der Wueste sein verlorenes Reittier wiederfindet."
+    }),
+    lesson: localized({
+      en: "This hadith keeps repentance open and hopeful. It pushes a person away from despair and back toward return.",
+      de: "Dieser Hadith haelt die Tuer der Reue offen und hoffnungsvoll. Er fuehrt vom Verzweifeln zur Rueckkehr."
+    }),
+    search: ["repentance", "tawbah", "return", "forgiveness", "despair", "ibn masud"]
+  }),
+  item({
+    id: "repentance-day-and-night",
+    category: "repentance",
+    grade: "sahih",
+    source: "Sahih Muslim 2759a",
+    narrator: "Abu Musa al-Ashari",
+    arabic: "Ø¥ÙÙ†Ù‘ÙŽ Ø§Ù„Ù„Ù‘ÙŽÙ‡ÙŽ ÙŠÙŽØ¨Ù’Ø³ÙØ·Ù ÙŠÙŽØ¯ÙŽÙ‡Ù Ø¨ÙØ§Ù„Ù„Ù‘ÙŽÙŠÙ’Ù„Ù Ù„ÙÙŠÙŽØªÙÙˆØ¨ÙŽ Ù…ÙØ³ÙÙŠØ¡Ù Ø§Ù„Ù†Ù‘ÙŽÙ‡ÙŽØ§Ø±Ù ÙˆÙŽÙŠÙŽØ¨Ù’Ø³ÙØ·ÙÙ‡ÙŽØ§ Ø¨ÙØ§Ù„Ù†Ù‘ÙŽÙ‡ÙŽØ§Ø±Ù Ù„ÙÙŠÙŽØªÙÙˆØ¨ÙŽ Ù…ÙØ³ÙÙŠØ¡Ù Ø§Ù„Ù„Ù‘ÙŽÙŠÙ’Ù„Ù",
+    translation: localized({
+      en: "Allah stretches out His Hand at night so that the sinner of the day may repent, and He stretches it out by day so that the sinner of the night may repent.",
+      de: "Allah streckt Seine Hand in der Nacht aus, damit der Suender des Tages bereut, und am Tag, damit der Suender der Nacht bereut."
+    }),
+    lesson: localized({
+      en: "It makes tawbah a constant path, not a rare emergency. The door stays open while life remains.",
+      de: "Er macht die Tauba zu einem staendigen Weg und nicht zu einem seltenen Notfall. Die Tuer bleibt offen, solange das Leben bleibt."
+    }),
+    search: ["repentance", "day", "night", "tawbah", "abu musa"]
+  }),
+  item({
+    id: "repentance-hundred-kills",
+    category: "repentance",
+    grade: "sahih",
+    source: "Sahih Muslim 2766a",
+    narrator: "Abu Said al-Khudri",
+    arabic: "ÙˆÙŽÙ…ÙŽÙ†Ù’ ÙŠÙŽØ­ÙÙˆÙ„Ù Ø¨ÙŽÙŠÙ’Ù†ÙŽÙƒÙŽ ÙˆÙŽØ¨ÙŽÙŠÙ’Ù†ÙŽ Ø§Ù„ØªÙ‘ÙŽÙˆÙ’Ø¨ÙŽØ©Ù",
+    translation: localized({
+      en: "Even the man who had killed one hundred people was shown that repentance was still open to him when he turned sincerely toward Allah.",
+      de: "Sogar dem Mann, der hundert Menschen getoetet hatte, wurde gezeigt, dass Reue fuer ihn noch offen war, als er sich aufrichtig Allah zuwandte."
+    }),
+    lesson: localized({
+      en: "This hadith makes a hard point: no one should close the door of repentance that Allah has left open.",
+      de: "Dieser Hadith macht einen harten Punkt klar: Niemand darf eine Reuetuer schliessen, die Allah offengelassen hat."
+    }),
+    search: ["repentance", "hundred", "kills", "forgiveness", "abu said"]
+  }),
+  item({
+    id: "patience-amazing-affair",
+    category: "patience",
+    grade: "sahih",
+    source: "Sahih Muslim 2999",
+    narrator: "Suhayb",
+    arabic: "Ø¹ÙŽØ¬ÙŽØ¨Ù‹Ø§ Ù„ÙØ£ÙŽÙ…Ù’Ø±Ù Ø§Ù„Ù’Ù…ÙØ¤Ù’Ù…ÙÙ†Ù Ø¥ÙÙ†Ù‘ÙŽ Ø£ÙŽÙ…Ù’Ø±ÙŽÙ‡Ù ÙƒÙÙ„Ù‘ÙŽÙ‡Ù Ø®ÙŽÙŠÙ’Ø±ÙŒ",
+    translation: localized({
+      en: "How wonderful is the affair of the believer. Every matter of his is good for him: gratitude in ease and patience in hardship.",
+      de: "Wie erstaunlich ist die Angelegenheit des Glaeubigen. Jede seiner Lagen ist gut fuer ihn: Dankbarkeit in Erleichterung und Geduld in Bedraengnis."
+    }),
+    lesson: localized({
+      en: "It frames patience as part of a larger believer mindset, not as passive suffering.",
+      de: "Er zeigt Geduld als Teil einer ganzen Haltung des Glaeubigen und nicht als passives Leiden."
+    }),
+    search: ["patience", "sabr", "believer", "gratitude", "suhayb"]
+  }),
+  item({
+    id: "patience-first-strike",
+    category: "patience",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 1283, Sahih Muslim 926",
+    narrator: "Anas ibn Malik",
+    arabic: "Ø¥ÙÙ†Ù‘ÙŽÙ…ÙŽØ§ Ø§Ù„ØµÙ‘ÙŽØ¨Ù’Ø±Ù Ø¹ÙÙ†Ù’Ø¯ÙŽ Ø§Ù„ØµÙ‘ÙŽØ¯Ù’Ù…ÙŽØ©Ù Ø§Ù„Ù’Ø£ÙÙˆÙ„ÙŽÙ‰",
+    translation: localized({
+      en: "True patience is at the first strike of calamity.",
+      de: "Wahre Geduld zeigt sich beim ersten Schlag der Pruefung."
+    }),
+    lesson: localized({
+      en: "This defines sabr at the moment of impact, when reaction is hardest to control.",
+      de: "Das definiert Sabr im Moment des Einschlags, wenn die Reaktion am schwersten zu beherrschen ist."
+    }),
+    search: ["patience", "first strike", "calamity", "anas", "sabr"]
+  }),
+  item({
+    id: "patience-sins-fall-away",
+    category: "patience",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 5641, Sahih Muslim 2573",
+    narrator: "Abu Saeed al-Khudri and Abu Hurayrah",
+    arabic: "Ù…ÙŽØ§ ÙŠÙØµÙÙŠØ¨Ù Ø§Ù„Ù’Ù…ÙØ³Ù’Ù„ÙÙ…ÙŽ Ù…ÙÙ†Ù’ Ù†ÙŽØµÙŽØ¨Ù ÙˆÙŽÙ„Ø§ÙŽ ÙˆÙŽØµÙŽØ¨Ù ÙˆÙŽÙ„Ø§ÙŽ Ù‡ÙŽÙ…Ù‘Ù ÙˆÙŽÙ„Ø§ÙŽ Ø­ÙØ²Ù’Ù†Ù ... Ø¥ÙÙ„Ù‘ÙŽØ§ ÙƒÙŽÙÙ‘ÙŽØ±ÙŽ Ø§Ù„Ù„Ù‘ÙŽÙ‡Ù Ø¨ÙÙ‡ÙŽØ§ Ù…ÙÙ†Ù’ Ø®ÙŽØ·ÙŽØ§ÙŠÙŽØ§Ù‡Ù",
+    translation: localized({
+      en: "No fatigue, illness, anxiety, grief, harm, or distress afflicts a Muslim except that Allah expiates sins through it.",
+      de: "Keine Muedigkeit, Krankheit, Sorge, Trauer, Schaeden oder Bedraengnis trifft einen Muslim, ohne dass Allah dadurch Suenden tilgt."
+    }),
+    lesson: localized({
+      en: "It gives hardship meaning without glorifying pain. Trials can purify while the believer remains steady.",
+      de: "Er gibt Bedraengnis Sinn, ohne Schmerz zu verherrlichen. Pruefungen koennen reinigen, waehrend der Glaeubige standhaft bleibt."
+    }),
+    search: ["patience", "hardship", "sins", "distress", "abu saeed", "abu hurayrah"]
+  }),
+  item({
+    id: "family-best-to-family",
+    category: "family",
+    grade: "hasan",
+    source: "Sunan Ibn Majah 1977",
+    narrator: "Ibn Abbas",
+    arabic: "Ø®ÙŽÙŠÙ’Ø±ÙÙƒÙÙ…Ù’ Ø®ÙŽÙŠÙ’Ø±ÙÙƒÙÙ…Ù’ Ù„ÙØ£ÙŽÙ‡Ù’Ù„ÙÙ‡Ù ÙˆÙŽØ£ÙŽÙ†ÙŽØ§ Ø®ÙŽÙŠÙ’Ø±ÙÙƒÙÙ…Ù’ Ù„ÙØ£ÙŽÙ‡Ù’Ù„ÙÙŠ",
+    translation: localized({
+      en: "The best of you are those who are best to their families, and I am the best of you to my family.",
+      de: "Die Besten unter euch sind diejenigen, die ihre Familie am besten behandeln, und ich bin der Beste von euch zu meiner Familie."
+    }),
+    lesson: localized({
+      en: "It moves religious excellence into the home, where character is hardest to fake and easiest to test.",
+      de: "Er verlegt religioese Vorzueglichkeit in das Zuhause, wo Charakter am schwersten zu spielen und am leichtesten zu pruefen ist."
+    }),
+    search: ["family", "wife", "home", "best to family", "ibn abbas"]
+  }),
+  item({
+    id: "family-orphan-care",
+    category: "family",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6005",
+    narrator: "Sahl ibn Sad",
+    arabic: "Ø£ÙŽÙ†ÙŽØ§ ÙˆÙŽÙƒÙŽØ§ÙÙÙ„Ù Ø§Ù„Ù’ÙŠÙŽØªÙÙŠÙ…Ù ÙÙÙŠ Ø§Ù„Ù’Ø¬ÙŽÙ†Ù‘ÙŽØ©Ù Ù‡ÙŽÙƒÙŽØ°ÙŽØ§",
+    translation: localized({
+      en: "I and the one who cares for an orphan will be like this in Paradise, and he joined his index and middle fingers.",
+      de: "Ich und derjenige, der sich um ein Waisenkind kuemmert, werden im Paradies so sein, und er legte Zeige- und Mittelfinger zusammen."
+    }),
+    lesson: localized({
+      en: "It lifts orphan care from charity language into companionship with the Prophet in Paradise.",
+      de: "Er hebt die Sorge um Waisen aus der blossen Wohltaetigkeit heraus und verbindet sie mit Naehe zum Propheten im Paradies."
+    }),
+    search: ["family", "orphan", "care", "paradise", "sahl"]
+  }),
+  item({
+    id: "family-kinship-ties",
+    category: "family",
+    grade: "muttafaqun-alayh",
+    source: "Riyad as-Salihin 330",
+    narrator: "Amr ibn al-As",
+    arabic: "ÙˆÙŽÙ„ÙŽÙƒÙÙ†Ù’ Ù„ÙŽÙ‡ÙÙ…Ù’ Ø±ÙŽØ­ÙÙ…ÙŒ Ø£ÙŽØ¨ÙÙ„Ù‘ÙÙ‡ÙŽØ§ Ø¨ÙØ¨ÙÙ„ÙŽØ§Ù„ÙÙ‡ÙŽØ§",
+    translation: localized({
+      en: "Even where loyalty did not belong, the Prophet still affirmed that ties of kinship must be maintained.",
+      de: "Selbst dort, wo keine besondere Loyalitaet bestand, bekraeftigte der Prophet, dass Verwandtschaftsbande erhalten werden muessen."
+    }),
+    lesson: localized({
+      en: "It teaches that family ties are not maintained only when relationships are easy or emotionally rewarding.",
+      de: "Er lehrt, dass Familienbande nicht nur dann gepflegt werden, wenn Beziehungen leicht oder emotional angenehm sind."
+    }),
+    search: ["family", "kinship", "silat ar-rahim", "amr ibn al-as"]
+  }),
+  item({
+    id: "truthfulness-leads-to-righteousness",
+    category: "truthfulness",
+    grade: "muttafaqun-alayh",
+    source: "Riyad as-Salihin 54",
+    narrator: "Abdullah ibn Masud",
+    arabic: "Ø¥ÙÙ†Ù‘ÙŽ Ø§Ù„ØµÙ‘ÙØ¯Ù’Ù‚ÙŽ ÙŠÙŽÙ‡Ù’Ø¯ÙÙŠ Ø¥ÙÙ„ÙŽÙ‰ Ø§Ù„Ù’Ø¨ÙØ±Ù‘Ù ÙˆÙŽØ¥ÙÙ†Ù‘ÙŽ Ø§Ù„Ø¨ÙØ±Ù‘ÙŽ ÙŠÙŽÙ‡Ù’Ø¯ÙÙŠ Ø¥ÙÙ„ÙŽÙ‰ Ø§Ù„Ù’Ø¬ÙŽÙ†Ù‘ÙŽØ©Ù",
+    translation: localized({
+      en: "Truthfulness leads to righteousness, and righteousness leads to Paradise. Persistent lying leads to wickedness and the Fire.",
+      de: "Wahrhaftigkeit fuehrt zur Rechtschaffenheit, und Rechtschaffenheit fuehrt ins Paradies. Beharrliches Luegen fuehrt zur Verdorbenheit und ins Feuer."
+    }),
+    lesson: localized({
+      en: "This hadith treats truthfulness as a path that shapes the whole person, not just isolated statements.",
+      de: "Dieser Hadith behandelt Wahrhaftigkeit als einen Weg, der den ganzen Menschen praegt und nicht nur einzelne Aussagen."
+    }),
+    search: ["truthfulness", "sidq", "truth", "lying", "ibn masud"]
+  }),
+  item({
+    id: "truthfulness-honest-merchant",
+    category: "truthfulness",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 1209",
+    narrator: "Abu Said al-Khudri",
+    arabic: "Ø§Ù„ØªÙ‘ÙŽØ§Ø¬ÙØ±Ù Ø§Ù„ØµÙ‘ÙŽØ¯ÙÙˆÙ‚Ù Ø§Ù„Ù’Ø£ÙŽÙ…ÙÙŠÙ†Ù Ù…ÙŽØ¹ÙŽ Ø§Ù„Ù†Ù‘ÙŽØ¨ÙÙŠÙ‘ÙÙŠÙ†ÙŽ ÙˆÙŽØ§Ù„ØµÙ‘ÙØ¯Ù‘ÙÙŠÙ‚ÙÙŠÙ†ÙŽ ÙˆÙŽØ§Ù„Ø´Ù‘ÙÙ‡ÙŽØ¯ÙŽØ§Ø¡Ù",
+    translation: localized({
+      en: "The truthful and trustworthy merchant will be with the Prophets, the truthful, and the martyrs.",
+      de: "Der wahrhaftige und vertrauenswuerdige Kaufmann wird mit den Propheten, den Wahrhaftigen und den Maertyrern sein."
+    }),
+    lesson: localized({
+      en: "It brings honesty into contracts, pricing, promises, and business conduct rather than leaving religion outside work.",
+      de: "Er bringt Ehrlichkeit in Vertraege, Preise, Zusagen und Geschaeftspraxis und laesst Religion nicht vor der Arbeitstuer enden."
+    }),
+    search: ["truthfulness", "merchant", "trustworthy", "business", "abu saeed"]
+  }),
+  item({
+    id: "truthfulness-clarity-in-trade",
+    category: "truthfulness",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 2079, Sahih Muslim 1532",
+    narrator: "Hakim ibn Hizam",
+    arabic: "ÙÙŽØ¥ÙÙ†Ù’ ØµÙŽØ¯ÙŽÙ‚ÙŽØ§ ÙˆÙŽØ¨ÙŽÙŠÙ‘ÙŽÙ†ÙŽØ§ Ø¨ÙÙˆØ±ÙÙƒÙŽ Ù„ÙŽÙ‡ÙÙ…ÙŽØ§ ÙÙÙŠ Ø¨ÙŽÙŠÙ’Ø¹ÙÙ‡ÙÙ…ÙŽØ§ ÙˆÙŽØ¥ÙÙ†Ù’ ÙƒÙŽØªÙŽÙ…ÙŽØ§ ÙˆÙŽÙƒÙŽØ°ÙŽØ¨ÙŽØ§ Ù…ÙØ­ÙÙ‚ÙŽØªÙ’ Ø¨ÙŽØ±ÙŽÙƒÙŽØ©Ù Ø¨ÙŽÙŠÙ’Ø¹ÙÙ‡ÙÙ…ÙŽØ§",
+    translation: localized({
+      en: "If both parties are truthful and clear, they are blessed in their sale; if they lie and conceal, the blessing of their sale is erased.",
+      de: "Wenn beide Parteien wahrhaftig und klar sind, wird ihr Handel gesegnet; wenn sie luegen und verschweigen, wird der Segen ihres Handels ausgeloescht."
+    }),
+    lesson: localized({
+      en: "This makes truthfulness measurable in transactions: transparency increases barakah; concealment destroys it.",
+      de: "Er macht Wahrhaftigkeit im Handel messbar: Transparenz vermehrt Baraka, Verschweigen zerstoert sie."
+    }),
+    search: ["truthfulness", "trade", "business", "clarity", "barakah", "hakim ibn hizam"]
+  }),
+  item({
+    id: "trust-birds-provision",
+    category: "trust",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 2344",
+    narrator: "Umar ibn al-Khattab",
+    arabic: "Ù„ÙŽÙˆÙ’ Ø£ÙŽÙ†Ù‘ÙŽÙƒÙÙ…Ù’ ÙƒÙÙ†Ù’ØªÙÙ…Ù’ ØªÙŽÙˆÙŽÙƒÙ‘ÙŽÙ„ÙÙˆÙ†ÙŽ Ø¹ÙŽÙ„ÙŽÙ‰ Ø§Ù„Ù„Ù‘ÙŽÙ‡Ù Ø­ÙŽÙ‚Ù‘ÙŽ ØªÙŽÙˆÙŽÙƒÙ‘ÙÙ„ÙÙ‡Ù Ù„ÙŽØ±ÙØ²ÙÙ‚Ù’ØªÙÙ…Ù’ ÙƒÙŽÙ…ÙŽØ§ ØªÙØ±Ù’Ø²ÙŽÙ‚Ù Ø§Ù„Ø·Ù‘ÙŽÙŠÙ’Ø±Ù",
+    translation: localized({
+      en: "If you relied upon Allah with the reliance He is due, He would provide for you as He provides for the birds: they leave hungry and return full.",
+      de: "Wenn ihr auf Allah mit dem rechten Tawakkul vertrauen wuerdet, wuerde Er euch versorgen, wie Er die Voegel versorgt: Sie ziehen hungrig aus und kommen satt zurueck."
+    }),
+    lesson: localized({
+      en: "It ties tawakkul to movement and effort. The birds still leave their nests and seek provision.",
+      de: "Er verbindet Tawakkul mit Bewegung und Einsatz. Die Voegel bleiben nicht im Nest, sondern fliegen aus und suchen Versorgung."
+    }),
+    search: ["trust", "tawakkul", "birds", "provision", "umar"]
+  }),
+  item({
+    id: "trust-tie-camel",
+    category: "trust",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 2517",
+    narrator: "Anas ibn Malik",
+    arabic: "Ø§Ø¹Ù’Ù‚ÙÙ„Ù’Ù‡ÙŽØ§ ÙˆÙŽØªÙŽÙˆÙŽÙƒÙ‘ÙŽÙ„Ù’",
+    translation: localized({
+      en: "Tie it and then rely upon Allah.",
+      de: "Binde sie fest und vertraue dann auf Allah."
+    }),
+    lesson: localized({
+      en: "This hadith removes the false split between planning and trust. Real tawakkul includes taking responsible means.",
+      de: "Dieser Hadith beseitigt den falschen Gegensatz zwischen Planung und Vertrauen. Echter Tawakkul schliesst verantwortliche Mittel ein."
+    }),
+    search: ["trust", "tawakkul", "tie camel", "means", "anas"]
+  }),
+  item({
+    id: "trust-ask-allah-alone",
+    category: "trust",
+    grade: "sahih",
+    source: "Jami at-Tirmidhi 2516",
+    narrator: "Ibn Abbas",
+    arabic: "Ø¥ÙØ°ÙŽØ§ Ø³ÙŽØ£ÙŽÙ„Ù’ØªÙŽ ÙÙŽØ§Ø³Ù’Ø£ÙŽÙ„Ù Ø§Ù„Ù„Ù‘ÙŽÙ‡ÙŽ ÙˆÙŽØ¥ÙØ°ÙŽØ§ Ø§Ø³Ù’ØªÙŽØ¹ÙŽÙ†Ù’ØªÙŽ ÙÙŽØ§Ø³Ù’ØªÙŽØ¹ÙÙ†Ù’ Ø¨ÙØ§Ù„Ù„Ù‘ÙŽÙ‡Ù",
+    translation: localized({
+      en: "When you ask, ask Allah; and when you seek help, seek help from Allah.",
+      de: "Wenn du bittest, dann bitte Allah; und wenn du Hilfe suchst, dann suche Hilfe bei Allah."
+    }),
+    lesson: localized({
+      en: "It builds tawakkul at the root level: dependence begins in the heart before it appears in outward action.",
+      de: "Er baut Tawakkul an der Wurzel auf: Abhaengigkeit beginnt im Herzen, bevor sie im aeusseren Handeln sichtbar wird."
+    }),
+    search: ["trust", "tawakkul", "ask Allah", "seek help", "ibn abbas"]
   })
 ];
 

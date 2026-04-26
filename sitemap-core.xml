@@ -451,12 +451,47 @@
     <priority>0.77</priority>
   </url>
   <url>
+    <loc>https://www.adantimer.com/hadith/repentance</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/patience</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/family</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/truthfulness</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/trust</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
     <loc>https://www.adantimer.com/de/hadith/intentions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.adantimer.com/de/hadith/prayer</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/repentance</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/patience</loc>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>

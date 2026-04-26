@@ -416,7 +416,13 @@ AssertContains $sitemapCore 'https://www.adantimer.com/qibla' "Core sitemap incl
 AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/hadith' "Core sitemap includes the Chinese hadith page" "Core sitemap is missing the Chinese hadith page"
 AssertContains $sitemapCore 'https://www.adantimer.com/hadith/intentions' "Core sitemap includes the Hadith intentions collection" "Core sitemap is missing the Hadith intentions collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/hadith/prayer' "Core sitemap includes the Hadith prayer collection" "Core sitemap is missing the Hadith prayer collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/repentance' "Core sitemap includes the Hadith repentance collection" "Core sitemap is missing the Hadith repentance collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/patience' "Core sitemap includes the Hadith patience collection" "Core sitemap is missing the Hadith patience collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/family' "Core sitemap includes the Hadith family collection" "Core sitemap is missing the Hadith family collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/truthfulness' "Core sitemap includes the Hadith truthfulness collection" "Core sitemap is missing the Hadith truthfulness collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/trust' "Core sitemap includes the Hadith trust collection" "Core sitemap is missing the Hadith trust collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/prayer' "Core sitemap includes the German Hadith prayer collection" "Core sitemap is missing the German Hadith prayer collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/repentance' "Core sitemap includes the German Hadith repentance collection" "Core sitemap is missing the German Hadith repentance collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/dhikr' "Core sitemap includes the Dhikr page" "Core sitemap is missing the Dhikr page"
 AssertContains $sitemapCore 'https://www.adantimer.com/ar/dhikr' "Core sitemap includes the Arabic Dhikr page" "Core sitemap is missing the Arabic Dhikr page"
 AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/morning' "Core sitemap includes the morning Dhikr collection" "Core sitemap is missing the morning Dhikr collection"
@@ -468,6 +474,11 @@ AssertContains $hadithEntries 'id: "character-control-anger"' "Local Hadith meta
 AssertContains $hadithEntries 'id: "knowledge-understanding-religion"' "Local Hadith metadata includes the expanded knowledge entry" "Local Hadith metadata is missing the expanded knowledge entry"
 AssertContains $hadithEntries 'id: "gratitude-affair-believer"' "Local Hadith metadata includes the expanded gratitude entry" "Local Hadith metadata is missing the expanded gratitude entry"
 AssertContains $hadithEntries 'id: "mercy-young-and-elders"' "Local Hadith metadata includes the expanded mercy entry" "Local Hadith metadata is missing the expanded mercy entry"
+AssertContains $hadithEntries 'id: "repentance-allah-loves-return"' "Local Hadith metadata includes the repentance entry" "Local Hadith metadata is missing the repentance entry"
+AssertContains $hadithEntries 'id: "patience-first-strike"' "Local Hadith metadata includes the patience entry" "Local Hadith metadata is missing the patience entry"
+AssertContains $hadithEntries 'id: "family-best-to-family"' "Local Hadith metadata includes the family entry" "Local Hadith metadata is missing the family entry"
+AssertContains $hadithEntries 'id: "truthfulness-honest-merchant"' "Local Hadith metadata includes the truthfulness entry" "Local Hadith metadata is missing the truthfulness entry"
+AssertContains $hadithEntries 'id: "trust-birds-provision"' "Local Hadith metadata includes the trust entry" "Local Hadith metadata is missing the trust entry"
 AssertContains $hadithEntries 'export function getHadithItems()' "Local Hadith metadata exports the item helper" "Local Hadith metadata item helper is missing"
 
 TestMojibake "templates/index.html"
@@ -485,8 +496,9 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/dhikr/distress" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="distress"', 'distress-dhun-nun')
   TestLiveUrl "$BaseUrl/dhikr/healing" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="healing"', 'healing-rabb-an-nas')
   TestLiveUrl "$BaseUrl/dhikr/before-sleep" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="sleep"', 'sleep-ayat-al-kursi')
-  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'character-control-anger', 'gratitude-affair-believer', 'hadith-category-chip')
+  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'character-control-anger', 'gratitude-affair-believer', 'repentance-allah-loves-return', 'hadith-category-chip')
   TestLiveUrl "$BaseUrl/hadith/intentions" @('<body data-page="hadith-collection"', 'data-hadith-collection="intentions"', 'intentions-hearts-deeds')
+  TestLiveUrl "$BaseUrl/hadith/repentance" @('<body data-page="hadith-collection"', 'data-hadith-collection="repentance"', 'repentance-day-and-night')
   TestLiveUrl "$BaseUrl/de/hadith/prayer" @('<html lang="de" dir="ltr">', '<body data-page="hadith-collection"', 'data-hadith-collection="prayer"')
   TestLiveUrl "$BaseUrl/de/hadith" @('<html lang="de" dir="ltr">', '<body data-page="hadith">', 'hadith-card-grid')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
