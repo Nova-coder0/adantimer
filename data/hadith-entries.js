@@ -130,6 +130,72 @@ export const HADITH_CATEGORIES = [
       tr: "Tevekkul",
       "zh-hans": "托靠真主"
     }
+  },
+  {
+    id: "parents",
+    labels: {
+      en: "Parents",
+      ar: "الوالدان",
+      de: "Eltern",
+      fr: "Parents",
+      tr: "Anne-Baba",
+      "zh-hans": "父母"
+    }
+  },
+  {
+    id: "speech",
+    labels: {
+      en: "Speech",
+      ar: "الكلام",
+      de: "Worte",
+      fr: "Paroles",
+      tr: "Konusma",
+      "zh-hans": "言语"
+    }
+  },
+  {
+    id: "brotherhood",
+    labels: {
+      en: "Brotherhood",
+      ar: "الأخوة",
+      de: "Bruderschaft",
+      fr: "Fraternite",
+      tr: "Kardeslik",
+      "zh-hans": "兄弟情谊"
+    }
+  },
+  {
+    id: "neighbors",
+    labels: {
+      en: "Neighbors",
+      ar: "الجيران",
+      de: "Nachbarn",
+      fr: "Voisins",
+      tr: "Komsular",
+      "zh-hans": "邻里"
+    }
+  },
+  {
+    id: "humility",
+    labels: {
+      en: "Humility",
+      ar: "التواضع",
+      de: "Demut",
+      fr: "Humilite",
+      tr: "Tevazu",
+      "zh-hans": "谦逊"
+    }
+  },
+  {
+    id: "generosity",
+    labels: {
+      en: "Generosity",
+      ar: "الكرم",
+      de: "Grosszuegigkeit",
+      fr: "Generosite",
+      tr: "Comertlik",
+      "zh-hans": "慷慨"
+    }
   }
 ];
 
@@ -741,6 +807,312 @@ export const HADITH_ITEMS = [
       de: "Er baut Tawakkul an der Wurzel auf: Abhaengigkeit beginnt im Herzen, bevor sie im aeusseren Handeln sichtbar wird."
     }),
     search: ["trust", "tawakkul", "ask Allah", "seek help", "ibn abbas"]
+  }),
+  item({
+    id: "parents-mother-then-father",
+    category: "parents",
+    grade: "sahih",
+    source: "Sahih Muslim 2548a",
+    narrator: "Abu Hurayrah",
+    arabic: "أُمُّكَ ثُمَّ أُمُّكَ ثُمَّ أُمُّكَ ثُمَّ أَبُوكَ",
+    translation: localized({
+      en: "Your mother, then your mother, then your mother, then your father.",
+      de: "Deine Mutter, dann deine Mutter, dann deine Mutter, dann dein Vater."
+    }),
+    lesson: localized({
+      en: "This hadith gives parents, especially mothers, a clear rank in daily duty, service, and gratitude.",
+      de: "Dieser Hadith gibt den Eltern und besonders der Mutter einen klaren Rang in taeglicher Pflicht, Dienst und Dankbarkeit."
+    }),
+    search: ["parents", "mother", "father", "good treatment", "abu hurayrah"]
+  }),
+  item({
+    id: "parents-best-deed-after-prayer",
+    category: "parents",
+    grade: "sahih",
+    source: "Sahih Muslim 85a",
+    narrator: "Abdullah ibn Masud",
+    arabic: "الصَّلاَةُ لِوَقْتِهَا ... ثُمَّ بِرُّ الْوَالِدَيْنِ",
+    translation: localized({
+      en: "The best deed is prayer at its proper time, then kindness to the parents, then striving in the path of Allah.",
+      de: "Die beste Tat ist das Gebet zu seiner Zeit, dann Guete zu den Eltern, dann der Einsatz auf Allahs Weg."
+    }),
+    lesson: localized({
+      en: "It places dutifulness to parents immediately after salah in the order of major deeds.",
+      de: "Er stellt die Guete zu den Eltern direkt nach dem Gebet in die Reihenfolge der grossen Taten."
+    }),
+    search: ["parents", "best deed", "prayer", "kindness", "ibn masud"]
+  }),
+  item({
+    id: "parents-old-age-paradise",
+    category: "parents",
+    grade: "sahih",
+    source: "Sahih Muslim 2551",
+    narrator: "Abu Hurayrah",
+    arabic: "رَغِمَ أَنْفُهُ ... مَنْ أَدْرَكَ أَبَوَيْهِ عِنْدَ الْكِبَرِ أَحَدَهُمَا أَوْ كِلَيْهِمَا ثُمَّ لَمْ يَدْخُلِ الْجَنَّةَ",
+    translation: localized({
+      en: "Disgrace be upon the one who reaches the old age of one or both of his parents and still does not enter Paradise through serving them.",
+      de: "Erniedrigt sei, wer das Alter eines oder beider Eltern erlebt und trotzdem nicht durch ihren Dienst ins Paradies eintritt."
+    }),
+    lesson: localized({
+      en: "This hadith turns caring for aging parents into a direct road to Paradise, not a secondary social duty.",
+      de: "Dieser Hadith macht die Pflege alternder Eltern zu einem direkten Weg ins Paradies und nicht zu einer blossen Nebensache."
+    }),
+    search: ["parents", "old age", "paradise", "service", "abu hurayrah"]
+  }),
+  item({
+    id: "speech-good-or-silent",
+    category: "speech",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6018, Sahih Muslim 47",
+    narrator: "Abu Hurayrah",
+    arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+    translation: localized({
+      en: "Whoever believes in Allah and the Last Day should speak good or remain silent.",
+      de: "Wer an Allah und den Juengsten Tag glaubt, soll Gutes sagen oder schweigen."
+    }),
+    lesson: localized({
+      en: "It sets a disciplined standard for speech: beneficial words or silence.",
+      de: "Er setzt einen disziplinierten Massstab fuer Sprache: nuetzliche Worte oder Schweigen."
+    }),
+    search: ["speech", "good or silent", "tongue", "last day", "abu hurayrah"]
+  }),
+  item({
+    id: "speech-muslim-safe-tongue-hand",
+    category: "speech",
+    grade: "sahih",
+    source: "Sahih Muslim 41",
+    narrator: "Jabir ibn Abdullah",
+    arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ",
+    translation: localized({
+      en: "A Muslim is the one from whose tongue and hand the Muslims are safe.",
+      de: "Ein Muslim ist derjenige, vor dessen Zunge und Hand die Muslime sicher sind."
+    }),
+    lesson: localized({
+      en: "The hadith measures faith through the safety you create for others, especially through speech.",
+      de: "Der Hadith misst Glauben daran, wie sicher andere vor dir sind, besonders vor deiner Zunge."
+    }),
+    search: ["speech", "tongue", "hand", "safe", "jabir"]
+  }),
+  item({
+    id: "speech-word-raises-or-destroys",
+    category: "speech",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6478, Sahih Muslim 2988",
+    narrator: "Abu Hurayrah",
+    arabic: "إِنَّ الْعَبْدَ لَيَتَكَلَّمُ بِالْكَلِمَةِ ... يَرْفَعُهُ اللَّهُ بِهَا دَرَجَاتٍ ... وَإِنَّ الْعَبْدَ لَيَتَكَلَّمُ بِالْكَلِمَةِ ... يَهْوِي بِهَا فِي جَهَنَّمَ",
+    translation: localized({
+      en: "A servant may speak a word pleasing to Allah and be raised by it, and may speak a word of His anger and fall because of it.",
+      de: "Ein Diener kann ein Wort sprechen, das Allah gefaellt, und dadurch erhoben werden; und ein Wort sprechen, das Allahs Zorn bringt, und dadurch fallen."
+    }),
+    lesson: localized({
+      en: "It forces seriousness around everyday speech. A single sentence can carry weight far beyond the moment.",
+      de: "Er zwingt zu Ernsthaftigkeit bei alltglicher Sprache. Ein einziger Satz kann weit mehr Gewicht haben als der Moment erkennen laesst."
+    }),
+    search: ["speech", "word", "tongue", "raises", "destroys", "abu hurayrah"]
+  }),
+  item({
+    id: "brotherhood-love-for-brother",
+    category: "brotherhood",
+    grade: "sahih",
+    source: "Sahih Muslim 45a",
+    narrator: "Anas ibn Malik",
+    arabic: "لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+    translation: localized({
+      en: "None of you truly believes until he loves for his brother what he loves for himself.",
+      de: "Keiner von euch glaubt wirklich, bis er fuer seinen Bruder liebt, was er fuer sich selbst liebt."
+    }),
+    lesson: localized({
+      en: "It turns brotherhood from a slogan into a measurable inner standard.",
+      de: "Er macht Bruderschaft von einem Schlagwort zu einem messbaren inneren Massstab."
+    }),
+    search: ["brotherhood", "brother", "faith", "love", "anas"]
+  }),
+  item({
+    id: "brotherhood-muslim-does-not-wrong",
+    category: "brotherhood",
+    grade: "sahih",
+    source: "Sahih Muslim 2564b",
+    narrator: "Abu Hurayrah",
+    arabic: "الْمُسْلِمُ أَخُو الْمُسْلِمِ لاَ يَظْلِمُهُ وَلاَ يَخْذُلُهُ وَلاَ يَحْقِرُهُ",
+    translation: localized({
+      en: "The Muslim is the brother of the Muslim: he does not wrong him, abandon him, or belittle him.",
+      de: "Der Muslim ist der Bruder des Muslims: Er tut ihm kein Unrecht, laesst ihn nicht im Stich und verachtet ihn nicht."
+    }),
+    lesson: localized({
+      en: "The hadith defines brotherhood through concrete duties, not vague good feeling.",
+      de: "Der Hadith definiert Bruderschaft durch konkrete Pflichten und nicht durch ein vages gutes Gefuehl."
+    }),
+    search: ["brotherhood", "wrong", "abandon", "belittle", "abu hurayrah"]
+  }),
+  item({
+    id: "brotherhood-no-envy-no-hate",
+    category: "brotherhood",
+    grade: "muttafaqun-alayh",
+    source: "Sahih Muslim 2563a",
+    narrator: "Abu Hurayrah",
+    arabic: "لاَ تَحَاسَدُوا وَلاَ تَبَاغَضُوا ... وَكُونُوا عِبَادَ اللَّهِ إِخْوَانًا",
+    translation: localized({
+      en: "Do not envy one another, do not hate one another, and be servants of Allah as brothers.",
+      de: "Beneidet einander nicht, hasst einander nicht und seid als Diener Allahs Brueder."
+    }),
+    lesson: localized({
+      en: "It protects brotherhood from the inner diseases that quietly break communities apart.",
+      de: "Er schuetzt Bruderschaft vor inneren Krankheiten, die Gemeinschaften leise auseinanderbrechen lassen."
+    }),
+    search: ["brotherhood", "envy", "hate", "brothers", "abu hurayrah"]
+  }),
+  item({
+    id: "neighbors-jibril-kept-advising",
+    category: "neighbors",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6014, Sahih Muslim 2624a",
+    narrator: "Aishah",
+    arabic: "مَا زَالَ جِبْرِيلُ يُوصِينِي بِالْجَارِ حَتَّى ظَنَنْتُ أَنَّهُ سَيُوَرِّثُهُ",
+    translation: localized({
+      en: "Jibril kept advising me regarding the neighbor until I thought he would make him an heir.",
+      de: "Jibril hat mich fortwhrend zum Nachbarn ermahnt, bis ich dachte, er werde ihn zum Erben machen."
+    }),
+    lesson: localized({
+      en: "The hadith raises neighborly conduct from courtesy into a repeatedly emphasized religious duty.",
+      de: "Der Hadith hebt gutes Verhalten gegenueber Nachbarn von einer Hoeflichkeit zu einer wiederholt betonten religioesen Pflicht."
+    }),
+    search: ["neighbors", "jibril", "heir", "aishah", "kindness"]
+  }),
+  item({
+    id: "neighbors-not-safe-from-harm",
+    category: "neighbors",
+    grade: "sahih",
+    source: "Sahih Muslim 46",
+    narrator: "Abu Hurayrah",
+    arabic: "لاَ يَدْخُلُ الْجَنَّةَ مَنْ لاَ يَأْمَنُ جَارُهُ بَوَائِقَهُ",
+    translation: localized({
+      en: "He will not enter Paradise whose neighbor is not safe from his harm.",
+      de: "Nicht wird ins Paradies eintreten, wessen Nachbar vor seinem Schaden nicht sicher ist."
+    }),
+    lesson: localized({
+      en: "This hadith makes neighborly harm a major moral failure, not a minor social flaw.",
+      de: "Dieser Hadith macht Nachbarsschaden zu einem grossen moralischen Versagen und nicht zu einem kleinen sozialen Fehler."
+    }),
+    search: ["neighbors", "harm", "safe", "paradise", "abu hurayrah"]
+  }),
+  item({
+    id: "neighbors-best-to-neighbor",
+    category: "neighbors",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 1944",
+    narrator: "Abdullah ibn Amr",
+    arabic: "خَيْرُ الْجِيرَانِ عِنْدَ اللَّهِ خَيْرُهُمْ لِجَارِهِ",
+    translation: localized({
+      en: "The best neighbors with Allah are those who are best to their neighbors.",
+      de: "Die besten Nachbarn bei Allah sind diejenigen, die zu ihren Nachbarn am besten sind."
+    }),
+    lesson: localized({
+      en: "It gives a positive target for neighborly excellence instead of only warning against harm.",
+      de: "Er gibt ein positives Ziel fuer nachbarschaftliche Vorzueglichkeit, statt nur vor Schaden zu warnen."
+    }),
+    search: ["neighbors", "best neighbor", "companion", "abdullah ibn amr"]
+  }),
+  item({
+    id: "humility-no-arrogance-enters-paradise",
+    category: "humility",
+    grade: "sahih",
+    source: "Sahih Muslim 91a",
+    narrator: "Abdullah ibn Masud",
+    arabic: "لاَ يَدْخُلُ الْجَنَّةَ مَنْ كَانَ فِي قَلْبِهِ مِثْقَالُ ذَرَّةٍ مِنْ كِبْرٍ",
+    translation: localized({
+      en: "No one who has an atom's weight of arrogance in his heart will enter Paradise.",
+      de: "Niemand, in dessen Herzen das Gewicht eines Staubkorns an Hochmut ist, wird ins Paradies eintreten."
+    }),
+    lesson: localized({
+      en: "It makes humility a salvation issue, not just a personality trait.",
+      de: "Er macht Demut zu einer Frage des Heils und nicht nur zu einer Charaktereigenschaft."
+    }),
+    search: ["humility", "arrogance", "paradise", "pride", "ibn masud"]
+  }),
+  item({
+    id: "humility-allah-commanded-humility",
+    category: "humility",
+    grade: "sahih",
+    source: "Sahih Muslim 2865d",
+    narrator: "Iyad ibn Himar",
+    arabic: "إِنَّ اللَّهَ أَوْحَى إِلَيَّ أَنْ تَوَاضَعُوا حَتَّى لاَ يَفْخَرَ أَحَدٌ عَلَى أَحَدٍ",
+    translation: localized({
+      en: "Allah revealed to me that you should be humble so that none of you boasts over another.",
+      de: "Allah hat mir offenbart, dass ihr demtig sein sollt, damit keiner sich ueber den anderen erhebt."
+    }),
+    lesson: localized({
+      en: "This makes humility a revealed social ethic, not just private self-improvement.",
+      de: "Das macht Demut zu einer offenbarten sozialen Ethik und nicht nur zu einer privaten Selbstverbesserung."
+    }),
+    search: ["humility", "boast", "revealed", "iyad ibn himar"]
+  }),
+  item({
+    id: "humility-people-of-paradise-weak",
+    category: "humility",
+    grade: "sahih",
+    source: "Sahih Muslim 2853c",
+    narrator: "Haritha ibn Wahb",
+    arabic: "أَلاَ أُخْبِرُكُمْ بِأَهْلِ الْجَنَّةِ كُلُّ ضَعِيفٍ مُتَضَعَّفٍ",
+    translation: localized({
+      en: "Shall I not tell you about the people of Paradise? Every humble and meek person whom others look down upon.",
+      de: "Soll ich euch nicht von den Leuten des Paradieses berichten? Jeder demtige und sanfte Mensch, auf den andere herabblicken."
+    }),
+    lesson: localized({
+      en: "It breaks the habit of measuring worth by status, force, or display.",
+      de: "Er zerbricht die Gewohnheit, Wert nach Status, Haerte oder Selbstdarstellung zu messen."
+    }),
+    search: ["humility", "paradise", "meek", "weak", "haritha ibn wahb"]
+  }),
+  item({
+    id: "generosity-upper-hand-better",
+    category: "generosity",
+    grade: "sahih",
+    source: "Sahih Muslim 1033",
+    narrator: "Abdullah ibn Umar",
+    arabic: "الْيَدُ الْعُلْيَا خَيْرٌ مِنَ الْيَدِ السُّفْلَى",
+    translation: localized({
+      en: "The upper hand is better than the lower hand; the upper gives and the lower asks.",
+      de: "Die obere Hand ist besser als die untere; die obere gibt und die untere bittet."
+    }),
+    lesson: localized({
+      en: "It pushes the believer toward giving, self-restraint from begging, and responsible provision.",
+      de: "Er drngt den Glaeubigen zum Geben, zur Zurueckhaltung vor Bettelei und zu verantwortlicher Versorgung."
+    }),
+    search: ["generosity", "upper hand", "charity", "giving", "ibn umar"]
+  }),
+  item({
+    id: "generosity-half-date-fire",
+    category: "generosity",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 1417, Sahih Muslim 1016b",
+    narrator: "Adi ibn Hatim",
+    arabic: "اتَّقُوا النَّارَ وَلَوْ بِشِقِّ تَمْرَةٍ",
+    translation: localized({
+      en: "Protect yourselves from the Fire, even if only with half a date.",
+      de: "Schuetzt euch vor dem Feuer, selbst wenn es nur mit einer halben Dattel ist."
+    }),
+    lesson: localized({
+      en: "It removes the excuse of waiting for large wealth before becoming generous.",
+      de: "Er nimmt die Ausrede weg, auf grossen Reichtum zu warten, bevor man grosszuegig wird."
+    }),
+    search: ["generosity", "charity", "half date", "fire", "adi ibn hatim"]
+  }),
+  item({
+    id: "generosity-charity-does-not-decrease",
+    category: "generosity",
+    grade: "sahih",
+    source: "Sahih Muslim 2588",
+    narrator: "Abu Hurayrah",
+    arabic: "مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ",
+    translation: localized({
+      en: "Charity does not decrease wealth.",
+      de: "Sadaqa verringert den Besitz nicht."
+    }),
+    lesson: localized({
+      en: "This hadith targets the fear behind stinginess and trains confidence in barakah.",
+      de: "Dieser Hadith trifft die Angst hinter Geiz und erzieht zu Vertrauen in Baraka."
+    }),
+    search: ["generosity", "charity", "wealth", "sadaqah", "abu hurayrah"]
   })
 ];
 
