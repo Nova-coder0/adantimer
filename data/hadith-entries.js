@@ -80,55 +80,55 @@ export const HADITH_CATEGORIES = [
     id: "repentance",
     labels: {
       en: "Repentance",
-      ar: "Ø§Ù„ØªÙˆØ¨Ø©",
+      ar: "التوبة",
       de: "Reue",
       fr: "Repentir",
       tr: "Tevbe",
-      "zh-hans": "å¿æ‚”"
+      "zh-hans": "忏悔"
     }
   },
   {
     id: "patience",
     labels: {
       en: "Patience",
-      ar: "Ø§Ù„ØµØ¨Ø±",
+      ar: "الصبر",
       de: "Geduld",
       fr: "Patience",
       tr: "Sabir",
-      "zh-hans": "å¿è€�"
+      "zh-hans": "忍耐"
     }
   },
   {
     id: "family",
     labels: {
       en: "Family",
-      ar: "Ø§Ù„Ø£Ø³Ø±Ø©",
+      ar: "الأسرة",
       de: "Familie",
       fr: "Famille",
       tr: "Aile",
-      "zh-hans": "å®¶åº­"
+      "zh-hans": "家庭"
     }
   },
   {
     id: "truthfulness",
     labels: {
       en: "Truthfulness",
-      ar: "Ø§Ù„ØµØ¯Ù‚",
+      ar: "الصدق",
       de: "Wahrhaftigkeit",
       fr: "Veracite",
       tr: "Dogruluk",
-      "zh-hans": "è¯šå®ž"
+      "zh-hans": "诚实"
     }
   },
   {
     id: "trust",
     labels: {
       en: "Trust in Allah",
-      ar: "Ø§Ù„ØªÙˆÙƒÙ„",
+      ar: "التوكل",
       de: "Tawakkul",
       fr: "Confiance en Allah",
       tr: "Tevekkul",
-      "zh-hans": "æ‰˜é çœŸä¸»"
+      "zh-hans": "托靠真主"
     }
   }
 ];
@@ -493,7 +493,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Sahih Muslim 2744c",
     narrator: "Abdullah ibn Masud",
-    arabic: "Ù„Ù„Ù‘ÙŽÙ‡Ù Ø£ÙŽØ´ÙŽØ¯Ù‘Ù ÙÙŽØ±ÙŽØ­Ù‹Ø§ Ø¨ÙØªÙŽÙˆÙ’Ø¨ÙŽØ©Ù Ø¹ÙŽØ¨Ù’Ø¯ÙÙ‡Ù Ø§Ù„Ù’Ù…ÙØ¤Ù’Ù…ÙÙ†Ù",
+    arabic: "لَلَّهُ أَشَدُّ فَرَحًا بِتَوْبَةِ عَبْدِهِ الْمُؤْمِنِ",
     translation: localized({
       en: "Allah is more pleased with the repentance of His believing servant than a man who finds his lost mount in the desert.",
       de: "Allah freut sich ueber die Reue Seines glaeubigen Dieners mehr als ein Mensch, der in der Wueste sein verlorenes Reittier wiederfindet."
@@ -510,7 +510,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Sahih Muslim 2759a",
     narrator: "Abu Musa al-Ashari",
-    arabic: "Ø¥ÙÙ†Ù‘ÙŽ Ø§Ù„Ù„Ù‘ÙŽÙ‡ÙŽ ÙŠÙŽØ¨Ù’Ø³ÙØ·Ù ÙŠÙŽØ¯ÙŽÙ‡Ù Ø¨ÙØ§Ù„Ù„Ù‘ÙŽÙŠÙ’Ù„Ù Ù„ÙÙŠÙŽØªÙÙˆØ¨ÙŽ Ù…ÙØ³ÙÙŠØ¡Ù Ø§Ù„Ù†Ù‘ÙŽÙ‡ÙŽØ§Ø±Ù ÙˆÙŽÙŠÙŽØ¨Ù’Ø³ÙØ·ÙÙ‡ÙŽØ§ Ø¨ÙØ§Ù„Ù†Ù‘ÙŽÙ‡ÙŽØ§Ø±Ù Ù„ÙÙŠÙŽØªÙÙˆØ¨ÙŽ Ù…ÙØ³ÙÙŠØ¡Ù Ø§Ù„Ù„Ù‘ÙŽÙŠÙ’Ù„Ù",
+    arabic: "إِنَّ اللَّهَ يَبْسُطُ يَدَهُ بِاللَّيْلِ لِيَتُوبَ مُسِيءُ النَّهَارِ وَيَبْسُطُهَا بِالنَّهَارِ لِيَتُوبَ مُسِيءُ اللَّيْلِ",
     translation: localized({
       en: "Allah stretches out His Hand at night so that the sinner of the day may repent, and He stretches it out by day so that the sinner of the night may repent.",
       de: "Allah streckt Seine Hand in der Nacht aus, damit der Suender des Tages bereut, und am Tag, damit der Suender der Nacht bereut."
@@ -527,7 +527,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Sahih Muslim 2766a",
     narrator: "Abu Said al-Khudri",
-    arabic: "ÙˆÙŽÙ…ÙŽÙ†Ù’ ÙŠÙŽØ­ÙÙˆÙ„Ù Ø¨ÙŽÙŠÙ’Ù†ÙŽÙƒÙŽ ÙˆÙŽØ¨ÙŽÙŠÙ’Ù†ÙŽ Ø§Ù„ØªÙ‘ÙŽÙˆÙ’Ø¨ÙŽØ©Ù",
+    arabic: "وَمَنْ يَحُولُ بَيْنَكَ وَبَيْنَ التَّوْبَةِ",
     translation: localized({
       en: "Even the man who had killed one hundred people was shown that repentance was still open to him when he turned sincerely toward Allah.",
       de: "Sogar dem Mann, der hundert Menschen getoetet hatte, wurde gezeigt, dass Reue fuer ihn noch offen war, als er sich aufrichtig Allah zuwandte."
@@ -544,7 +544,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Sahih Muslim 2999",
     narrator: "Suhayb",
-    arabic: "Ø¹ÙŽØ¬ÙŽØ¨Ù‹Ø§ Ù„ÙØ£ÙŽÙ…Ù’Ø±Ù Ø§Ù„Ù’Ù…ÙØ¤Ù’Ù…ÙÙ†Ù Ø¥ÙÙ†Ù‘ÙŽ Ø£ÙŽÙ…Ù’Ø±ÙŽÙ‡Ù ÙƒÙÙ„Ù‘ÙŽÙ‡Ù Ø®ÙŽÙŠÙ’Ø±ÙŒ",
+    arabic: "عَجَبًا لِأَمْرِ الْمُؤْمِنِ إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ",
     translation: localized({
       en: "How wonderful is the affair of the believer. Every matter of his is good for him: gratitude in ease and patience in hardship.",
       de: "Wie erstaunlich ist die Angelegenheit des Glaeubigen. Jede seiner Lagen ist gut fuer ihn: Dankbarkeit in Erleichterung und Geduld in Bedraengnis."
@@ -561,7 +561,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih al-Bukhari 1283, Sahih Muslim 926",
     narrator: "Anas ibn Malik",
-    arabic: "Ø¥ÙÙ†Ù‘ÙŽÙ…ÙŽØ§ Ø§Ù„ØµÙ‘ÙŽØ¨Ù’Ø±Ù Ø¹ÙÙ†Ù’Ø¯ÙŽ Ø§Ù„ØµÙ‘ÙŽØ¯Ù’Ù…ÙŽØ©Ù Ø§Ù„Ù’Ø£ÙÙˆÙ„ÙŽÙ‰",
+    arabic: "إِنَّمَا الصَّبْرُ عِنْدَ الصَّدْمَةِ الْأُولَى",
     translation: localized({
       en: "True patience is at the first strike of calamity.",
       de: "Wahre Geduld zeigt sich beim ersten Schlag der Pruefung."
@@ -578,7 +578,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih al-Bukhari 5641, Sahih Muslim 2573",
     narrator: "Abu Saeed al-Khudri and Abu Hurayrah",
-    arabic: "Ù…ÙŽØ§ ÙŠÙØµÙÙŠØ¨Ù Ø§Ù„Ù’Ù…ÙØ³Ù’Ù„ÙÙ…ÙŽ Ù…ÙÙ†Ù’ Ù†ÙŽØµÙŽØ¨Ù ÙˆÙŽÙ„Ø§ÙŽ ÙˆÙŽØµÙŽØ¨Ù ÙˆÙŽÙ„Ø§ÙŽ Ù‡ÙŽÙ…Ù‘Ù ÙˆÙŽÙ„Ø§ÙŽ Ø­ÙØ²Ù’Ù†Ù ... Ø¥ÙÙ„Ù‘ÙŽØ§ ÙƒÙŽÙÙ‘ÙŽØ±ÙŽ Ø§Ù„Ù„Ù‘ÙŽÙ‡Ù Ø¨ÙÙ‡ÙŽØ§ Ù…ÙÙ†Ù’ Ø®ÙŽØ·ÙŽØ§ÙŠÙŽØ§Ù‡Ù",
+    arabic: "مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلَا وَصَبٍ وَلَا هَمٍّ وَلَا حُزْنٍ ... إِلَّا كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ",
     translation: localized({
       en: "No fatigue, illness, anxiety, grief, harm, or distress afflicts a Muslim except that Allah expiates sins through it.",
       de: "Keine Muedigkeit, Krankheit, Sorge, Trauer, Schaeden oder Bedraengnis trifft einen Muslim, ohne dass Allah dadurch Suenden tilgt."
@@ -595,7 +595,7 @@ export const HADITH_ITEMS = [
     grade: "hasan",
     source: "Sunan Ibn Majah 1977",
     narrator: "Ibn Abbas",
-    arabic: "Ø®ÙŽÙŠÙ’Ø±ÙÙƒÙÙ…Ù’ Ø®ÙŽÙŠÙ’Ø±ÙÙƒÙÙ…Ù’ Ù„ÙØ£ÙŽÙ‡Ù’Ù„ÙÙ‡Ù ÙˆÙŽØ£ÙŽÙ†ÙŽØ§ Ø®ÙŽÙŠÙ’Ø±ÙÙƒÙÙ…Ù’ Ù„ÙØ£ÙŽÙ‡Ù’Ù„ÙÙŠ",
+    arabic: "خَيْرُكُمْ خَيْرُكُمْ لِأَهْلِهِ وَأَنَا خَيْرُكُمْ لِأَهْلِي",
     translation: localized({
       en: "The best of you are those who are best to their families, and I am the best of you to my family.",
       de: "Die Besten unter euch sind diejenigen, die ihre Familie am besten behandeln, und ich bin der Beste von euch zu meiner Familie."
@@ -612,7 +612,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih al-Bukhari 6005",
     narrator: "Sahl ibn Sad",
-    arabic: "Ø£ÙŽÙ†ÙŽØ§ ÙˆÙŽÙƒÙŽØ§ÙÙÙ„Ù Ø§Ù„Ù’ÙŠÙŽØªÙÙŠÙ…Ù ÙÙÙŠ Ø§Ù„Ù’Ø¬ÙŽÙ†Ù‘ÙŽØ©Ù Ù‡ÙŽÙƒÙŽØ°ÙŽØ§",
+    arabic: "أَنَا وَكَافِلُ الْيَتِيمِ فِي الْجَنَّةِ هَكَذَا",
     translation: localized({
       en: "I and the one who cares for an orphan will be like this in Paradise, and he joined his index and middle fingers.",
       de: "Ich und derjenige, der sich um ein Waisenkind kuemmert, werden im Paradies so sein, und er legte Zeige- und Mittelfinger zusammen."
@@ -629,7 +629,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Riyad as-Salihin 330",
     narrator: "Amr ibn al-As",
-    arabic: "ÙˆÙŽÙ„ÙŽÙƒÙÙ†Ù’ Ù„ÙŽÙ‡ÙÙ…Ù’ Ø±ÙŽØ­ÙÙ…ÙŒ Ø£ÙŽØ¨ÙÙ„Ù‘ÙÙ‡ÙŽØ§ Ø¨ÙØ¨ÙÙ„ÙŽØ§Ù„ÙÙ‡ÙŽØ§",
+    arabic: "وَلَكِنْ لَهُمْ رَحِمٌ أَبُلُّهَا بِبِلَالِهَا",
     translation: localized({
       en: "Even where loyalty did not belong, the Prophet still affirmed that ties of kinship must be maintained.",
       de: "Selbst dort, wo keine besondere Loyalitaet bestand, bekraeftigte der Prophet, dass Verwandtschaftsbande erhalten werden muessen."
@@ -646,7 +646,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Riyad as-Salihin 54",
     narrator: "Abdullah ibn Masud",
-    arabic: "Ø¥ÙÙ†Ù‘ÙŽ Ø§Ù„ØµÙ‘ÙØ¯Ù’Ù‚ÙŽ ÙŠÙŽÙ‡Ù’Ø¯ÙÙŠ Ø¥ÙÙ„ÙŽÙ‰ Ø§Ù„Ù’Ø¨ÙØ±Ù‘Ù ÙˆÙŽØ¥ÙÙ†Ù‘ÙŽ Ø§Ù„Ø¨ÙØ±Ù‘ÙŽ ÙŠÙŽÙ‡Ù’Ø¯ÙÙŠ Ø¥ÙÙ„ÙŽÙ‰ Ø§Ù„Ù’Ø¬ÙŽÙ†Ù‘ÙŽØ©Ù",
+    arabic: "إِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ وَإِنَّ الْبِرَّ يَهْدِي إِلَى الْجَنَّةِ",
     translation: localized({
       en: "Truthfulness leads to righteousness, and righteousness leads to Paradise. Persistent lying leads to wickedness and the Fire.",
       de: "Wahrhaftigkeit fuehrt zur Rechtschaffenheit, und Rechtschaffenheit fuehrt ins Paradies. Beharrliches Luegen fuehrt zur Verdorbenheit und ins Feuer."
@@ -663,7 +663,7 @@ export const HADITH_ITEMS = [
     grade: "hasan",
     source: "Jami at-Tirmidhi 1209",
     narrator: "Abu Said al-Khudri",
-    arabic: "Ø§Ù„ØªÙ‘ÙŽØ§Ø¬ÙØ±Ù Ø§Ù„ØµÙ‘ÙŽØ¯ÙÙˆÙ‚Ù Ø§Ù„Ù’Ø£ÙŽÙ…ÙÙŠÙ†Ù Ù…ÙŽØ¹ÙŽ Ø§Ù„Ù†Ù‘ÙŽØ¨ÙÙŠÙ‘ÙÙŠÙ†ÙŽ ÙˆÙŽØ§Ù„ØµÙ‘ÙØ¯Ù‘ÙÙŠÙ‚ÙÙŠÙ†ÙŽ ÙˆÙŽØ§Ù„Ø´Ù‘ÙÙ‡ÙŽØ¯ÙŽØ§Ø¡Ù",
+    arabic: "التَّاجِرُ الصَّدُوقُ الْأَمِينُ مَعَ النَّبِيِّينَ وَالصِّدِّيقِينَ وَالشُّهَدَاءِ",
     translation: localized({
       en: "The truthful and trustworthy merchant will be with the Prophets, the truthful, and the martyrs.",
       de: "Der wahrhaftige und vertrauenswuerdige Kaufmann wird mit den Propheten, den Wahrhaftigen und den Maertyrern sein."
@@ -680,7 +680,7 @@ export const HADITH_ITEMS = [
     grade: "muttafaqun-alayh",
     source: "Sahih al-Bukhari 2079, Sahih Muslim 1532",
     narrator: "Hakim ibn Hizam",
-    arabic: "ÙÙŽØ¥ÙÙ†Ù’ ØµÙŽØ¯ÙŽÙ‚ÙŽØ§ ÙˆÙŽØ¨ÙŽÙŠÙ‘ÙŽÙ†ÙŽØ§ Ø¨ÙÙˆØ±ÙÙƒÙŽ Ù„ÙŽÙ‡ÙÙ…ÙŽØ§ ÙÙÙŠ Ø¨ÙŽÙŠÙ’Ø¹ÙÙ‡ÙÙ…ÙŽØ§ ÙˆÙŽØ¥ÙÙ†Ù’ ÙƒÙŽØªÙŽÙ…ÙŽØ§ ÙˆÙŽÙƒÙŽØ°ÙŽØ¨ÙŽØ§ Ù…ÙØ­ÙÙ‚ÙŽØªÙ’ Ø¨ÙŽØ±ÙŽÙƒÙŽØ©Ù Ø¨ÙŽÙŠÙ’Ø¹ÙÙ‡ÙÙ…ÙŽØ§",
+    arabic: "فَإِنْ صَدَقَا وَبَيَّنَا بُورِكَ لَهُمَا فِي بَيْعِهِمَا وَإِنْ كَتَمَا وَكَذَبَا مُحِقَتْ بَرَكَةُ بَيْعِهِمَا",
     translation: localized({
       en: "If both parties are truthful and clear, they are blessed in their sale; if they lie and conceal, the blessing of their sale is erased.",
       de: "Wenn beide Parteien wahrhaftig und klar sind, wird ihr Handel gesegnet; wenn sie luegen und verschweigen, wird der Segen ihres Handels ausgeloescht."
@@ -697,7 +697,7 @@ export const HADITH_ITEMS = [
     grade: "hasan",
     source: "Jami at-Tirmidhi 2344",
     narrator: "Umar ibn al-Khattab",
-    arabic: "Ù„ÙŽÙˆÙ’ Ø£ÙŽÙ†Ù‘ÙŽÙƒÙÙ…Ù’ ÙƒÙÙ†Ù’ØªÙÙ…Ù’ ØªÙŽÙˆÙŽÙƒÙ‘ÙŽÙ„ÙÙˆÙ†ÙŽ Ø¹ÙŽÙ„ÙŽÙ‰ Ø§Ù„Ù„Ù‘ÙŽÙ‡Ù Ø­ÙŽÙ‚Ù‘ÙŽ ØªÙŽÙˆÙŽÙƒÙ‘ÙÙ„ÙÙ‡Ù Ù„ÙŽØ±ÙØ²ÙÙ‚Ù’ØªÙÙ…Ù’ ÙƒÙŽÙ…ÙŽØ§ ØªÙØ±Ù’Ø²ÙŽÙ‚Ù Ø§Ù„Ø·Ù‘ÙŽÙŠÙ’Ø±Ù",
+    arabic: "لَوْ أَنَّكُمْ كُنْتُمْ تَوَكَّلُونَ عَلَى اللَّهِ حَقَّ تَوَكُّلِهِ لَرُزِقْتُكُمْ كَمَا تُرْزَقُ الطَّيْرُ",
     translation: localized({
       en: "If you relied upon Allah with the reliance He is due, He would provide for you as He provides for the birds: they leave hungry and return full.",
       de: "Wenn ihr auf Allah mit dem rechten Tawakkul vertrauen wuerdet, wuerde Er euch versorgen, wie Er die Voegel versorgt: Sie ziehen hungrig aus und kommen satt zurueck."
@@ -714,7 +714,7 @@ export const HADITH_ITEMS = [
     grade: "hasan",
     source: "Jami at-Tirmidhi 2517",
     narrator: "Anas ibn Malik",
-    arabic: "Ø§Ø¹Ù’Ù‚ÙÙ„Ù’Ù‡ÙŽØ§ ÙˆÙŽØªÙŽÙˆÙŽÙƒÙ‘ÙŽÙ„Ù’",
+    arabic: "اعْقِلْهَا وَتَوَكَّلْ",
     translation: localized({
       en: "Tie it and then rely upon Allah.",
       de: "Binde sie fest und vertraue dann auf Allah."
@@ -731,7 +731,7 @@ export const HADITH_ITEMS = [
     grade: "sahih",
     source: "Jami at-Tirmidhi 2516",
     narrator: "Ibn Abbas",
-    arabic: "Ø¥ÙØ°ÙŽØ§ Ø³ÙŽØ£ÙŽÙ„Ù’ØªÙŽ ÙÙŽØ§Ø³Ù’Ø£ÙŽÙ„Ù Ø§Ù„Ù„Ù‘ÙŽÙ‡ÙŽ ÙˆÙŽØ¥ÙØ°ÙŽØ§ Ø§Ø³Ù’ØªÙŽØ¹ÙŽÙ†Ù’ØªÙŽ ÙÙŽØ§Ø³Ù’ØªÙŽØ¹ÙÙ†Ù’ Ø¨ÙØ§Ù„Ù„Ù‘ÙŽÙ‡Ù",
+    arabic: "إِذَا سَأَلْتَ فَاسْأَلِ اللَّهَ وَإِذَا اسْتَعَنْتَ فَاسْتَعِنْ بِاللَّهِ",
     translation: localized({
       en: "When you ask, ask Allah; and when you seek help, seek help from Allah.",
       de: "Wenn du bittest, dann bitte Allah; und wenn du Hilfe suchst, dann suche Hilfe bei Allah."
