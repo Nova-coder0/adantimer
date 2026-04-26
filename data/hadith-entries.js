@@ -1113,6 +1113,261 @@ export const HADITH_ITEMS = [
       de: "Dieser Hadith trifft die Angst hinter Geiz und erzieht zu Vertrauen in Baraka."
     }),
     search: ["generosity", "charity", "wealth", "sadaqah", "abu hurayrah"]
+  }),
+  item({
+    id: "intentions-family-spending-counts-charity",
+    category: "intentions",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 55",
+    narrator: "Abu Masud al-Badri",
+    arabic: "إِذَا أَنْفَقَ الرَّجُلُ عَلَى أَهْلِهِ يَحْتَسِبُهَا فَهُوَ لَهُ صَدَقَةٌ",
+    translation: localized({
+      en: "If a man spends on his family seeking reward from Allah, it is charity for him.",
+      de: "Wenn ein Mann fuer seine Familie ausgibt und dabei Allahs Lohn erhofft, ist es fuer ihn Sadaqa."
+    }),
+    lesson: localized({
+      en: "It turns ordinary family spending into worship when the intention is sound.",
+      de: "Er macht gewoehnliche Ausgaben fuer die Familie bei richtiger Absicht zu Gottesdienst."
+    }),
+    search: ["intentions", "family spending", "charity", "reward", "abu masud"]
+  }),
+  item({
+    id: "prayer-wudu-steps-and-waiting",
+    category: "prayer",
+    grade: "sahih",
+    source: "Sahih Muslim 251a",
+    narrator: "Abu Hurayrah",
+    arabic: "أَلاَ أَدُلُّكُمْ عَلَى مَا يَمْحُو اللَّهُ بِهِ الْخَطَايَا وَيَرْفَعُ بِهِ الدَّرَجَاتِ . قَالُوا بَلَى يَا رَسُولَ اللَّهِ . قَالَ إِسْبَاغُ الْوُضُوءِ عَلَى الْمَكَارِهِ وَكَثْرَةُ الْخُطَا إِلَى الْمَسَاجِدِ وَانْتِظَارُ الصَّلاَةِ بَعْدَ الصَّلاَةِ فَذَلِكُمُ الرِّبَاطُ",
+    translation: localized({
+      en: "Shall I tell you what Allah uses to erase sins and raise ranks? Completing wudu despite difficulty, taking many steps to the mosque, and waiting for one prayer after another. That is ribat.",
+      de: "Soll ich euch zeigen, wodurch Allah Suenden tilgt und Ränge erhöht? Das vollstaendige Wudu trotz Schwierigkeit, viele Schritte zur Moschee und das Warten auf das naechste Gebet nach dem Gebet. Das ist Ribat."
+    }),
+    lesson: localized({
+      en: "It shows that daily consistency around prayer builds rank, not only dramatic acts.",
+      de: "Er zeigt, dass taegliche Beständigkeit rund um das Gebet Rang aufbaut und nicht nur aussergewoehnliche Taten."
+    }),
+    search: ["prayer", "wudu", "mosque", "steps", "ranks", "abu hurayrah"]
+  }),
+  item({
+    id: "character-righteousness-is-good-character",
+    category: "character",
+    grade: "sahih",
+    source: "Al-Adab Al-Mufrad 295",
+    narrator: "An-Nawwas ibn Saman",
+    arabic: "الْبِرُّ حُسْنُ الْخُلُقِ وَالإِثْمُ مَا حَاكَ فِي نَفْسِكَ وَكَرِهْتَ أَنْ يَطَّلِعَ عَلَيْهِ النَّاسُ",
+    translation: localized({
+      en: "Righteousness is good character, and sin is what stirs unease in your soul and you dislike people knowing about.",
+      de: "Rechtschaffenheit ist guter Charakter, und Suende ist das, was in deiner Seele Unruhe ausloest und was du vor den Menschen verbergen moechtest."
+    }),
+    lesson: localized({
+      en: "It makes character central to righteousness rather than secondary to it.",
+      de: "Er macht guten Charakter zu einem Kern von Rechtschaffenheit und nicht zu einer Nebensache."
+    }),
+    search: ["character", "righteousness", "sin", "conscience", "nawwas"]
+  }),
+  item({
+    id: "knowledge-brighten-the-one-who-conveys",
+    category: "knowledge",
+    grade: "sahih",
+    source: "Sunan Abi Dawud 3660",
+    narrator: "Zayd ibn Thabit",
+    arabic: "نَضَّرَ اللَّهُ امْرَأً سَمِعَ مِنَّا حَدِيثًا فَحَفِظَهُ حَتَّى يُبَلِّغَهُ فَرُبَّ حَامِلِ فِقْهٍ إِلَى مَنْ هُوَ أَفْقَهُ مِنْهُ وَرُبَّ حَامِلِ فِقْهٍ لَيْسَ بِفَقِيهٍ",
+    translation: localized({
+      en: "May Allah brighten a person who hears a hadith from us, preserves it, and conveys it. A carrier of knowledge may deliver it to one who understands it better than him.",
+      de: "Möge Allah den Menschen erhellen, der einen Hadith von uns hört, ihn bewahrt und weitergibt. Ein Traeger von Wissen kann es an jemanden weitergeben, der es besser versteht als er."
+    }),
+    lesson: localized({
+      en: "It frames hadith learning as preservation and transmission, not private collection.",
+      de: "Er beschreibt Hadith-Lernen als Bewahrung und Weitergabe und nicht als private Sammlung."
+    }),
+    search: ["knowledge", "hadith", "transmit", "preserve", "zayd ibn thabit"]
+  }),
+  item({
+    id: "gratitude-repay-kindness-or-pray",
+    category: "gratitude",
+    grade: "sahih",
+    source: "Riyad as-Salihin 1723",
+    narrator: "Abdullah ibn Umar",
+    arabic: "مَنْ اسْتَعَاذَ بِاللَّهِ فَأَعِيذُوهُ وَمَنْ سَأَلَ بِاللَّهِ فَأَعْطُوهُ وَمَنْ دَعَاكُمْ فَأَجِيبُوهُ وَمَنْ صَنَعَ إِلَيْكُمْ مَعْرُوفًا فَكَافِئُوهُ فَإِنْ لَمْ تَجِدُوا مَا تُكَافِئُوهُ فَادْعُوا لَهُ حَتَّى تُرَوْا أَنَّكُمْ قَدْ كَافَأْتُمُوهُ",
+    translation: localized({
+      en: "Whoever does you a favor, repay him. If you cannot find anything to repay him with, then pray for him until you think you have repaid him.",
+      de: "Wer euch etwas Gutes tut, den vergütet es. Wenn ihr nichts findet, womit ihr vergelten könnt, dann betet für ihn, bis ihr meint, dass ihr es vergolten habt."
+    }),
+    lesson: localized({
+      en: "It turns gratitude into an active ethic of repayment, prayer, and acknowledgment.",
+      de: "Er macht Dankbarkeit zu einer aktiven Haltung aus Vergeltung, Dua und Anerkennung."
+    }),
+    search: ["gratitude", "favor", "repay", "pray for him", "ibn umar"]
+  }),
+  item({
+    id: "mercy-no-mercy-to-people",
+    category: "mercy",
+    grade: "sahih",
+    source: "Al-Adab Al-Mufrad 96",
+    narrator: "Jarir ibn Abdullah",
+    arabic: "لاَ يَرْحَمُ اللَّهُ مَنْ لا يَرْحَمُ النَّاسَ",
+    translation: localized({
+      en: "Allah does not show mercy to the one who does not show mercy to people.",
+      de: "Allah erweist demjenigen keine Barmherzigkeit, der den Menschen keine Barmherzigkeit erweist."
+    }),
+    lesson: localized({
+      en: "It ties hope for divine mercy directly to how one treats people.",
+      de: "Er verbindet die Hoffnung auf goettliche Barmherzigkeit direkt mit dem Umgang mit Menschen."
+    }),
+    search: ["mercy", "people", "jarir", "rahmah", "kindness"]
+  }),
+  item({
+    id: "repentance-best-sinners-are-repentant",
+    category: "repentance",
+    grade: "hasan",
+    source: "Sunan Ibn Majah 4251",
+    narrator: "Anas ibn Malik",
+    arabic: "كُلُّ بَنِي آدَمَ خَطَّاءٌ وَخَيْرُ الْخَطَّائِينَ التَّوَّابُونَ",
+    translation: localized({
+      en: "Every son of Adam sins, and the best of sinners are those who repent often.",
+      de: "Jeder Sohn Adams suendigt, und die Besten der Suender sind diejenigen, die oft bereuen."
+    }),
+    lesson: localized({
+      en: "It keeps the door of return open without normalizing sin.",
+      de: "Er haelt die Tuer zur Rueckkehr offen, ohne Suende zu verharmlosen."
+    }),
+    search: ["repentance", "sinners", "repent often", "anas", "tawbah"]
+  }),
+  item({
+    id: "patience-no-gift-better-than-patience",
+    category: "patience",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 1469",
+    narrator: "Abu Saeed al-Khudri",
+    arabic: "وَمَنْ يَتَصَبَّرْ يُصَبِّرْهُ اللَّهُ وَمَا أُعْطِيَ أَحَدٌ عَطَاءً خَيْرًا وَأَوْسَعَ مِنَ الصَّبْرِ",
+    translation: localized({
+      en: "Whoever strives to be patient, Allah makes him patient. No one is given a gift better and more expansive than patience.",
+      de: "Wer sich um Geduld bemueht, den laesst Allah geduldig werden. Niemandem wurde eine Gabe gegeben, die besser und umfassender ist als Geduld."
+    }),
+    lesson: localized({
+      en: "It treats patience as something cultivated, not merely inherited.",
+      de: "Er behandelt Geduld als etwas, das eingeuebt wird und nicht nur angeboren ist."
+    }),
+    search: ["patience", "gift", "abu saeed", "sabr", "strive"]
+  }),
+  item({
+    id: "family-spending-on-wife-is-rewarded",
+    category: "family",
+    grade: "muttafaqun-alayh",
+    source: "Riyad as-Salihin 292",
+    narrator: "Sad ibn Abi Waqqas",
+    arabic: "وَإِنَّكَ لَنْ تُنْفِقَ نَفَقَةً تَبْتَغِي بِهَا وَجْهَ اللَّهِ إِلاَّ أُجِرْتَ بِهَا حَتَّى مَا تَجْعَلُ فِي فِي امْرَأَتِكَ",
+    translation: localized({
+      en: "You will never spend anything seeking the Face of Allah except that you will be rewarded for it, even what you place in your wife's mouth.",
+      de: "Du wirst nichts ausgeben, womit du Allahs Wohlgefallen suchst, ohne dafür belohnt zu werden, selbst für das, was du in den Mund deiner Frau legst."
+    }),
+    lesson: localized({
+      en: "It makes care, feeding, and household responsibility part of sincere worship.",
+      de: "Er macht Fuersorge, Versorgung und Verantwortung im Haus zu einem Teil aufrichtiger Anbetung."
+    }),
+    search: ["family", "wife", "spending", "reward", "sad ibn abi waqqas"]
+  }),
+  item({
+    id: "trust-strong-believer-strive-for-benefit",
+    category: "trust",
+    grade: "sahih",
+    source: "Bulugh al-Maram 1569",
+    narrator: "Abu Hurayrah",
+    arabic: "اَلْمُؤْمِنُ اَلْقَوِيُّ خَيْرٌ وَأَحَبُّ إِلَى اَللَّهِ مِنْ اَلْمُؤْمِنِ اَلضَّعِيفِ وَفِي كُلٍّ خَيْرٌ اِحْرِصْ عَلَى مَا يَنْفَعُكَ وَاسْتَعِنْ بِاللَّهِ وَلَا تَعْجَزْ",
+    translation: localized({
+      en: "The strong believer is better and more beloved to Allah than the weak believer, though there is good in both. Be keen on what benefits you, seek Allah's help, and do not give up.",
+      de: "Der starke Glaeubige ist besser und Allah lieber als der schwache Glaeubige, obwohl in beiden Gutes ist. Sei eifrig in dem, was dir nuetzt, suche Allahs Hilfe und gib nicht auf."
+    }),
+    lesson: localized({
+      en: "It joins reliance on Allah with effort, usefulness, and disciplined action.",
+      de: "Er verbindet das Vertrauen auf Allah mit Einsatz, Nutzen und diszipliniertem Handeln."
+    }),
+    search: ["trust", "strong believer", "benefit", "seek Allah help", "abu hurayrah"]
+  }),
+  item({
+    id: "parents-you-and-wealth-belong-to-father",
+    category: "parents",
+    grade: "sahih",
+    source: "Sunan Ibn Majah 2291",
+    narrator: "Jabir ibn Abdullah",
+    arabic: "أَنْتَ وَمَالُكَ لأَبِيكَ",
+    translation: localized({
+      en: "You and your wealth belong to your father.",
+      de: "Du und dein Vermoegen gehoert deinem Vater."
+    }),
+    lesson: localized({
+      en: "It underscores the serious claim of parents over a child's wealth, service, and duty.",
+      de: "Er unterstreicht den ernsten Anspruch der Eltern auf Dienst, Unterstuetzung und Ruecksicht."
+    }),
+    search: ["parents", "father", "wealth", "jabir", "rights"]
+  }),
+  item({
+    id: "speech-harvest-of-the-tongue",
+    category: "speech",
+    grade: "hasan",
+    source: "Riyad as-Salihin 1522",
+    narrator: "Muadh ibn Jabal",
+    arabic: "ثَكِلَتْكَ أُمُّكَ يَا مُعَاذُ وَهَلْ يُكَبُّ النَّاسَ عَلَى وُجُوهِهِمْ فِي النَّارِ إِلاَّ حَصَائِدُ أَلْسِنَتِهِمْ",
+    translation: localized({
+      en: "May your mother be bereaved of you, Muadh. Are people thrown on their faces into the Fire for anything other than the harvest of their tongues?",
+      de: "Möge deine Mutter um dich trauern, Muadh. Werden die Menschen wegen etwas anderem als der Ernte ihrer Zungen auf ihre Gesichter ins Feuer geworfen?"
+    }),
+    lesson: localized({
+      en: "It gives the tongue weight and consequence far beyond casual speech.",
+      de: "Er gibt der Zunge ein Gewicht und eine Folge, die weit über lockere Worte hinausgeht."
+    }),
+    search: ["speech", "tongue", "fire", "muadh", "words"]
+  }),
+  item({
+    id: "brotherhood-believers-are-like-building",
+    category: "brotherhood",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 2446, Sahih Muslim 2585",
+    narrator: "Abu Musa al-Ashari",
+    arabic: "الْمُؤْمِنُ لِلْمُؤْمِنِ كَالْبُنْيَانِ يَشُدُّ بَعْضُهُ بَعْضًا",
+    translation: localized({
+      en: "A believer to another believer is like a building, each part strengthening the other.",
+      de: "Ein Glaeubiger ist für den anderen Glaeubigen wie ein Bauwerk, dessen Teile einander festigen."
+    }),
+    lesson: localized({
+      en: "It defines brotherhood as mutual reinforcement, not passive affiliation.",
+      de: "Er definiert Bruderschaft als gegenseitige Staerkung und nicht als bloße Zugehoerigkeit."
+    }),
+    search: ["brotherhood", "building", "support", "abu musa", "believers"]
+  }),
+  item({
+    id: "humility-allah-raises-the-humble",
+    category: "humility",
+    grade: "sahih",
+    source: "Riyad as-Salihin 602",
+    narrator: "Abu Hurayrah",
+    arabic: "وَمَا تَوَاضَعَ أَحَدٌ لِلَّهِ إِلاَّ رَفَعَهُ اللَّهُ",
+    translation: localized({
+      en: "No one humbles himself for Allah except that Allah raises him.",
+      de: "Niemand demütigt sich für Allah, ohne dass Allah ihn erhebt."
+    }),
+    lesson: localized({
+      en: "It breaks the fear that humility lowers status. With Allah it elevates.",
+      de: "Er zerstoert die Angst, dass Demut den Rang senkt. Bei Allah erhebt sie."
+    }),
+    search: ["humility", "Allah raises", "abu hurayrah", "tawadu"]
+  }),
+  item({
+    id: "generosity-care-for-widow-and-poor",
+    category: "generosity",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6006, Sahih Muslim 2982",
+    narrator: "Abu Hurayrah",
+    arabic: "السَّاعِي عَلَى الأَرْمَلَةِ وَالْمِسْكِينِ كَالْمُجَاهِدِ فِي سَبِيلِ اللَّهِ وَكَالْقَائِمِ لاَ يَفْتُرُ وَكَالصَّائِمِ لاَ يُفْطِرُ",
+    translation: localized({
+      en: "The one who works for a widow and the poor is like the fighter in Allah's path, like one who stands in prayer without tiring and fasts without breaking.",
+      de: "Wer sich für die Witwe und den Armen einsetzt, ist wie der Kaempfer auf Allahs Weg, wie einer, der unermüdlich im Gebet steht und fastet, ohne zu brechen."
+    }),
+    lesson: localized({
+      en: "It shows that active service to vulnerable people is among the highest forms of devotion.",
+      de: "Er zeigt, dass der aktive Dienst an Schutzbeduerftigen zu den hoechsten Formen der Hingabe gehoert."
+    }),
+    search: ["generosity", "widow", "poor", "service", "abu hurayrah"]
   })
 ];
 
