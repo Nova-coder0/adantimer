@@ -3960,7 +3960,7 @@ function buildHadithIndexCopy(language, pageType, collectionId = "") {
     hadithSourceAria: locale.sourceAria,
     hadithNarratorLabel: locale.narratorLabel,
     hadithTakeawayLabel: locale.takeawayLabel,
-    hadithCollection: activeCollectionId,
+    hadithCollection: activeCollectionId === "all" ? "" : activeCollectionId,
     hadithCollectionIntroHref: buildRoutePath(language, "hadith"),
     hadithCollectionBackLabel: collectionCopy?.indexTitle || locale.sectionTitle,
     hadithCategories: [
