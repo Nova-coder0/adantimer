@@ -1423,6 +1423,8 @@ function renderDhikrPage(state) {
     const count = Math.max(0, Math.min(Number(state.counts[itemId] || 0), target));
     const matchesCategory = state.activeCategory === "all" || category === state.activeCategory;
     card.hidden = !matchesCategory;
+    card.classList.toggle("is-hidden", !matchesCategory);
+    card.setAttribute("aria-hidden", matchesCategory ? "false" : "true");
     updateDhikrCard(card, count);
   });
 
