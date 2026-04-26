@@ -802,10 +802,16 @@ function getRequestedDhikrCollection() {
   return document.body.dataset.dhikrCollection || "";
 }
 
+function getDhikrCollectionRouteSlug(value) {
+  const slug = slugifyCity(String(value || ""));
+  if (slug === "sleep" || slug === "before-sleep") return "before-sleep";
+  return slug;
+}
+
 function buildRelativeUrl(lang, type, city = "", detail = "") {
   const prefix = getLanguagePrefix(lang);
   const slug = city ? encodeURIComponent(slugifyCity(city)) : "";
-  const detailSlug = detail ? encodeURIComponent(slugifyCity(detail)) : "";
+  const detailSlug = detail ? encodeURIComponent(type === "dhikr-collection" ? getDhikrCollectionRouteSlug(detail) : slugifyCity(detail)) : "";
   const pathMap = {
     home: slug ? `/${slug}` : "/",
     "prayer-times": slug ? `/prayer-times/${slug}` : "/prayer-times",
