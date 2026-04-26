@@ -256,6 +256,7 @@ AssertContains $scriptJs 'function initQuranIndex()' "Client keeps the Quran ind
 AssertContains $scriptJs 'function updateQuranIndexFilter(query = "")' "Client keeps the Quran index filter helper" "Client Quran index filter helper is missing"
 AssertContains $scriptJs 'function normalizeForSearch(value = "")' "Client keeps the Quran search normalizer" "Client Quran search normalizer is missing"
 AssertContains $scriptJs 'const DHIKR_STATE_STORAGE_KEY = "adantimer-dhikr-state-v1";' "Client keeps the Dhikr storage key" "Client Dhikr storage key is missing"
+AssertContains $scriptJs 'document.querySelectorAll(".dhikr-category-chip[data-dhikr-category]")' "Client scopes Dhikr category buttons to filter chips" "Client Dhikr category selector is too broad"
 AssertContains $scriptJs 'function renderDhikrPage(state)' "Client keeps the Dhikr page renderer" "Client Dhikr page renderer is missing"
 AssertContains $scriptJs 'function initDhikrPage()' "Client keeps the Dhikr page initializer" "Client Dhikr page initializer is missing"
 AssertContains $scriptJs 'buildRelativeUrl(language, "dhikr")' "Client can navigate to localized Dhikr routes" "Client Dhikr route navigation is missing"
