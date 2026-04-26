@@ -332,6 +332,8 @@ AssertContains $renderJs 'function buildQuranSurahCopy(language, pageType, surah
 AssertContains $renderJs 'function buildDhikrIndexCopy(language, pageType, collectionId = "")' "SSR renderer keeps the Dhikr index copy builder" "SSR renderer is missing the Dhikr index copy builder"
 AssertContains $renderJs 'function buildHadithIndexCopy(language, pageType)' "SSR renderer keeps the Hadith index copy builder" "SSR renderer is missing the Hadith index copy builder"
 AssertContains $renderJs 'function HADITH_CATEGORIES_LABEL(language, id)' "SSR renderer keeps the Hadith category label helper" "SSR renderer is missing the Hadith category label helper"
+AssertContains $renderJs 'value: String(categories.length),' "SSR renderer calculates Hadith theme stats dynamically" "SSR renderer still hardcodes Hadith theme stats"
+AssertContains $renderJs 'value: String(items.length),' "SSR renderer calculates Hadith entry stats dynamically" "SSR renderer still hardcodes Hadith entry stats"
 AssertContains $renderJs 'function normalizeDhikrCollectionId(value)' "SSR renderer keeps the Dhikr collection normalizer" "SSR renderer is missing the Dhikr collection normalizer"
 AssertContains $renderJs 'function getDhikrCollectionRouteSlug(value)' "SSR renderer keeps the Dhikr collection route-slug helper" "SSR renderer is missing the Dhikr collection route-slug helper"
 AssertContains $renderJs 'function getDhikrCollectionCopy(language, collectionId, label)' "SSR renderer keeps the Dhikr collection copy helper" "SSR renderer is missing the Dhikr collection copy helper"
@@ -449,6 +451,12 @@ AssertContains $dhikrEntries 'export function getDhikrItems()' "Local Dhikr meta
 AssertContains $hadithEntries 'export const HADITH_CATEGORIES = [' "Local Hadith metadata exports the category list" "Local Hadith metadata export is missing"
 AssertContains $hadithEntries 'id: "intentions-actions"' "Local Hadith metadata includes the intentions entry" "Local Hadith metadata is missing the intentions entry"
 AssertContains $hadithEntries 'id: "mercy-shown-mercy"' "Local Hadith metadata includes the mercy entry" "Local Hadith metadata is missing the mercy entry"
+AssertContains $hadithEntries 'id: "intentions-hearts-deeds"' "Local Hadith metadata includes the expanded intentions entry" "Local Hadith metadata is missing the expanded intentions entry"
+AssertContains $hadithEntries 'id: "prayer-nearest-in-sujood"' "Local Hadith metadata includes the expanded prayer entry" "Local Hadith metadata is missing the expanded prayer entry"
+AssertContains $hadithEntries 'id: "character-control-anger"' "Local Hadith metadata includes the expanded character entry" "Local Hadith metadata is missing the expanded character entry"
+AssertContains $hadithEntries 'id: "knowledge-understanding-religion"' "Local Hadith metadata includes the expanded knowledge entry" "Local Hadith metadata is missing the expanded knowledge entry"
+AssertContains $hadithEntries 'id: "gratitude-affair-believer"' "Local Hadith metadata includes the expanded gratitude entry" "Local Hadith metadata is missing the expanded gratitude entry"
+AssertContains $hadithEntries 'id: "mercy-young-and-elders"' "Local Hadith metadata includes the expanded mercy entry" "Local Hadith metadata is missing the expanded mercy entry"
 AssertContains $hadithEntries 'export function getHadithItems()' "Local Hadith metadata exports the item helper" "Local Hadith metadata item helper is missing"
 
 TestMojibake "templates/index.html"
@@ -466,7 +474,7 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/dhikr/distress" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="distress"', 'distress-dhun-nun')
   TestLiveUrl "$BaseUrl/dhikr/healing" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="healing"', 'healing-rabb-an-nas')
   TestLiveUrl "$BaseUrl/dhikr/before-sleep" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="sleep"', 'sleep-ayat-al-kursi')
-  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'hadith-category-chip')
+  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'character-control-anger', 'gratitude-affair-believer', 'hadith-category-chip')
   TestLiveUrl "$BaseUrl/de/hadith" @('<html lang="de" dir="ltr">', '<body data-page="hadith">', 'hadith-card-grid')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran" @('id="quran-search-clear"', 'quran-search-count')

@@ -113,6 +113,36 @@ export const HADITH_ITEMS = [
     search: ["intentions", "niyyah", "actions", "umar"]
   }),
   item({
+    id: "intentions-hearts-deeds",
+    category: "intentions",
+    grade: "sahih",
+    source: "Sahih Muslim 2564c",
+    narrator: "Abu Hurayrah",
+    arabic: "إِنَّ اللَّهَ لاَ يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ",
+    translation: localized({
+      en: "Allah does not look at your appearance or wealth. He looks at your hearts and your deeds."
+    }),
+    lesson: localized({
+      en: "This keeps intention and sincerity above image, status, and external presentation."
+    }),
+    search: ["intentions", "hearts", "deeds", "sincerity", "abu hurayrah"]
+  }),
+  item({
+    id: "intentions-leave-doubt",
+    category: "intentions",
+    grade: "sahih",
+    source: "Jami at-Tirmidhi 2518",
+    narrator: "Al-Hasan ibn Ali",
+    arabic: "دَعْ مَا يَرِيبُكَ إِلَى مَا لاَ يَرِيبُكَ فَإِنَّ الصِّدْقَ طُمَأْنِينَةٌ وَإِنَّ الْكَذِبَ رِيبَةٌ",
+    translation: localized({
+      en: "Leave what makes you doubtful for what does not make you doubtful. Truth brings calm, and falsehood brings doubt."
+    }),
+    lesson: localized({
+      en: "A practical hadith for clean intentions, careful choices, and stepping away from morally cloudy situations."
+    }),
+    search: ["intentions", "doubt", "certainty", "truth", "hasan ibn ali"]
+  }),
+  item({
     id: "prayer-first-account",
     category: "prayer",
     grade: "sahih",
@@ -136,6 +166,36 @@ export const HADITH_ITEMS = [
       "zh-hans": "这段圣训把礼拜重新放到核心位置，提醒人必须把每日礼拜的纪律当作首要事务。"
     }),
     search: ["prayer", "salah", "first deed", "account"]
+  }),
+  item({
+    id: "prayer-nearest-in-sujood",
+    category: "prayer",
+    grade: "sahih",
+    source: "Sahih Muslim 482",
+    narrator: "Abu Hurayrah",
+    arabic: "أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ فَأَكْثِرُوا الدُّعَاءَ",
+    translation: localized({
+      en: "The nearest a servant comes to his Lord is while in prostration, so increase your supplication then."
+    }),
+    lesson: localized({
+      en: "This hadith turns sujood into an active place for dua, humility, and presence in prayer."
+    }),
+    search: ["prayer", "sujood", "prostration", "dua", "closest"]
+  }),
+  item({
+    id: "prayer-pray-as-seen",
+    category: "prayer",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 631",
+    narrator: "Malik ibn al-Huwayrith",
+    arabic: "صَلُّوا كَمَا رَأَيْتُمُونِي أُصَلِّي",
+    translation: localized({
+      en: "Pray as you have seen me pray."
+    }),
+    lesson: localized({
+      en: "A concise hadith that anchors prayer practice to the Prophetic model rather than habit or assumption."
+    }),
+    search: ["prayer", "pray as you have seen me", "sunnah prayer", "malik"]
   }),
   item({
     id: "character-best-of-you",
@@ -163,6 +223,51 @@ export const HADITH_ITEMS = [
     search: ["character", "akhlaq", "best of you", "manners"]
   }),
   item({
+    id: "character-speak-good-or-silent",
+    category: "character",
+    grade: "sahih",
+    source: "Sahih Muslim 47a",
+    narrator: "Abu Hurayrah",
+    arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+    translation: localized({
+      en: "Whoever believes in Allah and the Last Day should speak good or remain silent."
+    }),
+    lesson: localized({
+      en: "It makes discipline of speech part of faith and resets online, social, and family speech standards."
+    }),
+    search: ["character", "speech", "silence", "good words", "faith"]
+  }),
+  item({
+    id: "character-love-for-brother",
+    category: "character",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 13, Sahih Muslim 45a",
+    narrator: "Anas ibn Malik",
+    arabic: "لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ",
+    translation: localized({
+      en: "None of you truly believes until he loves for his brother what he loves for himself."
+    }),
+    lesson: localized({
+      en: "This hadith pushes faith out of theory and into empathy, fairness, and sincere goodwill toward others."
+    }),
+    search: ["character", "brother", "love for others", "faith", "anas"]
+  }),
+  item({
+    id: "character-control-anger",
+    category: "character",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 6114",
+    narrator: "Abu Hurayrah",
+    arabic: "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ",
+    translation: localized({
+      en: "The strong person is not the one who overpowers others, but the one who controls himself when angry."
+    }),
+    lesson: localized({
+      en: "It redefines strength as self-mastery and makes anger control part of real character."
+    }),
+    search: ["character", "anger", "strength", "self-control", "abu hurayrah"]
+  }),
+  item({
     id: "knowledge-path",
     category: "knowledge",
     grade: "sahih",
@@ -186,6 +291,36 @@ export const HADITH_ITEMS = [
       "zh-hans": "这是一段鼓励持续学习、听课、阅读和有纪律求知的简明圣训。"
     }),
     search: ["knowledge", "ilm", "study", "path to paradise"]
+  }),
+  item({
+    id: "knowledge-understanding-religion",
+    category: "knowledge",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 71",
+    narrator: "Muawiyah",
+    arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ",
+    translation: localized({
+      en: "When Allah wants good for a person, He grants him understanding in the religion."
+    }),
+    lesson: localized({
+      en: "This makes sound understanding a sign of divine favor, not just information accumulation."
+    }),
+    search: ["knowledge", "understanding religion", "fiqh", "muawiyah"]
+  }),
+  item({
+    id: "knowledge-concealing-knowledge",
+    category: "knowledge",
+    grade: "hasan",
+    source: "Sunan Abi Dawud 3658",
+    narrator: "Abu Hurayrah",
+    arabic: "مَنْ سُئِلَ عَنْ عِلْمٍ فَكَتَمَهُ أُلْجِمَ بِلِجَامٍ مِنْ نَارٍ يَوْمَ الْقِيَامَةِ",
+    translation: localized({
+      en: "Whoever is asked about knowledge and conceals it will be bridled with fire on the Day of Resurrection."
+    }),
+    lesson: localized({
+      en: "It warns against selfish gatekeeping and frames beneficial teaching as a responsibility."
+    }),
+    search: ["knowledge", "teaching", "concealing knowledge", "responsibility"]
   }),
   item({
     id: "gratitude-to-people",
@@ -213,6 +348,36 @@ export const HADITH_ITEMS = [
     search: ["gratitude", "thanks", "people", "shukr"]
   }),
   item({
+    id: "gratitude-praise-after-food",
+    category: "gratitude",
+    grade: "sahih",
+    source: "Sahih Muslim 2734a",
+    narrator: "Anas ibn Malik",
+    arabic: "إِنَّ اللَّهَ لَيَرْضَى عَنِ الْعَبْدِ أَنْ يَأْكُلَ الأَكْلَةَ فَيَحْمَدَهُ عَلَيْهَا أَوْ يَشْرَبَ الشَّرْبَةَ فَيَحْمَدَهُ عَلَيْهَا",
+    translation: localized({
+      en: "Allah is pleased with the servant who praises Him after eating food or drinking."
+    }),
+    lesson: localized({
+      en: "This hadith makes gratitude concrete in ordinary daily routines, not just major moments."
+    }),
+    search: ["gratitude", "alhamdulillah", "food", "drink", "anas"]
+  }),
+  item({
+    id: "gratitude-affair-believer",
+    category: "gratitude",
+    grade: "sahih",
+    source: "Sahih Muslim 2999",
+    narrator: "Suhayb",
+    arabic: "عَجَبًا لأَمْرِ الْمُؤْمِنِ إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ",
+    translation: localized({
+      en: "Amazing is the affair of the believer. Every matter of his is good for him."
+    }),
+    lesson: localized({
+      en: "It trains a believer to read ease through gratitude and hardship through patience."
+    }),
+    search: ["gratitude", "believer", "patience", "good in every affair", "suhayb"]
+  }),
+  item({
     id: "mercy-shown-mercy",
     category: "mercy",
     grade: "hasan",
@@ -236,6 +401,36 @@ export const HADITH_ITEMS = [
       "zh-hans": "这段圣训把怜悯变成家庭、言语、劝导和承担责任中的日常标准。"
     }),
     search: ["mercy", "merciful", "rahman", "compassion"]
+  }),
+  item({
+    id: "mercy-not-shown-mercy",
+    category: "mercy",
+    grade: "hasan",
+    source: "Al-Adab Al-Mufrad 95",
+    narrator: "Abu Said al-Khudri",
+    arabic: "مَنْ لاَ يَرْحَمُ لاَ يُرْحَمُ",
+    translation: localized({
+      en: "Whoever does not show mercy will not be shown mercy."
+    }),
+    lesson: localized({
+      en: "A direct warning that mercy is not optional softness but a condition that shapes how one is treated."
+    }),
+    search: ["mercy", "show mercy", "compassion", "abu said"]
+  }),
+  item({
+    id: "mercy-young-and-elders",
+    category: "mercy",
+    grade: "sahih",
+    source: "Sunan Abi Dawud 4943",
+    narrator: "Abdullah ibn Amr",
+    arabic: "مَنْ لَمْ يَرْحَمْ صَغِيرَنَا وَيَعْرِفْ حَقَّ كَبِيرِنَا فَلَيْسَ مِنَّا",
+    translation: localized({
+      en: "Whoever does not show mercy to our young and recognize the right of our elders is not from us."
+    }),
+    lesson: localized({
+      en: "It ties mercy to community structure: tenderness to the young and respect toward elders."
+    }),
+    search: ["mercy", "young", "elders", "respect", "community"]
   })
 ];
 
