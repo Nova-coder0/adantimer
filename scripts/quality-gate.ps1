@@ -262,6 +262,7 @@ AssertContains $scriptJs 'function renderDhikrPage(state)' "Client keeps the Dhi
 AssertContains $scriptJs 'function initDhikrPage()' "Client keeps the Dhikr page initializer" "Client Dhikr page initializer is missing"
 AssertContains $scriptJs 'buildRelativeUrl(language, "dhikr")' "Client can navigate to localized Dhikr routes" "Client Dhikr route navigation is missing"
 AssertContains $scriptJs 'function getRequestedDhikrCollection()' "Client keeps the Dhikr collection helper" "Client Dhikr collection helper is missing"
+AssertContains $scriptJs 'function getDhikrCollectionRouteSlug(value)' "Client keeps the Dhikr collection route-slug helper" "Client Dhikr collection route-slug helper is missing"
 AssertContains $scriptJs '"dhikr-collection": detailSlug ? `/dhikr/${detailSlug}` : "/dhikr"' "Client URL builder includes Dhikr collection routes" "Client Dhikr collection route handling is missing"
 AssertContains $scriptJs 'buildRelativeUrl(language, "dhikr-collection", "", getRequestedDhikrCollection())' "Client can navigate to localized Dhikr collection routes" "Client localized Dhikr collection route navigation is missing"
 AssertContains $scriptJs 'pageType === "dhikr" || pageType === "dhikr-collection"' "Client handles both Dhikr page types" "Client does not separate the Dhikr collection flow"
@@ -322,6 +323,7 @@ AssertContains $renderJs 'function buildQuranIndexCopy(language, pageType)' "SSR
 AssertContains $renderJs 'function buildQuranSurahCopy(language, pageType, surah, surahReaderData)' "SSR renderer keeps the Quran surah copy builder" "SSR renderer is missing the Quran surah copy builder"
 AssertContains $renderJs 'function buildDhikrIndexCopy(language, pageType, collectionId = "")' "SSR renderer keeps the Dhikr index copy builder" "SSR renderer is missing the Dhikr index copy builder"
 AssertContains $renderJs 'function normalizeDhikrCollectionId(value)' "SSR renderer keeps the Dhikr collection normalizer" "SSR renderer is missing the Dhikr collection normalizer"
+AssertContains $renderJs 'function getDhikrCollectionRouteSlug(value)' "SSR renderer keeps the Dhikr collection route-slug helper" "SSR renderer is missing the Dhikr collection route-slug helper"
 AssertContains $renderJs 'function getDhikrCollectionCopy(language, collectionId, label)' "SSR renderer keeps the Dhikr collection copy helper" "SSR renderer is missing the Dhikr collection copy helper"
 AssertContains $renderJs 'Object.assign(ROUTES["dhikr-collection"], {' "SSR renderer defines the Dhikr collection route" "SSR renderer is missing the Dhikr collection route"
 AssertContains $renderJs 'data-dhikr-collection="' "SSR renderer exposes the active Dhikr collection on the body" "SSR renderer is missing the active Dhikr collection marker"
@@ -392,6 +394,10 @@ AssertContains $sitemapCore 'https://www.adantimer.com/dhikr' "Core sitemap incl
 AssertContains $sitemapCore 'https://www.adantimer.com/ar/dhikr' "Core sitemap includes the Arabic Dhikr page" "Core sitemap is missing the Arabic Dhikr page"
 AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/morning' "Core sitemap includes the morning Dhikr collection" "Core sitemap is missing the morning Dhikr collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/forgiveness' "Core sitemap includes the forgiveness Dhikr collection" "Core sitemap is missing the forgiveness Dhikr collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/provision' "Core sitemap includes the provision Dhikr collection" "Core sitemap is missing the provision Dhikr collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/distress' "Core sitemap includes the distress Dhikr collection" "Core sitemap is missing the distress Dhikr collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/healing' "Core sitemap includes the healing Dhikr collection" "Core sitemap is missing the healing Dhikr collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/before-sleep' "Core sitemap includes the before-sleep Dhikr collection" "Core sitemap is missing the before-sleep Dhikr collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/de/dhikr/after-prayer' "Core sitemap includes the German after-prayer Dhikr collection" "Core sitemap is missing the German after-prayer Dhikr collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/zh-hans/dhikr/evening' "Core sitemap includes the Chinese evening Dhikr collection" "Core sitemap is missing the Chinese evening Dhikr collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/quran' "Core sitemap includes the Quran page" "Core sitemap is missing the Quran page"
@@ -434,6 +440,10 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/de/dhikr" @('<html lang="de" dir="ltr">', '<body data-page="dhikr"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"')
   TestLiveUrl "$BaseUrl/dhikr/morning" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="morning"', 'morning-subhanallah')
   TestLiveUrl "$BaseUrl/de/dhikr/forgiveness" @('<html lang="de" dir="ltr">', '<body data-page="dhikr-collection"', 'data-dhikr-collection="forgiveness"')
+  TestLiveUrl "$BaseUrl/dhikr/provision" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="provision"', 'provision-rizq-dua')
+  TestLiveUrl "$BaseUrl/dhikr/distress" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="distress"', 'distress-dhun-nun')
+  TestLiveUrl "$BaseUrl/dhikr/healing" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="healing"', 'healing-rabb-an-nas')
+  TestLiveUrl "$BaseUrl/dhikr/before-sleep" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="sleep"', 'sleep-ayat-al-kursi')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran" @('id="quran-search-clear"', 'quran-search-count')
   TestLiveUrl "$BaseUrl/quran/al-fatihah" @('<body data-page="quran-surah"', 'quran-ayah-list', 'Surah Al-Fatihah', 'ayah-1')

@@ -70,7 +70,7 @@ const ROUTES = {
   quran: { en: "Quran", ar: "القرآن", path: () => "/quran" },
   "quran-surah": { en: "Quran", ar: "القرآن", path: (city, surahSlug) => surahSlug ? `/quran/${slugify(surahSlug)}` : "/quran" },
   dhikr: { en: "Dhikr", ar: "الذكر", path: () => "/dhikr" },
-  "dhikr-collection": { en: "Dhikr", ar: "الذكر", path: (city, collectionSlug) => collectionSlug ? `/dhikr/${slugify(collectionSlug)}` : "/dhikr" },
+  "dhikr-collection": { en: "Dhikr", ar: "الذكر", path: (city, collectionSlug) => collectionSlug ? `/dhikr/${getDhikrCollectionRouteSlug(collectionSlug)}` : "/dhikr" },
   hadith: { en: "Hadith", ar: "الحديث", path: () => "/hadith" }
 };
 
@@ -3038,7 +3038,7 @@ const DHIKR_INDEX_CONTENT = {
   }
 };
 
-const FEATURED_DHIKR_COLLECTION_IDS = ["morning", "evening", "after-prayer", "forgiveness"];
+const FEATURED_DHIKR_COLLECTION_IDS = ["morning", "evening", "after-prayer", "forgiveness", "provision", "distress", "healing", "sleep"];
 
 const DHIKR_COLLECTION_CONTENT = {
   en: {
@@ -3049,19 +3049,31 @@ const DHIKR_COLLECTION_CONTENT = {
       morning: "Morning adhkar collection",
       evening: "Evening adhkar collection",
       "after-prayer": "After prayer adhkar collection",
-      forgiveness: "Forgiveness and istighfar collection"
+      forgiveness: "Forgiveness and istighfar collection",
+      provision: "Provision and rizq collection",
+      distress: "Distress and relief collection",
+      healing: "Healing and shifa collection",
+      sleep: "Before sleep adhkar collection"
     },
     subtitles: {
       morning: "Keep the morning adhkar together on one focused page with counters, source notes, and a clean reset flow.",
       evening: "Stay with the evening dhikr collection on its own page and keep only these adhkar in view.",
       "after-prayer": "Use the post-prayer adhkar on a dedicated page built for the tasbih sequence after salah.",
-      forgiveness: "Track istighfar and repentance-focused adhkar on a dedicated forgiveness page."
+      forgiveness: "Track istighfar and repentance-focused adhkar on a dedicated forgiveness page.",
+      provision: "Keep provision and rizq-focused duas together on one page for steady daily repetition.",
+      distress: "Use a focused page for adhkar recited in hardship, anxiety, and moments of constriction.",
+      healing: "Keep healing and shifa-focused duas together on a page built for repeated recitation.",
+      sleep: "Open the before-sleep adhkar on their own page and keep only night-time remembrance in view."
     },
     metaDescriptions: {
       morning: "Read and track morning adhkar with counters, source notes, and a focused daily dhikr page.",
       evening: "Read and track evening adhkar with counters, source notes, and a focused daily dhikr page.",
       "after-prayer": "Read and track after prayer adhkar with counters, source notes, and a focused daily dhikr page.",
-      forgiveness: "Read and track forgiveness dhikr, istighfar, and repentance-focused adhkar with counters and source notes."
+      forgiveness: "Read and track forgiveness dhikr, istighfar, and repentance-focused adhkar with counters and source notes.",
+      provision: "Read and track provision and rizq duas with counters, source notes, and a focused daily dhikr page.",
+      distress: "Read and track distress and relief adhkar with counters, source notes, and a focused daily dhikr page.",
+      healing: "Read and track healing and shifa duas with counters, source notes, and a focused daily dhikr page.",
+      sleep: "Read and track before-sleep adhkar with counters, source notes, and a focused night dhikr page."
     },
     faq: label => [
       {
@@ -3086,19 +3098,31 @@ const DHIKR_COLLECTION_CONTENT = {
       morning: "Morgendhikr-Sammlung",
       evening: "Abenddhikr-Sammlung",
       "after-prayer": "Dhikr nach dem Gebet",
-      forgiveness: "Sammlung für Vergebung und Istighfar"
+      forgiveness: "Sammlung fuer Vergebung und Istighfar",
+      provision: "Sammlung fuer Rizq und Versorgung",
+      distress: "Sammlung fuer Bedraengnis und Erleichterung",
+      healing: "Sammlung fuer Heilung und Schifa",
+      sleep: "Sammlung fuer Dhikr vor dem Schlaf"
     },
     subtitles: {
       morning: "Halte die Morgendhikr auf einer eigenen fokussierten Seite mit Zählern, Quellenhinweisen und sauberem Reset-Ablauf zusammen.",
       evening: "Nutze die Abenddhikr auf einer eigenen Seite und behalte nur diese Sammlung im Blick.",
       "after-prayer": "Nutze die Adhkar nach dem Gebet auf einer eigenen Seite für die Tasbih-Folge nach dem Salah.",
-      forgiveness: "Verfolge Istighfar und Dhikr der Reue auf einer eigenen Seite für Vergebung."
+      forgiveness: "Verfolge Istighfar und Dhikr der Reue auf einer eigenen Seite fuer Vergebung.",
+      provision: "Halte Duas fuer Rizq und Versorgung auf einer eigenen fokussierten Seite fuer die taegliche Wiederholung zusammen.",
+      distress: "Nutze eine eigene Seite fuer Adhkar bei Bedraengnis, Sorge und schweren Momenten.",
+      healing: "Bündle Heilungs- und Schifa-Duas auf einer Seite, die fuer wiederholte Rezitation gebaut ist.",
+      sleep: "Oeffne den Dhikr vor dem Schlaf auf einer eigenen Seite und behalte nur die Abend- und Nachtadhkar im Blick."
     },
     metaDescriptions: {
       morning: "Lies und verfolge Morgendhikr mit Zählern, Quellenhinweisen und einer fokussierten täglichen Dhikr-Seite.",
       evening: "Lies und verfolge Abenddhikr mit Zählern, Quellenhinweisen und einer fokussierten täglichen Dhikr-Seite.",
       "after-prayer": "Lies und verfolge Dhikr nach dem Gebet mit Zählern, Quellenhinweisen und einer fokussierten täglichen Dhikr-Seite.",
-      forgiveness: "Lies und verfolge Vergebungs-Dhikr, Istighfar und reuebezogene Adhkar mit Zählern und Quellenhinweisen."
+      forgiveness: "Lies und verfolge Vergebungs-Dhikr, Istighfar und reuebezogene Adhkar mit Zaehlern und Quellenhinweisen.",
+      provision: "Lies und verfolge Rizq- und Versorgungs-Duas mit Zaehlern, Quellenhinweisen und einer fokussierten Dhikr-Seite.",
+      distress: "Lies und verfolge Adhkar fuer Bedraengnis und Erleichterung mit Zaehlern, Quellenhinweisen und einer fokussierten Dhikr-Seite.",
+      healing: "Lies und verfolge Heilungs- und Schifa-Duas mit Zaehlern, Quellenhinweisen und einer fokussierten Dhikr-Seite.",
+      sleep: "Lies und verfolge Dhikr vor dem Schlaf mit Zaehlern, Quellenhinweisen und einer fokussierten Nacht-Dhikr-Seite."
     },
     faq: label => [
       {
@@ -3126,6 +3150,12 @@ function normalizeDhikrCollectionId(value) {
   };
   const resolved = aliases[slug] || slug;
   return getDhikrCategories().some(item => item.id === resolved) ? resolved : "";
+}
+
+function getDhikrCollectionRouteSlug(value) {
+  const normalized = normalizeDhikrCollectionId(value);
+  if (normalized === "sleep") return "before-sleep";
+  return slugify(normalized || value || "");
 }
 
 function getDhikrCollectionCopy(language, collectionId, label) {
