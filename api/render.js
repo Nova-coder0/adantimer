@@ -3760,7 +3760,17 @@ function buildHadithIndexCopy(language, pageType) {
     hadithSectionEyebrow: locale.sectionEyebrow,
     hadithSectionTitle: locale.sectionTitle,
     hadithSectionIntro: locale.sectionIntro,
-    hadithStats: locale.stats,
+    hadithStats: [
+      {
+        value: String(categories.length),
+        label: locale.stats?.[0]?.label || "Themes"
+      },
+      {
+        value: String(items.length),
+        label: locale.stats?.[1]?.label || "Entries"
+      },
+      locale.stats?.[2] || { value: "Local", label: "SSR source" }
+    ],
     hadithStatsAria: locale.heroTitle,
     hadithCategoriesAria: locale.categoryAllLabel,
     hadithSourceAria: locale.sourceAria,
