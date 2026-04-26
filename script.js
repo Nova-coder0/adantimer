@@ -43,6 +43,7 @@ const qiblaKaabaMarkerEl = document.getElementById("qibla-kaaba-marker");
 const qiblaSensorButtonEl = document.getElementById("qibla-sensor-button");
 const qiblaSensorHintEl = document.getElementById("qibla-sensor-hint");
 const dhikrCardGridEl = document.getElementById("dhikr-card-grid");
+const dhikrCategoryRowEl = document.querySelector(".dhikr-category-row");
 const dhikrCategoryButtons = Array.from(document.querySelectorAll(".dhikr-category-chip[data-dhikr-category]"));
 const dhikrSummaryCompletedEl = document.getElementById("dhikr-summary-completed");
 const dhikrSummaryRepetitionsEl = document.getElementById("dhikr-summary-repetitions");
@@ -1438,15 +1439,15 @@ function initDhikrPage() {
   if (!dhikrCardGridEl) return;
   const state = readDhikrState();
 
-  if (dhikrCategoryButtons.length) {
-    dhikrCategoryButtons.forEach(button => {
-      if (button.dataset.dhikrBound === "true") return;
-      button.dataset.dhikrBound = "true";
-      button.addEventListener("click", () => {
-        state.activeCategory = button.dataset.dhikrCategory || "all";
-        writeDhikrState(state);
-        renderDhikrPage(state);
-      });
+  if (dhikrCategoryRowEl && dhikrCategoryRowEl.dataset.dhikrBound !== "true") {
+    dhikrCategoryRowEl.dataset.dhikrBound = "true";
+    dhikrCategoryRowEl.addEventListener("click", event => {
+      const button = event.target.closest(".dhikr-category-chip[data-dhikr-category]");
+      if (!button || !dhikrCategoryRowEl.contains(button)) return;
+      event.preventDefault();
+      state.activeCategory = button.dataset.dhikrCategory || "all";
+      writeDhikrState(state);
+      renderDhikrPage(state);
     });
   }
 
