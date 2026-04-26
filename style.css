@@ -445,7 +445,8 @@ body[data-page="quran-surah"] .hero-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
-body[data-page="dhikr"] .hero-grid {
+body[data-page="dhikr"] .hero-grid,
+body[data-page="dhikr-collection"] .hero-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -457,7 +458,8 @@ body[data-page="quran-surah"] .hero-copy {
   max-inline-size: none;
 }
 
-body[data-page="dhikr"] .hero-copy {
+body[data-page="dhikr"] .hero-copy,
+body[data-page="dhikr-collection"] .hero-copy {
   max-inline-size: none;
 }
 
@@ -837,6 +839,7 @@ body[data-page="dhikr"] .hero-copy {
   color: inherit;
   font: inherit;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .dhikr-category-chip strong {

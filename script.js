@@ -798,6 +798,10 @@ function getRequestedSurahSlug() {
   return document.body.dataset.surahSlug || "";
 }
 
+function getRequestedDhikrCollection() {
+  return document.body.dataset.dhikrCollection || "";
+}
+
 function buildRelativeUrl(lang, type, city = "", detail = "") {
   const prefix = getLanguagePrefix(lang);
   const slug = city ? encodeURIComponent(slugifyCity(city)) : "";
@@ -815,6 +819,7 @@ function buildRelativeUrl(lang, type, city = "", detail = "") {
     quran: "/quran",
     "quran-surah": detailSlug ? `/quran/${detailSlug}` : "/quran",
     dhikr: "/dhikr",
+    "dhikr-collection": detailSlug ? `/dhikr/${detailSlug}` : "/dhikr",
     hadith: "/hadith"
   };
   const path = pathMap[type] || pathMap.home;
@@ -822,8 +827,8 @@ function buildRelativeUrl(lang, type, city = "", detail = "") {
   return basePath;
 }
 
-function buildPageUrl(lang, type, city = "") {
-  return `https://www.adantimer.com${buildRelativeUrl(lang, type, city)}`;
+function buildPageUrl(lang, type, city = "", detail = "") {
+  return `https://www.adantimer.com${buildRelativeUrl(lang, type, city, detail)}`;
 }
 
 function setMetaContent(selector, value) {
@@ -1432,6 +1437,11 @@ function renderDhikrPage(state) {
     const isActive = button.dataset.dhikrCategory === state.activeCategory;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", isActive ? "true" : "false");
+    if (isActive) {
+      button.setAttribute("aria-current", "page");
+    } else {
+      button.removeAttribute("aria-current");
+    }
   });
 
   renderDhikrSummary(state);
@@ -1440,18 +1450,7 @@ function renderDhikrPage(state) {
 function initDhikrPage() {
   if (!dhikrCardGridEl) return;
   const state = readDhikrState();
-
-  if (dhikrCategoryRowEl && dhikrCategoryRowEl.dataset.dhikrBound !== "true") {
-    dhikrCategoryRowEl.dataset.dhikrBound = "true";
-    dhikrCategoryRowEl.addEventListener("click", event => {
-      const button = event.target.closest(".dhikr-category-chip[data-dhikr-category]");
-      if (!button || !dhikrCategoryRowEl.contains(button)) return;
-      event.preventDefault();
-      state.activeCategory = button.dataset.dhikrCategory || "all";
-      writeDhikrState(state);
-      renderDhikrPage(state);
-    });
-  }
+  state.activeCategory = getRequestedDhikrCollection() || "all";
 
   getDhikrCards().forEach(card => {
     if (card.dataset.dhikrBound === "true") return;
@@ -1530,6 +1529,18 @@ function setLanguage(lang, persist = true) {
   if (pageType === "dhikr") {
     if (persist) {
       const targetUrl = buildRelativeUrl(language, "dhikr");
+      if (window.location.pathname !== targetUrl) {
+        window.location.href = targetUrl;
+        return;
+      }
+    }
+    initDhikrPage();
+    return;
+  }
+
+  if (pageType === "dhikr-collection") {
+    if (persist) {
+      const targetUrl = buildRelativeUrl(language, "dhikr-collection", "", getRequestedDhikrCollection());
       if (window.location.pathname !== targetUrl) {
         window.location.href = targetUrl;
         return;
@@ -2022,7 +2033,7 @@ if (pageType === "quran") {
   initQuranIndex();
 } else if (pageType === "quran-surah") {
   // Surah pages are fully server-rendered; no client bootstrap is needed here.
-} else if (pageType === "dhikr") {
+} else if (pageType === "dhikr" || pageType === "dhikr-collection") {
   initDhikrPage();
 } else if (pageType === "qibla") {
   loadQiblaCompass();
