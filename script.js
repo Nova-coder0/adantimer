@@ -43,7 +43,7 @@ const qiblaKaabaMarkerEl = document.getElementById("qibla-kaaba-marker");
 const qiblaSensorButtonEl = document.getElementById("qibla-sensor-button");
 const qiblaSensorHintEl = document.getElementById("qibla-sensor-hint");
 const dhikrCardGridEl = document.getElementById("dhikr-card-grid");
-const dhikrCategoryButtons = Array.from(document.querySelectorAll("[data-dhikr-category]"));
+const dhikrCategoryButtons = Array.from(document.querySelectorAll(".dhikr-category-chip[data-dhikr-category]"));
 const dhikrSummaryCompletedEl = document.getElementById("dhikr-summary-completed");
 const dhikrSummaryRepetitionsEl = document.getElementById("dhikr-summary-repetitions");
 const dhikrSummaryTargetEl = document.getElementById("dhikr-summary-target");
@@ -1440,8 +1440,8 @@ function initDhikrPage() {
 
   if (dhikrCategoryButtons.length) {
     dhikrCategoryButtons.forEach(button => {
-      if (button.dataset.bound === "true") return;
-      button.dataset.bound = "true";
+      if (button.dataset.dhikrBound === "true") return;
+      button.dataset.dhikrBound = "true";
       button.addEventListener("click", () => {
         state.activeCategory = button.dataset.dhikrCategory || "all";
         writeDhikrState(state);
@@ -1451,8 +1451,8 @@ function initDhikrPage() {
   }
 
   getDhikrCards().forEach(card => {
-    if (card.dataset.bound === "true") return;
-    card.dataset.bound = "true";
+    if (card.dataset.dhikrBound === "true") return;
+    card.dataset.dhikrBound = "true";
     card.addEventListener("click", event => {
       const actionButton = event.target.closest("[data-dhikr-action]");
       if (!actionButton) return;
@@ -1470,8 +1470,8 @@ function initDhikrPage() {
     });
   });
 
-  if (dhikrResetVisibleEl && dhikrResetVisibleEl.dataset.bound !== "true") {
-    dhikrResetVisibleEl.dataset.bound = "true";
+  if (dhikrResetVisibleEl && dhikrResetVisibleEl.dataset.dhikrBound !== "true") {
+    dhikrResetVisibleEl.dataset.dhikrBound = "true";
     dhikrResetVisibleEl.addEventListener("click", () => {
       getVisibleDhikrCards().forEach(card => {
         state.counts[card.dataset.dhikrItem || ""] = 0;
@@ -1481,8 +1481,8 @@ function initDhikrPage() {
     });
   }
 
-  if (dhikrResetAllEl && dhikrResetAllEl.dataset.bound !== "true") {
-    dhikrResetAllEl.dataset.bound = "true";
+  if (dhikrResetAllEl && dhikrResetAllEl.dataset.dhikrBound !== "true") {
+    dhikrResetAllEl.dataset.dhikrBound = "true";
     dhikrResetAllEl.addEventListener("click", () => {
       state.counts = {};
       writeDhikrState(state);
