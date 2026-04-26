@@ -842,16 +842,30 @@ function getRequestedDhikrCollection() {
   return document.body.dataset.dhikrCollection || "";
 }
 
+function getRequestedHadithCollection() {
+  return document.body.dataset.hadithCollection || "";
+}
+
 function getDhikrCollectionRouteSlug(value) {
   const slug = slugifyCity(String(value || ""));
   if (slug === "sleep" || slug === "before-sleep") return "before-sleep";
   return slug;
 }
 
+function getHadithCollectionRouteSlug(value) {
+  return slugifyCity(String(value || ""));
+}
+
 function buildRelativeUrl(lang, type, city = "", detail = "") {
   const prefix = getLanguagePrefix(lang);
   const slug = city ? encodeURIComponent(slugifyCity(city)) : "";
-  const detailSlug = detail ? encodeURIComponent(type === "dhikr-collection" ? getDhikrCollectionRouteSlug(detail) : slugifyCity(detail)) : "";
+  const detailSlug = detail ? encodeURIComponent(
+    type === "dhikr-collection"
+      ? getDhikrCollectionRouteSlug(detail)
+      : type === "hadith-collection"
+        ? getHadithCollectionRouteSlug(detail)
+        : slugifyCity(detail)
+  ) : "";
   const pathMap = {
     home: slug ? `/${slug}` : "/",
     "prayer-times": slug ? `/prayer-times/${slug}` : "/prayer-times",
@@ -866,7 +880,8 @@ function buildRelativeUrl(lang, type, city = "", detail = "") {
     "quran-surah": detailSlug ? `/quran/${detailSlug}` : "/quran",
     dhikr: "/dhikr",
     "dhikr-collection": detailSlug ? `/dhikr/${detailSlug}` : "/dhikr",
-    hadith: "/hadith"
+    hadith: "/hadith",
+    "hadith-collection": detailSlug ? `/hadith/${detailSlug}` : "/hadith"
   };
   const path = pathMap[type] || pathMap.home;
   const basePath = `${prefix}${path === "/" && prefix ? "" : path}`;
@@ -1446,7 +1461,7 @@ function updateHadithFilter(query = "", category = "all") {
 function initHadithPage() {
   if (!hadithCardGridEl) return;
 
-  const initialActiveCategory = hadithCategoryButtons.find(button => button.classList.contains("is-active"))?.dataset.hadithCategory || "all";
+  const initialActiveCategory = getRequestedHadithCollection() || hadithCategoryButtons.find(button => button.classList.contains("is-active"))?.dataset.hadithCategory || "all";
 
   if (hadithSearchCountEl && !hadithSearchCountEl.dataset.entryLabel) {
     const label = hadithSearchCountEl.textContent.replace(/^[0-9\s/]+(?:of|von|sur|من|共|显示)?\s*/i, "").trim();
@@ -1700,6 +1715,18 @@ function setLanguage(lang, persist = true) {
   if (pageType === "hadith") {
     if (persist) {
       const targetUrl = buildRelativeUrl(language, "hadith");
+      if (window.location.pathname !== targetUrl) {
+        window.location.href = targetUrl;
+        return;
+      }
+    }
+    initHadithPage();
+    return;
+  }
+
+  if (pageType === "hadith-collection") {
+    if (persist) {
+      const targetUrl = buildRelativeUrl(language, "hadith-collection", "", getRequestedHadithCollection());
       if (window.location.pathname !== targetUrl) {
         window.location.href = targetUrl;
         return;
@@ -2186,13 +2213,13 @@ document.querySelectorAll("button.city-chip").forEach(button => {
   });
 });
 
-language = pageType === "quran" || pageType === "quran-surah" || pageType === "hadith" ? getCurrentDocumentLanguage() : getPreferredLanguage();
+language = pageType === "quran" || pageType === "quran-surah" || pageType === "hadith" || pageType === "hadith-collection" ? getCurrentDocumentLanguage() : getPreferredLanguage();
 setLanguage(language, false);
 if (pageType === "quran") {
   initQuranIndex();
 } else if (pageType === "quran-surah") {
   // Surah pages are fully server-rendered; no client bootstrap is needed here.
-} else if (pageType === "hadith") {
+} else if (pageType === "hadith" || pageType === "hadith-collection") {
   initHadithPage();
 } else if (pageType === "dhikr" || pageType === "dhikr-collection") {
   initDhikrPage();
