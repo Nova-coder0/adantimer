@@ -5,6 +5,10 @@ import {
   getDhikrItems
 } from "../data/dhikr-entries.js";
 import {
+  getHadithCategories,
+  getHadithItems
+} from "../data/hadith-entries.js";
+import {
   QURAN_SURAHS,
   getAdjacentQuranSurahs,
   getQuranSurahBySlug
@@ -1752,11 +1756,11 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
 
   const copy = {
     activeLanguage: "en",
-    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection",
-    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" ? pageType : "",
-    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection",
-    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection",
-    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" ? pageType : "",
+    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith",
+    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith",
+    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith",
     brandHref: buildRoutePath("en", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `Prayer schedule for ${place}` : "Prayer times by city")
@@ -1834,15 +1838,20 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
     ...buildQuranIndexCopy("en", pageType),
     ...buildQuranSurahCopy("en", pageType, surah, surahReaderData),
     ...buildDhikrIndexCopy("en", pageType, dhikrCollection),
+    ...buildHadithIndexCopy("en", pageType),
     ...buildQiblaPanelCopy("en", pageType),
     ...buildToolHubCopy("en", pageType),
     footerText: pageType === "quran"
       ? QURAN_INDEX_CONTENT.en.footerText
+      : pageType === "hadith"
+        ? HADITH_INDEX_CONTENT.en.footerText
       : pageType === "dhikr" || pageType === "dhikr-collection"
         ? DHIKR_INDEX_CONTENT.en.footerText
         : (place ? `Accurate prayer times for ${place} and other cities.` : "Accurate prayer times by city."),
     noscriptText: pageType === "quran"
       ? QURAN_INDEX_CONTENT.en.noscriptText
+      : pageType === "hadith"
+        ? HADITH_INDEX_CONTENT.en.noscriptText
       : pageType === "dhikr" || pageType === "dhikr-collection"
         ? DHIKR_INDEX_CONTENT.en.noscriptText
         : "JavaScript is required to load live prayer times and the next prayer countdown."
@@ -1895,11 +1904,11 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
 
   const copy = {
     activeLanguage: "ar",
-    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection",
-    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" ? pageType : "",
-    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection",
-    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection",
-    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" ? pageType : "",
+    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith",
+    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith",
+    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith",
     brandHref: buildRoutePath("ar", "home"),
     heroEyebrow: pageType === "home"
       ? (place ? `جدول الصلاة في ${place}` : "مواقيت الصلاة حسب المدينة")
@@ -1971,6 +1980,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     ...buildQuranIndexCopy("ar", pageType),
     ...buildQuranSurahCopy("ar", pageType, surah, surahReaderData),
     ...buildDhikrIndexCopy("ar", pageType, dhikrCollection),
+    ...buildHadithIndexCopy("ar", pageType),
     ...buildQiblaPanelCopy("ar", pageType),
     ...buildToolHubCopy("ar", pageType),
     footerText: pageType === "quran"
@@ -1983,6 +1993,10 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
   if (pageType === "dhikr" || pageType === "dhikr-collection") {
     copy.footerText = DHIKR_INDEX_CONTENT.ar.footerText;
     copy.noscriptText = DHIKR_INDEX_CONTENT.ar.noscriptText;
+  }
+  if (pageType === "hadith") {
+    copy.footerText = HADITH_INDEX_CONTENT.ar.footerText;
+    copy.noscriptText = HADITH_INDEX_CONTENT.ar.noscriptText;
   }
   return copy;
 }
@@ -2026,11 +2040,11 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
 
   return {
     activeLanguage: language,
-    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection",
-    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" ? pageType : "",
-    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection",
-    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection",
-    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection",
+    standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith",
+    standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" ? pageType : "",
+    hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith",
+    showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith",
+    showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith",
     brandHref: buildRoutePath(language, "home"),
     heroEyebrow: pageType === "home"
       ? (place ? locale.heroEyebrowPlace(place) : locale.heroEyebrowHome)
@@ -2074,15 +2088,20 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     ...buildQuranIndexCopy(language, pageType),
     ...buildQuranSurahCopy(language, pageType, surah, surahReaderData),
     ...buildDhikrIndexCopy(language, pageType, dhikrCollection),
+    ...buildHadithIndexCopy(language, pageType),
     ...buildQiblaPanelCopy(language, pageType),
     ...buildToolHubCopy(language, pageType),
     footerText: pageType === "quran"
       ? (QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en).footerText
+      : pageType === "hadith"
+        ? (HADITH_INDEX_CONTENT[language] || HADITH_INDEX_CONTENT.en).footerText
       : pageType === "dhikr" || pageType === "dhikr-collection"
         ? (DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en).footerText
         : locale.footerText(place),
     noscriptText: pageType === "quran"
       ? (QURAN_INDEX_CONTENT[language] || QURAN_INDEX_CONTENT.en).noscriptText
+      : pageType === "hadith"
+        ? (HADITH_INDEX_CONTENT[language] || HADITH_INDEX_CONTENT.en).noscriptText
       : pageType === "dhikr" || pageType === "dhikr-collection"
         ? (DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en).noscriptText
         : locale.noscriptText
@@ -2100,6 +2119,32 @@ function renderHeroCopy(copy) {
 
           <div class="dhikr-hero-stats" aria-label="${escapeHtml(copy.dhikrStatsAria)}">
 ${copy.dhikrStats.map(item => `            <div class="dhikr-hero-stat">
+              <strong>${escapeHtml(item.value)}</strong>
+              <span>${escapeHtml(item.label)}</span>
+            </div>`).join("\n")}
+          </div>
+        </section>`;
+  }
+
+  if (copy.standalonePageType === "hadith") {
+    return `        <section class="hero-copy hadith-hero-copy">
+          <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
+          <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
+          <p id="hero-subtitle" class="hero-subtitle">
+            ${escapeHtml(copy.heroSubtitle)}
+          </p>
+
+          <div class="hadith-search-bar">
+            <label class="sr-only" for="hadith-search">${escapeHtml(copy.hadithSearchLabel)}</label>
+            <div class="quran-search-row">
+              <input type="search" id="hadith-search" class="quran-search-input" placeholder="${escapeHtml(copy.hadithSearchPlaceholder)}" autocomplete="off">
+              <button type="button" id="hadith-search-clear" class="quran-search-clear" hidden aria-label="${escapeHtml(copy.hadithSearchLabel)}" title="${escapeHtml(copy.hadithSearchLabel)}">&times;</button>
+            </div>
+            <p class="muted quran-search-hint">${escapeHtml(copy.hadithSearchHint)}</p>
+          </div>
+
+          <div class="hadith-hero-stats" aria-label="${escapeHtml(copy.hadithStatsAria)}">
+${copy.hadithStats.map(item => `            <div class="hadith-hero-stat">
               <strong>${escapeHtml(item.value)}</strong>
               <span>${escapeHtml(item.label)}</span>
             </div>`).join("\n")}
@@ -2488,6 +2533,52 @@ ${renderFaqSection(copy)}
     </section>`;
 }
 
+function renderHadithSection(copy) {
+  const categoryMarkup = copy.hadithCategories.map(item => `          <button type="button" class="hadith-category-chip${item.active ? " is-active" : ""}" data-hadith-category="${escapeHtml(item.id)}" aria-pressed="${item.active ? "true" : "false"}">
+            <span>${escapeHtml(item.label)}</span>
+            <strong>${item.itemCount}</strong>
+          </button>`).join("\n");
+
+  const cardMarkup = copy.hadithItems.map(item => `          <article class="hadith-card" data-hadith-card data-hadith-item="${escapeHtml(item.id)}" data-hadith-category="${escapeHtml(item.category)}" data-search="${escapeHtml(item.search)}">
+            <div class="hadith-card-head">
+              <span class="hadith-card-category">${escapeHtml(item.categoryLabel)}</span>
+              <span class="hadith-card-grade">${escapeHtml(item.gradeLabel)}</span>
+            </div>
+            <div class="hadith-card-badges" aria-label="${escapeHtml(copy.hadithSourceAria)}">
+              <span class="dhikr-meta-badge is-grade">${escapeHtml(item.gradeLabel)}</span>
+              <span class="dhikr-meta-badge">${escapeHtml(item.source)}</span>
+              <span class="dhikr-meta-badge">${escapeHtml(copy.hadithNarratorLabel)}: ${escapeHtml(item.narrator)}</span>
+            </div>
+            <p class="hadith-card-arabic">${escapeHtml(item.arabic)}</p>
+            <p class="hadith-card-translation">${escapeHtml(item.translation)}</p>
+            <div class="hadith-card-meta">
+              <span>${escapeHtml(copy.hadithTakeawayLabel)}</span>
+              <span>${escapeHtml(item.lesson)}</span>
+            </div>
+          </article>`).join("\n");
+
+  return `    <section class="hadith-dashboard" aria-labelledby="hadith-dashboard-heading">
+      <section class="card hadith-collections-card" aria-labelledby="hadith-dashboard-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">${escapeHtml(copy.hadithSectionEyebrow)}</p>
+            <h2 id="hadith-dashboard-heading">${escapeHtml(copy.hadithSectionTitle)}</h2>
+          </div>
+          <p id="hadith-search-count" class="muted">${escapeHtml(copy.hadithSearchCountText)}</p>
+        </div>
+        <p class="muted">${escapeHtml(copy.hadithSectionIntro)}</p>
+        <div class="hadith-category-row" role="group" aria-label="${escapeHtml(copy.hadithCategoriesAria)}">
+${categoryMarkup}
+        </div>
+        <div class="hadith-card-grid" id="hadith-card-grid">
+${cardMarkup}
+        </div>
+        <p id="hadith-search-empty" class="muted hadith-empty-state" hidden>${escapeHtml(copy.hadithEmptyState)}</p>
+      </section>
+${renderFaqSection(copy)}
+    </section>`;
+}
+
 function renderCitiesSection(copy) {
   return `    <section class="card prose" aria-labelledby="cities-heading">
       <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
@@ -2532,6 +2623,12 @@ ${copy.faq.map(item => `          <div>
 
 function renderMainContent(copy) {
   if (copy.standalonePage) {
+    if (copy.standalonePageType === "hadith") {
+      return `  <main class="shell main-content">
+${renderHadithSection(copy)}
+  </main>`;
+    }
+
     if (copy.standalonePageType === "dhikr" || copy.standalonePageType === "dhikr-collection") {
       return `  <main class="shell main-content">
 ${renderDhikrSection(copy)}
@@ -2764,6 +2861,249 @@ function buildQuranIndexCopy(language, pageType) {
     noscriptText: locale.noscriptText
   };
 }
+
+const HADITH_INDEX_CONTENT = {
+  en: {
+    heroEyebrow: "Hadith",
+    heroTitle: "Read a focused hadith page without distraction",
+    heroSubtitle: "Use a curated hadith page built for short daily reading, quick category filtering, and direct return visits.",
+    searchLabel: "Search hadith",
+    searchPlaceholder: "Search by theme, narrator, source, or keyword",
+    searchHint: "Filter by intentions, prayer, character, knowledge, gratitude, or mercy.",
+    searchCount: count => `${count} hadith entries`,
+    emptyState: "No hadith matched this search or category yet.",
+    sectionEyebrow: "Collections",
+    sectionTitle: "Curated hadith for daily reading",
+    sectionIntro: "Move through core hadith themes, keep the page focused, and return quickly for short reading sessions.",
+    stats: [
+      { value: "6", label: "Themes" },
+      { value: "6", label: "Entries" },
+      { value: "Local", label: "SSR source" }
+    ],
+    categoryAllLabel: "All hadith",
+    sourceAria: "Hadith source details",
+    narratorLabel: "Narrator",
+    takeawayLabel: "Why it matters",
+    metaTitle: "Daily Hadith Reading Page | Adantimer",
+    metaDescription: "Read curated hadith with focused themes, source notes, and short lessons for prayer, character, knowledge, gratitude, mercy, and intentions.",
+    faq: [
+      {
+        question: "Does this hadith page focus on short daily reading?",
+        answer: "Yes. The first hadith page is built for quick reading and return visits, not for a large searchable hadith database."
+      },
+      {
+        question: "Can I filter hadith by topic?",
+        answer: "Yes. You can move between intentions, prayer, character, knowledge, gratitude, and mercy."
+      },
+      {
+        question: "Does each card keep its source visible?",
+        answer: "Yes. Each hadith card keeps the source, grade label, and narrator visible alongside the text and lesson."
+      }
+    ],
+    footerText: "Curated hadith reading and focused study pages inside Adantimer.",
+    noscriptText: "JavaScript is only needed for the hadith filter. The hadith content itself is already visible."
+  },
+  ar: {
+    heroEyebrow: "الحديث",
+    heroTitle: "اقرأ صفحة حديث مركزة بلا تشتيت",
+    heroSubtitle: "استخدم صفحة حديث منتقاة للقراءة اليومية القصيرة مع تصفية سريعة حسب الموضوع وعودة مباشرة لاحقا.",
+    searchLabel: "ابحث في الحديث",
+    searchPlaceholder: "ابحث حسب الموضوع أو الراوي أو المصدر أو الكلمة",
+    searchHint: "يمكنك التصفية بين النيات والصلاة والأخلاق والعلم والشكر والرحمة.",
+    searchCount: count => `${count} أحاديث`,
+    emptyState: "لا يوجد حديث يطابق هذا البحث أو هذا الموضوع حاليا.",
+    sectionEyebrow: "الموضوعات",
+    sectionTitle: "أحاديث منتقاة للقراءة اليومية",
+    sectionIntro: "تنقل بين الموضوعات الأساسية وابق الصفحة مركزة للقراءة السريعة والعودة المتكررة.",
+    stats: [
+      { value: "6", label: "موضوعات" },
+      { value: "6", label: "أحاديث" },
+      { value: "محلي", label: "مصدر الصفحة" }
+    ],
+    categoryAllLabel: "جميع الأحاديث",
+    sourceAria: "تفاصيل مصدر الحديث",
+    narratorLabel: "الراوي",
+    takeawayLabel: "الفائدة",
+    metaTitle: "صفحة حديث يومي للقراءة | Adantimer",
+    metaDescription: "اقرأ أحاديث منتقاة مع موضوعات مركزة وملاحظات المصدر وفوائد قصيرة للصلاة والأخلاق والعلم والشكر والرحمة والنيات.",
+    faq: [
+      {
+        question: "هل صفحة الحديث هذه مخصصة للقراءة اليومية القصيرة؟",
+        answer: "نعم. النسخة الأولى من صفحة الحديث مبنية للقراءة السريعة والعودة المتكررة، لا كقاعدة بيانات ضخمة."
+      },
+      {
+        question: "هل أستطيع تصفية الأحاديث حسب الموضوع؟",
+        answer: "نعم. يمكنك التنقل بين النيات والصلاة والأخلاق والعلم والشكر والرحمة."
+      },
+      {
+        question: "هل يبقى المصدر ظاهرا في كل بطاقة؟",
+        answer: "نعم. كل بطاقة تعرض المصدر ودرجة الحديث واسم الراوي مع النص والفائدة المختصرة."
+      }
+    ],
+    footerText: "قراءة حديث منتقاة وصفحات مراجعة مركزة داخل Adantimer.",
+    noscriptText: "يحتاج فلتر الحديث فقط إلى JavaScript، أما محتوى الحديث نفسه فهو ظاهر بالفعل."
+  },
+  de: {
+    heroEyebrow: "Hadith",
+    heroTitle: "Eine fokussierte Hadith-Seite fuer kurze taegliche Lesemomente",
+    heroSubtitle: "Nutze eine kuratierte Hadith-Seite fuer kurze taegliche Lesepausen, schnelle Themenfilter und spaetere direkte Rueckkehr.",
+    searchLabel: "Hadith durchsuchen",
+    searchPlaceholder: "Nach Thema, Ueberlieferer, Quelle oder Stichwort suchen",
+    searchHint: "Filtere nach Absichten, Gebet, Charakter, Wissen, Dankbarkeit oder Barmherzigkeit.",
+    searchCount: count => `${count} Hadith-Eintraege`,
+    emptyState: "Kein Hadith passt gerade zu dieser Suche oder Kategorie.",
+    sectionEyebrow: "Themen",
+    sectionTitle: "Kuratierte Hadithe fuer taegliches Lesen",
+    sectionIntro: "Wechsle zwischen klaren Hadith-Themen und halte die Seite auf kurze, wiederkehrende Lesesitzungen ausgerichtet.",
+    stats: [
+      { value: "6", label: "Themen" },
+      { value: "6", label: "Eintraege" },
+      { value: "Lokal", label: "SSR-Quelle" }
+    ],
+    categoryAllLabel: "Alle Hadithe",
+    sourceAria: "Hadith-Quellenangaben",
+    narratorLabel: "Ueberlieferer",
+    takeawayLabel: "Warum es wichtig ist",
+    metaTitle: "Hadith-Seite fuer taegliches Lesen | Adantimer",
+    metaDescription: "Lies kuratierte Hadithe mit fokussierten Themen, Quellenangaben und kurzen Lektionen zu Gebet, Charakter, Wissen, Dankbarkeit, Barmherzigkeit und Absichten.",
+    faq: [
+      {
+        question: "Ist diese Hadith-Seite fuer kurze taegliche Lesemomente gebaut?",
+        answer: "Ja. Die erste Hadith-Seite ist fuer schnelles Lesen und spaetere Rueckkehr gedacht, nicht als grosse Hadith-Datenbank."
+      },
+      {
+        question: "Kann ich Hadithe nach Thema filtern?",
+        answer: "Ja. Du kannst zwischen Absichten, Gebet, Charakter, Wissen, Dankbarkeit und Barmherzigkeit wechseln."
+      },
+      {
+        question: "Bleibt die Quelle in jeder Karte sichtbar?",
+        answer: "Ja. Jede Karte zeigt Quelle, Bewertungslabel und Ueberlieferer zusammen mit Text und kurzer Einordnung."
+      }
+    ],
+    footerText: "Kuratierte Hadith-Leseseiten und fokussierte Lernpfade in Adantimer.",
+    noscriptText: "JavaScript wird nur fuer den Hadith-Filter benoetigt. Der Hadith-Inhalt selbst ist bereits sichtbar."
+  },
+  fr: {
+    heroEyebrow: "Hadith",
+    heroTitle: "Une page hadith concentree pour la lecture quotidienne",
+    heroSubtitle: "Utilisez une page hadith selectionnee pour des lectures courtes, un filtrage rapide par theme et des retours simples.",
+    searchLabel: "Rechercher un hadith",
+    searchPlaceholder: "Rechercher par theme, rapporteur, source ou mot-cle",
+    searchHint: "Filtrez par intentions, priere, comportement, savoir, gratitude ou misericorde.",
+    searchCount: count => `${count} hadiths`,
+    emptyState: "Aucun hadith ne correspond a cette recherche ou a cette categorie.",
+    sectionEyebrow: "Themes",
+    sectionTitle: "Hadiths selectionnes pour la lecture quotidienne",
+    sectionIntro: "Passez d'un theme central a l'autre et gardez la page orientee vers des sessions de lecture courtes et regulieres.",
+    stats: [
+      { value: "6", label: "Themes" },
+      { value: "6", label: "Entrees" },
+      { value: "Local", label: "Source SSR" }
+    ],
+    categoryAllLabel: "Tous les hadiths",
+    sourceAria: "Details de source du hadith",
+    narratorLabel: "Rapporteur",
+    takeawayLabel: "Pourquoi c'est important",
+    metaTitle: "Page hadith pour la lecture quotidienne | Adantimer",
+    metaDescription: "Lisez des hadiths selectionnes avec des themes clairs, des notes de source et de courtes lecons sur la priere, le comportement, le savoir, la gratitude, la misericorde et les intentions.",
+    faq: [
+      {
+        question: "Cette page hadith est-elle faite pour une lecture quotidienne courte ?",
+        answer: "Oui. La premiere version est construite pour la lecture rapide et les retours reguliers, pas comme une grande base de donnees."
+      },
+      {
+        question: "Puis-je filtrer les hadiths par theme ?",
+        answer: "Oui. Vous pouvez passer entre intentions, priere, comportement, savoir, gratitude et misericorde."
+      },
+      {
+        question: "La source reste-t-elle visible sur chaque carte ?",
+        answer: "Oui. Chaque carte garde la source, le niveau et le rapporteur visibles avec le texte et la lecon."
+      }
+    ],
+    footerText: "Lecture de hadiths selectionnes et pages d'etude concentrees dans Adantimer.",
+    noscriptText: "JavaScript est seulement necessaire pour le filtre hadith. Le contenu des hadiths est deja visible."
+  },
+  tr: {
+    heroEyebrow: "Hadis",
+    heroTitle: "Gunluk okuma icin odakli bir hadis sayfasi",
+    heroSubtitle: "Kisa gunluk okumalar, hizli konu filtreleri ve kolay geri donusler icin secilmis bir hadis sayfasi kullan.",
+    searchLabel: "Hadis ara",
+    searchPlaceholder: "Konu, ravi, kaynak veya anahtar kelime ara",
+    searchHint: "Niyet, namaz, ahlak, ilim, sukretmek veya merhamet basliklarina gore filtrele.",
+    searchCount: count => `${count} hadis`,
+    emptyState: "Bu arama veya kategori icin eslesen hadis bulunmadi.",
+    sectionEyebrow: "Temalar",
+    sectionTitle: "Gunluk okuma icin secilmis hadisler",
+    sectionIntro: "Temel hadis konulari arasinda gecis yap ve sayfayi kisa ama duzenli okuma oturumlari icin odakli tut.",
+    stats: [
+      { value: "6", label: "Tema" },
+      { value: "6", label: "Giris" },
+      { value: "Yerel", label: "SSR kaynagi" }
+    ],
+    categoryAllLabel: "Tum hadisler",
+    sourceAria: "Hadis kaynak bilgileri",
+    narratorLabel: "Ravi",
+    takeawayLabel: "Neden onemli",
+    metaTitle: "Gunluk hadis okuma sayfasi | Adantimer",
+    metaDescription: "Namaz, ahlak, ilim, sukretmek, merhamet ve niyetler icin secilmis hadisleri kaynak notlari ve kisa derslerle oku.",
+    faq: [
+      {
+        question: "Bu hadis sayfasi kisa gunluk okumalar icin mi hazirlandi?",
+        answer: "Evet. Ilk hadis sayfasi hizli okuma ve tekrar donusler icin yapildi; buyuk bir hadis veritabani olmak icin degil."
+      },
+      {
+        question: "Hadisleri konuya gore filtreleyebilir miyim?",
+        answer: "Evet. Niyet, namaz, ahlak, ilim, sukretmek ve merhamet arasinda gecis yapabilirsin."
+      },
+      {
+        question: "Kaynak her kartta gorunur mu?",
+        answer: "Evet. Her kart, metin ve kisa dersle birlikte kaynak, derece ve ravi bilgisini gorunur tutar."
+      }
+    ],
+    footerText: "Adantimer icinde secilmis hadis okumalari ve odakli calisma sayfalari.",
+    noscriptText: "JavaScript sadece hadis filtresi icin gerekir. Hadis icerigi zaten gorunur."
+  },
+  "zh-hans": {
+    heroEyebrow: "Hadith",
+    heroTitle: "适合每日短读的圣训页面",
+    heroSubtitle: "使用一页经过精选的圣训页面，进行简短每日阅读、快速主题筛选和后续回访。",
+    searchLabel: "搜索圣训",
+    searchPlaceholder: "按主题、传述人、来源或关键词搜索",
+    searchHint: "可按举意、礼拜、品德、知识、感恩和怜悯筛选。",
+    searchCount: count => `${count} 条圣训`,
+    emptyState: "当前没有与这次搜索或分类匹配的圣训。",
+    sectionEyebrow: "主题",
+    sectionTitle: "适合每日阅读的精选圣训",
+    sectionIntro: "在核心圣训主题之间切换，让页面保持适合短时、重复访问的阅读模式。",
+    stats: [
+      { value: "6", label: "主题" },
+      { value: "6", label: "条目" },
+      { value: "本地", label: "SSR来源" }
+    ],
+    categoryAllLabel: "全部圣训",
+    sourceAria: "圣训来源信息",
+    narratorLabel: "传述人",
+    takeawayLabel: "核心提醒",
+    metaTitle: "每日圣训阅读页面 | Adantimer",
+    metaDescription: "阅读精选圣训，配有清晰主题、来源说明和简短提醒，涵盖礼拜、品德、知识、感恩、怜悯与举意。",
+    faq: [
+      {
+        question: "这页圣训页面是为简短每日阅读设计的吗？",
+        answer: "是的。第一版圣训页面主要服务于快速阅读和再次回访，而不是庞大的圣训数据库。"
+      },
+      {
+        question: "我可以按主题筛选圣训吗？",
+        answer: "可以。你可以在举意、礼拜、品德、知识、感恩和怜悯之间切换。"
+      },
+      {
+        question: "每张卡片都会显示来源吗？",
+        answer: "会。每张卡片都会同时显示来源、等级、传述人以及正文和简短提醒。"
+      }
+    ],
+    footerText: "Adantimer 内的精选圣训阅读与专注学习页面。",
+    noscriptText: "JavaScript 只用于圣训筛选，圣训内容本身已经可见。"
+  }
+};
 
 const DHIKR_INDEX_CONTENT = {
   en: {
@@ -3379,6 +3719,93 @@ function buildDhikrIndexCopy(language, pageType, collectionId = "") {
   return copy;
 }
 
+function buildHadithIndexCopy(language, pageType) {
+  if (pageType !== "hadith") {
+    return {
+      hadithStats: [],
+      hadithCategories: [],
+      hadithItems: [],
+      hadithSearchLabel: "",
+      hadithSearchPlaceholder: "",
+      hadithSearchHint: "",
+      hadithSearchCountText: "",
+      hadithEmptyState: ""
+    };
+  }
+
+  const locale = HADITH_INDEX_CONTENT[language] || HADITH_INDEX_CONTENT.en;
+  const categories = getHadithCategories();
+  const items = getHadithItems();
+  const gradeLabels = {
+    en: { sahih: "Sahih", hasan: "Hasan", "muttafaqun-alayh": "Agreed upon" },
+    ar: { sahih: "صحيح", hasan: "حسن", "muttafaqun-alayh": "متفق عليه" },
+    de: { sahih: "Sahih", hasan: "Hasan", "muttafaqun-alayh": "Beiderseits ueberliefert" },
+    fr: { sahih: "Sahih", hasan: "Hasan", "muttafaqun-alayh": "Rapporte par les deux" },
+    tr: { sahih: "Sahih", hasan: "Hasen", "muttafaqun-alayh": "Muttefekun aleyh" },
+    "zh-hans": { sahih: "可靠", hasan: "良好", "muttafaqun-alayh": "两大圣训实录共载" }
+  };
+  const localizedGrades = gradeLabels[language] || gradeLabels.en;
+
+  return {
+    heroEyebrow: locale.heroEyebrow,
+    heroHeading: locale.heroTitle,
+    heroSubtitle: locale.heroSubtitle,
+    metaTitle: locale.metaTitle,
+    metaDescription: locale.metaDescription,
+    hadithSearchLabel: locale.searchLabel,
+    hadithSearchPlaceholder: locale.searchPlaceholder,
+    hadithSearchHint: locale.searchHint,
+    hadithSearchCountText: locale.searchCount(items.length),
+    hadithEmptyState: locale.emptyState,
+    hadithSectionEyebrow: locale.sectionEyebrow,
+    hadithSectionTitle: locale.sectionTitle,
+    hadithSectionIntro: locale.sectionIntro,
+    hadithStats: locale.stats,
+    hadithStatsAria: locale.heroTitle,
+    hadithCategoriesAria: locale.categoryAllLabel,
+    hadithSourceAria: locale.sourceAria,
+    hadithNarratorLabel: locale.narratorLabel,
+    hadithTakeawayLabel: locale.takeawayLabel,
+    hadithCategories: [
+      {
+        id: "all",
+        label: locale.categoryAllLabel,
+        itemCount: items.length,
+        active: true
+      },
+      ...categories.map(category => ({
+        id: category.id,
+        label: category.labels[language] || category.labels.en,
+        itemCount: items.filter(item => item.category === category.id).length,
+        active: false
+      }))
+    ],
+    hadithItems: items.map(item => ({
+      id: item.id,
+      category: item.category,
+      categoryLabel: HADITH_CATEGORIES_LABEL(language, item.category),
+      arabic: item.arabic,
+      translation: item.translation[language] || item.translation.en,
+      lesson: item.lesson[language] || item.lesson.en,
+      narrator: item.narrator,
+      source: item.source,
+      gradeLabel: localizedGrades[item.grade] || localizedGrades.sahih,
+      search: [
+        item.id,
+        item.category,
+        item.narrator,
+        item.source,
+        item.translation[language] || item.translation.en,
+        item.lesson[language] || item.lesson.en,
+        ...(item.search || [])
+      ].join(" ").toLowerCase()
+    })),
+    faq: locale.faq,
+    footerText: locale.footerText,
+    noscriptText: locale.noscriptText
+  };
+}
+
 function buildQiblaPanelCopy(language, pageType) {
   const locale = QIBLA_PANEL_CONTENT[language] || QIBLA_PANEL_CONTENT.en;
   return {
@@ -3515,6 +3942,12 @@ function escapeHtml(value) {
 
 function DHIKR_CATEGORIES_LABEL(language, id) {
   const category = [{ id: "all", labels: { en: "All", ar: "الكل", de: "Alle", fr: "Toutes", tr: "Tümü", "zh-hans": "全部" } }, ...getDhikrCategories()]
+    .find(entry => entry.id === id);
+  return category?.labels?.[language] || category?.labels?.en || id;
+}
+
+function HADITH_CATEGORIES_LABEL(language, id) {
+  const category = [{ id: "all", labels: { en: "All", ar: "Ø§Ù„ÙƒÙ„", de: "Alle", fr: "Toutes", tr: "Tumu", "zh-hans": "å…¨éƒ¨" } }, ...getHadithCategories()]
     .find(entry => entry.id === id);
   return category?.labels?.[language] || category?.labels?.en || id;
 }

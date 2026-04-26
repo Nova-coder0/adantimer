@@ -51,6 +51,13 @@ const dhikrSummaryTargetEl = document.getElementById("dhikr-summary-target");
 const dhikrActiveCategoryEl = document.getElementById("dhikr-active-category");
 const dhikrResetVisibleEl = document.getElementById("dhikr-reset-visible");
 const dhikrResetAllEl = document.getElementById("dhikr-reset-all");
+const hadithSearchInputEl = document.getElementById("hadith-search");
+const hadithSearchClearEl = document.getElementById("hadith-search-clear");
+const hadithSearchCountEl = document.getElementById("hadith-search-count");
+const hadithSearchEmptyEl = document.getElementById("hadith-search-empty");
+const hadithCardGridEl = document.getElementById("hadith-card-grid");
+const hadithCategoryRowEl = document.querySelector(".hadith-category-row");
+const hadithCategoryButtons = Array.from(document.querySelectorAll(".hadith-category-chip[data-hadith-category]"));
 const pageType = document.body.dataset.page || "home";
 
 const LANGUAGE_ALIASES = {
@@ -222,6 +229,39 @@ const DHIKR_UI_LOCALES = {
   "zh-hans": {
     progressText: (value, target) => `已完成 ${value} / ${target}`,
     currentCategory: label => `当前分类：${label}`
+  }
+};
+
+const HADITH_INDEX_LOCALES = {
+  en: {
+    searchCount: (visible, total, hasQuery, label = "entries") => hasQuery ? `${visible} of ${total} ${label} shown` : `${total} ${label}`,
+    emptyState: query => `No hadith matched "${query}".`,
+    clearLabel: "Clear search"
+  },
+  ar: {
+    searchCount: (visible, total, hasQuery, label = "مدخل") => hasQuery ? `${visible} من ${total} ${label} ظاهرة` : `${total} ${label}`,
+    emptyState: query => `لا يوجد حديث يطابق "${query}".`,
+    clearLabel: "مسح البحث"
+  },
+  de: {
+    searchCount: (visible, total, hasQuery, label = "Einträge") => hasQuery ? `${visible} von ${total} ${label} angezeigt` : `${total} ${label}`,
+    emptyState: query => `Kein Hadith passt zu "${query}".`,
+    clearLabel: "Suche löschen"
+  },
+  fr: {
+    searchCount: (visible, total, hasQuery, label = "entrees") => hasQuery ? `${visible} sur ${total} ${label} affichees` : `${total} ${label}`,
+    emptyState: query => `Aucun hadith ne correspond a "${query}".`,
+    clearLabel: "Effacer la recherche"
+  },
+  tr: {
+    searchCount: (visible, total, hasQuery, label = "kayit") => hasQuery ? `${visible} / ${total} ${label} gosteriliyor` : `${total} ${label}`,
+    emptyState: query => `"${query}" ile eslesen hadis bulunamadi.`,
+    clearLabel: "Aramayi temizle"
+  },
+  "zh-hans": {
+    searchCount: (visible, total, hasQuery, label = "条") => hasQuery ? `显示 ${visible} / ${total} ${label}` : `共 ${total} ${label}`,
+    emptyState: query => `没有匹配“${query}”的圣训。`,
+    clearLabel: "清除搜索"
   }
 };
 
@@ -1351,6 +1391,107 @@ function initQuranIndex() {
   updateQuranIndexFilter(quranSearchInputEl.value);
 }
 
+function getHadithLocale() {
+  return HADITH_INDEX_LOCALES[language] || HADITH_INDEX_LOCALES.en;
+}
+
+function getHadithCards() {
+  return hadithCardGridEl ? Array.from(hadithCardGridEl.querySelectorAll("[data-hadith-card]")) : [];
+}
+
+function updateHadithFilter(query = "", category = "all") {
+  if (!hadithCardGridEl) return;
+  const locale = getHadithLocale();
+  const rawQuery = String(query || "").trim();
+  const normalizedQuery = normalizeForSearch(rawQuery);
+  const safeCategory = String(category || "all");
+  let visibleCount = 0;
+  const cards = getHadithCards();
+  const totalCount = cards.length;
+  const entryLabel = hadithSearchCountEl?.dataset.entryLabel || (language === "zh-hans" ? "条" : language === "ar" ? "مدخل" : language === "de" ? "Einträge" : language === "fr" ? "entrees" : language === "tr" ? "kayit" : "entries");
+
+  cards.forEach(card => {
+    const searchable = normalizeForSearch(card.dataset.search || "");
+    const matchesQuery = !normalizedQuery || searchable.includes(normalizedQuery);
+    const matchesCategory = safeCategory === "all" || (card.dataset.hadithCategory || "") === safeCategory;
+    const isVisible = matchesQuery && matchesCategory;
+    card.hidden = !isVisible;
+    card.classList.toggle("is-hidden", !isVisible);
+    card.setAttribute("aria-hidden", isVisible ? "false" : "true");
+    if (isVisible) visibleCount += 1;
+  });
+
+  hadithCategoryButtons.forEach(button => {
+    const isActive = (button.dataset.hadithCategory || "all") === safeCategory;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+
+  if (hadithSearchCountEl) {
+    hadithSearchCountEl.textContent = locale.searchCount(visibleCount, totalCount, Boolean(normalizedQuery || safeCategory !== "all"), entryLabel);
+  }
+  if (hadithSearchEmptyEl) {
+    hadithSearchEmptyEl.hidden = visibleCount !== 0;
+    if (!hadithSearchEmptyEl.hidden) {
+      hadithSearchEmptyEl.textContent = locale.emptyState(rawQuery || normalizedQuery || safeCategory);
+    }
+  }
+  if (hadithSearchClearEl) {
+    hadithSearchClearEl.hidden = !normalizedQuery;
+    hadithSearchClearEl.setAttribute("aria-label", locale.clearLabel);
+    hadithSearchClearEl.setAttribute("title", locale.clearLabel);
+  }
+}
+
+function initHadithPage() {
+  if (!hadithCardGridEl) return;
+
+  const initialActiveCategory = hadithCategoryButtons.find(button => button.classList.contains("is-active"))?.dataset.hadithCategory || "all";
+
+  if (hadithSearchCountEl && !hadithSearchCountEl.dataset.entryLabel) {
+    const label = hadithSearchCountEl.textContent.replace(/^[0-9\s/]+(?:of|von|sur|من|共|显示)?\s*/i, "").trim();
+    hadithSearchCountEl.dataset.entryLabel = label || "entries";
+  }
+
+  if (hadithSearchInputEl && hadithSearchInputEl.dataset.bound !== "true") {
+    hadithSearchInputEl.dataset.bound = "true";
+    hadithSearchInputEl.addEventListener("input", event => {
+      const activeCategory = hadithCategoryButtons.find(button => button.classList.contains("is-active"))?.dataset.hadithCategory || "all";
+      updateHadithFilter(event.target.value, activeCategory);
+    });
+    hadithSearchInputEl.addEventListener("keydown", event => {
+      if (event.key === "Escape" && hadithSearchInputEl.value) {
+        hadithSearchInputEl.value = "";
+        const activeCategory = hadithCategoryButtons.find(button => button.classList.contains("is-active"))?.dataset.hadithCategory || "all";
+        updateHadithFilter("", activeCategory);
+      }
+    });
+  }
+
+  if (hadithSearchClearEl && hadithSearchClearEl.dataset.bound !== "true") {
+    hadithSearchClearEl.dataset.bound = "true";
+    hadithSearchClearEl.addEventListener("click", () => {
+      if (hadithSearchInputEl) {
+        hadithSearchInputEl.value = "";
+        const activeCategory = hadithCategoryButtons.find(button => button.classList.contains("is-active"))?.dataset.hadithCategory || "all";
+        updateHadithFilter("", activeCategory);
+        hadithSearchInputEl.focus();
+      }
+    });
+  }
+
+  if (hadithCategoryRowEl && hadithCategoryRowEl.dataset.bound !== "true") {
+    hadithCategoryRowEl.dataset.bound = "true";
+    hadithCategoryRowEl.addEventListener("click", event => {
+      const button = event.target.closest(".hadith-category-chip[data-hadith-category]");
+      if (!button) return;
+      updateHadithFilter(hadithSearchInputEl ? hadithSearchInputEl.value : "", button.dataset.hadithCategory || "all");
+    });
+  }
+
+  updateHadithFilter(hadithSearchInputEl ? hadithSearchInputEl.value : "", initialActiveCategory);
+}
+
 function getDhikrLocale() {
   return DHIKR_UI_LOCALES[language] || DHIKR_UI_LOCALES.en;
 }
@@ -1553,6 +1694,18 @@ function setLanguage(lang, persist = true) {
       }
     }
     initDhikrPage();
+    return;
+  }
+
+  if (pageType === "hadith") {
+    if (persist) {
+      const targetUrl = buildRelativeUrl(language, "hadith");
+      if (window.location.pathname !== targetUrl) {
+        window.location.href = targetUrl;
+        return;
+      }
+    }
+    initHadithPage();
     return;
   }
 
@@ -2033,12 +2186,14 @@ document.querySelectorAll("button.city-chip").forEach(button => {
   });
 });
 
-language = pageType === "quran" || pageType === "quran-surah" ? getCurrentDocumentLanguage() : getPreferredLanguage();
+language = pageType === "quran" || pageType === "quran-surah" || pageType === "hadith" ? getCurrentDocumentLanguage() : getPreferredLanguage();
 setLanguage(language, false);
 if (pageType === "quran") {
   initQuranIndex();
 } else if (pageType === "quran-surah") {
   // Surah pages are fully server-rendered; no client bootstrap is needed here.
+} else if (pageType === "hadith") {
+  initHadithPage();
 } else if (pageType === "dhikr" || pageType === "dhikr-collection") {
   initDhikrPage();
 } else if (pageType === "qibla") {
