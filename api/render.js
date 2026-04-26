@@ -2880,16 +2880,16 @@ function buildQuranIndexCopy(language, pageType) {
 const HADITH_INDEX_CONTENT = {
   en: {
     heroEyebrow: "Hadith",
-    heroTitle: "Read a focused hadith page without distraction",
-    heroSubtitle: "Use a curated hadith page built for short daily reading, quick category filtering, and direct return visits.",
+    heroTitle: "Build a stronger hadith reading and study habit",
+    heroSubtitle: "Use a curated hadith page for short daily reading, topic-based study, and direct return visits across a growing set of themes.",
     searchLabel: "Search hadith",
     searchPlaceholder: "Search by theme, narrator, source, or keyword",
-    searchHint: "Filter by intentions, prayer, character, knowledge, gratitude, or mercy.",
+    searchHint: "Filter by theme, narrator, source, or study topic such as repentance, patience, family, truthfulness, or trust in Allah.",
     searchCount: count => `${count} hadith entries`,
     emptyState: "No hadith matched this search or category yet.",
     sectionEyebrow: "Collections",
-    sectionTitle: "Curated hadith for daily reading",
-    sectionIntro: "Move through core hadith themes, keep the page focused, and return quickly for short reading sessions.",
+    sectionTitle: "Curated hadith for daily reading and steady study",
+    sectionIntro: "Move through topic pages built for repeat reading, stronger study habits, and quick return visits across core hadith themes.",
     stats: [
       { value: "6", label: "Themes" },
       { value: "6", label: "Entries" },
@@ -2900,7 +2900,7 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Narrator",
     takeawayLabel: "Why it matters",
     metaTitle: "Daily Hadith Reading Page | Adantimer",
-    metaDescription: "Read curated hadith with focused themes, source notes, and short lessons for prayer, character, knowledge, gratitude, mercy, and intentions.",
+    metaDescription: "Read curated hadith with visible sources, short lessons, and study themes covering intentions, prayer, character, knowledge, gratitude, mercy, repentance, patience, family, truthfulness, and trust in Allah.",
     faq: [
       {
         question: "Does this hadith page focus on short daily reading?",
@@ -2908,7 +2908,7 @@ const HADITH_INDEX_CONTENT = {
       },
       {
         question: "Can I filter hadith by topic?",
-        answer: "Yes. You can move between intentions, prayer, character, knowledge, gratitude, and mercy."
+          answer: "Yes. You can move between intentions, prayer, character, knowledge, gratitude, mercy, repentance, patience, family, truthfulness, and trust in Allah."
       },
       {
         question: "Does each card keep its source visible?",
@@ -2964,12 +2964,12 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Nutze eine kuratierte Hadith-Seite fuer kurze taegliche Lesepausen, schnelle Themenfilter und spaetere direkte Rueckkehr.",
     searchLabel: "Hadith durchsuchen",
     searchPlaceholder: "Nach Thema, Ueberlieferer, Quelle oder Stichwort suchen",
-    searchHint: "Filtere nach Absichten, Gebet, Charakter, Wissen, Dankbarkeit oder Barmherzigkeit.",
+    searchHint: "Filtere nach Thema, Ueberlieferer, Quelle oder Lernfeld wie Reue, Geduld, Familie, Wahrhaftigkeit oder Tawakkul.",
     searchCount: count => `${count} Hadith-Eintraege`,
     emptyState: "Kein Hadith passt gerade zu dieser Suche oder Kategorie.",
     sectionEyebrow: "Themen",
-    sectionTitle: "Kuratierte Hadithe fuer taegliches Lesen",
-    sectionIntro: "Wechsle zwischen klaren Hadith-Themen und halte die Seite auf kurze, wiederkehrende Lesesitzungen ausgerichtet.",
+    sectionTitle: "Kuratierte Hadithe fuer taegliches Lesen und Lernen",
+    sectionIntro: "Wechsle zwischen thematischen Hadith-Seiten und halte die Seite auf kurze, wiederkehrende Lese- und Lernsitzungen ausgerichtet.",
     stats: [
       { value: "6", label: "Themen" },
       { value: "6", label: "Eintraege" },
@@ -2980,7 +2980,7 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Ueberlieferer",
     takeawayLabel: "Warum es wichtig ist",
     metaTitle: "Hadith-Seite fuer taegliches Lesen | Adantimer",
-    metaDescription: "Lies kuratierte Hadithe mit fokussierten Themen, Quellenangaben und kurzen Lektionen zu Gebet, Charakter, Wissen, Dankbarkeit, Barmherzigkeit und Absichten.",
+    metaDescription: "Lies kuratierte Hadithe mit sichtbaren Quellen, kurzen Lektionen und Lernthemen zu Absichten, Gebet, Charakter, Wissen, Dankbarkeit, Barmherzigkeit, Reue, Geduld, Familie, Wahrhaftigkeit und Tawakkul.",
     faq: [
       {
         question: "Ist diese Hadith-Seite fuer kurze taegliche Lesemomente gebaut?",
@@ -2988,7 +2988,7 @@ const HADITH_INDEX_CONTENT = {
       },
       {
         question: "Kann ich Hadithe nach Thema filtern?",
-        answer: "Ja. Du kannst zwischen Absichten, Gebet, Charakter, Wissen, Dankbarkeit und Barmherzigkeit wechseln."
+         answer: "Ja. Du kannst zwischen Absichten, Gebet, Charakter, Wissen, Dankbarkeit, Barmherzigkeit, Reue, Geduld, Familie, Wahrhaftigkeit und Tawakkul wechseln."
       },
       {
         question: "Bleibt die Quelle in jeder Karte sichtbar?",
@@ -3004,7 +3004,7 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Utilisez une page hadith selectionnee pour des lectures courtes, un filtrage rapide par theme et des retours simples.",
     searchLabel: "Rechercher un hadith",
     searchPlaceholder: "Rechercher par theme, rapporteur, source ou mot-cle",
-    searchHint: "Filtrez par intentions, priere, comportement, savoir, gratitude ou misericorde.",
+    searchHint: "Filtrez par theme, rapporteur, source ou parcours d'etude comme le repentir, la patience, la famille, la veracite ou la confiance en Allah.",
     searchCount: count => `${count} hadiths`,
     emptyState: "Aucun hadith ne correspond a cette recherche ou a cette categorie.",
     sectionEyebrow: "Themes",
@@ -3020,7 +3020,7 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Rapporteur",
     takeawayLabel: "Pourquoi c'est important",
     metaTitle: "Page hadith pour la lecture quotidienne | Adantimer",
-    metaDescription: "Lisez des hadiths selectionnes avec des themes clairs, des notes de source et de courtes lecons sur la priere, le comportement, le savoir, la gratitude, la misericorde et les intentions.",
+    metaDescription: "Lisez des hadiths selectionnes avec sources visibles, courtes lecons et themes d'etude sur les intentions, la priere, le comportement, le savoir, la gratitude, la misericorde, le repentir, la patience, la famille, la veracite et la confiance en Allah.",
     faq: [
       {
         question: "Cette page hadith est-elle faite pour une lecture quotidienne courte ?",
@@ -3028,7 +3028,7 @@ const HADITH_INDEX_CONTENT = {
       },
       {
         question: "Puis-je filtrer les hadiths par theme ?",
-        answer: "Oui. Vous pouvez passer entre intentions, priere, comportement, savoir, gratitude et misericorde."
+        answer: "Oui. Vous pouvez passer entre intentions, priere, comportement, savoir, gratitude, misericorde, repentir, patience, famille, veracite et confiance en Allah."
       },
       {
         question: "La source reste-t-elle visible sur chaque carte ?",
@@ -3044,7 +3044,7 @@ const HADITH_INDEX_CONTENT = {
     heroSubtitle: "Kisa gunluk okumalar, hizli konu filtreleri ve kolay geri donusler icin secilmis bir hadis sayfasi kullan.",
     searchLabel: "Hadis ara",
     searchPlaceholder: "Konu, ravi, kaynak veya anahtar kelime ara",
-    searchHint: "Niyet, namaz, ahlak, ilim, sukretmek veya merhamet basliklarina gore filtrele.",
+    searchHint: "Konu, ravi, kaynak veya tevbe, sabir, aile, dogruluk ve tevekkul gibi calisma basliklarina gore filtrele.",
     searchCount: count => `${count} hadis`,
     emptyState: "Bu arama veya kategori icin eslesen hadis bulunmadi.",
     sectionEyebrow: "Temalar",
@@ -3060,7 +3060,7 @@ const HADITH_INDEX_CONTENT = {
     narratorLabel: "Ravi",
     takeawayLabel: "Neden onemli",
     metaTitle: "Gunluk hadis okuma sayfasi | Adantimer",
-    metaDescription: "Namaz, ahlak, ilim, sukretmek, merhamet ve niyetler icin secilmis hadisleri kaynak notlari ve kisa derslerle oku.",
+    metaDescription: "Niyet, namaz, ahlak, ilim, sukretmek, merhamet, tevbe, sabir, aile, dogruluk ve tevekkul konularinda secilmis hadisleri kaynak notlari ve kisa derslerle oku.",
     faq: [
       {
         question: "Bu hadis sayfasi kisa gunluk okumalar icin mi hazirlandi?",
@@ -3068,7 +3068,7 @@ const HADITH_INDEX_CONTENT = {
       },
       {
         question: "Hadisleri konuya gore filtreleyebilir miyim?",
-        answer: "Evet. Niyet, namaz, ahlak, ilim, sukretmek ve merhamet arasinda gecis yapabilirsin."
+        answer: "Evet. Niyet, namaz, ahlak, ilim, sukretmek, merhamet, tevbe, sabir, aile, dogruluk ve tevekkul arasinda gecis yapabilirsin."
       },
       {
         question: "Kaynak her kartta gorunur mu?",
