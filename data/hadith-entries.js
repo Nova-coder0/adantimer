@@ -251,6 +251,61 @@ export const HADITH_CATEGORIES = [
       tr: "Zuhd",
       "zh-hans": "淡泊今世"
     }
+  },
+  {
+    id: "marriage",
+    labels: {
+      en: "Marriage",
+      ar: "الزواج",
+      de: "Ehe",
+      fr: "Mariage",
+      tr: "Evlilik",
+      "zh-hans": "婚姻"
+    }
+  },
+  {
+    id: "children",
+    labels: {
+      en: "Children",
+      ar: "الأطفال",
+      de: "Kinder",
+      fr: "Enfants",
+      tr: "Cocuklar",
+      "zh-hans": "孩子"
+    }
+  },
+  {
+    id: "anger",
+    labels: {
+      en: "Anger",
+      ar: "الغضب",
+      de: "Zorn",
+      fr: "Colere",
+      tr: "Ofke",
+      "zh-hans": "愤怒"
+    }
+  },
+  {
+    id: "adab",
+    labels: {
+      en: "Adab",
+      ar: "الآداب",
+      de: "Adab",
+      fr: "Bienséance",
+      tr: "Adab",
+      "zh-hans": "礼仪"
+    }
+  },
+  {
+    id: "backbiting",
+    labels: {
+      en: "Backbiting",
+      ar: "الغيبة",
+      de: "Ueble Nachrede",
+      fr: "Médisance",
+      tr: "Giybet",
+      "zh-hans": "背后议论"
+    }
   }
 ];
 
@@ -1678,6 +1733,261 @@ export const HADITH_ITEMS = [
       de: "Er trainiert das Herz, die Dunya als kurzen Halt und nicht als bleibende Heimat zu behandeln."
     }),
     search: ["zuhd", "world", "rider", "tree", "ibn masud"]
+  }),
+  item({
+    id: "marriage-youth-should-marry",
+    category: "marriage",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 5066, Sahih Muslim 1400",
+    narrator: "Abdullah ibn Masud",
+    arabic: "يَا مَعْشَرَ الشَّبَابِ مَنِ اسْتَطَاعَ الْبَاءَةَ فَلْيَتَزَوَّجْ فَإِنَّهُ أَغَضُّ لِلْبَصَرِ وَأَحْصَنُ لِلْفَرْجِ وَمَنْ لَمْ يَسْتَطِعْ فَعَلَيْهِ بِالصَّوْمِ فَإِنَّهُ لَهُ وِجَاءٌ",
+    translation: localized({
+      en: "O young people, whoever among you is able to marry should marry, for it helps lower the gaze and guard chastity. Whoever cannot should fast, for it diminishes desire.",
+      de: "O ihr jungen Menschen, wer von euch zur Ehe faehig ist, soll heiraten, denn das hilft den Blick zu senken und die Keuschheit zu schuetzen. Wer es nicht kann, soll fasten, denn das schwaecht das Verlangen."
+    }),
+    lesson: localized({
+      en: "It frames marriage as protection, discipline, and a lawful structure for desire.",
+      de: "Er beschreibt die Ehe als Schutz, Disziplin und als erlaubte Ordnung fuer das Verlangen."
+    }),
+    search: ["marriage", "young people", "fasting", "chastity", "ibn masud"]
+  }),
+  item({
+    id: "marriage-choose-religious-spouse",
+    category: "marriage",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 5090, Sahih Muslim 1466",
+    narrator: "Abu Hurayrah",
+    arabic: "تُنْكَحُ الْمَرْأَةُ لِأَرْبَعٍ لِمَالِهَا وَلِحَسَبِهَا وَلِجَمَالِهَا وَلِدِينِهَا فَاظْفَرْ بِذَاتِ الدِّينِ تَرِبَتْ يَدَاكَ",
+    translation: localized({
+      en: "A woman is married for four things: her wealth, her lineage, her beauty, and her religion. So choose the one with religion, may your hands be rubbed with dust.",
+      de: "Eine Frau wird wegen vier Dingen geheiratet: wegen ihres Vermoegens, ihrer Herkunft, ihrer Schoenheit und ihrer Religion. So waehle die religiöse Frau, sonst verlierst du."
+    }),
+    lesson: localized({
+      en: "It makes deen the decisive criterion when other attractions compete for attention.",
+      de: "Er macht den Glauben zum entscheidenden Massstab, wenn andere Anziehungspunkte miteinander konkurrieren."
+    }),
+    search: ["marriage", "religion", "spouse", "woman", "abu hurayrah"]
+  }),
+  item({
+    id: "marriage-be-good-to-women",
+    category: "marriage",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 5185, Sahih Muslim 1468",
+    narrator: "Abu Hurayrah",
+    arabic: "اسْتَوْصُوا بِالنِّسَاءِ خَيْرًا",
+    translation: localized({
+      en: "Take good care of women.",
+      de: "Behandelt die Frauen gut."
+    }),
+    lesson: localized({
+      en: "It places ihsan and responsible treatment at the center of marriage.",
+      de: "Er stellt Ihsan und verantwortungsvollen Umgang in das Zentrum der Ehe."
+    }),
+    search: ["marriage", "women", "good treatment", "wives", "abu hurayrah"]
+  }),
+  item({
+    id: "children-care-two-daughters",
+    category: "children",
+    grade: "sahih",
+    source: "Sahih Muslim 2631",
+    narrator: "Anas ibn Malik",
+    arabic: "مَنْ عَالَ جَارِيَتَيْنِ حَتَّى تَبْلُغَا جَاءَ يَوْمَ الْقِيَامَةِ أَنَا وَهُوَ",
+    translation: localized({
+      en: "Whoever takes care of two girls until they reach maturity will come on the Day of Resurrection with me like this.",
+      de: "Wer sich um zwei Maedchen kuemmert, bis sie erwachsen werden, wird am Tag der Auferstehung mit mir so kommen."
+    }),
+    lesson: localized({
+      en: "It gives a very high rank to patient care, provision, and raising daughters well.",
+      de: "Er gibt geduldiger Fuer­sorge, Versorgung und guter Erziehung von Toechtern einen sehr hohen Rang."
+    }),
+    search: ["children", "daughters", "care", "anas", "girls"]
+  }),
+  item({
+    id: "children-mercy-young-respect-elders",
+    category: "children",
+    grade: "sahih",
+    source: "Sunan Abi Dawud 4943",
+    narrator: "Anas ibn Malik",
+    arabic: "لَيْسَ مِنَّا مَنْ لَمْ يَرْحَمْ صَغِيرَنَا وَيُوَقِّرْ كَبِيرَنَا",
+    translation: localized({
+      en: "He is not one of us who does not show mercy to our young and respect to our elders.",
+      de: "Er gehoert nicht zu uns, wer unseren Jungen keine Barmherzigkeit zeigt und unsere Aelteren nicht ehrt."
+    }),
+    lesson: localized({
+      en: "It makes tenderness with children part of prophetic belonging, not an optional softness.",
+      de: "Er macht Sanftheit gegenueber Kindern zu einem Teil prophetischer Zugehoerigkeit und nicht zu einer optionalen Weichheit."
+    }),
+    search: ["children", "young", "elders", "mercy", "respect", "anas"]
+  }),
+  item({
+    id: "children-each-of-you-is-shepherd",
+    category: "children",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 5200, Sahih Muslim 1829",
+    narrator: "Abdullah ibn Umar",
+    arabic: "كُلُّكُمْ رَاعٍ وَكُلُّكُمْ مَسْئُولٌ عَنْ رَعِيَّتِهِ وَالرَّجُلُ رَاعٍ عَلَى أَهْلِ بَيْتِهِ وَالْمَرْأَةُ رَاعِيَةٌ عَلَى بَيْتِ زَوْجِهَا وَوَلَدِهِ",
+    translation: localized({
+      en: "All of you are shepherds and all of you are responsible for your flock. The man is a shepherd over his household, and the woman is a shepherd over her husband's house and children.",
+      de: "Ihr alle seid Hirten und ihr alle seid verantwortlich fuer eure Herde. Der Mann ist ein Hirt ueber sein Haus, und die Frau ist eine Hirtin ueber das Haus ihres Mannes und seine Kinder."
+    }),
+    lesson: localized({
+      en: "It makes raising children and guarding the home a direct trust before Allah.",
+      de: "Er macht die Erziehung der Kinder und den Schutz des Hauses zu einem unmittelbaren Vertrauen vor Allah."
+    }),
+    search: ["children", "family", "responsibility", "household", "ibn umar"]
+  }),
+  item({
+    id: "anger-do-not-become-angry",
+    category: "anger",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 6116",
+    narrator: "Abu Hurayrah",
+    arabic: "لاَ تَغْضَبْ",
+    translation: localized({
+      en: "Do not become angry.",
+      de: "Werde nicht zornig."
+    }),
+    lesson: localized({
+      en: "Its brevity is part of its force: anger itself is treated as a door that must be blocked early.",
+      de: "Seine Kuerze ist Teil seiner Kraft: Zorn selbst wird als Tuere behandelt, die frueh geschlossen werden muss."
+    }),
+    search: ["anger", "do not become angry", "abu hurayrah", "bukhari 6116"]
+  }),
+  item({
+    id: "anger-strong-controls-himself",
+    category: "anger",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6114, Sahih Muslim 2609",
+    narrator: "Abu Hurayrah",
+    arabic: "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ",
+    translation: localized({
+      en: "The strong man is not the one who overcomes others by strength, but the strong man is the one who controls himself when angry.",
+      de: "Der Starke ist nicht der, der andere im Ring niederwirft, sondern der Starke ist derjenige, der sich selbst beim Zorn beherrscht."
+    }),
+    lesson: localized({
+      en: "It redefines strength from domination to inner control.",
+      de: "Er definiert Staerke von Herrschaft ueber andere hin zu Herrschaft ueber sich selbst um."
+    }),
+    search: ["anger", "strength", "control", "self-restraint", "abu hurayrah"]
+  }),
+  item({
+    id: "anger-sit-then-lie-down",
+    category: "anger",
+    grade: "sahih",
+    source: "Sunan Abi Dawud 4782",
+    narrator: "Abu Dharr",
+    arabic: "إِذَا غَضِبَ أَحَدُكُمْ وَهُوَ قَائِمٌ فَلْيَجْلِسْ فَإِنْ ذَهَبَ عَنْهُ الْغَضَبُ وَإِلاَّ فَلْيَضْطَجِعْ",
+    translation: localized({
+      en: "When one of you becomes angry while standing, let him sit. If the anger leaves him, well and good; otherwise let him lie down.",
+      de: "Wenn einer von euch zornig wird, waehrend er steht, soll er sich setzen. Wenn der Zorn von ihm weicht, gut; andernfalls soll er sich hinlegen."
+    }),
+    lesson: localized({
+      en: "It turns anger management into immediate embodied action instead of vague reflection.",
+      de: "Er macht aus dem Umgang mit Zorn eine unmittelbare koerperliche Handlung statt einer vagen Selbstbetrachtung."
+    }),
+    search: ["anger", "sit down", "lie down", "abu dharr", "abu dawud"]
+  }),
+  item({
+    id: "adab-spread-salam",
+    category: "adab",
+    grade: "sahih",
+    source: "Sahih Muslim 54a",
+    narrator: "Abu Hurayrah",
+    arabic: "لاَ تَدْخُلُونَ الْجَنَّةَ حَتَّى تُؤْمِنُوا وَلاَ تُؤْمِنُوا حَتَّى تَحَابُّوا أَوَلاَ أَدُلُّكُمْ عَلَى شَىْءٍ إِذَا فَعَلْتُمُوهُ تَحَابَبْتُمْ أَفْشُوا السَّلاَمَ بَيْنَكُمْ",
+    translation: localized({
+      en: "You will not enter Paradise until you believe, and you will not truly believe until you love one another. Shall I tell you something that, if you do it, you will love one another? Spread salam among yourselves.",
+      de: "Ihr werdet das Paradies nicht betreten, bis ihr glaubt, und ihr werdet nicht vollkommen glauben, bis ihr einander liebt. Soll ich euch auf etwas hinweisen, das Liebe unter euch entstehen laesst? Verbreitet den Salam untereinander."
+    }),
+    lesson: localized({
+      en: "It treats the simple act of salam as infrastructure for love and faith in the community.",
+      de: "Er behandelt den einfachen Salam als Grundlage fuer Liebe und Glauben in der Gemeinschaft."
+    }),
+    search: ["adab", "salam", "love one another", "abu hurayrah", "muslim 54"]
+  }),
+  item({
+    id: "adab-smile-is-charity",
+    category: "adab",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 1956",
+    narrator: "Abu Dharr",
+    arabic: "تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ",
+    translation: localized({
+      en: "Your smiling in the face of your brother is charity.",
+      de: "Dein Laecheln ins Gesicht deines Bruders ist Sadaqa."
+    }),
+    lesson: localized({
+      en: "It shows that good manners are not cosmetic; they are counted as worship.",
+      de: "Er zeigt, dass gutes Benehmen nicht nur aeusserlich ist; es wird als Anbetung gezaehlt."
+    }),
+    search: ["adab", "smile", "charity", "abu dharr", "tirmidhi 1956"]
+  }),
+  item({
+    id: "adab-honor-guest",
+    category: "adab",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6138, Sahih Muslim 47b",
+    narrator: "Abu Hurayrah",
+    arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَصِلْ رَحِمَهُ وَمَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَسْكُتْ",
+    translation: localized({
+      en: "Whoever believes in Allah and the Last Day should honor his guest, maintain ties of kinship, and speak good or remain silent.",
+      de: "Wer an Allah und den Letzten Tag glaubt, soll seinen Gast ehren, die Verwandtschaftsbande pflegen und Gutes sprechen oder schweigen."
+    }),
+    lesson: localized({
+      en: "It joins hospitality, family duty, and disciplined speech into one adab standard.",
+      de: "Er verbindet Gastfreundschaft, Familienpflicht und beherrschte Sprache zu einem einzigen Adab-Massstab."
+    }),
+    search: ["adab", "guest", "kinship", "speak good", "abu hurayrah"]
+  }),
+  item({
+    id: "backbiting-what-is-backbiting",
+    category: "backbiting",
+    grade: "sahih",
+    source: "Sahih Muslim 2589",
+    narrator: "Abu Hurayrah",
+    arabic: "أَتَدْرُونَ مَا الْغِيبَةُ قَالُوا اللَّهُ وَرَسُولُهُ أَعْلَمُ قَالَ ذِكْرُكَ أَخَاكَ بِمَا يَكْرَهُ قِيلَ أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ قَالَ إِنْ كَانَ فِيهِ مَا تَقُولُ فَقَدِ اغْتَبْتَهُ وَإِنْ لَمْ يَكُنْ فِيهِ فَقَدْ بَهَتَّهُ",
+    translation: localized({
+      en: "Do you know what backbiting is? They said: Allah and His Messenger know best. He said: It is your mentioning about your brother that which he dislikes. It was said: What if what I say is actually in him? He said: If it is in him, you have backbitten him; if it is not in him, you have slandered him.",
+      de: "Wisst ihr, was Ueble Nachrede ist? Sie sagten: Allah und Sein Gesandter wissen es am besten. Er sagte: Dass du ueber deinen Bruder etwas erwaehnst, was er nicht mag. Es wurde gefragt: Und wenn das, was ich sage, wirklich in ihm ist? Er sagte: Wenn es in ihm ist, hast du ueber ihn schlecht geredet; und wenn es nicht in ihm ist, hast du ihn verleumdet."
+    }),
+    lesson: localized({
+      en: "It defines ghibah precisely and removes the common excuse that 'but it is true' makes it acceptable.",
+      de: "Er definiert Ghibah praezise und nimmt die uebliche Ausrede weg, dass etwas dadurch erlaubt werde, weil es wahr sei."
+    }),
+    search: ["backbiting", "ghibah", "slander", "abu hurayrah", "muslim 2589"]
+  }),
+  item({
+    id: "backbiting-muslim-safe-from-tongue-and-hand",
+    category: "backbiting",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 10, Sahih Muslim 40",
+    narrator: "Abdullah ibn Amr",
+    arabic: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ وَالْمُهَاجِرُ مَنْ هَجَرَ مَا نَهَى اللَّهُ عَنْهُ",
+    translation: localized({
+      en: "A Muslim is the one from whose tongue and hand the Muslims are safe, and the emigrant is the one who abandons what Allah has forbidden.",
+      de: "Ein Muslim ist derjenige, vor dessen Zunge und Hand die Muslime sicher sind, und der Auswanderer ist derjenige, der das verlaesst, was Allah verboten hat."
+    }),
+    lesson: localized({
+      en: "It makes harm through speech a direct test of real Islam, not a side issue.",
+      de: "Er macht Schaden durch die Zunge zu einem unmittelbaren Test echten Islam und nicht zu einer Nebensache."
+    }),
+    search: ["backbiting", "tongue", "hand", "muslim safe", "ibn amr"]
+  }),
+  item({
+    id: "backbiting-speak-good-or-silent",
+    category: "backbiting",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6138, Sahih Muslim 47b",
+    narrator: "Abu Hurayrah",
+    arabic: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَسْكُتْ",
+    translation: localized({
+      en: "Whoever believes in Allah and the Last Day should speak good or remain silent.",
+      de: "Wer an Allah und den Letzten Tag glaubt, soll Gutes sprechen oder schweigen."
+    }),
+    lesson: localized({
+      en: "It gives a practical rule that blocks much of backbiting before it even begins.",
+      de: "Er gibt eine praktische Regel, die einen grossen Teil der ueblen Nachrede stoppt, bevor sie ueberhaupt beginnt."
+    }),
+    search: ["backbiting", "speak good", "remain silent", "abu hurayrah", "tongue"]
   })
 ];
 
