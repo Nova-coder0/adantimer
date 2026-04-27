@@ -2158,6 +2158,227 @@ export const HADITH_ITEMS = [
       de: "Er macht sprachliche Verdorbenheit unvereinbar mit der Grundidentitaet eines Glaeubigen."
     }),
     search: ["speech", "defamer", "curser", "obscene", "ibn masud", "adab al mufrad 312"]
+  }),
+  item({
+    id: "dua-answered-if-not-hasty",
+    category: "dua",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6340, Sahih Muslim 2735",
+    narrator: "Abu Hurayrah",
+    arabic: "يُسْتَجَابُ لأَحَدِكُمْ مَا لَمْ يَعْجَلْ يَقُولُ دَعَوْتُ فَلَمْ يُسْتَجَبْ لِي",
+    translation: localized({
+      en: "The supplication of one of you will be answered so long as he is not hasty and says: I supplicated but I was not answered.",
+      de: "Das Bittgebet eines von euch wird erhoert, solange er nicht voreilig wird und sagt: Ich habe Bittgebete gesprochen, aber mir wurde nicht geantwortet."
+    }),
+    lesson: localized({
+      en: "It teaches sabr in dua and blocks despair when answers do not come on our timing.",
+      de: "Er lehrt Geduld im Bittgebet und verhindert Verzweiflung, wenn Antworten nicht nach unserem Zeitplan kommen."
+    }),
+    search: ["dua", "answered", "hasty", "patience", "abu hurayrah", "bukhari 6340"]
+  }),
+  item({
+    id: "dua-hands-not-returned-empty",
+    category: "dua",
+    grade: "hasan",
+    source: "Sunan Ibn Majah 3865",
+    narrator: "Salman al-Farisi",
+    arabic: "إِنَّ رَبَّكُمْ حَيِيٌّ كَرِيمٌ يَسْتَحْيِي مِنْ عَبْدِهِ أَنْ يَرْفَعَ إِلَيْهِ يَدَيْهِ فَيَرُدَّهُمَا صِفْرًا",
+    translation: localized({
+      en: "Your Lord is shy and generous. He is shy that His servant should raise his hands to Him and He returns them empty.",
+      de: "Euer Herr ist schaamhaft und grosszuegig. Er schaemt sich, dass Sein Diener die Haende zu Ihm erhebt und Er sie leer zurueckweist."
+    }),
+    lesson: localized({
+      en: "It strengthens hope in dua by tying it to Allah's generosity, not merely to our worthiness.",
+      de: "Er staerkt die Hoffnung im Bittgebet, indem er sie mit Allahs Grosszuegigkeit verbindet und nicht nur mit unserer eigenen Wuerdigkeit."
+    }),
+    search: ["dua", "hands", "empty", "salman", "ibn majah 3865"]
+  }),
+  item({
+    id: "trials-if-allah-wants-good-afflicts",
+    category: "trials",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 5645",
+    narrator: "Abu Hurayrah",
+    arabic: "مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُصِبْ مِنْهُ",
+    translation: localized({
+      en: "If Allah wants good for someone, He afflicts him with trials.",
+      de: "Wenn Allah fuer jemanden Gutes will, trifft Er ihn mit Pruefungen."
+    }),
+    lesson: localized({
+      en: "It refuses the idea that every hardship means rejection. Sometimes it is a path of divine good.",
+      de: "Er weist die Vorstellung zurueck, dass jede Schwierigkeit Ablehnung bedeutet. Manchmal ist sie ein Weg goettlichen Guten."
+    }),
+    search: ["trials", "good", "affliction", "abu hurayrah", "bukhari 5645"]
+  }),
+  item({
+    id: "trials-great-reward-great-trial",
+    category: "trials",
+    grade: "hasan",
+    source: "Sunan Ibn Majah 4031",
+    narrator: "Anas ibn Malik",
+    arabic: "عِظَمُ الْجَزَاءِ مَعَ عِظَمِ الْبَلاءِ وَإِنَّ اللَّهَ إِذَا أَحَبَّ قَوْمًا ابْتَلاهُمْ فَمَنْ رَضِيَ فَلَهُ الرِّضَا وَمَنْ سَخِطَ فَلَهُ السُّخْطُ",
+    translation: localized({
+      en: "The greatness of reward comes with the greatness of trial. When Allah loves a people, He tests them. Whoever is pleased will have His pleasure, and whoever is displeased will have His displeasure.",
+      de: "Die Groesse der Belohnung geht mit der Groesse der Pruefung einher. Wenn Allah ein Volk liebt, prueft Er es. Wer zufrieden ist, dem gilt Sein Wohlgefallen, und wer unzufrieden ist, auf den faellt Sein Missfallen."
+    }),
+    lesson: localized({
+      en: "It links trials to rank and response. The test is not only what happens, but how the servant meets it.",
+      de: "Er verbindet Pruefungen mit Rang und Reaktion. Die Pruefung ist nicht nur das, was geschieht, sondern auch, wie der Diener ihr begegnet."
+    }),
+    search: ["trials", "reward", "test", "love", "anas", "ibn majah 4031"]
+  }),
+  item({
+    id: "sincerity-fight-for-word-of-allah",
+    category: "sincerity",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 2810, Sahih Muslim 1904",
+    narrator: "Abu Musa al-Ashari",
+    arabic: "مَنْ قَاتَلَ لِتَكُونَ كَلِمَةُ اللَّهِ هِيَ الْعُلْيَا فَهُوَ فِي سَبِيلِ اللَّهِ",
+    translation: localized({
+      en: "Whoever fights so that the word of Allah is supreme, then he is in the cause of Allah.",
+      de: "Wer kaempft, damit Allahs Wort das hoechste ist, der ist auf Allahs Weg."
+    }),
+    lesson: localized({
+      en: "It makes niyyah the decisive line between outwardly similar actions and completely different realities before Allah.",
+      de: "Er macht die Absicht zur entscheidenden Grenze zwischen aeusserlich aehnlichen Handlungen und voellig verschiedenen Wirklichkeiten vor Allah."
+    }),
+    search: ["sincerity", "intention", "fight", "word of Allah", "abu musa"]
+  }),
+  item({
+    id: "justice-oppression-forbidden-qudsi",
+    category: "justice",
+    grade: "sahih",
+    source: "Sahih Muslim 2577a",
+    narrator: "Abu Dharr",
+    arabic: "يَا عِبَادِي إِنِّي حَرَّمْتُ الظُّلْمَ عَلَى نَفْسِي وَجَعَلْتُهُ بَيْنَكُمْ مُحَرَّمًا فَلَا تَظَالَمُوا",
+    translation: localized({
+      en: "O My servants, I have forbidden oppression for Myself and I have made it forbidden among you, so do not oppress one another.",
+      de: "O Meine Diener, Ich habe Mir selbst Unrecht verboten und es auch unter euch verboten gemacht, so fuegt einander kein Unrecht zu."
+    }),
+    lesson: localized({
+      en: "It grounds justice directly in a divine prohibition. Oppression is not merely bad practice; it is forbidden by Allah.",
+      de: "Er verankert Gerechtigkeit direkt in einem goettlichen Verbot. Unterdrueckung ist nicht nur schlechte Praxis, sondern von Allah verboten."
+    }),
+    search: ["justice", "oppression", "forbidden", "abu dharr", "muslim 2577"]
+  }),
+  item({
+    id: "justice-just-ruler-seven-shaded",
+    category: "justice",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 660, Sahih Muslim 1031",
+    narrator: "Abu Hurayrah",
+    arabic: "سَبْعَةٌ يُظِلُّهُمُ اللَّهُ فِي ظِلِّهِ يَوْمَ لَا ظِلَّ إِلَّا ظِلُّهُ إِمَامٌ عَادِلٌ",
+    translation: localized({
+      en: "Seven will be shaded by Allah in His shade on the Day when there is no shade but His shade: a just ruler...",
+      de: "Sieben wird Allah an dem Tag in Seinem Schatten schirmen, an dem es keinen Schatten ausser Seinem Schatten gibt: ein gerechter Fuehrer..."
+    }),
+    lesson: localized({
+      en: "It shows how highly Islam ranks justice in leadership and public responsibility.",
+      de: "Er zeigt, wie hoch der Islam Gerechtigkeit in Fuehrung und oeffentlicher Verantwortung einstuft."
+    }),
+    search: ["justice", "just ruler", "shade", "abu hurayrah", "bukhari 660"]
+  }),
+  item({
+    id: "neighbors-broth-share-with-neighbor",
+    category: "neighbors",
+    grade: "sahih",
+    source: "Sunan Ibn Majah 3362",
+    narrator: "Abu Dharr",
+    arabic: "إِذَا عَمِلْتَ مَرَقَةً فَأَكْثِرْ مَاءَهَا وَاغْتَرِفْ لِجِيرَانِكَ مِنْهَا",
+    translation: localized({
+      en: "When you make broth, add more water to it and give some of it to your neighbors.",
+      de: "Wenn du eine Suppe kochst, dann vermehre ihr Wasser und gib deinen Nachbarn etwas davon."
+    }),
+    lesson: localized({
+      en: "It translates neighborly care into small, repeatable acts of generosity, not abstract sentiment.",
+      de: "Er uebersetzt Nachbarschaftspflege in kleine, wiederholbare Handlungen der Grosszuegigkeit und nicht in abstrakte Gefuehle."
+    }),
+    search: ["neighbors", "broth", "share food", "abu dharr", "ibn majah 3362"]
+  }),
+  item({
+    id: "neighbors-do-not-block-wall-support",
+    category: "neighbors",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 2463, Sahih Muslim 1609",
+    narrator: "Abu Hurayrah",
+    arabic: "لَا يَمْنَعْ جَارٌ جَارَهُ أَنْ يَغْرِزَ خَشَبَهُ فِي جِدَارِهِ",
+    translation: localized({
+      en: "A neighbor should not prevent his neighbor from inserting a beam in his wall.",
+      de: "Ein Nachbar soll seinen Nachbarn nicht daran hindern, einen Balken in seine Wand einzusetzen."
+    }),
+    lesson: localized({
+      en: "It shows that neighbor rights include practical accommodation and cooperation, not only polite feelings.",
+      de: "Er zeigt, dass Nachbarrechte praktische Ruecksicht und Zusammenarbeit umfassen und nicht nur hoefliche Gefuehle."
+    }),
+    search: ["neighbors", "wall", "beam", "rights", "abu hurayrah"]
+  }),
+  item({
+    id: "truthfulness-sign-of-hypocrite-lies",
+    category: "truthfulness",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 33, Sahih Muslim 59",
+    narrator: "Abu Hurayrah",
+    arabic: "آيَةُ الْمُنَافِقِ ثَلَاثٌ إِذَا حَدَّثَ كَذَبَ وَإِذَا وَعَدَ أَخْلَفَ وَإِذَا اؤْتُمِنَ خَانَ",
+    translation: localized({
+      en: "The sign of a hypocrite is three: when he speaks, he lies; when he makes a promise, he breaks it; and when he is trusted, he betrays.",
+      de: "Das Zeichen des Heuchlers ist dreifach: Wenn er spricht, luegt er; wenn er verspricht, bricht er es; und wenn ihm etwas anvertraut wird, verraet er es."
+    }),
+    lesson: localized({
+      en: "It ties truthfulness to the whole moral structure of speech, promises, and trustworthiness.",
+      de: "Er verbindet Wahrhaftigkeit mit der ganzen moralischen Struktur von Sprache, Versprechen und Vertrauenswuerdigkeit."
+    }),
+    search: ["truthfulness", "hypocrite", "lies", "promise", "trust", "abu hurayrah"]
+  }),
+  item({
+    id: "truthfulness-enough-lie-repeat-all-hears",
+    category: "truthfulness",
+    grade: "sahih",
+    source: "Sahih Muslim 5",
+    narrator: "Abu Hurayrah",
+    arabic: "كَفَى بِالْمَرْءِ كَذِبًا أَنْ يُحَدِّثَ بِكُلِّ مَا سَمِعَ",
+    translation: localized({
+      en: "It is enough falsehood for a person to narrate everything he hears.",
+      de: "Es reicht einem Menschen als Luege, dass er alles weitererzaehlt, was er hoert."
+    }),
+    lesson: localized({
+      en: "It teaches verification and restraint, and it condemns careless forwarding as a form of lying.",
+      de: "Er lehrt Pruefung und Zurueckhaltung und verurteilt sorgloses Weiterverbreiten als eine Form der Luege."
+    }),
+    search: ["truthfulness", "lying", "narrate everything", "verification", "abu hurayrah", "muslim 5"]
+  }),
+  item({
+    id: "zuhd-richness-of-the-soul",
+    category: "zuhd",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6446, Sahih Muslim 1051",
+    narrator: "Abu Hurayrah",
+    arabic: "لَيْسَ الْغِنَى عَنْ كَثْرَةِ الْعَرَضِ وَلَكِنَّ الْغِنَى غِنَى النَّفْسِ",
+    translation: localized({
+      en: "Richness is not having many possessions, but true richness is richness of the soul.",
+      de: "Reichtum besteht nicht im Besitz vieler Gueter, sondern wahrer Reichtum ist der Reichtum der Seele."
+    }),
+    lesson: localized({
+      en: "It disconnects worth from accumulation and relocates wealth into contentment and inner sufficiency.",
+      de: "Er trennt Wert von Anhaeufung und verlegt Reichtum in Zufriedenheit und innere Genuegsamkeit."
+    }),
+    search: ["zuhd", "richness", "soul", "contentment", "abu hurayrah", "bukhari 6446"]
+  }),
+  item({
+    id: "zuhd-renounce-world-and-people",
+    category: "zuhd",
+    grade: "hasan",
+    source: "Sunan Ibn Majah 4102",
+    narrator: "Sahl ibn Sad as-Saidi",
+    arabic: "ازْهَدْ فِي الدُّنْيَا يُحِبَّكَ اللَّهُ وَازْهَدْ فِيمَا عِنْدَ النَّاسِ يُحِبَّكَ النَّاسُ",
+    translation: localized({
+      en: "Renounce the world and Allah will love you; renounce what people possess and people will love you.",
+      de: "Entsage der Welt, dann wird Allah dich lieben; und entsage dem, was die Menschen besitzen, dann werden die Menschen dich lieben."
+    }),
+    lesson: localized({
+      en: "It shows zuhd as freedom from grasping after dunya and from dependence on what is in people's hands.",
+      de: "Er zeigt Zuhd als Freiheit vom Greifen nach der Dunya und von Abhaengigkeit von dem, was in den Haenden der Menschen ist."
+    }),
+    search: ["zuhd", "renounce world", "people possess", "sahl ibn sad", "ibn majah 4102"]
   })
 ];
 
