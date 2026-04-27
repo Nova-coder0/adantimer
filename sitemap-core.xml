@@ -531,6 +531,31 @@
     <priority>0.77</priority>
   </url>
   <url>
+    <loc>https://www.adantimer.com/hadith/marriage</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/children</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/anger</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/adab</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/hadith/backbiting</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.77</priority>
+  </url>
+  <url>
     <loc>https://www.adantimer.com/de/hadith/intentions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
@@ -602,6 +627,31 @@
   </url>
   <url>
     <loc>https://www.adantimer.com/de/hadith/zuhd</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/marriage</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/children</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/anger</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/adab</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.adantimer.com/de/hadith/backbiting</loc>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
