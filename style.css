@@ -877,10 +877,48 @@ body[data-page="hadith"] .hero-copy {
 }
 
 .hadith-category-row {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.hadith-category-primary,
+.hadith-category-overflow {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 18px;
+}
+
+.hadith-category-more {
+  display: grid;
+  gap: 10px;
+}
+
+.hadith-category-more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.74);
+  color: inherit;
+  cursor: pointer;
+  list-style: none;
+}
+
+.hadith-category-more-toggle strong {
+  color: var(--accent-strong);
+}
+
+.hadith-category-more-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.hadith-category-more[open] .hadith-category-more-toggle {
+  background: rgba(13, 107, 93, 0.08);
+  border-color: rgba(13, 107, 93, 0.18);
 }
 
 .dhikr-category-chip {
@@ -1772,10 +1810,14 @@ body[dir="rtl"] .language-menu-list {
   }
 
   .dhikr-summary-actions,
-  .dhikr-category-row,
-  .hadith-category-row {
+  .dhikr-category-row {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .hadith-category-more-toggle {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .dhikr-card,
