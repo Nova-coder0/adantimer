@@ -1988,6 +1988,176 @@ export const HADITH_ITEMS = [
       de: "Er gibt eine praktische Regel, die einen grossen Teil der ueblen Nachrede stoppt, bevor sie ueberhaupt beginnt."
     }),
     search: ["backbiting", "speak good", "remain silent", "abu hurayrah", "tongue"]
+  }),
+  item({
+    id: "marriage-best-to-family",
+    category: "marriage",
+    grade: "sahih",
+    source: "Jami at-Tirmidhi 3895",
+    narrator: "Aishah",
+    arabic: "خَيْرُكُمْ خَيْرُكُمْ لأَهْلِهِ وَأَنَا خَيْرُكُمْ لأَهْلِي",
+    translation: localized({
+      en: "The best of you are the best to their families, and I am the best of you to my family.",
+      de: "Die Besten unter euch sind die, die am besten zu ihrer Familie sind, und ich bin der Beste von euch zu meiner Familie."
+    }),
+    lesson: localized({
+      en: "It makes goodness in the home a primary measure of real character, not public reputation.",
+      de: "Er macht Guete im eigenen Haus zu einem zentralen Massstab echten Charakters und nicht nur oeffentlichen Ruf."
+    }),
+    search: ["marriage", "family", "best to family", "aishah", "tirmidhi 3895"]
+  }),
+  item({
+    id: "marriage-do-not-hate-believing-wife",
+    category: "marriage",
+    grade: "sahih",
+    source: "Sahih Muslim 1468b",
+    narrator: "Abu Hurayrah",
+    arabic: "لاَ يَفْرَكْ مُؤْمِنٌ مُؤْمِنَةً إِنْ كَرِهَ مِنْهَا خُلُقًا رَضِيَ مِنْهَا آخَرَ",
+    translation: localized({
+      en: "A believing man should not hate a believing woman. If he dislikes one of her traits, he will be pleased with another.",
+      de: "Ein glaeubiger Mann soll eine glaeubige Frau nicht hassen. Wenn ihm eine ihrer Eigenschaften missfaellt, wird ihm eine andere gefallen."
+    }),
+    lesson: localized({
+      en: "It trains spouses to resist totalizing resentment and to keep justice and balance in marriage.",
+      de: "Er lehrt Ehepartner, pauschale Verbitterung zu vermeiden und in der Ehe Gerechtigkeit und Ausgewogenheit zu bewahren."
+    }),
+    search: ["marriage", "wife", "traits", "balance", "abu hurayrah", "muslim 1468"]
+  }),
+  item({
+    id: "children-three-daughters-or-sisters",
+    category: "children",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 1916",
+    narrator: "Abu Said al-Khudri",
+    arabic: "مَنْ كَانَ لَهُ ثَلاَثُ بَنَاتٍ أَوْ ثَلاَثُ أَخَوَاتٍ أَوِ ابْنَتَانِ أَوْ أُخْتَانِ فَأَحْسَنَ صُحْبَتَهُنَّ وَاتَّقَى اللَّهَ فِيهِنَّ فَلَهُ الْجَنَّةُ",
+    translation: localized({
+      en: "Whoever has three daughters, or three sisters, or two daughters, or two sisters, and keeps good company with them and fears Allah regarding them, will have Paradise.",
+      de: "Wer drei Toechter oder drei Schwestern oder zwei Toechter oder zwei Schwestern hat, gut mit ihnen umgeht und Allah in Bezug auf sie fuerchtet, fuer den ist das Paradies."
+    }),
+    lesson: localized({
+      en: "It raises patient care, provision, and honorable treatment of girls and sisters to a path of Paradise.",
+      de: "Er erhebt geduldige Fuer­sorge, Versorgung und ehrbaren Umgang mit Toechtern und Schwestern zu einem Weg ins Paradies."
+    }),
+    search: ["children", "daughters", "sisters", "paradise", "abu said", "tirmidhi 1916"]
+  }),
+  item({
+    id: "children-command-prayer-at-seven",
+    category: "children",
+    grade: "hasan",
+    source: "Sunan Abi Dawud 495",
+    narrator: "Abdullah ibn Amr ibn al-As",
+    arabic: "مُرُوا أَوْلاَدَكُمْ بِالصَّلاَةِ وَهُمْ أَبْنَاءُ سَبْعِ سِنِينَ وَاضْرِبُوهُمْ عَلَيْهَا وَهُمْ أَبْنَاءُ عَشْرِ سِنِينَ وَفَرِّقُوا بَيْنَهُمْ فِي الْمَضَاجِعِ",
+    translation: localized({
+      en: "Command your children to pray when they are seven years old, discipline them for it when they are ten, and separate them in their beds.",
+      de: "Befehlt euren Kindern das Gebet, wenn sie sieben Jahre alt sind, und diszipliniert sie darin mit zehn Jahren und trennt ihre Betten."
+    }),
+    lesson: localized({
+      en: "It frames worship training as deliberate upbringing that starts early and grows with age.",
+      de: "Er zeigt, dass die Erziehung zur Anbetung eine bewusste fruehe Schulung ist, die mit dem Alter mitwaechst."
+    }),
+    search: ["children", "prayer", "seven years", "ten years", "abu dawud 495"]
+  }),
+  item({
+    id: "anger-do-not-judge-while-angry",
+    category: "anger",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 7158, Sahih Muslim 1717a",
+    narrator: "Abu Bakrah",
+    arabic: "لاَ يَحْكُمُ أَحَدٌ بَيْنَ اثْنَيْنِ وَهُوَ غَضْبَانُ",
+    translation: localized({
+      en: "No one should judge between two people while he is angry.",
+      de: "Niemand soll zwischen zwei Menschen urteilen, waehrend er zornig ist."
+    }),
+    lesson: localized({
+      en: "It shows that anger corrupts judgment, so restraint is a condition for justice.",
+      de: "Er zeigt, dass Zorn das Urteil verdirbt, weshalb Selbstbeherrschung eine Voraussetzung fuer Gerechtigkeit ist."
+    }),
+    search: ["anger", "judgment", "judge", "abu bakrah", "bukhari 7158", "muslim 1717"]
+  }),
+  item({
+    id: "adab-rider-greets-walker",
+    category: "adab",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6234, Sahih Muslim 2160",
+    narrator: "Abu Hurayrah",
+    arabic: "يُسَلِّمُ الرَّاكِبُ عَلَى الْمَاشِي وَالْمَاشِي عَلَى الْقَاعِدِ وَالْقَلِيلُ عَلَى الْكَثِيرِ",
+    translation: localized({
+      en: "The rider should greet the walker, the walker the one who is seated, and the smaller group the larger group.",
+      de: "Der Reitende soll den Gehenden gruessen, der Gehende den Sitzenden und die kleinere Gruppe die groessere."
+    }),
+    lesson: localized({
+      en: "It turns salam into a disciplined social etiquette that lowers friction and spreads respect.",
+      de: "Er macht aus dem Salam eine geordnete soziale Etikette, die Reibung senkt und Respekt verbreitet."
+    }),
+    search: ["adab", "salam", "greeting", "rider", "walker", "abu hurayrah"]
+  }),
+  item({
+    id: "speech-leave-what-does-not-concern-you",
+    category: "speech",
+    grade: "hasan",
+    source: "40 Hadith an-Nawawi 12",
+    narrator: "Abu Hurayrah",
+    arabic: "مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ تَرْكُهُ مَا لَا يَعْنِيهِ",
+    translation: localized({
+      en: "Part of a person's excellence in Islam is leaving what does not concern him.",
+      de: "Zur Schoenheit des Islam eines Menschen gehoert es, das zu lassen, was ihn nicht betrifft."
+    }),
+    lesson: localized({
+      en: "It teaches disciplined speech, attention, and boundaries instead of compulsive commentary on everything.",
+      de: "Er lehrt beherrschte Sprache, Aufmerksamkeit und Grenzen statt zwanghaft alles kommentieren zu muessen."
+    }),
+    search: ["speech", "islam", "what does not concern you", "abu hurayrah", "nawawi 12"]
+  }),
+  item({
+    id: "speech-guard-jaws-and-private-parts",
+    category: "speech",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 6807",
+    narrator: "Sahl ibn Sad",
+    arabic: "مَنْ يَتَوَكَّلْ لِي مَا بَيْنَ لَحْيَيْهِ وَمَا بَيْنَ رِجْلَيْهِ أَتَوَكَّلْ لَهُ بِالْجَنَّةِ",
+    translation: localized({
+      en: "Whoever guarantees me what is between his jaws and what is between his legs, I guarantee Paradise for him.",
+      de: "Wer mir fuer das garantiert, was zwischen seinen Kiefern ist, und fuer das, was zwischen seinen Beinen ist, dem garantiere ich das Paradies."
+    }),
+    lesson: localized({
+      en: "It puts control of the tongue and desires among the clearest roads to salvation.",
+      de: "Er stellt die Beherrschung von Zunge und Begierde unter die klarsten Wege zur Rettung."
+    }),
+    search: ["speech", "tongue", "jaws", "paradise", "sahl ibn sad", "bukhari 6807"]
+  }),
+  item({
+    id: "backbiting-defend-brothers-honor",
+    category: "backbiting",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 1931",
+    narrator: "Abu al-Darda",
+    arabic: "مَنْ رَدَّ عَنْ عِرْضِ أَخِيهِ رَدَّ اللَّهُ عَنْ وَجْهِهِ النَّارَ يَوْمَ الْقِيَامَةِ",
+    translation: localized({
+      en: "Whoever protects his brother's honor, Allah will protect his face from the Fire on the Day of Resurrection.",
+      de: "Wer die Ehre seines Bruders verteidigt, dessen Gesicht wird Allah am Tag der Auferstehung vor dem Feuer schuetzen."
+    }),
+    lesson: localized({
+      en: "It shifts the believer from passive silence around ghibah to active defense of another Muslim's honor.",
+      de: "Er verschiebt den Glaeubigen von passivem Schweigen bei Ghibah hin zur aktiven Verteidigung der Ehre eines anderen Muslims."
+    }),
+    search: ["backbiting", "honor", "defend", "abu al-darda", "tirmidhi 1931"]
+  }),
+  item({
+    id: "speech-believer-not-defamer",
+    category: "speech",
+    grade: "sahih",
+    source: "Al-Adab Al-Mufrad 312",
+    narrator: "Abdullah ibn Masud",
+    arabic: "لَيْسَ الْمُؤْمِنُ بِالطَّعَّانِ وَلاَ اللِّعَانِ وَلاَ الْفَاحِشِ وَلاَ الْبَذِي",
+    translation: localized({
+      en: "A believer is not a defamer, nor a curser, nor coarse, nor obscene.",
+      de: "Ein Glaeubiger ist weder ein Verleumder noch ein Flucher noch vulgaer noch unanstaendig."
+    }),
+    lesson: localized({
+      en: "It makes verbal corruption incompatible with the basic identity of a believer.",
+      de: "Er macht sprachliche Verdorbenheit unvereinbar mit der Grundidentitaet eines Glaeubigen."
+    }),
+    search: ["speech", "defamer", "curser", "obscene", "ibn masud", "adab al mufrad 312"]
   })
 ];
 
