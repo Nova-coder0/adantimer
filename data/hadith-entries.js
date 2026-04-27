@@ -196,6 +196,61 @@ export const HADITH_CATEGORIES = [
       tr: "Comertlik",
       "zh-hans": "慷慨"
     }
+  },
+  {
+    id: "dua",
+    labels: {
+      en: "Supplication",
+      ar: "الدعاء",
+      de: "Bittgebete",
+      fr: "Invocation",
+      tr: "Dua",
+      "zh-hans": "祈求"
+    }
+  },
+  {
+    id: "trials",
+    labels: {
+      en: "Trials",
+      ar: "الابتلاء",
+      de: "Pruefungen",
+      fr: "Epreuves",
+      tr: "Imtihan",
+      "zh-hans": "考验"
+    }
+  },
+  {
+    id: "sincerity",
+    labels: {
+      en: "Sincerity",
+      ar: "الإخلاص",
+      de: "Aufrichtigkeit",
+      fr: "Sincerite",
+      tr: "Ihlas",
+      "zh-hans": "真诚"
+    }
+  },
+  {
+    id: "justice",
+    labels: {
+      en: "Justice",
+      ar: "العدل",
+      de: "Gerechtigkeit",
+      fr: "Justice",
+      tr: "Adalet",
+      "zh-hans": "公正"
+    }
+  },
+  {
+    id: "zuhd",
+    labels: {
+      en: "Zuhd",
+      ar: "الزهد",
+      de: "Weltentsagung",
+      fr: "Detachement",
+      tr: "Zuhd",
+      "zh-hans": "淡泊今世"
+    }
   }
 ];
 
@@ -1368,6 +1423,261 @@ export const HADITH_ITEMS = [
       de: "Er zeigt, dass der aktive Dienst an Schutzbeduerftigen zu den hoechsten Formen der Hingabe gehoert."
     }),
     search: ["generosity", "widow", "poor", "service", "abu hurayrah"]
+  }),
+  item({
+    id: "dua-supplication-is-worship",
+    category: "dua",
+    grade: "sahih",
+    source: "Jami at-Tirmidhi 2969",
+    narrator: "An-Numan ibn Bashir",
+    arabic: "الدُّعَاءُ هُوَ الْعِبَادَةُ",
+    translation: localized({
+      en: "Supplication is worship.",
+      de: "Das Bittgebet ist Anbetung."
+    }),
+    lesson: localized({
+      en: "It makes dua itself a central act of worship, not only something added after worship.",
+      de: "Er macht Dua selbst zu einer zentralen Form der Anbetung und nicht nur zu etwas Zusaetzlichem nach der Anbetung."
+    }),
+    search: ["dua", "supplication", "worship", "tirmidhi", "numan ibn bashir"]
+  }),
+  item({
+    id: "dua-nothing-more-honorable-than-supplication",
+    category: "dua",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 3370",
+    narrator: "Abu Hurayrah",
+    arabic: "لَيْسَ شَيْءٌ أَكْرَمَ عَلَى اللَّهِ تَعَالَى مِنَ الدُّعَاءِ",
+    translation: localized({
+      en: "There is nothing more honorable with Allah than supplication.",
+      de: "Nichts ist bei Allah ehrenvoller als das Bittgebet."
+    }),
+    lesson: localized({
+      en: "It shows the rank of dua and the dignity of turning to Allah with need.",
+      de: "Er zeigt den Rang der Dua und die Wuerde darin, sich in Beduerftigkeit an Allah zu wenden."
+    }),
+    search: ["dua", "honorable", "supplication", "abu hurayrah", "tirmidhi 3370"]
+  }),
+  item({
+    id: "dua-nearest-in-prostration",
+    category: "dua",
+    grade: "sahih",
+    source: "Sahih Muslim 482",
+    narrator: "Abu Hurayrah",
+    arabic: "أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ فَأَكْثِرُوا الدُّعَاءَ",
+    translation: localized({
+      en: "The nearest a servant comes to his Lord is while he is prostrating, so increase supplication.",
+      de: "Am naechsten ist der Diener seinem Herrn waehrend der Niederwerfung, so vermehrt dort das Bittgebet."
+    }),
+    lesson: localized({
+      en: "It points to sujud as one of the strongest places for dua inside salah.",
+      de: "Er weist auf den Sujud als einen der staerksten Orte fuer Dua innerhalb des Gebets hin."
+    }),
+    search: ["dua", "prostration", "sujud", "supplication", "muslim 482"]
+  }),
+  item({
+    id: "trials-believer-all-good",
+    category: "trials",
+    grade: "sahih",
+    source: "Sahih Muslim 2999",
+    narrator: "Suhayb ar-Rumi",
+    arabic: "عَجَبًا لأَمْرِ الْمُؤْمِنِ إِنَّ أَمْرَهُ كُلَّهُ خَيْرٌ وَلَيْسَ ذَاكَ لأَحَدٍ إِلاَّ لِلْمُؤْمِنِ إِنْ أَصَابَتْهُ سَرَّاءُ شَكَرَ فَكَانَ خَيْرًا لَهُ وَإِنْ أَصَابَتْهُ ضَرَّاءُ صَبَرَ فَكَانَ خَيْرًا لَهُ",
+    translation: localized({
+      en: "Wondrous is the affair of the believer. All of his affair is good, and that is for no one except the believer. If ease comes to him, he is grateful and that is good for him. If hardship comes to him, he is patient and that is good for him.",
+      de: "Erstaunlich ist die Angelegenheit des Glaeubigen. Seine ganze Angelegenheit ist gut, und das gilt fuer niemanden ausser fuer den Glaeubigen. Wenn ihn Gutes trifft, ist er dankbar und das ist gut fuer ihn. Wenn ihn Schwierigkeit trifft, ist er geduldig und das ist gut fuer ihn."
+    }),
+    lesson: localized({
+      en: "It teaches a believer to read both ease and hardship through worship instead of panic.",
+      de: "Er lehrt den Glaeubigen, sowohl Leichtigkeit als auch Schwierigkeit durch Anbetung und nicht durch Panik zu lesen."
+    }),
+    search: ["trials", "believer", "good", "patience", "gratitude", "suhayb"]
+  }),
+  item({
+    id: "trials-afflictions-expiate-sins",
+    category: "trials",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 5641, Sahih Muslim 2573",
+    narrator: "Abu Saeed al-Khudri and Abu Hurayrah",
+    arabic: "مَا يُصِيبُ الْمُسْلِمَ مِنْ نَصَبٍ وَلاَ وَصَبٍ وَلاَ هَمٍّ وَلاَ حُزْنٍ وَلاَ أَذًى وَلاَ غَمٍّ حَتَّى الشَّوْكَةِ يُشَاكُهَا إِلاَّ كَفَّرَ اللَّهُ بِهَا مِنْ خَطَايَاهُ",
+    translation: localized({
+      en: "No fatigue, disease, worry, sadness, hurt, or distress befalls a Muslim, not even the prick of a thorn, except that Allah expiates some of his sins through it.",
+      de: "Keine Erschoepfung, keine Krankheit, keine Sorge, keine Traurigkeit, kein Schmerz und keine Bedraengnis trifft einen Muslim, nicht einmal der Stich eines Dorns, ausser dass Allah dadurch einige seiner Suenden tilgt."
+    }),
+    lesson: localized({
+      en: "It gives meaning to pain without denying the reality of pain.",
+      de: "Er gibt Schmerz eine Bedeutung, ohne die Wirklichkeit des Schmerzes zu leugnen."
+    }),
+    search: ["trials", "hardship", "sins", "expiation", "thorn", "abu hurayrah"]
+  }),
+  item({
+    id: "trials-prophets-most-severely-tested",
+    category: "trials",
+    grade: "hasan",
+    source: "Jami at-Tirmidhi 2398",
+    narrator: "Sad ibn Abi Waqqas",
+    arabic: "الأَنْبِيَاءُ ثُمَّ الأَمْثَلُ فَالأَمْثَلُ فَيُبْتَلَى الرَّجُلُ عَلَى حَسَبِ دِينِهِ فَإِنْ كَانَ دِينُهُ صُلْبًا اشْتَدَّ بَلاَؤُهُ وَإِنْ كَانَ فِي دِينِهِ رِقَّةٌ ابْتُلِيَ عَلَى حَسَبِ دِينِهِ فَمَا يَبْرَحُ الْبَلاَءُ بِالْعَبْدِ حَتَّى يَتْرُكَهُ يَمْشِي عَلَى الأَرْضِ مَا عَلَيْهِ خَطِيئَةٌ",
+    translation: localized({
+      en: "The Prophets are tested most severely, then those nearest to them, then those nearest to them. A person is tested according to his religion. If his religion is firm, his trial is more severe; if there is weakness in his religion, he is tested according to his religion. Trials continue with a servant until he walks the earth without sin.",
+      de: "Am staerksten geprueft werden die Propheten, dann die ihnen Aehnlichsten und dann die ihnen Aehnlichsten. Ein Mensch wird nach seinem Glauben geprueft. Ist sein Glaube fest, wird seine Pruefung schwerer. Ist in seinem Glauben Schwachheit, wird er entsprechend seinem Glauben geprueft. Die Pruefung bleibt beim Diener, bis er ohne Suende auf der Erde geht."
+    }),
+    lesson: localized({
+      en: "It reframes severe trials as something that can accompany serious faith rather than contradict it.",
+      de: "Er deutet schwere Pruefungen als etwas, das starken Glauben begleiten kann, statt ihm zu widersprechen."
+    }),
+    search: ["trials", "prophets", "tested", "sad ibn abi waqqas", "affliction"]
+  }),
+  item({
+    id: "sincerity-allah-looks-hearts-and-deeds",
+    category: "sincerity",
+    grade: "sahih",
+    source: "Sahih Muslim 2564c",
+    narrator: "Abu Hurayrah",
+    arabic: "إِنَّ اللَّهَ لاَ يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ",
+    translation: localized({
+      en: "Allah does not look at your appearances and your wealth, but He looks at your hearts and your deeds.",
+      de: "Allah schaut nicht auf eure aeussere Gestalt und euren Besitz, sondern Er schaut auf eure Herzen und eure Taten."
+    }),
+    lesson: localized({
+      en: "It moves the standard away from image and toward inward truth and righteous action.",
+      de: "Er verlagert den Massstab weg vom Bild nach aussen hin zu innerer Wahrhaftigkeit und rechtschaffenen Taten."
+    }),
+    search: ["sincerity", "hearts", "deeds", "appearance", "abu hurayrah"]
+  }),
+  item({
+    id: "sincerity-deeds-only-for-his-face",
+    category: "sincerity",
+    grade: "hasan",
+    source: "Sunan an-Nasai 3140",
+    narrator: "Abu Umamah al-Bahili",
+    arabic: "إِنَّ اللَّهَ لاَ يَقْبَلُ مِنَ الْعَمَلِ إِلاَّ مَا كَانَ لَهُ خَالِصًا وَابْتُغِيَ بِهِ وَجْهُهُ",
+    translation: localized({
+      en: "Allah does not accept any deed except that which is purely for Him and by which His Face is sought.",
+      de: "Allah nimmt von einer Tat nur das an, was aufrichtig fuer Ihn ist und womit Sein Wohlgefallen gesucht wird."
+    }),
+    lesson: localized({
+      en: "It makes acceptance depend on sincerity, not only visible effort.",
+      de: "Er macht die Annahme einer Tat von Aufrichtigkeit abhaengig und nicht nur von sichtbarer Anstrengung."
+    }),
+    search: ["sincerity", "acceptance", "deeds", "for Allah alone", "abu umamah"]
+  }),
+  item({
+    id: "sincerity-showing-off-exposed",
+    category: "sincerity",
+    grade: "muttafaqun-alayh",
+    source: "Sahih al-Bukhari 6499, Sahih Muslim 2987",
+    narrator: "Jundub ibn Abdullah",
+    arabic: "مَنْ سَمَّعَ سَمَّعَ اللَّهُ بِهِ، وَمَنْ يُرَائِي يُرَائِي اللَّهُ بِهِ",
+    translation: localized({
+      en: "Whoever does deeds to be heard of, Allah will expose him; and whoever does deeds to be seen, Allah will expose him.",
+      de: "Wer Taten verrichtet, damit von ihm gesprochen wird, den wird Allah entlarven; und wer Taten verrichtet, um gesehen zu werden, den wird Allah entlarven."
+    }),
+    lesson: localized({
+      en: "It warns that the hidden intention to impress people will be turned into public humiliation.",
+      de: "Er warnt davor, dass die verborgene Absicht, Menschen zu beeindrucken, in oeffentliche Blossstellung umschlagen kann."
+    }),
+    search: ["sincerity", "showing off", "riya", "exposed", "jundub"]
+  }),
+  item({
+    id: "justice-just-on-pulpits-of-light",
+    category: "justice",
+    grade: "sahih",
+    source: "Sahih Muslim 1827",
+    narrator: "Abdullah ibn Amr",
+    arabic: "إِنَّ الْمُقْسِطِينَ عِنْدَ اللَّهِ عَلَى مَنَابِرَ مِنْ نُورٍ عَنْ يَمِينِ الرَّحْمَنِ عَزَّ وَجَلَّ وَكِلْتَا يَدَيْهِ يَمِينٌ الَّذِينَ يَعْدِلُونَ فِي حُكْمِهِمْ وَأَهْلِيهِمْ وَمَا وَلُوا",
+    translation: localized({
+      en: "The just will be with Allah upon pulpits of light at the right hand of the Most Merciful; those who are just in their rulings, with their families, and in what they are entrusted with.",
+      de: "Die Gerechten werden bei Allah auf Kanzeln aus Licht sein zur Rechten des Allerbarmers; diejenigen, die gerecht urteilen, in ihren Familien gerecht sind und in dem, was ihnen anvertraut wurde."
+    }),
+    lesson: localized({
+      en: "It extends justice beyond public office into family and every entrusted responsibility.",
+      de: "Er erweitert Gerechtigkeit ueber oeffentliche Aemter hinaus auf Familie und jede anvertraute Verantwortung."
+    }),
+    search: ["justice", "light", "pulpits", "fairness", "abdullah ibn amr"]
+  }),
+  item({
+    id: "justice-oppression-darkness-day-of-rising",
+    category: "justice",
+    grade: "sahih",
+    source: "Sahih Muslim 2578",
+    narrator: "Jabir ibn Abdullah",
+    arabic: "اتَّقُوا الظُّلْمَ فَإِنَّ الظُّلْمَ ظُلُمَاتٌ يَوْمَ الْقِيَامَةِ",
+    translation: localized({
+      en: "Beware of oppression, for oppression will be darkness on the Day of Resurrection.",
+      de: "Huetet euch vor Unrecht, denn Unrecht wird am Tag der Auferstehung zu Finsternissen."
+    }),
+    lesson: localized({
+      en: "It makes injustice a matter of ultimate consequence, not merely social harm.",
+      de: "Er macht Unrecht zu einer Angelegenheit mit letzter Konsequenz und nicht nur zu einem sozialen Schaden."
+    }),
+    search: ["justice", "oppression", "darkness", "day of resurrection", "jabir"]
+  }),
+  item({
+    id: "justice-help-brother-oppressor-or-oppressed",
+    category: "justice",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 2444",
+    narrator: "Anas ibn Malik",
+    arabic: "انْصُرْ أَخَاكَ ظَالِمًا أَوْ مَظْلُومًا قَالُوا يَا رَسُولَ اللَّهِ هَذَا نَنْصُرُهُ مَظْلُومًا فَكَيْفَ نَنْصُرُهُ ظَالِمًا قَالَ تَأْخُذُ فَوْقَ يَدَيْهِ",
+    translation: localized({
+      en: "Help your brother whether he is an oppressor or oppressed. They said: O Messenger of Allah, we understand helping him when he is oppressed, but how do we help him when he is an oppressor? He said: By restraining his hand.",
+      de: "Hilf deinem Bruder, ob er Unrecht tut oder Unrecht erleidet. Sie sagten: O Gesandter Allahs, wenn er Unrecht erleidet, verstehen wir es, aber wie helfen wir ihm, wenn er Unrecht tut? Er sagte: Indem du seine Hand zurueckhaeltst."
+    }),
+    lesson: localized({
+      en: "It defines justice as stopping wrongdoing, even when the wrongdoer is close to you.",
+      de: "Er definiert Gerechtigkeit so, dass Unrecht gestoppt wird, selbst wenn derjenige dir nahesteht."
+    }),
+    search: ["justice", "oppressor", "oppressed", "restrain", "anas"]
+  }),
+  item({
+    id: "zuhd-stranger-or-traveler",
+    category: "zuhd",
+    grade: "sahih",
+    source: "Sahih al-Bukhari 6416",
+    narrator: "Abdullah ibn Umar",
+    arabic: "كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ",
+    translation: localized({
+      en: "Be in this world as though you were a stranger or a traveler.",
+      de: "Sei in dieser Welt so, als waerst du ein Fremder oder ein Reisender."
+    }),
+    lesson: localized({
+      en: "It sets the believer's posture in dunya as temporary, alert, and unentangled.",
+      de: "Er bestimmt die Haltung des Glaeubigen in der Dunya als voruebergehend, wachsam und nicht verstrickt."
+    }),
+    search: ["zuhd", "world", "stranger", "traveler", "ibn umar"]
+  }),
+  item({
+    id: "zuhd-world-prison-for-believer",
+    category: "zuhd",
+    grade: "sahih",
+    source: "Sahih Muslim 2956",
+    narrator: "Abu Hurayrah",
+    arabic: "الدُّنْيَا سِجْنُ الْمُؤْمِنِ وَجَنَّةُ الْكَافِرِ",
+    translation: localized({
+      en: "This world is a prison for the believer and a paradise for the disbeliever.",
+      de: "Diese Welt ist ein Gefaengnis fuer den Glaeubigen und ein Paradies fuer den Unglaeubigen."
+    }),
+    lesson: localized({
+      en: "It corrects expectations by showing that full ease is not the believer's measure in this life.",
+      de: "Er korrigiert Erwartungen, indem er zeigt, dass volle Bequemlichkeit in diesem Leben nicht der Massstab des Glaeubigen ist."
+    }),
+    search: ["zuhd", "world", "prison", "paradise", "abu hurayrah"]
+  }),
+  item({
+    id: "zuhd-rider-under-tree",
+    category: "zuhd",
+    grade: "sahih",
+    source: "Jami at-Tirmidhi 2377",
+    narrator: "Abdullah ibn Masud",
+    arabic: "مَا لِي وَلِلدُّنْيَا مَا أَنَا فِي الدُّنْيَا إِلاَّ كَرَاكِبٍ اسْتَظَلَّ تَحْتَ شَجَرَةٍ ثُمَّ رَاحَ وَتَرَكَهَا",
+    translation: localized({
+      en: "What do I have to do with this world? I am in this world only like a rider who rests under a tree's shade, then leaves it and moves on.",
+      de: "Was habe ich mit dieser Welt zu tun? Ich bin in dieser Welt nur wie ein Reiter, der unter dem Schatten eines Baumes rastet und ihn dann verlaesst und weiterzieht."
+    }),
+    lesson: localized({
+      en: "It trains the heart to treat dunya as a brief stop, not a permanent home.",
+      de: "Er trainiert das Herz, die Dunya als kurzen Halt und nicht als bleibende Heimat zu behandeln."
+    }),
+    search: ["zuhd", "world", "rider", "tree", "ibn masud"]
   })
 ];
 

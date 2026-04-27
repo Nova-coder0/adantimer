@@ -427,10 +427,20 @@ AssertContains $sitemapCore 'https://www.adantimer.com/hadith/brotherhood' "Core
 AssertContains $sitemapCore 'https://www.adantimer.com/hadith/neighbors' "Core sitemap includes the Hadith neighbors collection" "Core sitemap is missing the Hadith neighbors collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/hadith/humility' "Core sitemap includes the Hadith humility collection" "Core sitemap is missing the Hadith humility collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/hadith/generosity' "Core sitemap includes the Hadith generosity collection" "Core sitemap is missing the Hadith generosity collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/dua' "Core sitemap includes the Hadith dua collection" "Core sitemap is missing the Hadith dua collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/trials' "Core sitemap includes the Hadith trials collection" "Core sitemap is missing the Hadith trials collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/sincerity' "Core sitemap includes the Hadith sincerity collection" "Core sitemap is missing the Hadith sincerity collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/justice' "Core sitemap includes the Hadith justice collection" "Core sitemap is missing the Hadith justice collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/hadith/zuhd' "Core sitemap includes the Hadith zuhd collection" "Core sitemap is missing the Hadith zuhd collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/prayer' "Core sitemap includes the German Hadith prayer collection" "Core sitemap is missing the German Hadith prayer collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/repentance' "Core sitemap includes the German Hadith repentance collection" "Core sitemap is missing the German Hadith repentance collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/parents' "Core sitemap includes the German Hadith parents collection" "Core sitemap is missing the German Hadith parents collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/generosity' "Core sitemap includes the German Hadith generosity collection" "Core sitemap is missing the German Hadith generosity collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/dua' "Core sitemap includes the German Hadith dua collection" "Core sitemap is missing the German Hadith dua collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/trials' "Core sitemap includes the German Hadith trials collection" "Core sitemap is missing the German Hadith trials collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/sincerity' "Core sitemap includes the German Hadith sincerity collection" "Core sitemap is missing the German Hadith sincerity collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/justice' "Core sitemap includes the German Hadith justice collection" "Core sitemap is missing the German Hadith justice collection"
+AssertContains $sitemapCore 'https://www.adantimer.com/de/hadith/zuhd' "Core sitemap includes the German Hadith zuhd collection" "Core sitemap is missing the German Hadith zuhd collection"
 AssertContains $sitemapCore 'https://www.adantimer.com/dhikr' "Core sitemap includes the Dhikr page" "Core sitemap is missing the Dhikr page"
 AssertContains $sitemapCore 'https://www.adantimer.com/ar/dhikr' "Core sitemap includes the Arabic Dhikr page" "Core sitemap is missing the Arabic Dhikr page"
 AssertContains $sitemapCore 'https://www.adantimer.com/dhikr/morning' "Core sitemap includes the morning Dhikr collection" "Core sitemap is missing the morning Dhikr collection"
@@ -493,6 +503,16 @@ AssertContains $hadithEntries 'id: "brotherhood-love-for-brother"' "Local Hadith
 AssertContains $hadithEntries 'id: "neighbors-jibril-kept-advising"' "Local Hadith metadata includes the neighbors entry" "Local Hadith metadata is missing the neighbors entry"
 AssertContains $hadithEntries 'id: "humility-no-arrogance-enters-paradise"' "Local Hadith metadata includes the humility entry" "Local Hadith metadata is missing the humility entry"
 AssertContains $hadithEntries 'id: "generosity-upper-hand-better"' "Local Hadith metadata includes the generosity entry" "Local Hadith metadata is missing the generosity entry"
+AssertContains $hadithEntries 'id: "dua"' "Local Hadith metadata includes the dua category" "Local Hadith metadata is missing the dua category"
+AssertContains $hadithEntries 'id: "trials"' "Local Hadith metadata includes the trials category" "Local Hadith metadata is missing the trials category"
+AssertContains $hadithEntries 'id: "sincerity"' "Local Hadith metadata includes the sincerity category" "Local Hadith metadata is missing the sincerity category"
+AssertContains $hadithEntries 'id: "justice"' "Local Hadith metadata includes the justice category" "Local Hadith metadata is missing the justice category"
+AssertContains $hadithEntries 'id: "zuhd"' "Local Hadith metadata includes the zuhd category" "Local Hadith metadata is missing the zuhd category"
+AssertContains $hadithEntries 'id: "dua-supplication-is-worship"' "Local Hadith metadata includes the dua entry" "Local Hadith metadata is missing the dua entry"
+AssertContains $hadithEntries 'id: "trials-believer-all-good"' "Local Hadith metadata includes the trials entry" "Local Hadith metadata is missing the trials entry"
+AssertContains $hadithEntries 'id: "sincerity-allah-looks-hearts-and-deeds"' "Local Hadith metadata includes the sincerity entry" "Local Hadith metadata is missing the sincerity entry"
+AssertContains $hadithEntries 'id: "justice-just-on-pulpits-of-light"' "Local Hadith metadata includes the justice entry" "Local Hadith metadata is missing the justice entry"
+AssertContains $hadithEntries 'id: "zuhd-stranger-or-traveler"' "Local Hadith metadata includes the zuhd entry" "Local Hadith metadata is missing the zuhd entry"
 AssertContains $hadithEntries 'export function getHadithItems()' "Local Hadith metadata exports the item helper" "Local Hadith metadata item helper is missing"
 
 TestMojibake "templates/index.html"
@@ -516,9 +536,12 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/hadith/repentance" @('<body data-page="hadith-collection"', 'data-hadith-collection="repentance"', 'repentance-day-and-night')
   TestLiveUrl "$BaseUrl/hadith/parents" @('<body data-page="hadith-collection"', 'data-hadith-collection="parents"', 'parents-mother-then-father')
   TestLiveUrl "$BaseUrl/hadith/speech" @('<body data-page="hadith-collection"', 'data-hadith-collection="speech"', 'speech-good-or-silent')
+  TestLiveUrl "$BaseUrl/hadith/dua" @('<body data-page="hadith-collection"', 'data-hadith-collection="dua"', 'dua-supplication-is-worship')
+  TestLiveUrl "$BaseUrl/hadith/justice" @('<body data-page="hadith-collection"', 'data-hadith-collection="justice"', 'justice-just-on-pulpits-of-light')
   TestLiveUrl "$BaseUrl/de/hadith/prayer" @('<html lang="de" dir="ltr">', '<body data-page="hadith-collection"', 'data-hadith-collection="prayer"')
   TestLiveUrl "$BaseUrl/de/hadith" @('<html lang="de" dir="ltr">', '<body data-page="hadith">', 'hadith-card-grid')
   TestLiveUrl "$BaseUrl/de/hadith/generosity" @('<html lang="de" dir="ltr">', '<body data-page="hadith-collection"', 'data-hadith-collection="generosity"')
+  TestLiveUrl "$BaseUrl/de/hadith/zuhd" @('<html lang="de" dir="ltr">', '<body data-page="hadith-collection"', 'data-hadith-collection="zuhd"')
   TestLiveUrl "$BaseUrl/quran" @('<body data-page="quran">', 'quran-search', 'quran-surah-grid', 'Read the Quran by surah')
   TestLiveUrl "$BaseUrl/quran" @('id="quran-search-clear"', 'quran-search-count')
   TestLiveUrl "$BaseUrl/quran/al-fatihah" @('<body data-page="quran-surah"', 'quran-ayah-list', 'Surah Al-Fatihah', 'ayah-1')
