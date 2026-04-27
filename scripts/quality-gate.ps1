@@ -356,6 +356,8 @@ AssertContains $renderJs 'data-dhikr-card ' "SSR renderer includes the Dhikr car
 AssertContains $renderJs 'dhikr-card-badges' "SSR renderer includes the Dhikr evidence badges" "SSR renderer is missing the Dhikr evidence badges"
 AssertContains $renderJs 'id="hadith-search-clear"' "SSR renderer includes the Hadith search clear control" "SSR renderer is missing the Hadith search clear control"
 AssertContains $renderJs 'data-hadith-card' "SSR renderer includes the Hadith cards" "SSR renderer is missing the Hadith cards"
+AssertContains $renderJs 'hadithPrimaryCategories' "SSR renderer keeps the compact Hadith primary-category split" "SSR renderer is missing the compact Hadith primary-category split"
+AssertContains $renderJs 'hadith-category-more-toggle' "SSR renderer includes the Hadith overflow filter toggle" "SSR renderer is missing the Hadith overflow filter toggle"
 AssertContains $renderJs 'quranArabicName: surah.nameArabic || ""' "SSR renderer exposes the Arabic surah name for the standalone hero" "SSR renderer is missing the Arabic surah-name field for the standalone hero"
 AssertContains $renderJs 'copy.standalonePageType === "dhikr"' "SSR renderer treats Dhikr as a standalone page type" "SSR renderer is missing the standalone Dhikr page branch"
 AssertContains $renderJs 'copy.standalonePageType === "quran"' "SSR renderer treats Quran as a standalone page type" "SSR renderer is missing the standalone Quran page branch"
@@ -479,6 +481,7 @@ AssertContains $styleCss '.dhikr-meta-badge {' "Stylesheet includes the Dhikr ev
 AssertContains $styleCss '.hadith-card-grid {' "Stylesheet includes the Hadith card grid" "Stylesheet is missing the Hadith card grid styles"
 AssertContains $styleCss '.hadith-card[hidden],' "Stylesheet explicitly hides filtered Hadith cards" "Stylesheet does not explicitly hide filtered Hadith cards"
 AssertContains $styleCss '.hadith-category-row {' "Stylesheet includes the Hadith category row" "Stylesheet is missing the Hadith category row styles"
+AssertContains $styleCss '.hadith-category-more-toggle {' "Stylesheet includes the Hadith overflow filter toggle" "Stylesheet is missing the Hadith overflow filter toggle styles"
 AssertContains $styleCss 'body[data-page="hadith"] .hero-grid {' "Stylesheet includes the standalone Hadith hero layout" "Stylesheet is missing the standalone Hadith hero layout"
 AssertContains $styleCss 'text-decoration: none;' "Stylesheet keeps Dhikr collection chips link-safe" "Stylesheet does not neutralize Dhikr chip link decoration"
 AssertContains $styleCss 'body[data-page="dhikr-collection"] .hero-grid {' "Stylesheet includes the standalone Dhikr hero layout" "Stylesheet is missing the standalone Dhikr hero layout"
@@ -551,7 +554,7 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/dhikr/distress" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="distress"', 'distress-dhun-nun')
   TestLiveUrl "$BaseUrl/dhikr/healing" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="healing"', 'healing-rabb-an-nas')
   TestLiveUrl "$BaseUrl/dhikr/before-sleep" @('<body data-page="dhikr-collection"', 'data-dhikr-collection="sleep"', 'sleep-ayat-al-kursi')
-  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'character-control-anger', 'gratitude-affair-believer', 'repentance-allah-loves-return', 'parents-mother-then-father', 'hadith-category-chip')
+  TestLiveUrl "$BaseUrl/hadith" @('<body data-page="hadith">', 'hadith-card-grid', 'id="hadith-search"', 'intentions-actions', 'character-control-anger', 'gratitude-affair-believer', 'repentance-allah-loves-return', 'parents-mother-then-father', 'hadith-category-chip', 'hadith-category-more')
   TestLiveUrl "$BaseUrl/hadith/intentions" @('<body data-page="hadith-collection"', 'data-hadith-collection="intentions"', 'intentions-hearts-deeds')
   TestLiveUrl "$BaseUrl/hadith/repentance" @('<body data-page="hadith-collection"', 'data-hadith-collection="repentance"', 'repentance-day-and-night')
   TestLiveUrl "$BaseUrl/hadith/parents" @('<body data-page="hadith-collection"', 'data-hadith-collection="parents"', 'parents-mother-then-father')

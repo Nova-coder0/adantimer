@@ -2548,10 +2548,23 @@ ${renderFaqSection(copy)}
 }
 
 function renderHadithSection(copy) {
-  const categoryMarkup = copy.hadithCategories.map(item => `          <a class="hadith-category-chip${item.active ? " is-active" : ""}" data-hadith-category="${escapeHtml(item.id)}" aria-pressed="${item.active ? "true" : "false"}" href="${escapeHtml(item.href)}">
+  const renderCategoryChip = item => `          <a class="hadith-category-chip${item.active ? " is-active" : ""}" data-hadith-category="${escapeHtml(item.id)}" aria-pressed="${item.active ? "true" : "false"}" href="${escapeHtml(item.href)}">
             <span>${escapeHtml(item.label)}</span>
             <strong>${item.itemCount}</strong>
-          </a>`).join("\n");
+          </a>`;
+  const primaryCategoryMarkup = copy.hadithPrimaryCategories.map(renderCategoryChip).join("\n");
+  const overflowCategoryMarkup = copy.hadithOverflowCategories.map(renderCategoryChip).join("\n");
+  const overflowMarkup = copy.hadithOverflowCategories.length
+    ? `        <details class="hadith-category-more"${copy.hadithOverflowOpen ? " open" : ""}>
+          <summary class="hadith-category-more-toggle">
+            <span>${escapeHtml(copy.hadithCategoryMoreLabel)}</span>
+            <strong>${copy.hadithOverflowCategories.length}</strong>
+          </summary>
+          <div class="hadith-category-overflow">
+${overflowCategoryMarkup}
+          </div>
+        </details>`
+    : "";
 
   const cardMarkup = copy.hadithItems.map(item => `          <article class="hadith-card" data-hadith-card data-hadith-item="${escapeHtml(item.id)}" data-hadith-category="${escapeHtml(item.category)}" data-search="${escapeHtml(item.search)}">
             <div class="hadith-card-head">
@@ -2583,7 +2596,10 @@ function renderHadithSection(copy) {
         ${copy.hadithCollection && copy.hadithCollection !== "all" ? `<a class="secondary-link" href="${escapeHtml(copy.hadithCollectionIntroHref)}">${escapeHtml(copy.hadithCollectionBackLabel)}</a>` : `<p class="muted">${escapeHtml(copy.hadithSectionIntro)}</p>`}
         ${copy.hadithCollection && copy.hadithCollection !== "all" ? `<p class="muted">${escapeHtml(copy.hadithSectionIntro)}</p>` : ""}
         <div class="hadith-category-row" role="group" aria-label="${escapeHtml(copy.hadithCategoriesAria)}">
-${categoryMarkup}
+          <div class="hadith-category-primary">
+${primaryCategoryMarkup}
+          </div>
+${overflowMarkup}
         </div>
         <div class="hadith-card-grid" id="hadith-card-grid">
 ${cardMarkup}
@@ -2896,6 +2912,7 @@ const HADITH_INDEX_CONTENT = {
       { value: "Local", label: "SSR source" }
     ],
     categoryAllLabel: "All hadith",
+    categoryMoreLabel: "More filters",
     sourceAria: "Hadith source details",
     narratorLabel: "Narrator",
     takeawayLabel: "Why it matters",
@@ -2976,6 +2993,7 @@ const HADITH_INDEX_CONTENT = {
       { value: "Lokal", label: "SSR-Quelle" }
     ],
     categoryAllLabel: "Alle Hadithe",
+    categoryMoreLabel: "Weitere Filter",
     sourceAria: "Hadith-Quellenangaben",
     narratorLabel: "Ueberlieferer",
     takeawayLabel: "Warum es wichtig ist",
@@ -3016,6 +3034,7 @@ const HADITH_INDEX_CONTENT = {
       { value: "Local", label: "Source SSR" }
     ],
     categoryAllLabel: "Tous les hadiths",
+    categoryMoreLabel: "Plus de filtres",
     sourceAria: "Details de source du hadith",
     narratorLabel: "Rapporteur",
     takeawayLabel: "Pourquoi c'est important",
@@ -3056,6 +3075,7 @@ const HADITH_INDEX_CONTENT = {
       { value: "Yerel", label: "SSR kaynagi" }
     ],
     categoryAllLabel: "Tum hadisler",
+    categoryMoreLabel: "Daha fazla filtre",
     sourceAria: "Hadis kaynak bilgileri",
     narratorLabel: "Ravi",
     takeawayLabel: "Neden onemli",
@@ -3897,12 +3917,16 @@ function buildHadithIndexCopy(language, pageType, collectionId = "") {
     return {
       hadithStats: [],
       hadithCategories: [],
+      hadithPrimaryCategories: [],
+      hadithOverflowCategories: [],
       hadithItems: [],
       hadithSearchLabel: "",
       hadithSearchPlaceholder: "",
       hadithSearchHint: "",
       hadithSearchCountText: "",
       hadithEmptyState: "",
+      hadithCategoryMoreLabel: "",
+      hadithOverflowOpen: false,
       hadithCollection: "",
       hadithCollectionIntroHref: "",
       hadithCollectionBackLabel: ""
@@ -3928,7 +3952,42 @@ function buildHadithIndexCopy(language, pageType, collectionId = "") {
     tr: { sahih: "Sahih", hasan: "Hasen", "muttafaqun-alayh": "Muttefekun aleyh" },
     "zh-hans": { sahih: "可靠", hasan: "良好", "muttafaqun-alayh": "两大圣训实录共载" }
   };
+  const moreFilterLabels = {
+    en: "More filters",
+    ar: "مزيد من الفلاتر",
+    de: "Weitere Filter",
+    fr: "Plus de filtres",
+    tr: "Daha fazla filtre",
+    "zh-hans": "更多筛选"
+  };
   const localizedGrades = gradeLabels[language] || gradeLabels.en;
+  const categoryEntries = [
+    {
+      id: "all",
+      label: locale.categoryAllLabel,
+      itemCount: items.length,
+      active: activeCollectionId === "all",
+      href: buildRoutePath(language, "hadith")
+    },
+    ...categories.map(category => ({
+      id: category.id,
+      label: category.labels[language] || category.labels.en,
+      itemCount: items.filter(item => item.category === category.id).length,
+      active: activeCollectionId === category.id,
+      href: buildRoutePath(language, "hadith-collection", "", category.id)
+    }))
+  ];
+  const categoryById = new Map(categoryEntries.map(item => [item.id, item]));
+  const preferredPrimaryIds = ["all", "intentions", "prayer", "character", "knowledge", "repentance", "family", "speech"];
+  const primaryCategoryIds = [...preferredPrimaryIds];
+  if (activeCollectionId !== "all" && !primaryCategoryIds.includes(activeCollectionId)) {
+    primaryCategoryIds[primaryCategoryIds.length - 1] = activeCollectionId;
+  }
+  const primaryCategories = primaryCategoryIds
+    .map(id => categoryById.get(id))
+    .filter(Boolean);
+  const primaryCategoryIdSet = new Set(primaryCategories.map(item => item.id));
+  const overflowCategories = categoryEntries.filter(item => !primaryCategoryIdSet.has(item.id));
 
   return {
     heroEyebrow: collectionCopy?.eyebrow || locale.heroEyebrow,
@@ -3941,6 +4000,7 @@ function buildHadithIndexCopy(language, pageType, collectionId = "") {
     hadithSearchHint: locale.searchHint,
     hadithSearchCountText: locale.searchCount(visibleItems.length),
     hadithEmptyState: locale.emptyState,
+    hadithCategoryMoreLabel: locale.categoryMoreLabel || moreFilterLabels[language] || moreFilterLabels.en,
     hadithSectionEyebrow: collectionCopy?.sectionEyebrow || locale.sectionEyebrow,
     hadithSectionTitle: collectionCopy?.title || locale.sectionTitle,
     hadithSectionIntro: collectionCopy?.subtitle || locale.sectionIntro,
@@ -3960,25 +4020,13 @@ function buildHadithIndexCopy(language, pageType, collectionId = "") {
     hadithSourceAria: locale.sourceAria,
     hadithNarratorLabel: locale.narratorLabel,
     hadithTakeawayLabel: locale.takeawayLabel,
+    hadithOverflowOpen: activeCollectionId !== "all" && overflowCategories.some(item => item.id === activeCollectionId),
     hadithCollection: activeCollectionId === "all" ? "" : activeCollectionId,
     hadithCollectionIntroHref: buildRoutePath(language, "hadith"),
     hadithCollectionBackLabel: collectionCopy?.indexTitle || locale.sectionTitle,
-    hadithCategories: [
-      {
-        id: "all",
-        label: locale.categoryAllLabel,
-        itemCount: items.length,
-        active: activeCollectionId === "all",
-        href: buildRoutePath(language, "hadith")
-      },
-      ...categories.map(category => ({
-        id: category.id,
-        label: category.labels[language] || category.labels.en,
-        itemCount: items.filter(item => item.category === category.id).length,
-        active: activeCollectionId === category.id,
-        href: buildRoutePath(language, "hadith-collection", "", category.id)
-      }))
-    ],
+    hadithCategories: categoryEntries,
+    hadithPrimaryCategories: primaryCategories,
+    hadithOverflowCategories: overflowCategories,
     hadithItems: visibleItems.map(item => ({
       id: item.id,
       category: item.category,
