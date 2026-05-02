@@ -981,6 +981,105 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
+  if (language === "en" && ["fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"].includes(pageType) && !sourceCity) {
+    const prayerConfig = {
+      "fajr-time": {
+        prayerName: "Fajr",
+        metaTitle: "Fajr Time Today | Daily Fajr Prayer Time Finder | Adantimer",
+        metaDescription: "Check Fajr time today, compare the current schedule by city, and move directly into major city pages for a faster Fajr lookup.",
+        aboutTitle: "What the Fajr time page should answer first",
+        aboutParagraphs: [
+          "This route is built for the direct search intent: what time is Fajr today and how can I verify it quickly for the right city.",
+          "The page keeps the Fajr result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to trust.",
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Mecca, Medina, Riyadh, and Dubai."
+        ],
+        faqTitle: "Common questions about Fajr time today"
+      },
+      "dhuhr-time": {
+        prayerName: "Dhuhr",
+        metaTitle: "Dhuhr Time Today | Daily Dhuhr Prayer Time Finder | Adantimer",
+        metaDescription: "Check Dhuhr time today, compare the current schedule by city, and move directly into major city pages for a faster Dhuhr lookup.",
+        aboutTitle: "What the Dhuhr time page should answer first",
+        aboutParagraphs: [
+          "This route is built for the direct search intent: what time is Dhuhr today and how can I confirm it quickly for the right city.",
+          "The page keeps the Dhuhr result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to verify.",
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Riyadh, Cairo, Dubai, and Singapore."
+        ],
+        faqTitle: "Common questions about Dhuhr time today"
+      },
+      "asr-time": {
+        prayerName: "Asr",
+        metaTitle: "Asr Time Today | Daily Asr Prayer Time Finder | Adantimer",
+        metaDescription: "Check Asr time today, compare the current schedule by city, and move directly into major city pages for a faster Asr lookup.",
+        aboutTitle: "What the Asr time page should answer first",
+        aboutParagraphs: [
+          "This route is built for the direct search intent: what time is Asr today and how can I confirm it quickly for the right city.",
+          "The page keeps the Asr result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to verify.",
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Cairo, Istanbul, Dubai, and London."
+        ],
+        faqTitle: "Common questions about Asr time today"
+      },
+      "maghrib-time": {
+        prayerName: "Maghrib",
+        metaTitle: "Maghrib Time Today | Daily Maghrib Prayer Time Finder | Adantimer",
+        metaDescription: "Check Maghrib time today, compare the current schedule by city, and move directly into major city pages for a faster Maghrib lookup.",
+        aboutTitle: "What the Maghrib time page should answer first",
+        aboutParagraphs: [
+          "This route is built for the direct search intent: what time is Maghrib today and how can I verify it quickly for the right city.",
+          "The page keeps the Maghrib result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to trust.",
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Mecca, Paris, London, and New York."
+        ],
+        faqTitle: "Common questions about Maghrib time today"
+      },
+      "isha-time": {
+        prayerName: "Isha",
+        metaTitle: "Isha Time Today | Daily Isha Prayer Time Finder | Adantimer",
+        metaDescription: "Check Isha time today, compare the current schedule by city, and move directly into major city pages for a faster Isha lookup.",
+        aboutTitle: "What the Isha time page should answer first",
+        aboutParagraphs: [
+          "This route is built for the direct search intent: what time is Isha today and how can I verify it quickly for the right city.",
+          "The page keeps the Isha result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to trust.",
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Mecca, Medina, Istanbul, and Singapore."
+        ],
+        faqTitle: "Common questions about Isha time today"
+      }
+    };
+
+    const { prayerName, metaTitle, metaDescription, aboutTitle, aboutParagraphs, faqTitle } = prayerConfig[pageType];
+
+    Object.assign(copy, {
+      metaTitle,
+      metaDescription,
+      heroSubtitle: `Check ${prayerName} time today, keep the live next-prayer countdown visible, and move directly into major city pages when you need a stronger city-specific timetable.`,
+      infoTitle: `Use this page when ${prayerName} time is the main question`,
+      features: [
+        `${prayerName} stays at the center of the page while the full daily timetable remains visible for context.`,
+        "Current prayer, next prayer, today's date, and the active method stay on the same screen for a faster check.",
+        "Major city routes are linked directly so you can switch from a general lookup to a city-specific timetable quickly.",
+        "GPS, IP fallback, and manual city search remain available when you need to reach the right route faster."
+      ],
+      citiesTitle: `Priority city routes for ${prayerName} time lookups`,
+      aboutTitle,
+      aboutParagraphs,
+      faqTitle,
+      faq: [
+        {
+          question: `Does this page only show ${prayerName} time?`,
+          answer: `No. ${prayerName} is the main focus, but the full daily prayer schedule stays visible on the same page.`
+        },
+        {
+          question: `Can I use this route for a specific city when I need ${prayerName} time?`,
+          answer: "Yes. You can search manually, let the page detect your location, or move into a direct city route from the linked priority pages."
+        },
+        {
+          question: `Why can ${prayerName} time differ from another timetable?`,
+          answer: "The shown time depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
+        }
+      ]
+    });
+    return copy;
+  }
+
   if (language === "en" && pageType === "home" && cityKey === "dubai") {
     Object.assign(copy, {
       metaTitle: "Prayer Times in Dubai Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
