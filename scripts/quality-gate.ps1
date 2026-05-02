@@ -397,10 +397,10 @@ AssertContains $renderJs 'Prayer Times Today | Fajr, Dhuhr, Asr, Maghrib & Isha 
 AssertContains $renderJs 'Next Prayer Time Today | Live Salah Countdown | Adantimer' "SSR renderer carries the next-prayer priority title" "SSR renderer is missing the stronger next-prayer title"
 AssertContains $renderJs 'Prayer Times in Dubai Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer' "SSR renderer carries the Dubai priority title" "SSR renderer is missing the stronger Dubai title"
 AssertContains $renderJs 'Prayer Times in Mecca Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer' "SSR renderer carries the Mecca priority title" "SSR renderer is missing the stronger Mecca title"
-AssertContains $renderJs '["medina", "riyadh", "cairo", "singapore"].includes(cityKey)' "SSR renderer carries the second English priority city switch" "SSR renderer is missing the second English priority city switch"
+AssertContains $renderJs '["medina", "riyadh", "cairo", "singapore", "london", "new-york", "paris", "istanbul"].includes(cityKey)' "SSR renderer carries the second English priority city switch" "SSR renderer is missing the second English priority city switch"
 AssertContains $renderJs '`Prayer Times in ${cityName} Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`' "SSR renderer carries the generic second-tier priority title template" "SSR renderer is missing the generic second-tier priority title template"
 AssertContains $renderJs 'buildRoutePath("ar", "prayer-times", "Dubai")' "SSR renderer carries Arabic Dubai priority routing" "SSR renderer is missing the Arabic Dubai priority routing"
-AssertContains $renderJs '["mecca", "medina", "riyadh", "cairo"].includes(cityKey)' "SSR renderer carries the Arabic core priority city switch" "SSR renderer is missing the Arabic core priority city switch"
+AssertContains $renderJs '["mecca", "medina", "riyadh", "cairo", "istanbul"].includes(cityKey)' "SSR renderer carries the Arabic core priority city switch" "SSR renderer is missing the Arabic core priority city switch"
 AssertContains $renderJs 'const INLINE_LINK_CONNECTORS = {' "SSR renderer keeps localized inline-link connectors" "SSR renderer is missing localized inline-link connectors"
 AssertContains $renderJs 'function localizeCityName(city, language)' "SSR renderer keeps the city-name localization helper" "SSR renderer city-name localization helper is missing"
 AssertContains $renderJs 'return LANGUAGE_ALIASES[normalized] || LANGUAGE_ALIASES[normalized.split("-")[0]] || "en";' "SSR renderer normalizes all supported languages" "SSR renderer language normalization drifted from the multilingual target"
@@ -578,10 +578,20 @@ if ($RunLive) {
   TestLiveUrlRegex "$BaseUrl/cairo" @('<title>Prayer Times in Cairo Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/singapore" @('<body data-page="home">', 'Prayer Times in Singapore Today', 'How to use the Singapore prayer times page')
   TestLiveUrlRegex "$BaseUrl/singapore" @('<title>Prayer Times in Singapore Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+  TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in London Today', 'How to use the London prayer times page')
+  TestLiveUrlRegex "$BaseUrl/london" @('<title>Prayer Times in London Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+  TestLiveUrl "$BaseUrl/new-york" @('<body data-page="home">', 'Prayer Times in New York Today', 'How to use the New York prayer times page')
+  TestLiveUrlRegex "$BaseUrl/new-york" @('<title>Prayer Times in New York Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+  TestLiveUrl "$BaseUrl/paris" @('<body data-page="home">', 'Prayer Times in Paris Today', 'How to use the Paris prayer times page')
+  TestLiveUrlRegex "$BaseUrl/paris" @('<title>Prayer Times in Paris Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+  TestLiveUrl "$BaseUrl/istanbul" @('<body data-page="home">', 'Prayer Times in Istanbul Today', 'How to use the Istanbul prayer times page')
+  TestLiveUrlRegex "$BaseUrl/istanbul" @('<title>Prayer Times in Istanbul Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/ar/dubai" @('<html lang="ar" dir="rtl">', '<body data-page="home">')
   TestLiveUrlRegex "$BaseUrl/ar/dubai" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u062f\u0628\u064a \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/ar/cairo" @('<html lang="ar" dir="rtl">', '<body data-page="home">')
   TestLiveUrlRegex "$BaseUrl/ar/cairo" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0642\u0627\u0647\u0631\u0629 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>')
+  TestLiveUrl "$BaseUrl/ar/istanbul" @('<html lang="ar" dir="rtl">', '<body data-page="home">')
+  TestLiveUrlRegex "$BaseUrl/ar/istanbul" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0625\u0633\u0637\u0646\u0628\u0648\u0644 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')

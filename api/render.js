@@ -1055,12 +1055,16 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
-  if (language === "en" && pageType === "home" && ["medina", "riyadh", "cairo", "singapore"].includes(cityKey)) {
+  if (language === "en" && pageType === "home" && ["medina", "riyadh", "cairo", "singapore", "london", "new-york", "paris", "istanbul"].includes(cityKey)) {
     const cityName = {
       medina: "Medina",
       riyadh: "Riyadh",
       cairo: "Cairo",
-      singapore: "Singapore"
+      singapore: "Singapore",
+      london: "London",
+      "new-york": "New York",
+      paris: "Paris",
+      istanbul: "Istanbul"
     }[cityKey];
 
     Object.assign(copy, {
@@ -1136,12 +1140,13 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
-  if (language === "ar" && pageType === "home" && ["mecca", "medina", "riyadh", "cairo"].includes(cityKey)) {
+  if (language === "ar" && pageType === "home" && ["mecca", "medina", "riyadh", "cairo", "istanbul"].includes(cityKey)) {
     const cityName = {
       mecca: "مكة",
       medina: "المدينة",
       riyadh: "الرياض",
-      cairo: "القاهرة"
+      cairo: "القاهرة",
+      istanbul: "إسطنبول"
     }[cityKey];
 
     Object.assign(copy, {
