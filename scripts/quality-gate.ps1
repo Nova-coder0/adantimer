@@ -251,6 +251,11 @@ AssertContains $indexHtml 'Other languages' "Homepage includes the Other languag
 AssertContains $indexHtml 'class="card tools-hub"' "Homepage template includes the tools hub container" "Homepage template is missing the tools hub container"
 AssertNotContains $indexHtml 'class="card qibla-panel"' "Homepage template no longer includes the qibla panel container" "Homepage template still includes the qibla panel container"
 AssertNotContains $indexHtml 'id="qibla-sensor-button"' "Homepage template no longer includes the qibla sensor button" "Homepage template still includes the qibla sensor button"
+AssertContains $indexHtml '/prayer-times/mecca' "Homepage template links to the Mecca prayer-time route" "Homepage template is missing the Mecca prayer-time route"
+AssertContains $indexHtml '/next-prayer/riyadh' "Homepage template links to the Riyadh next-prayer route" "Homepage template is missing the Riyadh next-prayer route"
+AssertContains $indexHtml '/fajr-time/medina' "Homepage template links to the Medina Fajr route" "Homepage template is missing the Medina Fajr route"
+AssertNotContains $indexHtml '/sydney' "Homepage template no longer pushes Sydney as a primary SEO route" "Homepage template still pushes Sydney as a primary SEO route"
+AssertNotContains $indexHtml '/berlin' "Homepage template no longer pushes Berlin as a primary SEO route" "Homepage template still pushes Berlin as a primary SEO route"
 AssertContains $indexHtml 'hreflang="de"' "Homepage exposes the German alternate" "Homepage is missing the German alternate"
 AssertContains $indexHtml 'hreflang="fr"' "Homepage exposes the French alternate" "Homepage is missing the French alternate"
 AssertContains $indexHtml 'hreflang="tr"' "Homepage exposes the Turkish alternate" "Homepage is missing the Turkish alternate"
@@ -530,7 +535,8 @@ TestMojibake "script.js"
 TestMojibake "data/hadith-entries.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', '/prayer-times/mecca', '/next-prayer/riyadh')
+  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', '/prayer-times/mecca', '/next-prayer/riyadh', '/fajr-time/medina')
+  TestLiveUrlNotContains "$BaseUrl/" @('/sydney', '/berlin')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
   TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr"', 'dhikr-card-grid', 'data-dhikr-category="provision"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"', 'dhikr-card-badges')
