@@ -408,7 +408,7 @@ AssertContains $renderJs 'Maghrib Time Today | Daily Maghrib Prayer Time Finder 
 AssertContains $renderJs 'Isha Time Today | Daily Isha Prayer Time Finder | Adantimer' "SSR renderer carries the Isha priority title" "SSR renderer is missing the stronger Isha title"
 AssertContains $renderJs 'if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity)' "SSR renderer carries the Arabic prayer-intent page switch" "SSR renderer is missing the Arabic prayer-intent page switch"
 AssertContains $renderJs 'Prayer Times in Mecca Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer' "SSR renderer carries the Mecca priority title" "SSR renderer is missing the stronger Mecca title"
-AssertContains $renderJs '["medina", "riyadh", "cairo", "kuala-lumpur", "london", "new-york", "paris", "istanbul"].includes(cityKey)' "SSR renderer carries the second English priority city switch" "SSR renderer is missing the second English priority city switch"
+AssertContains $renderJs '["medina", "riyadh", "cairo", "kuala-lumpur", "johor-bahru", "jakarta", "london", "new-york", "paris", "istanbul"].includes(cityKey)' "SSR renderer carries the second English priority city switch" "SSR renderer is missing the second English priority city switch"
 AssertContains $renderJs '`Prayer Times in ${cityName} Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`' "SSR renderer carries the generic second-tier priority title template" "SSR renderer is missing the generic second-tier priority title template"
 AssertContains $renderJs 'buildRoutePath("ar", "prayer-times", "Dubai")' "SSR renderer carries Arabic Dubai priority routing" "SSR renderer is missing the Arabic Dubai priority routing"
 AssertContains $renderJs '["mecca", "medina", "riyadh", "cairo", "istanbul"].includes(cityKey)' "SSR renderer carries the Arabic core priority city switch" "SSR renderer is missing the Arabic core priority city switch"
@@ -450,6 +450,8 @@ AssertContains $sitemapIntents 'https://www.adantimer.com/next-prayer' "Intent s
 AssertContains $sitemapIntents 'https://www.adantimer.com/ar/next-prayer' "Intent sitemap includes the Arabic next-prayer route" "Intent sitemap is missing the Arabic next-prayer route"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/mecca' "Top-city sitemap includes Mecca" "Top-city sitemap is missing Mecca"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/kuala-lumpur' "Top-city sitemap includes Kuala Lumpur" "Top-city sitemap is missing Kuala Lumpur"
+AssertContains $sitemapTopCities 'https://www.adantimer.com/johor-bahru' "Top-city sitemap includes Johor Bahru" "Top-city sitemap is missing Johor Bahru"
+AssertContains $sitemapTopCities 'https://www.adantimer.com/jakarta' "Top-city sitemap includes Jakarta" "Top-city sitemap is missing Jakarta"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/prayer-times/dubai' "Top-city sitemap includes Dubai prayer-times" "Top-city sitemap is missing Dubai prayer-times"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/mecca' "Arabic-core sitemap includes Mecca" "Arabic-core sitemap is missing Mecca"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/medina' "Arabic-core sitemap includes Medina" "Arabic-core sitemap is missing Medina"
@@ -610,7 +612,11 @@ if ($RunLive) {
   TestLiveUrlRegex "$BaseUrl/cairo" @('<title>Prayer Times in Cairo Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
 TestLiveUrl "$BaseUrl/kuala-lumpur" @('<body data-page="home">', 'Prayer Times in Kuala Lumpur Today', 'How to use the Kuala Lumpur prayer times page')
 TestLiveUrlRegex "$BaseUrl/kuala-lumpur" @('<title>Prayer Times in Kuala Lumpur Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
-  TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in London Today', 'How to use the London prayer times page')
+TestLiveUrl "$BaseUrl/johor-bahru" @('<body data-page="home">', 'Prayer Times in Johor Bahru Today', 'How to use the Johor Bahru prayer times page')
+TestLiveUrlRegex "$BaseUrl/johor-bahru" @('<title>Prayer Times in Johor Bahru Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/jakarta" @('<body data-page="home">', 'Prayer Times in Jakarta Today', 'How to use the Jakarta prayer times page')
+TestLiveUrlRegex "$BaseUrl/jakarta" @('<title>Prayer Times in Jakarta Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in London Today', 'How to use the London prayer times page')
   TestLiveUrlRegex "$BaseUrl/london" @('<title>Prayer Times in London Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/new-york" @('<body data-page="home">', 'Prayer Times in New York Today', 'How to use the New York prayer times page')
   TestLiveUrlRegex "$BaseUrl/new-york" @('<title>Prayer Times in New York Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')

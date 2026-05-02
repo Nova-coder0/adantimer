@@ -47,6 +47,8 @@ ENGLISH_TOP_CITIES = [
     "cairo",
     "istanbul",
     "kuala-lumpur",
+    "johor-bahru",
+    "jakarta",
     "london",
     "new-york",
     "paris",
