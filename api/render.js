@@ -902,6 +902,199 @@ const ROOT_HOME_OVERRIDES = {
   }
 };
 
+function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
+  const cityKey = slugify(sourceCity || "");
+
+  if (language === "en" && pageType === "prayer-times" && !sourceCity) {
+    Object.assign(copy, {
+      metaTitle: "Prayer Times Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
+      metaDescription: "Check today's prayer times with Fajr, Dhuhr, Asr, Maghrib, Isha and a live next prayer countdown, then move directly into the right city page.",
+      heroSubtitle: "Check today's full prayer schedule with a live next prayer countdown, then jump into major city pages such as Mecca, Dubai, Riyadh, Cairo, and Singapore.",
+      infoTitle: "Check today's full prayer schedule before moving into a city page",
+      features: [
+        "See Fajr, Dhuhr, Asr, Maghrib, and Isha together with the live next-prayer countdown.",
+        "Use one route to start, then move directly into major city pages when you need a city-specific timetable.",
+        "Adantimer tries GPS first, falls back to IP when needed, and still keeps manual city search available.",
+        "The method label stays visible so you can compare results with your local mosque or trusted timetable."
+      ],
+      citiesTitle: "Priority city pages for daily prayer times",
+      aboutTitle: "How this prayer times page is meant to be used",
+      aboutParagraphs: [
+        "This route is built for people who want today's prayer times first and a fast way into the right city page immediately after that first lookup.",
+        "The page keeps the full daily schedule, the next-prayer countdown, and the active calculation method on one screen so it is easier to verify the result before moving deeper.",
+        "If your community follows a different timetable or method, use the city route as the quick lookup and then follow your local mosque or trusted authority."
+      ],
+      faqTitle: "Common questions about today's prayer times",
+      faq: [
+        {
+          question: "Does this page show all five daily prayer times?",
+          answer: "Yes. The page is built to show Fajr, Dhuhr, Asr, Maghrib, and Isha together with the next prayer countdown."
+        },
+        {
+          question: "Can I move from here into a city-specific prayer page?",
+          answer: "Yes. This route links directly into major city pages so you can move from a general lookup to a more specific timetable quickly."
+        },
+        {
+          question: "Why can prayer times differ from another timetable?",
+          answer: "Prayer times can vary by calculation method, provider, or local community timetable, so the visible method label and your local mosque guidance both matter."
+        }
+      ]
+    });
+    return copy;
+  }
+
+  if (language === "en" && pageType === "next-prayer" && !sourceCity) {
+    Object.assign(copy, {
+      metaTitle: "Next Prayer Time Today | Live Salah Countdown | Adantimer",
+      metaDescription: "See the next prayer time today with a live salah countdown, current prayer status, and direct links into major city prayer pages.",
+      heroSubtitle: "Track the next prayer with a live countdown, see the current prayer status, and move directly into high-priority city pages when you need a local timetable.",
+      infoTitle: "Use this page when the next prayer is the main question",
+      features: [
+        "The next-prayer countdown stays at the center of the page together with the full daily schedule.",
+        "Current prayer, next prayer, and the active method stay visible on the same screen.",
+        "Major city routes are linked directly so you can switch from a general countdown to a city-specific page fast.",
+        "GPS, IP fallback, and manual city search all remain available for quicker route discovery."
+      ],
+      citiesTitle: "Priority next-prayer routes and city pages",
+      aboutTitle: "What the next-prayer page should answer first",
+      aboutParagraphs: [
+        "This route is for the direct search intent: what is the next prayer and how long is left until it starts.",
+        "The page keeps the countdown, current prayer status, full daily timetable, and active method together so the answer is visible without extra navigation.",
+        "When you need a city-specific answer after the first check, the linked city routes hand off to more focused prayer pages for places like Riyadh, Mecca, Dubai, and Cairo."
+      ],
+      faqTitle: "Common questions about the next prayer countdown",
+      faq: [
+        {
+          question: "Does this page only show the next prayer?",
+          answer: "No. The next prayer is the main focus, but the full daily prayer schedule still stays visible on the same page."
+        },
+        {
+          question: "Can I use this route for a specific city?",
+          answer: "Yes. You can search manually, let the page detect your location, or move into a direct city route such as Riyadh or Mecca."
+        },
+        {
+          question: "Why can the countdown differ from another source?",
+          answer: "The countdown depends on the loaded timetable, and timetables can vary by method or local authority, so compare the method label and your local mosque when needed."
+        }
+      ]
+    });
+    return copy;
+  }
+
+  if (language === "en" && pageType === "home" && cityKey === "dubai") {
+    Object.assign(copy, {
+      metaTitle: "Prayer Times in Dubai Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
+      metaDescription: "Check today's prayer times in Dubai with Fajr, Dhuhr, Asr, Maghrib, Isha, and a live next prayer countdown for Dubai.",
+      heroSubtitle: "Check today's prayer times in Dubai, follow the live next-prayer countdown, and review the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.",
+      infoTitle: "Prayer times in Dubai with the full daily schedule on one page",
+      features: [
+        "See today's Dubai timetable for Fajr, Dhuhr, Asr, Maghrib, and Isha together with the next prayer countdown.",
+        "Use the same page to verify the current prayer, today's date, and the active calculation method.",
+        "Move from Dubai into focused routes such as next prayer, Fajr time, or Asr time without leaving the timetable context.",
+        "Compare the shown method with your local mosque or trusted authority when your community follows a different timetable."
+      ],
+      aboutTitle: "How to use the Dubai prayer times page",
+      aboutParagraphs: [
+        "This page is built for people searching directly for prayer times in Dubai today, not for a generic homepage visit.",
+        "The schedule, next-prayer countdown, and visible method label stay together so you can check the timetable faster and compare it with local practice if needed.",
+        "If you need a more specific angle after the first lookup, use the linked Dubai routes for next prayer, Fajr, Asr, and the full prayer-times view."
+      ],
+      faqTitle: "Common questions about prayer times in Dubai",
+      faq: [
+        {
+          question: "Does this Dubai page include all five daily prayer times?",
+          answer: "Yes. It shows Fajr, Dhuhr, Asr, Maghrib, and Isha together with the next prayer countdown."
+        },
+        {
+          question: "Why might Dubai prayer times differ from another source?",
+          answer: "Prayer times can differ by calculation method or local timetable, so the visible method label and local mosque guidance both matter."
+        },
+        {
+          question: "Can I switch from Dubai to another city quickly?",
+          answer: "Yes. The page links directly into other major city pages and focused prayer-intent routes."
+        }
+      ]
+    });
+    return copy;
+  }
+
+  if (language === "en" && pageType === "home" && cityKey === "mecca") {
+    Object.assign(copy, {
+      metaTitle: "Prayer Times in Mecca Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
+      metaDescription: "Check today's prayer times in Mecca with Fajr, Dhuhr, Asr, Maghrib, Isha, and a live next prayer countdown for Mecca.",
+      heroSubtitle: "Check today's prayer times in Mecca, follow the live next-prayer countdown, and review the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.",
+      infoTitle: "Prayer times in Mecca with the full daily schedule and next prayer",
+      features: [
+        "See today's Mecca timetable for Fajr, Dhuhr, Asr, Maghrib, and Isha together with the next prayer countdown.",
+        "Keep the current prayer status, today's date, and active calculation method visible on the same page.",
+        "Move directly from Mecca into focused routes such as next prayer, Fajr time, or the broader prayer-times route.",
+        "Use the visible method label together with local mosque guidance when you compare the timetable with another source."
+      ],
+      aboutTitle: "How to use the Mecca prayer times page",
+      aboutParagraphs: [
+        "This page is built for the direct search intent: prayer times in Mecca today with the full daily schedule and the next prayer countdown on one screen.",
+        "The page keeps method visibility and city-specific routing together so the first answer is faster and the deeper route handoff is cleaner.",
+        "If your community or travel plan follows a different local timetable, treat this page as a fast lookup and compare it with the trusted local schedule."
+      ],
+      faqTitle: "Common questions about prayer times in Mecca",
+      faq: [
+        {
+          question: "Does this Mecca page show the next prayer and the full schedule together?",
+          answer: "Yes. The next prayer countdown stays visible while the full Fajr, Dhuhr, Asr, Maghrib, and Isha schedule remains on the same page."
+        },
+        {
+          question: "Why can prayer times in Mecca differ from another timetable?",
+          answer: "Timetables can differ by source or method, so the active method label and trusted local guidance should both be considered."
+        },
+        {
+          question: "Can I move from Mecca to related prayer routes quickly?",
+          answer: "Yes. The page links into focused routes such as next prayer, Fajr, Asr, and other high-priority city pages."
+        }
+      ]
+    });
+    return copy;
+  }
+
+  if (language === "ar" && pageType === "home" && cityKey === "dubai") {
+    Object.assign(copy, {
+      metaTitle: "مواقيت الصلاة في دبي اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer",
+      metaDescription: "تحقق من مواقيت الصلاة في دبي اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.",
+      heroSubtitle: "تحقق من مواقيت الصلاة في دبي اليوم، وتابع العد التنازلي للصلاة القادمة، وراجع جدول الفجر والظهر والعصر والمغرب والعشاء في صفحة واحدة.",
+      infoTitle: "مواقيت الصلاة في دبي مع الجدول الكامل والصلاة القادمة",
+      features: [
+        "اعرض جدول دبي اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.",
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة.",
+        "يمكنك الانتقال مباشرة من دبي إلى صفحات أكثر تركيزا مثل الصلاة القادمة أو الفجر أو العصر.",
+        "عند اختلاف الجدول عن مصدر آخر، قارن طريقة الحساب الظاهرة مع توقيت المسجد المحلي أو الجهة الموثوقة."
+      ],
+      aboutTitle: "كيف تستخدم صفحة مواقيت الصلاة في دبي",
+      aboutParagraphs: [
+        "هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في دبي اليوم، لا لمن يريد صفحة عامة فقط.",
+        "يجتمع في الصفحة جدول اليوم الكامل مع العد التنازلي للصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة."
+      ],
+      faqTitle: "أسئلة شائعة عن مواقيت الصلاة في دبي",
+      faq: [
+        {
+          question: "هل تعرض هذه الصفحة الصلوات الخمس اليومية في دبي؟",
+          answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة."
+        },
+        {
+          question: "لماذا قد تختلف مواقيت الصلاة في دبي عن مصدر آخر؟",
+          answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين."
+        },
+        {
+          question: "هل أستطيع الانتقال بسرعة من دبي إلى صفحات صلاة أخرى؟",
+          answer: "نعم. الصفحة تربطك مباشرة بمسارات أكثر تركيزا مثل الصلاة القادمة والفجر والعصر وصفحات المدن المهمة."
+        }
+      ]
+    });
+    return copy;
+  }
+
+  return copy;
+}
+
 const TOOL_HUB_CONTENT = {
   en: {
     eyebrow: "More Tools",
@@ -1629,7 +1822,13 @@ export async function GET(request) {
     const canonicalPath = buildRoutePath(language, pageType, city, detailSlug);
     const canonical = `${SITE_URL}${canonicalPath}`;
     const alternates = getAlternates(pageType, city, detailSlug);
-    const copy = buildCopy({ language, pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection });
+    const copy = applyPriorityPrayerSeoOverrides({
+      language,
+      pageType,
+      sourceCity,
+      place,
+      copy: buildCopy({ language, pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection })
+    });
     const title = copy.metaTitle || locale.title(topic, place, pageType);
     const description = copy.metaDescription || (pageType === "qibla"
       ? (QIBLA_PAGE_COPY[language] || QIBLA_PAGE_COPY.en).description(place)
