@@ -30,6 +30,35 @@ DEFAULT_COUNTRIES = [
 ]
 ARABIC_COUNTRIES = {"ae", "bh", "dz", "eg", "iq", "jo", "kw", "lb", "ly", "ma", "om", "ps", "qa", "sa", "sd", "sy", "tn", "ye"}
 INTENTS = ["", "prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
+PRIORITY_INTENTS = ["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
+CORE_LANGUAGE_HOMES = [
+    ("/", "1.0"),
+    ("/ar", "0.98"),
+    ("/de", "0.74"),
+    ("/fr", "0.74"),
+    ("/tr", "0.74"),
+    ("/zh-hans", "0.74"),
+]
+ENGLISH_TOP_CITIES = [
+    "dubai",
+    "mecca",
+    "medina",
+    "riyadh",
+    "cairo",
+    "istanbul",
+    "singapore",
+    "london",
+    "new-york",
+    "paris",
+]
+ARABIC_CORE_CITIES = [
+    "dubai",
+    "mecca",
+    "medina",
+    "riyadh",
+    "cairo",
+    "istanbul",
+]
 
 
 def slugify(value: str) -> str:
@@ -70,6 +99,14 @@ def write_sitemap(path: pathlib.Path, xml: str, compressed: bool) -> pathlib.Pat
     return path
 
 
+def write_priority_sitemap(root: pathlib.Path, name: str, entries: list[str], compressed: bool) -> pathlib.Path:
+    xml_path = root / f"{name}.xml"
+    write_sitemap(xml_path, urlset(entries), False)
+    if compressed:
+        write_sitemap(xml_path, urlset(entries), True)
+    return xml_path
+
+
 def discover_country_codes(root: pathlib.Path) -> list[str]:
     found = set(DEFAULT_COUNTRIES)
     for path in root.glob("sitemap-??.xml"):
@@ -103,14 +140,38 @@ def build_country_entries(code: str, cities: list[tuple[int, str]], lastmod: str
     for _population, city_slug in cities[:max_cities]:
         for intent in INTENTS:
             path = f"/{city_slug}" if not intent else f"/{intent}/{city_slug}"
-            entries.append(url_entry(f"{BASE_URL}{path}", "0.84" if not intent else "0.78", lastmod))
+            entries.append(url_entry(f"{BASE_URL}{path}", "0.62" if not intent else "0.56", lastmod))
         if code in ARABIC_COUNTRIES:
             for intent in INTENTS:
                 path = f"/ar/{city_slug}" if not intent else f"/ar/{intent}/{city_slug}"
-                entries.append(url_entry(f"{BASE_URL}{path}", "0.84" if not intent else "0.78", lastmod))
+                entries.append(url_entry(f"{BASE_URL}{path}", "0.62" if not intent else "0.56", lastmod))
     if not entries:
         entries.append(url_entry(f"{BASE_URL}/{code}", "0.50", lastmod))
     return entries[:MAX_URLS_PER_SITEMAP]
+
+
+def build_core_entries(lastmod: str) -> list[str]:
+    return [url_entry(f"{BASE_URL}{path}", priority, lastmod) for path, priority in CORE_LANGUAGE_HOMES]
+
+
+def build_intent_entries(lastmod: str) -> list[str]:
+    entries: list[str] = []
+    for intent in PRIORITY_INTENTS:
+        entries.append(url_entry(f"{BASE_URL}/{intent}", "0.94", lastmod))
+        entries.append(url_entry(f"{BASE_URL}/ar/{intent}", "0.91", lastmod))
+    return entries
+
+
+def build_priority_city_entries(cities: list[str], lastmod: str, language_prefix: str = "") -> list[str]:
+    entries: list[str] = []
+    prefix = f"/{language_prefix}" if language_prefix else ""
+    home_priority = "0.93" if not language_prefix else "0.9"
+    intent_priority = "0.87" if not language_prefix else "0.84"
+    for city_slug in cities:
+        entries.append(url_entry(f"{BASE_URL}{prefix}/{city_slug}", home_priority, lastmod))
+        for intent in PRIORITY_INTENTS:
+            entries.append(url_entry(f"{BASE_URL}{prefix}/{intent}/{city_slug}", intent_priority, lastmod))
+    return entries
 
 
 def main() -> None:
@@ -125,20 +186,19 @@ def main() -> None:
     groups = city_groups()
     country_codes = discover_country_codes(root)
 
-    core = [
-        url_entry(f"{BASE_URL}/", "1.0", lastmod),
-        url_entry(f"{BASE_URL}/ar", "0.95", lastmod),
-        url_entry(f"{BASE_URL}/prayer-times", "0.95", lastmod),
-        url_entry(f"{BASE_URL}/next-prayer", "0.95", lastmod),
-        url_entry(f"{BASE_URL}/fajr-time", "0.90", lastmod),
-        url_entry(f"{BASE_URL}/dhuhr-time", "0.90", lastmod),
-        url_entry(f"{BASE_URL}/asr-time", "0.90", lastmod),
-        url_entry(f"{BASE_URL}/maghrib-time", "0.90", lastmod),
-        url_entry(f"{BASE_URL}/isha-time", "0.90", lastmod),
-    ]
-    sitemap_targets = [write_sitemap(root / "sitemap-core.xml", urlset(core), compressed)]
+    core = build_core_entries(lastmod)
+    intents = build_intent_entries(lastmod)
+    top_cities = build_priority_city_entries(ENGLISH_TOP_CITIES, lastmod)
+    arabic_core = build_priority_city_entries(ARABIC_CORE_CITIES, lastmod, "ar")
 
-    total_urls = len(core)
+    sitemap_targets = [
+        write_priority_sitemap(root, "sitemap-core", core, compressed),
+        write_priority_sitemap(root, "sitemap-intents", intents, compressed),
+        write_priority_sitemap(root, "sitemap-top-cities", top_cities, compressed),
+        write_priority_sitemap(root, "sitemap-ar-core", arabic_core, compressed),
+    ]
+
+    total_urls = len(core) + len(intents) + len(top_cities) + len(arabic_core)
     for code in country_codes:
         entries = build_country_entries(code, groups.get(code, []), lastmod)
         total_urls += len(entries)

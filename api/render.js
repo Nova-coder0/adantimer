@@ -22,26 +22,31 @@ const QURAN_SURAH_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
 const quranSurahCache = new Map();
 
 const TOP_CITIES = [
-  { city: "Makkah", country: "Saudi Arabia" },
-  { city: "Madinah", country: "Saudi Arabia" },
-  { city: "Buraydah", country: "Saudi Arabia" },
-  { city: "Cairo", country: "Egypt" },
   { city: "Dubai", country: "United Arab Emirates" },
+  { city: "Mecca", country: "Saudi Arabia" },
+  { city: "Medina", country: "Saudi Arabia" },
+  { city: "Riyadh", country: "Saudi Arabia" },
+  { city: "Cairo", country: "Egypt" },
   { city: "Istanbul", country: "Turkey" },
+  { city: "Singapore", country: "Singapore" },
   { city: "London", country: "United Kingdom" },
   { city: "New York", country: "United States" },
-  { city: "Sydney", country: "Australia" }
+  { city: "Paris", country: "France" }
 ];
 
 const CITY_NAME_LOCALIZATIONS = {
   "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
+  "mecca": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
   "madinah": { ar: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", de: "Medina", fr: "Medine", tr: "Medine", "zh-hans": "\u9ea6\u5730\u90a3" },
+  "medina": { ar: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", de: "Medina", fr: "Medine", tr: "Medine", "zh-hans": "\u9ea6\u5730\u90a3" },
   "buraydah": { ar: "\u0628\u0631\u064a\u062f\u0629", de: "Buraida", fr: "Buraidah", tr: "Bureyde", "zh-hans": "\u5e03\u8d56\u8fbe" },
   "cairo": { ar: "\u0627\u0644\u0642\u0627\u0647\u0631\u0629", de: "Kairo", fr: "Le Caire", tr: "Kahire", "zh-hans": "\u5f00\u7f57" },
   "dubai": { ar: "\u062f\u0628\u064a", de: "Dubai", fr: "Duba\u00ef", tr: "Dubai", "zh-hans": "\u8fea\u62dc" },
+  "riyadh": { ar: "\u0627\u0644\u0631\u064a\u0627\u0636", de: "Riad", fr: "Riyad", tr: "Riyad", "zh-hans": "\u5229\u96c5\u5f97" },
   "istanbul": { ar: "\u0625\u0633\u0637\u0646\u0628\u0648\u0644", de: "Istanbul", fr: "Istanbul", tr: "\u0130stanbul", "zh-hans": "\u4f0a\u65af\u5766\u5e03\u5c14" },
   "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
   "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
+  "singapore": { ar: "\u0633\u0646\u063a\u0627\u0641\u0648\u0631\u0629", de: "Singapur", fr: "Singapour", tr: "Singapur", "zh-hans": "\u65b0\u52a0\u5761" },
   "sydney": { ar: "\u0633\u064a\u062f\u0646\u064a", de: "Sydney", fr: "Sydney", tr: "Sidney", "zh-hans": "\u6089\u5c3c" },
   "berlin": { ar: "\u0628\u0631\u0644\u064a\u0646", de: "Berlin", fr: "Berlin", tr: "Berlin", "zh-hans": "\u67cf\u6797" },
   "paris": { ar: "\u0628\u0627\u0631\u064a\u0633", de: "Paris", fr: "Paris", tr: "Paris", "zh-hans": "\u5df4\u9ece" },
@@ -56,6 +61,7 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "united kingdom": { ar: "\u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigtes K\u00f6nigreich", fr: "Royaume-Uni", tr: "Birle\u015fik Krall\u0131k", "zh-hans": "\u82f1\u56fd" },
   "united states": { ar: "\u0627\u0644\u0648\u0644\u0627\u064a\u0627\u062a \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigte Staaten", fr: "\u00c9tats-Unis", tr: "Amerika Birle\u015fik Devletleri", "zh-hans": "\u7f8e\u56fd" },
   "australia": { ar: "\u0623\u0633\u062a\u0631\u0627\u0644\u064a\u0627", de: "Australien", fr: "Australie", tr: "Avustralya", "zh-hans": "\u6fb3\u5927\u5229\u4e9a" },
+  "singapore": { ar: "\u0633\u0646\u063a\u0627\u0641\u0648\u0631\u0629", de: "Singapur", fr: "Singapour", tr: "Singapur", "zh-hans": "\u65b0\u52a0\u5761" },
   "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
   "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
   "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
@@ -1270,10 +1276,10 @@ const COPY_LOCALES = {
           { type: "isha", label: `Isha in ${place}` }
         ]
       : [
-          { type: "prayer-times", city: "Makkah", label: "Gebetszeiten in Makkah" },
-          { type: "asr", city: "Cairo", label: "Asr in Cairo" },
-          { type: "dhuhr", city: "Dubai", label: "Dhuhr in Dubai" },
-          { type: "next-prayer", city: "London", label: "Nächstes Gebet in London" }
+          { type: "prayer-times", city: "Mecca", label: "Gebetszeiten in Mekka" },
+          { type: "next-prayer", city: "Riyadh", label: "Nächstes Gebet in Riad" },
+          { type: "fajr", city: "Medina", label: "Fajr in Medina" },
+          { type: "prayer-times", city: "Dubai", label: "Gebetszeiten in Dubai" }
         ],
     aboutEyebrow: "Über diese Seite",
     aboutTitle: (topic, place) => `${topic}${place ? ` in ${place}` : ""} ohne Umwege`,
@@ -1361,10 +1367,10 @@ const COPY_LOCALES = {
           { type: "isha", label: `Isha à ${place}` }
         ]
       : [
-          { type: "prayer-times", city: "Makkah", label: "Horaires de prière à Makkah" },
-          { type: "asr", city: "Cairo", label: "Asr à Cairo" },
-          { type: "dhuhr", city: "Dubai", label: "Dhuhr à Dubai" },
-          { type: "next-prayer", city: "London", label: "Prochaine prière à London" }
+          { type: "prayer-times", city: "Mecca", label: "Horaires de prière à La Mecque" },
+          { type: "next-prayer", city: "Riyadh", label: "Prochaine prière à Riyad" },
+          { type: "fajr", city: "Medina", label: "Fajr à Médine" },
+          { type: "prayer-times", city: "Dubai", label: "Horaires de prière à Dubaï" }
         ],
     aboutEyebrow: "À propos",
     aboutTitle: (topic, place) => `${topic}${place ? ` à ${place}` : ""} sans détour`,
@@ -1452,10 +1458,10 @@ const COPY_LOCALES = {
           { type: "isha", label: `${place} için Isha` }
         ]
       : [
-          { type: "prayer-times", city: "Makkah", label: "Makkah için namaz vakitleri" },
-          { type: "asr", city: "Cairo", label: "Cairo için Asr" },
-          { type: "dhuhr", city: "Dubai", label: "Dubai için Dhuhr" },
-          { type: "next-prayer", city: "London", label: "London için sonraki namaz" }
+          { type: "prayer-times", city: "Mecca", label: "Mekke için namaz vakitleri" },
+          { type: "next-prayer", city: "Riyadh", label: "Riyad için sonraki namaz" },
+          { type: "fajr", city: "Medina", label: "Medine için Fajr" },
+          { type: "prayer-times", city: "Dubai", label: "Dubai için namaz vakitleri" }
         ],
     aboutEyebrow: "Hakkında",
     aboutTitle: (topic, place) => place ? `${place} için ${topic} sade ve net` : `${topic} sade ve net`,
@@ -1543,10 +1549,10 @@ const COPY_LOCALES = {
           { type: "isha", label: `${place}宵礼` }
         ]
       : [
-          { type: "prayer-times", city: "Makkah", label: "Makkah礼拜时间" },
-          { type: "asr", city: "Cairo", label: "Cairo晡礼" },
-          { type: "dhuhr", city: "Dubai", label: "Dubai晌礼" },
-          { type: "next-prayer", city: "London", label: "London下一次礼拜" }
+          { type: "prayer-times", city: "Mecca", label: "麦加礼拜时间" },
+          { type: "next-prayer", city: "Riyadh", label: "利雅得下一次礼拜" },
+          { type: "fajr", city: "Medina", label: "麦地那晨礼" },
+          { type: "prayer-times", city: "Dubai", label: "迪拜礼拜时间" }
         ],
     aboutEyebrow: "关于页面",
     aboutTitle: (topic, place) => place ? `${place}${topic}页面，直接清晰` : `${topic}页面，直接清晰`,
@@ -1762,10 +1768,10 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         { label: `Isha in ${place}`, href: buildRoutePath("en", "isha", sourceCity) }
       ]
     : [
-        { label: "Prayer times in Makkah", href: buildRoutePath("en", "prayer-times", "Makkah") },
-        { label: "Asr in Cairo", href: buildRoutePath("en", "asr", "Cairo") },
-        { label: "Dhuhr in Dubai", href: buildRoutePath("en", "dhuhr", "Dubai") },
-        { label: "Next prayer in London", href: buildRoutePath("en", "next-prayer", "London") }
+        { label: "Prayer times in Mecca", href: buildRoutePath("en", "prayer-times", "Mecca") },
+        { label: "Next prayer in Riyadh", href: buildRoutePath("en", "next-prayer", "Riyadh") },
+        { label: "Fajr in Medina", href: buildRoutePath("en", "fajr", "Medina") },
+        { label: "Prayer times in Singapore", href: buildRoutePath("en", "prayer-times", "Singapore") }
       ];
 
   const copy = {
@@ -1910,10 +1916,10 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
         { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) }
       ]
     : [
-        { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "prayer-times", "Makkah") },
-        { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
-        { label: "الظهر في دبي", href: buildRoutePath("ar", "dhuhr", "Dubai") },
-        { label: "الصلاة القادمة في لندن", href: buildRoutePath("ar", "next-prayer", "London") }
+        { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "prayer-times", "Mecca") },
+        { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
+        { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
+        { label: "مواقيت الصلاة في دبي", href: buildRoutePath("ar", "prayer-times", "Dubai") }
       ];
 
   const copy = {
@@ -2690,8 +2696,6 @@ ${renderScheduleSection(copy)}
 ${renderInfoSection(copy)}
     </section>
 
-${renderToolsSection(copy)}
-
 ${renderCitiesSection(copy)}
 
     <section class="seo-grid">
@@ -2699,6 +2703,8 @@ ${renderAboutArticle(copy)}
 
 ${renderFaqSection(copy)}
     </section>
+
+${renderToolsSection(copy)}
   </main>`;
 }
 
