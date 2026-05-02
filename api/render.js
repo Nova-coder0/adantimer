@@ -711,33 +711,37 @@ const QURAN_SURAH_CONTENT = {
 
 const ROOT_HOME_OVERRIDES = {
   en: {
-    infoTitle: "A stronger starting point for global prayer time searches",
+    infoTitle: "Start with trusted prayer times, then move into the right city page",
     features: [
-      "Server-rendered copy matches the visitor's language before the page hydrates.",
-      "The homepage is structured to answer two fast paths: today's schedule near you or a direct city prayer page.",
-      "Major cities, next-prayer routes, and individual prayer routes are linked immediately from the first screen.",
-      "Clean language-aware URLs make the homepage a better entry point for search, sharing, and return visits."
+      "The homepage leads first to high-priority prayer pages for major cities instead of scattering attention across random routes.",
+      "Today's schedule, the next-prayer countdown, and the visible calculation method stay on the same page for faster checking.",
+      "Adantimer tries GPS first, falls back to IP when needed, and still keeps manual city search available.",
+      "Use the method label and city route together, because prayer times can vary by calculation method or local mosque guidance."
     ],
-    citiesTitle: "Start with major prayer time cities",
-    aboutTitle: "Built for automatic language, location, and city discovery",
+    citiesTitle: "Priority prayer time pages for major cities",
+    aboutTitle: "How Adantimer handles prayer times, location, and calculation methods",
     aboutParagraphs: [
-      "Most visitors arriving on the homepage want either today's prayer schedule for their current city or a fast route into a known city page. The root page is structured around both goals.",
-      "Language, canonical signals, and visible copy now align earlier in the request so the first HTML already matches the visitor more closely.",
-      "That makes the homepage a stronger discovery page for global prayer-time searches while still handing off deeper intent to dedicated city routes."
+      "Most visitors arriving on the homepage want one of two things: today's prayer schedule near them or a direct route into a known city page such as Dubai, Mecca, Medina, Riyadh, Cairo, Istanbul, Singapore, London, New York, or Paris.",
+      "Adantimer tries GPS first, falls back to IP-based location when needed, and still keeps manual city search available. The visible method label helps explain why times can differ between data sources, methods, or local communities.",
+      "Use the homepage as the fastest discovery route, but follow your local mosque or trusted authority whenever your community uses a different timetable or calculation method."
     ],
-    faqTitle: "Common questions about automatic prayer times",
+    faqTitle: "Prayer time accuracy and location questions",
     faq: [
       {
         question: "Does the homepage adapt to my language automatically?",
         answer: "Yes. The root page can now render in the visitor's browser language on the first server response, while manual language switching stays available in the header."
       },
       {
-        question: "Can I jump from the homepage to a direct city page?",
-        answer: "Yes. The homepage links directly to major city pages and to focused prayer-intent routes such as next prayer, Fajr, Dhuhr, Asr, Maghrib, and Isha."
+        question: "How does Adantimer determine the prayer times shown here?",
+        answer: "The homepage uses the detected or searched city and shows the active calculation method alongside the schedule. Times can still vary between methods or local authorities."
       },
       {
         question: "What happens if my location is not available?",
         answer: "Adantimer tries GPS first, falls back to IP-based detection when needed, and still keeps manual city search available."
+      },
+      {
+        question: "Should I follow my local mosque if the timetable is different?",
+        answer: "Yes. Adantimer is built for fast lookup and route discovery, but your local mosque or trusted authority should take priority when your community follows a different method or timetable."
       }
     ]
   },
@@ -1769,8 +1773,10 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
       ]
     : [
         { label: "Prayer times in Mecca", href: buildRoutePath("en", "prayer-times", "Mecca") },
+        { label: "Prayer times in Dubai", href: buildRoutePath("en", "prayer-times", "Dubai") },
         { label: "Next prayer in Riyadh", href: buildRoutePath("en", "next-prayer", "Riyadh") },
         { label: "Fajr in Medina", href: buildRoutePath("en", "fajr", "Medina") },
+        { label: "Asr in Cairo", href: buildRoutePath("en", "asr", "Cairo") },
         { label: "Prayer times in Singapore", href: buildRoutePath("en", "prayer-times", "Singapore") }
       ];
 
@@ -1917,9 +1923,11 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
       ]
     : [
         { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "prayer-times", "Mecca") },
+        { label: "مواقيت الصلاة في دبي", href: buildRoutePath("ar", "prayer-times", "Dubai") },
         { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
         { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
-        { label: "مواقيت الصلاة في دبي", href: buildRoutePath("ar", "prayer-times", "Dubai") }
+        { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
+        { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "prayer-times", "Istanbul") }
       ];
 
   const copy = {

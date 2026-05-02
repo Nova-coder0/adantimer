@@ -391,7 +391,8 @@ AssertContains $renderJs 'const SUPPORTED_RENDER_LANGUAGES = ["en", "ar", "de", 
 AssertContains $renderJs 'const LANGUAGE_ALIASES = {' "SSR renderer keeps language aliases" "SSR renderer language aliases are missing"
 AssertContains $renderJs 'const LANGUAGE_PREFIXES = {' "SSR renderer keeps language prefixes" "SSR renderer language prefixes are missing"
 AssertContains $renderJs 'const ROOT_HOME_OVERRIDES = {' "SSR renderer keeps explicit root-home copy overrides" "SSR renderer is missing the root-home copy overrides"
-AssertContains $renderJs 'A stronger starting point for global prayer time searches' "SSR renderer carries stronger English root-home copy" "SSR renderer is missing the stronger English root-home copy"
+AssertContains $renderJs 'Start with trusted prayer times, then move into the right city page' "SSR renderer carries stronger English root-home copy" "SSR renderer is missing the stronger English root-home copy"
+AssertContains $renderJs 'How Adantimer handles prayer times, location, and calculation methods' "SSR renderer carries home trust content" "SSR renderer is missing the homepage trust-content heading"
 AssertContains $renderJs 'const CITY_NAME_LOCALIZATIONS = {' "SSR renderer keeps localized city-name mappings" "SSR renderer localized city-name mappings are missing"
 AssertContains $renderJs 'const INLINE_LINK_CONNECTORS = {' "SSR renderer keeps localized inline-link connectors" "SSR renderer is missing localized inline-link connectors"
 AssertContains $renderJs 'function localizeCityName(city, language)' "SSR renderer keeps the city-name localization helper" "SSR renderer city-name localization helper is missing"
@@ -516,7 +517,7 @@ TestMojibake "script.js"
 TestMojibake "data/hadith-entries.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'Built for automatic language, location, and city discovery')
+  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'How Adantimer handles prayer times, location, and calculation methods', '/prayer-times/mecca', '/next-prayer/riyadh')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
   TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr"', 'dhikr-card-grid', 'data-dhikr-category="provision"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"', 'dhikr-card-badges')
