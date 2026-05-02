@@ -46,7 +46,7 @@ ENGLISH_TOP_CITIES = [
     "riyadh",
     "cairo",
     "istanbul",
-    "singapore",
+    "kuala-lumpur",
     "london",
     "new-york",
     "paris",

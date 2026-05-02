@@ -28,7 +28,7 @@ const TOP_CITIES = [
   { city: "Riyadh", country: "Saudi Arabia" },
   { city: "Cairo", country: "Egypt" },
   { city: "Istanbul", country: "Turkey" },
-  { city: "Singapore", country: "Singapore" },
+  { city: "Kuala Lumpur", country: "Malaysia" },
   { city: "London", country: "United Kingdom" },
   { city: "New York", country: "United States" },
   { city: "Paris", country: "France" }
@@ -44,6 +44,7 @@ const CITY_NAME_LOCALIZATIONS = {
   "dubai": { ar: "\u062f\u0628\u064a", de: "Dubai", fr: "Duba\u00ef", tr: "Dubai", "zh-hans": "\u8fea\u62dc" },
   "riyadh": { ar: "\u0627\u0644\u0631\u064a\u0627\u0636", de: "Riad", fr: "Riyad", tr: "Riyad", "zh-hans": "\u5229\u96c5\u5f97" },
   "istanbul": { ar: "\u0625\u0633\u0637\u0646\u0628\u0648\u0644", de: "Istanbul", fr: "Istanbul", tr: "\u0130stanbul", "zh-hans": "\u4f0a\u65af\u5766\u5e03\u5c14" },
+  "kuala-lumpur": { ar: "\u0643\u0648\u0627\u0644\u0627 \u0644\u0645\u0628\u0648\u0631", de: "Kuala Lumpur", fr: "Kuala Lumpur", tr: "Kuala Lumpur", "zh-hans": "\u5409\u9686\u5761" },
   "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
   "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
   "singapore": { ar: "\u0633\u0646\u063a\u0627\u0641\u0648\u0631\u0629", de: "Singapur", fr: "Singapour", tr: "Singapur", "zh-hans": "\u65b0\u52a0\u5761" },
@@ -56,6 +57,7 @@ const CITY_NAME_LOCALIZATIONS = {
 const COUNTRY_NAME_LOCALIZATIONS = {
   "saudi arabia": { ar: "\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629", de: "Saudi-Arabien", fr: "Arabie saoudite", tr: "Suudi Arabistan", "zh-hans": "\u6c99\u7279\u963f\u62c9\u4f2f" },
   "egypt": { ar: "\u0645\u0635\u0631", de: "\u00c4gypten", fr: "\u00c9gypte", tr: "M\u0131s\u0131r", "zh-hans": "\u57c3\u53ca" },
+  "malaysia": { ar: "\u0645\u0627\u0644\u064a\u0632\u064a\u0627", de: "Malaysia", fr: "Malaisie", tr: "Malezya", "zh-hans": "\u9a6c\u6765\u897f\u4e9a" },
   "united arab emirates": { ar: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a", de: "Vereinigte Arabische Emirate", fr: "\u00c9mirats arabes unis", tr: "Birle\u015fik Arap Emirlikleri", "zh-hans": "\u963f\u8054\u914b" },
   "turkey": { ar: "\u062a\u0631\u0643\u064a\u0627", de: "T\u00fcrkei", fr: "Turquie", tr: "T\u00fcrkiye", "zh-hans": "\u571f\u8033\u5176" },
   "united kingdom": { ar: "\u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigtes K\u00f6nigreich", fr: "Royaume-Uni", tr: "Birle\u015fik Krall\u0131k", "zh-hans": "\u82f1\u56fd" },
@@ -721,7 +723,7 @@ const ROOT_HOME_OVERRIDES = {
     citiesTitle: "Priority prayer time pages for major cities",
     aboutTitle: "How Adantimer handles prayer times, location, and calculation methods",
     aboutParagraphs: [
-      "Most visitors arriving on the homepage want one of two things: today's prayer schedule near them or a direct route into a known city page such as Dubai, Mecca, Medina, Riyadh, Cairo, Istanbul, Singapore, London, New York, or Paris.",
+      "Most visitors arriving on the homepage want one of two things: today's prayer schedule near them or a direct route into a known city page such as Dubai, Mecca, Medina, Riyadh, Cairo, Istanbul, Kuala Lumpur, London, New York, or Paris.",
       "Adantimer tries GPS first, falls back to IP-based location when needed, and still keeps manual city search available. The visible method label helps explain why times can differ between data sources, methods, or local communities.",
       "Use the homepage as the fastest discovery route, but follow your local mosque or trusted authority whenever your community uses a different timetable or calculation method."
     ],
@@ -909,7 +911,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     Object.assign(copy, {
       metaTitle: "Prayer Times Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
       metaDescription: "Check today's prayer times with Fajr, Dhuhr, Asr, Maghrib, Isha and a live next prayer countdown, then move directly into the right city page.",
-      heroSubtitle: "Check today's full prayer schedule with a live next prayer countdown, then jump into major city pages such as Mecca, Dubai, Riyadh, Cairo, and Singapore.",
+      heroSubtitle: "Check today's full prayer schedule with a live next prayer countdown, then jump into major city pages such as Mecca, Dubai, Riyadh, Cairo, and Kuala Lumpur.",
       infoTitle: "Check today's full prayer schedule before moving into a city page",
       features: [
         "See Fajr, Dhuhr, Asr, Maghrib, and Isha together with the live next-prayer countdown.",
@@ -1003,7 +1005,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         aboutParagraphs: [
           "This route is built for the direct search intent: what time is Dhuhr today and how can I confirm it quickly for the right city.",
           "The page keeps the Dhuhr result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to verify.",
-          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Riyadh, Cairo, Dubai, and Singapore."
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Riyadh, Cairo, Dubai, and Kuala Lumpur."
         ],
         faqTitle: "Common questions about Dhuhr time today"
       },
@@ -1039,7 +1041,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         aboutParagraphs: [
           "This route is built for the direct search intent: what time is Isha today and how can I verify it quickly for the right city.",
           "The page keeps the Isha result together with the full daily timetable, the next-prayer countdown, and the visible method label so the answer is easier to trust.",
-          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Mecca, Medina, Istanbul, and Singapore."
+          "When you need a city-specific result after the first lookup, the linked city routes take you directly into stronger prayer pages for places such as Mecca, Medina, Istanbul, and Kuala Lumpur."
         ],
         faqTitle: "Common questions about Isha time today"
       }
@@ -1253,12 +1255,12 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
-  if (language === "en" && pageType === "home" && ["medina", "riyadh", "cairo", "singapore", "london", "new-york", "paris", "istanbul"].includes(cityKey)) {
+  if (language === "en" && pageType === "home" && ["medina", "riyadh", "cairo", "kuala-lumpur", "london", "new-york", "paris", "istanbul"].includes(cityKey)) {
     const cityName = {
       medina: "Medina",
       riyadh: "Riyadh",
       cairo: "Cairo",
-      singapore: "Singapore",
+      "kuala-lumpur": "Kuala Lumpur",
       london: "London",
       "new-york": "New York",
       paris: "Paris",
@@ -2267,7 +2269,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         { label: "Next prayer in Riyadh", href: buildRoutePath("en", "next-prayer", "Riyadh") },
         { label: "Fajr in Medina", href: buildRoutePath("en", "fajr", "Medina") },
         { label: "Asr in Cairo", href: buildRoutePath("en", "asr", "Cairo") },
-        { label: "Prayer times in Singapore", href: buildRoutePath("en", "prayer-times", "Singapore") }
+        { label: "Prayer times in Kuala Lumpur", href: buildRoutePath("en", "prayer-times", "Kuala Lumpur") }
       ];
 
   const copy = {
