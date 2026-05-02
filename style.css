@@ -305,10 +305,28 @@ a {
 }
 
 .popular-cities {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.city-chip-group {
+  display: grid;
+  gap: 10px;
+}
+
+.city-group-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.city-chip-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 18px;
 }
 
 .city-chip {
@@ -319,6 +337,44 @@ a {
   color: var(--accent-strong);
   border-radius: 999px;
   padding: 10px 14px;
+}
+
+.city-chip-overflow {
+  display: grid;
+  gap: 14px;
+  padding-top: 10px;
+}
+
+.city-chip-more {
+  display: grid;
+  gap: 10px;
+}
+
+.city-chip-more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  border: 1px solid rgba(56, 42, 21, 0.08);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--text);
+  font-weight: 600;
+  list-style: none;
+}
+
+.city-chip-more-toggle strong {
+  color: var(--accent-strong);
+}
+
+.city-chip-more-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.city-chip-more[open] .city-chip-more-toggle {
+  background: rgba(13, 107, 93, 0.08);
+  border-color: rgba(13, 107, 93, 0.18);
 }
 
 .intent-links {
@@ -423,6 +479,33 @@ a {
 
 .seo-grid {
   margin-top: 22px;
+}
+
+.priority-link-groups {
+  display: grid;
+  gap: 18px;
+}
+
+.priority-link-group {
+  display: grid;
+  gap: 10px;
+}
+
+.priority-link-heading {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.priority-link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.priority-link {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .schedule-card,

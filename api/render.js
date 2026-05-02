@@ -20,21 +20,18 @@ const QURAN_API_BASE = "https://api.alquran.cloud/v1";
 const QURAN_API_TIMEOUT_MS = 12000;
 const QURAN_SURAH_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
 const quranSurahCache = new Map();
-
-const TOP_CITIES = [
-  { city: "Dubai", country: "United Arab Emirates" },
-  { city: "Mecca", country: "Saudi Arabia" },
-  { city: "Medina", country: "Saudi Arabia" },
-  { city: "Riyadh", country: "Saudi Arabia" },
-  { city: "Cairo", country: "Egypt" },
-  { city: "Istanbul", country: "Turkey" },
-  { city: "Kuala Lumpur", country: "Malaysia" },
-  { city: "Johor Bahru", country: "Malaysia" },
-  { city: "Jakarta", country: "Indonesia" },
-  { city: "London", country: "United Kingdom" },
-  { city: "New York", country: "United States" },
-  { city: "Paris", country: "France" }
-];
+const PRIORITY_CITY_CONFIG = JSON.parse(
+  await readFile(new URL("../data/priority-cities.json", import.meta.url), "utf8")
+);
+const PRIORITY_CITY_GROUPS = PRIORITY_CITY_CONFIG.groups || [];
+const PRIORITY_CITY_BY_SLUG = new Map(
+  PRIORITY_CITY_GROUPS.flatMap(group =>
+    group.cities.map(city => [city.slug, { ...city, groupId: group.id }])
+  )
+);
+const TOP_CITIES = (PRIORITY_CITY_CONFIG.sitemaps?.englishTopCities || [])
+  .map(slug => PRIORITY_CITY_BY_SLUG.get(slug))
+  .filter(Boolean);
 
 const CITY_NAME_LOCALIZATIONS = {
   "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
@@ -72,6 +69,45 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
   "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
   "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+};
+
+const PRIORITY_GROUP_LABELS = {
+  en: {
+    core: "Core cities",
+    "southeast-asia": "Southeast Asia",
+    global: "Global cities",
+    intents: "Priority intents"
+  },
+  ar: {
+    core: "المدن الأساسية",
+    "southeast-asia": "جنوب شرق آسيا",
+    global: "مدن عالمية",
+    intents: "صفحات النية الأساسية"
+  },
+  de: {
+    core: "Kernstädte",
+    "southeast-asia": "Südostasien",
+    global: "Globale Städte",
+    intents: "Prioritäts-Intents"
+  },
+  fr: {
+    core: "Villes clés",
+    "southeast-asia": "Asie du Sud-Est",
+    global: "Villes mondiales",
+    intents: "Intentions prioritaires"
+  },
+  tr: {
+    core: "Çekirdek şehirler",
+    "southeast-asia": "Güneydoğu Asya",
+    global: "Küresel şehirler",
+    intents: "Öncelikli aramalar"
+  },
+  "zh-hans": {
+    core: "核心城市",
+    "southeast-asia": "东南亚",
+    global: "全球城市",
+    intents: "重点意图页面"
+  }
 };
 
 const ROUTES = {
@@ -1731,6 +1767,7 @@ const COPY_LOCALES = {
     countryPlaceholder: "Land (optional)",
     submitLabel: "Gebetszeiten anzeigen",
     topCitiesAria: "Beliebte Städte",
+    topCitiesMoreLabel: "Mehr Städte",
     intentAria: "Schnellzugriffe für Gebetsseiten",
     intentLinks: [
       { type: "prayer-times", label: "Gebetszeiten heute" },
@@ -1822,6 +1859,7 @@ const COPY_LOCALES = {
     countryPlaceholder: "Pays (optionnel)",
     submitLabel: "Voir les horaires",
     topCitiesAria: "Villes populaires",
+    topCitiesMoreLabel: "Plus de villes",
     intentAria: "Raccourcis de recherche",
     intentLinks: [
       { type: "prayer-times", label: "Horaires de prière aujourd'hui" },
@@ -1913,6 +1951,7 @@ const COPY_LOCALES = {
     countryPlaceholder: "Ülke (isteğe bağlı)",
     submitLabel: "Vakitleri göster",
     topCitiesAria: "Popüler şehirler",
+    topCitiesMoreLabel: "Daha fazla şehir",
     intentAria: "Namaz arama kısayolları",
     intentLinks: [
       { type: "prayer-times", label: "Bugünün namaz vakitleri" },
@@ -2004,6 +2043,7 @@ const COPY_LOCALES = {
     countryPlaceholder: "国家（可选）",
     submitLabel: "查看礼拜时间",
     topCitiesAria: "热门城市",
+    topCitiesMoreLabel: "更多城市",
     intentAria: "礼拜搜索快捷入口",
     intentLinks: [
       { type: "prayer-times", label: "今日礼拜时间" },
@@ -2240,6 +2280,39 @@ function getLocalizedTopCities(language) {
   }));
 }
 
+function getPriorityCitiesBySlugs(slugs = []) {
+  return slugs
+    .map(slug => PRIORITY_CITY_BY_SLUG.get(slug))
+    .filter(Boolean);
+}
+
+function getLocalizedPriorityGroups(language, slugs = []) {
+  const slugSet = new Set(slugs);
+  return PRIORITY_CITY_GROUPS
+    .map(group => ({
+      id: group.id,
+      cities: group.cities
+        .filter(city => slugSet.has(city.slug))
+        .map(city => ({
+          ...city,
+          displayCity: localizeCityName(city.city, language),
+          displayCountry: localizeCountryName(city.country, language)
+        }))
+    }))
+    .filter(group => group.cities.length);
+}
+
+function getPriorityGroupCities(language) {
+  return PRIORITY_CITY_GROUPS.map(group => ({
+    id: group.id,
+    cities: group.cities.map(city => ({
+      ...city,
+      displayCity: localizeCityName(city.city, language),
+      displayCountry: localizeCountryName(city.country, language)
+    }))
+  }));
+}
+
 function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection }) {
   const isHomeRoot = pageType === "home" && !place;
   const rootOverride = ROOT_HOME_OVERRIDES.en;
@@ -2252,13 +2325,13 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
       href: buildRoutePath("en", resolvedPage, item.city)
     }));
   const intentLinks = [
-    { label: "Prayer times today", href: buildRoutePath("en", "prayer-times") },
-    { label: "Next prayer time", href: buildRoutePath("en", "next-prayer") },
-    { label: "Fajr time", href: buildRoutePath("en", "fajr") },
-    { label: "Dhuhr time", href: buildRoutePath("en", "dhuhr") },
-    { label: "Asr time", href: buildRoutePath("en", "asr") },
-    { label: "Maghrib time", href: buildRoutePath("en", "maghrib") },
-    { label: "Isha time", href: buildRoutePath("en", "isha") }
+    { type: "prayer-times", label: "Prayer times today", href: buildRoutePath("en", "prayer-times") },
+    { type: "next-prayer", label: "Next prayer time", href: buildRoutePath("en", "next-prayer") },
+    { type: "fajr", label: "Fajr time", href: buildRoutePath("en", "fajr") },
+    { type: "dhuhr", label: "Dhuhr time", href: buildRoutePath("en", "dhuhr") },
+    { type: "asr", label: "Asr time", href: buildRoutePath("en", "asr") },
+    { type: "maghrib", label: "Maghrib time", href: buildRoutePath("en", "maghrib") },
+    { type: "isha", label: "Isha time", href: buildRoutePath("en", "isha") }
   ];
   const cityIntentLinks = sourceCity
     ? [
@@ -2289,6 +2362,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
     showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith" && pageType !== "hadith-collection",
     showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith" && pageType !== "hadith-collection",
     brandHref: buildRoutePath("en", "home"),
+    priorityGroupLabels: PRIORITY_GROUP_LABELS.en,
     heroEyebrow: pageType === "home"
       ? (place ? `Prayer schedule for ${place}` : "Prayer times by city")
       : `${topic}${place ? ` for ${place}` : ""}`,
@@ -2303,8 +2377,10 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
     countryLabel: "Country",
     countryPlaceholder: "Country (optional)",
     submitLabel: "Find Prayer Times",
-    topCities: getLocalizedTopCities("en"),
+    topCityGroupsPrimary: getLocalizedPriorityGroups("en", PRIORITY_CITY_CONFIG.hero?.primary || []),
+    topCityGroupsOverflow: getLocalizedPriorityGroups("en", PRIORITY_CITY_CONFIG.hero?.overflow || []),
     topCitiesAria: "Popular city shortcuts",
+    topCitiesMoreLabel: "More cities",
     intentLinks,
     intentAria: "Prayer search shortcuts",
     locationStatus: place ? `Prayer times for ${place}` : "Detecting your location",
@@ -2329,6 +2405,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         ],
     citiesEyebrow: "Explore More",
     citiesTitle: isHomeRoot ? rootOverride.citiesTitle : `Popular ${topic.toLowerCase()} pages`,
+    priorityCityGroups: getPriorityGroupCities("en"),
     cityLinks,
     cityIntentLinks,
     aboutEyebrow: "About",
@@ -2404,13 +2481,13 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     link.label = link.label.replace(sourceItem.city, localizeCityName(sourceItem.city, "ar"));
   });
   const intentLinks = [
-    { label: "مواقيت الصلاة اليوم", href: buildRoutePath("ar", "prayer-times") },
-    { label: "وقت الصلاة القادمة", href: buildRoutePath("ar", "next-prayer") },
-    { label: "وقت الفجر", href: buildRoutePath("ar", "fajr") },
-    { label: "وقت الظهر", href: buildRoutePath("ar", "dhuhr") },
-    { label: "وقت العصر", href: buildRoutePath("ar", "asr") },
-    { label: "وقت المغرب", href: buildRoutePath("ar", "maghrib") },
-    { label: "وقت العشاء", href: buildRoutePath("ar", "isha") }
+    { type: "prayer-times", label: "مواقيت الصلاة اليوم", href: buildRoutePath("ar", "prayer-times") },
+    { type: "next-prayer", label: "وقت الصلاة القادمة", href: buildRoutePath("ar", "next-prayer") },
+    { type: "fajr", label: "وقت الفجر", href: buildRoutePath("ar", "fajr") },
+    { type: "dhuhr", label: "وقت الظهر", href: buildRoutePath("ar", "dhuhr") },
+    { type: "asr", label: "وقت العصر", href: buildRoutePath("ar", "asr") },
+    { type: "maghrib", label: "وقت المغرب", href: buildRoutePath("ar", "maghrib") },
+    { type: "isha", label: "وقت العشاء", href: buildRoutePath("ar", "isha") }
   ];
   const cityIntentLinks = sourceCity
     ? [
@@ -2439,6 +2516,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith" && pageType !== "hadith-collection",
     showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith" && pageType !== "hadith-collection",
     brandHref: buildRoutePath("ar", "home"),
+    priorityGroupLabels: PRIORITY_GROUP_LABELS.ar,
     heroEyebrow: pageType === "home"
       ? (place ? `جدول الصلاة في ${place}` : "مواقيت الصلاة حسب المدينة")
       : `${topic}${place ? ` في ${place}` : ""}`,
@@ -2453,8 +2531,10 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     countryLabel: "الدولة",
     countryPlaceholder: "الدولة (اختياري)",
     submitLabel: "اعرض مواقيت الصلاة",
-    topCities: getLocalizedTopCities("ar"),
+    topCityGroupsPrimary: getLocalizedPriorityGroups("ar", PRIORITY_CITY_CONFIG.hero?.primary || []),
+    topCityGroupsOverflow: getLocalizedPriorityGroups("ar", PRIORITY_CITY_CONFIG.hero?.overflow || []),
     topCitiesAria: "روابط سريعة للمدن",
+    topCitiesMoreLabel: "مدن إضافية",
     intentLinks,
     intentAria: "روابط سريعة لنوع البحث",
     locationStatus: place ? `مواقيت الصلاة في ${place}` : "جار تحديد موقعك",
@@ -2477,6 +2557,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     ],
     citiesEyebrow: "اكتشف المزيد",
     citiesTitle: isHomeRoot ? rootOverride.citiesTitle : `صفحات شائعة عن ${topic}`,
+    priorityCityGroups: getPriorityGroupCities("ar"),
     cityLinks,
     cityIntentLinks,
     aboutEyebrow: "حول الصفحة",
@@ -2575,6 +2656,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     showPopularCities: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith" && pageType !== "hadith-collection",
     showIntentLinks: pageType !== "qibla" && pageType !== "quran" && pageType !== "dhikr" && pageType !== "dhikr-collection" && pageType !== "hadith" && pageType !== "hadith-collection",
     brandHref: buildRoutePath(language, "home"),
+    priorityGroupLabels: PRIORITY_GROUP_LABELS[language],
     heroEyebrow: pageType === "home"
       ? (place ? locale.heroEyebrowPlace(place) : locale.heroEyebrowHome)
       : locale.heroHeadingTopic(topic, place),
@@ -2587,8 +2669,10 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     countryLabel: locale.countryLabel,
     countryPlaceholder: locale.countryPlaceholder,
     submitLabel: locale.submitLabel,
-    topCities: getLocalizedTopCities(language),
+    topCityGroupsPrimary: getLocalizedPriorityGroups(language, PRIORITY_CITY_CONFIG.hero?.primary || []),
+    topCityGroupsOverflow: getLocalizedPriorityGroups(language, PRIORITY_CITY_CONFIG.hero?.overflow || []),
     topCitiesAria: locale.topCitiesAria,
+    topCitiesMoreLabel: locale.topCitiesMoreLabel,
     intentLinks,
     intentAria: locale.intentAria,
     locationStatus: locale.locationStatus(place),
@@ -2606,6 +2690,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     features: isHomeRoot && rootOverride ? rootOverride.features : locale.features(topic, place),
     citiesEyebrow: locale.citiesEyebrow,
     citiesTitle: isHomeRoot && rootOverride ? rootOverride.citiesTitle : locale.citiesTitle(topic),
+    priorityCityGroups: getPriorityGroupCities(language),
     cityLinks,
     cityIntentLinks,
     aboutEyebrow: locale.aboutEyebrow,
@@ -2734,13 +2819,7 @@ ${copy.quranStats.map(item => `            <div class="quran-hero-stat">
         </section>`;
   }
 
-  const popularCitiesMarkup = copy.showPopularCities
-    ? `
-
-          <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
-${copy.topCities.map(item => `            <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
-          </div>`
-    : "";
+  const popularCitiesMarkup = copy.showPopularCities ? renderPopularCitiesMarkup(copy) : "";
 
   const intentLinksMarkup = copy.showIntentLinks
     ? `
@@ -2767,6 +2846,42 @@ ${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">$
 ${popularCitiesMarkup}
 ${intentLinksMarkup}
         </section>`;
+}
+
+function renderPopularCitiesMarkup(copy) {
+  const primaryGroupsMarkup = (copy.topCityGroupsPrimary || []).map(group => `            <div class="city-chip-group" data-priority-group="${escapeHtml(group.id)}">
+              <span class="city-group-label" data-priority-group-label="${escapeHtml(group.id)}">${escapeHtml(copy.priorityGroupLabels?.[group.id] || group.id)}</span>
+              <div class="city-chip-list">
+${group.cities.map(item => `                <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
+              </div>
+            </div>`).join("\n");
+
+  const overflowGroups = copy.topCityGroupsOverflow || [];
+  const overflowCount = overflowGroups.reduce((total, group) => total + group.cities.length, 0);
+  const overflowMarkup = overflowGroups.length
+    ? `
+            <details class="city-chip-more">
+              <summary class="city-chip-more-toggle">
+                <span data-top-cities-more-label>${escapeHtml(copy.topCitiesMoreLabel || "More cities")}</span>
+                <strong>${overflowCount}</strong>
+              </summary>
+              <div class="city-chip-overflow">
+${overflowGroups.map(group => `                <div class="city-chip-group" data-priority-group="${escapeHtml(group.id)}">
+                  <span class="city-group-label" data-priority-group-label="${escapeHtml(group.id)}">${escapeHtml(copy.priorityGroupLabels?.[group.id] || group.id)}</span>
+                  <div class="city-chip-list">
+${group.cities.map(item => `                    <a class="city-chip" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
+                  </div>
+                </div>`).join("\n")}
+              </div>
+            </details>`
+    : "";
+
+  return `
+
+          <div class="popular-cities" aria-label="${escapeHtml(copy.topCitiesAria)}">
+${primaryGroupsMarkup}
+${overflowMarkup}
+          </div>`;
 }
 
 function renderNextPrayerCard(copy) {
@@ -3126,15 +3241,27 @@ ${renderFaqSection(copy)}
 }
 
 function renderCitiesSection(copy) {
+  const cityGroupsMarkup = (copy.priorityCityGroups || []).map(group => `        <div class="priority-link-group">
+          <h3 class="priority-link-heading" data-priority-group-label="${escapeHtml(group.id)}">${escapeHtml(copy.priorityGroupLabels?.[group.id] || group.id)}</h3>
+          <div class="priority-link-list">
+${group.cities.map(item => `            <a class="priority-link city-name-link" href="${escapeHtml(buildRoutePath(copy.activeLanguage, "home", item.city))}" data-city="${escapeHtml(item.city)}" data-country="${escapeHtml(item.country)}">${escapeHtml(item.displayCity || item.city)}</a>`).join("\n")}
+          </div>
+        </div>`).join("\n");
+
+  const intentGroupMarkup = `        <div class="priority-link-group">
+          <h3 class="priority-link-heading" data-priority-group-label="intents">${escapeHtml(copy.priorityGroupLabels?.intents || "Priority intents")}</h3>
+          <div class="priority-link-list">
+${copy.intentLinks.map(item => `            <a class="priority-link" href="${escapeHtml(item.href)}" data-route-type="${escapeHtml(item.type)}">${escapeHtml(item.label)}</a>`).join("\n")}
+          </div>
+        </div>`;
+
   return `    <section class="card prose" aria-labelledby="cities-heading">
       <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
       <h2 id="cities-heading">${escapeHtml(copy.citiesTitle)}</h2>
-      <p>
-        ${renderInlineLinks(copy.cityLinks, copy.activeLanguage)}
-      </p>
-      <p>
-        ${renderInlineLinks(copy.cityIntentLinks, copy.activeLanguage)}
-      </p>
+      <div class="priority-link-groups">
+${cityGroupsMarkup}
+${intentGroupMarkup}
+      </div>
     </section>`;
 }
 

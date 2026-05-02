@@ -1,0 +1,59 @@
+{
+  "groups": [
+    {
+      "id": "core",
+      "cities": [
+        { "slug": "dubai", "city": "Dubai", "country": "United Arab Emirates" },
+        { "slug": "mecca", "city": "Mecca", "country": "Saudi Arabia" },
+        { "slug": "medina", "city": "Medina", "country": "Saudi Arabia" },
+        { "slug": "riyadh", "city": "Riyadh", "country": "Saudi Arabia" },
+        { "slug": "cairo", "city": "Cairo", "country": "Egypt" },
+        { "slug": "istanbul", "city": "Istanbul", "country": "Turkey" }
+      ]
+    },
+    {
+      "id": "southeast-asia",
+      "cities": [
+        { "slug": "kuala-lumpur", "city": "Kuala Lumpur", "country": "Malaysia" },
+        { "slug": "johor-bahru", "city": "Johor Bahru", "country": "Malaysia" },
+        { "slug": "jakarta", "city": "Jakarta", "country": "Indonesia" }
+      ]
+    },
+    {
+      "id": "global",
+      "cities": [
+        { "slug": "london", "city": "London", "country": "United Kingdom" },
+        { "slug": "new-york", "city": "New York", "country": "United States" },
+        { "slug": "paris", "city": "Paris", "country": "France" }
+      ]
+    }
+  ],
+  "hero": {
+    "primary": ["dubai", "mecca", "medina", "riyadh", "kuala-lumpur", "jakarta"],
+    "overflow": ["cairo", "istanbul", "johor-bahru", "london", "new-york", "paris"]
+  },
+  "sitemaps": {
+    "englishTopCities": [
+      "dubai",
+      "mecca",
+      "medina",
+      "riyadh",
+      "cairo",
+      "istanbul",
+      "kuala-lumpur",
+      "johor-bahru",
+      "jakarta",
+      "london",
+      "new-york",
+      "paris"
+    ],
+    "arabicCoreCities": [
+      "dubai",
+      "mecca",
+      "medina",
+      "riyadh",
+      "cairo",
+      "istanbul"
+    ]
+  }
+}

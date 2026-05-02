@@ -88,13 +88,18 @@ const LANGUAGE_PREFIXES = {
 
 const CITY_NAME_LOCALIZATIONS = {
   "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
+  "mecca": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
   "madinah": { ar: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", de: "Medina", fr: "Medine", tr: "Medine", "zh-hans": "\u9ea6\u5730\u90a3" },
-    "buraydah": { ar: "\u0628\u0631\u064a\u062f\u0629", de: "Buraida", fr: "Buraidah", tr: "Bureyde", "zh-hans": "\u5e03\u8d56\u8fbe" },
-    "cairo": { ar: "\u0627\u0644\u0642\u0627\u0647\u0631\u0629", de: "Kairo", fr: "Le Caire", tr: "Kahire", "zh-hans": "\u5f00\u7f57" },
-    "dubai": { ar: "\u062f\u0628\u064a", de: "Dubai", fr: "Duba\u00ef", tr: "Dubai", "zh-hans": "\u8fea\u62dc" },
-    "istanbul": { ar: "\u0625\u0633\u0637\u0646\u0628\u0648\u0644", de: "Istanbul", fr: "Istanbul", tr: "\u0130stanbul", "zh-hans": "\u4f0a\u65af\u5766\u5e03\u5c14" },
-    "kuala-lumpur": { ar: "\u0643\u0648\u0627\u0644\u0627 \u0644\u0645\u0628\u0648\u0631", de: "Kuala Lumpur", fr: "Kuala Lumpur", tr: "Kuala Lumpur", "zh-hans": "\u5409\u9686\u5761" },
-    "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
+  "medina": { ar: "\u0627\u0644\u0645\u062f\u064a\u0646\u0629", de: "Medina", fr: "Medine", tr: "Medine", "zh-hans": "\u9ea6\u5730\u90a3" },
+  "buraydah": { ar: "\u0628\u0631\u064a\u062f\u0629", de: "Buraida", fr: "Buraidah", tr: "Bureyde", "zh-hans": "\u5e03\u8d56\u8fbe" },
+  "cairo": { ar: "\u0627\u0644\u0642\u0627\u0647\u0631\u0629", de: "Kairo", fr: "Le Caire", tr: "Kahire", "zh-hans": "\u5f00\u7f57" },
+  "dubai": { ar: "\u062f\u0628\u064a", de: "Dubai", fr: "Duba\u00ef", tr: "Dubai", "zh-hans": "\u8fea\u62dc" },
+  "riyadh": { ar: "\u0627\u0644\u0631\u064a\u0627\u0636", de: "Riad", fr: "Riyad", tr: "Riyad", "zh-hans": "\u5229\u96c5\u5f97" },
+  "istanbul": { ar: "\u0625\u0633\u0637\u0646\u0628\u0648\u0644", de: "Istanbul", fr: "Istanbul", tr: "\u0130stanbul", "zh-hans": "\u4f0a\u65af\u5766\u5e03\u5c14" },
+  "kuala-lumpur": { ar: "\u0643\u0648\u0627\u0644\u0627 \u0644\u0645\u0628\u0648\u0631", de: "Kuala Lumpur", fr: "Kuala Lumpur", tr: "Kuala Lumpur", "zh-hans": "\u5409\u9686\u5761" },
+  "johor-bahru": { ar: "\u062c\u0648\u0647\u0648\u0631 \u0628\u0647\u0631\u0648", de: "Johor Bahru", fr: "Johor Bahru", tr: "Johor Bahru", "zh-hans": "\u65b0\u5c71" },
+  "jakarta": { ar: "\u062c\u0627\u0643\u0631\u062a\u0627", de: "Jakarta", fr: "Jakarta", tr: "Cakarta", "zh-hans": "\u96c5\u52a0\u8fbe" },
+  "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
   "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
   "sydney": { ar: "\u0633\u064a\u062f\u0646\u064a", de: "Sydney", fr: "Sydney", tr: "Sidney", "zh-hans": "\u6089\u5c3c" },
   "berlin": { ar: "\u0628\u0631\u0644\u064a\u0646", de: "Berlin", fr: "Berlin", tr: "Berlin", "zh-hans": "\u67cf\u6797" },
@@ -105,6 +110,8 @@ const CITY_NAME_LOCALIZATIONS = {
 const COUNTRY_NAME_LOCALIZATIONS = {
   "saudi arabia": { ar: "\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629", de: "Saudi-Arabien", fr: "Arabie saoudite", tr: "Suudi Arabistan", "zh-hans": "\u6c99\u7279\u963f\u62c9\u4f2f" },
   "egypt": { ar: "\u0645\u0635\u0631", de: "\u00c4gypten", fr: "\u00c9gypte", tr: "M\u0131s\u0131r", "zh-hans": "\u57c3\u53ca" },
+  "malaysia": { ar: "\u0645\u0627\u0644\u064a\u0632\u064a\u0627", de: "Malaysia", fr: "Malaisie", tr: "Malezya", "zh-hans": "\u9a6c\u6765\u897f\u4e9a" },
+  "indonesia": { ar: "\u0625\u0646\u062f\u0648\u0646\u064a\u0633\u064a\u0627", de: "Indonesien", fr: "Indon\u00e9sie", tr: "Endonezya", "zh-hans": "\u5370\u5ea6\u5c3c\u897f\u4e9a" },
   "united arab emirates": { ar: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a", de: "Vereinigte Arabische Emirate", fr: "\u00c9mirats arabes unis", tr: "Birle\u015fik Arap Emirlikleri", "zh-hans": "\u963f\u8054\u914b" },
   "turkey": { ar: "\u062a\u0631\u0643\u064a\u0627", de: "T\u00fcrkei", fr: "Turquie", tr: "T\u00fcrkiye", "zh-hans": "\u571f\u8033\u5176" },
   "united kingdom": { ar: "\u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigtes K\u00f6nigreich", fr: "Royaume-Uni", tr: "Birle\u015fik Krall\u0131k", "zh-hans": "\u82f1\u56fd" },
@@ -113,6 +120,54 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
   "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
   "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+};
+
+const PRIORITY_GROUP_LABELS = {
+  en: {
+    core: "Core cities",
+    "southeast-asia": "Southeast Asia",
+    global: "Global cities",
+    intents: "Priority intents"
+  },
+  ar: {
+    core: "المدن الأساسية",
+    "southeast-asia": "جنوب شرق آسيا",
+    global: "مدن عالمية",
+    intents: "صفحات النية الأساسية"
+  },
+  de: {
+    core: "Kernstädte",
+    "southeast-asia": "Südostasien",
+    global: "Globale Städte",
+    intents: "Prioritäts-Intents"
+  },
+  fr: {
+    core: "Villes clés",
+    "southeast-asia": "Asie du Sud-Est",
+    global: "Villes mondiales",
+    intents: "Intentions prioritaires"
+  },
+  tr: {
+    core: "Çekirdek şehirler",
+    "southeast-asia": "Güneydoğu Asya",
+    global: "Küresel şehirler",
+    intents: "Öncelikli aramalar"
+  },
+  "zh-hans": {
+    core: "核心城市",
+    "southeast-asia": "东南亚",
+    global: "全球城市",
+    intents: "重点意图页面"
+  }
+};
+
+const PRIORITY_MORE_LABELS = {
+  en: "More cities",
+  ar: "مدن إضافية",
+  de: "Mehr Städte",
+  fr: "Plus de villes",
+  tr: "Daha fazla şehir",
+  "zh-hans": "更多城市"
 };
 
 const QIBLA_PAGE_COPY = {
@@ -301,8 +356,6 @@ const LOCALES = {
     eyebrow: "Prayer times by city", infoEyebrow: "Automatic", aboutEyebrow: "About", faqEyebrow: "FAQ", citiesEyebrow: "Popular Cities",
     footer: "Accurate prayer times by city.",
     citiesTitle: "Prayer times in major cities",
-    citiesLine1: 'Browse priority city pages directly: <a href="/mecca">Mecca prayer times</a>, <a href="/medina">Medina prayer times</a>, <a href="/riyadh">Riyadh prayer times</a>, <a href="/dubai">Dubai prayer times</a>, <a href="/kuala-lumpur">Kuala Lumpur prayer times</a>, <a href="/johor-bahru">Johor Bahru prayer times</a>, and <a href="/jakarta">Jakarta prayer times</a>.',
-    citiesLine2: 'Jump into specific searches like <a href="/next-prayer/riyadh">next prayer in Riyadh</a>, <a href="/fajr-time/medina">Fajr time in Medina</a>, <a href="/prayer-times/mecca">prayer times in Mecca</a>, or <a href="/prayer-times/jakarta">prayer times in Jakarta</a>.',
     heroTitle: (type, place, topic) => type === "home" ? (place ? `Prayer Times in ${place} Today` : "Prayer Times Today and Your Next Salah Countdown") : (place ? `${topic} in ${place}` : `${topic} Today`),
     heroSubtitle: (type, place, topic) => type === "home" ? (place ? `See accurate prayer times in ${place}, follow the next salah countdown, and review the full daily schedule.` : "The page now adapts automatically to the visitor's browser language and location.") : (place ? `See ${topic.toLowerCase()} in ${place}, then review the full daily prayer schedule below.` : `Load ${topic.toLowerCase()} automatically, then review the full daily prayer schedule below.`),
     infoTitle: topic => `Built for fast ${topic.toLowerCase()} checks`,
@@ -336,8 +389,6 @@ const LOCALES = {
     eyebrow: "Gebetszeiten nach Stadt", infoEyebrow: "Automatisch", aboutEyebrow: "Überblick", faqEyebrow: "FAQ", citiesEyebrow: "Beliebte Städte",
     footer: "Genaue Gebetszeiten nach Stadt.",
     citiesTitle: "Gebetszeiten in wichtigen Städten",
-    citiesLine1: 'Direkt zu Prioritätsseiten: <a href="/mecca">Mekka</a>, <a href="/medina">Medina</a>, <a href="/riyadh">Riad</a>, <a href="/dubai">Dubai</a>, <a href="/kuala-lumpur">Kuala Lumpur</a>, <a href="/johor-bahru">Johor Bahru</a> und <a href="/jakarta">Jakarta</a>.',
-    citiesLine2: 'Direkt zu Suchintentionen wie <a href="/next-prayer/riyadh">nächstes Gebet in Riad</a>, <a href="/fajr-time/medina">Fajr in Medina</a>, <a href="/prayer-times/mecca">Gebetszeiten in Mekka</a> oder <a href="/prayer-times/jakarta">Gebetszeiten in Jakarta</a>.',
     heroTitle: (type, place, topic) => type === "home" ? (place ? `Gebetszeiten in ${place} heute` : "Gebetszeiten heute und Countdown zum nächsten Gebet") : (place ? `${topic} in ${place}` : `${topic} heute`),
     heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Sieh genaue Gebetszeiten in ${place}, den Countdown zum nächsten Gebet und den kompletten Tagesplan.` : "Die Seite passt sich jetzt automatisch an die Browsersprache und den Standort an.") : (place ? `Sieh ${topic} in ${place} und darunter den vollständigen Gebetsplan.` : `Lade ${topic} automatisch und prüfe darunter den vollständigen Gebetsplan.`),
     infoTitle: topic => `Für schnelle Abfragen zu ${topic} gebaut`,
@@ -370,8 +421,6 @@ const LOCALES = {
     eyebrow: "Horaires par ville", infoEyebrow: "Automatique", aboutEyebrow: "À propos", faqEyebrow: "FAQ", citiesEyebrow: "Villes populaires",
     footer: "Horaires de prière précis par ville.",
     citiesTitle: "Horaires de prière dans les grandes villes",
-    citiesLine1: 'Accédez directement aux pages prioritaires : <a href="/mecca">La Mecque</a>, <a href="/medina">Médine</a>, <a href="/riyadh">Riyad</a>, <a href="/dubai">Dubaï</a>, <a href="/kuala-lumpur">Kuala Lumpur</a>, <a href="/johor-bahru">Johor Bahru</a> et <a href="/jakarta">Jakarta</a>.',
-    citiesLine2: 'Accédez aussi à des recherches précises comme <a href="/next-prayer/riyadh">prochaine prière à Riyad</a>, <a href="/fajr-time/medina">Fajr à Médine</a>, <a href="/prayer-times/mecca">horaires de prière à La Mecque</a> ou <a href="/prayer-times/jakarta">horaires de prière à Jakarta</a>.',
     heroTitle: (type, place, topic) => type === "home" ? (place ? `Horaires de prière à ${place} aujourd'hui` : "Horaires de prière aujourd'hui et compte à rebours") : (place ? `${topic} à ${place}` : `${topic} aujourd'hui`),
     heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Consultez les horaires précis à ${place}, la prochaine prière et le planning complet du jour.` : "La page s'adapte désormais automatiquement à la langue du navigateur et à la localisation.") : (place ? `Consultez ${topic} à ${place}, puis le planning complet ci-dessous.` : `Chargez ${topic} automatiquement, puis consultez le planning complet ci-dessous.`),
     infoTitle: topic => `Conçu pour vérifier rapidement ${topic}`,
@@ -403,8 +452,6 @@ const LOCALES = {
     eyebrow: "Şehre göre namaz vakitleri", infoEyebrow: "Otomatik", aboutEyebrow: "Hakkında", faqEyebrow: "SSS", citiesEyebrow: "Popüler şehirler",
     footer: "Şehre göre doğru namaz vakitleri.",
     citiesTitle: "Büyük şehirlerde namaz vakitleri",
-    citiesLine1: 'Öncelikli şehir sayfalarına doğrudan gidin: <a href="/mecca">Mekke</a>, <a href="/medina">Medine</a>, <a href="/riyadh">Riyad</a>, <a href="/dubai">Dubai</a>, <a href="/kuala-lumpur">Kuala Lumpur</a>, <a href="/johor-bahru">Johor Bahru</a> ve <a href="/jakarta">Cakarta</a>.',
-    citiesLine2: 'Ayrıca <a href="/next-prayer/riyadh">Riyad sonraki namaz</a>, <a href="/fajr-time/medina">Medine Fajr</a>, <a href="/prayer-times/mecca">Mekke namaz vakitleri</a> veya <a href="/prayer-times/jakarta">Cakarta namaz vakitleri</a> gibi aramalara gidin.',
     heroTitle: (type, place, topic) => type === "home" ? (place ? `${place} için bugünün namaz vakitleri` : "Bugünün namaz vakitleri ve sonraki namaz geri sayımı") : (place ? `${place} için ${topic}` : `${topic}`),
     heroSubtitle: (type, place, topic) => type === "home" ? (place ? `${place} için doğru vakitleri, sonraki namaz geri sayımını ve günlük takvimi görün.` : "Sayfa artık tarayıcı diline ve konuma otomatik uyum sağlar.") : (place ? `${place} için ${topic} bilgisini görün ve aşağıda tam takvimi inceleyin.` : `${topic} bilgisini otomatik yükleyin ve aşağıda tam takvimi inceleyin.`),
     infoTitle: topic => `${topic} için hızlı kullanım`,
@@ -436,8 +483,6 @@ const LOCALES = {
     eyebrow: "按城市查看礼拜时间", infoEyebrow: "自动", aboutEyebrow: "关于", faqEyebrow: "常见问题", citiesEyebrow: "热门城市",
     footer: "按城市提供准确礼拜时间。",
     citiesTitle: "主要城市礼拜时间",
-    citiesLine1: '可直接打开优先城市页面：<a href="/mecca">麦加</a>、<a href="/medina">麦地那</a>、<a href="/riyadh">利雅得</a>、<a href="/dubai">迪拜</a>、<a href="/kuala-lumpur">吉隆坡</a>、<a href="/johor-bahru">新山</a>、<a href="/jakarta">雅加达</a>。',
-    citiesLine2: '也可以直接进入具体搜索，例如 <a href="/next-prayer/riyadh">利雅得下一次礼拜</a>、<a href="/fajr-time/medina">麦地那晨礼时间</a>、<a href="/prayer-times/mecca">麦加礼拜时间</a>、或 <a href="/prayer-times/jakarta">雅加达礼拜时间</a>。',
     heroTitle: (type, place, topic) => type === "home" ? (place ? `${place} 今日礼拜时间` : "今日礼拜时间与下一次礼拜倒计时") : (place ? `${place}${topic}` : `${topic}`),
     heroSubtitle: (type, place, topic) => type === "home" ? (place ? `查看 ${place} 的准确礼拜时间、下一次礼拜以及完整日程。` : "页面现在会自动根据浏览器语言和位置进行适配。") : (place ? `查看 ${place} 的${topic}，并在下方查看完整礼拜时间表。` : `自动加载${topic}，并在下方查看完整礼拜时间表。`),
     infoTitle: topic => `为快速查看${topic}而设计`,
@@ -469,8 +514,6 @@ const LOCALES = {
     eyebrow: "مواقيت الصلاة حسب المدينة", infoEyebrow: "تلقائي", aboutEyebrow: "عن الصفحة", faqEyebrow: "الأسئلة الشائعة", citiesEyebrow: "مدن شائعة",
     footer: "مواقيت الصلاة الدقيقة حسب المدينة.",
     citiesTitle: "مواقيت الصلاة في المدن الكبرى",
-    citiesLine1: 'تصفح صفحات المدن الأساسية مباشرة: <a href="/mecca">مكة</a>، <a href="/medina">المدينة</a>، <a href="/riyadh">الرياض</a>، <a href="/dubai">دبي</a>، <a href="/kuala-lumpur">كوالا لمبور</a>، <a href="/johor-bahru">جوهور بهرو</a>، و<a href="/jakarta">جاكرتا</a>.',
-    citiesLine2: 'يمكنك أيضاً الانتقال إلى صفحات دقيقة مثل <a href="/next-prayer/riyadh">الصلاة القادمة في الرياض</a>، <a href="/fajr-time/medina">وقت الفجر في المدينة</a>، <a href="/prayer-times/mecca">مواقيت الصلاة في مكة</a>، أو <a href="/prayer-times/jakarta">مواقيت الصلاة في جاكرتا</a>.',
     heroTitle: (type, place, topic) => type === "home" ? (place ? `مواقيت الصلاة في ${place} اليوم` : "مواقيت الصلاة اليوم والعد التنازلي للصلاة القادمة") : (place ? `${topic} في ${place}` : `${topic} اليوم`),
     heroSubtitle: (type, place, topic) => type === "home" ? (place ? `شاهد المواقيت الدقيقة في ${place} وتابع الصلاة القادمة وجدول اليوم الكامل.` : "تتكيّف الصفحة الآن تلقائياً مع لغة المتصفح وموقع الزائر.") : (place ? `شاهد ${topic} في ${place} ثم راجع جدول الصلاة الكامل بالأسفل.` : `حمّل ${topic} تلقائياً ثم راجع جدول الصلاة الكامل بالأسفل.`),
     infoTitle: topic => `مصممة للوصول السريع إلى ${topic}`,
@@ -801,6 +844,38 @@ function getLocale() {
 
 function getTopic(locale) {
   return locale.topics[pageType] || locale.topics.home;
+}
+
+function getPriorityGroupLabel(groupId, lang = language) {
+  const localeKey = resolveLanguageTag(lang) || lang || "en";
+  return PRIORITY_GROUP_LABELS[localeKey]?.[groupId] || PRIORITY_GROUP_LABELS.en[groupId] || groupId;
+}
+
+function getPriorityMoreLabel(lang = language) {
+  const localeKey = resolveLanguageTag(lang) || lang || "en";
+  return PRIORITY_MORE_LABELS[localeKey] || PRIORITY_MORE_LABELS.en;
+}
+
+function buildPriorityIntentLabel(locale, routeType) {
+  const topic = locale.topics[routeType] || locale.topics.home;
+  switch (routeType) {
+    case "prayer-times":
+      return locale.code === "ar" ? "مواقيت الصلاة اليوم" :
+        locale.code === "de" ? "Gebetszeiten heute" :
+        locale.code === "fr" ? "Horaires de prière aujourd'hui" :
+        locale.code === "tr" ? "Bugünün namaz vakitleri" :
+        locale.code === "zh-hans" ? "今日礼拜时间" :
+        "Prayer times today";
+    case "next-prayer":
+      return locale.code === "ar" ? "وقت الصلاة القادمة" :
+        locale.code === "de" ? "Zeit des nächsten Gebets" :
+        locale.code === "fr" ? "Heure de la prochaine prière" :
+        locale.code === "tr" ? "Sonraki namaz vakti" :
+        locale.code === "zh-hans" ? "下一次礼拜时间" :
+        "Next prayer time";
+    default:
+      return topic;
+  }
 }
 
 function localizeCityName(city, lang = language) {
@@ -1263,6 +1338,13 @@ function renderStaticContent() {
     link.setAttribute("title", localizedPlace || localizedCity);
     link.setAttribute("href", buildRelativeUrl(language, "home", link.dataset.city || ""));
   });
+  document.querySelectorAll("[data-priority-group-label]").forEach(label => {
+    const groupId = label.getAttribute("data-priority-group-label") || "";
+    label.textContent = getPriorityGroupLabel(groupId, language);
+  });
+  document.querySelectorAll("[data-top-cities-more-label]").forEach(label => {
+    label.textContent = getPriorityMoreLabel(language);
+  });
   const infoEyebrow = document.querySelector(".info-card .eyebrow");
   const infoTitle = document.querySelector(".info-card h2");
   if (infoEyebrow) infoEyebrow.textContent = locale.infoEyebrow;
@@ -1293,19 +1375,22 @@ function renderStaticContent() {
   if (citiesSection) {
     const eyebrow = citiesSection.querySelector(".eyebrow");
     const heading = citiesSection.querySelector("h2");
-    const paragraphs = citiesSection.querySelectorAll("p");
     if (eyebrow) eyebrow.textContent = locale.citiesEyebrow;
     if (heading) heading.textContent = locale.citiesTitle;
-    if (paragraphs[0]) paragraphs[0].innerHTML = locale.citiesLine1;
-    if (paragraphs[1]) paragraphs[1].innerHTML = locale.citiesLine2;
-    citiesSection.querySelectorAll("a[href]").forEach(link => {
-      const href = link.getAttribute("href") || "";
-      if (!href.startsWith("/")) return;
-      const parts = href.replace(/^\/+/, "").split("/").filter(Boolean);
-      if (!parts.length) return;
-      const page = keywordToPage[parts[0]] || "home";
-      const city = page === "home" ? parts[0] : (parts[1] || "");
-      link.setAttribute("href", buildRelativeUrl(language, page, unslugifyCity(city)));
+    citiesSection.querySelectorAll("a.city-name-link[data-city]").forEach(link => {
+      const city = link.dataset.city || "";
+      const country = link.dataset.country || "";
+      const localizedCity = localizeCityName(city, language);
+      const localizedPlace = formatPlaceName(city, country, language);
+      link.textContent = localizedCity;
+      link.setAttribute("aria-label", localizedPlace || localizedCity);
+      link.setAttribute("title", localizedPlace || localizedCity);
+      link.setAttribute("href", buildRelativeUrl(language, "home", city));
+    });
+    citiesSection.querySelectorAll("a[data-route-type]").forEach(link => {
+      const routeType = link.dataset.routeType || "home";
+      link.textContent = buildPriorityIntentLabel(locale, routeType);
+      link.setAttribute("href", buildRelativeUrl(language, routeType));
     });
   }
   const footerText = document.querySelector(".footer p");

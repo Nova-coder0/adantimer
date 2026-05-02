@@ -207,6 +207,7 @@ $requiredFiles = @(
   "sitemap-ar-core.xml",
   "api/render.js",
   "data/quran-surahs.js",
+  "data/priority-cities.json",
   "data/dhikr-entries.js",
   "data/hadith-entries.js",
   ".github/workflows/generate-sitemaps.yml",
@@ -233,6 +234,7 @@ $styleCss = ReadProjectFile "style.css"
 $scriptJs = ReadProjectFile "script.js"
 $renderJs = ReadProjectFile "api/render.js"
 $quranSurahs = ReadProjectFile "data/quran-surahs.js"
+$priorityCities = ReadProjectFile "data/priority-cities.json"
 $dhikrEntries = ReadProjectFile "data/dhikr-entries.js"
 $hadithEntries = ReadProjectFile "data/hadith-entries.js"
 $vercelJsonText = ReadProjectFile "vercel.json"
@@ -294,6 +296,8 @@ AssertContains $scriptJs '"hadith-collection": detailSlug ? `/hadith/${detailSlu
 AssertContains $scriptJs 'buildRelativeUrl(language, "hadith")' "Client can navigate to localized Hadith routes" "Client Hadith route navigation is missing"
 AssertContains $scriptJs 'pageType === "hadith" || pageType === "hadith-collection"' "Client handles standalone Hadith index and collection pages separately" "Client does not separate the Hadith page flow"
 AssertContains $scriptJs 'const TOOL_HUB_LOCALES = {' "Client keeps localized tool-hub copy" "Client tool-hub copy is missing"
+AssertContains $scriptJs 'const PRIORITY_GROUP_LABELS = {' "Client keeps localized priority-city group labels" "Client priority-city group labels are missing"
+AssertContains $scriptJs 'function buildPriorityIntentLabel(locale, routeType)' "Client keeps the priority intent label helper" "Client priority intent label helper is missing"
 AssertContains $scriptJs 'const QIBLA_PANEL_LOCALES = {' "Client keeps localized qibla-panel copy" "Client qibla-panel copy is missing"
 AssertContains $scriptJs 'function renderToolsHub(locale)' "Client keeps the tools-hub renderer" "Client tools-hub renderer is missing"
 AssertContains $scriptJs 'function calculateQiblaBearing(lat, lng)' "Client keeps the qibla-bearing calculator" "Client qibla-bearing calculator is missing"
@@ -408,6 +412,8 @@ AssertContains $renderJs 'Maghrib Time Today | Daily Maghrib Prayer Time Finder 
 AssertContains $renderJs 'Isha Time Today | Daily Isha Prayer Time Finder | Adantimer' "SSR renderer carries the Isha priority title" "SSR renderer is missing the stronger Isha title"
 AssertContains $renderJs 'if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity)' "SSR renderer carries the Arabic prayer-intent page switch" "SSR renderer is missing the Arabic prayer-intent page switch"
 AssertContains $renderJs 'Prayer Times in Mecca Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer' "SSR renderer carries the Mecca priority title" "SSR renderer is missing the stronger Mecca title"
+AssertContains $renderJs 'priority-cities.json' "SSR renderer reads the central priority-city config" "SSR renderer is not wired to the central priority-city config"
+AssertContains $renderJs 'data-priority-group-label' "SSR renderer outputs grouped priority-city labels" "SSR renderer is missing grouped priority-city labels"
 AssertContains $renderJs '["medina", "riyadh", "cairo", "kuala-lumpur", "johor-bahru", "jakarta", "london", "new-york", "paris", "istanbul"].includes(cityKey)' "SSR renderer carries the second English priority city switch" "SSR renderer is missing the second English priority city switch"
 AssertContains $renderJs '`Prayer Times in ${cityName} Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`' "SSR renderer carries the generic second-tier priority title template" "SSR renderer is missing the generic second-tier priority title template"
 AssertContains $renderJs 'buildRoutePath("ar", "prayer-times", "Dubai")' "SSR renderer carries Arabic Dubai priority routing" "SSR renderer is missing the Arabic Dubai priority routing"
@@ -465,6 +471,9 @@ AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-sg.xml.gz' "Site
 AssertContains $robots 'Sitemap: https://www.adantimer.com/sitemap.xml' "robots.txt points to the sitemap index" "robots.txt is missing the sitemap index reference"
 AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired to the generator script" "Sitemap workflow no longer calls the generator script"
 AssertContains $workflow 'sitemap-top-cities.xml' "Sitemap workflow stages the top-city sitemap" "Sitemap workflow is missing the top-city sitemap"
+AssertContains $priorityCities '"id": "southeast-asia"' "Priority-city config keeps the Southeast Asia cluster" "Priority-city config is missing the Southeast Asia cluster"
+AssertContains $styleCss '.city-chip-more-toggle {' "Stylesheet includes the priority-city overflow toggle" "Stylesheet is missing the priority-city overflow toggle"
+AssertContains $styleCss '.priority-link-groups {' "Stylesheet includes the grouped priority-city layout" "Stylesheet is missing the grouped priority-city layout"
 AssertContains $styleCss '.quran-surah-grid {' "Stylesheet includes the Quran surah grid" "Stylesheet is missing the Quran surah grid styles"
 AssertContains $styleCss '.quran-search-row {' "Stylesheet includes the Quran search row layout" "Stylesheet is missing the Quran search row layout"
 AssertContains $styleCss '.quran-search-clear {' "Stylesheet includes the Quran search clear button" "Stylesheet is missing the Quran search clear button"
@@ -537,7 +546,7 @@ TestMojibake "script.js"
 TestMojibake "data/hadith-entries.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', '/prayer-times/mecca', '/next-prayer/riyadh', '/fajr-time/medina')
+  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', '/prayer-times/mecca', '/next-prayer/riyadh', '/fajr-time/medina', 'data-top-cities-more-label', 'data-priority-group-label')
   TestLiveUrlNotContains "$BaseUrl/" @('/sydney', '/berlin')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')

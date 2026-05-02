@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import html
+import json
 import pathlib
 import re
 import unicodedata
@@ -39,28 +40,10 @@ CORE_LANGUAGE_HOMES = [
     ("/tr", "0.74"),
     ("/zh-hans", "0.74"),
 ]
-ENGLISH_TOP_CITIES = [
-    "dubai",
-    "mecca",
-    "medina",
-    "riyadh",
-    "cairo",
-    "istanbul",
-    "kuala-lumpur",
-    "johor-bahru",
-    "jakarta",
-    "london",
-    "new-york",
-    "paris",
-]
-ARABIC_CORE_CITIES = [
-    "dubai",
-    "mecca",
-    "medina",
-    "riyadh",
-    "cairo",
-    "istanbul",
-]
+PRIORITY_CONFIG_PATH = pathlib.Path(__file__).resolve().parents[1] / "data" / "priority-cities.json"
+PRIORITY_CITY_CONFIG = json.loads(PRIORITY_CONFIG_PATH.read_text(encoding="utf-8"))
+ENGLISH_TOP_CITIES = PRIORITY_CITY_CONFIG["sitemaps"]["englishTopCities"]
+ARABIC_CORE_CITIES = PRIORITY_CITY_CONFIG["sitemaps"]["arabicCoreCities"]
 
 
 def slugify(value: str) -> str:
