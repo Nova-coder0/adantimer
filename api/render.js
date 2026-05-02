@@ -981,9 +981,9 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
-  if (language === "en" && ["fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"].includes(pageType) && !sourceCity) {
+  if (language === "en" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
     const prayerConfig = {
-      "fajr-time": {
+      fajr: {
         prayerName: "Fajr",
         metaTitle: "Fajr Time Today | Daily Fajr Prayer Time Finder | Adantimer",
         metaDescription: "Check Fajr time today, compare the current schedule by city, and move directly into major city pages for a faster Fajr lookup.",
@@ -995,7 +995,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         ],
         faqTitle: "Common questions about Fajr time today"
       },
-      "dhuhr-time": {
+      dhuhr: {
         prayerName: "Dhuhr",
         metaTitle: "Dhuhr Time Today | Daily Dhuhr Prayer Time Finder | Adantimer",
         metaDescription: "Check Dhuhr time today, compare the current schedule by city, and move directly into major city pages for a faster Dhuhr lookup.",
@@ -1007,7 +1007,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         ],
         faqTitle: "Common questions about Dhuhr time today"
       },
-      "asr-time": {
+      asr: {
         prayerName: "Asr",
         metaTitle: "Asr Time Today | Daily Asr Prayer Time Finder | Adantimer",
         metaDescription: "Check Asr time today, compare the current schedule by city, and move directly into major city pages for a faster Asr lookup.",
@@ -1019,7 +1019,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         ],
         faqTitle: "Common questions about Asr time today"
       },
-      "maghrib-time": {
+      maghrib: {
         prayerName: "Maghrib",
         metaTitle: "Maghrib Time Today | Daily Maghrib Prayer Time Finder | Adantimer",
         metaDescription: "Check Maghrib time today, compare the current schedule by city, and move directly into major city pages for a faster Maghrib lookup.",
@@ -1031,7 +1031,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         ],
         faqTitle: "Common questions about Maghrib time today"
       },
-      "isha-time": {
+      isha: {
         prayerName: "Isha",
         metaTitle: "Isha Time Today | Daily Isha Prayer Time Finder | Adantimer",
         metaDescription: "Check Isha time today, compare the current schedule by city, and move directly into major city pages for a faster Isha lookup.",

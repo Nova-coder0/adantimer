@@ -395,7 +395,7 @@ AssertContains $renderJs 'Start with trusted prayer times, then move into the ri
 AssertContains $renderJs 'How Adantimer handles prayer times, location, and calculation methods' "SSR renderer carries home trust content" "SSR renderer is missing the homepage trust-content heading"
 AssertContains $renderJs 'Prayer Times Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer' "SSR renderer carries the prayer-times priority title" "SSR renderer is missing the stronger prayer-times title"
 AssertContains $renderJs 'Next Prayer Time Today | Live Salah Countdown | Adantimer' "SSR renderer carries the next-prayer priority title" "SSR renderer is missing the stronger next-prayer title"
-AssertContains $renderJs '["fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"].includes(pageType)' "SSR renderer carries the prayer-intent page switch" "SSR renderer is missing the prayer-intent page switch"
+AssertContains $renderJs '["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)' "SSR renderer carries the prayer-intent page switch" "SSR renderer is missing the prayer-intent page switch"
 AssertContains $renderJs 'Fajr Time Today | Daily Fajr Prayer Time Finder | Adantimer' "SSR renderer carries the Fajr priority title" "SSR renderer is missing the stronger Fajr title"
 AssertContains $renderJs 'Dhuhr Time Today | Daily Dhuhr Prayer Time Finder | Adantimer' "SSR renderer carries the Dhuhr priority title" "SSR renderer is missing the stronger Dhuhr title"
 AssertContains $renderJs 'Asr Time Today | Daily Asr Prayer Time Finder | Adantimer' "SSR renderer carries the Asr priority title" "SSR renderer is missing the stronger Asr title"
@@ -572,15 +572,15 @@ if ($RunLive) {
   TestLiveUrlRegex "$BaseUrl/prayer-times" @('<title>Prayer Times Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/next-prayer" @('<body data-page="next-prayer">', 'Next Prayer Time Today', 'What the next-prayer page should answer first')
   TestLiveUrlRegex "$BaseUrl/next-prayer" @('<title>Next Prayer Time Today \| Live Salah Countdown \| Adantimer</title>')
-  TestLiveUrl "$BaseUrl/fajr-time" @('<body data-page="fajr-time">', 'Fajr Time Today', 'What the Fajr time page should answer first')
+  TestLiveUrl "$BaseUrl/fajr-time" @('<body data-page="fajr">', 'Fajr Time Today', 'What the Fajr time page should answer first')
   TestLiveUrlRegex "$BaseUrl/fajr-time" @('<title>Fajr Time Today \| Daily Fajr Prayer Time Finder \| Adantimer</title>')
-  TestLiveUrl "$BaseUrl/dhuhr-time" @('<body data-page="dhuhr-time">', 'Dhuhr Time Today', 'What the Dhuhr time page should answer first')
+  TestLiveUrl "$BaseUrl/dhuhr-time" @('<body data-page="dhuhr">', 'Dhuhr Time Today', 'What the Dhuhr time page should answer first')
   TestLiveUrlRegex "$BaseUrl/dhuhr-time" @('<title>Dhuhr Time Today \| Daily Dhuhr Prayer Time Finder \| Adantimer</title>')
-  TestLiveUrl "$BaseUrl/asr-time" @('<body data-page="asr-time">', 'Asr Time Today', 'What the Asr time page should answer first')
+  TestLiveUrl "$BaseUrl/asr-time" @('<body data-page="asr">', 'Asr Time Today', 'What the Asr time page should answer first')
   TestLiveUrlRegex "$BaseUrl/asr-time" @('<title>Asr Time Today \| Daily Asr Prayer Time Finder \| Adantimer</title>')
-  TestLiveUrl "$BaseUrl/maghrib-time" @('<body data-page="maghrib-time">', 'Maghrib Time Today', 'What the Maghrib time page should answer first')
+  TestLiveUrl "$BaseUrl/maghrib-time" @('<body data-page="maghrib">', 'Maghrib Time Today', 'What the Maghrib time page should answer first')
   TestLiveUrlRegex "$BaseUrl/maghrib-time" @('<title>Maghrib Time Today \| Daily Maghrib Prayer Time Finder \| Adantimer</title>')
-  TestLiveUrl "$BaseUrl/isha-time" @('<body data-page="isha-time">', 'Isha Time Today', 'What the Isha time page should answer first')
+  TestLiveUrl "$BaseUrl/isha-time" @('<body data-page="isha">', 'Isha Time Today', 'What the Isha time page should answer first')
   TestLiveUrlRegex "$BaseUrl/isha-time" @('<title>Isha Time Today \| Daily Isha Prayer Time Finder \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/dubai" @('<body data-page="home">', 'Prayer Times in Dubai Today', 'How to use the Dubai prayer times page')
   TestLiveUrlRegex "$BaseUrl/dubai" @('<title>Prayer Times in Dubai Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
