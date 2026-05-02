@@ -433,6 +433,8 @@ AssertContains $sitemapTopCities 'https://www.adantimer.com/mecca' "Top-city sit
 AssertContains $sitemapTopCities 'https://www.adantimer.com/singapore' "Top-city sitemap includes Singapore" "Top-city sitemap is missing Singapore"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/prayer-times/dubai' "Top-city sitemap includes Dubai prayer-times" "Top-city sitemap is missing Dubai prayer-times"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/mecca' "Arabic-core sitemap includes Mecca" "Arabic-core sitemap is missing Mecca"
+AssertContains $sitemapArCore 'https://www.adantimer.com/ar/medina' "Arabic-core sitemap includes Medina" "Arabic-core sitemap is missing Medina"
+AssertContains $sitemapArCore 'https://www.adantimer.com/ar/riyadh' "Arabic-core sitemap includes Riyadh" "Arabic-core sitemap is missing Riyadh"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/next-prayer/riyadh' "Arabic-core sitemap includes Riyadh next-prayer" "Arabic-core sitemap is missing Riyadh next-prayer"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-core.xml' "Sitemap index points to the core sitemap" "Sitemap index is missing the core sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-intents.xml' "Sitemap index points to the intent sitemap" "Sitemap index is missing the intent sitemap"
@@ -546,6 +548,12 @@ if ($RunLive) {
   TestLiveUrlNotContains "$BaseUrl/quran/al-fatihah" @('id="location-form"', 'class="next-prayer card featured-card"')
   TestLiveUrl "$BaseUrl/de/quran/al-fatihah" @('<html lang="de" dir="ltr">', '<body data-page="quran-surah"', 'Sure Al-Fatihah lesen')
   TestLiveUrlNotContains "$BaseUrl/de/quran/al-fatihah" @('id="location-form"', 'class="next-prayer card featured-card"')
+  TestLiveUrl "$BaseUrl/ar/mecca" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/mecca')
+  TestLiveUrlRegex "$BaseUrl/ar/mecca" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0645\u0643\u0629 \u0627\u0644\u064a\u0648\u0645 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0645\u0643\u0629 \u0627\u0644\u064a\u0648\u0645</h1>')
+  TestLiveUrl "$BaseUrl/ar/medina" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/medina')
+  TestLiveUrlRegex "$BaseUrl/ar/medina" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u064a\u0648\u0645 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u064a\u0648\u0645</h1>')
+  TestLiveUrl "$BaseUrl/ar/riyadh" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/riyadh')
+  TestLiveUrlRegex "$BaseUrl/ar/riyadh" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u064a\u0648\u0645 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u064a\u0648\u0645</h1>')
   TestLiveUrl "$BaseUrl/ar/asr-time/buraydah" @('<html lang="ar" dir="rtl">', 'https://www.adantimer.com/ar/asr-time/buraydah')
   TestLiveUrl "$BaseUrl/de/prayer-times/berlin" @('<html lang="de" dir="ltr">', 'https://www.adantimer.com/de/prayer-times/berlin')
   TestLiveUrl "$BaseUrl/fr/prayer-times/paris" @('<html lang="fr" dir="ltr">', 'https://www.adantimer.com/fr/prayer-times/paris')
