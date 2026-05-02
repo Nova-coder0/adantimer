@@ -2643,6 +2643,8 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     }
 
     return {
+      type: item.type,
+      city: resolvedCity,
       label,
       href: buildRoutePath(language, item.type, resolvedCity)
     };
@@ -3251,7 +3253,7 @@ ${group.cities.map(item => `            <a class="priority-link city-name-link" 
   const intentGroupMarkup = `        <div class="priority-link-group">
           <h3 class="priority-link-heading" data-priority-group-label="intents">${escapeHtml(copy.priorityGroupLabels?.intents || "Priority intents")}</h3>
           <div class="priority-link-list">
-${copy.intentLinks.map(item => `            <a class="priority-link" href="${escapeHtml(item.href)}" data-route-type="${escapeHtml(item.type)}">${escapeHtml(item.label)}</a>`).join("\n")}
+${(copy.cityIntentLinks || copy.intentLinks || []).map(item => `            <a class="priority-link" href="${escapeHtml(item.href)}" data-route-type="${escapeHtml(item.type || "")}"${item.city ? ` data-city="${escapeHtml(item.city)}"` : ""}>${escapeHtml(item.label)}</a>`).join("\n")}
           </div>
         </div>`;
 

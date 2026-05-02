@@ -878,6 +878,63 @@ function buildPriorityIntentLabel(locale, routeType) {
   }
 }
 
+function buildPriorityCityIntentLabel(locale, routeType, city) {
+  const localizedCity = localizeCityName(city, locale.code);
+  switch (routeType) {
+    case "prayer-times":
+      return locale.code === "ar" ? `مواقيت الصلاة في ${localizedCity}` :
+        locale.code === "de" ? `Gebetszeiten in ${localizedCity}` :
+        locale.code === "fr" ? `Horaires de priere a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin namaz vakitleri` :
+        locale.code === "zh-hans" ? `${localizedCity}礼拜时间` :
+        `Prayer times in ${localizedCity}`;
+    case "next-prayer":
+      return locale.code === "ar" ? `الصلاة القادمة في ${localizedCity}` :
+        locale.code === "de" ? `Naechstes Gebet in ${localizedCity}` :
+        locale.code === "fr" ? `Prochaine priere a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin sonraki namaz` :
+        locale.code === "zh-hans" ? `${localizedCity}的下一次礼拜` :
+        `Next prayer in ${localizedCity}`;
+    case "fajr":
+      return locale.code === "ar" ? `الفجر في ${localizedCity}` :
+        locale.code === "de" ? `Fajr in ${localizedCity}` :
+        locale.code === "fr" ? `Fajr a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin Fajr` :
+        locale.code === "zh-hans" ? `${localizedCity}的晨礼时间` :
+        `Fajr in ${localizedCity}`;
+    case "dhuhr":
+      return locale.code === "ar" ? `الظهر في ${localizedCity}` :
+        locale.code === "de" ? `Dhuhr in ${localizedCity}` :
+        locale.code === "fr" ? `Dhuhr a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin Dhuhr` :
+        locale.code === "zh-hans" ? `${localizedCity}的晌礼时间` :
+        `Dhuhr in ${localizedCity}`;
+    case "asr":
+      return locale.code === "ar" ? `العصر في ${localizedCity}` :
+        locale.code === "de" ? `Asr in ${localizedCity}` :
+        locale.code === "fr" ? `Asr a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin Asr` :
+        locale.code === "zh-hans" ? `${localizedCity}的晡礼时间` :
+        `Asr in ${localizedCity}`;
+    case "maghrib":
+      return locale.code === "ar" ? `المغرب في ${localizedCity}` :
+        locale.code === "de" ? `Maghrib in ${localizedCity}` :
+        locale.code === "fr" ? `Maghrib a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin Maghrib` :
+        locale.code === "zh-hans" ? `${localizedCity}的昏礼时间` :
+        `Maghrib in ${localizedCity}`;
+    case "isha":
+      return locale.code === "ar" ? `العشاء في ${localizedCity}` :
+        locale.code === "de" ? `Isha in ${localizedCity}` :
+        locale.code === "fr" ? `Isha a ${localizedCity}` :
+        locale.code === "tr" ? `${localizedCity} icin Isha` :
+        locale.code === "zh-hans" ? `${localizedCity}的宵礼时间` :
+        `Isha in ${localizedCity}`;
+    default:
+      return buildPriorityIntentLabel(locale, routeType);
+  }
+}
+
 function localizeCityName(city, lang = language) {
   if (!city) return "";
   const localeKey = resolveLanguageTag(lang) || lang || "en";
@@ -1387,7 +1444,13 @@ function renderStaticContent() {
       link.setAttribute("title", localizedPlace || localizedCity);
       link.setAttribute("href", buildRelativeUrl(language, "home", city));
     });
-    citiesSection.querySelectorAll("a[data-route-type]").forEach(link => {
+    citiesSection.querySelectorAll("a[data-route-type][data-city]").forEach(link => {
+      const routeType = link.dataset.routeType || "home";
+      const city = link.dataset.city || "";
+      link.textContent = buildPriorityCityIntentLabel(locale, routeType, city);
+      link.setAttribute("href", buildRelativeUrl(language, routeType, city));
+    });
+    citiesSection.querySelectorAll("a[data-route-type]:not([data-city])").forEach(link => {
       const routeType = link.dataset.routeType || "home";
       link.textContent = buildPriorityIntentLabel(locale, routeType);
       link.setAttribute("href", buildRelativeUrl(language, routeType));
