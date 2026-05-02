@@ -250,6 +250,8 @@ AssertContains $indexHtml 'hreflang="fr"' "Homepage exposes the French alternate
 AssertContains $indexHtml 'hreflang="tr"' "Homepage exposes the Turkish alternate" "Homepage is missing the Turkish alternate"
 AssertContains $indexHtml 'hreflang="zh-hans"' "Homepage exposes the Chinese alternate" "Homepage is missing the Chinese alternate"
 AssertContains $indexHtml '"inLanguage": ["en", "ar", "de", "fr", "tr", "zh-Hans"]' "Structured data lists the supported languages" "Structured data language list is incomplete"
+AssertContains $indexHtml 'window.si = window.si || function () {' "Homepage template initializes Vercel Speed Insights" "Homepage template is missing the Vercel Speed Insights initializer"
+AssertContains $indexHtml '/_vercel/speed-insights/script.js' "Homepage template loads the Vercel Speed Insights script" "Homepage template is missing the Vercel Speed Insights script"
 AssertContains $indexHtml '<script src="/script.js"></script>' "Homepage loads the main client script without stale cache-bust markers" "Homepage script loader drifted from the stable baseline"
 
 AssertContains $scriptJs 'function buildRelativeUrl(lang, type, city = "", detail = "")' "Client keeps a single URL builder" "Client URL builder is missing"
