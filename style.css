@@ -417,8 +417,7 @@ a {
 .content-grid + section.prose,
 .tools-hub + .prose,
 .tools-hub + .seo-grid,
-.tools-hub + section.prose,
-.seo-grid + .tools-hub {
+.tools-hub + section.prose {
   margin-top: 40px;
 }
 

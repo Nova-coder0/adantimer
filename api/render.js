@@ -2696,6 +2696,8 @@ ${renderScheduleSection(copy)}
 ${renderInfoSection(copy)}
     </section>
 
+${renderToolsSection(copy)}
+
 ${renderCitiesSection(copy)}
 
     <section class="seo-grid">
@@ -2703,8 +2705,6 @@ ${renderAboutArticle(copy)}
 
 ${renderFaqSection(copy)}
     </section>
-
-${renderToolsSection(copy)}
   </main>`;
 }
 
