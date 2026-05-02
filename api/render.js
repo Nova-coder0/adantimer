@@ -16,12 +16,13 @@ import {
 
 const SITE_URL = "https://www.adantimer.com";
 const INDEX_PATH = path.join(process.cwd(), "templates", "index.html");
+const PRIORITY_CITY_CONFIG_PATH = path.join(process.cwd(), "data", "priority-cities.json");
 const QURAN_API_BASE = "https://api.alquran.cloud/v1";
 const QURAN_API_TIMEOUT_MS = 12000;
 const QURAN_SURAH_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
 const quranSurahCache = new Map();
 const PRIORITY_CITY_CONFIG = JSON.parse(
-  await readFile(new URL("../data/priority-cities.json", import.meta.url), "utf8")
+  await readFile(PRIORITY_CITY_CONFIG_PATH, "utf8")
 );
 const PRIORITY_CITY_GROUPS = PRIORITY_CITY_CONFIG.groups || [];
 const PRIORITY_CITY_BY_SLUG = new Map(
