@@ -1055,6 +1055,50 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
+  if (language === "en" && pageType === "home" && ["medina", "riyadh", "cairo", "singapore"].includes(cityKey)) {
+    const cityName = {
+      medina: "Medina",
+      riyadh: "Riyadh",
+      cairo: "Cairo",
+      singapore: "Singapore"
+    }[cityKey];
+
+    Object.assign(copy, {
+      metaTitle: `Prayer Times in ${cityName} Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`,
+      metaDescription: `Check today's prayer times in ${cityName} with Fajr, Dhuhr, Asr, Maghrib, Isha, and a live next prayer countdown for ${cityName}.`,
+      heroSubtitle: `Check today's prayer times in ${cityName}, follow the live next-prayer countdown, and review the full daily schedule for Fajr, Dhuhr, Asr, Maghrib, and Isha.`,
+      infoTitle: `Prayer times in ${cityName} with the full daily schedule and next prayer`,
+      features: [
+        `See today's ${cityName} timetable for Fajr, Dhuhr, Asr, Maghrib, and Isha together with the next prayer countdown.`,
+        "Keep the current prayer status, today's date, and active calculation method visible on the same page.",
+        `Move directly from ${cityName} into focused routes such as next prayer, Fajr time, Asr time, or the broader prayer-times route.`,
+        "Use the visible method label together with local mosque guidance when you compare the timetable with another source."
+      ],
+      aboutTitle: `How to use the ${cityName} prayer times page`,
+      aboutParagraphs: [
+        `This page is built for the direct search intent: prayer times in ${cityName} today with the full daily schedule and the next prayer countdown on one screen.`,
+        "The page keeps method visibility and city-specific routing together so the first answer is faster and the deeper route handoff is cleaner.",
+        "If your community or travel plan follows a different local timetable, treat this page as a fast lookup and compare it with the trusted local schedule."
+      ],
+      faqTitle: `Common questions about prayer times in ${cityName}`,
+      faq: [
+        {
+          question: `Does this ${cityName} page show the next prayer and the full schedule together?`,
+          answer: "Yes. The next prayer countdown stays visible while the full Fajr, Dhuhr, Asr, Maghrib, and Isha schedule remains on the same page."
+        },
+        {
+          question: `Why can prayer times in ${cityName} differ from another timetable?`,
+          answer: "Timetables can differ by source or method, so the active method label and trusted local guidance should both be considered."
+        },
+        {
+          question: `Can I move from ${cityName} to related prayer routes quickly?`,
+          answer: "Yes. The page links into focused routes such as next prayer, Fajr, Asr, and other high-priority city pages."
+        }
+      ]
+    });
+    return copy;
+  }
+
   if (language === "ar" && pageType === "home" && cityKey === "dubai") {
     Object.assign(copy, {
       metaTitle: "مواقيت الصلاة في دبي اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer",
@@ -1085,6 +1129,50 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         },
         {
           question: "هل أستطيع الانتقال بسرعة من دبي إلى صفحات صلاة أخرى؟",
+          answer: "نعم. الصفحة تربطك مباشرة بمسارات أكثر تركيزا مثل الصلاة القادمة والفجر والعصر وصفحات المدن المهمة."
+        }
+      ]
+    });
+    return copy;
+  }
+
+  if (language === "ar" && pageType === "home" && ["mecca", "medina", "riyadh", "cairo"].includes(cityKey)) {
+    const cityName = {
+      mecca: "مكة",
+      medina: "المدينة",
+      riyadh: "الرياض",
+      cairo: "القاهرة"
+    }[cityKey];
+
+    Object.assign(copy, {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع العد التنازلي للصلاة القادمة، وراجع جدول الفجر والظهر والعصر والمغرب والعشاء في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع الجدول الكامل والصلاة القادمة`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى صفحات أكثر تركيزا مثل الصلاة القادمة أو الفجر أو العصر.`,
+        "عند اختلاف الجدول عن مصدر آخر، قارن طريقة الحساب الظاهرة مع توقيت المسجد المحلي أو الجهة الموثوقة."
+      ],
+      aboutTitle: `كيف تستخدم صفحة مواقيت الصلاة في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم، لا لمن يريد صفحة عامة فقط.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع العد التنازلي للصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        {
+          question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`,
+          answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة."
+        },
+        {
+          question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`,
+          answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين."
+        },
+        {
+          question: `هل أستطيع الانتقال بسرعة من ${cityName} إلى صفحات صلاة أخرى؟`,
           answer: "نعم. الصفحة تربطك مباشرة بمسارات أكثر تركيزا مثل الصلاة القادمة والفجر والعصر وصفحات المدن المهمة."
         }
       ]
