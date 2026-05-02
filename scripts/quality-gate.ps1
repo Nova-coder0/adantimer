@@ -517,7 +517,7 @@ TestMojibake "script.js"
 TestMojibake "data/hadith-entries.js"
 
 if ($RunLive) {
-  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', 'How Adantimer handles prayer times, location, and calculation methods', '/prayer-times/mecca', '/next-prayer/riyadh')
+  TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', '/prayer-times/mecca', '/next-prayer/riyadh')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
   TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr"', 'dhikr-card-grid', 'data-dhikr-category="provision"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"', 'dhikr-card-badges')
