@@ -1792,8 +1792,58 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     return null;
   }
 
+  if (pageType === "prayer-times") {
+    if (language === "en") {
+      return {
+        ...buildEnglishPriorityIntentCopy(pageType),
+        cityIntentLinks: [
+          { label: "Prayer times in Oran", href: buildRoutePath("en", "home", "Oran") },
+          { label: "Prayer times in Annaba", href: buildRoutePath("en", "home", "Annaba") },
+          { label: "Prayer times in Bouira", href: buildRoutePath("en", "home", "Bouira") },
+          { label: "Prayer times in Chesham", href: buildRoutePath("en", "home", "Chesham") },
+          { label: "Prayer times in Mecca", href: buildRoutePath("en", "home", "Mecca") },
+          { label: "Next prayer in Riyadh", href: buildRoutePath("en", "next-prayer", "Riyadh") },
+          { label: "Fajr in Medina", href: buildRoutePath("en", "fajr", "Medina") },
+          { label: "Prayer times in Kuala Lumpur", href: buildRoutePath("en", "home", "Kuala Lumpur") }
+        ]
+      };
+    }
+
+    if (language === "fr") {
+      return {
+        cityIntentLinks: [
+          { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
+          { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
+          { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
+          { label: "Horaires de prière à La Mecque", href: buildRoutePath("fr", "home", "Mecca") },
+          { label: "Prochaine prière à Riyad", href: buildRoutePath("fr", "next-prayer", "Riyadh") },
+          { label: "Fajr à Médine", href: buildRoutePath("fr", "fajr", "Medina") },
+          { label: "Asr au Caire", href: buildRoutePath("fr", "asr", "Cairo") },
+          { label: "Horaires de prière à Paris", href: buildRoutePath("fr", "home", "Paris") }
+        ]
+      };
+    }
+
+    if (language === "ar") {
+      return {
+        cityIntentLinks: [
+          { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
+          { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
+          { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
+          { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "home", "Mecca") },
+          { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
+          { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
+          { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
+          { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "home", "Istanbul") }
+        ]
+      };
+    }
+
+    return null;
+  }
+
   if (language === "en") {
-    if (pageType === "prayer-times" || pageType === "next-prayer" || ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
+    if (pageType === "next-prayer" || ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
       return buildEnglishPriorityIntentCopy(pageType);
     }
 
