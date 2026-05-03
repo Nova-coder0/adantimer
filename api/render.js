@@ -1410,6 +1410,43 @@ function buildEnglishPriorityIntentCityCopy(pageType, cityKey, place) {
     };
   }
 
+  if (key === "next-prayer:kuala-lumpur") {
+    return {
+      metaTitle: "Next Prayer in Kuala Lumpur Today | Live Salah Countdown | Adantimer",
+      metaDescription: "See the next prayer in Kuala Lumpur today with a live salah countdown, current prayer status, and the full daily prayer schedule for Kuala Lumpur.",
+      heroSubtitle: "Track the next prayer in Kuala Lumpur with a live countdown, see the current prayer status, and keep the full daily schedule available for a faster local check.",
+      infoTitle: "Use this Kuala Lumpur page when the next prayer is the main question",
+      features: [
+        "The next-prayer countdown stays at the center of the Kuala Lumpur page together with the full daily schedule.",
+        "Current prayer, next prayer, today's date, and the active method stay visible on the same screen.",
+        "The page links directly into Kuala Lumpur prayer-times and single-prayer routes when you need a more focused local view.",
+        "GPS, IP fallback, and manual city search remain available if you need to compare Kuala Lumpur with another city."
+      ],
+      citiesTitle: "Related Kuala Lumpur prayer routes",
+      aboutTitle: "What the Kuala Lumpur next-prayer page should answer first",
+      aboutParagraphs: [
+        "This route is for the direct local intent: what is the next prayer in Kuala Lumpur and how much time is left until it starts.",
+        "The page keeps the countdown, current prayer status, full daily timetable, and active method together so the local answer stays visible without extra navigation.",
+        "When you need a broader or narrower view after the first check, the linked Kuala Lumpur routes let you move into the full daily page or into individual prayer pages quickly."
+      ],
+      faqTitle: "Common questions about the next prayer in Kuala Lumpur",
+      faq: [
+        {
+          question: "Does this Kuala Lumpur page only show the next prayer?",
+          answer: "No. The next prayer is the main focus, but the full daily prayer schedule for Kuala Lumpur still stays visible on the same page."
+        },
+        {
+          question: "Can I switch from the Kuala Lumpur next-prayer page into other Kuala Lumpur prayer routes?",
+          answer: "Yes. The page links directly into the Kuala Lumpur prayer-times route and into narrower single-prayer routes."
+        },
+        {
+          question: "Why can the Kuala Lumpur countdown differ from another source?",
+          answer: "The countdown depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
+        }
+      ]
+    };
+  }
+
   if (key === "fajr:johor-bahru") {
     return {
       metaTitle: "Fajr Time in Johor Bahru Today | Daily Fajr Prayer Time Finder | Adantimer",
@@ -1441,6 +1478,80 @@ function buildEnglishPriorityIntentCityCopy(pageType, cityKey, place) {
         },
         {
           question: "Why can Fajr time in Johor Bahru differ from another timetable?",
+          answer: "The shown time depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
+        }
+      ]
+    };
+  }
+
+  if (key === "dhuhr:johor-bahru") {
+    return {
+      metaTitle: "Dhuhr Time in Johor Bahru Today | Daily Dhuhr Prayer Time Finder | Adantimer",
+      metaDescription: "Check Dhuhr time in Johor Bahru today, compare the full daily schedule, and keep the live next-prayer countdown visible on one page.",
+      heroSubtitle: "Check Dhuhr time in Johor Bahru today, keep the next-prayer countdown visible, and review the full daily schedule before moving into another route.",
+      infoTitle: "Use this Johor Bahru page when Dhuhr time is the main question",
+      features: [
+        "Dhuhr stays at the center of the Johor Bahru page while the full daily timetable remains visible for context.",
+        "Current prayer, next prayer, today's date, and the active method stay on the same screen for a faster local check.",
+        "The page links directly into Johor Bahru prayer-times and next-prayer routes when you want a broader city view.",
+        "GPS, IP fallback, and manual city search remain available if you need to compare Johor Bahru with another city."
+      ],
+      citiesTitle: "Related Johor Bahru prayer routes",
+      aboutTitle: "What the Johor Bahru Dhuhr page should answer first",
+      aboutParagraphs: [
+        "This route is built for the direct local intent: what time is Dhuhr in Johor Bahru today and how can I confirm it quickly.",
+        "The page keeps Dhuhr time together with the full daily timetable, the next-prayer countdown, and the visible calculation method so the answer is easier to verify.",
+        "When you need a broader city check after confirming Dhuhr, the linked Johor Bahru routes let you move into the full prayer-times page or the next-prayer page immediately."
+      ],
+      faqTitle: "Common questions about Dhuhr time in Johor Bahru",
+      faq: [
+        {
+          question: "Does this Johor Bahru page only show Dhuhr time?",
+          answer: "No. Dhuhr is the main focus, but the full daily prayer schedule for Johor Bahru stays visible on the same page."
+        },
+        {
+          question: "Can I move from the Johor Bahru Dhuhr page into other Johor Bahru prayer routes?",
+          answer: "Yes. The page links directly into the Johor Bahru prayer-times route and the next-prayer route."
+        },
+        {
+          question: "Why can Dhuhr time in Johor Bahru differ from another timetable?",
+          answer: "The shown time depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
+        }
+      ]
+    };
+  }
+
+  if (key === "isha:jakarta") {
+    return {
+      metaTitle: "Isha Time in Jakarta Today | Daily Isha Prayer Time Finder | Adantimer",
+      metaDescription: "Check Isha time in Jakarta today, compare the full daily schedule, and keep the live next-prayer countdown visible on one page.",
+      heroSubtitle: "Check Isha time in Jakarta today, keep the next-prayer countdown visible, and review the full daily schedule before moving into another route.",
+      infoTitle: "Use this Jakarta page when Isha time is the main question",
+      features: [
+        "Isha stays at the center of the Jakarta page while the full daily timetable remains visible for context.",
+        "Current prayer, next prayer, today's date, and the active method stay on the same screen for a faster local check.",
+        "The page links directly into Jakarta prayer-times and next-prayer routes when you want a broader city view.",
+        "GPS, IP fallback, and manual city search remain available if you need to compare Jakarta with another city."
+      ],
+      citiesTitle: "Related Jakarta prayer routes",
+      aboutTitle: "What the Jakarta Isha page should answer first",
+      aboutParagraphs: [
+        "This route is built for the direct local intent: what time is Isha in Jakarta today and how can I verify it quickly.",
+        "The page keeps Isha time together with the full daily timetable, the next-prayer countdown, and the visible calculation method so the answer is easier to trust.",
+        "When you need a broader city check after confirming Isha, the linked Jakarta routes let you move into the full prayer-times page or the next-prayer page immediately."
+      ],
+      faqTitle: "Common questions about Isha time in Jakarta",
+      faq: [
+        {
+          question: "Does this Jakarta page only show Isha time?",
+          answer: "No. Isha is the main focus, but the full daily prayer schedule for Jakarta stays visible on the same page."
+        },
+        {
+          question: "Can I move from the Jakarta Isha page into other Jakarta prayer routes?",
+          answer: "Yes. The page links directly into the Jakarta prayer-times route and the next-prayer route."
+        },
+        {
+          question: "Why can Isha time in Jakarta differ from another timetable?",
           answer: "The shown time depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
         }
       ]
