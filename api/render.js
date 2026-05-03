@@ -1388,13 +1388,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
   }
 
   if (language === "ar" && pageType === "home" && ARABIC_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
-    const cityName = {
-      mecca: "مكة",
-      medina: "المدينة",
-      riyadh: "الرياض",
-      cairo: "القاهرة",
-      istanbul: "إسطنبول"
-    }[cityKey];
+    const cityName = localizeCityName(ARABIC_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place, "ar");
 
     Object.assign(copy, {
       metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
