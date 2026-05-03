@@ -41,16 +41,19 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["mecca", { cityName: "Mecca", variant: "mecca" }],
     ["oran", { cityName: "Oran", variant: "generic" }],
     ["annaba", { cityName: "Annaba", variant: "generic" }],
+    ["bouira", { cityName: "Bouira", variant: "generic" }],
     ["chesham", { cityName: "Chesham", variant: "generic" }]
   ]),
   ar: new Map([
     ["dubai", { cityName: "دبي", variant: "dubai" }],
     ["oran", { cityName: "وهران", variant: "generic" }],
-    ["annaba", { cityName: "عنابة", variant: "generic" }]
+    ["annaba", { cityName: "عنابة", variant: "generic" }],
+    ["bouira", { cityName: "البويرة", variant: "generic" }]
   ]),
   fr: new Map([
     ["oran", { cityName: "Oran", variant: "oran" }],
-    ["annaba", { cityName: "Annaba", variant: "generic" }]
+    ["annaba", { cityName: "Annaba", variant: "generic" }],
+    ["bouira", { cityName: "Bouira", variant: "generic" }]
   ])
 };
 const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
@@ -2804,6 +2807,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
     cityIntentLinks = [
       { label: "Prayer times in Oran", href: buildRoutePath("en", "home", "Oran") },
       { label: "Prayer times in Annaba", href: buildRoutePath("en", "home", "Annaba") },
+      { label: "Prayer times in Bouira", href: buildRoutePath("en", "home", "Bouira") },
       { label: "Prayer times in Chesham", href: buildRoutePath("en", "home", "Chesham") },
       { label: "Prayer times in Mecca", href: buildRoutePath("en", "home", "Mecca") },
       { label: "Next prayer in Riyadh", href: buildRoutePath("en", "next-prayer", "Riyadh") },
@@ -2969,6 +2973,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     cityIntentLinks = [
       { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
       { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
+      { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
       { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "home", "Mecca") },
       { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
       { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
@@ -3123,6 +3128,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     cityIntentLinks = [
       { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
       { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
+      { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
       { label: "Horaires de prière à La Mecque", href: buildRoutePath("fr", "home", "Mecca") },
       { label: "Prochaine prière à Riyad", href: buildRoutePath("fr", "next-prayer", "Riyadh") },
       { label: "Fajr à Médine", href: buildRoutePath("fr", "fajr", "Medina") },
