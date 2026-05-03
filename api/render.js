@@ -1426,41 +1426,54 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   return null;
 }
 
+function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
+  if (pageType !== "home") {
+    return null;
+  }
+
+  if (language === "en") {
+    if (cityKey === "dubai") {
+      return buildEnglishPriorityHomeCityCopy("Dubai", "dubai");
+    }
+
+    if (cityKey === "mecca") {
+      return buildEnglishPriorityHomeCityCopy("Mecca", "mecca");
+    }
+
+    if (ENGLISH_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
+      const cityName = ENGLISH_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place;
+      return buildEnglishPriorityHomeCityCopy(cityName);
+    }
+
+    return null;
+  }
+
+  if (language === "ar") {
+    if (cityKey === "dubai") {
+      return buildArabicPriorityHomeCityCopy("دبي", "dubai");
+    }
+
+    if (ARABIC_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
+      const cityName = localizeCityName(ARABIC_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place, "ar");
+      return buildArabicPriorityHomeCityCopy(cityName);
+    }
+  }
+
+  return null;
+}
+
 function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
   const cityKey = slugify(sourceCity || "");
   const priorityIntentCopy = getPriorityIntentSeoCopy(language, pageType, sourceCity);
+  const priorityHomeCityCopy = getPriorityHomeCitySeoCopy(language, pageType, cityKey, place);
 
   if (priorityIntentCopy) {
     Object.assign(copy, priorityIntentCopy);
     return copy;
   }
 
-  if (language === "en" && pageType === "home" && cityKey === "dubai") {
-    Object.assign(copy, buildEnglishPriorityHomeCityCopy("Dubai", "dubai"));
-    return copy;
-  }
-
-  if (language === "en" && pageType === "home" && cityKey === "mecca") {
-    Object.assign(copy, buildEnglishPriorityHomeCityCopy("Mecca", "mecca"));
-    return copy;
-  }
-
-  if (language === "en" && pageType === "home" && ENGLISH_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
-    const cityName = ENGLISH_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place;
-
-    Object.assign(copy, buildEnglishPriorityHomeCityCopy(cityName));
-    return copy;
-  }
-
-  if (language === "ar" && pageType === "home" && cityKey === "dubai") {
-    Object.assign(copy, buildArabicPriorityHomeCityCopy("دبي", "dubai"));
-    return copy;
-  }
-
-  if (language === "ar" && pageType === "home" && ARABIC_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
-    const cityName = localizeCityName(ARABIC_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place, "ar");
-
-    Object.assign(copy, buildArabicPriorityHomeCityCopy(cityName));
+  if (priorityHomeCityCopy) {
+    Object.assign(copy, priorityHomeCityCopy);
     return copy;
   }
 
