@@ -33,20 +33,19 @@ const PRIORITY_CITY_BY_SLUG = new Map(
 const TOP_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.englishTopGroups || []);
 const ENGLISH_PRIORITY_HOME_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.englishTopGroups || []);
 const ENGLISH_PRIORITY_HOME_CITY_BY_SLUG = new Map(ENGLISH_PRIORITY_HOME_CITIES.map(city => [city.slug, city]));
-const ENGLISH_PRIORITY_HOME_CUSTOM_SLUGS = new Set(["dubai", "mecca"]);
-const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = new Set(
-  ENGLISH_PRIORITY_HOME_CITIES
-    .map(city => city.slug)
-    .filter(slug => !ENGLISH_PRIORITY_HOME_CUSTOM_SLUGS.has(slug))
-);
 const ARABIC_PRIORITY_HOME_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.arabicCoreGroups || []);
 const ARABIC_PRIORITY_HOME_CITY_BY_SLUG = new Map(ARABIC_PRIORITY_HOME_CITIES.map(city => [city.slug, city]));
-const ARABIC_PRIORITY_HOME_CUSTOM_SLUGS = new Set(["dubai"]);
-const ARABIC_PRIORITY_HOME_GENERIC_SLUGS = new Set(
-  ARABIC_PRIORITY_HOME_CITIES
-    .map(city => city.slug)
-    .filter(slug => !ARABIC_PRIORITY_HOME_CUSTOM_SLUGS.has(slug))
-);
+const PRIORITY_HOME_CUSTOM_VARIANTS = {
+  en: new Map([
+    ["dubai", { cityName: "Dubai", variant: "dubai" }],
+    ["mecca", { cityName: "Mecca", variant: "mecca" }]
+  ]),
+  ar: new Map([
+    ["dubai", { cityName: "دبي", variant: "dubai" }]
+  ])
+};
+const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
+const ARABIC_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ARABIC_PRIORITY_HOME_CITIES, "ar");
 
 const CITY_NAME_LOCALIZATIONS = {
   "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
@@ -1406,6 +1405,15 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
   };
 }
 
+function getPriorityHomeGenericSlugs(cities = [], language = "en") {
+  const customVariants = PRIORITY_HOME_CUSTOM_VARIANTS[language] || new Map();
+  return new Set(
+    cities
+      .map(city => city.slug)
+      .filter(slug => !customVariants.has(slug))
+  );
+}
+
 function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   if (sourceCity) {
     return null;
@@ -1432,12 +1440,9 @@ function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
   }
 
   if (language === "en") {
-    if (cityKey === "dubai") {
-      return buildEnglishPriorityHomeCityCopy("Dubai", "dubai");
-    }
-
-    if (cityKey === "mecca") {
-      return buildEnglishPriorityHomeCityCopy("Mecca", "mecca");
+    const customVariant = PRIORITY_HOME_CUSTOM_VARIANTS.en.get(cityKey);
+    if (customVariant) {
+      return buildEnglishPriorityHomeCityCopy(customVariant.cityName, customVariant.variant);
     }
 
     if (ENGLISH_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
@@ -1449,8 +1454,9 @@ function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
   }
 
   if (language === "ar") {
-    if (cityKey === "dubai") {
-      return buildArabicPriorityHomeCityCopy("دبي", "dubai");
+    const customVariant = PRIORITY_HOME_CUSTOM_VARIANTS.ar.get(cityKey);
+    if (customVariant) {
+      return buildArabicPriorityHomeCityCopy(customVariant.cityName, customVariant.variant);
     }
 
     if (ARABIC_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
