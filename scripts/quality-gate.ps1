@@ -419,9 +419,14 @@ AssertContains $renderJs 'Fajr Time in Johor Bahru Today | Daily Fajr Prayer Tim
 AssertContains $renderJs 'Next Prayer in Kuala Lumpur Today | Live Salah Countdown | Adantimer' "SSR renderer carries the Kuala Lumpur next-prayer priority title" "SSR renderer is missing the Kuala Lumpur next-prayer priority title"
 AssertContains $renderJs 'Dhuhr Time in Johor Bahru Today | Daily Dhuhr Prayer Time Finder | Adantimer' "SSR renderer carries the Johor Bahru Dhuhr priority title" "SSR renderer is missing the Johor Bahru Dhuhr priority title"
 AssertContains $renderJs 'Isha Time in Jakarta Today | Daily Isha Prayer Time Finder | Adantimer' "SSR renderer carries the Jakarta Isha priority title" "SSR renderer is missing the Jakarta Isha priority title"
+AssertContains $renderJs '["oran", { cityName: "Oran", variant: "generic" }]' "SSR renderer registers Oran as an English GSC winner home-city variant" "SSR renderer is missing the English Oran GSC winner variant"
+AssertContains $renderJs '["chesham", { cityName: "Chesham", variant: "generic" }]' "SSR renderer registers Chesham as an English GSC winner home-city variant" "SSR renderer is missing the English Chesham GSC winner variant"
+AssertContains $renderJs '["oran", { cityName: "Oran", variant: "oran" }]' "SSR renderer registers Oran as a French GSC winner home-city variant" "SSR renderer is missing the French Oran GSC winner variant"
+AssertContains $renderJs 'function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic")' "SSR renderer centralizes the French GSC winner home-city copy" "SSR renderer is missing the French GSC winner home-city builder"
 AssertContains $renderJs '\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0645\u0643\u0629 \u0627\u0644\u064a\u0648\u0645 | \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 | Adantimer' "SSR renderer carries the Mecca Arabic prayer-times priority title" "SSR renderer is missing the Mecca Arabic prayer-times priority title"
 AssertContains $renderJs '\u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a \u0627\u0644\u0631\u064a\u0627\u0636 \u0627\u0644\u064a\u0648\u0645 | \u0639\u062f \u062a\u0646\u0627\u0632\u0644\u064a \u0645\u0628\u0627\u0634\u0631 \u0644\u0644\u0635\u0644\u0627\u0629 | Adantimer' "SSR renderer carries the Riyadh Arabic next-prayer priority title" "SSR renderer is missing the Riyadh Arabic next-prayer priority title"
 AssertContains $renderJs '\u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u064a\u0648\u0645 | \u062f\u0644\u064a\u0644 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0627\u0644\u064a\u0648\u0645\u064a | Adantimer' "SSR renderer carries the Medina Arabic Fajr priority title" "SSR renderer is missing the Medina Arabic Fajr priority title"
+AssertContains $renderJs '["oran", { cityName: "وهران", variant: "generic" }]' "SSR renderer registers Oran as an Arabic GSC winner home-city variant" "SSR renderer is missing the Arabic Oran GSC winner variant"
 AssertContains $renderJs 'Fajr Time Today | Daily Fajr Prayer Time Finder | Adantimer' "SSR renderer carries the Fajr priority title" "SSR renderer is missing the stronger Fajr title"
 AssertContains $renderJs 'Dhuhr Time Today | Daily Dhuhr Prayer Time Finder | Adantimer' "SSR renderer carries the Dhuhr priority title" "SSR renderer is missing the stronger Dhuhr title"
 AssertContains $renderJs 'Asr Time Today | Daily Asr Prayer Time Finder | Adantimer' "SSR renderer carries the Asr priority title" "SSR renderer is missing the stronger Asr title"
@@ -622,6 +627,9 @@ if ($RunLive) {
   TestLiveUrlRegex "$BaseUrl/ar/fajr-time/medina" @('<title>\u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u064a\u0648\u0645 \| \u062f\u0644\u064a\u0644 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0627\u0644\u064a\u0648\u0645\u064a \| Adantimer</title>', '\u0645\u0627 \u0627\u0644\u0630\u064a \u064a\u062c\u0628 \u0623\u0646 \u062a\u062c\u064a\u0628 \u0639\u0646\u0647 \u0635\u0641\u062d\u0629 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a \u0627\u0644\u0645\u062f\u064a\u0646\u0629 \u0623\u0648\u0644\u0627')
   TestLiveUrl "$BaseUrl/prayer-times" @('<body data-page="prayer-times">', 'Prayer Times Today', 'How this prayer times page is meant to be used')
   TestLiveUrlRegex "$BaseUrl/prayer-times" @('<title>Prayer Times Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+  TestLiveUrl "$BaseUrl/prayer-times" @('href="/oran"', 'href="/chesham"')
+  TestLiveUrl "$BaseUrl/fr/prayer-times" @('<html lang="fr" dir="ltr">', 'href="/fr/oran"')
+  TestLiveUrl "$BaseUrl/ar/prayer-times" @('<html lang="ar" dir="rtl">', 'href="/ar/oran"')
   TestLiveUrl "$BaseUrl/prayer-times/kuala-lumpur" @('<body data-page="prayer-times">', 'Prayer Times in Kuala Lumpur Today', 'How to use the Kuala Lumpur prayer times page')
   TestLiveUrlRegex "$BaseUrl/prayer-times/kuala-lumpur" @('<title>Prayer Times in Kuala Lumpur Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/next-prayer" @('<body data-page="next-prayer">', 'Next Prayer Time Today', 'What the next-prayer page should answer first')
@@ -672,6 +680,14 @@ TestLiveUrl "$BaseUrl/johor-bahru" @('<body data-page="home">', 'Prayer Times in
 TestLiveUrlRegex "$BaseUrl/johor-bahru" @('<title>Prayer Times in Johor Bahru Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
 TestLiveUrl "$BaseUrl/jakarta" @('<body data-page="home">', 'Prayer Times in Jakarta Today', 'How to use the Jakarta prayer times page')
 TestLiveUrlRegex "$BaseUrl/jakarta" @('<title>Prayer Times in Jakarta Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/oran" @('<body data-page="home">', 'Prayer Times in Oran Today', 'How to use the Oran prayer times page')
+TestLiveUrlRegex "$BaseUrl/oran" @('<title>Prayer Times in Oran Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/chesham" @('<body data-page="home">', 'Prayer Times in Chesham Today', 'How to use the Chesham prayer times page')
+TestLiveUrlRegex "$BaseUrl/chesham" @('<title>Prayer Times in Chesham Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/fr/oran" @('<html lang="fr" dir="ltr">', '<body data-page="home">', 'Horaires de prière à Oran aujourd')
+TestLiveUrlRegex "$BaseUrl/fr/oran" @("<title>Horaires de prière à Oran aujourd(?:&#39;|'|’)hui \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>")
+TestLiveUrl "$BaseUrl/ar/oran" @('<html lang="ar" dir="rtl">', '<body data-page="home">')
+TestLiveUrlRegex "$BaseUrl/ar/oran" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0648\u0647\u0631\u0627\u0646 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0648\u0647\u0631\u0627\u0646 \u0627\u0644\u064a\u0648\u0645</h1>')
 TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in London Today', 'How to use the London prayer times page')
   TestLiveUrlRegex "$BaseUrl/london" @('<title>Prayer Times in London Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/new-york" @('<body data-page="home">', 'Prayer Times in New York Today', 'How to use the New York prayer times page')

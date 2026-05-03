@@ -38,10 +38,16 @@ const ARABIC_PRIORITY_HOME_CITY_BY_SLUG = new Map(ARABIC_PRIORITY_HOME_CITIES.ma
 const PRIORITY_HOME_CUSTOM_VARIANTS = {
   en: new Map([
     ["dubai", { cityName: "Dubai", variant: "dubai" }],
-    ["mecca", { cityName: "Mecca", variant: "mecca" }]
+    ["mecca", { cityName: "Mecca", variant: "mecca" }],
+    ["oran", { cityName: "Oran", variant: "generic" }],
+    ["chesham", { cityName: "Chesham", variant: "generic" }]
   ]),
   ar: new Map([
-    ["dubai", { cityName: "دبي", variant: "dubai" }]
+    ["dubai", { cityName: "دبي", variant: "dubai" }],
+    ["oran", { cityName: "وهران", variant: "generic" }]
+  ]),
+  fr: new Map([
+    ["oran", { cityName: "Oran", variant: "oran" }]
   ])
 };
 const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
@@ -60,6 +66,11 @@ const CITY_NAME_LOCALIZATIONS = {
   "kuala-lumpur": { ar: "\u0643\u0648\u0627\u0644\u0627 \u0644\u0645\u0628\u0648\u0631", de: "Kuala Lumpur", fr: "Kuala Lumpur", tr: "Kuala Lumpur", "zh-hans": "\u5409\u9686\u5761" },
   "johor-bahru": { ar: "\u062c\u0648\u0647\u0648\u0631 \u0628\u0647\u0631\u0648", de: "Johor Bahru", fr: "Johor Bahru", tr: "Johor Bahru", "zh-hans": "\u65b0\u5c71" },
   "jakarta": { ar: "\u062c\u0627\u0643\u0631\u062a\u0627", de: "Jakarta", fr: "Jakarta", tr: "Cakarta", "zh-hans": "\u96c5\u52a0\u8fbe" },
+  "oran": { ar: "\u0648\u0647\u0631\u0627\u0646", de: "Oran", fr: "Oran", tr: "Oran", "zh-hans": "\u5965\u5170" },
+  "annaba": { ar: "\u0639\u0646\u0627\u0628\u0629", de: "Annaba", fr: "Annaba", tr: "Annaba", "zh-hans": "\u5b89\u7eb3\u5df4" },
+  "bouira": { ar: "\u0627\u0644\u0628\u0648\u064a\u0631\u0629", de: "Bouira", fr: "Bouira", tr: "Bouira", "zh-hans": "Bouira" },
+  "ain-benian": { ar: "\u0639\u064a\u0646 \u0627\u0644\u0628\u0646\u064a\u0627\u0646", de: "Ain Benian", fr: "Ain Benian", tr: "Ain Benian", "zh-hans": "Ain Benian" },
+  "chesham": { ar: "\u062a\u0634\u064a\u0634\u0627\u0645", de: "Chesham", fr: "Chesham", tr: "Chesham", "zh-hans": "Chesham" },
   "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
   "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
   "singapore": { ar: "\u0633\u0646\u063a\u0627\u0641\u0648\u0631\u0629", de: "Singapur", fr: "Singapour", tr: "Singapur", "zh-hans": "\u65b0\u52a0\u5761" },
@@ -74,6 +85,7 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "egypt": { ar: "\u0645\u0635\u0631", de: "\u00c4gypten", fr: "\u00c9gypte", tr: "M\u0131s\u0131r", "zh-hans": "\u57c3\u53ca" },
   "malaysia": { ar: "\u0645\u0627\u0644\u064a\u0632\u064a\u0627", de: "Malaysia", fr: "Malaisie", tr: "Malezya", "zh-hans": "\u9a6c\u6765\u897f\u4e9a" },
   "indonesia": { ar: "\u0625\u0646\u062f\u0648\u0646\u064a\u0633\u064a\u0627", de: "Indonesien", fr: "Indon\u00e9sie", tr: "Endonezya", "zh-hans": "\u5370\u5ea6\u5c3c\u897f\u4e9a" },
+  "algeria": { ar: "\u0627\u0644\u062c\u0632\u0627\u0626\u0631", de: "Algerien", fr: "Alg\u00e9rie", tr: "Cezayir", "zh-hans": "\u963f\u5c14\u53ca\u5229\u4e9a" },
   "united arab emirates": { ar: "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a", de: "Vereinigte Arabische Emirate", fr: "\u00c9mirats arabes unis", tr: "Birle\u015fik Arap Emirlikleri", "zh-hans": "\u963f\u8054\u914b" },
   "turkey": { ar: "\u062a\u0631\u0643\u064a\u0627", de: "T\u00fcrkei", fr: "Turquie", tr: "T\u00fcrkiye", "zh-hans": "\u571f\u8033\u5176" },
   "united kingdom": { ar: "\u0627\u0644\u0645\u0645\u0644\u0643\u0629 \u0627\u0644\u0645\u062a\u062d\u062f\u0629", de: "Vereinigtes K\u00f6nigreich", fr: "Royaume-Uni", tr: "Birle\u015fik Krall\u0131k", "zh-hans": "\u82f1\u56fd" },
@@ -1063,6 +1075,82 @@ function buildEnglishPriorityHomeCityCopy(cityName, variant = "generic") {
   };
 }
 
+function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
+  const variantConfig = {
+    oran: {
+      infoTitle: `Horaires de prière à ${cityName} avec tout le planning du jour sur une seule page`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "Cette page couvre naturellement des formulations réelles comme horaire priere, adhan, adan, dohr, maghreb ou icha, sans créer de pages dupliquées."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`
+      ],
+      faq: [
+        {
+          question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`,
+          answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière."
+        },
+        {
+          question: `Pourquoi peut-on chercher ${cityName} avec horaire priere, adhan, dohr, maghreb ou icha ?`,
+          answer: "Les formulations varient selon les habitudes et les claviers. Cette page reste la page canonique unique pour Oran en français."
+        },
+        {
+          question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
+          answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    },
+    generic: {
+      infoTitle: `Horaires de prière à ${cityName} avec tout le planning du jour sur une seule page`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "Comparez la méthode affichée avec votre mosquée locale ou une autorité fiable si votre communauté suit un autre calendrier."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`
+      ],
+      faq: [
+        {
+          question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`,
+          answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière."
+        },
+        {
+          question: `Pourquoi les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
+          answer: "Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        },
+        {
+          question: `Puis-je passer rapidement de ${cityName} à d'autres routes de prière ?`,
+          answer: "Oui. La page renvoie directement vers des routes ciblées comme la prochaine prière, Fajr ou d'autres villes prioritaires."
+        }
+      ]
+    }
+  };
+
+  const resolvedVariant = variantConfig[variant] ? variant : "generic";
+  const resolved = variantConfig[resolvedVariant];
+
+  return {
+    metaTitle: `Horaires de prière à ${cityName} aujourd'hui | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`,
+    metaDescription: `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+    heroSubtitle: `Consultez les horaires de prière à ${cityName} aujourd'hui, suivez le compte à rebours jusqu'à la prochaine prière et gardez le planning complet sur une seule page.`,
+    infoTitle: resolved.infoTitle,
+    features: resolved.features,
+    aboutTitle: `Comment utiliser la page des horaires de prière à ${cityName}`,
+    aboutParagraphs: resolved.aboutParagraphs,
+    faqTitle: `Questions fréquentes sur les horaires de prière à ${cityName}`,
+    faq: resolved.faq
+  };
+}
+
 function buildEnglishPriorityIntentCopy(pageType) {
   if (pageType === "prayer-times") {
     return {
@@ -1741,6 +1829,13 @@ function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
     if (ARABIC_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
       const cityName = localizeCityName(ARABIC_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place, "ar");
       return buildArabicPriorityHomeCityCopy(cityName);
+    }
+  }
+
+  if (language === "fr") {
+    const customVariant = PRIORITY_HOME_CUSTOM_VARIANTS.fr.get(cityKey);
+    if (customVariant) {
+      return buildFrenchGscWinnerHomeCityCopy(customVariant.cityName, customVariant.variant);
     }
   }
 
@@ -2682,7 +2777,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
     { type: "maghrib", label: "Maghrib time", href: buildRoutePath("en", "maghrib") },
     { type: "isha", label: "Isha time", href: buildRoutePath("en", "isha") }
   ];
-  const cityIntentLinks = sourceCity
+  let cityIntentLinks = sourceCity
     ? [
         { label: `Prayer times in ${place}`, href: buildRoutePath("en", "prayer-times", sourceCity) },
         { label: `Next prayer in ${place}`, href: buildRoutePath("en", "next-prayer", sourceCity) },
@@ -2702,6 +2797,17 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
         { label: "Prayer times in Johor Bahru", href: buildRoutePath("en", "prayer-times", "Johor Bahru") },
         { label: "Prayer times in Jakarta", href: buildRoutePath("en", "prayer-times", "Jakarta") }
       ];
+  if (!sourceCity && pageType === "prayer-times") {
+    cityIntentLinks = [
+      { label: "Prayer times in Oran", href: buildRoutePath("en", "home", "Oran") },
+      { label: "Prayer times in Chesham", href: buildRoutePath("en", "home", "Chesham") },
+      { label: "Prayer times in Mecca", href: buildRoutePath("en", "home", "Mecca") },
+      { label: "Next prayer in Riyadh", href: buildRoutePath("en", "next-prayer", "Riyadh") },
+      { label: "Fajr in Medina", href: buildRoutePath("en", "fajr", "Medina") },
+      { label: "Prayer times in Kuala Lumpur", href: buildRoutePath("en", "home", "Kuala Lumpur") },
+      { label: "Prayer times in Jakarta", href: buildRoutePath("en", "home", "Jakarta") }
+    ];
+  }
 
   const copy = {
     activeLanguage: "en",
@@ -2838,7 +2944,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     { type: "maghrib", label: "وقت المغرب", href: buildRoutePath("ar", "maghrib") },
     { type: "isha", label: "وقت العشاء", href: buildRoutePath("ar", "isha") }
   ];
-  const cityIntentLinks = sourceCity
+  let cityIntentLinks = sourceCity
     ? [
         { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
         { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
@@ -2856,6 +2962,16 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
         { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
         { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "prayer-times", "Istanbul") }
       ];
+  if (!sourceCity && pageType === "prayer-times") {
+    cityIntentLinks = [
+      { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
+      { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "home", "Mecca") },
+      { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
+      { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
+      { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
+      { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "home", "Istanbul") }
+    ];
+  }
 
   const copy = {
     activeLanguage: "ar",
@@ -2984,7 +3100,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     label: item.label,
     href: buildRoutePath(language, item.type)
   }));
-  const cityIntentLinks = locale.cityIntentLinks(place).map(item => {
+  let cityIntentLinks = locale.cityIntentLinks(place).map(item => {
     const resolvedCity = item.city || sourceCity;
     let label = item.label;
     if (!place && item.city) {
@@ -2998,6 +3114,17 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
       href: buildRoutePath(language, item.type, resolvedCity)
     };
   });
+
+  if (!sourceCity && pageType === "prayer-times" && language === "fr") {
+    cityIntentLinks = [
+      { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
+      { label: "Horaires de prière à La Mecque", href: buildRoutePath("fr", "home", "Mecca") },
+      { label: "Prochaine prière à Riyad", href: buildRoutePath("fr", "next-prayer", "Riyadh") },
+      { label: "Fajr à Médine", href: buildRoutePath("fr", "fajr", "Medina") },
+      { label: "Asr au Caire", href: buildRoutePath("fr", "asr", "Cairo") },
+      { label: "Horaires de prière à Paris", href: buildRoutePath("fr", "home", "Paris") }
+    ];
+  }
 
   return {
     activeLanguage: language,
