@@ -204,6 +204,7 @@ $requiredFiles = @(
   "sitemap-core.xml",
   "sitemap-intents.xml",
   "sitemap-top-cities.xml",
+  "sitemap-gsc-winners.xml",
   "sitemap-ar-core.xml",
   "api/render.js",
   "data/quran-surahs.js",
@@ -241,6 +242,7 @@ $vercelJsonText = ReadProjectFile "vercel.json"
 $sitemapCore = ReadProjectFile "sitemap-core.xml"
 $sitemapIntents = ReadProjectFile "sitemap-intents.xml"
 $sitemapTopCities = ReadProjectFile "sitemap-top-cities.xml"
+$sitemapGscWinners = ReadProjectFile "sitemap-gsc-winners.xml"
 $sitemapArCore = ReadProjectFile "sitemap-ar-core.xml"
 $sitemapIndex = ReadProjectFile "sitemap.xml"
 $robots = ReadProjectFile "robots.txt"
@@ -502,6 +504,13 @@ AssertContains $sitemapTopCities 'https://www.adantimer.com/kuala-lumpur' "Top-c
 AssertContains $sitemapTopCities 'https://www.adantimer.com/johor-bahru' "Top-city sitemap includes Johor Bahru" "Top-city sitemap is missing Johor Bahru"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/jakarta' "Top-city sitemap includes Jakarta" "Top-city sitemap is missing Jakarta"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/prayer-times/dubai' "Top-city sitemap includes Dubai prayer-times" "Top-city sitemap is missing Dubai prayer-times"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/oran' "GSC-winners sitemap includes Oran" "GSC-winners sitemap is missing Oran"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/fr/oran' "GSC-winners sitemap includes French Oran" "GSC-winners sitemap is missing French Oran"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/ar/oran' "GSC-winners sitemap includes Arabic Oran" "GSC-winners sitemap is missing Arabic Oran"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/annaba' "GSC-winners sitemap includes Annaba" "GSC-winners sitemap is missing Annaba"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/bouira' "GSC-winners sitemap includes Bouira" "GSC-winners sitemap is missing Bouira"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/ain-benian' "GSC-winners sitemap includes Ain Benian" "GSC-winners sitemap is missing Ain Benian"
+AssertContains $sitemapGscWinners 'https://www.adantimer.com/chesham' "GSC-winners sitemap includes Chesham" "GSC-winners sitemap is missing Chesham"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/mecca' "Arabic-core sitemap includes Mecca" "Arabic-core sitemap is missing Mecca"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/medina' "Arabic-core sitemap includes Medina" "Arabic-core sitemap is missing Medina"
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/riyadh' "Arabic-core sitemap includes Riyadh" "Arabic-core sitemap is missing Riyadh"
@@ -509,11 +518,13 @@ AssertContains $sitemapArCore 'https://www.adantimer.com/ar/next-prayer/riyadh' 
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-core.xml' "Sitemap index points to the core sitemap" "Sitemap index is missing the core sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-intents.xml' "Sitemap index points to the intent sitemap" "Sitemap index is missing the intent sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-top-cities.xml' "Sitemap index points to the top-city sitemap" "Sitemap index is missing the top-city sitemap"
+AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-gsc-winners.xml' "Sitemap index points to the GSC-winners sitemap" "Sitemap index is missing the GSC-winners sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-ar-core.xml' "Sitemap index points to the Arabic-core sitemap" "Sitemap index is missing the Arabic-core sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-sg.xml.gz' "Sitemap index still points to the Singapore bulk sitemap" "Sitemap index is missing the Singapore bulk sitemap"
 AssertContains $robots 'Sitemap: https://www.adantimer.com/sitemap.xml' "robots.txt points to the sitemap index" "robots.txt is missing the sitemap index reference"
 AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired to the generator script" "Sitemap workflow no longer calls the generator script"
 AssertContains $workflow 'sitemap-top-cities.xml' "Sitemap workflow stages the top-city sitemap" "Sitemap workflow is missing the top-city sitemap"
+AssertContains $workflow 'sitemap-gsc-winners.xml' "Sitemap workflow stages the GSC-winners sitemap" "Sitemap workflow is missing the GSC-winners sitemap"
 AssertContains $priorityCities '"id": "southeast-asia"' "Priority-city config keeps the Southeast Asia cluster" "Priority-city config is missing the Southeast Asia cluster"
 AssertContains $styleCss '.city-chip-more-toggle {' "Stylesheet includes the priority-city overflow toggle" "Stylesheet is missing the priority-city overflow toggle"
 AssertContains $styleCss '.priority-link-groups {' "Stylesheet includes the grouped priority-city layout" "Stylesheet is missing the grouped priority-city layout"
@@ -735,7 +746,7 @@ TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in Lond
   TestLiveUrl "$BaseUrl/tr/prayer-times/istanbul" @('<html lang="tr" dir="ltr">', 'https://www.adantimer.com/tr/prayer-times/istanbul')
   TestLiveUrl "$BaseUrl/zh-hans/prayer-times/shanghai" @('<html lang="zh-CN" dir="ltr">', 'https://www.adantimer.com/zh-hans/prayer-times/shanghai')
   TestLiveUrl "$BaseUrl/robots.txt" @('Sitemap: https://www.adantimer.com/sitemap.xml')
-  TestLiveUrl "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-core.xml', 'https://www.adantimer.com/sitemap-top-cities.xml', 'https://www.adantimer.com/sitemap-sg.xml.gz')
+  TestLiveUrl "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-core.xml', 'https://www.adantimer.com/sitemap-top-cities.xml', 'https://www.adantimer.com/sitemap-gsc-winners.xml', 'https://www.adantimer.com/sitemap-sg.xml.gz')
 }
 
 Write-Host "Quality gate checks:"

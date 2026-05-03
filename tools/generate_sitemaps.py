@@ -32,6 +32,13 @@ DEFAULT_COUNTRIES = [
 ARABIC_COUNTRIES = {"ae", "bh", "dz", "eg", "iq", "jo", "kw", "lb", "ly", "ma", "om", "ps", "qa", "sa", "sd", "sy", "tn", "ye"}
 INTENTS = ["", "prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 PRIORITY_INTENTS = ["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
+GSC_WINNER_CITY_LANGUAGES = {
+    "oran": ["en", "fr", "ar"],
+    "annaba": ["en", "fr", "ar"],
+    "bouira": ["en", "fr", "ar"],
+    "ain-benian": ["en", "fr", "ar"],
+    "chesham": ["en"],
+}
 CORE_LANGUAGE_HOMES = [
     ("/", "1.0"),
     ("/ar", "0.98"),
@@ -172,6 +179,15 @@ def build_priority_city_entries(cities: list[str], lastmod: str, language_prefix
     return entries
 
 
+def build_gsc_winner_entries(lastmod: str) -> list[str]:
+    entries: list[str] = []
+    for city_slug, languages in GSC_WINNER_CITY_LANGUAGES.items():
+        for language in languages:
+            prefix = "" if language == "en" else f"/{language}"
+            entries.append(url_entry(f"{BASE_URL}{prefix}/{city_slug}", "0.88", lastmod))
+    return entries
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".", help="Project root")
@@ -188,15 +204,17 @@ def main() -> None:
     intents = build_intent_entries(lastmod)
     top_cities = build_priority_city_entries(ENGLISH_TOP_CITIES, lastmod)
     arabic_core = build_priority_city_entries(ARABIC_CORE_CITIES, lastmod, "ar")
+    gsc_winners = build_gsc_winner_entries(lastmod)
 
     sitemap_targets = [
         write_priority_sitemap(root, "sitemap-core", core, compressed),
         write_priority_sitemap(root, "sitemap-intents", intents, compressed),
         write_priority_sitemap(root, "sitemap-top-cities", top_cities, compressed),
         write_priority_sitemap(root, "sitemap-ar-core", arabic_core, compressed),
+        write_priority_sitemap(root, "sitemap-gsc-winners", gsc_winners, compressed),
     ]
 
-    total_urls = len(core) + len(intents) + len(top_cities) + len(arabic_core)
+    total_urls = len(core) + len(intents) + len(top_cities) + len(arabic_core) + len(gsc_winners)
     for code in country_codes:
         entries = build_country_entries(code, groups.get(code, []), lastmod)
         total_urls += len(entries)
