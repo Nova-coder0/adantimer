@@ -1131,12 +1131,13 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
         "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
         `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
-        "Cette page couvre naturellement des formulations réelles comme horaire priere, adhan, adan, dohr, maghreb ou icha, sans créer de pages dupliquées."
+        "Cette page couvre naturellement des formulations réelles comme horaire priere, horaires de prière, adhan, adan, heure dohr, heure du fajr, maghreb, maghrib, icha ou isha, sans créer de pages dupliquées."
       ],
       aboutParagraphs: [
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
-        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Pour Oran en particulier, cette couverture aide aussi sur les formulations mixtes que l'on voit réellement dans la recherche francophone: adhan aujourd'hui, adhan maghreb, heure de prière, heure dohr ou icha aujourd'hui."
       ],
       faq: [
         {
@@ -1159,12 +1160,14 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
         "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
         `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "La page couvre aussi des formulations réelles comme horaires de prière, horaire priere, adhan, adan, dohr, dhuhr, maghreb, maghrib, icha et isha sans multiplier les pages canoniques.",
         "Comparez la méthode affichée avec votre mosquée locale ou une autorité fiable si votre communauté suit un autre calendrier."
       ],
       aboutParagraphs: [
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
-        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        `La même page peut ainsi répondre à des recherches comme heure de prière à ${cityName}, adhan ${cityName}, heure dohr ${cityName}, maghreb ${cityName} ou icha ${cityName} aujourd'hui.`
       ],
       faq: [
         {
@@ -1196,6 +1199,46 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
     aboutParagraphs: resolved.aboutParagraphs,
     faqTitle: `Questions fréquentes sur les horaires de prière à ${cityName}`,
     faq: resolved.faq
+  };
+}
+
+function buildFrenchPriorityIntentCopy(pageType) {
+  if (pageType !== "prayer-times") {
+    return null;
+  }
+
+  return {
+    metaTitle: "Horaires de prière aujourd'hui | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
+    metaDescription: "Consultez les horaires de prière d'aujourd'hui, le compte à rebours jusqu'à la prochaine prière et des pages de ville ciblées pour Oran, Annaba, Bouira et Ain Benian.",
+    heroSubtitle: "Consultez les horaires de prière d'aujourd'hui, suivez la prochaine prière et utilisez une seule page canonique pour couvrir des recherches comme horaire priere, adhan aujourd'hui, heure dohr, heure du fajr, maghreb ou icha.",
+    infoTitle: "Une page d'entrée canonique pour les recherches françaises sur les horaires de prière",
+    features: [
+      "Cette route couvre les formulations centrales comme horaires de prière, horaire priere, heure de prière, adhan aujourd'hui, adhan maghreb, heure dohr et heure du fajr.",
+      "Fajr, Dhuhr, Asr, Maghrib et Isha restent visibles avec le compte à rebours jusqu'à la prochaine prière sur un seul écran.",
+      "La page renvoie ensuite vers des villes déjà porteuses de signaux comme Oran, Annaba, Bouira et Ain Benian au lieu de créer des doublons faibles.",
+      "Les variantes maghreb ou maghrib, icha ou isha, adhan ou adan sont absorbées par une seule structure propre et partageable."
+    ],
+    aboutTitle: "Comment utiliser la page française des horaires de prière",
+    aboutParagraphs: [
+      "Cette page existe pour répondre à l'intention large: horaires de prière aujourd'hui, prochaine prière et accès rapide à la bonne ville sans multiplier les routes synonymes.",
+      "Au lieu de créer une page différente pour chaque variation comme adhan, adan, dohr, dhuhr, maghreb ou icha, Adantimer concentre ces formulations sur une route canonique plus claire.",
+      "Quand la requête devient locale, la page transfère ensuite vers les routes de ville les plus pertinentes, en particulier les pages francophones qui montrent déjà des impressions dans Google."
+    ],
+    faqTitle: "Questions fréquentes sur les horaires de prière en français",
+    faq: [
+      {
+        question: "Cette page couvre-t-elle aussi des recherches comme horaire priere ou adhan aujourd'hui ?",
+        answer: "Oui. Elle a été renforcée pour couvrir naturellement ces formulations tout en gardant une seule URL canonique pour éviter les doublons."
+      },
+      {
+        question: "Pourquoi voit-on parfois dohr, dhuhr, maghreb, maghrib, icha ou isha dans la recherche ?",
+        answer: "Les usages varient selon le pays, le clavier et l'habitude. Adantimer couvre ces variantes dans le contenu sans créer une page différente pour chaque orthographe."
+      },
+      {
+        question: "Puis-je passer de cette page générale à une ville précise ?",
+        answer: "Oui. La page relie directement des villes prioritaires comme Oran, Annaba, Bouira et Ain Benian pour les recherches locales les plus proches de vos requêtes."
+      }
+    ]
   };
 }
 
@@ -3240,7 +3283,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     ];
   }
 
-  return {
+  const copy = {
     activeLanguage: language,
     isHomeRoot,
     standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
@@ -3313,6 +3356,15 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
         ? (DHIKR_INDEX_CONTENT[language] || DHIKR_INDEX_CONTENT.en).noscriptText
         : locale.noscriptText
   };
+
+  if (!sourceCity && language === "fr") {
+    const frenchPriorityIntentCopy = buildFrenchPriorityIntentCopy(pageType);
+    if (frenchPriorityIntentCopy) {
+      Object.assign(copy, frenchPriorityIntentCopy);
+    }
+  }
+
+  return copy;
 }
 
 function renderHeroCopy(copy) {
