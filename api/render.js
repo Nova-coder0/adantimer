@@ -1406,26 +1406,32 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
   };
 }
 
+function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
+  if (sourceCity) {
+    return null;
+  }
+
+  if (language === "en") {
+    if (pageType === "prayer-times" || pageType === "next-prayer" || ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
+      return buildEnglishPriorityIntentCopy(pageType);
+    }
+
+    return null;
+  }
+
+  if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
+    return buildArabicPriorityIntentCopy(pageType);
+  }
+
+  return null;
+}
+
 function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
   const cityKey = slugify(sourceCity || "");
+  const priorityIntentCopy = getPriorityIntentSeoCopy(language, pageType, sourceCity);
 
-  if (language === "en" && pageType === "prayer-times" && !sourceCity) {
-    Object.assign(copy, buildEnglishPriorityIntentCopy("prayer-times"));
-    return copy;
-  }
-
-  if (language === "en" && pageType === "next-prayer" && !sourceCity) {
-    Object.assign(copy, buildEnglishPriorityIntentCopy("next-prayer"));
-    return copy;
-  }
-
-  if (language === "en" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
-    Object.assign(copy, buildEnglishPriorityIntentCopy(pageType));
-    return copy;
-  }
-
-  if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
-    Object.assign(copy, buildArabicPriorityIntentCopy(pageType));
+  if (priorityIntentCopy) {
+    Object.assign(copy, priorityIntentCopy);
     return copy;
   }
 
