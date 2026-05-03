@@ -54,9 +54,9 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
   ]),
   fr: new Map([
     ["oran", { cityName: "Oran", variant: "oran" }],
-    ["annaba", { cityName: "Annaba", variant: "generic" }],
-    ["bouira", { cityName: "Bouira", variant: "generic" }],
-    ["ain-benian", { cityName: "Ain Benian", variant: "generic" }]
+    ["annaba", { cityName: "Annaba", variant: "annaba" }],
+    ["bouira", { cityName: "Bouira", variant: "bouira" }],
+    ["ain-benian", { cityName: "Ain Benian", variant: "ain-benian" }]
   ])
 };
 const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
@@ -1147,6 +1147,93 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         {
           question: `Pourquoi peut-on chercher ${cityName} avec horaire priere, adhan, dohr, maghreb ou icha ?`,
           answer: "Les formulations varient selon les habitudes et les claviers. Cette page reste la page canonique unique pour Oran en français."
+        },
+        {
+          question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
+          answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    },
+    annaba: {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning complet et la prochaine prière sur une seule page`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "Cette page couvre des formulations réelles vues dans la recherche francophone comme adhan, maghreb, maghrib, horaires de prière et heure de prière sans créer de doublons faibles."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Pour Annaba, la couverture vise aussi des formulations comme adhan maghreb, heure de prière ou maghrib aujourd'hui dans une seule page canonique française."
+      ],
+      faq: [
+        {
+          question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`,
+          answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière."
+        },
+        {
+          question: `Pourquoi peut-on chercher ${cityName} avec adhan, maghreb ou heure de prière ?`,
+          answer: "Les formulations varient selon les habitudes, les pays et les claviers. Cette page reste la page canonique unique pour Annaba en français."
+        },
+        {
+          question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
+          answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    },
+    bouira: {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning complet et la prochaine prière sur une seule page`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "Cette page couvre naturellement des recherches comme adhan maghreb, maghreb, maghrib, horaires de prière ou adhan aujourd'hui sans multiplier les routes synonymes."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Pour Bouira, la couverture est renforcée autour de maghreb, maghrib et adhan afin de mieux répondre aux formulations déjà vues dans Search Console."
+      ],
+      faq: [
+        {
+          question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`,
+          answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière."
+        },
+        {
+          question: `Pourquoi voit-on parfois ${cityName} avec adhan maghreb ou maghrib dans la recherche ?`,
+          answer: "Les utilisateurs mélangent souvent les variantes adhan, maghreb et maghrib. Cette page garde une seule URL canonique française pour éviter les doublons."
+        },
+        {
+          question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
+          answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    },
+    "ain-benian": {
+      infoTitle: `Horaires de prière à ${cityName} avec tout le planning du jour et Isha sur une seule page`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "La page couvre aussi des formulations réelles comme horaires de prière, horaire priere, Isha, icha et adhan sans multiplier les pages canoniques."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Pour Ain Benian, la couverture vise aussi les requêtes mêlant prayer times, Isha, icha et aujourd'hui dans une seule page française claire."
+      ],
+      faq: [
+        {
+          question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`,
+          answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière."
+        },
+        {
+          question: `Pourquoi peut-on chercher ${cityName} avec Isha, icha ou horaire priere ?`,
+          answer: "Les formulations et orthographes varient selon les habitudes et les claviers. Cette page reste la page canonique unique pour Ain Benian en français."
         },
         {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
