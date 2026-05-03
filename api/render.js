@@ -151,6 +151,39 @@ const PRIORITY_GROUP_LABELS = {
   }
 };
 
+const ROOT_DISCOVERY_COPY = {
+  en: {
+    citiesLead: "Browse popular city pages directly:",
+    searchesLead: "Jump into specific searches like",
+    featuredLead: "Featured prayer routes include"
+  },
+  ar: {
+    citiesLead: "تصفح صفحات المدن المشهورة مباشرة:",
+    searchesLead: "انتقل إلى عمليات بحث محددة مثل",
+    featuredLead: "المسارات البارزة تشمل"
+  },
+  de: {
+    citiesLead: "Öffne beliebte Stadtseiten direkt:",
+    searchesLead: "Wechsle in gezielte Suchrouten wie",
+    featuredLead: "Hervorgehobene Gebetsrouten sind"
+  },
+  fr: {
+    citiesLead: "Ouvrez directement les pages de villes populaires :",
+    searchesLead: "Passez à des recherches ciblées comme",
+    featuredLead: "Les routes de prière mises en avant comprennent"
+  },
+  tr: {
+    citiesLead: "Popüler şehir sayfalarını doğrudan aç:",
+    searchesLead: "Şu gibi belirli aramalara geç:",
+    featuredLead: "Öne çıkan namaz rotaları şunları kapsar"
+  },
+  "zh-hans": {
+    citiesLead: "直接查看热门城市页面：",
+    searchesLead: "也可以跳转到更具体的查询，例如",
+    featuredLead: "重点礼拜路由包括"
+  }
+};
+
 const ROUTES = {
   home: { en: "Prayer Times", ar: "مواقيت الصلاة", path: city => city ? `/${slugify(city)}` : "/" },
   "prayer-times": { en: "Prayer Times", ar: "مواقيت الصلاة", path: city => city ? `/prayer-times/${slugify(city)}` : "/prayer-times" },
@@ -3790,6 +3823,16 @@ ${renderFaqSection(copy)}
 
 function renderCitiesSection(copy) {
   if (copy.isHomeRoot) {
+    const discoveryCopy = ROOT_DISCOVERY_COPY[copy.activeLanguage] || ROOT_DISCOVERY_COPY.en;
+    const rootCityLinks = [...(copy.topCityGroupsPrimary || []), ...(copy.topCityGroupsOverflow || [])]
+      .flatMap(group => group.cities || [])
+      .slice(0, 6)
+      .map(item => ({
+        href: buildRoutePath(copy.activeLanguage, "home", item.city),
+        label: item.displayCity || item.city
+      }));
+    const rootSearchLinks = (copy.intentLinks || []).slice(0, 4);
+    const rootFeaturedLinks = (copy.cityIntentLinks || []).slice(0, 4);
     const popularCitiesMarkup = copy.showPopularCities ? renderPopularCitiesMarkup(copy) : "";
     const intentLinksMarkup = copy.showIntentLinks
       ? `        <div class="priority-link-group">
@@ -3799,10 +3842,16 @@ ${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">$
           </div>
         </div>`
       : "";
+    const discoveryParagraphs = [
+      rootCityLinks.length ? `      <p>${escapeHtml(discoveryCopy.citiesLead)} ${renderInlineLinks(rootCityLinks, copy.activeLanguage)}</p>` : "",
+      rootSearchLinks.length ? `      <p>${escapeHtml(discoveryCopy.searchesLead)} ${renderInlineLinks(rootSearchLinks, copy.activeLanguage)}</p>` : "",
+      rootFeaturedLinks.length ? `      <p>${escapeHtml(discoveryCopy.featuredLead)} ${renderInlineLinks(rootFeaturedLinks, copy.activeLanguage)}</p>` : ""
+    ].filter(Boolean).join("\n");
 
     return `    <section class="card prose" aria-labelledby="cities-heading">
       <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
       <h2 id="cities-heading">${escapeHtml(copy.citiesTitle)}</h2>
+${discoveryParagraphs}
 ${popularCitiesMarkup}
       <div class="priority-link-groups">
 ${intentLinksMarkup}
