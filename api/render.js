@@ -31,6 +31,22 @@ const PRIORITY_CITY_BY_SLUG = new Map(
   )
 );
 const TOP_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.englishTopGroups || []);
+const ENGLISH_PRIORITY_HOME_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.englishTopGroups || []);
+const ENGLISH_PRIORITY_HOME_CITY_BY_SLUG = new Map(ENGLISH_PRIORITY_HOME_CITIES.map(city => [city.slug, city]));
+const ENGLISH_PRIORITY_HOME_CUSTOM_SLUGS = new Set(["dubai", "mecca"]);
+const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = new Set(
+  ENGLISH_PRIORITY_HOME_CITIES
+    .map(city => city.slug)
+    .filter(slug => !ENGLISH_PRIORITY_HOME_CUSTOM_SLUGS.has(slug))
+);
+const ARABIC_PRIORITY_HOME_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.arabicCoreGroups || []);
+const ARABIC_PRIORITY_HOME_CITY_BY_SLUG = new Map(ARABIC_PRIORITY_HOME_CITIES.map(city => [city.slug, city]));
+const ARABIC_PRIORITY_HOME_CUSTOM_SLUGS = new Set(["dubai"]);
+const ARABIC_PRIORITY_HOME_GENERIC_SLUGS = new Set(
+  ARABIC_PRIORITY_HOME_CITIES
+    .map(city => city.slug)
+    .filter(slug => !ARABIC_PRIORITY_HOME_CUSTOM_SLUGS.has(slug))
+);
 
 const CITY_NAME_LOCALIZATIONS = {
   "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
@@ -1295,19 +1311,8 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
-  if (language === "en" && pageType === "home" && ["medina", "riyadh", "cairo", "kuala-lumpur", "johor-bahru", "jakarta", "london", "new-york", "paris", "istanbul"].includes(cityKey)) {
-    const cityName = {
-      medina: "Medina",
-      riyadh: "Riyadh",
-      cairo: "Cairo",
-      "kuala-lumpur": "Kuala Lumpur",
-      "johor-bahru": "Johor Bahru",
-      "jakarta": "Jakarta",
-      london: "London",
-      "new-york": "New York",
-      paris: "Paris",
-      istanbul: "Istanbul"
-    }[cityKey];
+  if (language === "en" && pageType === "home" && ENGLISH_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
+    const cityName = ENGLISH_PRIORITY_HOME_CITY_BY_SLUG.get(cityKey)?.city || place;
 
     Object.assign(copy, {
       metaTitle: `Prayer Times in ${cityName} Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`,
@@ -1382,7 +1387,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
     return copy;
   }
 
-  if (language === "ar" && pageType === "home" && ["mecca", "medina", "riyadh", "cairo", "istanbul"].includes(cityKey)) {
+  if (language === "ar" && pageType === "home" && ARABIC_PRIORITY_HOME_GENERIC_SLUGS.has(cityKey)) {
     const cityName = {
       mecca: "مكة",
       medina: "المدينة",
