@@ -415,6 +415,8 @@ AssertContains $renderJs 'Asr Time Today | Daily Asr Prayer Time Finder | Adanti
 AssertContains $renderJs 'Maghrib Time Today | Daily Maghrib Prayer Time Finder | Adantimer' "SSR renderer carries the Maghrib priority title" "SSR renderer is missing the stronger Maghrib title"
 AssertContains $renderJs 'Isha Time Today | Daily Isha Prayer Time Finder | Adantimer' "SSR renderer carries the Isha priority title" "SSR renderer is missing the stronger Isha title"
 AssertContains $renderJs 'if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity)' "SSR renderer carries the Arabic prayer-intent page switch" "SSR renderer is missing the Arabic prayer-intent page switch"
+AssertContains $renderJs 'function buildArabicPriorityIntentCopy(pageType)' "SSR renderer centralizes Arabic priority intent copy in a shared builder" "SSR renderer is missing the shared Arabic priority intent builder"
+AssertContains $renderJs 'Object.assign(copy, buildArabicPriorityIntentCopy(pageType));' "SSR renderer routes Arabic prayer-intent pages through the shared builder" "SSR renderer no longer routes Arabic prayer-intent pages through the shared builder"
 AssertContains $renderJs 'priority-cities.json' "SSR renderer reads the central priority-city config" "SSR renderer is not wired to the central priority-city config"
 AssertContains $renderJs 'data-priority-group-label' "SSR renderer outputs grouped priority-city labels" "SSR renderer is missing grouped priority-city labels"
 AssertContains $renderJs 'function buildEnglishPriorityHomeCityCopy(cityName, variant = "generic")' "SSR renderer centralizes English priority home-city copy in a shared builder" "SSR renderer is missing the shared English priority home-city builder"

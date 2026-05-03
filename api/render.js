@@ -1236,25 +1236,7 @@ function buildEnglishPriorityIntentCopy(pageType) {
   };
 }
 
-function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
-  const cityKey = slugify(sourceCity || "");
-
-  if (language === "en" && pageType === "prayer-times" && !sourceCity) {
-    Object.assign(copy, buildEnglishPriorityIntentCopy("prayer-times"));
-    return copy;
-  }
-
-  if (language === "en" && pageType === "next-prayer" && !sourceCity) {
-    Object.assign(copy, buildEnglishPriorityIntentCopy("next-prayer"));
-    return copy;
-  }
-
-  if (language === "en" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
-    Object.assign(copy, buildEnglishPriorityIntentCopy(pageType));
-    return copy;
-  }
-
-  if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
+function buildArabicPriorityIntentCopy(pageType) {
     const prayerConfig = {
       fajr: {
         prayerName: "الفجر",
@@ -1320,7 +1302,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
 
     const { prayerName, metaTitle, metaDescription, aboutTitle, aboutParagraphs, faqTitle } = prayerConfig[pageType];
 
-    Object.assign(copy, {
+  return {
       metaTitle,
       metaDescription,
       heroSubtitle: `تحقق من وقت ${prayerName} اليوم، وأبق العد التنازلي للصلاة القادمة ظاهرا، ثم انتقل مباشرة إلى صفحات المدن المهمة عندما تحتاج إلى جدول أقوى حسب المدينة.`,
@@ -1350,6 +1332,29 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
         }
       ]
     });
+    return copy;
+  }
+
+function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
+  const cityKey = slugify(sourceCity || "");
+
+  if (language === "en" && pageType === "prayer-times" && !sourceCity) {
+    Object.assign(copy, buildEnglishPriorityIntentCopy("prayer-times"));
+    return copy;
+  }
+
+  if (language === "en" && pageType === "next-prayer" && !sourceCity) {
+    Object.assign(copy, buildEnglishPriorityIntentCopy("next-prayer"));
+    return copy;
+  }
+
+  if (language === "en" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
+    Object.assign(copy, buildEnglishPriorityIntentCopy(pageType));
+    return copy;
+  }
+
+  if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType) && !sourceCity) {
+    Object.assign(copy, buildArabicPriorityIntentCopy(pageType));
     return copy;
   }
 
