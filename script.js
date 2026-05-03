@@ -133,36 +133,42 @@ const PRIORITY_GROUP_LABELS = {
     core: "Core cities",
     "southeast-asia": "Southeast Asia",
     global: "Global cities",
+    cities: "Other cities",
     intents: "Priority intents"
   },
   ar: {
     core: "المدن الأساسية",
     "southeast-asia": "جنوب شرق آسيا",
     global: "مدن عالمية",
+    cities: "مدن أخرى",
     intents: "صفحات النية الأساسية"
   },
   de: {
     core: "Kernstädte",
     "southeast-asia": "Südostasien",
     global: "Globale Städte",
+    cities: "Weitere Städte",
     intents: "Prioritäts-Intents"
   },
   fr: {
     core: "Villes clés",
     "southeast-asia": "Asie du Sud-Est",
     global: "Villes mondiales",
+    cities: "Autres villes",
     intents: "Intentions prioritaires"
   },
   tr: {
     core: "Çekirdek şehirler",
     "southeast-asia": "Güneydoğu Asya",
     global: "Küresel şehirler",
+    cities: "Diğer şehirler",
     intents: "Öncelikli aramalar"
   },
   "zh-hans": {
     core: "核心城市",
     "southeast-asia": "东南亚",
     global: "全球城市",
+    cities: "其他城市",
     intents: "重点意图页面"
   }
 };
@@ -1440,6 +1446,13 @@ function renderStaticContent() {
     const heading = citiesSection.querySelector("h2");
     if (eyebrow) eyebrow.textContent = locale.citiesEyebrow;
     if (heading) heading.textContent = locale.citiesTitle;
+    const priorityLabels = PRIORITY_GROUP_LABELS[language] || PRIORITY_GROUP_LABELS.en;
+    citiesSection.querySelectorAll("[data-priority-group-label]").forEach(node => {
+      const groupId = node.getAttribute("data-priority-group-label") || "";
+      if (priorityLabels[groupId]) {
+        node.textContent = priorityLabels[groupId];
+      }
+    });
     citiesSection.querySelectorAll("a.city-name-link[data-city]").forEach(link => {
       const city = link.dataset.city || "";
       const country = link.dataset.country || "";

@@ -111,36 +111,42 @@ const PRIORITY_GROUP_LABELS = {
     core: "Core cities",
     "southeast-asia": "Southeast Asia",
     global: "Global cities",
+    cities: "Other cities",
     intents: "Priority intents"
   },
   ar: {
     core: "المدن الأساسية",
     "southeast-asia": "جنوب شرق آسيا",
     global: "مدن عالمية",
+    cities: "مدن أخرى",
     intents: "صفحات النية الأساسية"
   },
   de: {
     core: "Kernstädte",
     "southeast-asia": "Südostasien",
     global: "Globale Städte",
+    cities: "Weitere Städte",
     intents: "Prioritäts-Intents"
   },
   fr: {
     core: "Villes clés",
     "southeast-asia": "Asie du Sud-Est",
     global: "Villes mondiales",
+    cities: "Autres villes",
     intents: "Intentions prioritaires"
   },
   tr: {
     core: "Çekirdek şehirler",
     "southeast-asia": "Güneydoğu Asya",
     global: "Küresel şehirler",
+    cities: "Diğer şehirler",
     intents: "Öncelikli aramalar"
   },
   "zh-hans": {
     core: "核心城市",
     "southeast-asia": "东南亚",
     global: "全球城市",
+    cities: "其他城市",
     intents: "重点意图页面"
   }
 };
@@ -2820,14 +2826,16 @@ function getPriorityGroupCities(language) {
 }
 
 function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection }) {
-  const isHomeRoot = pageType === "home" && !place;
+  const isHomeRoot = pageType === "home" && !place && !sourceCity;
   const rootOverride = ROOT_HOME_OVERRIDES.en;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
     .filter(item => item.city !== sourceCity)
     .slice(0, 6)
     .map(item => ({
-      label: `${topic} in ${item.city}`,
+      city: item.city,
+      country: item.country,
+      label: item.city,
       href: buildRoutePath("en", resolvedPage, item.city)
     }));
   const intentLinks = [
@@ -2874,6 +2882,7 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
 
   const copy = {
     activeLanguage: "en",
+    isHomeRoot,
     standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
     standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection" ? pageType : "",
     hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
@@ -2982,14 +2991,16 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
 }
 
 function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection }) {
-  const isHomeRoot = pageType === "home" && !place;
+  const isHomeRoot = pageType === "home" && !place && !sourceCity;
   const rootOverride = ROOT_HOME_OVERRIDES.ar;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const cityLinks = TOP_CITIES
     .filter(item => item.city !== sourceCity)
     .slice(0, 6)
     .map(item => ({
-      label: `${topic} في ${item.city}`,
+      city: item.city,
+      country: item.country,
+      label: localizeCityName(item.city, "ar"),
       href: buildRoutePath("ar", resolvedPage, item.city)
     }));
   cityLinks.forEach((link, index) => {
@@ -3040,6 +3051,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
 
   const copy = {
     activeLanguage: "ar",
+    isHomeRoot,
     standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
     standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection" ? pageType : "",
     hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
@@ -3150,7 +3162,7 @@ function buildCopy({ language, pageType, place, sourceCity, topic, surah, surahR
 function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection }) {
   const locale = COPY_LOCALES[language];
   if (!locale) return buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahReaderData, dhikrCollection, hadithCollection });
-  const isHomeRoot = pageType === "home" && !place;
+  const isHomeRoot = pageType === "home" && !place && !sourceCity;
   const rootOverride = ROOT_HOME_OVERRIDES[language];
 
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
@@ -3158,7 +3170,9 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     .filter(item => item.city !== sourceCity)
     .slice(0, 6)
     .map(item => ({
-      label: locale.cityLinkLabel(topic, localizeCityName(item.city, language)),
+      city: item.city,
+      country: item.country,
+      label: localizeCityName(item.city, language),
       href: buildRoutePath(language, resolvedPage, item.city)
     }));
   const intentLinks = locale.intentLinks.map(item => ({
@@ -3195,6 +3209,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
 
   return {
     activeLanguage: language,
+    isHomeRoot,
     standalonePage: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
     standalonePageType: pageType === "qibla" || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection" ? pageType : "",
     hideNextPrayerCard: pageType === "qibla" || pageType === "quran" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection",
@@ -3364,16 +3379,6 @@ ${copy.quranStats.map(item => `            <div class="quran-hero-stat">
         </section>`;
   }
 
-  const popularCitiesMarkup = copy.showPopularCities ? renderPopularCitiesMarkup(copy) : "";
-
-  const intentLinksMarkup = copy.showIntentLinks
-    ? `
-
-          <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
-${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("\n")}
-          </div>`
-    : "";
-
   return `        <section class="hero-copy">
           <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
           <h1 id="hero-heading">${escapeHtml(copy.heroHeading)}</h1>
@@ -3388,8 +3393,6 @@ ${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">$
             <input type="text" id="manual-country" name="country" placeholder="${escapeHtml(copy.countryPlaceholder)}" autocomplete="country-name">
             <button id="set-location-btn" type="submit">${escapeHtml(copy.submitLabel)}</button>
           </form>
-${popularCitiesMarkup}
-${intentLinksMarkup}
         </section>`;
 }
 
@@ -3786,6 +3789,34 @@ ${renderFaqSection(copy)}
 }
 
 function renderCitiesSection(copy) {
+  if (copy.isHomeRoot) {
+    const popularCitiesMarkup = copy.showPopularCities ? renderPopularCitiesMarkup(copy) : "";
+    const intentLinksMarkup = copy.showIntentLinks
+      ? `        <div class="priority-link-group">
+          <h3 class="priority-link-heading" data-priority-group-label="intents">${escapeHtml(copy.priorityGroupLabels?.intents || "Priority intents")}</h3>
+          <div class="intent-links" aria-label="${escapeHtml(copy.intentAria)}">
+${copy.intentLinks.map(item => `            <a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("\n")}
+          </div>
+        </div>`
+      : "";
+
+    return `    <section class="card prose" aria-labelledby="cities-heading">
+      <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
+      <h2 id="cities-heading">${escapeHtml(copy.citiesTitle)}</h2>
+${popularCitiesMarkup}
+      <div class="priority-link-groups">
+${intentLinksMarkup}
+      </div>
+    </section>`;
+  }
+
+  const cityLinksMarkup = `        <div class="priority-link-group">
+          <h3 class="priority-link-heading" data-priority-group-label="cities">${escapeHtml(copy.priorityGroupLabels?.cities || "Other cities")}</h3>
+          <div class="priority-link-list">
+${(copy.cityLinks || []).map(item => `            <a class="priority-link city-name-link" href="${escapeHtml(item.href)}" data-city="${escapeHtml(item.city || "")}" data-country="${escapeHtml(item.country || "")}">${escapeHtml(item.label)}</a>`).join("\n")}
+          </div>
+        </div>`;
+
   const cityGroupsMarkup = (copy.priorityCityGroups || []).map(group => `        <div class="priority-link-group">
           <h3 class="priority-link-heading" data-priority-group-label="${escapeHtml(group.id)}">${escapeHtml(copy.priorityGroupLabels?.[group.id] || group.id)}</h3>
           <div class="priority-link-list">
@@ -3804,7 +3835,7 @@ ${(copy.cityIntentLinks || copy.intentLinks || []).map(item => `            <a c
       <p class="eyebrow">${escapeHtml(copy.citiesEyebrow)}</p>
       <h2 id="cities-heading">${escapeHtml(copy.citiesTitle)}</h2>
       <div class="priority-link-groups">
-${cityGroupsMarkup}
+${copy.isHomeRoot ? cityGroupsMarkup : cityLinksMarkup}
 ${intentGroupMarkup}
       </div>
     </section>`;
