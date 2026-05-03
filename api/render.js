@@ -1331,9 +1331,8 @@ function buildArabicPriorityIntentCopy(pageType) {
           answer: "يعتمد الوقت المعروض على الجدول المحمل، ويمكن أن تختلف الجداول بحسب طريقة الحساب أو الجهة المحلية، لذلك قارن طريقة الحساب الظاهرة مع توقيت المسجد المحلي عند الحاجة."
         }
       ]
-    });
-    return copy;
-  }
+  };
+}
 
 function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
   const cityKey = slugify(sourceCity || "");
