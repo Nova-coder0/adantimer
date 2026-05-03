@@ -655,6 +655,8 @@ if ($RunLive) {
   TestLiveUrlRegex "$BaseUrl/prayer-times" @('<title>Prayer Times Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/prayer-times" @('href="/oran"', 'href="/annaba"', 'href="/bouira"', 'href="/ain-benian"', 'href="/chesham"')
   TestLiveUrl "$BaseUrl/fr/prayer-times" @('<html lang="fr" dir="ltr">', 'href="/fr/oran"', 'href="/fr/annaba"', 'href="/fr/bouira"', 'href="/fr/ain-benian"', 'horaire priere', 'adhan aujourd')
+  TestLiveUrl "$BaseUrl/fr/next-prayer" @('<html lang="fr" dir="ltr">', 'href="/fr/next-prayer/oran"', 'href="/fr/next-prayer/annaba"', 'Prochaine prière aujourd', 'adhan aujourd')
+  TestLiveUrlRegex "$BaseUrl/fr/next-prayer" @("<title>Prochaine prière aujourd(?:&#39;|'|’)hui \| Compte à rebours en direct \| Adantimer</title>")
   TestLiveUrl "$BaseUrl/ar/prayer-times" @('<html lang="ar" dir="rtl">', 'href="/ar/oran"', 'href="/ar/annaba"', 'href="/ar/bouira"', 'href="/ar/ain-benian"')
   TestLiveUrl "$BaseUrl/prayer-times/kuala-lumpur" @('<body data-page="prayer-times">', 'Prayer Times in Kuala Lumpur Today', 'How to use the Kuala Lumpur prayer times page')
   TestLiveUrlRegex "$BaseUrl/prayer-times/kuala-lumpur" @('<title>Prayer Times in Kuala Lumpur Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
