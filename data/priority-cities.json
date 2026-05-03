@@ -29,31 +29,11 @@
     }
   ],
   "hero": {
-    "primary": ["dubai", "mecca", "medina", "riyadh", "kuala-lumpur", "jakarta"],
-    "overflow": ["cairo", "istanbul", "johor-bahru", "london", "new-york", "paris"]
+    "primaryGroups": ["core"],
+    "overflowGroups": ["southeast-asia", "global"]
   },
   "sitemaps": {
-    "englishTopCities": [
-      "dubai",
-      "mecca",
-      "medina",
-      "riyadh",
-      "cairo",
-      "istanbul",
-      "kuala-lumpur",
-      "johor-bahru",
-      "jakarta",
-      "london",
-      "new-york",
-      "paris"
-    ],
-    "arabicCoreCities": [
-      "dubai",
-      "mecca",
-      "medina",
-      "riyadh",
-      "cairo",
-      "istanbul"
-    ]
+    "englishTopGroups": ["core", "southeast-asia", "global"],
+    "arabicCoreGroups": ["core"]
   }
 }

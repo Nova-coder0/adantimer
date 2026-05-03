@@ -42,8 +42,21 @@ CORE_LANGUAGE_HOMES = [
 ]
 PRIORITY_CONFIG_PATH = pathlib.Path(__file__).resolve().parents[1] / "data" / "priority-cities.json"
 PRIORITY_CITY_CONFIG = json.loads(PRIORITY_CONFIG_PATH.read_text(encoding="utf-8"))
-ENGLISH_TOP_CITIES = PRIORITY_CITY_CONFIG["sitemaps"]["englishTopCities"]
-ARABIC_CORE_CITIES = PRIORITY_CITY_CONFIG["sitemaps"]["arabicCoreCities"]
+PRIORITY_CITY_GROUPS = {group["id"]: group["cities"] for group in PRIORITY_CITY_CONFIG["groups"]}
+
+
+def priority_group_slugs(group_ids: list[str]) -> list[str]:
+    slugs: list[str] = []
+    for group_id in group_ids:
+        for city in PRIORITY_CITY_GROUPS.get(group_id, []):
+            slug = city["slug"]
+            if slug not in slugs:
+                slugs.append(slug)
+    return slugs
+
+
+ENGLISH_TOP_CITIES = priority_group_slugs(PRIORITY_CITY_CONFIG["sitemaps"]["englishTopGroups"])
+ARABIC_CORE_CITIES = priority_group_slugs(PRIORITY_CITY_CONFIG["sitemaps"]["arabicCoreGroups"])
 
 
 def slugify(value: str) -> str:

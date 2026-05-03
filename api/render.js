@@ -24,14 +24,13 @@ const QURAN_SURAH_CACHE_TTL_MS = 1000 * 60 * 60 * 12;
 const quranSurahCache = new Map();
 const PRIORITY_CITY_CONFIG = JSON.parse(readFileSync(PRIORITY_CITY_CONFIG_PATH, "utf8"));
 const PRIORITY_CITY_GROUPS = PRIORITY_CITY_CONFIG.groups || [];
+const PRIORITY_CITY_GROUPS_BY_ID = new Map(PRIORITY_CITY_GROUPS.map(group => [group.id, group]));
 const PRIORITY_CITY_BY_SLUG = new Map(
   PRIORITY_CITY_GROUPS.flatMap(group =>
     group.cities.map(city => [city.slug, { ...city, groupId: group.id }])
   )
 );
-const TOP_CITIES = (PRIORITY_CITY_CONFIG.sitemaps?.englishTopCities || [])
-  .map(slug => PRIORITY_CITY_BY_SLUG.get(slug))
-  .filter(Boolean);
+const TOP_CITIES = getPriorityCitiesByGroupIds(PRIORITY_CITY_CONFIG.sitemaps?.englishTopGroups || []);
 
 const CITY_NAME_LOCALIZATIONS = {
   "makkah": { ar: "\u0645\u0643\u0629", de: "Mekka", fr: "La Mecque", tr: "Mekke", "zh-hans": "\u9ea6\u52a0" },
@@ -2286,20 +2285,25 @@ function getPriorityCitiesBySlugs(slugs = []) {
     .filter(Boolean);
 }
 
-function getLocalizedPriorityGroups(language, slugs = []) {
-  const slugSet = new Set(slugs);
-  return PRIORITY_CITY_GROUPS
+function getPriorityCitiesByGroupIds(groupIds = []) {
+  return groupIds.flatMap(groupId => {
+    const group = PRIORITY_CITY_GROUPS_BY_ID.get(groupId);
+    return group ? group.cities : [];
+  });
+}
+
+function getLocalizedPriorityGroups(language, groupIds = []) {
+  return groupIds
+    .map(groupId => PRIORITY_CITY_GROUPS_BY_ID.get(groupId))
+    .filter(Boolean)
     .map(group => ({
       id: group.id,
-      cities: group.cities
-        .filter(city => slugSet.has(city.slug))
-        .map(city => ({
-          ...city,
-          displayCity: localizeCityName(city.city, language),
-          displayCountry: localizeCountryName(city.country, language)
-        }))
-    }))
-    .filter(group => group.cities.length);
+      cities: group.cities.map(city => ({
+        ...city,
+        displayCity: localizeCityName(city.city, language),
+        displayCountry: localizeCountryName(city.country, language)
+      }))
+    }));
 }
 
 function getPriorityGroupCities(language) {
@@ -2377,8 +2381,8 @@ function buildEnglishCopy({ pageType, place, sourceCity, topic, surah, surahRead
     countryLabel: "Country",
     countryPlaceholder: "Country (optional)",
     submitLabel: "Find Prayer Times",
-    topCityGroupsPrimary: getLocalizedPriorityGroups("en", PRIORITY_CITY_CONFIG.hero?.primary || []),
-    topCityGroupsOverflow: getLocalizedPriorityGroups("en", PRIORITY_CITY_CONFIG.hero?.overflow || []),
+    topCityGroupsPrimary: getLocalizedPriorityGroups("en", PRIORITY_CITY_CONFIG.hero?.primaryGroups || []),
+    topCityGroupsOverflow: getLocalizedPriorityGroups("en", PRIORITY_CITY_CONFIG.hero?.overflowGroups || []),
     topCitiesAria: "Popular city shortcuts",
     topCitiesMoreLabel: "More cities",
     intentLinks,
@@ -2531,8 +2535,8 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     countryLabel: "الدولة",
     countryPlaceholder: "الدولة (اختياري)",
     submitLabel: "اعرض مواقيت الصلاة",
-    topCityGroupsPrimary: getLocalizedPriorityGroups("ar", PRIORITY_CITY_CONFIG.hero?.primary || []),
-    topCityGroupsOverflow: getLocalizedPriorityGroups("ar", PRIORITY_CITY_CONFIG.hero?.overflow || []),
+    topCityGroupsPrimary: getLocalizedPriorityGroups("ar", PRIORITY_CITY_CONFIG.hero?.primaryGroups || []),
+    topCityGroupsOverflow: getLocalizedPriorityGroups("ar", PRIORITY_CITY_CONFIG.hero?.overflowGroups || []),
     topCitiesAria: "روابط سريعة للمدن",
     topCitiesMoreLabel: "مدن إضافية",
     intentLinks,
@@ -2671,8 +2675,8 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     countryLabel: locale.countryLabel,
     countryPlaceholder: locale.countryPlaceholder,
     submitLabel: locale.submitLabel,
-    topCityGroupsPrimary: getLocalizedPriorityGroups(language, PRIORITY_CITY_CONFIG.hero?.primary || []),
-    topCityGroupsOverflow: getLocalizedPriorityGroups(language, PRIORITY_CITY_CONFIG.hero?.overflow || []),
+    topCityGroupsPrimary: getLocalizedPriorityGroups(language, PRIORITY_CITY_CONFIG.hero?.primaryGroups || []),
+    topCityGroupsOverflow: getLocalizedPriorityGroups(language, PRIORITY_CITY_CONFIG.hero?.overflowGroups || []),
     topCitiesAria: locale.topCitiesAria,
     topCitiesMoreLabel: locale.topCitiesMoreLabel,
     intentLinks,
