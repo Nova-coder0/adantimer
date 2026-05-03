@@ -95,6 +95,15 @@ def urlset(entries: list[str]) -> str:
     )
 
 
+def sitemap_index(entries: list[str]) -> str:
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(entries)
+        + "\n</sitemapindex>\n"
+    )
+
+
 def write_sitemap(path: pathlib.Path, xml: str, compressed: bool) -> pathlib.Path:
     if compressed:
         target = path.with_suffix(path.suffix + ".gz")
@@ -109,6 +118,20 @@ def write_priority_sitemap(root: pathlib.Path, name: str, entries: list[str], co
     write_sitemap(xml_path, urlset(entries), False)
     if compressed:
         write_sitemap(xml_path, urlset(entries), True)
+    return xml_path
+
+
+def write_sitemap_index(root: pathlib.Path, name: str, targets: list[pathlib.Path], lastmod: str) -> pathlib.Path:
+    entries: list[str] = []
+    for target in targets:
+        entries.append(
+            "  <sitemap>\n"
+            f"    <loc>{BASE_URL}/{html.escape(target.name, quote=False)}</loc>\n"
+            f"    <lastmod>{lastmod}</lastmod>\n"
+            "  </sitemap>"
+        )
+    xml_path = root / f"{name}.xml"
+    xml_path.write_text(sitemap_index(entries), encoding="utf-8")
     return xml_path
 
 
@@ -206,7 +229,7 @@ def main() -> None:
     arabic_core = build_priority_city_entries(ARABIC_CORE_CITIES, lastmod, "ar")
     gsc_winners = build_gsc_winner_entries(lastmod)
 
-    sitemap_targets = [
+    priority_targets = [
         write_priority_sitemap(root, "sitemap-core", core, compressed),
         write_priority_sitemap(root, "sitemap-intents", intents, compressed),
         write_priority_sitemap(root, "sitemap-top-cities", top_cities, compressed),
@@ -215,27 +238,20 @@ def main() -> None:
     ]
 
     total_urls = len(core) + len(intents) + len(top_cities) + len(arabic_core) + len(gsc_winners)
+    bulk_targets: list[pathlib.Path] = []
     for code in country_codes:
         entries = build_country_entries(code, groups.get(code, []), lastmod)
         total_urls += len(entries)
-        sitemap_targets.append(write_sitemap(root / f"sitemap-{code}.xml", urlset(entries), compressed))
+        bulk_targets.append(write_sitemap(root / f"sitemap-{code}.xml", urlset(entries), compressed))
 
-    index_entries = []
-    for target in sitemap_targets:
-        index_entries.append(
-            "  <sitemap>\n"
-            f"    <loc>{BASE_URL}/{html.escape(target.name, quote=False)}</loc>\n"
-            f"    <lastmod>{lastmod}</lastmod>\n"
-            "  </sitemap>"
-        )
-    index = (
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + "\n".join(index_entries)
-        + "\n</sitemapindex>\n"
+    write_sitemap_index(root, "sitemap-bulk-cities", bulk_targets, lastmod)
+    write_sitemap_index(root, "sitemap", priority_targets, lastmod)
+    print(
+        "Generated "
+        f"{len(priority_targets)} priority sitemaps, "
+        f"{len(bulk_targets)} bulk country sitemaps, "
+        f"and {total_urls:,} URLs"
     )
-    (root / "sitemap.xml").write_text(index, encoding="utf-8")
-    print(f"Generated {len(sitemap_targets)} sitemap files with {total_urls:,} URLs")
 
 
 if __name__ == "__main__":

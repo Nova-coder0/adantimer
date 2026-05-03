@@ -8,11 +8,29 @@ The goal is not to create empty files or fake URLs. The goal is to give search e
 
 ## Sitemap Structure
 
-- `sitemap.xml` is the sitemap index submitted to Google Search Console.
-- `sitemap-core.xml.gz` contains the main intent pages.
+- `sitemap.xml` is the prioritized sitemap index submitted to Google Search Console.
+- `sitemap-core.xml` contains the main language home routes.
+- `sitemap-intents.xml` contains the core prayer intent routes.
+- `sitemap-top-cities.xml` contains reviewed top-city routes and their intent pages.
+- `sitemap-ar-core.xml` contains reviewed Arabic core-city routes and their intent pages.
+- `sitemap-gsc-winners.xml` contains routes that already show real Google Search Console impression signals.
+- `sitemap-bulk-cities.xml` is a secondary sitemap index for bulk country sitemaps.
 - `sitemap-xx.xml.gz` files contain country-specific city URLs.
 - Each country sitemap stays below 50,000 URLs.
 - Arabic-market countries include both English/global and `/ar/...` Arabic URL patterns.
+
+## Priority Rule
+
+The main sitemap index is not a dump of every generated URL anymore.
+
+It is intentionally limited to priority sitemap files that represent:
+
+- reviewed core hubs
+- reviewed top cities
+- reviewed Arabic core routes
+- real GSC winner pages
+
+Bulk city sitemaps remain available through `sitemap-bulk-cities.xml`, but they are no longer mixed into the main sitemap signal by default.
 
 ## Canonical URL Rule
 
@@ -41,4 +59,7 @@ The sitemap generator uses these canonical intent patterns:
 
 The generator uses real GeoNames city data through `geonamescache`. This lets us scale toward a large competitor-style SEO structure while avoiding invented or low-quality URLs.
 
-The local test generated more than one million city + prayer-intent URLs while keeping the largest sitemap below 50,000 URLs.
+That scale should not be pushed to Google as one undifferentiated priority signal on a young domain. The generator therefore keeps two layers:
+
+- a small, prioritized sitemap index for the strongest pages
+- a separate bulk-city sitemap index for longtail inventory
