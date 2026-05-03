@@ -1333,6 +1333,123 @@ function buildArabicPriorityIntentCopy(pageType) {
   };
 }
 
+function buildEnglishPriorityIntentCityCopy(pageType, cityKey, place) {
+  const key = `${pageType}:${cityKey}`;
+
+  if (key === "prayer-times:kuala-lumpur") {
+    return {
+      metaTitle: "Prayer Times in Kuala Lumpur Today | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer",
+      metaDescription: "Check today's prayer times in Kuala Lumpur with Fajr, Dhuhr, Asr, Maghrib, Isha, and a live next prayer countdown for Kuala Lumpur.",
+      heroSubtitle: "Check today's prayer times in Kuala Lumpur, keep the next-prayer countdown visible, and review the full Fajr, Dhuhr, Asr, Maghrib, and Isha schedule on one page.",
+      infoTitle: "Use this Kuala Lumpur page when you need the full daily prayer schedule first",
+      features: [
+        "The full Kuala Lumpur schedule stays visible with Fajr, Dhuhr, Asr, Maghrib, Isha, and the next-prayer countdown together.",
+        "Current prayer, next prayer, today's date, and the active calculation method remain on one screen for a faster check.",
+        "The page links directly into Kuala Lumpur-specific next-prayer and single-prayer routes when you want a narrower lookup.",
+        "GPS, IP fallback, and manual city search remain available when you need to compare Kuala Lumpur with another city quickly."
+      ],
+      citiesTitle: "Related Kuala Lumpur prayer routes",
+      aboutTitle: "How to use the Kuala Lumpur prayer times page",
+      aboutParagraphs: [
+        "This route is built for the direct search intent: prayer times in Kuala Lumpur today, with the full daily schedule visible immediately instead of a generic overview first.",
+        "The page keeps the timetable, the next-prayer countdown, and the visible calculation method together so you can verify the result before moving into a narrower prayer route.",
+        "If your local mosque or community timetable differs, use this page as the fast city lookup and then compare the visible method with the local authority you follow."
+      ],
+      faqTitle: "Common questions about prayer times in Kuala Lumpur",
+      faq: [
+        {
+          question: "Does this Kuala Lumpur page show all five daily prayer times?",
+          answer: "Yes. The page shows Fajr, Dhuhr, Asr, Maghrib, and Isha together with the live next-prayer countdown."
+        },
+        {
+          question: "Can I move from this page into a narrower Kuala Lumpur prayer route?",
+          answer: "Yes. The page links directly into city-specific next-prayer and single-prayer routes for Kuala Lumpur."
+        },
+        {
+          question: "Why can prayer times in Kuala Lumpur differ from another timetable?",
+          answer: "Prayer times can vary by calculation method, data source, or local community timetable, so the visible method label and your local mosque guidance both matter."
+        }
+      ]
+    };
+  }
+
+  if (key === "next-prayer:jakarta") {
+    return {
+      metaTitle: "Next Prayer in Jakarta Today | Live Salah Countdown | Adantimer",
+      metaDescription: "See the next prayer in Jakarta today with a live salah countdown, current prayer status, and the full daily prayer schedule for Jakarta.",
+      heroSubtitle: "Track the next prayer in Jakarta with a live countdown, see the current prayer status, and keep the full daily schedule available for a faster local check.",
+      infoTitle: "Use this Jakarta page when the next prayer is the main question",
+      features: [
+        "The next-prayer countdown stays at the center of the Jakarta page together with the full daily schedule.",
+        "Current prayer, next prayer, today's date, and the active method stay visible on the same screen.",
+        "The page links directly into Jakarta prayer-times and single-prayer routes when you need a more focused local view.",
+        "GPS, IP fallback, and manual city search remain available if you need to compare Jakarta with another city."
+      ],
+      citiesTitle: "Related Jakarta prayer routes",
+      aboutTitle: "What the Jakarta next-prayer page should answer first",
+      aboutParagraphs: [
+        "This route is for the direct local intent: what is the next prayer in Jakarta and how much time is left until it starts.",
+        "The page keeps the countdown, current prayer status, full daily timetable, and active method together so the local answer stays visible without extra navigation.",
+        "When you need a broader or narrower view after the first check, the linked Jakarta routes let you move into the full daily page or into individual prayer pages quickly."
+      ],
+      faqTitle: "Common questions about the next prayer in Jakarta",
+      faq: [
+        {
+          question: "Does this Jakarta page only show the next prayer?",
+          answer: "No. The next prayer is the main focus, but the full daily prayer schedule for Jakarta still stays visible on the same page."
+        },
+        {
+          question: "Can I switch from the Jakarta next-prayer page into other Jakarta prayer routes?",
+          answer: "Yes. The page links directly into the Jakarta prayer-times route and into narrower single-prayer routes."
+        },
+        {
+          question: "Why can the Jakarta countdown differ from another source?",
+          answer: "The countdown depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
+        }
+      ]
+    };
+  }
+
+  if (key === "fajr:johor-bahru") {
+    return {
+      metaTitle: "Fajr Time in Johor Bahru Today | Daily Fajr Prayer Time Finder | Adantimer",
+      metaDescription: "Check Fajr time in Johor Bahru today, compare the full daily schedule, and keep the live next-prayer countdown visible on one page.",
+      heroSubtitle: "Check Fajr time in Johor Bahru today, keep the next-prayer countdown visible, and review the full daily schedule before moving into another route.",
+      infoTitle: "Use this Johor Bahru page when Fajr time is the main question",
+      features: [
+        "Fajr stays at the center of the Johor Bahru page while the full daily timetable remains visible for context.",
+        "Current prayer, next prayer, today's date, and the active method stay on the same screen for a faster local check.",
+        "The page links directly into Johor Bahru prayer-times and next-prayer routes when you want a broader city view.",
+        "GPS, IP fallback, and manual city search remain available if you need to compare Johor Bahru with another city."
+      ],
+      citiesTitle: "Related Johor Bahru prayer routes",
+      aboutTitle: "What the Johor Bahru Fajr page should answer first",
+      aboutParagraphs: [
+        "This route is built for the direct local intent: what time is Fajr in Johor Bahru today and how can I verify it quickly.",
+        "The page keeps Fajr time together with the full daily timetable, the next-prayer countdown, and the visible calculation method so the answer is easier to trust.",
+        "When you need a broader city check after confirming Fajr, the linked Johor Bahru routes let you move into the full prayer-times page or the next-prayer page immediately."
+      ],
+      faqTitle: "Common questions about Fajr time in Johor Bahru",
+      faq: [
+        {
+          question: "Does this Johor Bahru page only show Fajr time?",
+          answer: "No. Fajr is the main focus, but the full daily prayer schedule for Johor Bahru stays visible on the same page."
+        },
+        {
+          question: "Can I move from the Johor Bahru Fajr page into other Johor Bahru prayer routes?",
+          answer: "Yes. The page links directly into the Johor Bahru prayer-times route and the next-prayer route."
+        },
+        {
+          question: "Why can Fajr time in Johor Bahru differ from another timetable?",
+          answer: "The shown time depends on the loaded timetable, and timetables can vary by method or local authority, so compare the visible method label with your local mosque when needed."
+        }
+      ]
+    };
+  }
+
+  return null;
+}
+
 function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
   if (variant === "dubai") {
     return {
@@ -1470,8 +1587,16 @@ function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
 
 function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place, copy }) {
   const cityKey = slugify(sourceCity || "");
+  const priorityIntentCityCopy = language === "en"
+    ? buildEnglishPriorityIntentCityCopy(pageType, cityKey, place)
+    : null;
   const priorityIntentCopy = getPriorityIntentSeoCopy(language, pageType, sourceCity);
   const priorityHomeCityCopy = getPriorityHomeCitySeoCopy(language, pageType, cityKey, place);
+
+  if (priorityIntentCityCopy) {
+    Object.assign(copy, priorityIntentCityCopy);
+    return copy;
+  }
 
   if (priorityIntentCopy) {
     Object.assign(copy, priorityIntentCopy);
