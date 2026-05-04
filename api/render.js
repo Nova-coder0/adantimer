@@ -1505,6 +1505,120 @@ function buildFrenchPriorityIntentCopy(pageType) {
   return null;
 }
 
+function buildGermanPriorityIntentCopy(pageType) {
+  if (pageType === "prayer-times") {
+    return {
+      metaTitle: "Gebetszeiten heute | Salat Zeiten, Namaz Zeiten und Adhan Zeit | Adantimer",
+      metaDescription: "Pruefe die Gebetszeiten heute, verfolge den Live-Countdown bis zum naechsten Gebet und buendele Suchmuster wie Salat Zeiten, Namaz Zeiten, Adhan Zeit oder Azan Zeit auf einer kanonischen Seite.",
+      heroSubtitle: "Pruefe die Gebetszeiten heute, behalte den Live-Countdown im Blick und nutze eine kanonische Seite fuer Gebetszeiten, Salat Zeiten, Namaz Zeiten, Adhan Zeit und Azan Zeit.",
+      infoTitle: "Kanonische Einstiegsseite fuer deutsche Gebetszeiten-Suchen",
+      features: [
+        "Diese Route deckt Gebetszeiten heute, Gebetskalender, Salat Zeiten, Namaz Zeiten, islamische Gebetszeiten sowie Adhan Zeit und Azan Zeit ab.",
+        "Fajr, Dhuhr, Asr, Maghrib und Isha bleiben zusammen mit dem Live-Countdown auf einem Bildschirm sichtbar.",
+        "Die Seite verweist danach sauber auf staerkere Stadtseiten wie Berlin, Koeln, Frankfurt und Hamburg, statt schwache Synonym-URLs aufzubauen.",
+        "Varianten wie Adhan, Azan oder Namaz werden in einer einzigen starken deutschen Struktur gesammelt."
+      ],
+      aboutTitle: "Wie die deutsche Gebetszeiten-Seite genutzt werden soll",
+      aboutParagraphs: [
+        "Diese Seite ist fuer die breite Suchintention gebaut: Gebetszeiten heute schnell pruefen und danach direkt in die passende Stadt wechseln.",
+        "Statt fuer jede Schreibweise wie Salat Zeiten, Namaz Zeiten, Adhan Zeit oder Azan Zeit eine eigene schwache Route zu bauen, buendelt Adantimer diese Begriffe auf einer kanonischen URL.",
+        "Wenn die Suche lokal wird, uebergibt die Seite an staerkere Stadtseiten, die fuer Deutschland bereits besser lesbar und teilbarer sind."
+      ],
+      faqTitle: "Hauefige Fragen zu deutschen Gebetszeiten-Suchen",
+      faq: [
+        {
+          question: "Deckt diese Seite auch Suchanfragen wie Salat Zeiten, Namaz Zeiten oder Azan Zeit ab?",
+          answer: "Ja. Die Seite wurde genau dafuer verstaerkt und sammelt diese Varianten auf einer kanonischen URL."
+        },
+        {
+          question: "Zeigt diese Seite alle fuenf taeglichen Gebetszeiten?",
+          answer: "Ja. Fajr, Dhuhr, Asr, Maghrib und Isha bleiben zusammen mit dem Countdown bis zum naechsten Gebet sichtbar."
+        }
+      ]
+    };
+  }
+
+  if (pageType === "next-prayer") {
+    return {
+      metaTitle: "Naechste Gebetszeit heute | Live Countdown fuer Adhan und Azan Zeit | Adantimer",
+      metaDescription: "Verfolge die naechste Gebetszeit heute mit Live-Countdown und buendele Suchmuster wie Adhan Zeit, Azan Zeit oder naechstes Gebet auf einer kanonischen Seite.",
+      heroSubtitle: "Verfolge die naechste Gebetszeit mit Live-Countdown und nutze eine kanonische Seite fuer Adhan Zeit, Azan Zeit und naechstes Gebet.",
+      infoTitle: "Kanonische Seite fuer die naechste Gebetszeit auf Deutsch",
+      features: [
+        "Diese Route deckt naechste Gebetszeit, naechstes Gebet, Adhan Zeit und Azan Zeit in einer einzigen starken Struktur ab.",
+        "Aktives Gebet, naechstes Gebet und der volle Tagesplan bleiben gemeinsam sichtbar.",
+        "Die Seite gibt danach saubere Uebergaenge zu Berlin, Koeln und Frankfurt, wenn die Suche lokal wird."
+      ],
+      aboutTitle: "Was die Seite fuer die naechste Gebetszeit zuerst beantworten muss",
+      aboutParagraphs: [
+        "Diese Seite soll zuerst zeigen, welches Gebet als naechstes kommt und wie lange es noch dauert.",
+        "Synonyme wie Adhan Zeit oder Azan Zeit werden hier gebuendelt, statt auf mehrere schwache Routen verteilt."
+      ],
+      faqTitle: "Hauefige Fragen zur naechsten Gebetszeit",
+      faq: [
+        {
+          question: "Deckt diese Seite auch Adhan Zeit und Azan Zeit ab?",
+          answer: "Ja. Diese Suchmuster werden hier bewusst auf einer kanonischen URL gesammelt."
+        }
+      ]
+    };
+  }
+
+  if (pageType === "fajr") {
+    return {
+      metaTitle: "Fajr Zeit heute | Fadschr Zeit und Fajr Gebetszeit | Adantimer",
+      metaDescription: "Pruefe die Fajr Zeit heute, halte den Tagesplan sichtbar und sammle Suchmuster wie Fadschr Zeit, Fajr Zeit genau oder Fajr Gebetszeit auf einer kanonischen Seite.",
+      heroSubtitle: "Pruefe die Fajr Zeit heute und nutze eine kanonische Seite fuer Fajr Zeit, Fadschr Zeit und verwandte Suchmuster.",
+      infoTitle: "Kanonische Seite fuer Fajr- und Fadschr-Zeit",
+      features: [
+        "Diese Route deckt Fajr Zeit, Fadschr Zeit, Fajr Zeit genau und aehnliche deutsche Suchmuster ab.",
+        "Die Fajr-Zeit bleibt im Fokus, waehrend der volle Tagesplan und der Live-Countdown sichtbar bleiben.",
+        "Die Seite verlinkt danach auf staerkere Stadtseiten wie Berlin und Frankfurt fuer lokale Fajr-Suchen."
+      ],
+      aboutTitle: "Was die Fajr-Seite zuerst liefern muss",
+      aboutParagraphs: [
+        "Diese Seite ist fuer die direkte Frage gebaut: Wann ist Fajr oder Fadschr heute.",
+        "Statt mehrere Schreibweisen auf verschiedene Seiten zu verteilen, bleibt die deutsche Fajr-Suche auf einer kanonischen URL gebuendelt."
+      ],
+      faqTitle: "Hauefige Fragen zur Fajr-Zeit",
+      faq: [
+        {
+          question: "Deckt diese Seite auch Fadschr Zeit ab?",
+          answer: "Ja. Fajr und Fadschr werden hier gemeinsam auf einer starken deutschen Route abgebildet."
+        }
+      ]
+    };
+  }
+
+  if (pageType === "maghrib") {
+    return {
+      metaTitle: "Maghrib Zeit heute | Abendgebet und Maghrib Gebetszeit | Adantimer",
+      metaDescription: "Pruefe die Maghrib Zeit heute, halte den Tagesplan sichtbar und sammle Suchmuster wie Maghrib Zeit oder Abendgebet auf einer kanonischen Seite.",
+      heroSubtitle: "Pruefe die Maghrib Zeit heute und nutze eine kanonische Seite fuer Maghrib Zeit und Abendgebet.",
+      infoTitle: "Kanonische Seite fuer Maghrib-Suchen auf Deutsch",
+      features: [
+        "Diese Route deckt Maghrib Zeit, Maghrib Zeit genau und verwandte Suchmuster fuer das Abendgebet ab.",
+        "Die Maghrib-Zeit bleibt im Fokus, waehrend der volle Tagesplan und der Live-Countdown sichtbar bleiben.",
+        "Die Seite verlinkt danach auf staerkere Stadtseiten wie Koeln und Hamburg fuer lokale Abendgebets-Suchen."
+      ],
+      aboutTitle: "Was die Maghrib-Seite zuerst liefern muss",
+      aboutParagraphs: [
+        "Diese Seite ist fuer die direkte Frage gebaut: Wann ist Maghrib heute.",
+        "Die kanonische URL verhindert, dass mehrere schwache deutsche Abendgebet-Varianten parallel gegeneinander laufen."
+      ],
+      faqTitle: "Hauefige Fragen zur Maghrib-Zeit",
+      faq: [
+        {
+          question: "Deckt diese Seite auch Suchanfragen zum Abendgebet ab?",
+          answer: "Ja. Die deutsche Maghrib-Seite deckt diese Suchintention auf einer kanonischen Route mit ab."
+        }
+      ]
+    };
+  }
+
+  return null;
+}
+
 function buildTurkishPriorityIntentCopy(pageType) {
   if (pageType === "prayer-times") {
     return {
@@ -2748,12 +2862,24 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
           { label: "Asr au Caire", href: buildRoutePath("fr", "asr", "Cairo") },
           { label: "Horaires de prière à Paris", href: buildRoutePath("fr", "home", "Paris") }
         ]
-      };
-    }
+        };
+      }
 
-    if (language === "tr") {
-      return {
-        ...buildTurkishPriorityIntentCopy(pageType),
+      if (language === "de") {
+        return {
+          ...buildGermanPriorityIntentCopy(pageType),
+          cityIntentLinks: [
+            { label: "Gebetszeiten in Berlin", href: buildRoutePath("de", "home", "Berlin") },
+            { label: "Gebetszeiten in Koeln", href: buildRoutePath("de", "home", "Cologne") },
+            { label: "Gebetszeiten in Frankfurt", href: buildRoutePath("de", "home", "Frankfurt") },
+            { label: "Gebetszeiten in Hamburg", href: buildRoutePath("de", "home", "Hamburg") }
+          ]
+        };
+      }
+
+      if (language === "tr") {
+        return {
+          ...buildTurkishPriorityIntentCopy(pageType),
         cityIntentLinks: [
           { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") },
           { label: "Mekke icin namaz vakitleri", href: buildRoutePath("tr", "home", "Mecca") },
@@ -2818,17 +2944,54 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     };
   }
 
-  if (language === "en") {
-    if (pageType === "next-prayer" || ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
-      return buildEnglishPriorityIntentCopy(pageType);
+    if (language === "en") {
+      if (pageType === "next-prayer" || ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
+        return buildEnglishPriorityIntentCopy(pageType);
     }
 
-    return null;
-  }
+      return null;
+    }
 
-  if (language === "tr") {
-    if (pageType === "prayer-times") {
-      return {
+    if (language === "de") {
+      if (pageType === "next-prayer") {
+        return {
+          ...buildGermanPriorityIntentCopy(pageType),
+          cityIntentLinks: [
+            { label: "Naechste Gebetszeit in Berlin", href: buildRoutePath("de", "next-prayer", "Berlin") },
+            { label: "Naechste Gebetszeit in Koeln", href: buildRoutePath("de", "next-prayer", "Cologne") },
+            { label: "Gebetszeiten in Berlin", href: buildRoutePath("de", "home", "Berlin") }
+          ]
+        };
+      }
+
+      if (pageType === "fajr") {
+        return {
+          ...buildGermanPriorityIntentCopy(pageType),
+          cityIntentLinks: [
+            { label: "Fajr Zeit in Berlin", href: buildRoutePath("de", "fajr", "Berlin") },
+            { label: "Fajr Zeit in Frankfurt", href: buildRoutePath("de", "fajr", "Frankfurt") },
+            { label: "Gebetszeiten in Berlin", href: buildRoutePath("de", "home", "Berlin") }
+          ]
+        };
+      }
+
+      if (pageType === "maghrib") {
+        return {
+          ...buildGermanPriorityIntentCopy(pageType),
+          cityIntentLinks: [
+            { label: "Maghrib Zeit in Koeln", href: buildRoutePath("de", "maghrib", "Cologne") },
+            { label: "Maghrib Zeit in Hamburg", href: buildRoutePath("de", "maghrib", "Hamburg") },
+            { label: "Gebetszeiten in Koeln", href: buildRoutePath("de", "home", "Cologne") }
+          ]
+        };
+      }
+
+      return null;
+    }
+
+    if (language === "tr") {
+      if (pageType === "prayer-times") {
+        return {
         ...buildTurkishPriorityIntentCopy(pageType),
         cityIntentLinks: [
           { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") },
