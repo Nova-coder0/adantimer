@@ -1404,6 +1404,7 @@ function buildFrenchPriorityIntentCopy(pageType) {
       aboutParagraphs: [
         "Cette page existe pour répondre à l'intention large: horaires de prière aujourd'hui, prochaine prière et accès rapide à la bonne ville sans multiplier les routes synonymes.",
         "Au lieu de créer une page différente pour chaque variation comme adhan, adan, dohr, dhuhr, maghreb ou icha, Adantimer concentre ces formulations sur une route canonique plus claire.",
+        "Si votre recherche mentionne une mosquée précise en Algérie, utilisez d'abord cette page générale comme base puis passez vers Oran, Alger, Annaba, Bouira ou Ain Benian pour comparer avec la mosquée locale ou le quartier visé.",
         "Quand la requête devient locale, la page transfère ensuite vers les routes de ville les plus pertinentes, en particulier les pages francophones qui montrent déjà des impressions dans Google."
       ],
       faqTitle: "Questions fréquentes sur les horaires de prière en français",
@@ -1415,6 +1416,10 @@ function buildFrenchPriorityIntentCopy(pageType) {
         {
           question: "Pourquoi voit-on parfois dohr, dhuhr, maghreb, maghrib, icha ou isha dans la recherche ?",
           answer: "Les usages varient selon le pays, le clavier et l'habitude. Adantimer couvre ces variantes dans le contenu sans créer une page différente pour chaque orthographe."
+        },
+        {
+          question: "Puis-je utiliser cette page si je cherche les horaires d'une mosquée en Algérie ?",
+          answer: "Oui. Cette page sert de point d'entrée canonique, puis les liens vers Alger, Oran, Annaba, Bouira et Ain Benian vous aident à comparer avec une mosquée locale ou un quartier précis."
         },
         {
           question: "Puis-je passer de cette page générale à une ville précise ?",
@@ -1440,6 +1445,7 @@ function buildFrenchPriorityIntentCopy(pageType) {
       aboutParagraphs: [
         "Cette page existe pour répondre à l'intention directe: quelle est la prochaine prière et combien de temps reste-t-il avant son début.",
         "Au lieu de multiplier les routes synonymes autour d'adhan aujourd'hui ou de la prochaine prière, Adantimer concentre ces formulations sur une route canonique plus claire.",
+        "Si votre recherche cite une mosquée précise en Algérie, utilisez d'abord cette page générale pour voir la prochaine prière puis basculez vers la ville algérienne la plus proche avant de comparer avec le tableau de la mosquée locale.",
         "Quand la requête devient locale, la page transfère ensuite vers les routes de ville les plus pertinentes, en particulier les pages francophones déjà testées dans Google."
       ],
       faqTitle: "Questions fréquentes sur la prochaine prière en français",
@@ -1451,6 +1457,10 @@ function buildFrenchPriorityIntentCopy(pageType) {
         {
           question: "Cette page affiche-t-elle seulement la prochaine prière ?",
           answer: "Non. La prochaine prière est le focus principal, mais le planning complet du jour reste visible sur la même page."
+        },
+        {
+          question: "Puis-je utiliser cette page si je cherche la prochaine prière pour une mosquée en Algérie ?",
+          answer: "Oui. Cette page donne une réponse canonique rapide, puis les liens vers Alger, Oran, Annaba, Bouira et Ain Benian permettent de rapprocher le résultat d'une mosquée ou d'un secteur local."
         },
         {
           question: "Puis-je passer de cette page générale à une ville précise ?",
@@ -2966,6 +2976,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
 
     if (language === "fr") {
       return {
+        ...buildFrenchPriorityIntentCopy(pageType),
         cityIntentLinks: [
           { label: "Horaires de prière à Alger", href: buildRoutePath("fr", "home", "Alger") },
           { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
@@ -3006,17 +3017,37 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
 
     if (language === "ar") {
       return {
+        metaTitle: "مواقيت الصلاة اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer",
+        metaDescription: "تحقق من مواقيت الصلاة اليوم، واعرض الصلاة القادمة، ثم انتقل مباشرة إلى الجزائر العاصمة ووهران وعنابة والبويرة وعين البنيان لمقارنة الجدول مع المسجد المحلي أو الجهة التي تتبعها.",
+        heroSubtitle: "تحقق من مواقيت الصلاة اليوم، وتابع الصلاة القادمة، واستخدم هذه الصفحة العامة كنقطة دخول قبل الانتقال إلى المدينة الجزائرية الأقرب أو مقارنة الجدول مع مسجد محلي محدد.",
+        infoTitle: "صفحة دخول أساسية لبحث مواقيت الصلاة في الجزائر بالعربية",
+        aboutTitle: "كيف تستخدم صفحة مواقيت الصلاة العامة قبل الانتقال إلى مدينة جزائرية",
+        aboutParagraphs: [
+          "هذه الصفحة مخصصة لنية البحث العامة: مواقيت الصلاة اليوم والصلاة القادمة والوصول السريع إلى المدينة الصحيحة داخل الجزائر.",
+          "بدلا من إنشاء صفحة منفصلة لكل صيغة بحث، تجمع هذه الصفحة العبارات الأساسية في مسار واضح واحد ثم تنقلك إلى الجزائر العاصمة ووهران وعنابة والبويرة وعين البنيان.",
+          "إذا كان بحثك يتضمن اسم مسجد محدد، فاستخدم هذه الصفحة كنقطة بداية ثم انتقل إلى المدينة الأقرب وقارن المواقيت المعروضة بجدول المسجد أو الجهة المحلية التي تتبعها."
+        ],
+        faqTitle: "أسئلة شائعة عن مواقيت الصلاة العامة في الجزائر",
+        faq: [
+          {
+            question: "هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن مواقيت مسجد في الجزائر؟",
+            answer: "نعم. هذه الصفحة تعطيك نقطة دخول عامة، ثم تساعدك روابط المدن الجزائرية على الوصول إلى السياق الأقرب قبل مقارنة المواقيت بجدول المسجد المحلي."
+          },
+          {
+            question: "هل تعرض هذه الصفحة الصلوات الخمس مع الصلاة القادمة؟",
+            answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع إبقاء الصلاة القادمة والجدول الكامل ظاهرين."
+          }
+        ],
         cityIntentLinks: [
           { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
           { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
           { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
           { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
           { label: "مواقيت الصلاة في عين البنيان", href: buildRoutePath("ar", "home", "Ain Benian") },
-          { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "home", "Mecca") },
-          { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
-          { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
-          { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
-          { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "home", "Istanbul") }
+          { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
+          { label: "الفجر في وهران", href: buildRoutePath("ar", "fajr", "Oran") },
+          { label: "المغرب في عنابة", href: buildRoutePath("ar", "maghrib", "Annaba") },
+          { label: "العشاء في عين البنيان", href: buildRoutePath("ar", "isha", "Ain Benian") }
         ]
       };
     }
@@ -3155,12 +3186,36 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
 
   if (pageType === "next-prayer" && language === "ar") {
     return {
-      ...buildArabicPriorityIntentCopy(pageType),
+      metaTitle: "الصلاة القادمة اليوم | عد تنازلي مباشر للصلاة القادمة | Adantimer",
+      metaDescription: "تابع الصلاة القادمة اليوم مع العد التنازلي المباشر، ثم انتقل إلى الجزائر العاصمة أو وهران أو عنابة أو البويرة أو عين البنيان لمقارنة النتيجة مع المسجد المحلي أو الجهة التي تتبعها.",
+      heroSubtitle: "تابع الصلاة القادمة اليوم مع عد تنازلي مباشر، واستخدم هذه الصفحة العامة كنقطة دخول قبل الانتقال إلى المدينة الجزائرية الأقرب أو مقارنة الوقت مع مسجد محلي محدد.",
+      infoTitle: "صفحة أساسية لبحث الصلاة القادمة في الجزائر بالعربية",
+      aboutTitle: "كيف تستخدم صفحة الصلاة القادمة العامة قبل الانتقال إلى مدينة جزائرية",
+      aboutParagraphs: [
+        "هذه الصفحة تجيب أولا عن السؤال المباشر: ما الصلاة القادمة الآن وكم بقي عليها، ثم تنقل البحث إلى المدينة الجزائرية الأقرب.",
+        "بدلا من فتح مسارات ضعيفة كثيرة، تجمع الصفحة نية الصلاة القادمة في مسار واضح واحد ثم توزعها على الجزائر العاصمة ووهران وعنابة والبويرة وعين البنيان.",
+        "إذا كان بحثك يتضمن اسم مسجد محدد، فاستخدم هذه الصفحة كنقطة بداية ثم انتقل إلى المدينة المناسبة وقارن العد التنازلي والجدول الظاهرين بجدول المسجد المحلي."
+      ],
+      faqTitle: "أسئلة شائعة عن الصلاة القادمة العامة في الجزائر",
+      faq: [
+        {
+          question: "هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن الصلاة القادمة لمسجد في الجزائر؟",
+          answer: "نعم. هذه الصفحة تعطيك مرجعا عاما سريعا، ثم تنقلك روابط المدن الجزائرية إلى السياق الأقرب قبل مقارنة النتيجة بجدول المسجد المحلي."
+        },
+        {
+          question: "هل تعرض هذه الصفحة الصلاة القادمة فقط؟",
+          answer: "لا. الصلاة القادمة هي التركيز الأساسي، لكن الجدول الكامل لليوم يبقى ظاهرا للمقارنة السريعة."
+        }
+      ],
       cityIntentLinks: [
         { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
         { label: "الصلاة القادمة في وهران", href: buildRoutePath("ar", "next-prayer", "Oran") },
+        { label: "الصلاة القادمة في عنابة", href: buildRoutePath("ar", "next-prayer", "Annaba") },
+        { label: "الصلاة القادمة في البويرة", href: buildRoutePath("ar", "next-prayer", "Bouira") },
+        { label: "الصلاة القادمة في عين البنيان", href: buildRoutePath("ar", "next-prayer", "Ain Benian") },
         { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
-        { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") }
+        { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
+        { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") }
       ]
     };
   }
