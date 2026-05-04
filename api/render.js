@@ -1505,6 +1505,120 @@ function buildFrenchPriorityIntentCopy(pageType) {
   return null;
 }
 
+function buildTurkishPriorityIntentCopy(pageType) {
+  if (pageType === "prayer-times") {
+    return {
+      metaTitle: "Bugunun Namaz Vakitleri | Ezan Saatleri ve Sonraki Namaz | Adantimer",
+      metaDescription: "Bugunun namaz vakitlerini, sonraki namaz geri sayimini ve ezan saatleri bilgisini tek sayfada gor, sonra dogru sehir sayfasina gec.",
+      heroSubtitle: "Bugunun namaz vakitlerini gor, sonraki namaz geri sayimini takip et ve ezan saatleri ile ezan vakti gibi aramalari tek kanonik sayfada topla.",
+      infoTitle: "Turkce namaz vakitleri aramalari icin kanonik giris sayfasi",
+      features: [
+        "Bu rota bugun namaz vakitleri, ezan saatleri, ezan vakti ve namaz saati gibi cekirdek aramalari tek yerde toplar.",
+        "Tam gunluk plan, sonraki namaz, mevcut namaz durumu ve hesaplama yontemi ayni ekranda gorunur.",
+        "Sayfa daha sonra Istanbul, Mekke, Riyad ve Kahire gibi oncelikli sehir sayfalarina temiz gecis verir.",
+        "Ayni niyet icin zayif kopya URL uretmek yerine bir guclu turkce merkez sayfa kullanilir."
+      ],
+      aboutTitle: "Turkce namaz vakitleri sayfasi nasil kullanilmali",
+      aboutParagraphs: [
+        "Bu sayfa bugunun namaz vakitleri aramasina hizli cevap vermek icin hazirlandi.",
+        "Ezan saatleri, ezan vakti ve namaz vakitleri gibi farkli ifadeler burada ayni kanonik yapi icinde birlestirilir.",
+        "Sorgu sehire dondugunde sayfa ziyaretciyi Istanbul ve diger guclu sehir rotalarina aktarir."
+      ],
+      faqTitle: "Turkce namaz vakitleri hakkinda sik sorulan sorular",
+      faq: [
+        {
+          question: "Bu sayfa ezan saatleri ve ezan vakti aramalarini da kapsar mi?",
+          answer: "Evet. Bu sayfa bu tur cekirdek aramalari tek kanonik URL uzerinde toplamayi hedefler."
+        },
+        {
+          question: "Sadece tek bir vakti mi gosteriyor?",
+          answer: "Hayir. Sayfa Fajr, Dhuhr, Asr, Maghrib ve Isha icin tam gunluk plani birlikte gosterir."
+        }
+      ]
+    };
+  }
+
+  if (pageType === "next-prayer") {
+    return {
+      metaTitle: "Sonraki Namaz Vakti Bugun | Canli Geri Sayim | Adantimer",
+      metaDescription: "Sonraki namaz vaktini bugun canli geri sayimla gor, mevcut namaz durumunu izle ve sehir bazli sayfalara hizla gec.",
+      heroSubtitle: "Sonraki namaz vaktini canli geri sayimla takip et ve ezan ne zaman gibi aramalari tek kanonik sayfada topla.",
+      infoTitle: "Sonraki namaz ve ezan ne zaman aramalari icin kanonik sayfa",
+      features: [
+        "Bu rota sonraki namaz, ezan ne zaman ve bir sonraki ezan vakti gibi aramalari kapsar.",
+        "Canli geri sayim, aktif namaz ve gunluk plan ayni yerde kalir.",
+        "Istanbul ve Riyad gibi sehir rotalarina hizli gecis verilir."
+      ],
+      aboutTitle: "Sonraki namaz sayfasi neyi once cevaplamali",
+      aboutParagraphs: [
+        "Bu sayfa once siradaki namazin hangisi oldugunu ve ne kadar sure kaldigini gostermelidir.",
+        "Ayni niyet icin cok sayida benzer rota acmak yerine tek guclu turkce sayfa kullanilir."
+      ],
+      faqTitle: "Sonraki namaz hakkinda sik sorulan sorular",
+      faq: [
+        {
+          question: "Bu sayfa ezan ne zaman aramasini da kapsar mi?",
+          answer: "Evet. Sonraki namaz vakti ve benzer turkce aramalar burada ayni kanonik yapida toplanir."
+        }
+      ]
+    };
+  }
+
+  if (pageType === "fajr") {
+    return {
+      metaTitle: "Fajr Vakti Bugun | Gunluk Fajr Vakti Rehberi | Adantimer",
+      metaDescription: "Fajr vaktini bugun kontrol et, tam gunluk plani gor ve sehir bazli Fajr sayfalarina hizla gec.",
+      heroSubtitle: "Fajr vaktini bugun kontrol et ve fajr vakti gibi aramalari tek kanonik sayfada topla.",
+      infoTitle: "Fajr vakti aramalari icin kanonik sayfa",
+      features: [
+        "Bu rota fajr vakti, sabah namazi vakti ve benzer aramalari ayni sayfada toplar.",
+        "Fajr odakta kalirken sonraki namaz ve tam gunluk plan da gorunur.",
+        "Medine ve Istanbul gibi guclu sehir rotalarina temiz gecis verilir."
+      ],
+      aboutTitle: "Fajr vakti sayfasi neyi once cevaplamali",
+      aboutParagraphs: [
+        "Bu sayfa once bugunun Fajr vaktini hizli ve net bicimde gostermelidir.",
+        "Sorgu sehire dondugunde ziyaretci daha guclu yerel sayfalara aktarilir."
+      ],
+      faqTitle: "Fajr vakti hakkinda sik sorulan sorular",
+      faq: [
+        {
+          question: "Bu sayfa fajr vakti aramasini kapsar mi?",
+          answer: "Evet. Fajr vakti odakli turkce aramalar bu kanonik sayfa uzerinde toplanir."
+        }
+      ]
+    };
+  }
+
+  if (pageType === "maghrib") {
+    return {
+      metaTitle: "Aksam Ezani ve Maghrib Vakti Bugun | Gunluk Maghrib Rehberi | Adantimer",
+      metaDescription: "Aksam ezani ve Maghrib vaktini bugun kontrol et, tam gunluk plani gor ve sehir bazli Maghrib sayfalarina hizla gec.",
+      heroSubtitle: "Aksam ezani ve Maghrib vaktini bugun kontrol et ve bu aramalari tek kanonik sayfada topla.",
+      infoTitle: "Aksam ezani ve Maghrib vakti aramalari icin kanonik sayfa",
+      features: [
+        "Bu rota aksam ezani, Maghrib vakti ve benzer aksam namazi aramalarini ayni yerde toplar.",
+        "Maghrib odakta kalirken sonraki namaz ve tam gunluk plan gorunur.",
+        "Istanbul ve Mekke gibi guclu sehir rotalarina temiz gecis verilir."
+      ],
+      aboutTitle: "Maghrib sayfasi neyi once cevaplamali",
+      aboutParagraphs: [
+        "Bu sayfa once bugunun aksam ezani ve Maghrib vaktini hizli bicimde gostermelidir.",
+        "Ayni niyet icin birden fazla zayif URL yerine tek guclu turkce sayfa kullanilir."
+      ],
+      faqTitle: "Maghrib vakti hakkinda sik sorulan sorular",
+      faq: [
+        {
+          question: "Bu sayfa aksam ezani aramasini kapsar mi?",
+          answer: "Evet. Aksam ezani ve Maghrib vakti odakli aramalar ayni kanonik rota altinda toplanir."
+        }
+      ]
+    };
+  }
+
+  return null;
+}
+
 function buildEnglishPriorityIntentCopy(pageType) {
   if (pageType === "prayer-times") {
     return {
@@ -2637,6 +2751,18 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
       };
     }
 
+    if (language === "tr") {
+      return {
+        ...buildTurkishPriorityIntentCopy(pageType),
+        cityIntentLinks: [
+          { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") },
+          { label: "Mekke icin namaz vakitleri", href: buildRoutePath("tr", "home", "Mecca") },
+          { label: "Riyad icin sonraki namaz", href: buildRoutePath("tr", "next-prayer", "Riyadh") },
+          { label: "Kahire icin Asr", href: buildRoutePath("tr", "asr", "Cairo") }
+        ]
+      };
+    }
+
     if (language === "ar") {
       return {
         cityIntentLinks: [
@@ -2695,6 +2821,55 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   if (language === "en") {
     if (pageType === "next-prayer" || ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
       return buildEnglishPriorityIntentCopy(pageType);
+    }
+
+    return null;
+  }
+
+  if (language === "tr") {
+    if (pageType === "prayer-times") {
+      return {
+        ...buildTurkishPriorityIntentCopy(pageType),
+        cityIntentLinks: [
+          { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") },
+          { label: "Mekke icin namaz vakitleri", href: buildRoutePath("tr", "home", "Mecca") },
+          { label: "Riyad icin sonraki namaz", href: buildRoutePath("tr", "next-prayer", "Riyadh") },
+          { label: "Kahire icin Asr", href: buildRoutePath("tr", "asr", "Cairo") }
+        ]
+      };
+    }
+
+    if (pageType === "next-prayer") {
+      return {
+        ...buildTurkishPriorityIntentCopy(pageType),
+        cityIntentLinks: [
+          { label: "Istanbul icin sonraki namaz", href: buildRoutePath("tr", "next-prayer", "Istanbul") },
+          { label: "Riyad icin sonraki namaz", href: buildRoutePath("tr", "next-prayer", "Riyadh") },
+          { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") }
+        ]
+      };
+    }
+
+    if (pageType === "fajr") {
+      return {
+        ...buildTurkishPriorityIntentCopy(pageType),
+        cityIntentLinks: [
+          { label: "Istanbul icin Fajr", href: buildRoutePath("tr", "fajr", "Istanbul") },
+          { label: "Medine icin Fajr", href: buildRoutePath("tr", "fajr", "Medina") },
+          { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") }
+        ]
+      };
+    }
+
+    if (pageType === "maghrib") {
+      return {
+        ...buildTurkishPriorityIntentCopy(pageType),
+        cityIntentLinks: [
+          { label: "Istanbul icin Maghrib", href: buildRoutePath("tr", "maghrib", "Istanbul") },
+          { label: "Mekke icin Maghrib", href: buildRoutePath("tr", "maghrib", "Mecca") },
+          { label: "Istanbul icin namaz vakitleri", href: buildRoutePath("tr", "home", "Istanbul") }
+        ]
+      };
     }
 
     return null;
