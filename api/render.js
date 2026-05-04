@@ -2856,11 +2856,10 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
           { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
           { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
           { label: "Horaires de prière à Ain Benian", href: buildRoutePath("fr", "home", "Ain Benian") },
-          { label: "Horaires de prière à La Mecque", href: buildRoutePath("fr", "home", "Mecca") },
-          { label: "Prochaine prière à Riyad", href: buildRoutePath("fr", "next-prayer", "Riyadh") },
-          { label: "Fajr à Médine", href: buildRoutePath("fr", "fajr", "Medina") },
-          { label: "Asr au Caire", href: buildRoutePath("fr", "asr", "Cairo") },
-          { label: "Horaires de prière à Paris", href: buildRoutePath("fr", "home", "Paris") }
+          { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
+          { label: "Heure du Fajr à Oran", href: buildRoutePath("fr", "fajr", "Oran") },
+          { label: "Heure du Maghrib à Bouira", href: buildRoutePath("fr", "maghrib", "Bouira") },
+          { label: "Heure de l'Isha à Ain Benian", href: buildRoutePath("fr", "isha", "Ain Benian") }
         ]
         };
       }
@@ -4241,14 +4240,15 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
       ];
   if (!sourceCity && pageType === "prayer-times") {
     cityIntentLinks = [
+      { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
       { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
       { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
       { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
-      { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "home", "Mecca") },
-      { label: "الصلاة القادمة في الرياض", href: buildRoutePath("ar", "next-prayer", "Riyadh") },
-      { label: "الفجر في المدينة", href: buildRoutePath("ar", "fajr", "Medina") },
-      { label: "العصر في القاهرة", href: buildRoutePath("ar", "asr", "Cairo") },
-      { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "home", "Istanbul") }
+      { label: "مواقيت الصلاة في عين البنيان", href: buildRoutePath("ar", "home", "Ain Benian") },
+      { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
+      { label: "الفجر في وهران", href: buildRoutePath("ar", "fajr", "Oran") },
+      { label: "المغرب في عنابة", href: buildRoutePath("ar", "maghrib", "Annaba") },
+      { label: "العشاء في عين البنيان", href: buildRoutePath("ar", "isha", "Ain Benian") }
     ];
   }
 
@@ -4399,14 +4399,15 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
 
   if (!sourceCity && pageType === "prayer-times" && language === "fr") {
     cityIntentLinks = [
+      { label: "Horaires de prière à Alger", href: buildRoutePath("fr", "home", "Alger") },
       { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
       { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
       { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
-      { label: "Horaires de prière à La Mecque", href: buildRoutePath("fr", "home", "Mecca") },
-      { label: "Prochaine prière à Riyad", href: buildRoutePath("fr", "next-prayer", "Riyadh") },
-      { label: "Fajr à Médine", href: buildRoutePath("fr", "fajr", "Medina") },
-      { label: "Asr au Caire", href: buildRoutePath("fr", "asr", "Cairo") },
-      { label: "Horaires de prière à Paris", href: buildRoutePath("fr", "home", "Paris") }
+      { label: "Horaires de prière à Ain Benian", href: buildRoutePath("fr", "home", "Ain Benian") },
+      { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
+      { label: "Heure du Fajr à Oran", href: buildRoutePath("fr", "fajr", "Oran") },
+      { label: "Heure du Maghrib à Bouira", href: buildRoutePath("fr", "maghrib", "Bouira") },
+      { label: "Heure de l'Isha à Ain Benian", href: buildRoutePath("fr", "isha", "Ain Benian") }
     ];
   }
 
