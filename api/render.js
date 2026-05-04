@@ -1156,6 +1156,7 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
         `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Vous pouvez aussi comparer rapidement avec Alger, Annaba, Bouira ou Ain Benian depuis le bloc des autres villes sans quitter le cluster Algérie.",
         "Pour Oran en particulier, cette couverture aide aussi sur les formulations mixtes que l'on voit réellement dans la recherche francophone: adhan aujourd'hui, adhan maghreb, heure de prière, heure dohr ou icha aujourd'hui."
       ],
       faq: [
@@ -1166,6 +1167,10 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         {
           question: `Pourquoi peut-on chercher ${cityName} avec horaire priere, adhan, dohr, maghreb ou icha ?`,
           answer: "Les formulations varient selon les habitudes et les claviers. Cette page reste la page canonique unique pour Oran en français."
+        },
+        {
+          question: `Puis-je comparer rapidement Oran avec d'autres villes d'Algérie ?`,
+          answer: "Oui. Le bloc des autres villes vous permet de basculer vers Alger, Annaba, Bouira ou Ain Benian pour comparer des horaires proches dans le même cluster algérien."
         },
         {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
@@ -1185,6 +1190,7 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
         `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Le bloc des autres villes vous aide aussi à passer rapidement vers Oran, Alger, Bouira ou Ain Benian pour comparer les horaires dans le même contexte algérien.",
         "Pour Annaba, la couverture vise aussi des formulations comme adhan maghreb, heure de prière ou maghrib aujourd'hui dans une seule page canonique française."
       ],
       faq: [
@@ -1195,6 +1201,10 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         {
           question: `Pourquoi peut-on chercher ${cityName} avec adhan, maghreb ou heure de prière ?`,
           answer: "Les formulations varient selon les habitudes, les pays et les claviers. Cette page reste la page canonique unique pour Annaba en français."
+        },
+        {
+          question: `Puis-je comparer rapidement Annaba avec d'autres villes d'Algérie ?`,
+          answer: "Oui. Les liens de ville sur cette page permettent de comparer Annaba avec Oran, Alger, Bouira ou Ain Benian sans quitter le cluster Algérie."
         },
         {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
@@ -1214,6 +1224,7 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
         `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Le bloc des autres villes vous laisse aussi comparer Bouira avec Alger, Oran, Annaba ou Ain Benian dans une logique Algérie plutôt que globale.",
         "Pour Bouira, la couverture est renforcée autour de maghreb, maghrib et adhan afin de mieux répondre aux formulations déjà vues dans Search Console."
       ],
       faq: [
@@ -1224,6 +1235,10 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         {
           question: `Pourquoi voit-on parfois ${cityName} avec adhan maghreb ou maghrib dans la recherche ?`,
           answer: "Les utilisateurs mélangent souvent les variantes adhan, maghreb et maghrib. Cette page garde une seule URL canonique française pour éviter les doublons."
+        },
+        {
+          question: `Puis-je comparer Bouira avec d'autres villes d'Algérie depuis cette page ?`,
+          answer: "Oui. Vous pouvez passer vers Alger, Oran, Annaba ou Ain Benian depuis les autres villes pour vérifier rapidement un autre horaire algérien."
         },
         {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
@@ -1243,6 +1258,7 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
         `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Le bloc des autres villes permet aussi de passer rapidement vers Alger, Oran, Annaba ou Bouira pour comparer Ain Benian avec d'autres villes algériennes utiles.",
         "Pour Ain Benian, la couverture vise aussi les requêtes mêlant prayer times, Isha, icha et aujourd'hui dans une seule page française claire."
       ],
       faq: [
@@ -1253,6 +1269,10 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         {
           question: `Pourquoi peut-on chercher ${cityName} avec Isha, icha ou horaire priere ?`,
           answer: "Les formulations et orthographes varient selon les habitudes et les claviers. Cette page reste la page canonique unique pour Ain Benian en français."
+        },
+        {
+          question: `Puis-je comparer Ain Benian avec d'autres villes d'Algérie depuis ici ?`,
+          answer: "Oui. La section des autres villes vous permet de basculer vers Alger, Oran, Annaba ou Bouira pour comparer rapidement les horaires."
         },
         {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
@@ -1272,6 +1292,7 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
         "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
         `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Vous pouvez aussi utiliser les autres villes pour comparer Alger avec Oran, Annaba, Bouira ou Ain Benian sans sortir du cluster Algérie que nous renforçons en priorité.",
         "Pour Alger, la couverture est renforcée autour de heure de prière, horaires de prière, heure priere, adhan maghreb et fajr aujourd'hui afin de répondre à une couche francophone nord-africaine plus dense."
       ],
       faq: [
@@ -1282,6 +1303,10 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         {
           question: `Pourquoi peut-on chercher ${cityName} avec heure de prière, heure priere ou adhan maghreb ?`,
           answer: "Les formulations varient selon les pays, les habitudes et les claviers. Cette page reste la page canonique unique pour Alger en français."
+        },
+        {
+          question: `Puis-je comparer Alger avec d'autres villes d'Algérie depuis cette page ?`,
+          answer: "Oui. Les autres villes vous donnent un accès direct à Oran, Annaba, Bouira et Ain Benian pour comparer rapidement les horaires dans le même marché algérien."
         },
         {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
@@ -2633,7 +2658,8 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
       aboutParagraphs: [
         "هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في وهران اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.",
         "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
-        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة."
+        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة.",
+        "ويمكنك أيضا مقارنة وهران بسرعة مع الجزائر العاصمة أو عنابة أو البويرة أو عين البنيان من خلال قسم المدن الأخرى داخل نفس مسار الجزائر."
       ],
       faqTitle: "أسئلة شائعة عن مواقيت الصلاة في وهران",
       faq: [
@@ -2644,6 +2670,10 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
         {
           question: "هل يمكنني معرفة الصلاة القادمة في وهران من نفس الصفحة؟",
           answer: "نعم. تبقى الصلاة القادمة مرئية مع الجدول الكامل حتى لا تحتاج إلى الانتقال السريع بين صفحات كثيرة."
+        },
+        {
+          question: "هل أستطيع مقارنة وهران مع مدن جزائرية أخرى من نفس الصفحة؟",
+          answer: "نعم. يوصلك قسم المدن الأخرى مباشرة إلى الجزائر العاصمة وعنابة والبويرة وعين البنيان حتى تقارن المواقيت داخل نفس السوق الجزائري."
         },
         {
           question: "لماذا قد تختلف مواقيت الصلاة في وهران عن مصدر آخر؟",
@@ -2669,7 +2699,8 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
       aboutParagraphs: [
         "هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في عنابة اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.",
         "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
-        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة."
+        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة.",
+        "ويساعدك قسم المدن الأخرى أيضا على مقارنة عنابة بسرعة مع وهران والجزائر العاصمة والبويرة وعين البنيان ضمن نفس تركيز الجزائر."
       ],
       faqTitle: "أسئلة شائعة عن مواقيت الصلاة في عنابة",
       faq: [
@@ -2680,6 +2711,10 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
         {
           question: "هل يمكنني معرفة وقت المغرب في عنابة من نفس الصفحة؟",
           answer: "نعم. تبقى مواقيت اليوم كلها ظاهرة، بما فيها المغرب والصلاة القادمة، في نفس الصفحة."
+        },
+        {
+          question: "هل أستطيع مقارنة عنابة مع مدن جزائرية أخرى من نفس الصفحة؟",
+          answer: "نعم. يمكنك الانتقال بسرعة إلى وهران والجزائر العاصمة والبويرة وعين البنيان لمقارنة المواقيت داخل نفس مجموعة الجزائر."
         },
         {
           question: "لماذا قد تختلف مواقيت الصلاة في عنابة عن مصدر آخر؟",
@@ -2705,7 +2740,8 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
       aboutParagraphs: [
         "هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في البويرة اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.",
         "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
-        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة."
+        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة.",
+        "كما يمكنك استخدام قسم المدن الأخرى لمقارنة البويرة بسرعة مع الجزائر العاصمة أو وهران أو عنابة أو عين البنيان ضمن نفس طبقة الجزائر."
       ],
       faqTitle: "أسئلة شائعة عن مواقيت الصلاة في البويرة",
       faq: [
@@ -2716,6 +2752,10 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
         {
           question: "هل يمكنني معرفة وقت المغرب أو الصلاة القادمة في البويرة من نفس الصفحة؟",
           answer: "نعم. تبقى مواقيت اليوم كلها ظاهرة مع الصلاة القادمة حتى لا تحتاج إلى الانتقال السريع بين صفحات كثيرة."
+        },
+        {
+          question: "هل أستطيع مقارنة البويرة مع مدن جزائرية أخرى من نفس الصفحة؟",
+          answer: "نعم. يعرض لك قسم المدن الأخرى روابط مباشرة إلى الجزائر العاصمة ووهران وعنابة وعين البنيان حتى تقارن المواقيت سريعا."
         },
         {
           question: "لماذا قد تختلف مواقيت الصلاة في البويرة عن مصدر آخر؟",
@@ -2741,7 +2781,8 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
       aboutParagraphs: [
         "هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في عين البنيان اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.",
         "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
-        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة."
+        "إذا أردت مقارنة النتيجة بجدول محلي مختلف، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم اتبع توقيت المسجد المحلي أو الجهة الموثوقة.",
+        "ويمكنك كذلك مقارنة عين البنيان بسرعة مع الجزائر العاصمة أو وهران أو عنابة أو البويرة من خلال قسم المدن الأخرى داخل هذا المسار الجزائري."
       ],
       faqTitle: "أسئلة شائعة عن مواقيت الصلاة في عين البنيان",
       faq: [
@@ -2752,6 +2793,10 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
         {
           question: "هل يمكنني معرفة وقت العشاء أو الصلاة القادمة في عين البنيان من نفس الصفحة؟",
           answer: "نعم. تبقى مواقيت اليوم كلها ظاهرة مع الصلاة القادمة حتى لا تحتاج إلى الانتقال السريع بين صفحات كثيرة."
+        },
+        {
+          question: "هل أستطيع مقارنة عين البنيان مع مدن جزائرية أخرى من نفس الصفحة؟",
+          answer: "نعم. يتيح لك قسم المدن الأخرى الوصول مباشرة إلى الجزائر العاصمة ووهران وعنابة والبويرة لمقارنة المواقيت بسرعة."
         },
         {
           question: "لماذا قد تختلف مواقيت الصلاة في عين البنيان عن مصدر آخر؟",
@@ -2777,7 +2822,8 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
       aboutParagraphs: [
         `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم، مع جدول اليوم الكامل مرئيا منذ البداية.`,
         "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
-        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن الطريقة الظاهرة بالمصدر الذي تتبعه."
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن الطريقة الظاهرة بالمصدر الذي تتبعه.",
+        "ويساعدك قسم المدن الأخرى أيضا على مقارنة الجزائر العاصمة مع وهران وعنابة والبويرة وعين البنيان من داخل نفس طبقة الجزائر التي نعطيها الأولوية."
       ],
       faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
       faq: [
@@ -2788,6 +2834,10 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
         {
           question: `هل يمكنني الانتقال من ${cityName} إلى مسارات أدق مثل الصلاة القادمة أو الفجر؟`,
           answer: "نعم. الصفحة تربطك مباشرة بمسارات أكثر تركيزا مثل الصلاة القادمة ووقت الفجر ومواقيت الصلاة الكاملة."
+        },
+        {
+          question: `هل أستطيع مقارنة ${cityName} مع مدن جزائرية أخرى من نفس الصفحة؟`,
+          answer: "نعم. قسم المدن الأخرى يوصلك مباشرة إلى وهران وعنابة والبويرة وعين البنيان حتى تقارن المواقيت بسرعة داخل نفس السوق الجزائري."
         },
         {
           question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`,
@@ -4227,15 +4277,24 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
   const isHomeRoot = pageType === "home" && !place && !sourceCity;
   const rootOverride = ROOT_HOME_OVERRIDES.ar;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
-  const cityLinks = TOP_CITIES
-    .filter(item => item.city !== sourceCity)
-    .slice(0, 6)
-    .map(item => ({
-      city: item.city,
-      country: item.country,
-      label: localizeCityName(item.city, "ar"),
-      href: buildRoutePath("ar", resolvedPage, item.city)
-    }));
+  const cityLinks = (ALGERIA_WINNER_CITY_SLUGS.includes(sourceCity)
+    ? ALGERIA_WINNER_ARABIC_CITY_LINKS
+        .filter(item => slugify(item.city) !== sourceCity)
+        .map(item => ({
+          city: item.city,
+          country: "Algeria",
+          label: item.label.replace("مواقيت الصلاة في ", ""),
+          href: buildRoutePath("ar", "home", item.city)
+        }))
+    : TOP_CITIES
+        .filter(item => item.city !== sourceCity)
+        .slice(0, 6)
+        .map(item => ({
+          city: item.city,
+          country: item.country,
+          label: localizeCityName(item.city, "ar"),
+          href: buildRoutePath("ar", resolvedPage, item.city)
+        })));
   cityLinks.forEach((link, index) => {
     const filteredCities = TOP_CITIES.filter(item => item.city !== sourceCity).slice(0, 6);
     const sourceItem = filteredCities[index];
@@ -4414,15 +4473,24 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
   const rootOverride = ROOT_HOME_OVERRIDES[language];
 
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
-  const cityLinks = TOP_CITIES
-    .filter(item => item.city !== sourceCity)
-    .slice(0, 6)
-    .map(item => ({
-      city: item.city,
-      country: item.country,
-      label: localizeCityName(item.city, language),
-      href: buildRoutePath(language, resolvedPage, item.city)
-    }));
+  const cityLinks = (language === "fr" && ALGERIA_WINNER_CITY_SLUGS.includes(sourceCity)
+    ? ALGERIA_WINNER_FRENCH_CITY_LINKS
+        .filter(item => slugify(item.city) !== sourceCity)
+        .map(item => ({
+          city: item.city,
+          country: "Algeria",
+          label: item.label.replace("Horaires de prière à ", ""),
+          href: buildRoutePath("fr", "home", item.city)
+        }))
+    : TOP_CITIES
+        .filter(item => item.city !== sourceCity)
+        .slice(0, 6)
+        .map(item => ({
+          city: item.city,
+          country: item.country,
+          label: localizeCityName(item.city, language),
+          href: buildRoutePath(language, resolvedPage, item.city)
+        })));
   const intentLinks = locale.intentLinks.map(item => ({
     label: item.label,
     href: buildRoutePath(language, item.type)
