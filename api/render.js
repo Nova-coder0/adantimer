@@ -50,13 +50,15 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["oran", { cityName: "وهران", variant: "oran" }],
     ["annaba", { cityName: "عنابة", variant: "annaba" }],
     ["bouira", { cityName: "البويرة", variant: "bouira" }],
-    ["ain-benian", { cityName: "عين البنيان", variant: "ain-benian" }]
+    ["ain-benian", { cityName: "عين البنيان", variant: "ain-benian" }],
+    ["alger", { cityName: "الجزائر العاصمة", variant: "alger" }]
   ]),
   fr: new Map([
     ["oran", { cityName: "Oran", variant: "oran" }],
     ["annaba", { cityName: "Annaba", variant: "annaba" }],
     ["bouira", { cityName: "Bouira", variant: "bouira" }],
-    ["ain-benian", { cityName: "Ain Benian", variant: "ain-benian" }]
+    ["ain-benian", { cityName: "Ain Benian", variant: "ain-benian" }],
+    ["alger", { cityName: "Alger", variant: "alger" }]
   ])
 };
 const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
@@ -79,6 +81,7 @@ const CITY_NAME_LOCALIZATIONS = {
   "annaba": { ar: "\u0639\u0646\u0627\u0628\u0629", de: "Annaba", fr: "Annaba", tr: "Annaba", "zh-hans": "\u5b89\u7eb3\u5df4" },
   "bouira": { ar: "\u0627\u0644\u0628\u0648\u064a\u0631\u0629", de: "Bouira", fr: "Bouira", tr: "Bouira", "zh-hans": "Bouira" },
   "ain-benian": { ar: "\u0639\u064a\u0646 \u0627\u0644\u0628\u0646\u064a\u0627\u0646", de: "Ain Benian", fr: "Ain Benian", tr: "Ain Benian", "zh-hans": "Ain Benian" },
+  "alger": { ar: "\u0627\u0644\u062c\u0632\u0627\u0626\u0631 \u0627\u0644\u0639\u0627\u0635\u0645\u0629", de: "Algier", fr: "Alger", tr: "Cezayir", "zh-hans": "\u963f\u5c14\u53ca\u5c14" },
   "chesham": { ar: "\u062a\u0634\u064a\u0634\u0627\u0645", de: "Chesham", fr: "Chesham", tr: "Chesham", "zh-hans": "Chesham" },
   "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
   "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
@@ -1241,6 +1244,35 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
         }
       ]
     },
+    alger: {
+      infoTitle: `Horaires de prière à ${cityName} avec tout le planning du jour sur une seule page`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez passer directement vers des routes plus ciblées comme la prochaine prière, Fajr ou le planning complet.`,
+        "Cette page vise explicitement les formulations vues dans le pack comme heure de prière Alger, heure priere Alger, horaires de prière Alger, adhan maghreb Alger ou fajr aujourd'hui Alger."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        "Pour Alger, la couverture est renforcée autour de heure de prière, horaires de prière, heure priere, adhan maghreb et fajr aujourd'hui afin de répondre à une couche francophone nord-africaine plus dense."
+      ],
+      faq: [
+        {
+          question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`,
+          answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière."
+        },
+        {
+          question: `Pourquoi peut-on chercher ${cityName} avec heure de prière, heure priere ou adhan maghreb ?`,
+          answer: "Les formulations varient selon les pays, les habitudes et les claviers. Cette page reste la page canonique unique pour Alger en français."
+        },
+        {
+          question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
+          answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    },
     generic: {
       infoTitle: `Horaires de prière à ${cityName} avec tout le planning du jour sur une seule page`,
       features: [
@@ -2323,6 +2355,42 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
     };
   }
 
+  if (variant === "alger") {
+    return {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع الصلاة القادمة، وراجع جدول الفجر والظهر والعصر والمغرب والعشاء في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع الجدول الكامل والصلاة القادمة`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الصفحة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في مكان واحد لسهولة المراجعة السريعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى مسارات أكثر تركيزا مثل الصلاة القادمة أو وقت الفجر أو مواقيت الصلاة الكاملة.`,
+        "هذه الصفحة تحافظ على عنوان أساسي واحد واضح وتغطي نية البحث المحلية بدون إنشاء صفحات مترادفة ضعيفة."
+      ],
+      aboutTitle: `كيف تستخدم صفحة مواقيت الصلاة في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم، مع جدول اليوم الكامل مرئيا منذ البداية.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن الطريقة الظاهرة بالمصدر الذي تتبعه."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        {
+          question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`,
+          answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الشاشة."
+        },
+        {
+          question: `هل يمكنني الانتقال من ${cityName} إلى مسارات أدق مثل الصلاة القادمة أو الفجر؟`,
+          answer: "نعم. الصفحة تربطك مباشرة بمسارات أكثر تركيزا مثل الصلاة القادمة ووقت الفجر ومواقيت الصلاة الكاملة."
+        },
+        {
+          question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`,
+          answer: "قد تختلف المواقيت بحسب طريقة الحساب أو المرجع المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين."
+        }
+      ]
+    };
+  }
+
   return {
     metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
     metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
@@ -2393,6 +2461,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     if (language === "fr") {
       return {
         cityIntentLinks: [
+          { label: "Horaires de prière à Alger", href: buildRoutePath("fr", "home", "Alger") },
           { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
           { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
           { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
@@ -2409,6 +2478,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     if (language === "ar") {
       return {
         cityIntentLinks: [
+          { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
           { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
           { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
           { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
