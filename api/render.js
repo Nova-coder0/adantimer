@@ -2659,6 +2659,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
 
   if (pageType === "next-prayer" && language === "fr") {
     return {
+      ...buildArabicPriorityIntentCopy(pageType),
       cityIntentLinks: [
         { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
         { label: "Prochaine prière à Oran", href: buildRoutePath("fr", "next-prayer", "Oran") },
@@ -2678,6 +2679,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
         ? "Heure du Maghrib"
         : "Heure de l'Isha";
     return {
+      ...buildArabicPriorityIntentCopy(pageType),
       cityIntentLinks: [
         { label: `${prayerLabel} à Alger`, href: buildRoutePath("fr", pageType, "Alger") },
         { label: `${prayerLabel} à Oran`, href: buildRoutePath("fr", pageType, "Oran") },
@@ -2700,6 +2702,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
 
   if (pageType === "next-prayer" && language === "ar") {
     return {
+      ...buildArabicPriorityIntentCopy(pageType),
       cityIntentLinks: [
         { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
         { label: "الصلاة القادمة في وهران", href: buildRoutePath("ar", "next-prayer", "Oran") },
@@ -2712,6 +2715,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   if (language === "ar" && ["fajr", "maghrib"].includes(pageType)) {
     const prayerLabel = pageType === "fajr" ? "الفجر" : "المغرب";
     return {
+      ...buildArabicPriorityIntentCopy(pageType),
       cityIntentLinks: [
         { label: `${prayerLabel} في الجزائر العاصمة`, href: buildRoutePath("ar", pageType, "Alger") },
         { label: `${prayerLabel} في وهران`, href: buildRoutePath("ar", pageType, "Oran") },
