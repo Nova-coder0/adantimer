@@ -1677,6 +1677,123 @@ function buildEnglishPriorityIntentCopy(pageType) {
   };
 }
 
+function buildFrenchPriorityIntentCityCopy(pageType, cityKey, place) {
+  const key = `${pageType}:${cityKey}`;
+
+  if (key === "next-prayer:alger") {
+    return {
+      metaTitle: `Prochaine prière à ${place} aujourd'hui | Compte à rebours en direct | Adantimer`,
+      metaDescription: `Consultez la prochaine prière à ${place} aujourd'hui avec le compte à rebours en direct, la prière en cours et le planning complet de la journée.`,
+      heroSubtitle: `Suivez la prochaine prière à ${place} avec un compte à rebours en direct, gardez la prière en cours visible et vérifiez le planning complet sur une seule page.`,
+      infoTitle: `Utilisez cette page quand la prochaine prière à ${place} est la question principale`,
+      features: [
+        `Le compte à rebours de la prochaine prière reste au centre de la page ${place} avec tout le planning quotidien.`,
+        "La prière en cours, la prochaine prière, la date du jour et la méthode de calcul restent visibles sur le même écran.",
+        `La page relie directement ${place} vers les horaires de prière complets ainsi que vers des routes ciblées comme Fajr ou Maghrib.`,
+        "Cela aide aussi à couvrir des formulations réelles comme adhan aujourd'hui, prochaine prière, ou heure de la prochaine prière sans créer de doublons."
+      ],
+      citiesTitle: `Routes liées pour la prochaine prière à ${place}`,
+      aboutTitle: `Ce que la page de la prochaine prière à ${place} doit répondre d'abord`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention directe: quelle est la prochaine prière à ${place} et combien de temps reste-t-il avant qu'elle commence.`,
+        "Le compte à rebours, la prière en cours, le planning complet et la méthode visible restent ensemble pour garder la réponse locale immédiatement vérifiable.",
+        `Si vous avez ensuite besoin d'un angle plus précis, les liens de ${place} permettent de passer vers les horaires complets, Fajr ou Maghrib sans repartir d'une page générale.`
+      ],
+      faqTitle: `Questions fréquentes sur la prochaine prière à ${place}`,
+      faq: [
+        {
+          question: `Cette page ${place} affiche-t-elle uniquement la prochaine prière ?`,
+          answer: `Non. La prochaine prière est la priorité, mais le planning complet de ${place} reste visible sur la même page.`
+        },
+        {
+          question: `Puis-je passer de la prochaine prière à ${place} vers d'autres routes locales ?`,
+          answer: `Oui. La page relie directement ${place} vers les horaires de prière complets ainsi que vers des routes plus ciblées comme Fajr ou Maghrib.`
+        },
+        {
+          question: `Pourquoi le compte à rebours à ${place} peut-il différer d'une autre source ?`,
+          answer: "Le compte à rebours dépend du planning chargé, et les horaires peuvent varier selon la méthode de calcul ou la référence locale suivie."
+        }
+      ]
+    };
+  }
+
+  if (key === "fajr:alger") {
+    return {
+      metaTitle: `Heure du Fajr à ${place} aujourd'hui | Recherche quotidienne du Fajr | Adantimer`,
+      metaDescription: `Consultez l'heure du Fajr à ${place} aujourd'hui, gardez le planning complet visible et comparez la méthode de calcul sur une seule page.`,
+      heroSubtitle: `Consultez l'heure du Fajr à ${place} aujourd'hui, gardez le compte à rebours visible et vérifiez le planning complet avant de passer à une autre route.`,
+      infoTitle: `Utilisez cette page quand l'heure du Fajr à ${place} est la question principale`,
+      features: [
+        `Le Fajr reste au centre de la page ${place} pendant que le planning complet reste visible pour le contexte.`,
+        "La prière en cours, la prochaine prière, la date du jour et la méthode de calcul restent visibles sur le même écran.",
+        `La page relie directement ${place} vers les horaires complets et vers la prochaine prière pour une vérification plus large si nécessaire.`,
+        "Elle couvre aussi naturellement des formulations comme heure du fajr, fajr aujourd'hui et horaires de prière Alger sans créer d'URL dupliquées."
+      ],
+      citiesTitle: `Routes liées pour le Fajr à ${place}`,
+      aboutTitle: `Ce que la page du Fajr à ${place} doit répondre d'abord`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure du Fajr à ${place} aujourd'hui et comment la vérifier rapidement.`,
+        "Le Fajr, le planning complet, le compte à rebours et la méthode visible restent ensemble afin que la réponse soit plus simple à confirmer.",
+        `Après la première vérification, les liens de ${place} permettent de passer directement vers les horaires complets ou la prochaine prière.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure du Fajr à ${place}`,
+      faq: [
+        {
+          question: `Cette page ${place} affiche-t-elle uniquement le Fajr ?`,
+          answer: `Non. Le Fajr est la priorité, mais le planning complet de ${place} reste visible sur la même page.`
+        },
+        {
+          question: `Puis-je passer du Fajr à ${place} vers d'autres routes locales ?`,
+          answer: `Oui. La page relie directement ${place} vers les horaires complets et vers la prochaine prière.`
+        },
+        {
+          question: `Pourquoi l'heure du Fajr à ${place} peut-elle différer d'une autre source ?`,
+          answer: "Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    };
+  }
+
+  if (key === "maghrib:alger") {
+    return {
+      metaTitle: `Heure du Maghrib à ${place} aujourd'hui | Recherche quotidienne du Maghrib | Adantimer`,
+      metaDescription: `Consultez l'heure du Maghrib à ${place} aujourd'hui, gardez le planning complet visible et vérifiez la prochaine prière sur une seule page.`,
+      heroSubtitle: `Consultez l'heure du Maghrib à ${place} aujourd'hui, gardez la prochaine prière visible et vérifiez le planning complet avant de changer de route.`,
+      infoTitle: `Utilisez cette page quand l'heure du Maghrib à ${place} est la question principale`,
+      features: [
+        `Le Maghrib reste au centre de la page ${place} pendant que le planning complet reste visible pour le contexte.`,
+        "La prière en cours, la prochaine prière, la date du jour et la méthode de calcul restent visibles sur le même écran.",
+        `La page relie directement ${place} vers les horaires complets et vers la prochaine prière pour une vérification plus large si nécessaire.`,
+        "Elle couvre aussi des formulations vues dans les recherches comme adhan maghreb, maghreb, maghrib et heure de prière Alger sans créer de routes synonymes."
+      ],
+      citiesTitle: `Routes liées pour le Maghrib à ${place}`,
+      aboutTitle: `Ce que la page du Maghrib à ${place} doit répondre d'abord`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure du Maghrib à ${place} aujourd'hui et comment la vérifier rapidement.`,
+        "Le Maghrib, le planning complet, la prochaine prière et la méthode visible restent ensemble afin que la réponse soit plus simple à confirmer.",
+        `Après la première vérification, les liens de ${place} permettent de passer directement vers les horaires complets ou la prochaine prière.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure du Maghrib à ${place}`,
+      faq: [
+        {
+          question: `Cette page ${place} affiche-t-elle uniquement le Maghrib ?`,
+          answer: `Non. Le Maghrib est la priorité, mais le planning complet de ${place} reste visible sur la même page.`
+        },
+        {
+          question: `Puis-je passer du Maghrib à ${place} vers d'autres routes locales ?`,
+          answer: `Oui. La page relie directement ${place} vers les horaires complets et vers la prochaine prière.`
+        },
+        {
+          question: `Pourquoi l'heure du Maghrib à ${place} peut-elle différer d'une autre source ?`,
+          answer: "Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
+        }
+      ]
+    };
+  }
+
+  return null;
+}
+
 function buildArabicPriorityIntentCopy(pageType) {
     const prayerConfig = {
       fajr: {
@@ -2051,6 +2168,21 @@ function buildArabicPriorityIntentCityCopy(pageType, cityKey, place) {
     };
   }
 
+  if (key === "next-prayer:alger") {
+    return {
+      metaTitle: `\u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645 | \u0639\u062f \u062a\u0646\u0627\u0632\u0644\u064a \u0645\u0628\u0627\u0634\u0631 \u0644\u0644\u0635\u0644\u0627\u0629 | Adantimer`,
+      metaDescription: `\u0627\u0639\u0631\u0641 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645 \u0645\u0639 \u0639\u062f \u062a\u0646\u0627\u0632\u0644\u064a \u0645\u0628\u0627\u0634\u0631\u060c \u0648\u062d\u0627\u0644\u0629 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629\u060c \u0648\u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644.`,
+      heroSubtitle: `\u062a\u0627\u0628\u0639 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a ${place} \u0645\u0639 \u0639\u062f \u062a\u0646\u0627\u0632\u0644\u064a \u0645\u0628\u0627\u0634\u0631\u060c \u0648\u0627\u0639\u0631\u0641 \u062d\u0627\u0644\u0629 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629\u060c \u0648\u0623\u0628\u0642 \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644 \u0645\u062a\u0627\u062d\u0627 \u0641\u064a \u0627\u0644\u0635\u0641\u062d\u0629 \u0646\u0641\u0633\u0647\u0627.`,
+      infoTitle: `\u0627\u0633\u062a\u062e\u062f\u0645 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0639\u0646\u062f\u0645\u0627 \u062a\u0643\u0648\u0646 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a ${place} \u0647\u064a \u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u0623\u0633\u0627\u0633\u064a`,
+      aboutTitle: `\u0645\u0627 \u0627\u0644\u0630\u064a \u064a\u062c\u0628 \u0623\u0646 \u062a\u062c\u064a\u0628 \u0639\u0646\u0647 \u0635\u0641\u062d\u0629 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a ${place} \u0623\u0648\u0644\u0627`,
+      aboutParagraphs: [
+        `\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0645\u0628\u0646\u064a\u0629 \u0644\u0646\u064a\u0629 \u0627\u0644\u0628\u062d\u062b \u0627\u0644\u0645\u0628\u0627\u0634\u0631\u0629: \u0645\u0627 \u0647\u064a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0641\u064a ${place} \u0648\u0643\u0645 \u064a\u0628\u0642\u0649 \u0639\u0644\u0649 \u0628\u062f\u0626\u0647\u0627.`,
+        "\u062a\u062c\u0645\u0639 \u0627\u0644\u0635\u0641\u062d\u0629 \u0627\u0644\u0639\u062f \u0627\u0644\u062a\u0646\u0627\u0632\u0644\u064a\u060c \u0648\u062d\u0627\u0644\u0629 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u062d\u0627\u0644\u064a\u0629\u060c \u0648\u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a\u060c \u0648\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0638\u0627\u0647\u0631\u0629 \u0641\u064a \u0645\u0643\u0627\u0646 \u0648\u0627\u062d\u062f.",
+        `\u0628\u0639\u062f \u0623\u0648\u0644 \u062a\u062d\u0642\u0642\u060c \u064a\u0645\u0643\u0646\u0643 \u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0645\u0646 ${place} \u0625\u0644\u0649 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0643\u0627\u0645\u0644\u0629 \u0648\u0625\u0644\u0649 \u0645\u0633\u0627\u0631\u0627\u062a \u0623\u062f\u0642 \u0645\u062b\u0644 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0648\u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628.`
+      ]
+    };
+  }
+
   if (key === "next-prayer:oran") {
     return {
       metaTitle: `الصلاة القادمة في ${place} اليوم | عد تنازلي مباشر للصلاة | Adantimer`,
@@ -2077,6 +2209,21 @@ function buildArabicPriorityIntentCityCopy(pageType, cityKey, place) {
           question: `لماذا قد يختلف العد التنازلي للصلاة القادمة في ${place} عن مصدر آخر؟`,
           answer: "قد يختلف التوقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين."
         }
+      ]
+    };
+  }
+
+  if (key === "fajr:alger") {
+    return {
+      metaTitle: `\u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645 | \u062f\u0644\u064a\u0644 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0627\u0644\u064a\u0648\u0645\u064a | Adantimer`,
+      metaDescription: `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645\u060c \u0648\u0631\u0627\u062c\u0639 \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644\u060c \u0648\u0623\u0628\u0642 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0638\u0627\u0647\u0631\u0629 \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0635\u0641\u062d\u0629.`,
+      heroSubtitle: `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645\u060c \u0648\u0631\u0627\u062c\u0639 \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644\u060c \u0648\u0623\u0628\u0642 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0638\u0627\u0647\u0631\u0629 \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062a\u0648\u0642\u064a\u062a \u0628\u0633\u0631\u0639\u0629.`,
+      infoTitle: `\u0627\u0633\u062a\u062e\u062f\u0645 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0639\u0646\u062f\u0645\u0627 \u064a\u0643\u0648\u0646 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a ${place} \u0647\u0648 \u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u0623\u0633\u0627\u0633\u064a`,
+      aboutTitle: `\u0645\u0627 \u0627\u0644\u0630\u064a \u064a\u062c\u0628 \u0623\u0646 \u062a\u062c\u064a\u0628 \u0639\u0646\u0647 \u0635\u0641\u062d\u0629 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a ${place} \u0623\u0648\u0644\u0627`,
+      aboutParagraphs: [
+        `\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0645\u0628\u0646\u064a\u0629 \u0644\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u0645\u0628\u0627\u0634\u0631: \u0645\u0627 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645 \u0648\u0643\u064a\u0641 \u0623\u062a\u062d\u0642\u0642 \u0645\u0646\u0647 \u0628\u0633\u0631\u0639\u0629.`,
+        "\u062a\u0639\u0631\u0636 \u0627\u0644\u0635\u0641\u062d\u0629 \u0648\u0642\u062a \u0627\u0644\u0641\u062c\u0631 \u0645\u0639 \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644\u060c \u0648\u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629\u060c \u0648\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0638\u0627\u0647\u0631\u0629 \u0641\u064a \u0634\u0627\u0634\u0629 \u0648\u0627\u062d\u062f\u0629.",
+        `\u0628\u0639\u062f \u0623\u0648\u0644 \u062a\u062d\u0642\u0642\u060c \u064a\u0645\u0643\u0646\u0643 \u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0645\u0646 ${place} \u0625\u0644\u0649 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0643\u0627\u0645\u0644\u0629 \u0623\u0648 \u0625\u0644\u0649 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0628\u0633\u0631\u0639\u0629.`
       ]
     };
   }
@@ -2137,6 +2284,21 @@ function buildArabicPriorityIntentCityCopy(pageType, cityKey, place) {
           question: `لماذا قد يختلف وقت المغرب في ${place} عن مصدر آخر؟`,
           answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك راجع المسجد المحلي أو الجهة الموثوقة إذا احتجت إلى مقارنة إضافية."
         }
+      ]
+    };
+  }
+
+  if (key === "maghrib:alger") {
+    return {
+      metaTitle: `\u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645 | \u062f\u0644\u064a\u0644 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0627\u0644\u064a\u0648\u0645\u064a | Adantimer`,
+      metaDescription: `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645\u060c \u0648\u0631\u0627\u062c\u0639 \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644\u060c \u0648\u0623\u0628\u0642 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0638\u0627\u0647\u0631\u0629 \u0644\u0644\u0648\u0635\u0648\u0644 \u0627\u0644\u0623\u0633\u0631\u0639.`,
+      heroSubtitle: `\u062a\u062d\u0642\u0642 \u0645\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645\u060c \u0648\u0631\u0627\u062c\u0639 \u0627\u0644\u062c\u062f\u0648\u0644 \u0627\u0644\u064a\u0648\u0645\u064a \u0627\u0644\u0643\u0627\u0645\u0644\u060c \u0648\u0623\u0628\u0642 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0638\u0627\u0647\u0631\u0629 \u0644\u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062a\u0648\u0642\u064a\u062a \u0628\u0633\u0631\u0639\u0629.`,
+      infoTitle: `\u0627\u0633\u062a\u062e\u062f\u0645 \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0639\u0646\u062f\u0645\u0627 \u064a\u0643\u0648\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0641\u064a ${place} \u0647\u0648 \u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u0623\u0633\u0627\u0633\u064a`,
+      aboutTitle: `\u0645\u0627 \u0627\u0644\u0630\u064a \u064a\u062c\u0628 \u0623\u0646 \u062a\u062c\u064a\u0628 \u0639\u0646\u0647 \u0635\u0641\u062d\u0629 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0641\u064a ${place} \u0623\u0648\u0644\u0627`,
+      aboutParagraphs: [
+        `\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0645\u0628\u0646\u064a\u0629 \u0644\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u0645\u0628\u0627\u0634\u0631: \u0645\u0627 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0641\u064a ${place} \u0627\u0644\u064a\u0648\u0645 \u0648\u0643\u064a\u0641 \u0623\u062a\u062d\u0642\u0642 \u0645\u0646\u0647 \u0628\u0633\u0631\u0639\u0629.`,
+        "\u062a\u0639\u0631\u0636 \u0627\u0644\u0635\u0641\u062d\u0629 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628 \u0645\u0639 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0643\u0627\u0645\u0644\u0629\u060c \u0648\u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629\u060c \u0648\u0637\u0631\u064a\u0642\u0629 \u0627\u0644\u062d\u0633\u0627\u0628 \u0627\u0644\u0638\u0627\u0647\u0631\u0629 \u0641\u064a \u0645\u0643\u0627\u0646 \u0648\u0627\u062d\u062f.",
+        `\u0628\u0639\u062f \u0627\u0644\u062a\u062d\u0642\u0642 \u0645\u0646 \u0648\u0642\u062a \u0627\u0644\u0645\u063a\u0631\u0628\u060c \u064a\u0645\u0643\u0646\u0643 \u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0645\u0646 ${place} \u0625\u0644\u0649 \u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0643\u0627\u0645\u0644\u0629 \u0623\u0648 \u0625\u0644\u0649 \u0627\u0644\u0635\u0644\u0627\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0645\u0646 \u0646\u0641\u0633 \u0627\u0644\u0635\u0641\u062d\u0629.`
       ]
     };
   }
@@ -2498,6 +2660,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   if (pageType === "next-prayer" && language === "fr") {
     return {
       cityIntentLinks: [
+        { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
         { label: "Prochaine prière à Oran", href: buildRoutePath("fr", "next-prayer", "Oran") },
         { label: "Prochaine prière à Annaba", href: buildRoutePath("fr", "next-prayer", "Annaba") },
         { label: "Prochaine prière à Bouira", href: buildRoutePath("fr", "next-prayer", "Bouira") },
@@ -2516,6 +2679,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
         : "Heure de l'Isha";
     return {
       cityIntentLinks: [
+        { label: `${prayerLabel} à Alger`, href: buildRoutePath("fr", pageType, "Alger") },
         { label: `${prayerLabel} à Oran`, href: buildRoutePath("fr", pageType, "Oran") },
         { label: `${prayerLabel} à Annaba`, href: buildRoutePath("fr", pageType, "Annaba") },
         { label: `${prayerLabel} à Bouira`, href: buildRoutePath("fr", pageType, "Bouira") },
@@ -2532,6 +2696,29 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     }
 
     return null;
+  }
+
+  if (pageType === "next-prayer" && language === "ar") {
+    return {
+      cityIntentLinks: [
+        { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
+        { label: "الصلاة القادمة في وهران", href: buildRoutePath("ar", "next-prayer", "Oran") },
+        { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
+        { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") }
+      ]
+    };
+  }
+
+  if (language === "ar" && ["fajr", "maghrib"].includes(pageType)) {
+    const prayerLabel = pageType === "fajr" ? "الفجر" : "المغرب";
+    return {
+      cityIntentLinks: [
+        { label: `${prayerLabel} في الجزائر العاصمة`, href: buildRoutePath("ar", pageType, "Alger") },
+        { label: `${prayerLabel} في وهران`, href: buildRoutePath("ar", pageType, "Oran") },
+        { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
+        { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") }
+      ]
+    };
   }
 
   if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
@@ -2586,9 +2773,11 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
   const cityKey = slugify(sourceCity || "");
   const priorityIntentCityCopy = language === "en"
     ? buildEnglishPriorityIntentCityCopy(pageType, cityKey, place)
-    : language === "ar"
-      ? buildArabicPriorityIntentCityCopy(pageType, cityKey, place)
-      : null;
+    : language === "fr"
+      ? buildFrenchPriorityIntentCityCopy(pageType, cityKey, place)
+      : language === "ar"
+        ? buildArabicPriorityIntentCityCopy(pageType, cityKey, place)
+        : null;
   const priorityIntentCopy = getPriorityIntentSeoCopy(language, pageType, sourceCity);
   const priorityHomeCityCopy = getPriorityHomeCitySeoCopy(language, pageType, cityKey, place);
 
