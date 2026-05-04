@@ -109,6 +109,22 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
 };
 
+const ALGERIA_WINNER_CITY_SLUGS = ["alger", "oran", "annaba", "bouira", "ain-benian"];
+const ALGERIA_WINNER_FRENCH_CITY_LINKS = [
+  { city: "Alger", label: "Horaires de prière à Alger" },
+  { city: "Oran", label: "Horaires de prière à Oran" },
+  { city: "Annaba", label: "Horaires de prière à Annaba" },
+  { city: "Bouira", label: "Horaires de prière à Bouira" },
+  { city: "Ain Benian", label: "Horaires de prière à Ain Benian" }
+];
+const ALGERIA_WINNER_ARABIC_CITY_LINKS = [
+  { city: "Alger", label: "مواقيت الصلاة في الجزائر العاصمة" },
+  { city: "Oran", label: "مواقيت الصلاة في وهران" },
+  { city: "Annaba", label: "مواقيت الصلاة في عنابة" },
+  { city: "Bouira", label: "مواقيت الصلاة في البويرة" },
+  { city: "Ain Benian", label: "مواقيت الصلاة في عين البنيان" }
+];
+
 const PRIORITY_GROUP_LABELS = {
   en: {
     core: "Core cities",
@@ -3601,15 +3617,30 @@ const COPY_LOCALES = {
     citiesTitle: topic => `Pages populaires pour ${topic}`,
     cityLinkLabel: (topic, city) => `${topic} à ${city}`,
     cityIntentLinks: place => place
-      ? [
-          { type: "prayer-times", label: `Horaires de prière à ${place}` },
-          { type: "next-prayer", label: `Prochaine prière à ${place}` },
-          { type: "fajr", label: `Fajr à ${place}` },
-          { type: "dhuhr", label: `Dhuhr à ${place}` },
-          { type: "asr", label: `Asr à ${place}` },
-          { type: "maghrib", label: `Maghrib à ${place}` },
-          { type: "isha", label: `Isha à ${place}` }
-        ]
+      ? (
+          ["Alger", "Oran", "Annaba", "Bouira", "Ain Benian"].includes(place)
+            ? [
+                { type: "prayer-times", label: `Horaires de prière à ${place}` },
+                { type: "next-prayer", label: `Prochaine prière à ${place}` },
+                { type: "fajr", label: `Fajr à ${place}` },
+                { type: "maghrib", label: `Maghrib à ${place}` },
+                { type: "isha", label: `Isha à ${place}` },
+                ...ALGERIA_WINNER_FRENCH_CITY_LINKS.filter(item => item.city !== place).map(item => ({
+                  type: "prayer-times",
+                  city: item.city,
+                  label: item.label
+                }))
+              ]
+            : [
+                { type: "prayer-times", label: `Horaires de prière à ${place}` },
+                { type: "next-prayer", label: `Prochaine prière à ${place}` },
+                { type: "fajr", label: `Fajr à ${place}` },
+                { type: "dhuhr", label: `Dhuhr à ${place}` },
+                { type: "asr", label: `Asr à ${place}` },
+                { type: "maghrib", label: `Maghrib à ${place}` },
+                { type: "isha", label: `Isha à ${place}` }
+              ]
+        )
       : [
           { type: "prayer-times", city: "Mecca", label: "Horaires de prière à La Mecque" },
           { type: "next-prayer", city: "Riyadh", label: "Prochaine prière à Riyad" },
@@ -4221,15 +4252,29 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
     { type: "isha", label: "وقت العشاء", href: buildRoutePath("ar", "isha") }
   ];
   let cityIntentLinks = sourceCity
-    ? [
-        { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
-        { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
-        { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
-        { label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", sourceCity) },
-        { label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", sourceCity) },
-        { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
-        { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) }
-      ]
+    ? (
+        ALGERIA_WINNER_CITY_SLUGS.includes(sourceCity)
+          ? [
+              { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
+              { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
+              { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
+              { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
+              { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) },
+              ...ALGERIA_WINNER_ARABIC_CITY_LINKS.filter(item => slugify(item.city) !== sourceCity).map(item => ({
+                label: item.label,
+                href: buildRoutePath("ar", "home", item.city)
+              }))
+            ]
+          : [
+              { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
+              { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
+              { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
+              { label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", sourceCity) },
+              { label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", sourceCity) },
+              { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
+              { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) }
+            ]
+      )
     : [
         { label: "مواقيت الصلاة في مكة", href: buildRoutePath("ar", "prayer-times", "Mecca") },
         { label: "مواقيت الصلاة في دبي", href: buildRoutePath("ar", "prayer-times", "Dubai") },
