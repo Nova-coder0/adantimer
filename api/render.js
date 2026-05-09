@@ -82,6 +82,14 @@ const CITY_NAME_LOCALIZATIONS = {
   "bouira": { ar: "\u0627\u0644\u0628\u0648\u064a\u0631\u0629", de: "Bouira", fr: "Bouira", tr: "Bouira", "zh-hans": "Bouira" },
   "ain-benian": { ar: "\u0639\u064a\u0646 \u0627\u0644\u0628\u0646\u064a\u0627\u0646", de: "Ain Benian", fr: "Ain Benian", tr: "Ain Benian", "zh-hans": "Ain Benian" },
   "alger": { ar: "\u0627\u0644\u062c\u0632\u0627\u0626\u0631 \u0627\u0644\u0639\u0627\u0635\u0645\u0629", de: "Algier", fr: "Alger", tr: "Cezayir", "zh-hans": "\u963f\u5c14\u53ca\u5c14" },
+  "constantine": { ar: "\u0642\u0633\u0646\u0637\u064a\u0646\u0629", de: "Constantine", fr: "Constantine", tr: "Constantine", "zh-hans": "Constantine" },
+  "setif": { ar: "\u0633\u0637\u064a\u0641", de: "Setif", fr: "Setif", tr: "Setif", "zh-hans": "Setif" },
+  "blida": { ar: "\u0627\u0644\u0628\u0644\u064a\u062f\u0629", de: "Blida", fr: "Blida", tr: "Blida", "zh-hans": "Blida" },
+  "tlemcen": { ar: "\u062a\u0644\u0645\u0633\u0627\u0646", de: "Tlemcen", fr: "Tlemcen", tr: "Tlemcen", "zh-hans": "Tlemcen" },
+  "batna": { ar: "\u0628\u0627\u062a\u0646\u0629", de: "Batna", fr: "Batna", tr: "Batna", "zh-hans": "Batna" },
+  "bejaia": { ar: "\u0628\u062c\u0627\u064a\u0629", de: "Bejaia", fr: "Bejaia", tr: "Bejaia", "zh-hans": "Bejaia" },
+  "mostaganem": { ar: "\u0645\u0633\u062a\u063a\u0627\u0646\u0645", de: "Mostaganem", fr: "Mostaganem", tr: "Mostaganem", "zh-hans": "Mostaganem" },
+  "sidi-bel-abbes": { ar: "\u0633\u064a\u062f\u064a \u0628\u0644\u0639\u0628\u0627\u0633", de: "Sidi Bel Abbes", fr: "Sidi Bel Abbes", tr: "Sidi Bel Abbes", "zh-hans": "Sidi Bel Abbes" },
   "chesham": { ar: "\u062a\u0634\u064a\u0634\u0627\u0645", de: "Chesham", fr: "Chesham", tr: "Chesham", "zh-hans": "Chesham" },
   "london": { ar: "\u0644\u0646\u062f\u0646", de: "London", fr: "Londres", tr: "Londra", "zh-hans": "\u4f26\u6566" },
   "new-york": { ar: "\u0646\u064a\u0648\u064a\u0648\u0631\u0643", de: "New York", fr: "New York", tr: "New York", "zh-hans": "\u7ebd\u7ea6" },
@@ -114,6 +122,21 @@ const COUNTRY_NAME_LOCALIZATIONS = {
 };
 
 const ALGERIA_WINNER_CITY_SLUGS = ["alger", "oran", "annaba", "bouira", "ain-benian"];
+const ALGERIA_FOCUS_CITIES = [
+  "Alger",
+  "Oran",
+  "Constantine",
+  "Annaba",
+  "Setif",
+  "Blida",
+  "Tlemcen",
+  "Batna",
+  "Bejaia",
+  "Mostaganem",
+  "Sidi Bel Abbes",
+  "Bouira",
+  "Ain Benian"
+];
 const ALGERIA_WINNER_FRENCH_CITY_LINKS = [
   { city: "Alger", label: "Horaires de prière à Alger" },
   { city: "Oran", label: "Horaires de prière à Oran" },
@@ -128,6 +151,92 @@ const ALGERIA_WINNER_ARABIC_CITY_LINKS = [
   { city: "Bouira", label: "مواقيت الصلاة في البويرة" },
   { city: "Ain Benian", label: "مواقيت الصلاة في عين البنيان" }
 ];
+
+function getAlgeriaFocusCities(sourceCity = "") {
+  const sourceSlug = slugify(sourceCity);
+  return ALGERIA_FOCUS_CITIES.filter(city => slugify(city) !== sourceSlug);
+}
+
+function buildAlgeriaCityLinks(language, sourceCity = "", limit = 10) {
+  return getAlgeriaFocusCities(sourceCity)
+    .slice(0, limit)
+    .map(city => ({
+      city,
+      country: "Algeria",
+      label: localizeCityName(city, language),
+      href: buildRoutePath(language, "home", city)
+    }));
+}
+
+function buildAlgeriaPrayerHubLinks(language) {
+  if (language === "fr") {
+    return [
+      ...ALGERIA_FOCUS_CITIES.slice(0, 9).map(city => ({
+        label: `Horaires de prière à ${localizeCityName(city, "fr")}`,
+        href: buildRoutePath("fr", "home", city)
+      })),
+      { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
+      { label: "Heure du Fajr à Oran", href: buildRoutePath("fr", "fajr", "Oran") },
+      { label: "Heure du Maghrib à Annaba", href: buildRoutePath("fr", "maghrib", "Annaba") },
+      { label: "Heure de l'Isha à Bouira", href: buildRoutePath("fr", "isha", "Bouira") }
+    ];
+  }
+
+  if (language === "ar") {
+    return [
+      ...ALGERIA_FOCUS_CITIES.slice(0, 9).map(city => ({
+        label: `مواقيت الصلاة في ${localizeCityName(city, "ar")}`,
+        href: buildRoutePath("ar", "home", city)
+      })),
+      { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
+      { label: "الفجر في وهران", href: buildRoutePath("ar", "fajr", "Oran") },
+      { label: "المغرب في عنابة", href: buildRoutePath("ar", "maghrib", "Annaba") },
+      { label: "العشاء في البويرة", href: buildRoutePath("ar", "isha", "Bouira") }
+    ];
+  }
+
+  return [];
+}
+
+function buildAlgeriaGenericIntentLinks(language, pageType) {
+  if (language === "fr") {
+    const prayerLabel = pageType === "next-prayer"
+      ? "Prochaine prière"
+      : pageType === "fajr"
+        ? "Heure du Fajr"
+        : pageType === "maghrib"
+          ? "Heure du Maghrib"
+          : "Heure de l'Isha";
+    return [
+      ...ALGERIA_FOCUS_CITIES.slice(0, 8).map(city => ({
+        label: `${prayerLabel} à ${localizeCityName(city, "fr")}`,
+        href: buildRoutePath("fr", pageType, city)
+      })),
+      { label: "Horaires de prière à Alger", href: buildRoutePath("fr", "home", "Alger") },
+      { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
+      { label: "Horaires de prière à Constantine", href: buildRoutePath("fr", "home", "Constantine") }
+    ];
+  }
+
+  if (language === "ar") {
+    const prayerLabel = pageType === "next-prayer"
+      ? "الصلاة القادمة"
+      : pageType === "fajr"
+        ? "الفجر"
+        : "المغرب";
+    return [
+      ...ALGERIA_FOCUS_CITIES.slice(0, 8).map(city => ({
+        label: `${prayerLabel} في ${localizeCityName(city, "ar")}`,
+        href: buildRoutePath("ar", pageType, city)
+      })),
+      { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
+      { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
+      { label: "مواقيت الصلاة في قسنطينة", href: buildRoutePath("ar", "home", "Constantine") }
+    ];
+  }
+
+  return [];
+}
 
 const PRIORITY_GROUP_LABELS = {
   en: {
@@ -3071,17 +3180,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     if (language === "fr") {
       return {
         ...buildFrenchPriorityIntentCopy(pageType),
-        cityIntentLinks: [
-          { label: "Horaires de prière à Alger", href: buildRoutePath("fr", "home", "Alger") },
-          { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
-          { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
-          { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
-          { label: "Horaires de prière à Ain Benian", href: buildRoutePath("fr", "home", "Ain Benian") },
-          { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
-          { label: "Heure du Fajr à Oran", href: buildRoutePath("fr", "fajr", "Oran") },
-          { label: "Heure du Maghrib à Bouira", href: buildRoutePath("fr", "maghrib", "Bouira") },
-          { label: "Heure de l'Isha à Ain Benian", href: buildRoutePath("fr", "isha", "Ain Benian") }
-        ]
+        cityIntentLinks: buildAlgeriaPrayerHubLinks("fr")
         };
       }
 
@@ -3152,35 +3251,14 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   if (pageType === "next-prayer" && language === "fr") {
     return {
       ...buildFrenchPriorityIntentCopy(pageType),
-      cityIntentLinks: [
-        { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
-        { label: "Prochaine prière à Oran", href: buildRoutePath("fr", "next-prayer", "Oran") },
-        { label: "Prochaine prière à Annaba", href: buildRoutePath("fr", "next-prayer", "Annaba") },
-        { label: "Prochaine prière à Bouira", href: buildRoutePath("fr", "next-prayer", "Bouira") },
-        { label: "Prochaine prière à Ain Benian", href: buildRoutePath("fr", "next-prayer", "Ain Benian") },
-        { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
-        { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") }
-      ]
+      cityIntentLinks: buildAlgeriaGenericIntentLinks("fr", pageType)
     };
   }
 
   if (language === "fr" && ["fajr", "maghrib", "isha"].includes(pageType)) {
-    const prayerLabel = pageType === "fajr"
-      ? "Heure du Fajr"
-      : pageType === "maghrib"
-        ? "Heure du Maghrib"
-        : "Heure de l'Isha";
     return {
       ...buildFrenchPriorityIntentCopy(pageType),
-      cityIntentLinks: [
-        { label: `${prayerLabel} à Alger`, href: buildRoutePath("fr", pageType, "Alger") },
-        { label: `${prayerLabel} à Oran`, href: buildRoutePath("fr", pageType, "Oran") },
-        { label: `${prayerLabel} à Annaba`, href: buildRoutePath("fr", pageType, "Annaba") },
-        { label: `${prayerLabel} à Bouira`, href: buildRoutePath("fr", pageType, "Bouira") },
-        { label: `${prayerLabel} à Ain Benian`, href: buildRoutePath("fr", pageType, "Ain Benian") },
-        { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
-        { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") }
-      ]
+      cityIntentLinks: buildAlgeriaGenericIntentLinks("fr", pageType)
     };
   }
 
@@ -3301,29 +3379,14 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
           answer: "لا. الصلاة القادمة هي التركيز الأساسي، لكن الجدول الكامل لليوم يبقى ظاهرا للمقارنة السريعة."
         }
       ],
-      cityIntentLinks: [
-        { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
-        { label: "الصلاة القادمة في وهران", href: buildRoutePath("ar", "next-prayer", "Oran") },
-        { label: "الصلاة القادمة في عنابة", href: buildRoutePath("ar", "next-prayer", "Annaba") },
-        { label: "الصلاة القادمة في البويرة", href: buildRoutePath("ar", "next-prayer", "Bouira") },
-        { label: "الصلاة القادمة في عين البنيان", href: buildRoutePath("ar", "next-prayer", "Ain Benian") },
-        { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
-        { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
-        { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") }
-      ]
+      cityIntentLinks: buildAlgeriaGenericIntentLinks("ar", pageType)
     };
   }
 
   if (language === "ar" && ["fajr", "maghrib"].includes(pageType)) {
-    const prayerLabel = pageType === "fajr" ? "الفجر" : "المغرب";
     return {
       ...buildArabicPriorityIntentCopy(pageType),
-      cityIntentLinks: [
-        { label: `${prayerLabel} في الجزائر العاصمة`, href: buildRoutePath("ar", pageType, "Alger") },
-        { label: `${prayerLabel} في وهران`, href: buildRoutePath("ar", pageType, "Oran") },
-        { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
-        { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") }
-      ]
+      cityIntentLinks: buildAlgeriaGenericIntentLinks("ar", pageType)
     };
   }
 
@@ -4534,14 +4597,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const sourceCitySlug = slugify(sourceCity);
   const cityLinks = (ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)
-    ? ALGERIA_WINNER_ARABIC_CITY_LINKS
-        .filter(item => slugify(item.city) !== sourceCitySlug)
-        .map(item => ({
-          city: item.city,
-          country: "Algeria",
-          label: item.label.replace("مواقيت الصلاة في ", ""),
-          href: buildRoutePath("ar", "home", item.city)
-        }))
+    ? buildAlgeriaCityLinks("ar", sourceCity)
     : TOP_CITIES
         .filter(item => item.city !== sourceCity)
         .slice(0, 6)
@@ -4551,12 +4607,14 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
           label: localizeCityName(item.city, "ar"),
           href: buildRoutePath("ar", resolvedPage, item.city)
         })));
-  cityLinks.forEach((link, index) => {
-    const filteredCities = TOP_CITIES.filter(item => item.city !== sourceCity).slice(0, 6);
-    const sourceItem = filteredCities[index];
-    if (!sourceItem) return;
-    link.label = link.label.replace(sourceItem.city, localizeCityName(sourceItem.city, "ar"));
-  });
+  if (!ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)) {
+    cityLinks.forEach((link, index) => {
+      const filteredCities = TOP_CITIES.filter(item => item.city !== sourceCity).slice(0, 6);
+      const sourceItem = filteredCities[index];
+      if (!sourceItem) return;
+      link.label = link.label.replace(sourceItem.city, localizeCityName(sourceItem.city, "ar"));
+    });
+  }
   const intentLinks = [
     { type: "prayer-times", label: "مواقيت الصلاة اليوم", href: buildRoutePath("ar", "prayer-times") },
     { type: "next-prayer", label: "وقت الصلاة القادمة", href: buildRoutePath("ar", "next-prayer") },
@@ -4575,9 +4633,9 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
               { label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
               { label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
               { label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) },
-              ...ALGERIA_WINNER_ARABIC_CITY_LINKS.filter(item => slugify(item.city) !== sourceCitySlug).map(item => ({
-                label: item.label,
-                href: buildRoutePath("ar", "home", item.city)
+              ...buildAlgeriaCityLinks("ar", sourceCity, 8).map(item => ({
+                label: `مواقيت الصلاة في ${item.label}`,
+                href: item.href
               }))
             ]
           : [
@@ -4599,17 +4657,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
         { label: "مواقيت الصلاة في إسطنبول", href: buildRoutePath("ar", "prayer-times", "Istanbul") }
       ];
   if (!sourceCity && pageType === "prayer-times") {
-    cityIntentLinks = [
-      { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
-      { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
-      { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
-      { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
-      { label: "مواقيت الصلاة في عين البنيان", href: buildRoutePath("ar", "home", "Ain Benian") },
-      { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
-      { label: "الفجر في وهران", href: buildRoutePath("ar", "fajr", "Oran") },
-      { label: "المغرب في عنابة", href: buildRoutePath("ar", "maghrib", "Annaba") },
-      { label: "العشاء في عين البنيان", href: buildRoutePath("ar", "isha", "Ain Benian") }
-    ];
+    cityIntentLinks = buildAlgeriaPrayerHubLinks("ar");
   }
 
   const copy = {
@@ -4731,14 +4779,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const sourceCitySlug = slugify(sourceCity);
   const cityLinks = (language === "fr" && ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)
-    ? ALGERIA_WINNER_FRENCH_CITY_LINKS
-        .filter(item => slugify(item.city) !== sourceCitySlug)
-        .map(item => ({
-          city: item.city,
-          country: "Algeria",
-          label: item.label.replace("Horaires de prière à ", ""),
-          href: buildRoutePath("fr", "home", item.city)
-        }))
+    ? buildAlgeriaCityLinks("fr", sourceCity)
     : TOP_CITIES
         .filter(item => item.city !== sourceCity)
         .slice(0, 6)
@@ -4768,17 +4809,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
   });
 
   if (!sourceCity && pageType === "prayer-times" && language === "fr") {
-    cityIntentLinks = [
-      { label: "Horaires de prière à Alger", href: buildRoutePath("fr", "home", "Alger") },
-      { label: "Horaires de prière à Oran", href: buildRoutePath("fr", "home", "Oran") },
-      { label: "Horaires de prière à Annaba", href: buildRoutePath("fr", "home", "Annaba") },
-      { label: "Horaires de prière à Bouira", href: buildRoutePath("fr", "home", "Bouira") },
-      { label: "Horaires de prière à Ain Benian", href: buildRoutePath("fr", "home", "Ain Benian") },
-      { label: "Prochaine prière à Alger", href: buildRoutePath("fr", "next-prayer", "Alger") },
-      { label: "Heure du Fajr à Oran", href: buildRoutePath("fr", "fajr", "Oran") },
-      { label: "Heure du Maghrib à Bouira", href: buildRoutePath("fr", "maghrib", "Bouira") },
-      { label: "Heure de l'Isha à Ain Benian", href: buildRoutePath("fr", "isha", "Ain Benian") }
-    ];
+    cityIntentLinks = buildAlgeriaPrayerHubLinks("fr");
   }
 
   const copy = {
