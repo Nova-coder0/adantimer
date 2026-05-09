@@ -30,6 +30,9 @@ DEFAULT_COUNTRIES = [
     "sn", "sy", "td", "th", "tj", "tm", "tn", "tr", "tw", "tz", "ua", "ug", "us", "uz", "ve", "vn", "ye", "za",
 ]
 ARABIC_COUNTRIES = {"ae", "bh", "dz", "eg", "iq", "jo", "kw", "lb", "ly", "ma", "om", "ps", "qa", "sa", "sd", "sy", "tn", "ye"}
+COUNTRY_BULK_LANGUAGES = {
+    "dz": ["en", "fr", "ar"],
+}
 INTENTS = ["", "prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 PRIORITY_INTENTS = ["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 GSC_WINNER_CITY_LANGUAGES = {
@@ -162,16 +165,15 @@ def city_groups() -> dict[str, list[tuple[int, str]]]:
 
 
 def build_country_entries(code: str, cities: list[tuple[int, str]], lastmod: str) -> list[str]:
-    variant_count = len(INTENTS) * (2 if code in ARABIC_COUNTRIES else 1)
+    country_languages = COUNTRY_BULK_LANGUAGES.get(code) or (["en", "ar"] if code in ARABIC_COUNTRIES else ["en"])
+    variant_count = len(INTENTS) * len(country_languages)
     max_cities = max(1, MAX_URLS_PER_SITEMAP // variant_count)
     entries: list[str] = []
     for _population, city_slug in cities[:max_cities]:
-        for intent in INTENTS:
-            path = f"/{city_slug}" if not intent else f"/{intent}/{city_slug}"
-            entries.append(url_entry(f"{BASE_URL}{path}", "0.62" if not intent else "0.56", lastmod))
-        if code in ARABIC_COUNTRIES:
+        for language in country_languages:
             for intent in INTENTS:
-                path = f"/ar/{city_slug}" if not intent else f"/ar/{intent}/{city_slug}"
+                prefix = "" if language == "en" else f"/{language}"
+                path = f"{prefix}/{city_slug}" if not intent else f"{prefix}/{intent}/{city_slug}"
                 entries.append(url_entry(f"{BASE_URL}{path}", "0.62" if not intent else "0.56", lastmod))
     if not entries:
         entries.append(url_entry(f"{BASE_URL}/{code}", "0.50", lastmod))

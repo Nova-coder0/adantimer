@@ -4189,12 +4189,12 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapedTitle}</title>`)
     .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escapedDescription}">`)
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapedCanonical}">`)
-    .replace(/<link rel="alternate" hreflang="en" href="[^"]*">/, `<link rel="alternate" hreflang="en" href="${escapeHtml(alternates.en)}">`)
-    .replace(/<link rel="alternate" hreflang="ar" href="[^"]*">/, `<link rel="alternate" hreflang="ar" href="${escapeHtml(alternates.ar)}">`)
-    .replace(/<link rel="alternate" hreflang="de" href="[^"]*">/, `<link rel="alternate" hreflang="de" href="${escapeHtml(alternates.de)}">`)
-    .replace(/<link rel="alternate" hreflang="fr" href="[^"]*">/, `<link rel="alternate" hreflang="fr" href="${escapeHtml(alternates.fr)}">`)
-    .replace(/<link rel="alternate" hreflang="tr" href="[^"]*">/, `<link rel="alternate" hreflang="tr" href="${escapeHtml(alternates.tr)}">`)
-    .replace(/<link rel="alternate" hreflang="zh-hans" href="[^"]*">/, `<link rel="alternate" hreflang="zh-hans" href="${escapeHtml(alternates["zh-hans"])}">`)
+    .replace(/<link rel="alternate" hreflang="en" href="[^"]*">\r?\n?/, alternates.en ? `<link rel="alternate" hreflang="en" href="${escapeHtml(alternates.en)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="ar" href="[^"]*">\r?\n?/, alternates.ar ? `<link rel="alternate" hreflang="ar" href="${escapeHtml(alternates.ar)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="de" href="[^"]*">\r?\n?/, alternates.de ? `<link rel="alternate" hreflang="de" href="${escapeHtml(alternates.de)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="fr" href="[^"]*">\r?\n?/, alternates.fr ? `<link rel="alternate" hreflang="fr" href="${escapeHtml(alternates.fr)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="tr" href="[^"]*">\r?\n?/, alternates.tr ? `<link rel="alternate" hreflang="tr" href="${escapeHtml(alternates.tr)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="zh-hans" href="[^"]*">\r?\n?/, alternates["zh-hans"] ? `<link rel="alternate" hreflang="zh-hans" href="${escapeHtml(alternates["zh-hans"])}">\n` : "")
     .replace(/<link rel="alternate" hreflang="x-default" href="[^"]*">/, `<link rel="alternate" hreflang="x-default" href="${escapeHtml(alternates.default)}">`)
     .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${escapedTitle}">`)
     .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${escapedDescription}">`)
@@ -6858,9 +6858,26 @@ function formatPlaceName(city, country, language) {
   return localizedCity && localizedCountry ? `${localizedCity}, ${localizedCountry}` : localizedCity || localizedCountry || "";
 }
 
+function getAlternateLanguages(pageType, city, surahSlug = "") {
+  if (!city || surahSlug || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection" || pageType === "qibla") {
+    return [...SUPPORTED_RENDER_LANGUAGES];
+  }
+
+  const cityKey = slugify(city);
+  if (ALGERIA_WINNER_CITY_SLUGS.includes(cityKey)) {
+    return ["en", "fr", "ar"];
+  }
+
+  if (ARABIC_PRIORITY_HOME_CITY_BY_SLUG.has(cityKey)) {
+    return ["en", "ar"];
+  }
+
+  return ["en"];
+}
+
 function getAlternates(pageType, city, surahSlug = "") {
   const alternates = {};
-  for (const language of SUPPORTED_RENDER_LANGUAGES) {
+  for (const language of getAlternateLanguages(pageType, city, surahSlug)) {
     alternates[language] = `${SITE_URL}${buildRoutePath(language, pageType, city, surahSlug)}`;
   }
   alternates.default = alternates.en;
