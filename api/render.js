@@ -3231,17 +3231,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
             answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع إبقاء الصلاة القادمة والجدول الكامل ظاهرين."
           }
         ],
-        cityIntentLinks: [
-          { label: "مواقيت الصلاة في الجزائر العاصمة", href: buildRoutePath("ar", "home", "Alger") },
-          { label: "مواقيت الصلاة في وهران", href: buildRoutePath("ar", "home", "Oran") },
-          { label: "مواقيت الصلاة في عنابة", href: buildRoutePath("ar", "home", "Annaba") },
-          { label: "مواقيت الصلاة في البويرة", href: buildRoutePath("ar", "home", "Bouira") },
-          { label: "مواقيت الصلاة في عين البنيان", href: buildRoutePath("ar", "home", "Ain Benian") },
-          { label: "الصلاة القادمة في الجزائر العاصمة", href: buildRoutePath("ar", "next-prayer", "Alger") },
-          { label: "الفجر في وهران", href: buildRoutePath("ar", "fajr", "Oran") },
-          { label: "المغرب في عنابة", href: buildRoutePath("ar", "maghrib", "Annaba") },
-          { label: "العشاء في عين البنيان", href: buildRoutePath("ar", "isha", "Ain Benian") }
-        ]
+        cityIntentLinks: buildAlgeriaPrayerHubLinks("ar")
       };
     }
 
