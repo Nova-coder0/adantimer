@@ -3240,6 +3240,60 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   return null;
 }
 
+function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, place, copy) {
+  if (!copy || !ALGERIA_WINNER_CITY_SLUGS.includes(cityKey)) {
+    return copy;
+  }
+
+  const intentLabelFr = pageType === "next-prayer"
+    ? `la prochaine priere a ${place}`
+    : pageType === "fajr"
+      ? `l'heure du Fajr a ${place}`
+      : pageType === "maghrib"
+        ? `l'heure du Maghrib a ${place}`
+        : pageType === "isha"
+          ? `l'heure du Isha a ${place}`
+          : `les horaires de priere a ${place}`;
+
+  const intentLabelAr = pageType === "next-prayer"
+    ? `الصلاة القادمة في ${place}`
+    : pageType === "fajr"
+      ? `وقت الفجر في ${place}`
+      : pageType === "maghrib"
+        ? `وقت المغرب في ${place}`
+        : pageType === "isha"
+          ? `وقت العشاء في ${place}`
+          : `مواقيت الصلاة في ${place}`;
+
+  if (language === "fr") {
+    const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
+    const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    about.push(`Si votre recherche combine ${intentLabelFr} avec le nom d'une mosquee, gardez cette page comme reference rapide puis comparez avec le tableau de la mosquee locale ou de l'autorite religieuse suivie dans votre quartier.`);
+    faq.push({
+      question: `Cette page reste-t-elle utile si ma recherche mentionne une mosquee a ${place} ?`,
+      answer: `Oui. Utilisez cette page ${place} comme reference rapide puis comparez avec la mosquee locale ou l'autorite religieuse suivie dans votre zone si un horaire de quartier differe legerement.`
+    });
+    copy.aboutParagraphs = about;
+    copy.faq = faq;
+    return copy;
+  }
+
+  if (language === "ar") {
+    const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
+    const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    about.push(`إذا كان بحثك يجمع بين ${intentLabelAr} واسم مسجد، فاستخدم هذه الصفحة كمرجع سريع ثم قارن مع توقيت المسجد المحلي أو الجهة الدينية المعتمدة في الحي.`);
+    faq.push({
+      question: `هل تنفع هذه الصفحة إذا كان البحث يتضمن اسم مسجد في ${place}؟`,
+      answer: `نعم. استخدم صفحة ${place} كمرجع سريع ثم قارن مع توقيت المسجد المحلي أو الجهة الدينية المعتمدة في منطقتك إذا كان هناك فرق بسيط في توقيت الحي.`
+    });
+    copy.aboutParagraphs = about;
+    copy.faq = faq;
+    return copy;
+  }
+
+  return copy;
+}
+
 function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
   if (pageType !== "home") {
     return null;
@@ -3294,7 +3348,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
   const priorityHomeCityCopy = getPriorityHomeCitySeoCopy(language, pageType, cityKey, place);
 
   if (priorityIntentCityCopy) {
-    Object.assign(copy, priorityIntentCityCopy);
+    Object.assign(copy, applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, place, priorityIntentCityCopy));
     return copy;
   }
 
