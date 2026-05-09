@@ -3650,7 +3650,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
 }
 
 function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, place, copy) {
-  if (!copy || !ALGERIA_WINNER_CITY_SLUGS.includes(cityKey)) {
+  if (!copy || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
     return copy;
   }
 
@@ -4848,7 +4848,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
   const rootOverride = ROOT_HOME_OVERRIDES.ar;
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const sourceCitySlug = slugify(sourceCity);
-  const cityLinks = (ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)
+  const cityLinks = (ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)
     ? buildAlgeriaCityLinks("ar", sourceCity)
     : TOP_CITIES
         .filter(item => item.city !== sourceCity)
@@ -4859,7 +4859,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
           label: localizeCityName(item.city, "ar"),
           href: buildRoutePath("ar", resolvedPage, item.city)
         })));
-  if (!ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)) {
+  if (!ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)) {
     cityLinks.forEach((link, index) => {
       const filteredCities = TOP_CITIES.filter(item => item.city !== sourceCity).slice(0, 6);
       const sourceItem = filteredCities[index];
@@ -4878,7 +4878,7 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
   ];
   let cityIntentLinks = sourceCity
     ? (
-        ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)
+        ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)
           ? [
               { label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
               { label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
@@ -5030,7 +5030,7 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
 
   const resolvedPage = pageType === "home" ? "prayer-times" : pageType;
   const sourceCitySlug = slugify(sourceCity);
-  const cityLinks = (language === "fr" && ALGERIA_WINNER_CITY_SLUGS.includes(sourceCitySlug)
+  const cityLinks = (language === "fr" && ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)
     ? buildAlgeriaCityLinks("fr", sourceCity)
     : TOP_CITIES
         .filter(item => item.city !== sourceCity)
