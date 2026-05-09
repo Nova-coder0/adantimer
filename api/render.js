@@ -204,6 +204,10 @@ function buildAlgeriaGenericIntentLinks(language, pageType) {
       ? "Prochaine prière"
       : pageType === "fajr"
         ? "Heure du Fajr"
+        : pageType === "dhuhr"
+          ? "Heure du Dhuhr"
+          : pageType === "asr"
+            ? "Heure du Asr"
         : pageType === "maghrib"
           ? "Heure du Maghrib"
           : "Heure de l'Isha";
@@ -223,7 +227,13 @@ function buildAlgeriaGenericIntentLinks(language, pageType) {
       ? "الصلاة القادمة"
       : pageType === "fajr"
         ? "الفجر"
-        : "المغرب";
+        : pageType === "dhuhr"
+          ? "الظهر"
+          : pageType === "asr"
+            ? "العصر"
+            : pageType === "maghrib"
+              ? "المغرب"
+              : "العشاء";
     return [
       ...ALGERIA_FOCUS_CITIES.slice(0, 8).map(city => ({
         label: `${prayerLabel} في ${localizeCityName(city, "ar")}`,
@@ -3245,7 +3255,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     };
   }
 
-  if (language === "fr" && ["fajr", "maghrib", "isha"].includes(pageType)) {
+  if (language === "fr" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
     return {
       ...buildFrenchPriorityIntentCopy(pageType),
       cityIntentLinks: buildAlgeriaGenericIntentLinks("fr", pageType)
@@ -3373,15 +3383,11 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     };
   }
 
-  if (language === "ar" && ["fajr", "maghrib"].includes(pageType)) {
+  if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
     return {
       ...buildArabicPriorityIntentCopy(pageType),
       cityIntentLinks: buildAlgeriaGenericIntentLinks("ar", pageType)
     };
-  }
-
-  if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
-    return buildArabicPriorityIntentCopy(pageType);
   }
 
   return null;

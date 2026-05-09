@@ -460,7 +460,7 @@ AssertContains $renderJs 'Asr Time Today | Daily Asr Prayer Time Finder | Adanti
 AssertContains $renderJs 'Maghrib Time Today | Daily Maghrib Prayer Time Finder | Adantimer' "SSR renderer carries the Maghrib priority title" "SSR renderer is missing the stronger Maghrib title"
 AssertContains $renderJs 'Isha Time Today | Daily Isha Prayer Time Finder | Adantimer' "SSR renderer carries the Isha priority title" "SSR renderer is missing the stronger Isha title"
 AssertContains $renderJs 'function buildArabicPriorityIntentCopy(pageType)' "SSR renderer centralizes Arabic priority intent copy in a shared builder" "SSR renderer is missing the shared Arabic priority intent builder"
-AssertContains $renderJs 'return buildArabicPriorityIntentCopy(pageType);' "SSR renderer routes Arabic prayer-intent pages through the shared builder" "SSR renderer no longer routes Arabic prayer-intent pages through the shared builder"
+AssertContains $renderJs 'cityIntentLinks: buildAlgeriaGenericIntentLinks("ar", pageType)' "SSR renderer routes Arabic prayer-intent pages through the Algeria intent-link builder" "SSR renderer is missing the Arabic Algeria intent-link builder wiring"
 AssertContains $renderJs 'priority-cities.json' "SSR renderer reads the central priority-city config" "SSR renderer is not wired to the central priority-city config"
 AssertContains $renderJs 'data-priority-group-label' "SSR renderer outputs grouped priority-city labels" "SSR renderer is missing grouped priority-city labels"
 AssertContains $renderJs 'function buildEnglishPriorityHomeCityCopy(cityName, variant = "generic")' "SSR renderer centralizes English priority home-city copy in a shared builder" "SSR renderer is missing the shared English priority home-city builder"
@@ -698,6 +698,8 @@ if ($RunLive) {
   TestLiveUrlRegex "$BaseUrl/fr/next-prayer" @("<title>Prochaine prière aujourd(?:&#39;|'|’)hui \| Compte à rebours en direct \| Adantimer</title>")
   TestLiveUrl "$BaseUrl/fr/fajr-time" @('<html lang="fr" dir="ltr">', 'href="/fr/fajr-time/alger"', 'href="/fr/fajr-time/oran"', 'Heure du Fajr aujourd', 'heure du fajr')
   TestLiveUrlRegex "$BaseUrl/fr/fajr-time" @("<title>Heure du Fajr aujourd(?:&#39;|'|’)hui \| Recherche quotidienne du Fajr \| Adantimer</title>")
+  TestLiveUrl "$BaseUrl/fr/dhuhr-time" @('<html lang="fr" dir="ltr">', 'href="/fr/dhuhr-time/alger"', 'href="/fr/dhuhr-time/oran"', 'Heure du Dhuhr')
+  TestLiveUrl "$BaseUrl/fr/asr-time" @('<html lang="fr" dir="ltr">', 'href="/fr/asr-time/alger"', 'href="/fr/asr-time/oran"', 'Heure du Asr')
   TestLiveUrl "$BaseUrl/fr/maghrib-time" @('<html lang="fr" dir="ltr">', 'href="/fr/maghrib-time/alger"', 'href="/fr/maghrib-time/bouira"', 'Heure du Maghrib aujourd', 'adhan maghreb')
   TestLiveUrlRegex "$BaseUrl/fr/maghrib-time" @("<title>Heure du Maghrib aujourd(?:&#39;|'|’)hui \| Recherche quotidienne du Maghrib \| Adantimer</title>")
   TestLiveUrl "$BaseUrl/fr/isha-time" @('<html lang="fr" dir="ltr">', 'href="/fr/isha-time/ain-benian"', "Heure de l'Isha aujourd", 'icha aujourd')
@@ -711,6 +713,9 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/tr/maghrib-time" @('<html lang="tr" dir="ltr">', 'href="/tr/maghrib-time/istanbul"', 'href="/tr/maghrib-time/mecca"', 'aksam ezani')
   TestLiveUrlRegex "$BaseUrl/tr/maghrib-time" @('<title>Aksam Ezani ve Maghrib Vakti Bugun \| Gunluk Maghrib Rehberi \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/ar/prayer-times" @('<html lang="ar" dir="rtl">', 'href="/ar/alger"', 'href="/ar/oran"', 'href="/ar/constantine"', 'href="/ar/setif"', 'href="/ar/annaba"', 'href="/ar/bouira"', 'href="/ar/ain-benian"')
+  TestLiveUrl "$BaseUrl/ar/dhuhr-time" @('<html lang="ar" dir="rtl">', 'href="/ar/dhuhr-time/alger"', 'href="/ar/dhuhr-time/oran"', 'وقت الظهر')
+  TestLiveUrl "$BaseUrl/ar/asr-time" @('<html lang="ar" dir="rtl">', 'href="/ar/asr-time/alger"', 'href="/ar/asr-time/oran"', 'وقت العصر')
+  TestLiveUrl "$BaseUrl/ar/isha-time" @('<html lang="ar" dir="rtl">', 'href="/ar/isha-time/alger"', 'href="/ar/isha-time/oran"', 'وقت العشاء')
   TestLiveUrl "$BaseUrl/prayer-times/kuala-lumpur" @('<body data-page="prayer-times">', 'Prayer Times in Kuala Lumpur Today', 'How to use the Kuala Lumpur prayer times page')
   TestLiveUrlRegex "$BaseUrl/prayer-times/kuala-lumpur" @('<title>Prayer Times in Kuala Lumpur Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/next-prayer" @('<body data-page="next-prayer">', 'Next Prayer Time Today', 'What the next-prayer page should answer first')
