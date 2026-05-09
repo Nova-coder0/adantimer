@@ -19,6 +19,7 @@ The goal is not to create empty files or fake URLs. The goal is to give search e
 - Each country sitemap stays below 50,000 URLs.
 - Bulk country sitemaps are generated only for countries whose main 1-3 search languages are actually supported by the site.
 - Arabic-market countries include both English/global and `/ar/...` Arabic URL patterns.
+- Algeria is a special focus market. Its active bulk rollout is intentionally narrowed to the two strongest local SEO languages: French and Arabic.
 
 ## Priority Rule
 

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.adantimer.com/oran</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
     <loc>https://www.adantimer.com/fr/oran</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>daily</changefreq>
@@ -14,12 +8,6 @@
   </url>
   <url>
     <loc>https://www.adantimer.com/ar/oran</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://www.adantimer.com/annaba</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.88</priority>
@@ -37,12 +25,6 @@
     <priority>0.88</priority>
   </url>
   <url>
-    <loc>https://www.adantimer.com/bouira</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
     <loc>https://www.adantimer.com/fr/bouira</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>daily</changefreq>
@@ -50,12 +32,6 @@
   </url>
   <url>
     <loc>https://www.adantimer.com/ar/bouira</loc>
-    <lastmod>2026-05-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://www.adantimer.com/ain-benian</loc>
     <lastmod>2026-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.88</priority>

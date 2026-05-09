@@ -26,7 +26,7 @@ COUNTRY_BULK_LANGUAGES = {
     # Arabic-first countries.
     "ae": ["ar", "en"],
     "bh": ["ar", "en"],
-    "dz": ["fr", "ar", "en"],
+    "dz": ["fr", "ar"],
     "eg": ["ar", "en"],
     "iq": ["ar", "en"],
     "jo": ["ar", "en"],
@@ -75,10 +75,10 @@ COUNTRY_BULK_LANGUAGES = {
 INTENTS = ["", "prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 PRIORITY_INTENTS = ["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 GSC_WINNER_CITY_LANGUAGES = {
-    "oran": ["en", "fr", "ar"],
-    "annaba": ["en", "fr", "ar"],
-    "bouira": ["en", "fr", "ar"],
-    "ain-benian": ["en", "fr", "ar"],
+    "oran": ["fr", "ar"],
+    "annaba": ["fr", "ar"],
+    "bouira": ["fr", "ar"],
+    "ain-benian": ["fr", "ar"],
     "chesham": ["en"],
 }
 CORE_LANGUAGE_HOMES = [
