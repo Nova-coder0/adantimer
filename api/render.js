@@ -51,7 +51,7 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["annaba", { cityName: "عنابة", variant: "annaba" }],
     ["bouira", { cityName: "البويرة", variant: "bouira" }],
     ["ain-benian", { cityName: "عين البنيان", variant: "ain-benian" }],
-    ["alger", { cityName: "الجزائر العاصمة", variant: "alger" }]
+    ["alger", { cityName: "الجزائر العاصمة", variant: "alger" }],
     ["constantine", { cityName: "\u0642\u0633\u0646\u0637\u064a\u0646\u0629", variant: "generic" }],
     ["setif", { cityName: "\u0633\u0637\u064a\u0641", variant: "generic" }],
     ["blida", { cityName: "\u0627\u0644\u0628\u0644\u064a\u062f\u0629", variant: "generic" }],
@@ -66,7 +66,7 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["annaba", { cityName: "Annaba", variant: "annaba" }],
     ["bouira", { cityName: "Bouira", variant: "bouira" }],
     ["ain-benian", { cityName: "Ain Benian", variant: "ain-benian" }],
-    ["alger", { cityName: "Alger", variant: "alger" }]
+    ["alger", { cityName: "Alger", variant: "alger" }],
     ["constantine", { cityName: "Constantine", variant: "generic" }],
     ["setif", { cityName: "Setif", variant: "generic" }],
     ["blida", { cityName: "Blida", variant: "generic" }],
