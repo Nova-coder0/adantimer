@@ -531,6 +531,10 @@ AssertContains $sitemapArCore 'https://www.adantimer.com/ar/riyadh' "Arabic-core
 AssertContains $sitemapArCore 'https://www.adantimer.com/ar/next-prayer/riyadh' "Arabic-core sitemap includes Riyadh next-prayer" "Arabic-core sitemap is missing Riyadh next-prayer"
 AssertContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-de.xml.gz' "Bulk sitemap index includes Germany" "Bulk sitemap index is missing Germany"
 AssertContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-sg.xml.gz' "Bulk sitemap index includes Singapore" "Bulk sitemap index is missing Singapore"
+AssertContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-br.xml.gz' "Bulk sitemap index includes Brazil" "Bulk sitemap index is missing Brazil"
+AssertContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-es.xml.gz' "Bulk sitemap index includes Spain" "Bulk sitemap index is missing Spain"
+AssertNotContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-af.xml.gz' "Bulk sitemap index excludes unsupported Afghanistan" "Bulk sitemap index still exposes unsupported Afghanistan"
+AssertNotContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-ir.xml.gz' "Bulk sitemap index excludes unsupported Iran" "Bulk sitemap index still exposes unsupported Iran"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-core.xml' "Sitemap index points to the core sitemap" "Sitemap index is missing the core sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-intents.xml' "Sitemap index points to the intent sitemap" "Sitemap index is missing the intent sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-top-cities.xml' "Sitemap index points to the top-city sitemap" "Sitemap index is missing the top-city sitemap"
@@ -814,7 +818,7 @@ TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in Lond
   TestLiveUrl "$BaseUrl/robots.txt" @('Sitemap: https://www.adantimer.com/sitemap.xml')
   TestLiveUrl "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-core.xml', 'https://www.adantimer.com/sitemap-top-cities.xml', 'https://www.adantimer.com/sitemap-gsc-winners.xml', 'https://www.adantimer.com/sitemap-ar-core.xml')
   TestLiveUrlNotContains "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-sg.xml.gz', 'https://www.adantimer.com/sitemap-de.xml.gz')
-  TestLiveUrl "$BaseUrl/sitemap-bulk-cities.xml" @('https://www.adantimer.com/sitemap-sg.xml.gz', 'https://www.adantimer.com/sitemap-de.xml.gz')
+  TestLiveUrl "$BaseUrl/sitemap-bulk-cities.xml" @('https://www.adantimer.com/sitemap-sg.xml.gz', 'https://www.adantimer.com/sitemap-de.xml.gz', 'https://www.adantimer.com/sitemap-br.xml.gz', 'https://www.adantimer.com/sitemap-es.xml.gz')
 }
 
 Write-Host "Quality gate checks:"

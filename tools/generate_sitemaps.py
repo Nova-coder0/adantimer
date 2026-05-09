@@ -22,28 +22,55 @@ from geonamescache import GeonamesCache
 
 BASE_URL = "https://www.adantimer.com"
 MAX_URLS_PER_SITEMAP = 49_000
-DEFAULT_COUNTRIES = [
-    "ae", "af", "al", "ar", "at", "au", "ba", "bd", "be", "bg", "bh", "bn", "br", "ca", "ch", "cl", "cm", "cn", "co", "cr",
-    "de", "dk", "do", "dz", "ee", "eg", "es", "et", "fi", "fr", "gb", "gh", "gr", "hk", "id", "ie", "in", "iq", "ir", "is",
-    "it", "jo", "jp", "ke", "kg", "kr", "kw", "kz", "lb", "lk", "lt", "lu", "lv", "ly", "ma", "ml", "mr", "mv", "mx", "my",
-    "ne", "ng", "nl", "no", "np", "om", "pa", "pe", "pk", "pl", "ps", "pt", "qa", "ro", "rs", "ru", "sa", "sd", "se", "sg",
-    "sn", "sy", "td", "th", "tj", "tm", "tn", "tr", "tw", "tz", "ua", "ug", "us", "uz", "ve", "vn", "ye", "za",
-]
-ARABIC_COUNTRIES = {"ae", "bh", "dz", "eg", "iq", "jo", "kw", "lb", "ly", "ma", "om", "ps", "qa", "sa", "sd", "sy", "tn", "ye"}
 COUNTRY_BULK_LANGUAGES = {
-    "dz": ["en", "fr", "ar"],
-    "ar": ["en", "es"],
-    "br": ["en", "pt"],
-    "cl": ["en", "es"],
-    "co": ["en", "es"],
-    "cr": ["en", "es"],
-    "do": ["en", "es"],
-    "es": ["en", "es"],
-    "mx": ["en", "es"],
-    "pa": ["en", "es"],
-    "pe": ["en", "es"],
-    "pt": ["en", "pt"],
-    "ve": ["en", "es"],
+    # Arabic-first countries.
+    "ae": ["ar", "en"],
+    "bh": ["ar", "en"],
+    "dz": ["fr", "ar", "en"],
+    "eg": ["ar", "en"],
+    "iq": ["ar", "en"],
+    "jo": ["ar", "en"],
+    "kw": ["ar", "en"],
+    "lb": ["ar", "fr", "en"],
+    "ly": ["ar", "en"],
+    "ma": ["fr", "ar", "en"],
+    "om": ["ar", "en"],
+    "ps": ["ar", "en"],
+    "qa": ["ar", "en"],
+    "sa": ["ar", "en"],
+    "sd": ["ar", "en"],
+    "sy": ["ar", "en"],
+    "tn": ["fr", "ar", "en"],
+    "ye": ["ar", "en"],
+    # German / French / Turkish / Chinese supported markets.
+    "at": ["de", "en"],
+    "be": ["fr", "de", "en"],
+    "ca": ["en", "fr"],
+    "ch": ["de", "fr", "en"],
+    "cn": ["zh-hans", "en"],
+    "de": ["de", "en"],
+    "fr": ["fr", "en"],
+    "gb": ["en"],
+    "ie": ["en"],
+    "lu": ["fr", "de", "en"],
+    "sg": ["en", "zh-hans"],
+    "tr": ["tr", "en"],
+    "us": ["en"],
+    "au": ["en"],
+    # Portuguese supported markets.
+    "br": ["pt", "en"],
+    "pt": ["pt", "en"],
+    # Spanish supported markets.
+    "ar": ["es", "en"],
+    "cl": ["es", "en"],
+    "co": ["es", "en"],
+    "cr": ["es", "en"],
+    "do": ["es", "en"],
+    "es": ["es", "en"],
+    "mx": ["es", "en"],
+    "pa": ["es", "en"],
+    "pe": ["es", "en"],
+    "ve": ["es", "en"],
 }
 INTENTS = ["", "prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 PRIORITY_INTENTS = ["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
@@ -152,13 +179,8 @@ def write_sitemap_index(root: pathlib.Path, name: str, targets: list[pathlib.Pat
     return xml_path
 
 
-def discover_country_codes(root: pathlib.Path) -> list[str]:
-    found = set(DEFAULT_COUNTRIES)
-    for path in root.glob("sitemap-??.xml"):
-        found.add(path.stem.replace("sitemap-", "").lower())
-    for path in root.glob("sitemap.??.xml"):
-        found.add(path.stem.replace("sitemap.", "").lower())
-    return sorted(code for code in found if len(code) == 2)
+def supported_bulk_country_codes() -> list[str]:
+    return sorted(COUNTRY_BULK_LANGUAGES.keys())
 
 
 def city_groups() -> dict[str, list[tuple[int, str]]]:
@@ -179,7 +201,9 @@ def city_groups() -> dict[str, list[tuple[int, str]]]:
 
 
 def build_country_entries(code: str, cities: list[tuple[int, str]], lastmod: str) -> list[str]:
-    country_languages = COUNTRY_BULK_LANGUAGES.get(code) or (["en", "ar"] if code in ARABIC_COUNTRIES else ["en"])
+    country_languages = COUNTRY_BULK_LANGUAGES.get(code)
+    if not country_languages:
+        return []
     variant_count = len(INTENTS) * len(country_languages)
     max_cities = max(1, MAX_URLS_PER_SITEMAP // variant_count)
     entries: list[str] = []
@@ -237,7 +261,7 @@ def main() -> None:
     lastmod = date.today().isoformat()
     compressed = not args.uncompressed
     groups = city_groups()
-    country_codes = discover_country_codes(root)
+    country_codes = supported_bulk_country_codes()
 
     core = build_core_entries(lastmod)
     intents = build_intent_entries(lastmod)
@@ -257,6 +281,8 @@ def main() -> None:
     bulk_targets: list[pathlib.Path] = []
     for code in country_codes:
         entries = build_country_entries(code, groups.get(code, []), lastmod)
+        if not entries:
+            continue
         total_urls += len(entries)
         bulk_targets.append(write_sitemap(root / f"sitemap-{code}.xml", urlset(entries), compressed))
 
@@ -266,7 +292,8 @@ def main() -> None:
         "Generated "
         f"{len(priority_targets)} priority sitemaps, "
         f"{len(bulk_targets)} bulk country sitemaps, "
-        f"and {total_urls:,} URLs"
+        f"and {total_urls:,} URLs "
+        f"across {len(country_codes)} supported-language countries"
     )
 
 

@@ -17,6 +17,7 @@ The goal is not to create empty files or fake URLs. The goal is to give search e
 - `sitemap-bulk-cities.xml` is a secondary sitemap index for bulk country sitemaps.
 - `sitemap-xx.xml.gz` files contain country-specific city URLs.
 - Each country sitemap stays below 50,000 URLs.
+- Bulk country sitemaps are generated only for countries whose main 1-3 search languages are actually supported by the site.
 - Arabic-market countries include both English/global and `/ar/...` Arabic URL patterns.
 
 ## Priority Rule
@@ -31,6 +32,8 @@ It is intentionally limited to priority sitemap files that represent:
 - real GSC winner pages
 
 Bulk city sitemaps remain available through `sitemap-bulk-cities.xml`, but they are no longer mixed into the main sitemap signal by default.
+
+That bulk layer is also intentionally filtered. If a country would only be served with obviously wrong language combinations, it does not belong in the active bulk sitemap index yet.
 
 ## Canonical URL Rule
 
