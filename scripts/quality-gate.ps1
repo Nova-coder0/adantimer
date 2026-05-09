@@ -205,6 +205,7 @@ $requiredFiles = @(
   "sitemap-core.xml",
   "sitemap-intents.xml",
   "sitemap-top-cities.xml",
+  "sitemap-algeria-priority.xml",
   "sitemap-gsc-winners.xml",
   "sitemap-ar-core.xml",
   "api/render.js",
@@ -243,6 +244,7 @@ $vercelJsonText = ReadProjectFile "vercel.json"
 $sitemapCore = ReadProjectFile "sitemap-core.xml"
 $sitemapIntents = ReadProjectFile "sitemap-intents.xml"
 $sitemapTopCities = ReadProjectFile "sitemap-top-cities.xml"
+$sitemapAlgeriaPriority = ReadProjectFile "sitemap-algeria-priority.xml"
 $sitemapGscWinners = ReadProjectFile "sitemap-gsc-winners.xml"
 $sitemapArCore = ReadProjectFile "sitemap-ar-core.xml"
 $sitemapBulkCities = ReadProjectFile "sitemap-bulk-cities.xml"
@@ -522,6 +524,14 @@ AssertContains $sitemapTopCities 'https://www.adantimer.com/kuala-lumpur' "Top-c
 AssertContains $sitemapTopCities 'https://www.adantimer.com/johor-bahru' "Top-city sitemap includes Johor Bahru" "Top-city sitemap is missing Johor Bahru"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/jakarta' "Top-city sitemap includes Jakarta" "Top-city sitemap is missing Jakarta"
 AssertContains $sitemapTopCities 'https://www.adantimer.com/prayer-times/dubai' "Top-city sitemap includes Dubai prayer-times" "Top-city sitemap is missing Dubai prayer-times"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/fr/constantine' "Algeria-priority sitemap includes French Constantine" "Algeria-priority sitemap is missing French Constantine"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/ar/constantine' "Algeria-priority sitemap includes Arabic Constantine" "Algeria-priority sitemap is missing Arabic Constantine"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/fr/blida' "Algeria-priority sitemap includes French Blida" "Algeria-priority sitemap is missing French Blida"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/ar/blida' "Algeria-priority sitemap includes Arabic Blida" "Algeria-priority sitemap is missing Arabic Blida"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/fr/sidi-bel-abbes' "Algeria-priority sitemap includes French Sidi Bel Abbes" "Algeria-priority sitemap is missing French Sidi Bel Abbes"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/ar/sidi-bel-abbes' "Algeria-priority sitemap includes Arabic Sidi Bel Abbes" "Algeria-priority sitemap is missing Arabic Sidi Bel Abbes"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/fr/next-prayer/constantine' "Algeria-priority sitemap includes French Constantine next-prayer" "Algeria-priority sitemap is missing French Constantine next-prayer"
+AssertContains $sitemapAlgeriaPriority 'https://www.adantimer.com/ar/maghrib-time/blida' "Algeria-priority sitemap includes Arabic Blida maghrib-time" "Algeria-priority sitemap is missing Arabic Blida maghrib-time"
 AssertContains $sitemapGscWinners 'https://www.adantimer.com/fr/oran' "GSC-winners sitemap includes French Oran" "GSC-winners sitemap is missing French Oran"
 AssertContains $sitemapGscWinners 'https://www.adantimer.com/ar/oran' "GSC-winners sitemap includes Arabic Oran" "GSC-winners sitemap is missing Arabic Oran"
 AssertContains $sitemapGscWinners 'https://www.adantimer.com/fr/annaba' "GSC-winners sitemap includes French Annaba" "GSC-winners sitemap is missing French Annaba"
@@ -545,6 +555,7 @@ AssertNotContains $sitemapBulkCities 'https://www.adantimer.com/sitemap-ir.xml.g
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-core.xml' "Sitemap index points to the core sitemap" "Sitemap index is missing the core sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-intents.xml' "Sitemap index points to the intent sitemap" "Sitemap index is missing the intent sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-top-cities.xml' "Sitemap index points to the top-city sitemap" "Sitemap index is missing the top-city sitemap"
+AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-algeria-priority.xml' "Sitemap index points to the Algeria-priority sitemap" "Sitemap index is missing the Algeria-priority sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-gsc-winners.xml' "Sitemap index points to the GSC-winners sitemap" "Sitemap index is missing the GSC-winners sitemap"
 AssertContains $sitemapIndex 'https://www.adantimer.com/sitemap-ar-core.xml' "Sitemap index points to the Arabic-core sitemap" "Sitemap index is missing the Arabic-core sitemap"
 AssertNotContains $sitemapIndex 'https://www.adantimer.com/sitemap-sg.xml.gz' "Sitemap index no longer exposes bulk city sitemaps directly" "Sitemap index still exposes bulk city sitemaps directly"
@@ -553,6 +564,7 @@ AssertContains $robots 'Sitemap: https://www.adantimer.com/sitemap.xml' "robots.
 AssertContains $workflow 'tools/generate_sitemaps.py' "Sitemap workflow is wired to the generator script" "Sitemap workflow no longer calls the generator script"
 AssertContains $workflow 'sitemap-bulk-cities.xml' "Sitemap workflow stages the bulk-city sitemap index" "Sitemap workflow is missing the bulk-city sitemap index"
 AssertContains $workflow 'sitemap-top-cities.xml' "Sitemap workflow stages the top-city sitemap" "Sitemap workflow is missing the top-city sitemap"
+AssertContains $workflow 'sitemap-algeria-priority.xml' "Sitemap workflow stages the Algeria-priority sitemap" "Sitemap workflow is missing the Algeria-priority sitemap"
 AssertContains $workflow 'sitemap-gsc-winners.xml' "Sitemap workflow stages the GSC-winners sitemap" "Sitemap workflow is missing the GSC-winners sitemap"
 AssertContains $priorityCities '"id": "southeast-asia"' "Priority-city config keeps the Southeast Asia cluster" "Priority-city config is missing the Southeast Asia cluster"
 AssertContains $styleCss '.city-chip-more-toggle {' "Stylesheet includes the priority-city overflow toggle" "Stylesheet is missing the priority-city overflow toggle"
@@ -792,6 +804,12 @@ TestLiveUrlRegex "$BaseUrl/chesham" @('<title>Prayer Times in Chesham Today \| F
   TestLiveUrlRegex "$BaseUrl/fr/bouira" @("<title>Horaires de prière à Bouira aujourd(?:&#39;|'|’)hui \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>")
   TestLiveUrl "$BaseUrl/fr/ain-benian" @('<html lang="fr" dir="ltr">', '<body data-page="home">', 'Horaires de prière à Ain Benian aujourd', 'icha', 'Isha')
   TestLiveUrlRegex "$BaseUrl/fr/ain-benian" @("<title>Horaires de prière à Ain Benian aujourd(?:&#39;|'|’)hui \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>")
+  TestLiveUrl "$BaseUrl/fr/constantine" @('<html lang="fr" dir="ltr">', '<body data-page="home">', 'Horaires de prière à Constantine aujourd', 'href="/fr/setif"', 'href="/fr/blida"')
+  TestLiveUrlRegex "$BaseUrl/fr/constantine" @("<title>Horaires de prière à Constantine aujourd(?:&#39;|'|’)hui \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>")
+  TestLiveUrl "$BaseUrl/fr/blida" @('<html lang="fr" dir="ltr">', '<body data-page="home">', 'Horaires de prière à Blida aujourd', 'href="/fr/constantine"', 'href="/fr/sidi-bel-abbes"')
+  TestLiveUrlRegex "$BaseUrl/fr/blida" @("<title>Horaires de prière à Blida aujourd(?:&#39;|'|’)hui \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>")
+  TestLiveUrl "$BaseUrl/fr/sidi-bel-abbes" @('<html lang="fr" dir="ltr">', '<body data-page="home">', 'Horaires de prière à Sidi Bel Abbes aujourd', 'href="/fr/tlemcen"', 'href="/fr/mostaganem"')
+  TestLiveUrlRegex "$BaseUrl/fr/sidi-bel-abbes" @("<title>Horaires de prière à Sidi Bel Abbes aujourd(?:&#39;|'|’)hui \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>")
   TestLiveUrl "$BaseUrl/ar/oran" @('<html lang="ar" dir="rtl">', '<body data-page="home">', 'الصلاة القادمة', 'وقت الفجر', 'href="/ar/alger"', 'href="/ar/constantine"', 'href="/ar/setif"', 'href="/ar/annaba"', 'href="/ar/bouira"', 'href="/ar/ain-benian"')
   TestLiveUrlRegex "$BaseUrl/ar/oran" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0648\u0647\u0631\u0627\u0646 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0648\u0647\u0631\u0627\u0646 \u0627\u0644\u064a\u0648\u0645</h1>')
   TestLiveUrl "$BaseUrl/ar/alger" @('<html lang="ar" dir="rtl">', '<body data-page="home">', 'الجزائر العاصمة', 'الصلاة القادمة')
@@ -808,6 +826,12 @@ TestLiveUrl "$BaseUrl/ar/bouira" @('<html lang="ar" dir="rtl">', '<body data-pag
 TestLiveUrlRegex "$BaseUrl/ar/bouira" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0628\u0648\u064a\u0631\u0629 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0628\u0648\u064a\u0631\u0629 \u0627\u0644\u064a\u0648\u0645</h1>')
 TestLiveUrl "$BaseUrl/ar/ain-benian" @('<html lang="ar" dir="rtl">', '<body data-page="home">', 'وقت العشاء', 'الصلاة القادمة')
 TestLiveUrlRegex "$BaseUrl/ar/ain-benian" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0639\u064a\u0646 \u0627\u0644\u0628\u0646\u064a\u0627\u0646 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>', '<h1[^>]*>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0639\u064a\u0646 \u0627\u0644\u0628\u0646\u064a\u0627\u0646 \u0627\u0644\u064a\u0648\u0645</h1>')
+TestLiveUrl "$BaseUrl/ar/constantine" @('<html lang="ar" dir="rtl">', '<body data-page="home">', 'قسنطينة', 'href="/ar/setif"', 'href="/ar/blida"')
+TestLiveUrlRegex "$BaseUrl/ar/constantine" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0642\u0633\u0646\u0637\u064a\u0646\u0629 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/ar/blida" @('<html lang="ar" dir="rtl">', '<body data-page="home">', 'البليدة', 'href="/ar/constantine"', 'href="/ar/sidi-bel-abbes"')
+TestLiveUrlRegex "$BaseUrl/ar/blida" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0627\u0644\u0628\u0644\u064a\u062f\u0629 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>')
+TestLiveUrl "$BaseUrl/ar/sidi-bel-abbes" @('<html lang="ar" dir="rtl">', '<body data-page="home">', 'سيدي بلعباس', 'href="/ar/tlemcen"', 'href="/ar/mostaganem"')
+TestLiveUrlRegex "$BaseUrl/ar/sidi-bel-abbes" @('<title>\u0645\u0648\u0627\u0642\u064a\u062a \u0627\u0644\u0635\u0644\u0627\u0629 \u0641\u064a \u0633\u064a\u062f\u064a \u0628\u0644\u0639\u0628\u0627\u0633 \u0627\u0644\u064a\u0648\u0645 \| \u0627\u0644\u0641\u062c\u0631 \u0648\u0627\u0644\u0638\u0647\u0631 \u0648\u0627\u0644\u0639\u0635\u0631 \u0648\u0627\u0644\u0645\u063a\u0631\u0628 \u0648\u0627\u0644\u0639\u0634\u0627\u0621 \| Adantimer</title>')
 TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in London Today', 'How to use the London prayer times page')
   TestLiveUrlRegex "$BaseUrl/london" @('<title>Prayer Times in London Today \| Fajr, Dhuhr, Asr, Maghrib &(?:amp;|) Isha \| Adantimer</title>')
   TestLiveUrl "$BaseUrl/new-york" @('<body data-page="home">', 'Prayer Times in New York Today', 'How to use the New York prayer times page')
@@ -828,7 +852,7 @@ TestLiveUrl "$BaseUrl/london" @('<body data-page="home">', 'Prayer Times in Lond
   TestLiveUrl "$BaseUrl/tr/prayer-times/istanbul" @('<html lang="tr" dir="ltr">', 'https://www.adantimer.com/tr/prayer-times/istanbul')
   TestLiveUrl "$BaseUrl/zh-hans/prayer-times/shanghai" @('<html lang="zh-CN" dir="ltr">', 'https://www.adantimer.com/zh-hans/prayer-times/shanghai')
   TestLiveUrl "$BaseUrl/robots.txt" @('Sitemap: https://www.adantimer.com/sitemap.xml')
-  TestLiveUrl "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-core.xml', 'https://www.adantimer.com/sitemap-top-cities.xml', 'https://www.adantimer.com/sitemap-gsc-winners.xml', 'https://www.adantimer.com/sitemap-ar-core.xml')
+  TestLiveUrl "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-core.xml', 'https://www.adantimer.com/sitemap-top-cities.xml', 'https://www.adantimer.com/sitemap-algeria-priority.xml', 'https://www.adantimer.com/sitemap-gsc-winners.xml', 'https://www.adantimer.com/sitemap-ar-core.xml')
   TestLiveUrlNotContains "$BaseUrl/sitemap.xml" @('https://www.adantimer.com/sitemap-sg.xml.gz', 'https://www.adantimer.com/sitemap-de.xml.gz')
   TestLiveUrl "$BaseUrl/sitemap-bulk-cities.xml" @('https://www.adantimer.com/sitemap-sg.xml.gz', 'https://www.adantimer.com/sitemap-de.xml.gz', 'https://www.adantimer.com/sitemap-br.xml.gz', 'https://www.adantimer.com/sitemap-es.xml.gz')
 }

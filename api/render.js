@@ -52,6 +52,14 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["bouira", { cityName: "البويرة", variant: "bouira" }],
     ["ain-benian", { cityName: "عين البنيان", variant: "ain-benian" }],
     ["alger", { cityName: "الجزائر العاصمة", variant: "alger" }]
+    ["constantine", { cityName: "\u0642\u0633\u0646\u0637\u064a\u0646\u0629", variant: "generic" }],
+    ["setif", { cityName: "\u0633\u0637\u064a\u0641", variant: "generic" }],
+    ["blida", { cityName: "\u0627\u0644\u0628\u0644\u064a\u062f\u0629", variant: "generic" }],
+    ["tlemcen", { cityName: "\u062a\u0644\u0645\u0633\u0627\u0646", variant: "generic" }],
+    ["batna", { cityName: "\u0628\u0627\u062a\u0646\u0629", variant: "generic" }],
+    ["bejaia", { cityName: "\u0628\u062c\u0627\u064a\u0629", variant: "generic" }],
+    ["mostaganem", { cityName: "\u0645\u0633\u062a\u063a\u0627\u0646\u0645", variant: "generic" }],
+    ["sidi-bel-abbes", { cityName: "\u0633\u064a\u062f\u064a \u0628\u0644\u0639\u0628\u0627\u0633", variant: "generic" }]
   ]),
   fr: new Map([
     ["oran", { cityName: "Oran", variant: "oran" }],
@@ -59,6 +67,14 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["bouira", { cityName: "Bouira", variant: "bouira" }],
     ["ain-benian", { cityName: "Ain Benian", variant: "ain-benian" }],
     ["alger", { cityName: "Alger", variant: "alger" }]
+    ["constantine", { cityName: "Constantine", variant: "generic" }],
+    ["setif", { cityName: "Setif", variant: "generic" }],
+    ["blida", { cityName: "Blida", variant: "generic" }],
+    ["tlemcen", { cityName: "Tlemcen", variant: "generic" }],
+    ["batna", { cityName: "Batna", variant: "generic" }],
+    ["bejaia", { cityName: "Bejaia", variant: "generic" }],
+    ["mostaganem", { cityName: "Mostaganem", variant: "generic" }],
+    ["sidi-bel-abbes", { cityName: "Sidi Bel Abbes", variant: "generic" }]
   ])
 };
 const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
@@ -137,6 +153,7 @@ const ALGERIA_FOCUS_CITIES = [
   "Bouira",
   "Ain Benian"
 ];
+const ALGERIA_PRIORITY_CITY_SLUGS = new Set(ALGERIA_FOCUS_CITIES.map(city => slugify(city)));
 const ALGERIA_WINNER_FRENCH_CITY_LINKS = [
   { city: "Alger", label: "Horaires de prière à Alger" },
   { city: "Oran", label: "Horaires de prière à Oran" },
@@ -6995,7 +7012,7 @@ function getAlternateLanguages(pageType, city, surahSlug = "", currentLanguage =
   }
 
   const cityKey = slugify(city);
-  if (ALGERIA_WINNER_CITY_SLUGS.includes(cityKey)) {
+  if (ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
     return ["en", "fr", "ar"];
   }
 

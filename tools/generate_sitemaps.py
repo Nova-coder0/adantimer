@@ -81,6 +81,21 @@ GSC_WINNER_CITY_LANGUAGES = {
     "ain-benian": ["fr", "ar"],
     "chesham": ["en"],
 }
+ALGERIA_PRIORITY_CITIES = [
+    "alger",
+    "oran",
+    "constantine",
+    "annaba",
+    "setif",
+    "blida",
+    "tlemcen",
+    "batna",
+    "bejaia",
+    "mostaganem",
+    "sidi-bel-abbes",
+    "bouira",
+    "ain-benian",
+]
 CORE_LANGUAGE_HOMES = [
     ("/", "1.0"),
     ("/ar", "0.98"),
@@ -251,6 +266,17 @@ def build_gsc_winner_entries(lastmod: str) -> list[str]:
     return entries
 
 
+def build_algeria_priority_entries(lastmod: str) -> list[str]:
+    entries: list[str] = []
+    for language in ["fr", "ar"]:
+        prefix = f"/{language}"
+        for city_slug in ALGERIA_PRIORITY_CITIES:
+            entries.append(url_entry(f"{BASE_URL}{prefix}/{city_slug}", "0.89", lastmod))
+            for intent in PRIORITY_INTENTS:
+                entries.append(url_entry(f"{BASE_URL}{prefix}/{intent}/{city_slug}", "0.83", lastmod))
+    return entries
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".", help="Project root")
@@ -268,16 +294,18 @@ def main() -> None:
     top_cities = build_priority_city_entries(ENGLISH_TOP_CITIES, lastmod)
     arabic_core = build_priority_city_entries(ARABIC_CORE_CITIES, lastmod, "ar")
     gsc_winners = build_gsc_winner_entries(lastmod)
+    algeria_priority = build_algeria_priority_entries(lastmod)
 
     priority_targets = [
         write_priority_sitemap(root, "sitemap-core", core, compressed),
         write_priority_sitemap(root, "sitemap-intents", intents, compressed),
         write_priority_sitemap(root, "sitemap-top-cities", top_cities, compressed),
         write_priority_sitemap(root, "sitemap-ar-core", arabic_core, compressed),
+        write_priority_sitemap(root, "sitemap-algeria-priority", algeria_priority, compressed),
         write_priority_sitemap(root, "sitemap-gsc-winners", gsc_winners, compressed),
     ]
 
-    total_urls = len(core) + len(intents) + len(top_cities) + len(arabic_core) + len(gsc_winners)
+    total_urls = len(core) + len(intents) + len(top_cities) + len(arabic_core) + len(algeria_priority) + len(gsc_winners)
     bulk_targets: list[pathlib.Path] = []
     for code in country_codes:
         entries = build_country_entries(code, groups.get(code, []), lastmod)
