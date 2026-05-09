@@ -71,6 +71,14 @@ const LANGUAGE_ALIASES = {
   "de-de": "de",
   fr: "fr",
   "fr-fr": "fr",
+  pt: "pt",
+  "pt-br": "pt",
+  "pt-pt": "pt",
+  es: "es",
+  "es-es": "es",
+  "es-mx": "es",
+  "es-ar": "es",
+  "es-co": "es",
   tr: "tr",
   "tr-tr": "tr",
   zh: "zh-hans",
@@ -82,6 +90,8 @@ const LANGUAGE_PREFIXES = {
   ar: "/ar",
   de: "/de",
   fr: "/fr",
+  pt: "/pt",
+  es: "/es",
   tr: "/tr",
   "zh-hans": "/zh-hans"
 };
@@ -109,7 +119,7 @@ const CITY_NAME_LOCALIZATIONS = {
   "sydney": { ar: "\u0633\u064a\u062f\u0646\u064a", de: "Sydney", fr: "Sydney", tr: "Sidney", "zh-hans": "\u6089\u5c3c" },
   "berlin": { ar: "\u0628\u0631\u0644\u064a\u0646", de: "Berlin", fr: "Berlin", tr: "Berlin", "zh-hans": "\u67cf\u6797" },
   "paris": { ar: "\u0628\u0627\u0631\u064a\u0633", de: "Paris", fr: "Paris", tr: "Paris", "zh-hans": "\u5df4\u9ece" },
-  "shanghai": { ar: "\u0634\u0646\u063a\u0647\u0627\u064a", de: "Shanghai", fr: "Shanghai", tr: "\u015eanhay", "zh-hans": "\u4e0a\u6d77" }
+  "shanghai": { ar: "\u0634\u0646\u063a\u0647\u0627\u064a", de: "Shanghai", fr: "Shanghai", pt: "Xangai", es: "Shangai", tr: "\u015eanhay", "zh-hans": "\u4e0a\u6d77" }
 };
 
 const COUNTRY_NAME_LOCALIZATIONS = {
@@ -125,7 +135,10 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "australia": { ar: "\u0623\u0633\u062a\u0631\u0627\u0644\u064a\u0627", de: "Australien", fr: "Australie", tr: "Avustralya", "zh-hans": "\u6fb3\u5927\u5229\u4e9a" },
   "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
   "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
-  "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+  "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", pt: "China", es: "China", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" },
+  "brazil": { ar: "\u0627\u0644\u0628\u0631\u0627\u0632\u064a\u0644", de: "Brasilien", fr: "Bresil", pt: "Brasil", es: "Brasil", tr: "Brezilya", "zh-hans": "\u5df4\u897f" },
+  "portugal": { ar: "\u0627\u0644\u0628\u0631\u062a\u063a\u0627\u0644", de: "Portugal", fr: "Portugal", pt: "Portugal", es: "Portugal", tr: "Portekiz", "zh-hans": "\u8461\u8404\u7259" },
+  "spain": { ar: "\u0625\u0633\u0628\u0627\u0646\u064a\u0627", de: "Spanien", fr: "Espagne", pt: "Espanha", es: "Espana", tr: "\u0130spanya", "zh-hans": "\u897f\u73ed\u7259" }
 };
 
 const PRIORITY_GROUP_LABELS = {
@@ -156,6 +169,20 @@ const PRIORITY_GROUP_LABELS = {
     global: "Villes mondiales",
     cities: "Autres villes",
     intents: "Intentions prioritaires"
+  },
+  pt: {
+    core: "Cidades principais",
+    "southeast-asia": "Sudeste Asiatico",
+    global: "Cidades globais",
+    cities: "Outras cidades",
+    intents: "Intencoes prioritarias"
+  },
+  es: {
+    core: "Ciudades clave",
+    "southeast-asia": "Sudeste asiatico",
+    global: "Ciudades globales",
+    cities: "Otras ciudades",
+    intents: "Intenciones prioritarias"
   },
   tr: {
     core: "Çekirdek şehirler",
@@ -344,6 +371,29 @@ function normalizeForSearch(value = "") {
     .replace(/\s+/g, " ")
     .trim();
 }
+
+PRIORITY_MORE_LABELS.pt = "Mais cidades";
+PRIORITY_MORE_LABELS.es = "Mas ciudades";
+
+QIBLA_PAGE_COPY.pt = {
+  button: "Mostrar direcao da Qibla",
+  heroSubtitle: place => place
+    ? `Use a bussola abaixo para se alinhar em direcao a Makkah a partir de ${place}.`
+    : "Use a bussola abaixo para calcular a direcao da qibla a partir da sua localizacao atual ou de qualquer cidade pesquisada.",
+  pageDescription: place => place
+    ? `Verifique a direcao da qibla a partir de ${place}, veja o angulo para Makkah e use a bussola ao vivo em telefones compativeis.`
+    : "Verifique a direcao da qibla a partir da sua localizacao atual ou de qualquer cidade, veja o angulo para Makkah e use a bussola ao vivo em telefones compativeis."
+};
+
+QIBLA_PAGE_COPY.es = {
+  button: "Mostrar direccion de la Qibla",
+  heroSubtitle: place => place
+    ? `Usa la brujula de abajo para orientarte hacia Makkah desde ${place}.`
+    : "Usa la brujula de abajo para calcular la direccion de la qibla desde tu ubicacion actual o cualquier ciudad que busques.",
+  pageDescription: place => place
+    ? `Consulta la direccion de la qibla desde ${place}, ve el angulo hacia Makkah y usa la brujula en vivo en telefonos compatibles.`
+    : "Consulta la direccion de la qibla desde tu ubicacion actual o cualquier ciudad, ve el angulo hacia Makkah y usa la brujula en vivo en telefonos compatibles."
+};
 
 const LOCALES = {
   en: {
@@ -539,6 +589,74 @@ const LOCALES = {
   }
 };
 
+LOCALES.pt = {
+  code: "pt", dir: "ltr",
+  button: "Ver horarios", cityPlaceholder: "Digite uma cidade", countryPlaceholder: "Pais (opcional)",
+  currentLocationName: "Localizacao atual",
+  nextPrayer: "Proxima oracao", currentPrayer: "Oracao atual", today: "Hoje", method: "Metodo",
+  loading: "Carregando...", locating: "Tentando GPS e depois IP como reserva.", detect: "Detectando sua localizacao",
+  resolvingGpsStatus: "Verificando a localizacao do navegador",
+  resolvingGpsDetail: "Primeiro tentamos a localizacao do dispositivo.",
+  resolvingIpStatus: "Tentando localizacao de reserva",
+  resolvingIpDetail: "A posicao da rede sera usada como opcao de reserva.",
+  resolvingRecent: place => `Atualizando horarios para ${place}`,
+  resolvingManual: place => `Carregando horarios para ${place}`,
+  noCurrentPrayer: "Entre duas oracoes", searchPrompt: "Digite uma cidade para atualizar o horario.",
+  permissionError: "Nao foi possivel carregar sua localizacao. Pesquise uma cidade para continuar.",
+  locationNotFound: "Cidade nao encontrada. Tente uma cidade maior proxima.",
+  fetchError: "Nao foi possivel carregar os horarios agora. Tente novamente.",
+  timezone: tz => `Fuso horario: ${tz}`, locationPrefix: "Horarios para", countdown: "comeca em",
+  prayers: { Fajr: "Fajr", Dhuhr: "Dhuhr", Asr: "Asr", Maghrib: "Maghrib", Isha: "Isha" },
+  topics: { home: "Horarios de oracao", "prayer-times": "Horarios de oracao", "next-prayer": "Hora da proxima oracao", fajr: "Horario do Fajr", dhuhr: "Horario do Dhuhr", asr: "Horario do Asr", maghrib: "Horario do Maghrib", isha: "Horario do Isha" },
+  eyebrow: "Horarios de oracao por cidade", infoEyebrow: "Automatico", aboutEyebrow: "Visao geral", faqEyebrow: "Perguntas frequentes", citiesEyebrow: "Cidades populares",
+  footer: "Horarios de oracao precisos por cidade.",
+  citiesTitle: "Horarios de oracao nas principais cidades",
+  heroTitle: (type, place, topic) => type === "home" ? (place ? `Horarios de oracao em ${place} hoje` : "Horarios de oracao de hoje e contagem para a proxima oracao") : (place ? `${topic} em ${place}` : `${topic} hoje`),
+  heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Veja horarios precisos em ${place}, acompanhe a proxima oracao e revise a programacao completa do dia.` : "A pagina agora se adapta automaticamente ao idioma do navegador e a localizacao.") : (place ? `Veja ${topic} em ${place} e revise a programacao completa abaixo.` : `Carregue ${topic} automaticamente e revise a programacao completa abaixo.`),
+  infoTitle: topic => `Feito para consultas rapidas de ${topic}`,
+  features: topic => ["Detecta idioma e localizacao automaticamente.", `Mostra ${topic} com contagem regressiva ao vivo.`, "Funciona diretamente no navegador sem aplicativo.", "Os botoes manuais em ingles e arabe continuam disponiveis no canto superior direito."],
+  aboutTitle: topic => `${topic} sem etapas desnecessarias`,
+  about: (topic, place) => [place ? `Esta pagina e focada em ${topic} em ${place}, para que o visitante veja a informacao correta imediatamente.` : `Esta pagina e focada em ${topic}, para que o visitante veja a informacao correta imediatamente.`, "O objetivo e oferecer uma experiencia mais profissional: idioma automatico, localizacao automatica e um quadro claro de oracoes.", "Isso ajuda tanto os usuarios quanto os mecanismos de busca a entender a pagina com mais clareza."],
+  faqTitle: "Perguntas frequentes",
+  faq: [["A pagina detecta minha cidade automaticamente?", "Sim. A pagina tenta primeiro o GPS e depois usa IP como reserva."], ["Posso mudar para outra cidade?", "Sim. Voce pode pesquisar qualquer cidade manualmente."], ["A pagina segue automaticamente o idioma do visitante?", "Sim. A pagina agora segue automaticamente o idioma do navegador, mantendo os botoes manuais de ingles e arabe."]],
+  pageTitle: (type, place, topic) => type === "home" ? (place ? `Horarios de oracao em ${place} hoje | Fajr, Dhuhr, Asr, Maghrib, Isha | Adantimer` : "Adantimer | Horarios de oracao precisos e proxima oracao") : (place ? `${topic} em ${place} hoje | Adantimer` : `${topic} hoje | Adantimer`),
+  pageDescription: (type, place, topic) => type === "home" ? (place ? `Confira horarios precisos em ${place}, acompanhe a proxima oracao e revise a programacao completa do dia.` : "Confira horarios de oracao para sua cidade e deixe o Adantimer seguir automaticamente o idioma do navegador.") : (place ? `Confira ${topic} em ${place}, acompanhe a proxima oracao e revise a programacao completa do dia.` : `Confira ${topic}, acompanhe a proxima oracao e revise a programacao completa do dia.`)
+};
+
+LOCALES.es = {
+  code: "es", dir: "ltr",
+  button: "Ver horarios", cityPlaceholder: "Introduce una ciudad", countryPlaceholder: "Pais (opcional)",
+  currentLocationName: "Ubicacion actual",
+  nextPrayer: "Proxima oracion", currentPrayer: "Oracion actual", today: "Hoy", method: "Metodo",
+  loading: "Cargando...", locating: "Intentando GPS y luego IP como respaldo.", detect: "Detectando tu ubicacion",
+  resolvingGpsStatus: "Comprobando la ubicacion del navegador",
+  resolvingGpsDetail: "Primero intentamos usar la ubicacion del dispositivo.",
+  resolvingIpStatus: "Intentando ubicacion de respaldo",
+  resolvingIpDetail: "La posicion de red se usa como opcion de respaldo.",
+  resolvingRecent: place => `Actualizando horarios para ${place}`,
+  resolvingManual: place => `Cargando horarios para ${place}`,
+  noCurrentPrayer: "Entre dos oraciones", searchPrompt: "Introduce una ciudad para actualizar el horario.",
+  permissionError: "No se pudo cargar tu ubicacion. Busca una ciudad para continuar.",
+  locationNotFound: "Ciudad no encontrada. Prueba una ciudad grande cercana.",
+  fetchError: "No fue posible cargar los horarios ahora. Intentalo de nuevo.",
+  timezone: tz => `Zona horaria: ${tz}`, locationPrefix: "Horarios para", countdown: "comienza en",
+  prayers: { Fajr: "Fajr", Dhuhr: "Dhuhr", Asr: "Asr", Maghrib: "Maghrib", Isha: "Isha" },
+  topics: { home: "Horarios de oracion", "prayer-times": "Horarios de oracion", "next-prayer": "Hora de la proxima oracion", fajr: "Hora del Fajr", dhuhr: "Hora del Dhuhr", asr: "Hora del Asr", maghrib: "Hora del Maghrib", isha: "Hora del Isha" },
+  eyebrow: "Horarios de oracion por ciudad", infoEyebrow: "Automatico", aboutEyebrow: "Resumen", faqEyebrow: "Preguntas frecuentes", citiesEyebrow: "Ciudades populares",
+  footer: "Horarios de oracion precisos por ciudad.",
+  citiesTitle: "Horarios de oracion en ciudades principales",
+  heroTitle: (type, place, topic) => type === "home" ? (place ? `Horarios de oracion en ${place} hoy` : "Horarios de oracion de hoy y cuenta regresiva para la proxima oracion") : (place ? `${topic} en ${place}` : `${topic} hoy`),
+  heroSubtitle: (type, place, topic) => type === "home" ? (place ? `Consulta horarios precisos en ${place}, sigue la proxima oracion y revisa el calendario completo del dia.` : "La pagina ahora se adapta automaticamente al idioma del navegador y a la ubicacion.") : (place ? `Consulta ${topic} en ${place} y revisa el calendario completo debajo.` : `Carga ${topic} automaticamente y revisa el calendario completo debajo.`),
+  infoTitle: topic => `Hecho para consultas rapidas de ${topic}`,
+  features: topic => ["Detecta idioma y ubicacion automaticamente.", `Muestra ${topic} con cuenta regresiva en vivo.`, "Funciona directamente en el navegador sin aplicacion.", "Los botones manuales de ingles y arabe siguen disponibles arriba a la derecha."],
+  aboutTitle: topic => `${topic} sin pasos innecesarios`,
+  about: (topic, place) => [place ? `Esta pagina se centra en ${topic} en ${place}, para que el visitante vea la informacion correcta de inmediato.` : `Esta pagina se centra en ${topic}, para que el visitante vea la informacion correcta de inmediato.`, "El objetivo es ofrecer una experiencia mas profesional: idioma automatico, ubicacion automatica y un horario de oracion claro.", "Esto ayuda tanto a los usuarios como a los motores de busqueda a entender mejor la pagina."],
+  faqTitle: "Preguntas frecuentes",
+  faq: [["La pagina detecta mi ciudad automaticamente?", "Si. La pagina intenta primero el GPS y luego usa IP como respaldo."], ["Puedo cambiar a otra ciudad?", "Si. Puedes buscar cualquier ciudad manualmente."], ["La pagina sigue automaticamente el idioma del visitante?", "Si. La pagina ahora sigue automaticamente el idioma del navegador, manteniendo los botones manuales de ingles y arabe."]],
+  pageTitle: (type, place, topic) => type === "home" ? (place ? `Horarios de oracion en ${place} hoy | Fajr, Dhuhr, Asr, Maghrib, Isha | Adantimer` : "Adantimer | Horarios de oracion precisos y proxima oracion") : (place ? `${topic} en ${place} hoy | Adantimer` : `${topic} hoy | Adantimer`),
+  pageDescription: (type, place, topic) => type === "home" ? (place ? `Consulta horarios precisos en ${place}, sigue la proxima oracion y revisa el calendario completo del dia.` : "Consulta horarios de oracion para tu ciudad y deja que Adantimer siga automaticamente el idioma del navegador.") : (place ? `Consulta ${topic} en ${place}, sigue la proxima oracion y revisa el calendario completo del dia.` : `Consulta ${topic}, sigue la proxima oracion y revisa el calendario completo del dia.`)
+};
+
 const TOPIC_EXTENSIONS = {
   en: { qibla: "Qibla Direction", quran: "Quran", dhikr: "Dhikr", hadith: "Hadith" },
   ar: { qibla: "اتجاه القبلة", quran: "القرآن", dhikr: "الذكر", hadith: "الحديث" },
@@ -547,6 +665,9 @@ const TOPIC_EXTENSIONS = {
   tr: { qibla: "Kible Yonu", quran: "Kuran", dhikr: "Zikir", hadith: "Hadis" },
   "zh-hans": { qibla: "Qibla方向", quran: "古兰经", dhikr: "记念", hadith: "圣训" }
 };
+
+TOPIC_EXTENSIONS.pt = { qibla: "Direcao da Qibla", quran: "Alcorao", dhikr: "Dhikr", hadith: "Hadith" };
+TOPIC_EXTENSIONS.es = { qibla: "Direccion de la Qibla", quran: "Coran", dhikr: "Dhikr", hadith: "Hadith" };
 
 const TOOL_HUB_LOCALES = {
   en: {
@@ -614,6 +735,30 @@ const TOOL_HUB_LOCALES = {
       dhikr: { label: "Dhikr", description: "让记念页面紧贴主礼拜时间体验。", cta: "打开 Dhikr" },
       hadith: { label: "Hadith", description: "进入圣训页面，适合短时间阅读和学习。", cta: "打开 Hadith" }
     }
+  }
+};
+
+TOOL_HUB_LOCALES.pt = {
+  eyebrow: "Mais ferramentas",
+  title: "Abrir Qibla, Alcorao, Dhikr e Hadith",
+  intro: "",
+  items: {
+    qibla: { label: "Qibla", description: "Abra uma pagina de direcao da qibla ao lado do horario de oracao ao vivo.", cta: "Abrir Qibla" },
+    quran: { label: "Alcorao", description: "Continue para uma pagina do Alcorao para leitura diaria rapida e visitas recorrentes.", cta: "Abrir Alcorao" },
+    dhikr: { label: "Dhikr", description: "Mantenha uma pagina dedicada de dhikr a um toque da experiencia principal de oracao.", cta: "Abrir Dhikr" },
+    hadith: { label: "Hadith", description: "Abra uma pagina de hadith para leituras curtas e estudo.", cta: "Abrir Hadith" }
+  }
+};
+
+TOOL_HUB_LOCALES.es = {
+  eyebrow: "Mas herramientas",
+  title: "Abrir Qibla, Coran, Dhikr y Hadith",
+  intro: "",
+  items: {
+    qibla: { label: "Qibla", description: "Abre una pagina de direccion de la qibla junto al horario de oracion en vivo.", cta: "Abrir Qibla" },
+    quran: { label: "Coran", description: "Continua a una pagina del Coran para lectura diaria rapida y visitas recurrentes.", cta: "Abrir Coran" },
+    dhikr: { label: "Dhikr", description: "Mantiene una pagina dedicada de dhikr a un toque de la experiencia principal de oracion.", cta: "Abrir Dhikr" },
+    hadith: { label: "Hadith", description: "Abre una pagina de hadith para lecturas breves y estudio.", cta: "Abrir Hadith" }
   }
 };
 
@@ -690,6 +835,32 @@ const QIBLA_PANEL_LOCALES = {
     bearingLabel: "\u76f8\u5bf9\u6b63\u5317\u7684\u65b9\u5411",
     distanceLabel: "\u8ddd\u79bb\u9ea6\u52a0"
   }
+};
+
+QIBLA_PANEL_LOCALES.pt = {
+  eyebrow: "Qibla",
+  title: "Bussola da qibla",
+  summary: "Veja a direcao da Kaaba a partir da sua localizacao atual ou de qualquer cidade pesquisada.",
+  placeFallback: "Localizacao atual",
+  statusIdle: "Permita a localizacao ou pesquise uma cidade para calcular a qibla.",
+  statusResolving: "Calculando a direcao da qibla...",
+  statusError: "Nao foi possivel calcular a qibla agora. Pesquise uma cidade e tente novamente.",
+  statusReady: (place, bearing) => `${place} fica voltado para a qibla a ${bearing}\u00b0 a partir do norte.`,
+  bearingLabel: "Angulo a partir do norte",
+  distanceLabel: "Distancia ate Makkah"
+};
+
+QIBLA_PANEL_LOCALES.es = {
+  eyebrow: "Qibla",
+  title: "Brujula de la qibla",
+  summary: "Mira la direccion de la Kaaba desde tu ubicacion actual o cualquier ciudad que busques.",
+  placeFallback: "Ubicacion actual",
+  statusIdle: "Permite la ubicacion o busca una ciudad para calcular la qibla.",
+  statusResolving: "Calculando la direccion de la qibla...",
+  statusError: "No se pudo calcular la qibla ahora. Busca una ciudad e intentalo de nuevo.",
+  statusReady: (place, bearing) => `${place} mira hacia la qibla a ${bearing}\u00b0 desde el norte.`,
+  bearingLabel: "Angulo desde el norte",
+  distanceLabel: "Distancia hasta Makkah"
 };
 
 for (const tools of Object.values(TOOL_HUB_LOCALES)) {

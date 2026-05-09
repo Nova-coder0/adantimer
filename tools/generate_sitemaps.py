@@ -32,6 +32,18 @@ DEFAULT_COUNTRIES = [
 ARABIC_COUNTRIES = {"ae", "bh", "dz", "eg", "iq", "jo", "kw", "lb", "ly", "ma", "om", "ps", "qa", "sa", "sd", "sy", "tn", "ye"}
 COUNTRY_BULK_LANGUAGES = {
     "dz": ["en", "fr", "ar"],
+    "ar": ["en", "es"],
+    "br": ["en", "pt"],
+    "cl": ["en", "es"],
+    "co": ["en", "es"],
+    "cr": ["en", "es"],
+    "do": ["en", "es"],
+    "es": ["en", "es"],
+    "mx": ["en", "es"],
+    "pa": ["en", "es"],
+    "pe": ["en", "es"],
+    "pt": ["en", "pt"],
+    "ve": ["en", "es"],
 }
 INTENTS = ["", "prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
 PRIORITY_INTENTS = ["prayer-times", "next-prayer", "fajr-time", "dhuhr-time", "asr-time", "maghrib-time", "isha-time"]
@@ -47,6 +59,8 @@ CORE_LANGUAGE_HOMES = [
     ("/ar", "0.98"),
     ("/de", "0.74"),
     ("/fr", "0.74"),
+    ("/pt", "0.74"),
+    ("/es", "0.74"),
     ("/tr", "0.74"),
     ("/zh-hans", "0.74"),
 ]

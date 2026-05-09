@@ -89,7 +89,8 @@ const CITY_NAME_LOCALIZATIONS = {
   "sydney": { ar: "\u0633\u064a\u062f\u0646\u064a", de: "Sydney", fr: "Sydney", tr: "Sidney", "zh-hans": "\u6089\u5c3c" },
   "berlin": { ar: "\u0628\u0631\u0644\u064a\u0646", de: "Berlin", fr: "Berlin", tr: "Berlin", "zh-hans": "\u67cf\u6797" },
   "paris": { ar: "\u0628\u0627\u0631\u064a\u0633", de: "Paris", fr: "Paris", tr: "Paris", "zh-hans": "\u5df4\u9ece" },
-  "shanghai": { ar: "\u0634\u0646\u063a\u0647\u0627\u064a", de: "Shanghai", fr: "Shanghai", tr: "\u015eanhay", "zh-hans": "\u4e0a\u6d77" }
+  "shanghai": { ar: "\u0634\u0646\u063a\u0647\u0627\u064a", de: "Shanghai", fr: "Shanghai", pt: "Xangai", es: "Shangai", tr: "\u015eanhay", "zh-hans": "\u4e0a\u6d77" },
+  "alger": { ar: "\u0627\u0644\u062c\u0632\u0627\u0626\u0631 \u0627\u0644\u0639\u0627\u0635\u0645\u0629", de: "Algier", fr: "Alger", pt: "Argel", es: "Argel", tr: "Cezayir", "zh-hans": "\u963f\u5c14\u53ca\u5c14" }
 };
 
 const COUNTRY_NAME_LOCALIZATIONS = {
@@ -106,7 +107,10 @@ const COUNTRY_NAME_LOCALIZATIONS = {
   "singapore": { ar: "\u0633\u0646\u063a\u0627\u0641\u0648\u0631\u0629", de: "Singapur", fr: "Singapour", tr: "Singapur", "zh-hans": "\u65b0\u52a0\u5761" },
   "germany": { ar: "\u0623\u0644\u0645\u0627\u0646\u064a\u0627", de: "Deutschland", fr: "Allemagne", tr: "Almanya", "zh-hans": "\u5fb7\u56fd" },
   "france": { ar: "\u0641\u0631\u0646\u0633\u0627", de: "Frankreich", fr: "France", tr: "Fransa", "zh-hans": "\u6cd5\u56fd" },
-  "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" }
+  "china": { ar: "\u0627\u0644\u0635\u064a\u0646", de: "China", fr: "Chine", pt: "China", es: "China", tr: "\u00c7in", "zh-hans": "\u4e2d\u56fd" },
+  "brazil": { ar: "\u0627\u0644\u0628\u0631\u0627\u0632\u064a\u0644", de: "Brasilien", fr: "Br\u00e9sil", pt: "Brasil", es: "Brasil", tr: "Brezilya", "zh-hans": "\u5df4\u897f" },
+  "portugal": { ar: "\u0627\u0644\u0628\u0631\u062a\u063a\u0627\u0644", de: "Portugal", fr: "Portugal", pt: "Portugal", es: "Portugal", tr: "Portekiz", "zh-hans": "\u8461\u8404\u7259" },
+  "spain": { ar: "\u0625\u0633\u0628\u0627\u0646\u064a\u0627", de: "Spanien", fr: "Espagne", pt: "Espanha", es: "Espa\u00f1a", tr: "\u0130spanya", "zh-hans": "\u897f\u73ed\u7259" }
 };
 
 const ALGERIA_WINNER_CITY_SLUGS = ["alger", "oran", "annaba", "bouira", "ain-benian"];
@@ -154,6 +158,20 @@ const PRIORITY_GROUP_LABELS = {
     cities: "Autres villes",
     intents: "Intentions prioritaires"
   },
+  pt: {
+    core: "Cidades principais",
+    "southeast-asia": "Sudeste Asiatico",
+    global: "Cidades globais",
+    cities: "Outras cidades",
+    intents: "Intencoes prioritarias"
+  },
+  es: {
+    core: "Ciudades clave",
+    "southeast-asia": "Sudeste asiatico",
+    global: "Ciudades globales",
+    cities: "Otras ciudades",
+    intents: "Intenciones prioritarias"
+  },
   tr: {
     core: "Çekirdek şehirler",
     "southeast-asia": "Güneydoğu Asya",
@@ -190,6 +208,16 @@ const ROOT_DISCOVERY_COPY = {
     citiesLead: "Ouvrez directement les pages de villes populaires :",
     searchesLead: "Passez à des recherches ciblées comme",
     featuredLead: "Les routes de prière mises en avant comprennent"
+  },
+  pt: {
+    citiesLead: "Abra diretamente paginas populares de cidades:",
+    searchesLead: "Passe para pesquisas especificas como",
+    featuredLead: "As rotas de oracao em destaque incluem"
+  },
+  es: {
+    citiesLead: "Abre directamente paginas populares de ciudades:",
+    searchesLead: "Pasa a busquedas especificas como",
+    featuredLead: "Las rutas de oracion destacadas incluyen"
   },
   tr: {
     citiesLead: "Popüler şehir sayfalarını doğrudan aç:",
@@ -246,7 +274,7 @@ const LOCALES = {
   }
 };
 
-const SUPPORTED_RENDER_LANGUAGES = ["en", "ar", "de", "fr", "tr", "zh-hans"];
+const SUPPORTED_RENDER_LANGUAGES = ["en", "ar", "de", "fr", "pt", "es", "tr", "zh-hans"];
 
 const LANGUAGE_ALIASES = {
   en: "en",
@@ -259,6 +287,14 @@ const LANGUAGE_ALIASES = {
   "de-de": "de",
   fr: "fr",
   "fr-fr": "fr",
+  pt: "pt",
+  "pt-br": "pt",
+  "pt-pt": "pt",
+  es: "es",
+  "es-es": "es",
+  "es-mx": "es",
+  "es-ar": "es",
+  "es-co": "es",
   tr: "tr",
   "tr-tr": "tr",
   zh: "zh-hans",
@@ -270,6 +306,8 @@ const LANGUAGE_PREFIXES = {
   ar: "/ar",
   de: "/de",
   fr: "/fr",
+  pt: "/pt",
+  es: "/es",
   tr: "/tr",
   "zh-hans": "/zh-hans"
 };
@@ -277,6 +315,8 @@ const LANGUAGE_PREFIXES = {
 Object.assign(ROUTES.home, {
   de: "Gebetszeiten",
   fr: "Horaires de prière",
+  pt: "Horarios de Oracao",
+  es: "Horarios de Oracion",
   tr: "Namaz Vakitleri",
   "zh-hans": "礼拜时间"
 });
@@ -284,6 +324,8 @@ Object.assign(ROUTES.home, {
 Object.assign(ROUTES["prayer-times"], {
   de: "Gebetszeiten",
   fr: "Horaires de prière",
+  pt: "Horarios de Oracao",
+  es: "Horarios de Oracion",
   tr: "Namaz Vakitleri",
   "zh-hans": "礼拜时间"
 });
@@ -291,6 +333,8 @@ Object.assign(ROUTES["prayer-times"], {
 Object.assign(ROUTES["next-prayer"], {
   de: "Zeit des nächsten Gebets",
   fr: "Heure de la prochaine prière",
+  pt: "Hora da Proxima Oracao",
+  es: "Hora de la Proxima Oracion",
   tr: "Sonraki Namaz Vakti",
   "zh-hans": "下一次礼拜时间"
 });
@@ -298,6 +342,8 @@ Object.assign(ROUTES["next-prayer"], {
 Object.assign(ROUTES.fajr, {
   de: "Fajr-Zeit",
   fr: "Heure du Fajr",
+  pt: "Horario do Fajr",
+  es: "Hora del Fajr",
   tr: "Fajr Vakti",
   "zh-hans": "晨礼时间"
 });
@@ -305,6 +351,8 @@ Object.assign(ROUTES.fajr, {
 Object.assign(ROUTES.dhuhr, {
   de: "Dhuhr-Zeit",
   fr: "Heure du Dhuhr",
+  pt: "Horario do Dhuhr",
+  es: "Hora del Dhuhr",
   tr: "Dhuhr Vakti",
   "zh-hans": "晌礼时间"
 });
@@ -312,6 +360,8 @@ Object.assign(ROUTES.dhuhr, {
 Object.assign(ROUTES.asr, {
   de: "Asr-Zeit",
   fr: "Heure de l'Asr",
+  pt: "Horario do Asr",
+  es: "Hora del Asr",
   tr: "Asr Vakti",
   "zh-hans": "晡礼时间"
 });
@@ -319,6 +369,8 @@ Object.assign(ROUTES.asr, {
 Object.assign(ROUTES.maghrib, {
   de: "Maghrib-Zeit",
   fr: "Heure du Maghrib",
+  pt: "Horario do Maghrib",
+  es: "Hora del Maghrib",
   tr: "Maghrib Vakti",
   "zh-hans": "昏礼时间"
 });
@@ -326,6 +378,8 @@ Object.assign(ROUTES.maghrib, {
 Object.assign(ROUTES.isha, {
   de: "Isha-Zeit",
   fr: "Heure de l'Isha",
+  pt: "Horario do Isha",
+  es: "Hora del Isha",
   tr: "Isha Vakti",
   "zh-hans": "宵礼时间"
 });
@@ -333,6 +387,8 @@ Object.assign(ROUTES.isha, {
 Object.assign(ROUTES.qibla, {
   de: "Qibla-Richtung",
   fr: "Direction de la Qibla",
+  pt: "Direcao da Qibla",
+  es: "Direccion de la Qibla",
   tr: "Kible Yonu",
   "zh-hans": "Qibla方向"
 });
@@ -340,6 +396,8 @@ Object.assign(ROUTES.qibla, {
 Object.assign(ROUTES.quran, {
   de: "Koran",
   fr: "Coran",
+  pt: "Alcorao",
+  es: "Coran",
   tr: "Kuran",
   "zh-hans": "古兰经"
 });
@@ -347,6 +405,8 @@ Object.assign(ROUTES.quran, {
 Object.assign(ROUTES["quran-surah"], {
   de: "Koran",
   fr: "Coran",
+  pt: "Alcorao",
+  es: "Coran",
   tr: "Kuran",
   "zh-hans": "古兰经"
 });
@@ -354,6 +414,8 @@ Object.assign(ROUTES["quran-surah"], {
 Object.assign(ROUTES.dhikr, {
   de: "Dhikr",
   fr: "Dhikr",
+  pt: "Dhikr",
+  es: "Dhikr",
   tr: "Zikir",
   "zh-hans": "记念"
 });
@@ -361,6 +423,8 @@ Object.assign(ROUTES.dhikr, {
 Object.assign(ROUTES["dhikr-collection"], {
   de: "Dhikr",
   fr: "Dhikr",
+  pt: "Dhikr",
+  es: "Dhikr",
   tr: "Zikir",
   "zh-hans": "记念"
 });
@@ -368,6 +432,8 @@ Object.assign(ROUTES["dhikr-collection"], {
 Object.assign(ROUTES.hadith, {
   de: "Hadith",
   fr: "Hadith",
+  pt: "Hadith",
+  es: "Hadiz",
   tr: "Hadis",
   "zh-hans": "圣训"
 });
@@ -375,6 +441,8 @@ Object.assign(ROUTES.hadith, {
 Object.assign(ROUTES["hadith-collection"], {
   de: "Hadith",
   fr: "Hadith",
+  pt: "Hadith",
+  es: "Hadiz",
   tr: "Hadis",
   "zh-hans": "圣训"
 });
@@ -401,6 +469,28 @@ Object.assign(LOCALES, {
     description: (topic, place) => place
       ? `Consultez ${topic} à ${place}, la prochaine prière et le planning du jour.`
       : `Consultez ${topic} et le planning du jour selon la localisation.`
+  },
+  pt: {
+    htmlLang: "pt",
+    dir: "ltr",
+    inLanguage: "pt",
+    title: (topic, place, pageType) => pageType === "home" && !place
+      ? "Adantimer | Horarios de oracao precisos e proxima oracao"
+      : `${topic}${place ? ` em ${place}` : ""} hoje | Adantimer`,
+    description: (topic, place) => place
+      ? `Consulte ${topic} em ${place}, veja a proxima oracao e a programacao de hoje.`
+      : `Consulte ${topic} e a programacao de hoje com base na localizacao.`
+  },
+  es: {
+    htmlLang: "es",
+    dir: "ltr",
+    inLanguage: "es",
+    title: (topic, place, pageType) => pageType === "home" && !place
+      ? "Adantimer | Horarios de oracion precisos y proxima oracion"
+      : `${topic}${place ? ` en ${place}` : ""} hoy | Adantimer`,
+    description: (topic, place) => place
+      ? `Consulta ${topic} en ${place}, la proxima oracion y el horario de hoy.`
+      : `Consulta ${topic} y el horario de hoy segun tu ubicacion.`
   },
   tr: {
     htmlLang: "tr",
@@ -430,6 +520,8 @@ const INLINE_LINK_CONNECTORS = {
   ar: "و",
   de: "und",
   fr: "et",
+  pt: "e",
+  es: "y",
   tr: "ve",
   "zh-hans": "和"
 };
@@ -439,6 +531,8 @@ const REVELATION_LABELS = {
   ar: { meccan: "مكية", medinan: "مدنية" },
   de: { meccan: "Mekkanisch", medinan: "Medinensisch" },
   fr: { meccan: "Mecquoise", medinan: "Médinoise" },
+  pt: { meccan: "Meca", medinan: "Medina" },
+  es: { meccan: "La Meca", medinan: "Medina" },
   tr: { meccan: "Mekke", medinan: "Medine" },
   "zh-hans": { meccan: "麦加时期", medinan: "麦地那时期" }
 };
@@ -4110,7 +4204,7 @@ export async function GET(request) {
         : hadithCollection;
     const canonicalPath = buildRoutePath(language, pageType, city, detailSlug);
     const canonical = `${SITE_URL}${canonicalPath}`;
-    const alternates = getAlternates(pageType, city, detailSlug);
+    const alternates = getAlternates(pageType, city, detailSlug, language);
     const copy = applyPriorityPrayerSeoOverrides({
       language,
       pageType,
@@ -4193,6 +4287,8 @@ function applyTemplate(template, { alternates, canonical, copy, description, loc
     .replace(/<link rel="alternate" hreflang="ar" href="[^"]*">\r?\n?/, alternates.ar ? `<link rel="alternate" hreflang="ar" href="${escapeHtml(alternates.ar)}">\n` : "")
     .replace(/<link rel="alternate" hreflang="de" href="[^"]*">\r?\n?/, alternates.de ? `<link rel="alternate" hreflang="de" href="${escapeHtml(alternates.de)}">\n` : "")
     .replace(/<link rel="alternate" hreflang="fr" href="[^"]*">\r?\n?/, alternates.fr ? `<link rel="alternate" hreflang="fr" href="${escapeHtml(alternates.fr)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="pt" href="[^"]*">\r?\n?/, alternates.pt ? `<link rel="alternate" hreflang="pt" href="${escapeHtml(alternates.pt)}">\n` : "")
+    .replace(/<link rel="alternate" hreflang="es" href="[^"]*">\r?\n?/, alternates.es ? `<link rel="alternate" hreflang="es" href="${escapeHtml(alternates.es)}">\n` : "")
     .replace(/<link rel="alternate" hreflang="tr" href="[^"]*">\r?\n?/, alternates.tr ? `<link rel="alternate" hreflang="tr" href="${escapeHtml(alternates.tr)}">\n` : "")
     .replace(/<link rel="alternate" hreflang="zh-hans" href="[^"]*">\r?\n?/, alternates["zh-hans"] ? `<link rel="alternate" hreflang="zh-hans" href="${escapeHtml(alternates["zh-hans"])}">\n` : "")
     .replace(/<link rel="alternate" hreflang="x-default" href="[^"]*">/, `<link rel="alternate" hreflang="x-default" href="${escapeHtml(alternates.default)}">`)
@@ -6858,7 +6954,7 @@ function formatPlaceName(city, country, language) {
   return localizedCity && localizedCountry ? `${localizedCity}, ${localizedCountry}` : localizedCity || localizedCountry || "";
 }
 
-function getAlternateLanguages(pageType, city, surahSlug = "") {
+function getAlternateLanguages(pageType, city, surahSlug = "", currentLanguage = "en") {
   if (!city || surahSlug || pageType === "quran" || pageType === "quran-surah" || pageType === "dhikr" || pageType === "dhikr-collection" || pageType === "hadith" || pageType === "hadith-collection" || pageType === "qibla") {
     return [...SUPPORTED_RENDER_LANGUAGES];
   }
@@ -6872,12 +6968,12 @@ function getAlternateLanguages(pageType, city, surahSlug = "") {
     return ["en", "ar"];
   }
 
-  return ["en"];
+  return Array.from(new Set(["en", currentLanguage]));
 }
 
-function getAlternates(pageType, city, surahSlug = "") {
+function getAlternates(pageType, city, surahSlug = "", currentLanguage = "en") {
   const alternates = {};
-  for (const language of getAlternateLanguages(pageType, city, surahSlug)) {
+  for (const language of getAlternateLanguages(pageType, city, surahSlug, currentLanguage)) {
     alternates[language] = `${SITE_URL}${buildRoutePath(language, pageType, city, surahSlug)}`;
   }
   alternates.default = alternates.en;
