@@ -273,6 +273,38 @@ function buildAlgeriaGenericIntentLinks(language, pageType) {
   return [];
 }
 
+function buildAlgeriaHomeCityIntentLinks(language, sourceCity, place) {
+  if (!sourceCity || !place) {
+    return [];
+  }
+
+  if (language === "fr") {
+    return [
+      { type: "prayer-times", city: sourceCity, label: `Horaires de prière à ${place}`, href: buildRoutePath("fr", "prayer-times", sourceCity) },
+      { type: "next-prayer", city: sourceCity, label: `Prochaine prière à ${place}`, href: buildRoutePath("fr", "next-prayer", sourceCity) },
+      { type: "fajr", city: sourceCity, label: `Heure du Fajr à ${place}`, href: buildRoutePath("fr", "fajr", sourceCity) },
+      { type: "dhuhr", city: sourceCity, label: `Heure du Dhuhr à ${place}`, href: buildRoutePath("fr", "dhuhr", sourceCity) },
+      { type: "asr", city: sourceCity, label: `Heure du Asr à ${place}`, href: buildRoutePath("fr", "asr", sourceCity) },
+      { type: "maghrib", city: sourceCity, label: `Heure du Maghrib à ${place}`, href: buildRoutePath("fr", "maghrib", sourceCity) },
+      { type: "isha", city: sourceCity, label: `Heure de l'Isha à ${place}`, href: buildRoutePath("fr", "isha", sourceCity) }
+    ];
+  }
+
+  if (language === "ar") {
+    return [
+      { type: "prayer-times", city: sourceCity, label: `مواقيت الصلاة في ${place}`, href: buildRoutePath("ar", "prayer-times", sourceCity) },
+      { type: "next-prayer", city: sourceCity, label: `الصلاة القادمة في ${place}`, href: buildRoutePath("ar", "next-prayer", sourceCity) },
+      { type: "fajr", city: sourceCity, label: `الفجر في ${place}`, href: buildRoutePath("ar", "fajr", sourceCity) },
+      { type: "dhuhr", city: sourceCity, label: `الظهر في ${place}`, href: buildRoutePath("ar", "dhuhr", sourceCity) },
+      { type: "asr", city: sourceCity, label: `العصر في ${place}`, href: buildRoutePath("ar", "asr", sourceCity) },
+      { type: "maghrib", city: sourceCity, label: `المغرب في ${place}`, href: buildRoutePath("ar", "maghrib", sourceCity) },
+      { type: "isha", city: sourceCity, label: `العشاء في ${place}`, href: buildRoutePath("ar", "isha", sourceCity) }
+    ];
+  }
+
+  return [];
+}
+
 const PRIORITY_GROUP_LABELS = {
   en: {
     core: "Core cities",
@@ -5442,6 +5474,9 @@ function buildArabicCopy({ pageType, place, sourceCity, topic, surah, surahReade
   if (!sourceCity && pageType === "prayer-times") {
     cityIntentLinks = buildAlgeriaPrayerHubLinks("ar");
   }
+  if (sourceCity && ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)) {
+    cityIntentLinks = buildAlgeriaHomeCityIntentLinks("ar", sourceCity, place);
+  }
 
   const copy = {
     activeLanguage: "ar",
@@ -5593,6 +5628,9 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
 
   if (!sourceCity && pageType === "prayer-times" && language === "fr") {
     cityIntentLinks = buildAlgeriaPrayerHubLinks("fr");
+  }
+  if (sourceCity && language === "fr" && ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)) {
+    cityIntentLinks = buildAlgeriaHomeCityIntentLinks("fr", sourceCity, place);
   }
 
   const copy = {
