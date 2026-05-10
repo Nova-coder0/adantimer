@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+﻿import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import {
@@ -154,6 +154,12 @@ const ALGERIA_FOCUS_CITIES = [
   "Ain Benian"
 ];
 const ALGERIA_PRIORITY_CITY_SLUGS = new Set(ALGERIA_FOCUS_CITIES.map(city => slugify(city)));
+const ALGERIA_NEIGHBORHOOD_FOCUS_CITY_SLUGS = new Set([
+  ...ALGERIA_WINNER_CITY_SLUGS,
+  "constantine",
+  "setif",
+  "blida"
+]);
 const ALGERIA_WINNER_FRENCH_CITY_LINKS = [
   { city: "Alger", label: "Horaires de prière à Alger" },
   { city: "Oran", label: "Horaires de prière à Oran" },
@@ -4245,20 +4251,21 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
     ? `الصلاة القادمة في ${place}`
     : pageType === "fajr"
       ? `وقت الفجر في ${place}`
-      : pageType === "maghrib"
-        ? `وقت المغرب في ${place}`
-        : pageType === "isha"
-          ? `وقت العشاء في ${place}`
-          : `مواقيت الصلاة في ${place}`;
+      : pageType === "dhuhr"
+        ? `وقت الظهر في ${place}`
+        : pageType === "asr"
+          ? `وقت العصر في ${place}`
+          : pageType === "maghrib"
+            ? `وقت المغرب في ${place}`
+            : pageType === "isha"
+              ? `وقت العشاء في ${place}`
+              : `مواقيت الصلاة في ${place}`;
 
   if (language === "fr") {
     const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
     const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
     about.push(`Si votre recherche combine ${intentLabelFr} avec le nom d'une mosquee, gardez cette page comme reference rapide puis comparez avec le tableau de la mosquee locale ou de l'autorite religieuse suivie dans votre quartier.`);
     about.push(`Cette page absorbe aussi des recherches locales comme mosquee ${place}, adhan ${place}, salat ${place}, heure de priere ${place} et ${intentLabelFr} aujourd'hui sur une seule URL canonique forte.`);
-    if (pageType === "dhuhr" || pageType === "asr") {
-      about.push(`Elle capte aussi des recherches plus directes comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place} et mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} aujourd'hui sans repartir sur des variantes faibles.`);
-    }
     faq.push({
       question: `Cette page reste-t-elle utile si ma recherche mentionne une mosquee a ${place} ?`,
       answer: `Oui. Utilisez cette page ${place} comme reference rapide puis comparez avec la mosquee locale ou l'autorite religieuse suivie dans votre zone si un horaire de quartier differe legerement.`
@@ -4268,16 +4275,15 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
       answer: `Oui. Elle couvre aussi des variantes locales comme adhan ${place}, salat ${place}, heure de priere ${place} et ${intentLabelFr} aujourd'hui avant de redistribuer vers la route canonique la plus utile.`
     });
     if (pageType === "dhuhr" || pageType === "asr") {
+      about.push(`Elle capte aussi des recherches plus directes comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place} et mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} aujourd'hui sans repartir sur des variantes faibles.`);
+      about.push(`Elle couvre aussi des formulations locales comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et salat ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} aujourd'hui.`);
       faq.push({
         question: `Cette page couvre-t-elle aussi des recherches comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place} ou mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} ?`,
         answer: `Oui. Elle absorbe aussi des recherches locales comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et ${intentLabelFr} aujourd'hui sur la meme URL canonique.`
       });
-    }
-    if (pageType === "dhuhr" || pageType === "asr") {
-      about.push(`Elle couvre aussi des formulations locales comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et salat ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} aujourd'hui.`);
       faq.push({
         question: `Cette page aide-t-elle aussi pour des recherches comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place} ou mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} ?`,
-        answer: `Oui. Elle couvre aussi des requêtes comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, salat ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} sur une seule URL canonique forte.`
+        answer: `Oui. Elle couvre aussi des requetes comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, salat ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} sur une seule URL canonique forte.`
       });
     }
     copy.aboutParagraphs = about;
@@ -4317,28 +4323,49 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
 
   return copy;
 }
-
 function applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, place, copy) {
   if (!copy || !place || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
     return copy;
   }
 
+  const isNeighborhoodFocusCity = ALGERIA_NEIGHBORHOOD_FOCUS_CITY_SLUGS.has(cityKey);
+
   if (language === "fr") {
     const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
     const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
     const queryLine = pageType === "home"
-      ? `Cette page absorbe aussi des recherches comme horaire priere ${place}, horaires de prière ${place}, adhan ${place}, dohr ${place}, maghreb ${place}, maghrib ${place}, icha ${place}, isha ${place} et prochaine prière ${place} sans créer de doublons.`
-      : `Cette page absorbe aussi des recherches comme adhan ${place}, mosquée ${place}, prochaine prière ${place}, heure du fajr ${place}, maghreb ${place}, maghrib ${place}, icha ${place} et isha ${place} sur une seule URL canonique.`;
+      ? `Cette page absorbe aussi des recherches comme horaire priere ${place}, horaires de priere ${place}, adhan ${place}, dohr ${place}, maghreb ${place}, maghrib ${place}, icha ${place}, isha ${place} et prochaine priere ${place} sans creer de doublons.`
+      : `Cette page absorbe aussi des recherches comme adhan ${place}, mosquee ${place}, prochaine priere ${place}, heure du fajr ${place}, maghreb ${place}, maghrib ${place}, icha ${place} et isha ${place} sur une seule URL canonique.`;
     about.push(queryLine);
-    about.push(`Elle reste aussi pertinente pour des recherches mixtes comme mosquee ${place}, adhan ${place}, salat ${place}, heure de prière ${place} ou ${pageType === "home" ? `prochaine prière ${place}` : `${copy.heroHeadingHome || "horaire priere"} ${place}`} sans ouvrir de variantes faibles.`);
+    about.push(`Elle reste aussi pertinente pour des recherches mixtes comme mosquee ${place}, adhan ${place}, salat ${place}, heure de priere ${place} ou ${pageType === "home" ? `prochaine priere ${place}` : `${copy.heroHeadingHome || "horaire priere"} ${place}`} sans ouvrir de variantes faibles.`);
     faq.push({
-      question: `Pourquoi cette page couvre-t-elle aussi des variantes comme adhan, maghreb, icha ou mosquée à ${place} ?`,
-      answer: `Parce que les recherches locales mélangent souvent horaire priere, adhan, maghreb, maghrib, icha, isha et parfois le nom d'une mosquée à ${place}. Adantimer regroupe ces variantes sur une page canonique forte au lieu de créer plusieurs routes faibles.`
+      question: `Pourquoi cette page couvre-t-elle aussi des variantes comme adhan, maghreb, icha ou mosquee a ${place} ?`,
+      answer: `Parce que les recherches locales melangent souvent horaire priere, adhan, maghreb, maghrib, icha, isha et parfois le nom d'une mosquee a ${place}. Adantimer regroupe ces variantes sur une page canonique forte au lieu de creer plusieurs routes faibles.`
     });
     faq.push({
-      question: `Cette page aide-t-elle aussi pour des recherches très locales comme mosquee ${place} ou adhan ${place} aujourd'hui ?`,
-      answer: `Oui. Elle absorbe aussi des recherches comme mosquee ${place}, adhan ${place}, heure de prière ${place}, salat ${place} ou prochaine prière ${place} avant de vous envoyer vers la page la plus utile pour ${place}.`
+      question: `Cette page aide-t-elle aussi pour des recherches tres locales comme mosquee ${place} ou adhan ${place} aujourd'hui ?`,
+      answer: `Oui. Elle absorbe aussi des recherches comme mosquee ${place}, adhan ${place}, heure de priere ${place}, salat ${place} ou prochaine priere ${place} avant de vous envoyer vers la page la plus utile pour ${place}.`
     });
+    if (isNeighborhoodFocusCity) {
+      const localIntentLabelFr = pageType === "next-prayer"
+        ? `prochaine priere ${place}`
+        : pageType === "fajr"
+          ? `heure du fajr ${place}`
+          : pageType === "dhuhr"
+            ? `heure du Dhuhr ${place}`
+            : pageType === "asr"
+              ? `heure du Asr ${place}`
+              : pageType === "maghrib"
+                ? `heure du Maghrib ${place}`
+                : pageType === "isha"
+                  ? `heure de l'Isha ${place}`
+                  : `horaire priere ${place}`;
+      about.push(`Elle reste aussi proche des recherches de quartier comme horaire priere quartier ${place}, mosquee quartier ${place}, mosquee centre-ville ${place} ou ${localIntentLabelFr} quartier ${place} sans ouvrir de pages faibles par quartier.`);
+      faq.push({
+        question: `Cette page couvre-t-elle aussi des recherches de quartier comme horaire priere quartier ${place} ou mosquee centre-ville ${place} ?`,
+        answer: `Oui. Pour ${place}, cette page absorbe aussi des formulations comme horaire priere quartier ${place}, mosquee quartier ${place}, mosquee centre-ville ${place}, adhan ${place} quartier ou ${localIntentLabelFr} quartier ${place} sur une seule URL canonique forte.`
+      });
+    }
     copy.aboutParagraphs = about;
     copy.faq = faq;
     return copy;
@@ -4360,6 +4387,26 @@ function applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, pl
       question: `هل تساعد هذه الصفحة أيضا في بحوث محلية جدا مثل مسجد ${place} أو اذان ${place} اليوم؟`,
       answer: `نعم. تغطي أيضا عبارات مثل مسجد ${place} واذان ${place} ووقت الصلاة ${place} والصلاة القادمة ${place} قبل نقل الزائر إلى الصفحة الأنسب داخل ${place}.`
     });
+    if (isNeighborhoodFocusCity) {
+      const localIntentLabelAr = pageType === "next-prayer"
+        ? `الصلاة القادمة ${place}`
+        : pageType === "fajr"
+          ? `وقت الفجر ${place}`
+          : pageType === "dhuhr"
+            ? `وقت الظهر ${place}`
+            : pageType === "asr"
+              ? `وقت العصر ${place}`
+              : pageType === "maghrib"
+                ? `وقت المغرب ${place}`
+                : pageType === "isha"
+                  ? `وقت العشاء ${place}`
+                  : `مواقيت الصلاة ${place}`;
+      about.push(`وتبقى هذه الصفحة مفيدة أيضا لبحوث الأحياء مثل مسجد الحي في ${place} ووقت الصلاة في حي ${place} واذان ${place} في الحي و${localIntentLabelAr} داخل الحي من دون فتح صفحات ضعيفة لكل حي.`);
+      faq.push({
+        question: `هل تغطي هذه الصفحة أيضا بحوث الأحياء مثل مسجد الحي في ${place} أو وقت الصلاة في حي ${place}؟`,
+        answer: `نعم. في ${place} تجمع الصفحة أيضا صيغًا مثل مسجد الحي في ${place} ووقت الصلاة في حي ${place} واذان ${place} في الحي و${localIntentLabelAr} داخل الحي ضمن مسار قانوني واحد قوي.`
+      });
+    }
     copy.aboutParagraphs = about;
     copy.faq = faq;
     return copy;
@@ -4367,7 +4414,6 @@ function applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, pl
 
   return copy;
 }
-
 function applyAlgeriaGenericHubKeywordCoverage(language, pageType, copy) {
   if (!copy || !["prayer-times", "next-prayer", "fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
     return copy;
