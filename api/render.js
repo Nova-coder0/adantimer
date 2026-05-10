@@ -5752,11 +5752,14 @@ function buildLocalizedCopy(language, { pageType, place, sourceCity, topic, sura
     };
   });
 
-  if (!sourceCity && pageType === "prayer-times" && language === "fr") {
+  if (!sourceCity && (pageType === "home" || pageType === "prayer-times") && language === "fr") {
     cityIntentLinks = buildAlgeriaPrayerHubLinks("fr");
   }
   if (sourceCity && language === "fr" && ALGERIA_PRIORITY_CITY_SLUGS.has(sourceCitySlug)) {
     cityIntentLinks = buildAlgeriaHomeCityIntentLinks("fr", sourceCity, place);
+  }
+  if (!sourceCity && (pageType === "home" || pageType === "prayer-times") && language === "ar") {
+    cityIntentLinks = buildAlgeriaPrayerHubLinks("ar");
   }
 
   const copy = {
