@@ -1840,7 +1840,7 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
   };
 }
 
-function buildFrenchPriorityIntentCityCopy(pageType, cityKey, place) {
+function buildFrenchAlgeriaPriorityIntentCityCopy(pageType, cityKey, place) {
   if (!cityKey || !place || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
     return null;
   }
@@ -2689,7 +2689,7 @@ function buildFrenchPriorityIntentCityCopy(pageType, cityKey, place) {
   return null;
 }
 
-function buildArabicPriorityIntentCityCopy(pageType, cityKey, place) {
+function buildArabicAlgeriaPriorityIntentCityCopy(pageType, cityKey, place) {
   if (!cityKey || !place || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
     return null;
   }
@@ -4280,9 +4280,9 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
   const priorityIntentCityCopy = language === "en"
     ? buildEnglishPriorityIntentCityCopy(pageType, cityKey, place)
     : language === "fr"
-      ? buildFrenchPriorityIntentCityCopy(pageType, cityKey, place)
+      ? buildFrenchAlgeriaPriorityIntentCityCopy(pageType, cityKey, place) || buildFrenchPriorityIntentCityCopy(pageType, cityKey, place)
       : language === "ar"
-        ? buildArabicPriorityIntentCityCopy(pageType, cityKey, place)
+        ? buildArabicAlgeriaPriorityIntentCityCopy(pageType, cityKey, place) || buildArabicPriorityIntentCityCopy(pageType, cityKey, place)
         : null;
   const priorityIntentCopy = getPriorityIntentSeoCopy(language, pageType, sourceCity);
   const priorityHomeCityCopy = getPriorityHomeCitySeoCopy(language, pageType, cityKey, place);
