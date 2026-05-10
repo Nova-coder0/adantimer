@@ -4231,11 +4231,15 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
     ? `la prochaine priere a ${place}`
     : pageType === "fajr"
       ? `l'heure du Fajr a ${place}`
-      : pageType === "maghrib"
-        ? `l'heure du Maghrib a ${place}`
-        : pageType === "isha"
-          ? `l'heure du Isha a ${place}`
-          : `les horaires de priere a ${place}`;
+      : pageType === "dhuhr"
+        ? `l'heure du Dhuhr a ${place}`
+        : pageType === "asr"
+          ? `l'heure du Asr a ${place}`
+          : pageType === "maghrib"
+            ? `l'heure du Maghrib a ${place}`
+            : pageType === "isha"
+              ? `l'heure du Isha a ${place}`
+              : `les horaires de priere a ${place}`;
 
   const intentLabelAr = pageType === "next-prayer"
     ? `الصلاة القادمة في ${place}`
@@ -4252,6 +4256,9 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
     const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
     about.push(`Si votre recherche combine ${intentLabelFr} avec le nom d'une mosquee, gardez cette page comme reference rapide puis comparez avec le tableau de la mosquee locale ou de l'autorite religieuse suivie dans votre quartier.`);
     about.push(`Cette page absorbe aussi des recherches locales comme mosquee ${place}, adhan ${place}, salat ${place}, heure de priere ${place} et ${intentLabelFr} aujourd'hui sur une seule URL canonique forte.`);
+    if (pageType === "dhuhr" || pageType === "asr") {
+      about.push(`Elle capte aussi des recherches plus directes comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place} et mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} aujourd'hui sans repartir sur des variantes faibles.`);
+    }
     faq.push({
       question: `Cette page reste-t-elle utile si ma recherche mentionne une mosquee a ${place} ?`,
       answer: `Oui. Utilisez cette page ${place} comme reference rapide puis comparez avec la mosquee locale ou l'autorite religieuse suivie dans votre zone si un horaire de quartier differe legerement.`
@@ -4260,6 +4267,19 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
       question: `Cette page couvre-t-elle aussi des recherches comme adhan ${place} ou salat ${place} aujourd'hui ?`,
       answer: `Oui. Elle couvre aussi des variantes locales comme adhan ${place}, salat ${place}, heure de priere ${place} et ${intentLabelFr} aujourd'hui avant de redistribuer vers la route canonique la plus utile.`
     });
+    if (pageType === "dhuhr" || pageType === "asr") {
+      faq.push({
+        question: `Cette page couvre-t-elle aussi des recherches comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place} ou mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} ?`,
+        answer: `Oui. Elle absorbe aussi des recherches locales comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et ${intentLabelFr} aujourd'hui sur la meme URL canonique.`
+      });
+    }
+    if (pageType === "dhuhr" || pageType === "asr") {
+      about.push(`Elle couvre aussi des formulations locales comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et salat ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} aujourd'hui.`);
+      faq.push({
+        question: `Cette page aide-t-elle aussi pour des recherches comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place} ou mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} ?`,
+        answer: `Oui. Elle couvre aussi des requêtes comme heure du ${pageType === "dhuhr" ? "Dhuhr" : "Asr"} ${place}, adhan ${pageType === "dhuhr" ? "Dohr" : "Asr"} ${place}, salat ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} et mosquee ${place} ${pageType === "dhuhr" ? "dohr" : "asr"} sur une seule URL canonique forte.`
+      });
+    }
     copy.aboutParagraphs = about;
     copy.faq = faq;
     return copy;
@@ -4268,6 +4288,11 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
   if (language === "ar") {
     const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
     const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    const localIntentLabelAr = pageType === "dhuhr"
+      ? `وقت الظهر في ${place}`
+      : pageType === "asr"
+        ? `وقت العصر في ${place}`
+        : intentLabelAr;
     about.push(`إذا كان بحثك يجمع بين ${intentLabelAr} واسم مسجد، فاستخدم هذه الصفحة كمرجع سريع ثم قارن مع توقيت المسجد المحلي أو الجهة الدينية المعتمدة في الحي.`);
     about.push(`وتغطي هذه الصفحة أيضا بحوثا محلية مثل مسجد ${place} واذان ${place} وصلاة ${place} ووقت الصلاة ${place} و${intentLabelAr} اليوم ضمن رابط قانوني واحد قوي.`);
     faq.push({
@@ -4278,6 +4303,13 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
       question: `هل تغطي هذه الصفحة أيضا عبارات مثل اذان ${place} أو صلاة ${place} اليوم؟`,
       answer: `نعم. تغطي أيضا صيغ بحث مثل اذان ${place} وصلاة ${place} ووقت الصلاة ${place} و${intentLabelAr} اليوم قبل نقل الزائر إلى المسار القانوني الأنسب.`
     });
+    if (pageType === "dhuhr" || pageType === "asr") {
+      about.push(`وتستوعب أيضا بحوثا مباشرة مثل ${pageType === "dhuhr" ? "اذان الظهر" : "اذان العصر"} ${place} و${pageType === "dhuhr" ? "صلاة الظهر" : "صلاة العصر"} ${place} و${localIntentLabelAr} اليوم ومسجد ${place} ${pageType === "dhuhr" ? "الظهر" : "العصر"} دون فتح مسارات ضعيفة.`);
+      faq.push({
+        question: `هل تغطي هذه الصفحة أيضا بحوثا مثل ${pageType === "dhuhr" ? "اذان الظهر" : "اذان العصر"} ${place} أو مسجد ${place} ${pageType === "dhuhr" ? "الظهر" : "العصر"}؟`,
+        answer: `نعم. تجمع الصفحة أيضا بحوثا مثل ${pageType === "dhuhr" ? "اذان الظهر" : "اذان العصر"} ${place} و${pageType === "dhuhr" ? "صلاة الظهر" : "صلاة العصر"} ${place} و${localIntentLabelAr} اليوم ومسجد ${place} ${pageType === "dhuhr" ? "الظهر" : "العصر"} ضمن نفس المسار القانوني.`
+      });
+    }
     copy.aboutParagraphs = about;
     copy.faq = faq;
     return copy;
