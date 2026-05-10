@@ -644,6 +644,8 @@ if ($RunLive) {
   TestLiveUrl "$BaseUrl/" @("Other languages", 'hreflang="zh-hans"', '/prayer-times/mecca', '/next-prayer/riyadh', '/fajr-time/medina', 'data-top-cities-more-label', 'data-priority-group-label')
   TestLiveUrlNotContains "$BaseUrl/" @('/sydney', '/berlin')
   TestLiveUrlRegex "$BaseUrl/" @('<html lang="(?:en|ar|de|fr|tr|zh-CN)"(?: dir="(?:ltr|rtl)")?>', '<title>Adantimer \|')
+  TestLiveUrl "$BaseUrl/fr" @('<html lang="fr" dir="ltr">', 'horaire priere Alger', 'mosquee Oran', '/fr/alger', '/fr/oran')
+  TestLiveUrl "$BaseUrl/ar" @('<html lang="ar" dir="rtl">', 'مواقيت الصلاة الجزائر', 'الصلاة القادمة في الجزائر العاصمة', 'مسجد وهران', '/ar/alger', '/ar/oran')
   TestLiveUrl "$BaseUrl/qibla" @('<body data-page="qibla">', 'qibla-panel', 'Qibla Compass', 'qibla-sensor-button', 'qibla-kaaba-marker', 'qibla-dial')
   TestLiveUrl "$BaseUrl/dhikr" @('<body data-page="dhikr"', 'dhikr-card-grid', 'data-dhikr-category="provision"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"', 'dhikr-card-badges')
   TestLiveUrl "$BaseUrl/de/dhikr" @('<html lang="de" dir="ltr">', '<body data-page="dhikr"', 'data-dhikr-item="forgiveness-sayyid-al-istighfar"')

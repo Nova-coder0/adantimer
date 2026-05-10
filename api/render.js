@@ -1155,16 +1155,17 @@ const ROOT_HOME_OVERRIDES = {
     infoTitle: "نقطة بداية أقوى للبحث عن مواقيت الصلاة عالمياً",
     features: [
       "يتم عرض النص المناسب للغة الزائر من الخادم قبل أن تبدأ الصفحة في التفاعل.",
-      "الصفحة الرئيسية مبنية لمسارين واضحين: جدول اليوم في موقعك الحالي أو الانتقال مباشرة إلى صفحة مدينة معروفة.",
-      "روابط المدن المهمة وصفحات الصلاة القادمة وصفحات الفجر والظهر والعصر والمغرب والعشاء تظهر مباشرة من الشاشة الأولى.",
+      "الصفحة الرئيسية مبنية لمسارين واضحين: جدول اليوم في موقعك الحالي أو الانتقال مباشرة إلى صفحة مدينة معروفة في الجزائر.",
+      "روابط المدن المهمة وصفحات الصلاة القادمة وصفحات الفجر والظهر والعصر والمغرب والعشاء تظهر مباشرة من الشاشة الأولى مع تركيز على الجزائر العاصمة ووهران وعنابة.",
       "الروابط النظيفة المرتبطة باللغة تجعل الصفحة الرئيسية أفضل للبحث والمشاركة والعودة لاحقاً."
     ],
     citiesTitle: "ابدأ بأهم مدن مواقيت الصلاة",
     aboutTitle: "مصممة للغة التلقائية واكتشاف الموقع والمدينة",
     aboutParagraphs: [
-      "معظم الزوار الذين يصلون إلى الصفحة الرئيسية يريدون إما جدول الصلاة لمدينتهم الحالية أو طريقاً سريعاً إلى صفحة مدينة يعرفونها. لذلك تم تنظيم الصفحة حول هذين الهدفين.",
+      "معظم الزوار الذين يصلون إلى الصفحة الرئيسية يريدون إما جدول الصلاة لمدينتهم الحالية أو طريقاً سريعاً إلى صفحة مدينة يعرفونها. لذلك تم تنظيم الصفحة حول هذين الهدفين مع تركيز أولي على الجزائر.",
       "اللغة والإشارات القانونية والمحتوى المرئي أصبحت الآن متوافقة مبكراً في الطلب بحيث يطابق أول HTML الزائر بشكل أفضل.",
-      "هذا يجعل الصفحة الرئيسية أقوى كنقطة اكتشاف عالمية لمواقيت الصلاة مع إبقاء صفحات المدن المخصصة للمسارات الأعمق."
+      "هذا يجعل الصفحة الرئيسية أقوى كنقطة اكتشاف عالمية لمواقيت الصلاة مع إبقاء صفحات المدن المخصصة للمسارات الأعمق.",
+      "تغطي هذه الصفحة أيضاً صيغاً حقيقية مثل مواقيت الصلاة الجزائر، الصلاة القادمة في الجزائر العاصمة، مسجد وهران، وقت المغرب في عنابة ووقت العشاء في البويرة قبل توزيع الزائر على المدينة الصحيحة."
     ],
     faqTitle: "أسئلة شائعة عن مواقيت الصلاة التلقائية",
     faq: [
@@ -1179,6 +1180,10 @@ const ROOT_HOME_OVERRIDES = {
       {
         question: "ماذا يحدث إذا لم يتوفر موقعي؟",
         answer: "يحاول Adantimer استخدام GPS أولاً، ثم يعتمد على IP عند الحاجة، مع بقاء البحث اليدوي عن المدينة متاحاً دائماً."
+      },
+      {
+        question: "هل تغطي هذه الصفحة أيضاً بحوث الجزائر التي تجمع اسم المدينة أو المسجد مع الصلاة؟",
+        answer: "نعم. تغطي أيضاً عبارات مثل مواقيت الصلاة الجزائر، الصلاة القادمة في الجزائر العاصمة، مسجد وهران، وقت المغرب في عنابة أو وقت العشاء في البويرة قبل إرسال الزائر إلى أفضل صفحة مدينة أو نية."
       }
     ]
   },
@@ -1217,16 +1222,17 @@ const ROOT_HOME_OVERRIDES = {
     infoTitle: "Un point d'entrée plus fort pour les recherches mondiales d'horaires de prière",
     features: [
       "Le contenu rendu côté serveur correspond à la langue du visiteur avant même l'hydratation.",
-      "La page d'accueil répond à deux besoins rapides : le planning du jour à proximité ou l'accès direct à une page de ville connue.",
-      "Les grandes villes ainsi que les routes prochaine prière, Fajr, Dhuhr, Asr, Maghrib et Isha sont liées dès le premier écran.",
+      "La page d'accueil répond à deux besoins rapides : le planning du jour à proximité ou l'accès direct à une page de ville connue en Algérie.",
+      "Les grandes villes ainsi que les routes prochaine prière, Fajr, Dhuhr, Asr, Maghrib et Isha sont liées dès le premier écran, surtout pour Alger, Oran, Annaba, Bouira et Ain Benian.",
       "Des URL propres et adaptées à la langue renforcent la page d'accueil pour la recherche, le partage et les retours."
     ],
     citiesTitle: "Commencer par les grandes villes de prière",
     aboutTitle: "Conçue pour la langue automatique, la localisation et la découverte des villes",
     aboutParagraphs: [
-      "La plupart des visiteurs arrivant sur la page d'accueil veulent soit le planning du jour pour leur ville actuelle, soit un accès rapide à une page de ville connue. La route d'accueil est désormais structurée autour de ces deux objectifs.",
+      "La plupart des visiteurs arrivant sur la page d'accueil veulent soit le planning du jour pour leur ville actuelle, soit un accès rapide à une page de ville connue. La route d'accueil est désormais structurée autour de ces deux objectifs, avec un accent fort sur l'Algérie.",
       "La langue, les signaux canoniques et le contenu visible sont désormais alignés plus tôt dans la requête pour que le premier HTML corresponde mieux au visiteur.",
-      "La page d'accueil devient ainsi une meilleure porte d'entrée pour les recherches mondiales d'horaires de prière, tout en laissant les intentions plus précises aux pages de ville."
+      "La page d'accueil devient ainsi une meilleure porte d'entrée pour les recherches mondiales d'horaires de prière, tout en laissant les intentions plus précises aux pages de ville.",
+      "Elle couvre aussi des recherches comme horaire priere Alger, horaires de prière Oran, adhan maghreb Annaba, heure dohr Constantine, icha Bouira ou mosquee Oran avant de redistribuer vers la bonne ville."
     ],
     faqTitle: "Questions fréquentes sur les horaires de prière automatiques",
     faq: [
@@ -1241,6 +1247,10 @@ const ROOT_HOME_OVERRIDES = {
       {
         question: "Que se passe-t-il si ma position n'est pas disponible ?",
         answer: "Adantimer essaie d'abord le GPS, bascule sur la détection IP si nécessaire et laisse toujours la recherche manuelle de ville disponible."
+      },
+      {
+        question: "Cette page d'accueil couvre-t-elle aussi des recherches algériennes avec nom de ville ou mosquée ?",
+        answer: "Oui. Elle couvre aussi des variantes comme horaire priere Alger, adhan Oran, mosquee Oran, adhan maghreb Annaba, icha Bouira ou prochaine priere Alger avant de redistribuer vers la page de ville ou d'intention la plus utile."
       }
     ]
   },
