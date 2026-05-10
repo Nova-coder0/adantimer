@@ -4251,9 +4251,14 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
     const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
     const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
     about.push(`Si votre recherche combine ${intentLabelFr} avec le nom d'une mosquee, gardez cette page comme reference rapide puis comparez avec le tableau de la mosquee locale ou de l'autorite religieuse suivie dans votre quartier.`);
+    about.push(`Cette page absorbe aussi des recherches locales comme mosquee ${place}, adhan ${place}, salat ${place}, heure de priere ${place} et ${intentLabelFr} aujourd'hui sur une seule URL canonique forte.`);
     faq.push({
       question: `Cette page reste-t-elle utile si ma recherche mentionne une mosquee a ${place} ?`,
       answer: `Oui. Utilisez cette page ${place} comme reference rapide puis comparez avec la mosquee locale ou l'autorite religieuse suivie dans votre zone si un horaire de quartier differe legerement.`
+    });
+    faq.push({
+      question: `Cette page couvre-t-elle aussi des recherches comme adhan ${place} ou salat ${place} aujourd'hui ?`,
+      answer: `Oui. Elle couvre aussi des variantes locales comme adhan ${place}, salat ${place}, heure de priere ${place} et ${intentLabelFr} aujourd'hui avant de redistribuer vers la route canonique la plus utile.`
     });
     copy.aboutParagraphs = about;
     copy.faq = faq;
@@ -4264,9 +4269,14 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
     const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
     const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
     about.push(`إذا كان بحثك يجمع بين ${intentLabelAr} واسم مسجد، فاستخدم هذه الصفحة كمرجع سريع ثم قارن مع توقيت المسجد المحلي أو الجهة الدينية المعتمدة في الحي.`);
+    about.push(`وتغطي هذه الصفحة أيضا بحوثا محلية مثل مسجد ${place} واذان ${place} وصلاة ${place} ووقت الصلاة ${place} و${intentLabelAr} اليوم ضمن رابط قانوني واحد قوي.`);
     faq.push({
       question: `هل تنفع هذه الصفحة إذا كان البحث يتضمن اسم مسجد في ${place}؟`,
       answer: `نعم. استخدم صفحة ${place} كمرجع سريع ثم قارن مع توقيت المسجد المحلي أو الجهة الدينية المعتمدة في منطقتك إذا كان هناك فرق بسيط في توقيت الحي.`
+    });
+    faq.push({
+      question: `هل تغطي هذه الصفحة أيضا عبارات مثل اذان ${place} أو صلاة ${place} اليوم؟`,
+      answer: `نعم. تغطي أيضا صيغ بحث مثل اذان ${place} وصلاة ${place} ووقت الصلاة ${place} و${intentLabelAr} اليوم قبل نقل الزائر إلى المسار القانوني الأنسب.`
     });
     copy.aboutParagraphs = about;
     copy.faq = faq;
