@@ -55,11 +55,11 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["constantine", { cityName: "\u0642\u0633\u0646\u0637\u064a\u0646\u0629", variant: "constantine" }],
     ["setif", { cityName: "\u0633\u0637\u064a\u0641", variant: "setif" }],
     ["blida", { cityName: "\u0627\u0644\u0628\u0644\u064a\u062f\u0629", variant: "blida" }],
-    ["tlemcen", { cityName: "\u062a\u0644\u0645\u0633\u0627\u0646", variant: "generic" }],
-    ["batna", { cityName: "\u0628\u0627\u062a\u0646\u0629", variant: "generic" }],
-    ["bejaia", { cityName: "\u0628\u062c\u0627\u064a\u0629", variant: "generic" }],
-    ["mostaganem", { cityName: "\u0645\u0633\u062a\u063a\u0627\u0646\u0645", variant: "generic" }],
-    ["sidi-bel-abbes", { cityName: "\u0633\u064a\u062f\u064a \u0628\u0644\u0639\u0628\u0627\u0633", variant: "generic" }]
+    ["tlemcen", { cityName: "\u062a\u0644\u0645\u0633\u0627\u0646", variant: "tlemcen" }],
+    ["batna", { cityName: "\u0628\u0627\u062a\u0646\u0629", variant: "batna" }],
+    ["bejaia", { cityName: "\u0628\u062c\u0627\u064a\u0629", variant: "bejaia" }],
+    ["mostaganem", { cityName: "\u0645\u0633\u062a\u063a\u0627\u0646\u0645", variant: "mostaganem" }],
+    ["sidi-bel-abbes", { cityName: "\u0633\u064a\u062f\u064a \u0628\u0644\u0639\u0628\u0627\u0633", variant: "sidi-bel-abbes" }]
   ]),
   fr: new Map([
     ["oran", { cityName: "Oran", variant: "oran" }],
@@ -70,11 +70,11 @@ const PRIORITY_HOME_CUSTOM_VARIANTS = {
     ["constantine", { cityName: "Constantine", variant: "constantine" }],
     ["setif", { cityName: "Setif", variant: "setif" }],
     ["blida", { cityName: "Blida", variant: "blida" }],
-    ["tlemcen", { cityName: "Tlemcen", variant: "generic" }],
-    ["batna", { cityName: "Batna", variant: "generic" }],
-    ["bejaia", { cityName: "Bejaia", variant: "generic" }],
-    ["mostaganem", { cityName: "Mostaganem", variant: "generic" }],
-    ["sidi-bel-abbes", { cityName: "Sidi Bel Abbes", variant: "generic" }]
+    ["tlemcen", { cityName: "Tlemcen", variant: "tlemcen" }],
+    ["batna", { cityName: "Batna", variant: "batna" }],
+    ["bejaia", { cityName: "Bejaia", variant: "bejaia" }],
+    ["mostaganem", { cityName: "Mostaganem", variant: "mostaganem" }],
+    ["sidi-bel-abbes", { cityName: "Sidi Bel Abbes", variant: "sidi-bel-abbes" }]
   ])
 };
 const ENGLISH_PRIORITY_HOME_GENERIC_SLUGS = getPriorityHomeGenericSlugs(ENGLISH_PRIORITY_HOME_CITIES, "en");
@@ -1680,6 +1680,116 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
           question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`,
           answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire."
         }
+      ]
+    },
+    tlemcen: {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning du jour et les villes clés de l'ouest algérien`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez comparer directement Sidi Bel Abbes, Mostaganem, Alger, Oran ou Blida sans quitter le bloc Algérie.`,
+        "La page couvre aussi les formulations locales comme horaire priere, horaires de prière, adhan et maghreb dans une seule URL canonique."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        `Si votre recherche mentionne une mosquée à ${cityName}, utilisez cette page comme référence de ville puis comparez-la avec l'horaire de cette mosquée locale.`,
+        "Le bloc des autres villes vous aide aussi à comparer Tlemcen avec Sidi Bel Abbes, Mostaganem, Alger, Oran ou Blida dans le même contexte algérien."
+      ],
+      faq: [
+        { question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`, answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière." },
+        { question: `Puis-je comparer rapidement ${cityName} avec d'autres villes d'Algérie ?`, answer: "Oui. Les liens de ville vous mènent vers Sidi Bel Abbes, Mostaganem, Alger, Oran et Blida pour comparer rapidement les horaires." },
+        { question: `Puis-je utiliser cette page si je cherche les horaires d'une mosquée à ${cityName} ?`, answer: "Oui. Cette page sert de référence rapide pour Tlemcen, puis vous pouvez confronter le tableau affiché à la mosquée ou au quartier que vous suivez." },
+        { question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`, answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire." }
+      ]
+    },
+    batna: {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning complet et la comparaison des villes de l'est algérien`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez comparer directement Constantine, Sétif, Annaba, Alger ou Bejaia sans quitter la couche Algérie.`,
+        "La page couvre aussi des formulations locales comme horaire priere, adhan, maghreb et icha dans un seul point d'entrée canonique."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        `Si votre recherche vise une mosquée à ${cityName}, gardez cette page comme base de ville puis comparez le tableau affiché avec l'horaire de cette mosquée locale.`,
+        "Le bloc des autres villes permet aussi de comparer Batna avec Constantine, Sétif, Annaba, Alger ou Bejaia sans sortir du même cluster algérien."
+      ],
+      faq: [
+        { question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`, answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière." },
+        { question: `Puis-je comparer rapidement ${cityName} avec d'autres villes d'Algérie ?`, answer: "Oui. Les autres villes vous donnent un accès direct à Constantine, Sétif, Annaba, Alger et Bejaia pour comparer les horaires." },
+        { question: `Puis-je utiliser cette page si je cherche les horaires d'une mosquée à ${cityName} ?`, answer: "Oui. La page de Batna sert de référence canonique pour la ville, puis vous pouvez vérifier l'écart éventuel avec votre mosquée ou votre quartier." },
+        { question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`, answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire." }
+      ]
+    },
+    bejaia: {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning du jour et les liens utiles pour la côte algérienne`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez comparer directement Sétif, Bouira, Alger, Constantine ou Annaba sans quitter le bloc Algérie.`,
+        "La page couvre aussi les recherches de type horaire priere, adhan, maghreb et horaires de prière sur une seule URL stable."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        `Si votre recherche mentionne une mosquée à ${cityName}, utilisez cette page comme point de départ puis comparez avec les horaires de ce lieu de prière.`,
+        "Le bloc des autres villes vous permet aussi de comparer Bejaia avec Sétif, Bouira, Alger, Constantine ou Annaba dans la même couche Algérie."
+      ],
+      faq: [
+        { question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`, answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière." },
+        { question: `Puis-je comparer rapidement ${cityName} avec d'autres villes d'Algérie ?`, answer: "Oui. Les autres villes vous permettent de basculer vers Sétif, Bouira, Alger, Constantine et Annaba pour comparer les horaires." },
+        { question: `Puis-je utiliser cette page si je cherche les horaires d'une mosquée à ${cityName} ?`, answer: "Oui. Cette page de Bejaia donne une base claire pour la ville entière, puis vous pouvez la rapprocher de l'horaire de votre mosquée ou de votre secteur local." },
+        { question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`, answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire." }
+      ]
+    },
+    mostaganem: {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning complet et les comparaisons utiles de l'ouest algérien`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez comparer directement Tlemcen, Sidi Bel Abbes, Oran, Alger ou Blida sans quitter le bloc Algérie.`,
+        "La page couvre aussi des formulations comme horaire priere, adhan et maghreb sur une seule page canonique."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        `Si votre recherche vise une mosquée à ${cityName}, gardez cette page comme base de ville puis comparez le tableau affiché avec l'horaire de cette mosquée locale.`,
+        "Le bloc des autres villes vous permet aussi de comparer Mostaganem avec Tlemcen, Sidi Bel Abbes, Oran, Alger ou Blida dans le même cluster algérien."
+      ],
+      faq: [
+        { question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`, answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière." },
+        { question: `Puis-je comparer rapidement ${cityName} avec d'autres villes d'Algérie ?`, answer: "Oui. Les liens de ville vous mènent vers Tlemcen, Sidi Bel Abbes, Oran, Alger et Blida pour comparer les horaires." },
+        { question: `Puis-je utiliser cette page si je cherche les horaires d'une mosquée à ${cityName} ?`, answer: "Oui. La page de Mostaganem sert de référence canonique pour la ville, puis vous pouvez comparer le tableau affiché avec votre mosquée ou votre quartier." },
+        { question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`, answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire." }
+      ]
+    },
+    "sidi-bel-abbes": {
+      infoTitle: `Horaires de prière à ${cityName} avec le planning du jour et les autres villes importantes de l'ouest algérien`,
+      features: [
+        `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+        "Le statut de la prière en cours, la date du jour et la méthode de calcul restent visibles sur la même page pour une vérification plus rapide.",
+        `Depuis ${cityName}, vous pouvez comparer directement Tlemcen, Mostaganem, Oran, Alger ou Blida sans quitter le bloc Algérie.`,
+        "La page couvre aussi les formulations locales comme horaire priere, horaires de prière, adhan, dohr et maghreb dans une seule URL claire."
+      ],
+      aboutParagraphs: [
+        `Cette page est conçue pour la recherche directe : horaires de prière à ${cityName} aujourd'hui, avec le planning complet visible immédiatement.`,
+        "Le tableau du jour, le compte à rebours et la méthode affichée restent ensemble pour que la réponse soit plus rapide à vérifier.",
+        `Si vous comparez avec une mosquée locale ou un autre site, utilisez cette page comme point d'entrée rapide puis confrontez la méthode visible à l'autorité locale que vous suivez.`,
+        `Si votre recherche mentionne une mosquée à ${cityName}, utilisez cette page comme référence de ville puis comparez-la avec les horaires de ce lieu de prière.`,
+        "Le bloc des autres villes vous aide aussi à comparer Sidi Bel Abbes avec Tlemcen, Mostaganem, Oran, Alger ou Blida dans le même contexte algérien."
+      ],
+      faq: [
+        { question: `Cette page ${cityName} affiche-t-elle les cinq prières du jour ?`, answer: "Oui. Elle affiche Fajr, Dhuhr, Asr, Maghrib et Isha avec le compte à rebours jusqu'à la prochaine prière." },
+        { question: `Puis-je comparer rapidement ${cityName} avec d'autres villes d'Algérie ?`, answer: "Oui. Les autres villes vous donnent un accès direct à Tlemcen, Mostaganem, Oran, Alger et Blida pour comparer les horaires." },
+        { question: `Puis-je utiliser cette page si je cherche les horaires d'une mosquée à ${cityName} ?`, answer: "Oui. Cette page de Sidi Bel Abbes donne une base claire pour la ville entière, puis vous pouvez la rapprocher de l'horaire de votre mosquée ou de votre secteur local." },
+        { question: `Les horaires de prière à ${cityName} peuvent-ils varier selon la source ?`, answer: "Oui. Les horaires peuvent varier selon la méthode de calcul ou la référence locale, donc comparez aussi avec votre mosquée si nécessaire." }
       ]
     },
     generic: {
@@ -3372,6 +3482,151 @@ function buildArabicPriorityHomeCityCopy(cityName, variant = "generic") {
           question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`,
           answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين."
         }
+      ]
+    };
+  }
+
+  if (variant === "tlemcen") {
+    return {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع الصلاة القادمة، وراجع الجدول الكامل في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع مدن الغرب الجزائري المرتبطة`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة السريعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى سيدي بلعباس أو مستغانم أو وهران أو الجزائر العاصمة أو البليدة للمقارنة داخل نفس طبقة الجزائر.`,
+        "تغطي الصفحة أيضًا صيغ البحث المتداولة حول مواقيت الصلاة ووقت المغرب والصلاة القادمة بدون تفتيت النية على صفحات كثيرة."
+      ],
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن طريقة الحساب الظاهرة بالمصدر الذي تتبعه.",
+        `إذا كان بحثك يتضمن مسجدًا في ${cityName}، فاستخدم هذه الصفحة كمرجع سريع للمدينة ثم قارنها بجدول ذلك المسجد أو الحي الذي تتبعه.`,
+        "كما يتيح لك قسم المدن الأخرى مقارنة تلمسان مع سيدي بلعباس ومستغانم ووهران أو الجزائر العاصمة والبليدة داخل نفس التركيز الجزائري."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        { question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`, answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الشاشة." },
+        { question: `هل أستطيع مقارنة ${cityName} مع مدن جزائرية أخرى من نفس الصفحة؟`, answer: "نعم. قسم المدن الأخرى يوصلك مباشرة إلى سيدي بلعباس ومستغانم ووهران والجزائر العاصمة والبليدة لمقارنة المواقيت بسرعة." },
+        { question: `هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن مواقيت مسجد في ${cityName}؟`, answer: "نعم. صفحة تلمسان تعطيك أساسًا واضحًا للمدينة، ثم يمكنك مقارنتها بجدول المسجد أو الجهة المحلية التي تتبعها." },
+        { question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`, answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين." }
+      ]
+    };
+  }
+
+  if (variant === "batna") {
+    return {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع الصلاة القادمة، وراجع الجدول الكامل في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع مدن الشرق الجزائري ذات الصلة`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة السريعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى قسنطينة أو سطيف أو عنابة أو الجزائر العاصمة أو بجاية للمقارنة داخل نفس طبقة الجزائر.`,
+        "تغطي الصفحة أيضًا صيغ البحث المحلية حول مواقيت الصلاة ووقت الفجر ووقت المغرب والصلاة القادمة دون تشتيت الإشارات."
+      ],
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن طريقة الحساب الظاهرة بالمصدر الذي تتبعه.",
+        `إذا كان بحثك يذكر مسجدًا في ${cityName}، فابدأ بهذه الصفحة كمرجع للمدينة ثم قارنها بجدول ذلك المسجد المحلي.`,
+        "وقسم المدن الأخرى يتيح لك مقارنة باتنة مع قسنطينة وسطيف وعنابة أو الجزائر العاصمة وبجاية ضمن نفس تركيز الجزائر."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        { question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`, answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الشاشة." },
+        { question: `هل أستطيع مقارنة ${cityName} مع مدن جزائرية أخرى من نفس الصفحة؟`, answer: "نعم. روابط المدن الأخرى تنقلك مباشرة إلى قسنطينة وسطيف وعنابة والجزائر العاصمة وبجاية لمقارنة المواقيت." },
+        { question: `هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن مواقيت مسجد في ${cityName}؟`, answer: "نعم. صفحة باتنة تعطيك مرجعًا واضحًا للمدينة، ثم يمكنك مقارنة الجدول المعروض بجدول المسجد أو الحي الذي تتبعه." },
+        { question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`, answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين." }
+      ]
+    };
+  }
+
+  if (variant === "bejaia") {
+    return {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع الصلاة القادمة، وراجع الجدول الكامل في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع الجدول الكامل والمدن الساحلية والداخلية المرتبطة`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة السريعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى سطيف أو البويرة أو الجزائر العاصمة أو قسنطينة أو عنابة للمقارنة داخل نفس طبقة الجزائر.`,
+        "تغطي الصفحة أيضًا نية البحث المحلية حول مواقيت الصلاة ووقت المغرب والصلاة القادمة في بجاية ضمن رابط واحد واضح."
+      ],
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن طريقة الحساب الظاهرة بالمصدر الذي تتبعه.",
+        `إذا كان بحثك يتضمن مسجدًا في ${cityName}، فاستخدم هذه الصفحة كمرجع أولي للمدينة ثم قارن المواقيت بجدول المسجد المحلي الذي تبحث عنه.`,
+        "كما يساعدك قسم المدن الأخرى على مقارنة بجاية مع سطيف والبويرة والجزائر العاصمة وقسنطينة أو عنابة في نفس السوق الجزائري."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        { question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`, answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الشاشة." },
+        { question: `هل أستطيع مقارنة ${cityName} مع مدن جزائرية أخرى من نفس الصفحة؟`, answer: "نعم. قسم المدن الأخرى يوصلك مباشرة إلى سطيف والبويرة والجزائر العاصمة وقسنطينة وعنابة لمقارنة المواقيت بسرعة." },
+        { question: `هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن مواقيت مسجد في ${cityName}؟`, answer: "نعم. صفحة بجاية تعطيك أساسًا واضحًا للمدينة، ثم يمكنك مقارنتها بجدول المسجد أو الجهة المحلية التي تتبعها." },
+        { question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`, answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين." }
+      ]
+    };
+  }
+
+  if (variant === "mostaganem") {
+    return {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع الصلاة القادمة، وراجع الجدول الكامل في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع المقارنة السريعة بين مدن الغرب الجزائري`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة السريعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى تلمسان أو سيدي بلعباس أو وهران أو الجزائر العاصمة أو البليدة للمقارنة داخل نفس طبقة الجزائر.`,
+        "تغطي الصفحة أيضًا صيغ البحث الشائعة مثل مواقيت الصلاة ووقت المغرب والصلاة القادمة بدون إنشاء صفحات مترادفة ضعيفة."
+      ],
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن طريقة الحساب الظاهرة بالمصدر الذي تتبعه.",
+        `إذا كان بحثك يذكر مسجدًا في ${cityName}، فابدأ بهذه الصفحة كمرجع للمدينة ثم قارنها بجدول ذلك المسجد المحلي.`,
+        "وقسم المدن الأخرى يتيح لك مقارنة مستغانم مع تلمسان وسيدي بلعباس ووهران أو الجزائر العاصمة والبليدة داخل نفس تركيز الجزائر."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        { question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`, answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الشاشة." },
+        { question: `هل أستطيع مقارنة ${cityName} مع مدن جزائرية أخرى من نفس الصفحة؟`, answer: "نعم. روابط المدن الأخرى تنقلك مباشرة إلى تلمسان وسيدي بلعباس ووهران والجزائر العاصمة والبليدة لمقارنة المواقيت." },
+        { question: `هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن مواقيت مسجد في ${cityName}؟`, answer: "نعم. صفحة مستغانم تعطيك مرجعًا واضحًا للمدينة، ثم يمكنك مقارنة الجدول المعروض بجدول المسجد أو الحي الذي تتبعه." },
+        { question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`, answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين." }
+      ]
+    };
+  }
+
+  if (variant === "sidi-bel-abbes") {
+    return {
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وتابع الصلاة القادمة، وراجع الجدول الكامل في صفحة واحدة.`,
+      infoTitle: `مواقيت الصلاة في ${cityName} مع مدن الغرب الجزائري الأكثر صلة`,
+      features: [
+        `اعرض جدول ${cityName} اليومي للفجر والظهر والعصر والمغرب والعشاء مع العد التنازلي للصلاة القادمة.`,
+        "تبقى الصلاة الحالية وتاريخ اليوم وطريقة الحساب الظاهرة في نفس الصفحة لسهولة المراجعة السريعة.",
+        `يمكنك الانتقال مباشرة من ${cityName} إلى تلمسان أو مستغانم أو وهران أو الجزائر العاصمة أو البليدة للمقارنة داخل نفس طبقة الجزائر.`,
+        "تغطي الصفحة أيضًا صيغ البحث المتداولة حول مواقيت الصلاة ووقت الفجر ووقت المغرب والصلاة القادمة ضمن رابط واحد واضح."
+      ],
+      aboutParagraphs: [
+        `هذه الصفحة مبنية لمن يبحث مباشرة عن مواقيت الصلاة في ${cityName} اليوم مع ظهور الجدول الكامل والعد التنازلي من أول نظرة.`,
+        "يجتمع في الصفحة جدول اليوم الكامل مع الصلاة القادمة وطريقة الحساب الظاهرة حتى تصل إلى الإجابة بسرعة أكبر.",
+        "إذا كنت تحتاج إلى مقارنة النتيجة بجدول مسجد محلي أو جهة موثوقة، فاستخدم هذه الصفحة كنقطة وصول سريعة ثم قارن طريقة الحساب الظاهرة بالمصدر الذي تتبعه.",
+        `إذا كان بحثك يتضمن مسجدًا في ${cityName}، فاستخدم هذه الصفحة كمرجع سريع للمدينة ثم قارنها بجدول ذلك المسجد أو الحي الذي تتبعه.`,
+        "كما يساعدك قسم المدن الأخرى على مقارنة سيدي بلعباس مع تلمسان ومستغانم ووهران أو الجزائر العاصمة والبليدة داخل نفس السوق الجزائري."
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`,
+      faq: [
+        { question: `هل تعرض هذه الصفحة الصلوات الخمس اليومية في ${cityName}؟`, answer: "نعم. تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة في نفس الشاشة." },
+        { question: `هل أستطيع مقارنة ${cityName} مع مدن جزائرية أخرى من نفس الصفحة؟`, answer: "نعم. قسم المدن الأخرى يوصلك مباشرة إلى تلمسان ومستغانم ووهران والجزائر العاصمة والبليدة لمقارنة المواقيت بسرعة." },
+        { question: `هل يمكنني استخدام هذه الصفحة إذا كنت أبحث عن مواقيت مسجد في ${cityName}؟`, answer: "نعم. صفحة سيدي بلعباس تعطيك أساسًا واضحًا للمدينة، ثم يمكنك مقارنتها بجدول المسجد أو الجهة المحلية التي تتبعها." },
+        { question: `لماذا قد تختلف مواقيت الصلاة في ${cityName} عن مصدر آخر؟`, answer: "قد تختلف المواقيت بحسب طريقة الحساب أو الجدول المحلي، لذلك تبقى طريقة الحساب الظاهرة وإرشاد المسجد المحلي مهمين." }
       ]
     };
   }
