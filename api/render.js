@@ -195,7 +195,7 @@ function buildAlgeriaPrayerHubLinks(language) {
   const focusCities = getAlgeriaFocusCities("");
   if (language === "fr") {
     return [
-      ...focusCities.slice(0, 9).map(city => ({
+      ...focusCities.map(city => ({
         label: `Horaires de prière à ${localizeCityName(city, "fr")}`,
         href: buildRoutePath("fr", "home", city)
       })),
@@ -208,7 +208,7 @@ function buildAlgeriaPrayerHubLinks(language) {
 
   if (language === "ar") {
     return [
-      ...focusCities.slice(0, 9).map(city => ({
+      ...focusCities.map(city => ({
         label: `مواقيت الصلاة في ${localizeCityName(city, "ar")}`,
         href: buildRoutePath("ar", "home", city)
       })),
@@ -237,7 +237,7 @@ function buildAlgeriaGenericIntentLinks(language, pageType) {
           ? "Heure du Maghrib"
           : "Heure de l'Isha";
     return [
-      ...focusCities.slice(0, 8).map(city => ({
+      ...focusCities.map(city => ({
         label: `${prayerLabel} à ${localizeCityName(city, "fr")}`,
         href: buildRoutePath("fr", pageType, city)
       })),
@@ -260,7 +260,7 @@ function buildAlgeriaGenericIntentLinks(language, pageType) {
               ? "المغرب"
               : "العشاء";
     return [
-      ...focusCities.slice(0, 8).map(city => ({
+      ...focusCities.map(city => ({
         label: `${prayerLabel} في ${localizeCityName(city, "ar")}`,
         href: buildRoutePath("ar", pageType, city)
       })),
