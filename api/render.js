@@ -4266,6 +4266,46 @@ function applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, p
   return copy;
 }
 
+function applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, place, copy) {
+  if (!copy || !place || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
+    return copy;
+  }
+
+  if (language === "fr") {
+    const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
+    const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    const queryLine = pageType === "home"
+      ? `Cette page absorbe aussi des recherches comme horaire priere ${place}, horaires de prière ${place}, adhan ${place}, dohr ${place}, maghreb ${place}, maghrib ${place}, icha ${place}, isha ${place} et prochaine prière ${place} sans créer de doublons.`
+      : `Cette page absorbe aussi des recherches comme adhan ${place}, mosquée ${place}, prochaine prière ${place}, heure du fajr ${place}, maghreb ${place}, maghrib ${place}, icha ${place} et isha ${place} sur une seule URL canonique.`;
+    about.push(queryLine);
+    faq.push({
+      question: `Pourquoi cette page couvre-t-elle aussi des variantes comme adhan, maghreb, icha ou mosquée à ${place} ?`,
+      answer: `Parce que les recherches locales mélangent souvent horaire priere, adhan, maghreb, maghrib, icha, isha et parfois le nom d'une mosquée à ${place}. Adantimer regroupe ces variantes sur une page canonique forte au lieu de créer plusieurs routes faibles.`
+    });
+    copy.aboutParagraphs = about;
+    copy.faq = faq;
+    return copy;
+  }
+
+  if (language === "ar") {
+    const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
+    const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    const queryLine = pageType === "home"
+      ? `تغطي هذه الصفحة أيضا صيغ البحث مثل مواقيت الصلاة ${place} ووقت الفجر ${place} ووقت المغرب ${place} ووقت العشاء ${place} والصلاة القادمة ${place} واسم مسجد في ${place} ضمن رابط قانوني واحد.`
+      : `تغطي هذه الصفحة أيضا صيغ البحث مثل الصلاة القادمة ${place} ووقت الفجر ${place} ووقت المغرب ${place} ووقت العشاء ${place} ومواقيت الصلاة ${place} واسم مسجد في ${place} ضمن صفحة واحدة قوية.`;
+    about.push(queryLine);
+    faq.push({
+      question: `لماذا تغطي هذه الصفحة أيضا صيغًا مثل مسجد ${place} أو الصلاة القادمة أو وقت المغرب؟`,
+      answer: `لأن البحث المحلي في ${place} يجمع غالبا بين مواقيت الصلاة واسم مسجد أو بين الصلاة القادمة ووقت الفجر ووقت المغرب ووقت العشاء. لذلك تجمع Adantimer هذه الصيغ في صفحة قانونية واحدة بدل إنشاء مسارات ضعيفة كثيرة.`
+    });
+    copy.aboutParagraphs = about;
+    copy.faq = faq;
+    return copy;
+  }
+
+  return copy;
+}
+
 function getPriorityHomeCitySeoCopy(language, pageType, cityKey, place) {
   if (pageType !== "home") {
     return null;
@@ -4320,7 +4360,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
   const priorityHomeCityCopy = getPriorityHomeCitySeoCopy(language, pageType, cityKey, place);
 
   if (priorityIntentCityCopy) {
-    Object.assign(copy, applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, place, priorityIntentCityCopy));
+    Object.assign(copy, applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, place, applyAlgeriaMosqueIntentCityEnhancements(language, pageType, cityKey, place, priorityIntentCityCopy)));
     return copy;
   }
 
@@ -4330,7 +4370,7 @@ function applyPriorityPrayerSeoOverrides({ language, pageType, sourceCity, place
   }
 
   if (priorityHomeCityCopy) {
-    Object.assign(copy, priorityHomeCityCopy);
+    Object.assign(copy, applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, place, priorityHomeCityCopy));
     return copy;
   }
 
