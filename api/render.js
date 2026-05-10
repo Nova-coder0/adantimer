@@ -4324,6 +4324,22 @@ function applyAlgeriaGenericHubKeywordCoverage(language, pageType, copy) {
       question: "Pourquoi cette page générale couvre-t-elle aussi des variantes locales d'Algérie avec adhan, mosquée ou nom de ville ?",
       answer: "Parce que les recherches réelles en Algérie mélangent souvent horaire priere, adhan, nom de ville, prochaine prière, maghreb, icha et parfois le nom d'une mosquée. Adantimer regroupe ces variantes sur des routes canoniques fortes avant de redistribuer vers la bonne ville."
     });
+    faq.push({
+      question: "Cette page generale couvre-t-elle aussi des recherches algeriennes plus precises comme dohr, icha, asr ou adhan maghreb ?",
+      answer: pageType === "dhuhr"
+        ? "Oui. Elle absorbe aussi des recherches comme heure dohr Alger, heure du Dhuhr Oran, dohr Annaba ou mosquee Constantine avant de rediriger vers la ville ou l'intent le plus proche."
+        : pageType === "asr"
+          ? "Oui. Elle absorbe aussi des recherches comme heure Asr Alger, heure du Asr Oran, asr Annaba ou mosquee Setif avant de redistribuer vers la bonne page."
+          : pageType === "maghrib"
+            ? "Oui. Elle absorbe aussi des recherches comme adhan maghreb Alger, heure du Maghrib Oran, maghrib Annaba ou mosquee Bejaia avant de redistribuer vers la bonne ville."
+            : pageType === "isha"
+              ? "Oui. Elle absorbe aussi des recherches comme icha Alger, isha Ain Benian, heure de l'Isha Oran ou mosquee Mostaganem avant de redistribuer vers la page la plus utile."
+              : pageType === "fajr"
+                ? "Oui. Elle absorbe aussi des recherches comme heure du fajr Alger, fajr aujourd'hui Oran, adhan fajr Annaba ou mosquee Constantine avant de redistribuer vers la bonne ville."
+                : pageType === "next-prayer"
+                  ? "Oui. Elle absorbe aussi des recherches comme prochaine priere Alger, adhan aujourd'hui Oran, heure de la prochaine priere Annaba ou mosquee Bouira avant de redistribuer vers la bonne page."
+                  : "Oui. Elle absorbe aussi des recherches comme horaire priere Alger, adhan maghreb Annaba, heure dohr Constantine, icha Bouira, isha Ain Benian ou mosquee Oran avant de redistribuer vers la bonne ville."
+    });
     copy.aboutParagraphs = about;
     copy.faq = faq;
     return copy;
@@ -4341,6 +4357,22 @@ function applyAlgeriaGenericHubKeywordCoverage(language, pageType, copy) {
     faq.push({
       question: "لماذا تغطي هذه الصفحة العامة أيضا صيغًا جزائرية تجمع بين المدينة أو المسجد ومواقيت الصلاة؟",
       answer: "لأن البحث الحقيقي في الجزائر يجمع كثيرا بين مواقيت الصلاة واسم المدينة أو اسم مسجد أو الصلاة القادمة أو وقت المغرب أو وقت العشاء. لذلك تجمع Adantimer هذه الصيغ في مسارات عربية قانونية قوية قبل نقل الزائر إلى المدينة الأقرب."
+    });
+    faq.push({
+      question: "هل تغطي هذه الصفحة العامة أيضا صيغ بحث جزائرية أدق مثل وقت الظهر أو وقت العصر أو اسم مسجد؟",
+      answer: pageType === "dhuhr"
+        ? "نعم. تغطي أيضا صيغ بحث مثل وقت الظهر الجزائر العاصمة ووقت الظهر وهران ووقت الظهر عنابة واسم مسجد في قسنطينة قبل نقل الزائر إلى الصفحة الأقرب."
+        : pageType === "asr"
+          ? "نعم. تغطي أيضا صيغ بحث مثل وقت العصر الجزائر العاصمة ووقت العصر وهران ووقت العصر عنابة واسم مسجد في سطيف قبل نقل الزائر إلى الصفحة الأقرب."
+          : pageType === "maghrib"
+            ? "نعم. تغطي أيضا صيغ بحث مثل وقت المغرب الجزائر العاصمة واذان المغرب وهران ووقت المغرب عنابة واسم مسجد في بجاية قبل نقل الزائر إلى الصفحة الأقرب."
+            : pageType === "isha"
+              ? "نعم. تغطي أيضا صيغ بحث مثل وقت العشاء الجزائر العاصمة ووقت العشاء وهران ووقت العشاء عين البنيان واسم مسجد في مستغانم قبل نقل الزائر إلى الصفحة الأقرب."
+              : pageType === "fajr"
+                ? "نعم. تغطي أيضا صيغ بحث مثل وقت الفجر الجزائر العاصمة ووقت الفجر وهران واذان الفجر عنابة واسم مسجد في قسنطينة قبل نقل الزائر إلى الصفحة الأقرب."
+                : pageType === "next-prayer"
+                  ? "نعم. تغطي أيضا صيغ بحث مثل الصلاة القادمة الجزائر العاصمة والصلاة القادمة وهران واسم مسجد في عنابة أو البويرة قبل نقل الزائر إلى الصفحة الأقرب."
+                  : "نعم. تغطي أيضا صيغ بحث مثل مواقيت الصلاة الجزائر العاصمة ومواقيت الصلاة وهران ووقت المغرب عنابة ووقت الظهر قسنطينة واسم مسجد في عين البنيان قبل نقل الزائر إلى الصفحة الأقرب."
     });
     copy.aboutParagraphs = about;
     copy.faq = faq;
