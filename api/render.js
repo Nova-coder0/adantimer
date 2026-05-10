@@ -1840,6 +1840,144 @@ function buildFrenchGscWinnerHomeCityCopy(cityName, variant = "generic") {
   };
 }
 
+function buildFrenchPriorityIntentCityCopy(pageType, cityKey, place) {
+  if (!cityKey || !place || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
+    return null;
+  }
+
+  const cityName = localizeCityName(place, "fr");
+  const prayerConfig = {
+    "prayer-times": {
+      title: `Horaires de prière à ${cityName} aujourd'hui`,
+      metaTitle: `Horaires de prière à ${cityName} aujourd'hui | Fajr, Dhuhr, Asr, Maghrib & Isha | Adantimer`,
+      metaDescription: `Consultez les horaires de prière à ${cityName} aujourd'hui avec Fajr, Dhuhr, Asr, Maghrib, Isha et le compte à rebours jusqu'à la prochaine prière.`,
+      heroSubtitle: `Consultez les horaires de prière à ${cityName} aujourd'hui, gardez le compte à rebours de la prochaine prière visible et vérifiez rapidement le tableau complet avant de comparer avec une mosquée locale.`,
+      infoTitle: `Utilisez cette page pour les horaires de prière à ${cityName}`,
+      aboutTitle: `Comment utiliser la page des horaires de prière à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: horaires de prière à ${cityName} aujourd'hui avec le tableau complet visible immédiatement.`,
+        `La page garde Fajr, Dhuhr, Asr, Maghrib et Isha ensemble avec la prochaine prière, la méthode affichée et les liens vers d'autres villes algériennes prioritaires.`,
+        `Si votre recherche mentionne une mosquée à ${cityName}, utilisez cette page comme base canonique rapide puis comparez avec le tableau de la mosquée locale ou de l'autorité religieuse que vous suivez.`
+      ],
+      faqTitle: `Questions fréquentes sur les horaires de prière à ${cityName}`
+    },
+    "next-prayer": {
+      title: `Prochaine prière à ${cityName} aujourd'hui`,
+      metaTitle: `Prochaine prière à ${cityName} aujourd'hui | Compte à rebours en direct | Adantimer`,
+      metaDescription: `Suivez la prochaine prière à ${cityName} aujourd'hui avec un compte à rebours en direct, le statut de la prière en cours et le planning complet du jour.`,
+      heroSubtitle: `Suivez la prochaine prière à ${cityName} avec un compte à rebours en direct et gardez le tableau complet visible pour comparer rapidement avec votre mosquée locale.`,
+      infoTitle: `Utilisez cette page quand la prochaine prière à ${cityName} est la question principale`,
+      aboutTitle: `Comment utiliser la page de la prochaine prière à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est la prochaine prière à ${cityName} et combien de temps reste-t-il avant son début.`,
+        `Le compte à rebours, le statut de la prière en cours, le planning complet et la méthode affichée restent visibles sur le même écran pour une vérification rapide.`,
+        `Si votre recherche cite une mosquée à ${cityName}, utilisez cette page comme réponse canonique rapide puis comparez avec le tableau local ou le quartier concerné.`
+      ],
+      faqTitle: `Questions fréquentes sur la prochaine prière à ${cityName}`
+    },
+    fajr: {
+      title: `Heure du Fajr à ${cityName} aujourd'hui`,
+      metaTitle: `Heure du Fajr à ${cityName} aujourd'hui | Recherche quotidienne du Fajr | Adantimer`,
+      metaDescription: `Vérifiez l'heure du Fajr à ${cityName} aujourd'hui, gardez le compte à rebours visible et comparez le résultat avec une mosquée locale si nécessaire.`,
+      heroSubtitle: `Vérifiez l'heure du Fajr à ${cityName} aujourd'hui, gardez le compte à rebours visible et consultez le planning complet avant de comparer avec la mosquée locale.`,
+      infoTitle: `Utilisez cette page quand l'heure du Fajr à ${cityName} est la question principale`,
+      aboutTitle: `Comment utiliser la page de l'heure du Fajr à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure du Fajr à ${cityName} aujourd'hui et comment la vérifier rapidement.`,
+        `La page garde l'heure du Fajr, la prochaine prière, le tableau complet et la méthode affichée ensemble pour rendre la réponse plus facile à confirmer.`,
+        `Si votre recherche cite une mosquée de ${cityName}, utilisez cette page comme base canonique puis comparez avec l'horaire suivi dans votre secteur.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure du Fajr à ${cityName}`
+    },
+    dhuhr: {
+      title: `Heure du Dhuhr à ${cityName} aujourd'hui`,
+      metaTitle: `Heure du Dhuhr à ${cityName} aujourd'hui | Recherche quotidienne du Dhuhr | Adantimer`,
+      metaDescription: `Vérifiez l'heure du Dhuhr à ${cityName} aujourd'hui, gardez le compte à rebours visible et comparez le résultat avec une mosquée locale si nécessaire.`,
+      heroSubtitle: `Vérifiez l'heure du Dhuhr à ${cityName} aujourd'hui, gardez le compte à rebours visible et consultez le planning complet avant de comparer avec la mosquée locale.`,
+      infoTitle: `Utilisez cette page quand l'heure du Dhuhr à ${cityName} est la question principale`,
+      aboutTitle: `Comment utiliser la page de l'heure du Dhuhr à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure du Dhuhr à ${cityName} aujourd'hui et comment la confirmer rapidement.`,
+        `La page garde l'heure du Dhuhr, la prochaine prière, le tableau complet et la méthode affichée ensemble pour rendre la réponse plus facile à vérifier.`,
+        `Si votre recherche cite une mosquée de ${cityName}, utilisez cette page comme base canonique puis comparez avec l'horaire local réellement suivi.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure du Dhuhr à ${cityName}`
+    },
+    asr: {
+      title: `Heure du Asr à ${cityName} aujourd'hui`,
+      metaTitle: `Heure du Asr à ${cityName} aujourd'hui | Recherche quotidienne du Asr | Adantimer`,
+      metaDescription: `Vérifiez l'heure du Asr à ${cityName} aujourd'hui, gardez le compte à rebours visible et comparez le résultat avec une mosquée locale si nécessaire.`,
+      heroSubtitle: `Vérifiez l'heure du Asr à ${cityName} aujourd'hui, gardez le compte à rebours visible et consultez le planning complet avant de comparer avec la mosquée locale.`,
+      infoTitle: `Utilisez cette page quand l'heure du Asr à ${cityName} est la question principale`,
+      aboutTitle: `Comment utiliser la page de l'heure du Asr à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure du Asr à ${cityName} aujourd'hui et comment la vérifier rapidement.`,
+        `La page garde l'heure du Asr, la prochaine prière, le tableau complet et la méthode affichée ensemble pour rendre la réponse plus facile à confirmer.`,
+        `Si votre recherche cite une mosquée de ${cityName}, utilisez cette page comme base canonique puis comparez avec l'horaire de la mosquée ou du quartier.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure du Asr à ${cityName}`
+    },
+    maghrib: {
+      title: `Heure du Maghrib à ${cityName} aujourd'hui`,
+      metaTitle: `Heure du Maghrib à ${cityName} aujourd'hui | Recherche quotidienne du Maghrib | Adantimer`,
+      metaDescription: `Vérifiez l'heure du Maghrib à ${cityName} aujourd'hui, gardez le compte à rebours visible et comparez le résultat avec une mosquée locale si nécessaire.`,
+      heroSubtitle: `Vérifiez l'heure du Maghrib à ${cityName} aujourd'hui, gardez le compte à rebours visible et consultez le planning complet avant de comparer avec la mosquée locale.`,
+      infoTitle: `Utilisez cette page quand l'heure du Maghrib à ${cityName} est la question principale`,
+      aboutTitle: `Comment utiliser la page de l'heure du Maghrib à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure du Maghrib à ${cityName} aujourd'hui et comment la vérifier rapidement.`,
+        `La page garde l'heure du Maghrib, la prochaine prière, le tableau complet et la méthode affichée ensemble pour rendre la réponse plus facile à confirmer.`,
+        `Si votre recherche cite une mosquée de ${cityName}, utilisez cette page comme base canonique puis comparez avec l'horaire du Maghrib suivi localement.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure du Maghrib à ${cityName}`
+    },
+    isha: {
+      title: `Heure de l'Isha à ${cityName} aujourd'hui`,
+      metaTitle: `Heure de l'Isha à ${cityName} aujourd'hui | Recherche quotidienne de l'Isha | Adantimer`,
+      metaDescription: `Vérifiez l'heure de l'Isha à ${cityName} aujourd'hui, gardez le compte à rebours visible et comparez le résultat avec une mosquée locale si nécessaire.`,
+      heroSubtitle: `Vérifiez l'heure de l'Isha à ${cityName} aujourd'hui, gardez le compte à rebours visible et consultez le planning complet avant de comparer avec la mosquée locale.`,
+      infoTitle: `Utilisez cette page quand l'heure de l'Isha à ${cityName} est la question principale`,
+      aboutTitle: `Comment utiliser la page de l'heure de l'Isha à ${cityName}`,
+      aboutParagraphs: [
+        `Cette route répond à l'intention locale directe: quelle est l'heure de l'Isha à ${cityName} aujourd'hui et comment la vérifier rapidement.`,
+        `La page garde l'heure de l'Isha, la prochaine prière, le tableau complet et la méthode affichée ensemble pour rendre la réponse plus facile à confirmer.`,
+        `Si votre recherche cite une mosquée de ${cityName}, utilisez cette page comme base canonique puis comparez avec l'horaire suivi par votre mosquée locale.`
+      ],
+      faqTitle: `Questions fréquentes sur l'heure de l'Isha à ${cityName}`
+    }
+  };
+
+  const config = prayerConfig[pageType];
+  if (!config) {
+    return null;
+  }
+
+  return {
+    metaTitle: config.metaTitle,
+    metaDescription: config.metaDescription,
+    heroSubtitle: config.heroSubtitle,
+    infoTitle: config.infoTitle,
+    citiesTitle: `Autres routes de prière liées à ${cityName}`,
+    aboutTitle: config.aboutTitle,
+    aboutParagraphs: config.aboutParagraphs,
+    faqTitle: config.faqTitle,
+    faq: [
+      {
+        question: `${config.title} est-elle la seule information visible ?`,
+        answer: "Non. La page garde aussi le planning complet du jour, la prochaine prière et la méthode affichée sur le même écran."
+      },
+      {
+        question: `Puis-je utiliser cette page si je cherche une mosquée à ${cityName} ?`,
+        answer: `Oui. Utilisez cette page comme réponse canonique rapide pour ${cityName}, puis comparez avec la mosquée locale, le quartier ou l'autorité religieuse que vous suivez.`
+      },
+      {
+        question: `Puis-je passer de cette page à d'autres routes de prière pour ${cityName} ?`,
+        answer: `Oui. La page relie directement les autres routes de prière utiles pour ${cityName} et vers les villes algériennes prioritaires voisines.`
+      }
+    ]
+  };
+}
+
 function buildFrenchPriorityIntentCopy(pageType) {
   if (pageType === "prayer-times") {
     return {
@@ -2549,6 +2687,144 @@ function buildFrenchPriorityIntentCityCopy(pageType, cityKey, place) {
   }
 
   return null;
+}
+
+function buildArabicPriorityIntentCityCopy(pageType, cityKey, place) {
+  if (!cityKey || !place || !ALGERIA_PRIORITY_CITY_SLUGS.has(cityKey)) {
+    return null;
+  }
+
+  const cityName = localizeCityName(place, "ar");
+  const prayerConfig = {
+    "prayer-times": {
+      title: `مواقيت الصلاة في ${cityName} اليوم`,
+      metaTitle: `مواقيت الصلاة في ${cityName} اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer`,
+      metaDescription: `تحقق من مواقيت الصلاة في ${cityName} اليوم مع الفجر والظهر والعصر والمغرب والعشاء والعد التنازلي للصلاة القادمة.`,
+      heroSubtitle: `تحقق من مواقيت الصلاة في ${cityName} اليوم، وأبق العد التنازلي للصلاة القادمة ظاهرا، ثم قارن بسرعة مع مسجدك المحلي عند الحاجة.`,
+      infoTitle: `استخدم هذه الصفحة عندما تحتاج مواقيت الصلاة في ${cityName} مباشرة`,
+      aboutTitle: `كيف تستخدم صفحة مواقيت الصلاة في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: مواقيت الصلاة في ${cityName} اليوم مع الجدول الكامل ظاهر من البداية.`,
+        `تعرض الصفحة الفجر والظهر والعصر والمغرب والعشاء مع الصلاة القادمة وطريقة الحساب وروابط مدن الجزائر ذات الأولوية في مكان واحد.`,
+        `إذا كانت عبارتك تتضمن اسم مسجد في ${cityName} فابدأ بهذه الصفحة كمرجع سريع ثم قارن بالجدول الذي تعتمده الجهة المحلية أو المسجد الذي تتبعه.`
+      ],
+      faqTitle: `أسئلة شائعة عن مواقيت الصلاة في ${cityName}`
+    },
+    "next-prayer": {
+      title: `الصلاة القادمة في ${cityName} اليوم`,
+      metaTitle: `الصلاة القادمة في ${cityName} اليوم | عد تنازلي مباشر للصلاة | Adantimer`,
+      metaDescription: `تابع الصلاة القادمة في ${cityName} اليوم مع عد تنازلي مباشر وحالة الصلاة الحالية والجدول اليومي الكامل.`,
+      heroSubtitle: `تابع الصلاة القادمة في ${cityName} مع عد تنازلي مباشر وأبق الجدول الكامل ظاهرا حتى تقارن بسرعة مع مسجدك المحلي.`,
+      infoTitle: `استخدم هذه الصفحة عندما تكون الصلاة القادمة في ${cityName} هي السؤال الرئيسي`,
+      aboutTitle: `كيف تستخدم صفحة الصلاة القادمة في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: ما هي الصلاة القادمة في ${cityName} وكم بقي على بدايتها.`,
+        `يبقى العد التنازلي وحالة الصلاة الحالية والجدول الكامل وطريقة الحساب المعروضة على الشاشة نفسها حتى تكون المراجعة أسرع.`,
+        `إذا كانت عبارتك تتضمن مسجدا في ${cityName} فاستخدم هذه الصفحة كإجابة سريعة ثم قارنها بجدول المسجد المحلي أو الحي الذي تقصده.`
+      ],
+      faqTitle: `أسئلة شائعة عن الصلاة القادمة في ${cityName}`
+    },
+    fajr: {
+      title: `وقت الفجر في ${cityName} اليوم`,
+      metaTitle: `وقت الفجر في ${cityName} اليوم | دليل وقت الفجر اليومي | Adantimer`,
+      metaDescription: `تحقق من وقت الفجر في ${cityName} اليوم وأبق العد التنازلي للصلاة القادمة ظاهرا ثم قارن مع مسجدك المحلي عند الحاجة.`,
+      heroSubtitle: `تحقق من وقت الفجر في ${cityName} اليوم وأبق العد التنازلي ظاهرا ثم راجع الجدول الكامل قبل مقارنة النتيجة مع المسجد المحلي.`,
+      infoTitle: `استخدم هذه الصفحة عندما يكون وقت الفجر في ${cityName} هو السؤال الرئيسي`,
+      aboutTitle: `كيف تستخدم صفحة وقت الفجر في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: ما وقت الفجر في ${cityName} اليوم وكيف أتحقق منه بسرعة.`,
+        `تعرض الصفحة وقت الفجر مع الصلاة القادمة والجدول الكامل وطريقة الحساب في مكان واحد حتى تكون النتيجة أوضح وأسهل في المراجعة.`,
+        `إذا كانت عبارتك تتضمن اسم مسجد في ${cityName} فابدأ بهذه الصفحة ثم قارن بالجدول المحلي الذي تتبعه في المسجد أو الحي.`
+      ],
+      faqTitle: `أسئلة شائعة عن وقت الفجر في ${cityName}`
+    },
+    dhuhr: {
+      title: `وقت الظهر في ${cityName} اليوم`,
+      metaTitle: `وقت الظهر في ${cityName} اليوم | دليل وقت الظهر اليومي | Adantimer`,
+      metaDescription: `تحقق من وقت الظهر في ${cityName} اليوم وأبق العد التنازلي للصلاة القادمة ظاهرا ثم قارن مع مسجدك المحلي عند الحاجة.`,
+      heroSubtitle: `تحقق من وقت الظهر في ${cityName} اليوم وأبق العد التنازلي ظاهرا ثم راجع الجدول الكامل قبل مقارنة النتيجة مع المسجد المحلي.`,
+      infoTitle: `استخدم هذه الصفحة عندما يكون وقت الظهر في ${cityName} هو السؤال الرئيسي`,
+      aboutTitle: `كيف تستخدم صفحة وقت الظهر في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: ما وقت الظهر في ${cityName} اليوم وكيف أؤكده بسرعة.`,
+        `تعرض الصفحة وقت الظهر مع الصلاة القادمة والجدول الكامل وطريقة الحساب في مكان واحد حتى تكون النتيجة أوضح وأسهل في المراجعة.`,
+        `إذا كانت عبارتك تتضمن اسم مسجد في ${cityName} فابدأ بهذه الصفحة ثم قارن بجدول المسجد المحلي أو الجهة التي تتبعها.`
+      ],
+      faqTitle: `أسئلة شائعة عن وقت الظهر في ${cityName}`
+    },
+    asr: {
+      title: `وقت العصر في ${cityName} اليوم`,
+      metaTitle: `وقت العصر في ${cityName} اليوم | دليل وقت العصر اليومي | Adantimer`,
+      metaDescription: `تحقق من وقت العصر في ${cityName} اليوم وأبق العد التنازلي للصلاة القادمة ظاهرا ثم قارن مع مسجدك المحلي عند الحاجة.`,
+      heroSubtitle: `تحقق من وقت العصر في ${cityName} اليوم وأبق العد التنازلي ظاهرا ثم راجع الجدول الكامل قبل مقارنة النتيجة مع المسجد المحلي.`,
+      infoTitle: `استخدم هذه الصفحة عندما يكون وقت العصر في ${cityName} هو السؤال الرئيسي`,
+      aboutTitle: `كيف تستخدم صفحة وقت العصر في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: ما وقت العصر في ${cityName} اليوم وكيف أتحقق منه بسرعة.`,
+        `تعرض الصفحة وقت العصر مع الصلاة القادمة والجدول الكامل وطريقة الحساب في مكان واحد حتى تكون النتيجة أوضح وأسهل في التحقق.`,
+        `إذا كانت عبارتك تتضمن اسم مسجد في ${cityName} فابدأ بهذه الصفحة ثم قارن بجدول المسجد المحلي أو الحي الذي تقصده.`
+      ],
+      faqTitle: `أسئلة شائعة عن وقت العصر في ${cityName}`
+    },
+    maghrib: {
+      title: `وقت المغرب في ${cityName} اليوم`,
+      metaTitle: `وقت المغرب في ${cityName} اليوم | دليل وقت المغرب اليومي | Adantimer`,
+      metaDescription: `تحقق من وقت المغرب في ${cityName} اليوم وأبق العد التنازلي للصلاة القادمة ظاهرا ثم قارن مع مسجدك المحلي عند الحاجة.`,
+      heroSubtitle: `تحقق من وقت المغرب في ${cityName} اليوم وأبق العد التنازلي ظاهرا ثم راجع الجدول الكامل قبل مقارنة النتيجة مع المسجد المحلي.`,
+      infoTitle: `استخدم هذه الصفحة عندما يكون وقت المغرب في ${cityName} هو السؤال الرئيسي`,
+      aboutTitle: `كيف تستخدم صفحة وقت المغرب في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: ما وقت المغرب في ${cityName} اليوم وكيف أتحقق منه بسرعة.`,
+        `تعرض الصفحة وقت المغرب مع الصلاة القادمة والجدول الكامل وطريقة الحساب في مكان واحد حتى تكون النتيجة أوضح وأسهل في التحقق.`,
+        `إذا كانت عبارتك تتضمن اسم مسجد في ${cityName} فابدأ بهذه الصفحة ثم قارن بجدول المغرب في المسجد المحلي أو الجهة التي تتبعها.`
+      ],
+      faqTitle: `أسئلة شائعة عن وقت المغرب في ${cityName}`
+    },
+    isha: {
+      title: `وقت العشاء في ${cityName} اليوم`,
+      metaTitle: `وقت العشاء في ${cityName} اليوم | دليل وقت العشاء اليومي | Adantimer`,
+      metaDescription: `تحقق من وقت العشاء في ${cityName} اليوم وأبق العد التنازلي للصلاة القادمة ظاهرا ثم قارن مع مسجدك المحلي عند الحاجة.`,
+      heroSubtitle: `تحقق من وقت العشاء في ${cityName} اليوم وأبق العد التنازلي ظاهرا ثم راجع الجدول الكامل قبل مقارنة النتيجة مع المسجد المحلي.`,
+      infoTitle: `استخدم هذه الصفحة عندما يكون وقت العشاء في ${cityName} هو السؤال الرئيسي`,
+      aboutTitle: `كيف تستخدم صفحة وقت العشاء في ${cityName}`,
+      aboutParagraphs: [
+        `هذه الصفحة تجيب عن نية البحث المحلية المباشرة: ما وقت العشاء في ${cityName} اليوم وكيف أتحقق منه بسرعة.`,
+        `تعرض الصفحة وقت العشاء مع الصلاة القادمة والجدول الكامل وطريقة الحساب في مكان واحد حتى تكون النتيجة أوضح وأسهل في التحقق.`,
+        `إذا كانت عبارتك تتضمن اسم مسجد في ${cityName} فابدأ بهذه الصفحة ثم قارن بجدول المسجد المحلي أو الحي الذي تقصده.`
+      ],
+      faqTitle: `أسئلة شائعة عن وقت العشاء في ${cityName}`
+    }
+  };
+
+  const config = prayerConfig[pageType];
+  if (!config) {
+    return null;
+  }
+
+  return {
+    metaTitle: config.metaTitle,
+    metaDescription: config.metaDescription,
+    heroSubtitle: config.heroSubtitle,
+    infoTitle: config.infoTitle,
+    citiesTitle: `مسارات صلاة مرتبطة بـ ${cityName}`,
+    aboutTitle: config.aboutTitle,
+    aboutParagraphs: config.aboutParagraphs,
+    faqTitle: config.faqTitle,
+    faq: [
+      {
+        question: `هل تعرض هذه الصفحة ${config.title} فقط؟`,
+        answer: "لا. تبقى الصلاة القادمة والجدول الكامل وطريقة الحساب المعروضة ظاهرة في الصفحة نفسها."
+      },
+      {
+        question: `هل أستطيع استخدام هذه الصفحة إذا كنت أبحث عن مسجد في ${cityName}؟`,
+        answer: `نعم. استخدم هذه الصفحة كإجابة سريعة ومرجع محلي لـ ${cityName} ثم قارنها بجدول المسجد المحلي أو الجهة التي تتبعها.`
+      },
+      {
+        question: `هل أستطيع الانتقال من هذه الصفحة إلى مسارات صلاة أخرى خاصة بـ ${cityName}؟`,
+        answer: `نعم. الصفحة تربط مباشرة بمسارات الصلاة الأخرى الخاصة بـ ${cityName} وبمدن الجزائر ذات الأولوية القريبة.`
+      }
+    ]
+  };
 }
 
 function buildArabicPriorityIntentCopy(pageType) {
