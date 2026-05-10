@@ -371,9 +371,9 @@ const ROOT_DISCOVERY_COPY = {
     featuredLead: "Featured prayer routes include"
   },
   ar: {
-    citiesLead: "تصفح صفحات المدن المشهورة مباشرة:",
-    searchesLead: "انتقل إلى عمليات بحث محددة مثل",
-    featuredLead: "المسارات البارزة تشمل"
+    citiesLead: "تصفح صفحات المدن الجزائرية المهمة مباشرة:",
+    searchesLead: "انتقل إلى بحوث جزائرية محددة مثل",
+    featuredLead: "المسارات الجزائرية البارزة تشمل"
   },
   de: {
     citiesLead: "Öffne beliebte Stadtseiten direkt:",
@@ -381,9 +381,9 @@ const ROOT_DISCOVERY_COPY = {
     featuredLead: "Hervorgehobene Gebetsrouten sind"
   },
   fr: {
-    citiesLead: "Ouvrez directement les pages de villes populaires :",
-    searchesLead: "Passez à des recherches ciblées comme",
-    featuredLead: "Les routes de prière mises en avant comprennent"
+    citiesLead: "Ouvrez directement les pages des villes algériennes prioritaires :",
+    searchesLead: "Passez à des recherches algériennes ciblées comme",
+    featuredLead: "Les routes de prière algériennes mises en avant comprennent"
   },
   pt: {
     citiesLead: "Abra diretamente paginas populares de cidades:",
@@ -6355,13 +6355,20 @@ ${renderFaqSection(copy)}
 function renderCitiesSection(copy) {
   if (copy.isHomeRoot) {
     const discoveryCopy = ROOT_DISCOVERY_COPY[copy.activeLanguage] || ROOT_DISCOVERY_COPY.en;
-    const rootCityLinks = [...(copy.topCityGroupsPrimary || []), ...(copy.topCityGroupsOverflow || [])]
-      .flatMap(group => group.cities || [])
-      .slice(0, 6)
-      .map(item => ({
-        href: buildRoutePath(copy.activeLanguage, "home", item.city),
-        label: item.displayCity || item.city
-      }));
+    const rootCityLinks = (copy.isHomeRoot && ["fr", "ar"].includes(copy.activeLanguage))
+      ? getAlgeriaFocusCities("")
+          .slice(0, 6)
+          .map(city => ({
+            href: buildRoutePath(copy.activeLanguage, "home", city),
+            label: localizeCityName(city, copy.activeLanguage)
+          }))
+      : [...(copy.topCityGroupsPrimary || []), ...(copy.topCityGroupsOverflow || [])]
+          .flatMap(group => group.cities || [])
+          .slice(0, 6)
+          .map(item => ({
+            href: buildRoutePath(copy.activeLanguage, "home", item.city),
+            label: item.displayCity || item.city
+          }));
     const rootSearchLinks = (copy.intentLinks || []).slice(0, 4);
     const rootFeaturedLinks = (copy.cityIntentLinks || []).slice(0, 4);
     const popularCitiesMarkup = copy.showPopularCities ? renderPopularCitiesMarkup(copy) : "";
