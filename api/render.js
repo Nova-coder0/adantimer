@@ -4007,10 +4007,10 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     }
 
     if (language === "fr") {
-      return {
+      return applyAlgeriaGenericHubKeywordCoverage("fr", pageType, {
         ...buildFrenchPriorityIntentCopy(pageType),
         cityIntentLinks: buildAlgeriaPrayerHubLinks("fr")
-        };
+        });
       }
 
       if (language === "de") {
@@ -4038,7 +4038,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
     }
 
     if (language === "ar") {
-      return {
+      return applyAlgeriaGenericHubKeywordCoverage("ar", pageType, {
         metaTitle: "مواقيت الصلاة اليوم | الفجر والظهر والعصر والمغرب والعشاء | Adantimer",
         metaDescription: "تحقق من مواقيت الصلاة اليوم، واعرض الصلاة القادمة، ثم انتقل مباشرة إلى الجزائر العاصمة ووهران وعنابة والبويرة وعين البنيان لمقارنة الجدول مع المسجد المحلي أو الجهة التي تتبعها.",
         heroSubtitle: "تحقق من مواقيت الصلاة اليوم، وتابع الصلاة القادمة، واستخدم هذه الصفحة العامة كنقطة دخول قبل الانتقال إلى المدينة الجزائرية الأقرب أو مقارنة الجدول مع مسجد محلي محدد.",
@@ -4061,24 +4061,24 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
           }
         ],
         cityIntentLinks: buildAlgeriaPrayerHubLinks("ar")
-      };
+      });
     }
 
     return null;
   }
 
   if (pageType === "next-prayer" && language === "fr") {
-    return {
+    return applyAlgeriaGenericHubKeywordCoverage("fr", pageType, {
       ...buildFrenchPriorityIntentCopy(pageType),
       cityIntentLinks: buildAlgeriaGenericIntentLinks("fr", pageType)
-    };
+    });
   }
 
   if (language === "fr" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
-    return {
+    return applyAlgeriaGenericHubKeywordCoverage("fr", pageType, {
       ...buildFrenchPriorityIntentCopy(pageType),
       cityIntentLinks: buildAlgeriaGenericIntentLinks("fr", pageType)
-    };
+    });
   }
 
     if (language === "en") {
@@ -4176,7 +4176,7 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
   }
 
   if (pageType === "next-prayer" && language === "ar") {
-    return {
+    return applyAlgeriaGenericHubKeywordCoverage("ar", pageType, {
       metaTitle: "الصلاة القادمة اليوم | عد تنازلي مباشر للصلاة القادمة | Adantimer",
       metaDescription: "تابع الصلاة القادمة اليوم مع العد التنازلي المباشر، ثم انتقل إلى الجزائر العاصمة أو وهران أو عنابة أو البويرة أو عين البنيان لمقارنة النتيجة مع المسجد المحلي أو الجهة التي تتبعها.",
       heroSubtitle: "تابع الصلاة القادمة اليوم مع عد تنازلي مباشر، واستخدم هذه الصفحة العامة كنقطة دخول قبل الانتقال إلى المدينة الجزائرية الأقرب أو مقارنة الوقت مع مسجد محلي محدد.",
@@ -4199,14 +4199,14 @@ function getPriorityIntentSeoCopy(language, pageType, sourceCity) {
         }
       ],
       cityIntentLinks: buildAlgeriaGenericIntentLinks("ar", pageType)
-    };
+    });
   }
 
   if (language === "ar" && ["fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
-    return {
+    return applyAlgeriaGenericHubKeywordCoverage("ar", pageType, {
       ...buildArabicPriorityIntentCopy(pageType),
       cityIntentLinks: buildAlgeriaGenericIntentLinks("ar", pageType)
-    };
+    });
   }
 
   return null;
@@ -4297,6 +4297,50 @@ function applyAlgeriaKeywordCoverageEnhancements(language, pageType, cityKey, pl
     faq.push({
       question: `لماذا تغطي هذه الصفحة أيضا صيغًا مثل مسجد ${place} أو الصلاة القادمة أو وقت المغرب؟`,
       answer: `لأن البحث المحلي في ${place} يجمع غالبا بين مواقيت الصلاة واسم مسجد أو بين الصلاة القادمة ووقت الفجر ووقت المغرب ووقت العشاء. لذلك تجمع Adantimer هذه الصيغ في صفحة قانونية واحدة بدل إنشاء مسارات ضعيفة كثيرة.`
+    });
+    copy.aboutParagraphs = about;
+    copy.faq = faq;
+    return copy;
+  }
+
+  return copy;
+}
+
+function applyAlgeriaGenericHubKeywordCoverage(language, pageType, copy) {
+  if (!copy || !["prayer-times", "next-prayer", "fajr", "dhuhr", "asr", "maghrib", "isha"].includes(pageType)) {
+    return copy;
+  }
+
+  if (language === "fr") {
+    const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
+    const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    const queryLine = pageType === "prayer-times"
+      ? "Cette page couvre aussi des recherches comme horaire priere Alger, horaires de prière Oran, adhan maghreb Annaba, heure dohr Constantine, icha Bouira, isha Ain Benian ou mosquée Oran sans créer de routes synonymes."
+      : pageType === "next-prayer"
+        ? "Cette page couvre aussi des recherches comme prochaine prière Alger, adhan aujourd'hui Oran, heure de la prochaine prière Annaba, mosquée Bouira et mosquée Ain Benian sur une seule URL canonique."
+        : `Cette page couvre aussi des recherches comme ${copy.heroHeadingHome || "horaire de prière"} Alger, adhan Oran, mosquée Annaba, maghreb Bouira, icha Ain Benian et prochaine prière Constantine sans créer de doublons.`;
+    about.push(queryLine);
+    faq.push({
+      question: "Pourquoi cette page générale couvre-t-elle aussi des variantes locales d'Algérie avec adhan, mosquée ou nom de ville ?",
+      answer: "Parce que les recherches réelles en Algérie mélangent souvent horaire priere, adhan, nom de ville, prochaine prière, maghreb, icha et parfois le nom d'une mosquée. Adantimer regroupe ces variantes sur des routes canoniques fortes avant de redistribuer vers la bonne ville."
+    });
+    copy.aboutParagraphs = about;
+    copy.faq = faq;
+    return copy;
+  }
+
+  if (language === "ar") {
+    const about = Array.isArray(copy.aboutParagraphs) ? [...copy.aboutParagraphs] : [];
+    const faq = Array.isArray(copy.faq) ? [...copy.faq] : [];
+    const queryLine = pageType === "prayer-times"
+      ? "تغطي هذه الصفحة أيضا صيغ البحث مثل مواقيت الصلاة الجزائر العاصمة ومواقيت الصلاة وهران ووقت المغرب عنابة ووقت الظهر قسنطينة ووقت العشاء البويرة واسم مسجد في عين البنيان ضمن مسار عربي واحد قوي."
+      : pageType === "next-prayer"
+        ? "تغطي هذه الصفحة أيضا صيغ البحث مثل الصلاة القادمة الجزائر العاصمة والصلاة القادمة وهران واسم مسجد في عنابة أو البويرة ووقت الصلاة القادمة في عين البنيان ضمن رابط قانوني واحد."
+        : "تغطي هذه الصفحة أيضا صيغ البحث المحلية في الجزائر مثل مواقيت الصلاة واسم مسجد والصلاة القادمة ووقت الفجر أو المغرب أو العشاء مع اسم المدينة ضمن صفحة عربية واحدة واضحة.";
+    about.push(queryLine);
+    faq.push({
+      question: "لماذا تغطي هذه الصفحة العامة أيضا صيغًا جزائرية تجمع بين المدينة أو المسجد ومواقيت الصلاة؟",
+      answer: "لأن البحث الحقيقي في الجزائر يجمع كثيرا بين مواقيت الصلاة واسم المدينة أو اسم مسجد أو الصلاة القادمة أو وقت المغرب أو وقت العشاء. لذلك تجمع Adantimer هذه الصيغ في مسارات عربية قانونية قوية قبل نقل الزائر إلى المدينة الأقرب."
     });
     copy.aboutParagraphs = about;
     copy.faq = faq;
